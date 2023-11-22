@@ -326,6 +326,20 @@ pattern_tuning <- function(pattrn, spe_nb, spe_l, exclude_type, hmn=1, rg=c(0, 0
   
 }
 
+#' unique_pos
+#'
+#' Return the indexes of the first unique values from a vector
+#'
+#' @param vec is the input vector
+
+unique_pos <- function(vec){
+
+        u_vec <- unique(vec)
+
+        return(match(u_vec, vec))
+
+}
+
 #' can_be_num
 #'
 #' Return TRUE if a variable can be converted to a number and FALSE if not
