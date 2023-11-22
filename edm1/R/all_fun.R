@@ -1,5 +1,4 @@
 library(stringr)
-library(pdftools)
 library(readxl)
 library(openxlsx)
 library(writexl)

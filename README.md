@@ -12,3 +12,11 @@ To see the documentation in your R shell:
 2. > devtools::load_all(path_to_edm_pkg)
 3. > ?function_from_edm
 
+**Requirements**
+
+1. stringr
+2. readxl
+3. openxlsx
+4. writexl
+5. stringi
+
