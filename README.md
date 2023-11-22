@@ -12,7 +12,7 @@ To see the documentation in your R shell:
 2. > devtools::load_all(path_to_edm_pkg)
 3. > ?function_from_edm
 
-**Requirements**
+**PKG Requirements**
 
 1. stringr
 2. readxl
