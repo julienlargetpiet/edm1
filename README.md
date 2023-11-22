@@ -138,11 +138,12 @@ Allow to automatically arrange 1 dimensional data according to vector and parame
 @param sep_ is the separator of the csv outputed
 
 @param organisation is the way variables include themselves, for instance ,resuming precedent example, if organisation=c(1, 0) so the data output will be:
-d, a
-d, a1
-e, c
-f, c
-f, c1
+
+d, a \
+d, a1 \
+e, c \
+f, c \
+f, c1 \
 
 @param unic_sep1 is the unic separator between variables (default is "\_")
 
@@ -276,9 +277,11 @@ Allow to find the number of days month from a month date, take in count leap yea
 
 Allow to see if vectors are present in a dataframe
 
-x: 1, 2, 1
-   3, 4, 1
-   1, 5, 8
+ex: 
+
+   1, 2, 1 \
+   3, 4, 1 \
+   1, 5, 8 \
 
 the vector c(4, 1) with the coefficient 1 and the start position at the second column is containded in the dataframe
 
