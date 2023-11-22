@@ -145,7 +145,7 @@ e, c \
 f, c \
 f, c1 
 
-@param unic_sep1 is the unic separator between variables (default is "\_")
+@param unic_sep1 is the unic separator between variables (default is "_")
 
 @param unic_sep2 is the unic separator between datasets (default is "-")
 
