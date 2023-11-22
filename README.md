@@ -143,7 +143,7 @@ d, a \
 d, a1 \
 e, c \
 f, c \
-f, c1 \
+f, c1 
 
 @param unic_sep1 is the unic separator between variables (default is "\_")
 
@@ -281,7 +281,7 @@ ex:
 
    1, 2, 1 \
    3, 4, 1 \
-   1, 5, 8 \
+   1, 5, 8 
 
 the vector c(4, 1) with the coefficient 1 and the start position at the second column is containded in the dataframe
 
