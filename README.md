@@ -360,6 +360,12 @@ Second case: It is the opposite to the first case, it means that if the pattern 
 @param strict a vector containing the "strict" condition for each nth vector in word_ ("strict" is the string to activate this option)
 @param btwn is a vector containing the condition ("yes" to activate this option) meaning that if "yes", all elements between two matched patern in vct will be returned 
 
-@param all_in_word is a value (default set to "no", "yes" to activate this option) that, if activated, won't authorized a previous matched pattern to be matched again 
+@param all_in_word is a value (default set to "yes", "no" to activate this option) that, if activated, won't authorized a previous matched pattern to be matched again
+
+@param notatall is a string you are sure is not present in vct (default set to "###")
+
+ @param btwn is a vector containing the condition ("yes" to activate this option) meaning that if "yes", all elements between two matched patern in vct will be returned , so the patterns you enter in word_ have to be in the order you think it will appear in vct 
+
+@param all_in_word is a value (default set to "yes", "no" to activate this option) that, if activated, won't authorized a previous matched pattern to be matched again
 
 REGEX can also be used in the searched patterns

@@ -2309,13 +2309,18 @@ change_date <- function(date_, sep_, day_  = NA, month_ = NA,
 #' Second case: It is the opposite to the first case, it means that if the pattern is partially present like in the first position and the last, it will be considered like a matched pattern
 #' @param word_ is the vector containing the patterns
 #' @param vct is the vector being searched for patterns
-#' @param occ a vector containing the occurence of the pattern in word_ to be matched in the vector being searched, if the occurence is 2 for the nth pattern in word_ and only one occurence is found in vct so no pattern will be matched
+#' @param occ a vector containing the occurence of the pattern in word_ to be matched in the vector being searched, if the occurence is 2 for the nth pattern in word_ and only one occurence is found in vct so no pattern will be matched, put "forever" to no longer depend on the occurence for the associated pattern
 #' @param strict a vector containing the "strict" condition for each nth vector in word_ ("strict" is the string to activate this option)
-#' @param btwn is a vector containing the condition ("yes" to activate this option) meaning that if "yes", all elements between two matched patern in vct will be returned 
-#' @param all_in_word is a value (default set to "no", "yes" to activate this option) that, if activated, won't authorized a previous matched pattern to be matched again 
+#' @param btwn is a vector containing the condition ("yes" to activate this option) meaning that if "yes", all elements between two matched patern in vct will be returned , so the patterns you enter in word_ have to be in the order you think it will appear in vct 
+#' @param all_in_word is a value (default set to "yes", "no" to activate this option) that, if activated, won't authorized a previous matched pattern to be matched again
+#' @param notatall is a string that you are sure is not present in vct
 #' @export
 
-pattern_gettr <- function(word_, vct, occ=c(1), strict, btwn, all_in_word="no"){
+pattern_gettr <- function(word_, vct, occ=c(1), strict, btwn, all_in_word="yes", notatall="###"){
+
+  all_occ <- c()
+
+  for (i in 1:length(word_)){ all_occ <- append(all_occ, 0) }
 
   if (length(btwn) < (length(occ) - 1)){
 
@@ -2341,8 +2346,6 @@ pattern_gettr <- function(word_, vct, occ=c(1), strict, btwn, all_in_word="no"){
 
   }
 
-  occ_strt <- 1
-
   frst_occ <- c()
 
   occ_idx = 1
@@ -2353,9 +2356,9 @@ pattern_gettr <- function(word_, vct, occ=c(1), strict, btwn, all_in_word="no"){
 
   can_ins <- 0
 
-  cls <- 0
-
   for (i in 1:length(vct)){
+
+    print(word_)
            
     to_compare = 0
 
@@ -2365,11 +2368,17 @@ pattern_gettr <- function(word_, vct, occ=c(1), strict, btwn, all_in_word="no"){
 
                 t = 1
 
-                while (to_compare < 1 & t < length(word_)){
+                while (to_compare < 1 & t <= length(word_)){
 
                         if (nchar(word_[t]) == nchar(vct[i])){
 
-                                to_compare = sum(str_detect(vct[i], word_[t]))
+                                print("aa")
+
+                                v_bool <- str_detect(vct[i], word_[t])
+
+                                to_compare = sum(v_bool)
+
+                                if (to_compare > 0){indx <- t}
 
                         }
 
@@ -2379,21 +2388,29 @@ pattern_gettr <- function(word_, vct, occ=c(1), strict, btwn, all_in_word="no"){
 
             }else{
 
-                to_compare = sum(str_detect(vct[i], word_))
+                    v_bool <- str_detect(vct[i], word_)
+
+                    to_compare =  sum(v_bool)
+
+                    if (to_compare > 0){indx <- match(T, v_bool)}
 
             }
 
-    }else if (cls == 0){
+    }else{
 
        if (strict[occ_idx] == "yes"){
 
          t = 1
 
-         while (t < length(word_) & to_compare < 1){
+         while (t <= length(word_) & to_compare < 1){
 
            if (nchar(word_[t]) == nchar(vct[i])){
 
-                to_compare = sum(str_detect(vct[i], word_[t]))
+                v_bool <- str_detect(vct[i], word_[t])
+
+                to_compare = sum(v_bool)
+
+                if (to_compare > 0){indx <- t}
 
             }
 
@@ -2403,7 +2420,11 @@ pattern_gettr <- function(word_, vct, occ=c(1), strict, btwn, all_in_word="no"){
 
        }else{
 
-        to_compare =  sum(str_detect(vct[i], word_))
+        v_bool <- str_detect(vct[i], word_)
+
+        to_compare =  sum(v_bool)
+
+        if (to_compare > 0){indx <- match(T, v_bool)}
 
        }
 
@@ -2411,21 +2432,37 @@ pattern_gettr <- function(word_, vct, occ=c(1), strict, btwn, all_in_word="no"){
 
     if (to_compare > 0) {
 
-      if (all_in_word != "yes"){
+      all_occ <- as.numeric(all_occ)
+
+      all_occ[indx] = all_occ[indx] + 1
+
+      all_occ <- as.character(all_occ)
+
+      if (all_in_word == "no"){
 
               if (length(word_) >= 2){
 
-                word_ <- word_[2:length(word_)]
+                word_ <- word_[-indx]
 
               }else{
 
-                cls <- 1 
+                word_[1] <- notatall
 
               }
 
-      } 
+      }
 
-      if (occ_strt == occ[occ_idx]){
+      print(occ)
+
+      print(indx)
+
+      if (all_occ[indx] == occ[indx] | occ[indx] == "forever"){
+
+        print("oui")
+
+        print(all_occ)
+
+        print(occ_idx)
 
         can_ins <- 1
         
@@ -2444,8 +2481,6 @@ pattern_gettr <- function(word_, vct, occ=c(1), strict, btwn, all_in_word="no"){
         if ((occ_idx + 1) <= length(occ)){ occ_idx = occ_idx + 1 }
 
       }
-      
-      occ_strt = occ_strt + 1
       
     }
 
