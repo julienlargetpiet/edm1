@@ -136,7 +136,7 @@ Allo to generate in a csv all kind of data you can imagine according to what you
 
 Allow to automatically arrange 1 dimensional data according to vector and parameters
 
-@param data is the data provided (vector) each column is separated by a unic separator and each dataset from the same column is separated by another unic separator (ex: c("`_`", c("d", "-", "e", "-", "f"), "`_`", c("a", "a1", "-", "b", "-", "c", "c1")"`_`")
+@param data is the data provided (vector) each column is separated by a unic separator and each dataset from the same column is separated by another unic separator (ex: c("\_ ", c("d", "-", "e", "-", "f"), "\_ ", c("a", "a1", "-", "b", "-", "c", "c1")"\_ ")
 
 @param cols is the colnames of the data generated in a csv
 
@@ -152,7 +152,7 @@ e, c \
 f, c \
 f, c1 
 
-@param unic_sep1 is the unic separator between variables (default is "_")
+@param unic_sep1 is the unic separator between variables (default is "\_ ")
 
 @param unic_sep2 is the unic separator between datasets (default is "-")
 
