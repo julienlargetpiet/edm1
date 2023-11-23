@@ -349,15 +349,21 @@ unique_pos <- function(vec){
 
 can_be_num <- function(x){
 
-    if (typeof(x) == double){
+    if (typeof(x) == "double"){
 
             return(T)
 
     }else{
 
+        vec_bool <- c()
+
         v_ref <- c("1", "2", "3", "4", "5", "6", "7", "8", "9", "0")    
 
-        if (all(grepl(x, v_ref)) == T){
+        v_wrk <- unlist(str_split(x, ""), v_ref)
+
+        for (i in 1:length(v_wrk)){ vec_bool <- append(vec_bool, sum(grepl(v_wrk[i], v_ref))) }
+
+        if (sum(vec_bool) == length(vec_bool)){
 
                 return(T)
 
