@@ -19,7 +19,7 @@ library(stringi)
 #' @param output is the name of the outputed xlsx (can be set to NA if no output)
 #' @param new_val if overwrite is TRUE, then the differences will be overwritten by the comparator data
 #' @param pattern_only will cover differences by pattern if overwritten is set to TRUE 
-
+#' @export
 
 diff_xlsx <- function(file_, sht, v_old_begin, v_old_end, 
                       v_new_begin, v_new_end, df2=NA, overwrite=T, 
@@ -132,6 +132,7 @@ diff_xlsx <- function(file_, sht, v_old_begin, v_old_end,
 #' @param df_in is the dataframe that will be inserted 
 #' @param df_ins is the dataset to be inserted
 #' ins_loc is a vector containg two parameters (row, column) of the begining for the insertion
+#' @export
 
 insert_df <- function(df_in, df_ins, ins_loc){
 
@@ -180,6 +181,7 @@ insert_df <- function(df_in, df_ins, ins_loc){
 #' @param from_ is the vector from which the element of the varying part will be generated
 #' @param hmn is how many of varying pattern from the same base will be created
 #' @param after is set to 1 by default, it means that the varying part will be after the fixed part, set to 0 if you want the varying part to be before 
+#' @export
 
 pattern_generator <- function(base_, from_, lngth, hmn=1, after=1){
   
@@ -228,6 +230,7 @@ pattern_generator <- function(base_, from_, lngth, hmn=1, after=1){
 #' @param exclude_type is character that won't be replaced
 #' @param hmn is how many output the function will return
 #' @param rg is a vector with two parameters (index of the first letter that will be replaced, index of the last letter that will be replaced) default is set to all the letters from the source pattern
+#' @export
 
 pattern_tuning <- function(pattrn, spe_nb, spe_l, exclude_type, hmn=1, rg=c(0, 0)){
   
@@ -328,6 +331,7 @@ pattern_tuning <- function(pattrn, spe_nb, spe_l, exclude_type, hmn=1, rg=c(0, 0
 #' Return the indexes of the first unique values from a vector
 #'
 #' @param vec is the input vector
+#' @export
 
 unique_pos <- function(vec){
 
@@ -341,6 +345,7 @@ unique_pos <- function(vec){
 #'
 #' Return TRUE if a variable can be converted to a number and FALSE if not
 #' @param x is the input value
+#' @export
 
 can_be_num <- function(x){
 
@@ -379,6 +384,7 @@ can_be_num <- function(x){
 #' @param round_l is a vector which, for each column containing number, associate a round value
 #' @param sep_ is the separator used to write data in the csv
 #' @return new generated data in addition to saving it in the output
+#' @export
 
 data_gen <- function(type_=c("number", "mixed", "string"), strt_l=c(0, 0, 10), nb_r=c(50, 10, 40), output="gened.csv", properties=c("1-5", "1-5", "1-5"), type_distri=c("random", "random", "random"), str_source=c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "w", "x", "y", "z"), round_l=c(0, 0, 0), sep_=","){
   
@@ -599,6 +605,7 @@ data_gen <- function(type_=c("number", "mixed", "string"), strt_l=c(0, 0, 10), n
 #' f, c1
 #' @param unic_sep1 is the unic separator between variables (default is "_")
 #' @param unic_sep2 is the unic separator between datasets (default is "-")
+#' @export
 
 data_meshup <- function(data, cols=NA, file_=NA, sep_=";", 
                         organisation=c(2, 1, 0), unic_sep1="_", 
@@ -739,6 +746,7 @@ data_meshup <- function(data, cols=NA, file_=NA, sep_=";",
 #' Allow to get the number of a spreadsheet based column by the letter ex: AAA = 703
 #'
 #' @param letter is the letter (name of the column)
+#' @export
 
 letter_to_nb <- function(letter){
   
@@ -768,6 +776,7 @@ letter_to_nb <- function(letter){
 #' Allow to get the letter of a spreadsheet based column by the number ex: 703 = AAA
 #'
 #' @param x is the number of the column 
+#' @export
 
 nb_to_letter <- function(x){
   
@@ -840,6 +849,7 @@ nb_to_letter <- function(x){
 #'
 #' the function return a vector with the previous variables in the same order
 #' those that could not be calculated will be represented with NA value
+#' @export
 
 cost_and_taxes <- function(qte=NA, pu=NA, prix_ht=NA, tva=NA, prix_ttc=NA,
                            prix_tva=NA, pu_ttc=NA, adjust=NA, prix_d_ht=NA,
@@ -1172,6 +1182,7 @@ cost_and_taxes <- function(qte=NA, pu=NA, prix_ht=NA, tva=NA, prix_ttc=NA,
 #' @param sentc is the date to convert
 #' @param sep_in is the separator of the dat input (default is "-")
 #' @param sep_out is the separator of the converted date (default is "-")
+#' @export
 
 format_date <- function(f_dialect, sentc, sep_in="-", sep_out="-"){
   
@@ -1202,6 +1213,7 @@ format_date <- function(f_dialect, sentc, sep_in="-", sep_out="-"){
 #' ex: if i want my vector c(1, 2) to be 5 of length this function will return me: c(1, 2, 1, 2, 1) 
 #' @param vec1 is the input vector
 #' @param goal is the length to reach
+#' @export
 
 until_stnl <- function(vec1, goal){
 
@@ -1237,6 +1249,7 @@ until_stnl <- function(vec1, goal){
 #' @param v_id is a vector containing the ids
 #' @param col_id is the column that contains the ids (default is equal to 1)
 #' @param included_col_id is if the result should return the col_id (default set to yes) 
+#' @export
 
 vlookup_df <- function(df, v_id, col_id=1, included_col_id="yes"){
   
@@ -1271,6 +1284,7 @@ vlookup_df <- function(df, v_id, col_id=1, included_col_id="yes"){
 #' list(c("a", "b"), c("1", "2"), c("A", "Z", "E")) --> c("a1A", "a2A", "b1A", "b2A", "a1Z", ...)
 #' @param l is the list
 #' @param sep_ is the separator between elements (default is set to "" as you see in the example)
+#' @export
 
 multitud <- function(l, sep_=""){
   
@@ -1313,6 +1327,7 @@ multitud <- function(l, sep_=""){
 #' @param val_to_stop is the vector containing the values to stop
 #' @param index_rc is the value for the jump (default set to NA so default will be first case)
 #' @param included is if the values to stop has to be also returned in the vectors (defaultn set to "yes")
+#' @export
 
 df_tuned <- function(df, val_to_stop, index_rc=NA, included="yes"){
 
@@ -1383,6 +1398,7 @@ df_tuned <- function(df, val_to_stop, index_rc=NA, included="yes"){
 #' @param df is the input dataframe
 #' @param condition_l is the vector of the possible conditions ("==", ">", "<", "!=", "%")
 #' @param val_l is the vector with the values related to condition_l (so the values has to be placed in the same order)
+#' @export
 
 see_df <- function(df, condition_l, val_l){
 
@@ -1487,6 +1503,7 @@ see_df <- function(df, condition_l, val_l){
 #' Allow to find the number of days month from a month date, take in count leap year 
 #' @param date_ is the input date
 #' @param sep_ is the separator of the input date
+#' @export
 
 days_from_month <- function(date_, sep_){
   
@@ -1587,6 +1604,7 @@ days_from_month <- function(date_, sep_){
 #' @param vec_l is a list the vectors
 #' @param coeff_ is the related coefficient of the vector
 #' @param strt_l is a vector containing the start position for each vector
+#' @export
 
 vec_in_df <- function(df_, vec_l, coeff_, strt_l, distinct="NA"){
 
@@ -1745,6 +1763,7 @@ vec_in_df <- function(df_, vec_l, coeff_, strt_l, distinct="NA"){
 #' @param sep_vec is the separator for the dates contained in vec
 #' @param only is can be changed to "+" or "-" to repectively only return the higher dates and the lower dates (default set to "both")
 #' @param head is the number of dates that will be returned (default set to NA so all dates in vec will be returned)
+#' @export
 
 closest_date <- function(vec, date_, frmt, sep_="/", sep_vec="/", only_="both", head=NA){
 
@@ -1915,6 +1934,7 @@ closest_date <- function(vec, date_, frmt, sep_="/", sep_vec="/", only_="both", 
 #' @param second_ is the second to add (can be negative)
 #' @param frmt is the format of the input date, (deault set to "snhdmy" (second, minute, hour, day, month, year), so all variable are taken in count),
 #' if you only want to work with standard date for example change this variable to "dmy"
+#' @export
 
 change_date <- function(date_, sep_, day_  = NA, month_ = NA, 
                         year_ = NA, hour_ = NA, min_ = NA, 
@@ -2287,6 +2307,7 @@ change_date <- function(date_, sep_, day_  = NA, month_ = NA,
 #' @param strict a vector containing the "strict" condition for each nth vector in word_ ("strict" is the string to activate this option)
 #' @param btwn is a vector containing the condition ("yes" to activate this option) meaning that if "yes", all elements between two matched patern in vct will be returned 
 #' @param all_in_word is a value (default set to "no", "yes" to activate this option) that, if activated, won't authorized a previous matched pattern to be matched again 
+#' @export
 
 pattern_gettr <- function(word_, vct, occ=c(1), strict, btwn, all_in_word="no"){
 
