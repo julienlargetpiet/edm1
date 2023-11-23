@@ -2487,6 +2487,35 @@ pattern_gettr <- function(word_, vct, occ=c(1), strict, btwn, all_in_word="yes",
   
 }
 
+#' diff_vec
+#'
+#' Compare two vecters and return a boolean vector with TRUE if same element at the same index and FALSE if not
+#'
+#' @param vec1 is one of the two vectors  
+#' @param vec2 is one of the two vectors  
 
+diff_vec <- function(vec1, vec2){
 
+        rtnl <- c()
 
+        for (i in 1:length(vec1)){
+
+                if (sum(is.na(c(vec1[i], vec2[i]))) == 0){
+
+                        if (vec1[i] != vec2[i]){
+
+                                rtnl <- append(rtnl, F)
+
+                        }else{
+
+                                rtnl <- append(rtnl, T)
+
+                        }
+
+                }
+
+        }
+
+  return(rtnl)
+
+}
