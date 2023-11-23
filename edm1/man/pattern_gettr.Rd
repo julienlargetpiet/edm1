@@ -4,20 +4,31 @@
 \alias{pattern_gettr}
 \title{pattern_gettr}
 \usage{
-pattern_gettr(word_, vct, occ = c(1), strict, btwn, all_in_word = "no")
+pattern_gettr(
+  word_,
+  vct,
+  occ = c(1),
+  strict,
+  btwn,
+  all_in_word = "yes",
+  notatall = "###"
+)
 }
 \arguments{
 \item{word_}{is the vector containing the patterns}
 
 \item{vct}{is the vector being searched for patterns}
 
-\item{occ}{a vector containing the occurence of the pattern in word_ to be matched in the vector being searched, if the occurence is 2 for the nth pattern in word_ and only one occurence is found in vct so no pattern will be matched}
+\item{occ}{a vector containing the occurence of the pattern in word_ to be matched in the vector being searched, if the occurence is 2 for the nth pattern in word_ and only one occurence is found in vct so no pattern will be matched, put "forever" to no longer depend on the occurence for the associated pattern}
 
 \item{strict}{a vector containing the "strict" condition for each nth vector in word_ ("strict" is the string to activate this option)}
 
-\item{btwn}{is a vector containing the condition ("yes" to activate this option) meaning that if "yes", all elements between two matched patern in vct will be returned}
+\item{btwn}{is a vector containing the condition ("yes" to activate this option) meaning that if "yes", all elements between two matched patern in vct will be returned , so the patterns you enter in word_ have to be in the order you think it will appear in vct}
 
-\item{all_in_word}{is a value (default set to "no", "yes" to activate this option) that, if activated, won't authorized a previous matched pattern to be matched again}
+\item{all_in_word}{is a value (default set to "yes", "no" to activate this option) that, if activated, won't authorized a previous matched pattern to be matched again}
+
+\item{notatall}{is a string that you are sure is not present in vct
+REGEX can also be used as pattern}
 }
 \description{
 Search for pattern(s) contained in a vector in another vector and return matched one and their position according to these rules:

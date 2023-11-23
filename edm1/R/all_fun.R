@@ -2314,6 +2314,7 @@ change_date <- function(date_, sep_, day_  = NA, month_ = NA,
 #' @param btwn is a vector containing the condition ("yes" to activate this option) meaning that if "yes", all elements between two matched patern in vct will be returned , so the patterns you enter in word_ have to be in the order you think it will appear in vct 
 #' @param all_in_word is a value (default set to "yes", "no" to activate this option) that, if activated, won't authorized a previous matched pattern to be matched again
 #' @param notatall is a string that you are sure is not present in vct
+#' REGEX can also be used as pattern 
 #' @export
 
 pattern_gettr <- function(word_, vct, occ=c(1), strict, btwn, all_in_word="yes", notatall="###"){
