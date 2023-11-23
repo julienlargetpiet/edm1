@@ -20,6 +20,8 @@ To see the documentation in your R shell:
 
 ## Installation 
 
+First, clone this repository `git clone https://github.com/iro0087/edm`
+
 In your R prompt, in "edm/edm1" do the following:
 
 1. \>build()
