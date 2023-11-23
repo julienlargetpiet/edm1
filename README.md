@@ -8,15 +8,22 @@ Documentation for each functions is written in edm1/man.
 
 To see the documentation in your R shell:
 
-1. > library("devtools")
-2. > devtools::load_all(path_to_edm_pkg)
-3. > ?function_from_edm
+1. \> library("devtools")
+2. \> devtools::load_all(path_to_edm_pkg)
+3. \> ?function_from_edm
 
 ## PKG Requirements
 
 1. stringr
 2. openxlsx
 3. stringi
+
+## Installation 
+
+In your R prompt, in "edm/edm1" do the following:
+
+1. \>build()
+2. \>install()
 
 ## Documentation
 
