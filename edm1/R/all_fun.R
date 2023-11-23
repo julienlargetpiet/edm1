@@ -2358,8 +2358,6 @@ pattern_gettr <- function(word_, vct, occ=c(1), strict, btwn, all_in_word="yes",
 
   for (i in 1:length(vct)){
 
-    print(word_)
-           
     to_compare = 0
 
     if (all_in_word == "yes"){
@@ -2452,17 +2450,7 @@ pattern_gettr <- function(word_, vct, occ=c(1), strict, btwn, all_in_word="yes",
 
       }
 
-      print(occ)
-
-      print(indx)
-
       if (all_occ[indx] == occ[indx] | occ[indx] == "forever"){
-
-        print("oui")
-
-        print(all_occ)
-
-        print(occ_idx)
 
         can_ins <- 1
         
