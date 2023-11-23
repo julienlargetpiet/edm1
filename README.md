@@ -362,3 +362,4 @@ Second case: It is the opposite to the first case, it means that if the pattern 
 
 @param all_in_word is a value (default set to "no", "yes" to activate this option) that, if activated, won't authorized a previous matched pattern to be matched again 
 
+REGEX can also be used in the searched patterns
