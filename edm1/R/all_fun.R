@@ -2303,7 +2303,7 @@ change_date <- function(date_, sep_, day_  = NA, month_ = NA,
 
 #' pattern_gettr 
 #'
-#' Search for pattern(s) contained in a vector in another vector and return matched one and their position according to these rules:
+#' Search for pattern(s) contained in a vector in another vector and return a list containing matched one (first index) and their position (second index) according to these rules:
 #'
 #' First case: Search for patterns strictly, it means that the searched pattern(s) will be matched only if the patterns containded in the vector that is beeing explored by the function are present like this c("pattern_searched", "other", ..., "pattern_searched") and not as c("other_thing pattern_searched other_thing", "other", ..., "pattern_searched other_thing") 
 #' Second case: It is the opposite to the first case, it means that if the pattern is partially present like in the first position and the last, it will be considered like a matched pattern
