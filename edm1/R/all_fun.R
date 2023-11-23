@@ -1,7 +1,5 @@
 library(stringr)
-library(readxl)
 library(openxlsx)
-library(writexl)
 library(stringi)
 
 #' diff_xlsx
@@ -28,7 +26,7 @@ diff_xlsx <- function(file_, sht, v_old_begin, v_old_end,
                       color_="red", pattern="", output="out.xlsx", new_val=T,
                       pattern_only=T){
   
-  rd <- read_excel(file_, sheet=sht, col_names=NA)
+  rd <- read.xlsx(file_, sheet=sht, col_names=NA)
   
   data_ <- data.frame(rd)
   
@@ -742,7 +740,7 @@ data_meshup <- function(data, cols=NA, file_=NA, sep_=";",
 #'
 #' @param letter is the letter (name of the column)
 
-lettr_to_nb <- function(letter){
+letter_to_nb <- function(letter){
   
   l <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
          "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z")
@@ -771,7 +769,7 @@ lettr_to_nb <- function(letter){
 #'
 #' @param x is the number of the column 
 
-nb_to_lettr <- function(x){
+nb_to_letter <- function(x){
   
   l <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
          "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z")

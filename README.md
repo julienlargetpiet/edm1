@@ -15,10 +15,8 @@ To see the documentation in your R shell:
 ## PKG Requirements
 
 1. stringr
-2. readxl
-3. openxlsx
-4. writexl
-5. stringi
+2. openxlsx
+3. stringi
 
 ## Documentation
 
