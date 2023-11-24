@@ -2519,3 +2519,34 @@ diff_vec <- function(vec1, vec2){
   return(rtnl)
 
 }
+
+#' append_row
+#'
+#' Append the last row from dataframe to the another or same dataframe
+#'
+#' @param df_in is the dataframe from which the row will append to another or the same  dataframe
+#' @param df is the dataframe to which the row will append
+#' @param hmn is how many time the last row will be appended
+#' @param na_col is a vector containing the columns that won't append and will be replaced by another value (unique_do_not_know)
+#' @param unique_do_not_know is the value of the non appending column in the appending row
+#' @export
+
+append_row <- function(df_in, df, hmn=1, na_col=c(), unique_do_not_know=NA){
+
+        appender <- df_in[nrow(df), ]
+
+        appender[na_col] <- unique_do_not_know
+
+        for (i in 1:hmn){
+
+                df <- rbind(df, appender)
+
+        }
+
+  return(df)
+
+}
+
+
+
+
