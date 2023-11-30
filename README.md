@@ -268,9 +268,13 @@ Allow to return a datafame with TRUE cells where the condition entered are respe
 
 @param df is the input dataframe
 
-@param condition_l is the vector of the possible conditions ("==", ">", "<", "!=", "%")
+@param condition_l is the vector of the possible conditions ("==", ">", "<", "!=", "%%", "%%r") (equal, greater than, lower than, not equal to, is divisible by, divides), you can put the same condition n times. 
 
-@param val_l is the vector with the values related to condition_l (so the values has to be placed in the same order)
+@param val_l is the list of vectors containing the values related to condition_l (so the vector of values has to be placed in the same order)
+
+@param conjunction_l contains the | or & conjunctions, so if the length of condition_l is equal to 3, there will be 2 conjunctions. If the length of conjunction_l is inferior to the length of condition_l minus 1, conjunction_l will match its goal length value with its last argument as the last arguments. For example, c("&", "|", "&") with a goal length value of 5 --> c("&", "|", "&", "&", "&")
+
+@examples see_df(df, c("%%", "=="), list(c(2, 11), c(3)), list("|") will return all the values that are divisible by 2 and 11 and all the values that are equal to 3 from the dataframe  
 
 ### days_from_month
 
@@ -369,3 +373,38 @@ Second case: It is the opposite to the first case, it means that if the pattern 
 @param all_in_word is a value (default set to "yes", "no" to activate this option) that, if activated, won't authorized a previous matched pattern to be matched again
 
 REGEX can also be used in the searched patterns
+
+### see_inside
+
+Return a list containing all the column of the files in the current directory with a chosen file extension and its associated file and sheet if xlsx
+For example if i have 2 files "out.csv" with 2 columns and "out.xlsx" with 1 column for its first sheet and 2 for its second one, the return will look like this:
+c(column_1, column_2, column_3, column_4, column_5, unique_separator, "1-2-out.csv", "3-3-sheet_1-out.xlsx", 4-5-sheet_2-out.xlsx)
+
+@param pattern is a vector containin the file extension of the spreadsheets ("xlsx", "csv"...)
+
+@param path is the path where are located the files
+
+@param sep_ is a vector containing the separator for each csv type file in order following the operating system file order, if the vector does not match the number of the csv files found, it will assume the separator for the rest of the files is the same as the last csv file found. It means that if you know the separator is the same for all the csv type files, you just have to put the separator once in the vector.
+
+@param unique_sep is a pattern that you know will never be in your input files
+
+@param rec alloaw to get files recursively 
+
+If x is the return value, to see all the files name, position of the columns and possible sheet name associanted with, do the following: print(x[(grep(unique_sep, x)[1]+1):length(x)])
+If you just want to see the columns do the following: print(x[1:(grep(unique_sep, x) - 1)])
+
+### val_replacer
+
+Allow to replace value from dataframe to another one.
+
+@param df is the input dataframe
+
+@param val_replaced is a vector of the value(s) to be replaced
+
+@param val_replacor is the value that will replace val_replaced
+
+@param df_rpt is the replacement matrix and has to be the same dimension as df. Only the indexes that are equal to TRUE will be authorized indexes for the values to be replaced in the input matrix
+
+
+
+

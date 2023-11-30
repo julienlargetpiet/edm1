@@ -1832,8 +1832,6 @@ see_df <- function(df, condition_l, val_l, conjunction_l=c(), rt_val=T, f_val=F)
 
 }
 
-#see_df(df_in, c("==", "==", "==", "==", "=="), list(c(2, 1), c(3), c(1, 2), c(5, 1), c(2, 1, 3)), c("&", "|", "&", "|"))
-
 #' days_from_month
 #'
 #' Allow to find the number of days month from a month date, take in count leap year 
@@ -2877,8 +2875,7 @@ see_file <- function(string_, index_ext=1, ext=T){
 
 #' see_inside
 #'
-#' Return a list containing all the column of the files in the current directory with a chosen file extension and its associated file and sheet if xlsx
-#' For example if i have 2 files "out.csv" with 2 columns and "out.xlsx" with 1 column for its first sheet and 2 for its second one, the return will look like this:
+#' Return a list containing all the column of the files in the current directory with a chosen file extension and its associated file and sheet if xlsx. For example if i have 2 files "out.csv" with 2 columns and "out.xlsx" with 1 column for its first sheet and 2 for its second one, the return will look like this:
 #' c(column_1, column_2, column_3, column_4, column_5, unique_separator, "1-2-out.csv", "3-3-sheet_1-out.xlsx", 4-5-sheet_2-out.xlsx)
 #'
 #' @param pattern is a vector containin the file extension of the spreadsheets ("xlsx", "csv"...)
