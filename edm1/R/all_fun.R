@@ -1426,8 +1426,6 @@ see_df <- function(df, condition_l, val_l, conjunction_l=c(), rt_val=T, f_val=F)
 
         for (I in 1:ncol(df)){
 
-                print("#################")
-
                 for (i in 1:nrow(df)){
 
                         checked_l <- c()
@@ -2699,8 +2697,6 @@ pattern_gettr <- function(word_, vct, occ=c(1), strict, btwn, all_in_word="yes",
 
                         if (nchar(word_[t]) == nchar(vct[i])){
 
-                                print("aa")
-
                                 v_bool <- str_detect(vct[i], word_[t])
 
                                 to_compare = sum(v_bool)
@@ -2905,8 +2901,6 @@ see_inside <- function(pattern_, path_=".", sep_=c(","), unique_sep="#####", rec
 
         sep_idx = 1
         
-        print(x)
-
         for (i in 1:length(x)){
 
                 file_as_vec <- unlist(str_split(x[i], ""))
