@@ -405,6 +405,25 @@ Allow to replace value from dataframe to another one.
 
 @param df_rpt is the replacement matrix and has to be the same dimension as df. Only the indexes that are equal to TRUE will be authorized indexes for the values to be replaced in the input matrix
 
+### date_sort
+
+Allow to ascendely or desendely sort dates in a vector.
+
+@param vec is the vector containing the dates.
+
+@param asc is a boolean variable, that if set to TRUE will sort the dates ascendely and descendely if set to FALSE
+
+@param sep is the separator of the date strings ex: "11-12-1998" the separator is "-"
+
+
+### see_idx
+
+Allow to find the indexes of the elements of the first vector in the second.
+
+@param v1 is the first vector
+
+@param v2 is the second vector
+
 
 
 
