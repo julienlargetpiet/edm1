@@ -2987,5 +2987,70 @@ val_replacer <- function(df, val_replaced=F, val_replacor=T, df_rpt=NA){
   
 }
 
+#' see_idx
+#'
+#' Allow to find the indexes of the elements of the first vector in the second.
+#'
+#' @param v1 is the first vector
+#' @param v2 is the second vector
+#' @export
 
+see_idx <- function(v1, v2, exclude_val="######", no_more=F){
+ 
+  rtnl <- c()
+ 
+  for (i in 1:length(v1)){
+    
+    rtnl <- append(rtnl, grep(v1[i], v2))
+    
+    if (no_more == T){ v2[rtnl[length(rtnl)]] <- exclude_val }
+    
+  }
+ 
+  return(rtnl)
+ 
+}
+
+#' date_sort
+#'
+#' Allow to ascendely or desendely sort dates in a vector.
+#' 
+#' @param vec is the vector containing the dates.
+#' @param asc is a boolean variable, that if set to TRUE will sort the dates ascendely and descendely if set to FALSE
+#' @param sep is the separator of the date strings ex: "11-12-1998" the separator is "-"
+#' @export
+
+date_sort <- function(vec, asc=F, sep="-"){
+ 
+  vec2 <- str_split(vec, sep)
+ 
+  s_vec <- c()
+ 
+  for (i in 1:length(vec)){
+    
+    s_vec <- append(s_vec, prod(as.numeric(unlist(vec2[i]))))
+    
+  }
+ 
+  if (asc==T){
+ 
+    rtnl <- sort(s_vec, decreasing=F)
+ 
+  }else{
+    
+    rtnl <- sort(s_vec, decreasing=T)
+    
+  }
+ 
+  s_vec_idx <- c()
+ 
+  for (i in 1:length(s_vec)){
+    
+    s_vec_idx <- append(s_vec_idx, grep(rtnl[i], s_vec))
+    
+  }
+ 
+  return(vec[s_vec_idx])
+ 
+}
 
