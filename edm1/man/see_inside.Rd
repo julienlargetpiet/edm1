@@ -30,3 +30,9 @@ Return a list containing all the column of the files in the current directory wi
 For example if i have 2 files "out.csv" with 2 columns and "out.xlsx" with 1 column for its first sheet and 2 for its second one, the return will look like this:
 c(column_1, column_2, column_3, column_4, column_5, unique_separator, "1-2-out.csv", "3-3-sheet_1-out.xlsx", 4-5-sheet_2-out.xlsx)
 }
+\examples{
+print(x[(grep(unique_sep, x)[1]+1):length(x)]). 
+If you just want to see the columns do the following: 
+print(x[1:(grep(unique_sep, x) - 1)])
+
+}

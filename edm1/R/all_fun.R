@@ -2880,8 +2880,10 @@ see_file <- function(string_, index_ext=1, ext=T){
 #' @param unique_sep is a pattern that you know will never be in your input files
 #' @param rec alloaw to get files recursively 
 #' 
-#' If x is the return value, to see all the files name, position of the columns and possible sheet name associanted with, do the following: print(x[(grep(unique_sep, x)[1]+1):length(x)])
-#' If you just want to see the columns do the following: print(x[1:(grep(unique_sep, x) - 1)])
+#' If x is the return value, to see all the files name, position of the columns and possible sheet name associanted with, do the following: 
+#' @examples print(x[(grep(unique_sep, x)[1]+1):length(x)]). 
+#' If you just want to see the columns do the following: 
+#' @examples print(x[1:(grep(unique_sep, x) - 1)])
 #'
 #' @export
 
@@ -3012,9 +3014,7 @@ see_idx <- function(v1, v2, exclude_val="######", no_more=F){
 }
 
 #' date_sort
-#'
 #' Allow to ascendely or desendely sort dates in a vector.
-#' 
 #' @param vec is the vector containing the dates.
 #' @param asc is a boolean variable, that if set to TRUE will sort the dates ascendely and descendely if set to FALSE
 #' @param sep is the separator of the date strings ex: "11-12-1998" the separator is "-"
