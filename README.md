@@ -457,7 +457,7 @@ Allow to get the value of directorie depth from a path.
 example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
 
 
-###list_files
+### list_files
 
 A list.files() based function addressing the need of listing the files with extension a or or extension b ...
 
