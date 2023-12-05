@@ -428,16 +428,22 @@ Allow to find the indexes of the elements of the first vector in the second.
 ### file_rec2 
 
 Allow to find the directories and the subdirectories with a specified end and start depth value from a path. This function might be more powerfull than file_rec because it uses a custom algorythm that does not nee to perform a full recursive search before tuning it to only find the directories with a good value of depth. Depth example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
+
 @param xmax is the depth value
+
 @param xmin is the minimum value of depth
+
 @param pathc is the reference path, from which depth value is equal to 1
 
 
 ### file_rec
 
 Allow to get all the files recursively from a path according to an end and start depth value. If you want to have an other version of this function that uses a more sophisticated algorythm (which can be faster), check file_rec2. Depth example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
+
 @param xmax is the end depth value
+
 @param xmin is the start depth value
+
 @param pathc is the reference path 
 
 
@@ -445,31 +451,41 @@ Allow to get all the files recursively from a path according to an end and start
 ### get_rec 
                                                                              
 Allow to get the value of directorie depth from a path.
+
 @param pathc is the reference path
+
 example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
 
 
 ###list_files
 
 A list.files() based function addressing the need of listing the files with extension a or or extension b ...
+
 @param pathc is the path, can be a vector of multiple path because list.files() supports it.
+
 @param patternc is a vector containing all the exensions you want
 
 
 ### match_n2
 
 Allow to get the indexes for the nth occurence of a value in a vector. Example: c(1, 2, 3, 1, 2), the first occurence of 1 and 2 is at index 1 and 2 respectively, but the second occurence is respectively at the 4th and 5th index.
+
 @param vec is th einput vector
 mc is a vector containing the values you want to get the index for the nth occurence in vec
+
 @param n is a vector containing the occurences for each value in mc so if i have mc <- c(3, 27) and n <- c(1, 2), i want the first occurence for 3 and the second for 27 in vec. If the length of n is inferior of the length of mc, m will extend with its last value as new arguments. It means that if mc <- c(3, 27) but n <- c(1) so n will extend to c(1, 1), so we will get the first occurence of 3 and 27 in vec. 
+
 @param wnb is a string you are sure is not in mc
 
 
 ### match_n
                                                                                                                                                                                                                                       
 Allow to get the indexes for the nth occurence of a value in a vector. Example: c(1, 2, 3, 1, 2), the first occurence of 1 and 2 is at index 1 and 2 respectively, but the second occurence is respectively at the 4th and 5th index.
-@param vec is th einput vector
+
+@param vec is th input vector
 mc is a vector containing the values you want to get the index for the nth occurence in vec
+
 @param is the value of the occurence
+
 @param wnb is a string you are sure is not in mc
 
