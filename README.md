@@ -31,6 +31,11 @@ In your R prompt, in "edm/edm1" do the following:
 
 ### diff_xlsx 
 
+        `diff_xlsx(file_, sht, v_old_begin, v_old_end, 
+                              v_new_begin, v_new_end, df2=NA, overwrite=T, 
+                              color_="red", pattern="", output="out.xlsx", new_val=T,
+                              pattern_only=T)`
+
 Allow to see the difference between two datasets and output it into an xlsx file
 
 `file_` is the file where the data is 
@@ -61,6 +66,8 @@ Allow to see the difference between two datasets and output it into an xlsx file
 
 ### insert_df
 
+        `insert_df(df_in, df_ins, ins_loc)`
+
 Allow to insert dataframe into another dataframe according to coordinates (row, column) from the dataframe that will be inserted
 
 `df_in` is the dataframe that will be inserted 
@@ -69,6 +76,8 @@ Allow to insert dataframe into another dataframe according to coordinates (row, 
 ins_loc is a vector containg two parameters (row, column) of the begining for the insertion
 
 ### pattern_generator
+
+        `pattern_generator(base_, from_, lngth, hmn=1, after=1)`
 
 Allow to create patterns which have a part that is varying aech time randomly
 
@@ -81,6 +90,8 @@ Allow to create patterns which have a part that is varying aech time randomly
 `after` is set to 1 by default, it means that the varying part will be after the fixed part, set to 0 if you want the varying part to be before 
 
 ### pattern_tuning
+
+        `pattern_tuning(pattrn, spe_nb, spe_l, exclude_type, hmn=1, rg=c(0, 0))`
 
 Allow to tune a pattern very precisely
 
@@ -98,17 +109,23 @@ Allow to tune a pattern very precisely
 
 ### unique_pos
 
+        `unique_pos(vec)`
+
 Return the indexes of the first unique values from a vector
 
 `vec` is the input vector
 
 ### can_be_num
 
+        `can_be_num(x)`
+
 Return TRUE if a variable can be converted to a number and FALSE if not
 
 `x` is the input value
 
 ### data_gen
+
+        `(type_=c("number", "mixed", "string"), strt_l=c(0, 0, 10), nb_r=c(50, 10, 40), output="gened.csv", properties=c("1-5", "1-5", "1-5"), type_distri=c("random", "random", "random"), str_source=c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "w", "x", "y", "z"), round_l=c(0, 0, 0), sep_=",")`
 
 Allo to generate in a csv all kind of data you can imagine according to what you provide
 
@@ -134,6 +151,10 @@ Allo to generate in a csv all kind of data you can imagine according to what you
 
 ### data_meshup
 
+        `data_meshup(data, cols=NA, file_=NA, sep_=";", 
+                        organisation=c(2, 1, 0), unic_sep1="_", 
+                        unic_sep2="-")`
+
 Allow to automatically arrange 1 dimensional data according to vector and parameters
 
 `data` is the data provided (vector) each column is separated by a unic separator and each dataset from the same column is separated by another unic separator (ex: c("\_ ", c("d", "-", "e", "-", "f"), "\_ ", c("a", "a1", "-", "b", "-", "c", "c1")"\_ ")
@@ -158,17 +179,25 @@ f, c1
 
 ### letter_to_nb
 
+        `letter_to_nb(letter)`
+
 Allow to get the number of a spreadsheet based column by the letter ex: AAA = 703
 
 `letter` is the letter (name of the column)
 
 ### nb_to_letter
 
+        `nb_to_letter(x)`
+
 Allow to get the letter of a spreadsheet based column by the number ex: 703 = AAA
 
 `x` is the number of the column 
 
 ### cost and taxes
+
+        `cost_and_taxes(qte=NA, pu=NA, prix_ht=NA, tva=NA, prix_ttc=NA,
+                           prix_tva=NA, pu_ttc=NA, adjust=NA, prix_d_ht=NA,
+                           prix_d_ttc=NA, pu_d=NA, pu_d_ttc=NA)`
 
 Allow to calculate basic variables related to cost and taxes from a bunch of products (elements)
 So put every variable you know in the following order:
@@ -201,7 +230,9 @@ the function return a vector with the previous variables in the same order
 those that could not be calculated will be represented with NA value
 x-month-xxxx -> xx-xx-xxxx
 
-### formate_date
+### format_date
+
+        `format_date(f_dialect, sentc, sep_in="-", sep_out="-")`
 
 Allow to convert xx-month-xxxx date type to xx-xx-xxxx
 
@@ -215,6 +246,8 @@ Allow to convert xx-month-xxxx date type to xx-xx-xxxx
 
 ### until_stnl
 
+        `until_stnl(vec1, goal)`
+
 Maxes a vector to a chosen length 
 
 ex: if i want my vector c(1, 2) to be 5 of length this function will return me: c(1, 2, 1, 2, 1) 
@@ -224,6 +257,8 @@ ex: if i want my vector c(1, 2) to be 5 of length this function will return me: 
 `goal` is the length to reach
 
 ### vlookup_df
+
+        `vlookup_df(df, v_id, col_id=1, included_col_id="yes")`
 
 Alow to perform a vlookup on a dataframe
 
@@ -237,6 +272,8 @@ Alow to perform a vlookup on a dataframe
 
 ### multitud
 
+        `multitud(l, sep_="")`
+
 From a list containing vectors allow to generate a vector following this rule:
 
 list(c("a", "b"), c("1", "2"), c("A", "Z", "E")) --> c("a1A", "a2A", "b1A", "b2A", "a1Z", ...)
@@ -246,6 +283,8 @@ list(c("a", "b"), c("1", "2"), c("A", "Z", "E")) --> c("a1A", "a2A", "b1A", "b2A
 `sep_` is the separator between elements (default is set to "" as you see in the example)
 
 ### df_tuned 
+
+        `df_tuned(df, val_to_stop, index_rc=NA, included="yes")`
 
 Allow to return a list from a dataframe following these rules:
 First situation, I want the vectors from the returned list be composed of values that are separated by special values contained in a vector 
@@ -264,6 +303,8 @@ If i take this dataframe data.frame(c(1, 1, 2, 1, 4, 4), c(1, 1, 2, 1, 3, 3), c(
 
 ### see_df
 
+        `see_df(df, condition_l, val_l, conjunction_l=c(), rt_val=T, f_val=F)`
+
 Allow to return a datafame with TRUE cells where the condition entered are respected and FALSE where these are not
 
 `df` is the input dataframe
@@ -278,6 +319,8 @@ Allow to return a datafame with TRUE cells where the condition entered are respe
 
 ### days_from_month
 
+        `days_from_month(date_, sep_)`
+
 Allow to find the number of days month from a month date, take in count leap year 
 
 `date_` is the input date
@@ -285,6 +328,8 @@ Allow to find the number of days month from a month date, take in count leap yea
 `sep_` is the separator of the input date
 
 ### vec_in_df
+
+        `vec_in_df(df_, vec_l, coeff_, strt_l, distinct="NA")`
 
 Allow to see if vectors are present in a dataframe
 
@@ -308,6 +353,8 @@ stinct is the value you are sure is not contained in the matrix
 
 ### closest_date
 
+        `closest_date(vec, date_, frmt, sep_="/", sep_vec="/", only_="both", head=NA)`
+
 return the closest dates from a vector compared to the input date
 
 `date_` is the input date
@@ -326,6 +373,10 @@ if you only want to work with standard date for example change this variable to 
 `head` is the number of dates that will be returned (default set to NA so all dates in vec will be returned)
 
 ### change_date
+
+        `change_date(date_, sep_, day_  = NA, month_ = NA, 
+                        year_ = NA, hour_ = NA, min_ = NA, 
+                        second_ = NA, frmt="snhdmy")`
 
 Allow to add to a date second-minute-hour-day-month-year
 
@@ -349,6 +400,8 @@ Allow to add to a date second-minute-hour-day-month-year
 if you only want to work with standard date for example change this variable to "dmy"
 
 ### pattern_gettr 
+
+        `pattern_gettr(word_, vct, occ=c(1), strict, btwn, all_in_word="yes", notatall="###")`
 
 Search for pattern(s) contained in a vector in another vector and return a list containing matched one (first index) and their position (second index) according to these rules:
 
@@ -377,6 +430,8 @@ REGEX can also be used in the searched patterns
 
 ### see_inside
 
+        `see_inside(pattern_, path_=".", sep_=c(","), unique_sep="#####", rec=F)`
+
 Return a list containing all the column of the files in the current directory with a chosen file extension and its associated file and sheet if xlsx
 For example if i have 2 files "out.csv" with 2 columns and "out.xlsx" with 1 column for its first sheet and 2 for its second one, the return will look like this:
 c(column_1, column_2, column_3, column_4, column_5, unique_separator, "1-2-out.csv", "3-3-sheet_1-out.xlsx", 4-5-sheet_2-out.xlsx)
@@ -396,6 +451,8 @@ If you just want to see the columns do the following: print(x[1:(grep(unique_sep
 
 ### val_replacer
 
+        `val_replacer(df, val_replaced, val_replacor=T, df_rpt=NA)`
+
 Allow to replace value from dataframe to another one.
 
 `df` is the input dataframe
@@ -408,6 +465,8 @@ Allow to replace value from dataframe to another one.
 
 ### date_sort
 
+     `date_sort(vec, asc=F, sep="-")`   
+
 Allow to ascendely or desendely sort dates in a vector.
 
 `vec` is the vector containing the dates.
@@ -419,6 +478,8 @@ Allow to ascendely or desendely sort dates in a vector.
 
 ### see_idx
 
+        `(v1, v2, exclude_val="######", no_more=F)`
+
 Allow to find the indexes of the elements of the first vector in the second.
 
 `v1` is the first vector
@@ -427,6 +488,8 @@ Allow to find the indexes of the elements of the first vector in the second.
 
 
 ### file_rec2 
+
+        `file_rec2(xmax, xmin=1, pathc=".")`
 
 Allow to find the directories and the subdirectories with a specified end and start depth value from a path. This function might be more powerfull than file_rec because it uses a custom algorythm that does not nee to perform a full recursive search before tuning it to only find the directories with a good value of depth. Depth example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
 
@@ -439,6 +502,8 @@ Allow to find the directories and the subdirectories with a specified end and st
 
 ### file_rec
 
+        `file_rec(xmax, xmin=1, pathc=".")`
+
 Allow to get all the files recursively from a path according to an end and start depth value. If you want to have an other version of this function that uses a more sophisticated algorythm (which can be faster), check file_rec2. Depth example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
 
 `xmax` is the end depth value
@@ -448,9 +513,10 @@ Allow to get all the files recursively from a path according to an end and start
 `pathc` is the reference path 
 
 
-
 ### get_rec 
-                                                                             
+                
+                `get_rec(pathc=".")`
+                
 Allow to get the value of directorie depth from a path.
 
 `pathc` is the reference path
@@ -460,6 +526,8 @@ example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
 
 ### list_files
 
+        `list_files(patternc, pathc=".")`
+
 A list.files() based function addressing the need of listing the files with extension a or or extension b ...
 
 `pathc` is the path, can be a vector of multiple path because list.files() supports it.
@@ -468,6 +536,8 @@ A list.files() based function addressing the need of listing the files with exte
 
 
 ### match_n2
+
+        `(vec, mc, n, wnb="#####")`
 
 Allow to get the indexes for the nth occurence of a value in a vector. Example: c(1, 2, 3, 1, 2), the first occurence of 1 and 2 is at index 1 and 2 respectively, but the second occurence is respectively at the 4th and 5th index.
 
@@ -480,7 +550,9 @@ mc is a vector containing the values you want to get the index for the nth occur
 
 
 ### match_n
-                                                                                                                                                                                                                                      
+
+        `match_n(vec, mc, n=1, wnb="#####")`
+
 Allow to get the indexes for the nth occurence of a value in a vector. Example: c(1, 2, 3, 1, 2), the first occurence of 1 and 2 is at index 1 and 2 respectively, but the second occurence is respectively at the 4th and 5th index.
 
 `vec` is th input vector
