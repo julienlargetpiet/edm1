@@ -15,11 +15,10 @@ until_stnl(vec1, goal)
 }
 \description{
 Maxes a vector to a chosen length
+ex: if i want my vector c(1, 2) to be 5 of length this function will return me: c(1, 2, 1, 2, 1)
 
 Maxes a vector to a chosen length
 }
 \details{
-ex: if i want my vector c(1, 2) to be 5 of length this function will return me: c(1, 2, 1, 2, 1)
-
 ex: if i want my vector c(1, 2) to be 5 of length this function will return me: c(1, 2, 1, 2, 1)
 }

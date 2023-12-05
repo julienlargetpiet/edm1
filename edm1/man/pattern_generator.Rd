@@ -18,7 +18,7 @@ pattern_generator(base_, from_, lngth, hmn = 1, after = 1)
 \item{after}{is set to 1 by default, it means that the varying part will be after the fixed part, set to 0 if you want the varying part to be before}
 }
 \description{
-Allow to create patterns which have a part that is varying aech time randomly
+Allow to create patterns which have a part that is varying randomly each time.
 
 Allow to create patterns which have a part that is varying aech time randomly
 }

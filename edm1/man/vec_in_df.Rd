@@ -19,16 +19,14 @@ vec_in_df(df_, vec_l, coeff_, strt_l, distinct = "NA")
 }
 \description{
 Allow to see if vectors are present in a dataframe
+ex: 1, 2, 1
+3, 4, 1
+1, 5, 8
+the vector c(4, 1) with the coefficient 1 and the start position at the second column is containded in the dataframe
 
 Allow to see if vectors are present in a dataframe
 }
 \details{
-ex: 1, 2, 1
-3, 4, 1
-1, 5, 8
-
-the vector c(4, 1) with the coefficient 1 and the start position at the second column is containded in the dataframe
-
 ex: 1, 2, 1
 3, 4, 1
 1, 5, 8

@@ -22,7 +22,7 @@ pattern_tuning(pattrn, spe_nb, spe_l, exclude_type, hmn = 1, rg = c(0, 0))
 \item{rg}{is a vector with two parameters (index of the first letter that will be replaced, index of the last letter that will be replaced) default is set to all the letters from the source pattern}
 }
 \description{
-Allow to tune a pattern very precisely
+Allow to tune a pattern very precisely and output a vector containing its variations n times.
 
 Allow to tune a pattern very precisely
 }

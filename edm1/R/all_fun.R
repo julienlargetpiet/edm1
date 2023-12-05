@@ -4,14 +4,14 @@ library(stringi)
 
 #' diff_xlsx
 #'
-#' Allow to see the difference between two datasets and output it into an xlsx file
-#'
+#' Allow to see the difference between two datasets and output it into an xlsx file. If the dimensions of the new datasets are bigger than the old one, only the matching cells will be compared, if the dimensions of the new one are lower than the old one, there will be an error.  
 #' @param file_ is the file where the data is
 #' @param sht is the sheet where the data is
-#' @param v_old_begin is the corrdinate (row, column) where the data to be compared starts
+#' @param v_old_begin is a vector containing the coordinates (row, column) where the data to be compared starts
 #' @param v_old_end is the same but for its end
 #' @param v_new_begin is the coordinates where the comparator data starts
 #' @param v_new_end is the same but for its end
+#' If the dimensions of the new datasets are bigger than the old one, only the matching cells will be compared, if the dimensions of the new one are lower than the old one, there will be an error.  
 #' @param df2 is optional, if the comparator dataset is directly a dataframe
 #' @param overwrite allow to overwrite differences is (set to T by default)
 #' @param color_ is the color the differences will be outputed
@@ -131,7 +131,7 @@ diff_xlsx <- function(file_, sht, v_old_begin, v_old_end,
 #' Allow to insert dataframe into another dataframe according to coordinates (row, column) from the dataframe that will be inserted
 #' @param df_in is the dataframe that will be inserted 
 #' @param df_ins is the dataset to be inserted
-#' ins_loc is a vector containg two parameters (row, column) of the begining for the insertion
+#' @param ins_loc is a vector containg two parameters (row, column) of the begining for the insertion
 #' @export
 
 insert_df <- function(df_in, df_ins, ins_loc){
@@ -176,7 +176,7 @@ insert_df <- function(df_in, df_ins, ins_loc){
 
 #' pattern_generator
 #'
-#' Allow to create patterns which have a part that is varying aech time randomly
+#' Allow to create patterns which have a part that is varying randomly each time.
 #' @param base_ is the pattern that will be kept
 #' @param from_ is the vector from which the element of the varying part will be generated
 #' @param hmn is how many of varying pattern from the same base will be created
@@ -223,10 +223,10 @@ pattern_generator <- function(base_, from_, lngth, hmn=1, after=1){
 
 #' pattern_tuning
 #'
-#' Allow to tune a pattern very precisely
+#' Allow to tune a pattern very precisely and output a vector containing its variations n times.
 #' @param pattrn is the character that will be tuned 
 #' @param spe_nb is the number of new character that will be replaced
-#' @param spe_l is the source vector from which the new characters will be replace old ones
+#' @param spe_l is the source vector from which the new characters will replace old ones
 #' @param exclude_type is character that won't be replaced
 #' @param hmn is how many output the function will return
 #' @param rg is a vector with two parameters (index of the first letter that will be replaced, index of the last letter that will be replaced) default is set to all the letters from the source pattern
@@ -326,21 +326,6 @@ pattern_tuning <- function(pattrn, spe_nb, spe_l, exclude_type, hmn=1, rg=c(0, 0
   
 }
 
-#' unique_pos
-#'
-#' Return the indexes of the first unique values from a vector
-#'
-#' @param vec is the input vector
-#' @export
-
-unique_pos <- function(vec){
-
-        u_vec <- unique(vec)
-
-        return(match(u_vec, vec))
-
-}
-
 #' can_be_num
 #'
 #' Return TRUE if a variable can be converted to a number and FALSE if not
@@ -376,6 +361,20 @@ can_be_num <- function(x){
     }
 
 }
+
+#' unique_pos
+#' Allow to find indexes of the unique values from a vector. 
+#' @param vec is the input vector
+#' @export
+
+unique_pos <- function(vec){
+
+        u_vec <- unique(vec)
+
+        return(match(u_vec, vec))
+
+}
+
 
 #' data_gen
 #'
@@ -750,7 +749,6 @@ data_meshup <- function(data, cols=NA, file_=NA, sep_=";",
 #' letter_to_nb
 #'
 #' Allow to get the number of a spreadsheet based column by the letter ex: AAA = 703
-#'
 #' @param letter is the letter (name of the column)
 #' @export
 
@@ -780,7 +778,6 @@ letter_to_nb <- function(letter){
 #' nb_to_letter
 #'
 #' Allow to get the letter of a spreadsheet based column by the number ex: 703 = AAA
-#'
 #' @param x is the number of the column 
 #' @export
 
@@ -839,7 +836,6 @@ nb_to_letter <- function(x){
 #'
 #' Allow to calculate basic variables related to cost and taxes from a bunch of products (elements)
 #' So put every variable you know in the following order:
-#'
 #' @param qte is the quantity of elements
 #' @param pu is the price of a single elements without taxes
 #' @param prix_ht is the duty-free price of the whole set of elements
@@ -852,7 +848,6 @@ nb_to_letter <- function(x){
 #' @param prix_d_ttc is the price with taxes of an element after discount
 #' @param pu_d is the price of a single element after discount and without taxes
 #' @param pu_d_ttc is the free-duty price of a single element after discount
-#'
 #' the function return a vector with the previous variables in the same order
 #' those that could not be calculated will be represented with NA value
 #' @export
@@ -1183,7 +1178,6 @@ cost_and_taxes <- function(qte=NA, pu=NA, prix_ht=NA, tva=NA, prix_ttc=NA,
 #' formate_date
 #'
 #' Allow to convert xx-month-xxxx date type to xx-xx-xxxx
-#'
 #' @param f_dialect are the months from the language of which the month come
 #' @param sentc is the date to convert
 #' @param sep_in is the separator of the dat input (default is "-")
@@ -1215,7 +1209,6 @@ format_date <- function(f_dialect, sentc, sep_in="-", sep_out="-"){
 #' until_stnl
 #'
 #' Maxes a vector to a chosen length 
-#' 
 #' ex: if i want my vector c(1, 2) to be 5 of length this function will return me: c(1, 2, 1, 2, 1) 
 #' @param vec1 is the input vector
 #' @param goal is the length to reach
@@ -1250,7 +1243,6 @@ until_stnl <- function(vec1, goal){
 #' vlookup_df
 #'
 #' Alow to perform a vlookup on a dataframe
-#'
 #' @param df is the input dataframe
 #' @param v_id is a vector containing the ids
 #' @param col_id is the column that contains the ids (default is equal to 1)
@@ -1286,7 +1278,6 @@ vlookup_df <- function(df, v_id, col_id=1, included_col_id="yes"){
 #' multitud
 #'
 #' From a list containing vectors allow to generate a vector following this rule:
-#'
 #' list(c("a", "b"), c("1", "2"), c("A", "Z", "E")) --> c("a1A", "a2A", "b1A", "b2A", "a1Z", ...)
 #' @param l is the list
 #' @param sep_ is the separator between elements (default is set to "" as you see in the example)
@@ -1328,7 +1319,6 @@ multitud <- function(l, sep_=""){
 #' list(c(1, 1, 2), c(1, 1, 1, 2), c(1, 1, 1, 1, 2)) if i have chosen to take in count the 2. As you noticed here the value to stop is 2 but it can be several contained in a vector
 #' Second situation: I want to return a list for every jump of 3.
 #' If i take this dataframe data.frame(c(1, 1, 2, 1, 4, 4), c(1, 1, 2, 1, 3, 3), c(1, 1, 1, 2, 3, 3)) it will return list(c(1, 1, 2), c(1, 4, 4), c(1, 1, 2), c(1, 3, 3), c(1, 1, 1), c(2, 3, 3)) 
-#'
 #' @param df is the input data.frame
 #' @param val_to_stop is the vector containing the values to stop
 #' @param index_rc is the value for the jump (default set to NA so default will be first case)
@@ -1400,7 +1390,6 @@ df_tuned <- function(df, val_to_stop, index_rc=NA, included="yes"){
 #' see_df
 #' 
 #' Allow to return a datafame with TRUE cells where the condition entered are respected and FALSE where these are not
-#'
 #' @param df is the input dataframe
 #' @param condition_l is the vector of the possible conditions ("==", ">", "<", "!=", "%%", "%%r") (equal, greater than, lower than, not equal to, is divisible by, divides), you can put the same condition n times. 
 #' @param val_l is the list of vectors containing the values related to condition_l (so the vector of values has to be placed in the same order)
@@ -1925,13 +1914,10 @@ days_from_month <- function(date_, sep_){
 #' vec_in_df
 #'
 #' Allow to see if vectors are present in a dataframe
-#'
 #'ex: 1, 2, 1
 #'    3, 4, 1
 #'    1, 5, 8
-#'
 #' the vector c(4, 1) with the coefficient 1 and the start position at the second column is containded in the dataframe
-#'
 #' @param df_ is the input dataframe
 #' @param vec_l is a list the vectors
 #' @param coeff_ is the related coefficient of the vector
@@ -2086,7 +2072,6 @@ vec_in_df <- function(df_, vec_l, coeff_, strt_l, distinct="NA"){
 #' closest_date
 #'
 #' return the closest dates from a vector compared to the input date
-#'
 #' @param date_ is the input date
 #' @param vec is a vector containing the dates to be compared to the input date
 #' @param frmt is the format of the input date, (deault set to "snhdmy" (second, minute, hour, day, month, year), so all variable are taken in count),
@@ -2255,7 +2240,6 @@ closest_date <- function(vec, date_, frmt, sep_="/", sep_vec="/", only_="both", 
 #' change_date
 #'
 #' Allow to add to a date second-minute-hour-day-month-year
-#'
 #' @param date_ is the input date
 #' @param sep_ is the date separator
 #' @param day_ is the day to add (can be negative)
@@ -2630,7 +2614,6 @@ change_date <- function(date_, sep_, day_  = NA, month_ = NA,
 #' pattern_gettr 
 #'
 #' Search for pattern(s) contained in a vector in another vector and return a list containing matched one (first index) and their position (second index) according to these rules:
-#'
 #' First case: Search for patterns strictly, it means that the searched pattern(s) will be matched only if the patterns containded in the vector that is beeing explored by the function are present like this c("pattern_searched", "other", ..., "pattern_searched") and not as c("other_thing pattern_searched other_thing", "other", ..., "pattern_searched other_thing") 
 #' Second case: It is the opposite to the first case, it means that if the pattern is partially present like in the first position and the last, it will be considered like a matched pattern
 #' @param word_ is the vector containing the patterns
@@ -2813,8 +2796,7 @@ pattern_gettr <- function(word_, vct, occ=c(1), strict, btwn, all_in_word="yes",
 
 #' append_row
 #'
-#' Append the last row from dataframe to the another or same dataframe
-#'
+#' @description Append the last row from dataframe to the another or same dataframe
 #' @param df_in is the dataframe from which the row will append to another or the same  dataframe
 #' @param df is the dataframe to which the row will append
 #' @param hmn is how many time the last row will be appended
@@ -2841,7 +2823,6 @@ append_row <- function(df_in, df, hmn=1, na_col=c(), unique_do_not_know=NA){
 #' see_file
 #'
 #' Allow to get the filename or its extension
-#'
 #' @param string_ is the input string
 #' @param index_ext is the occurence of the dot that separates the filename and its extension
 #' @param ext is a boolean that if set to TRUE, will return the file extension and if set to FALSE, will return filename
@@ -2873,18 +2854,15 @@ see_file <- function(string_, index_ext=1, ext=T){
 #'
 #' Return a list containing all the column of the files in the current directory with a chosen file extension and its associated file and sheet if xlsx. For example if i have 2 files "out.csv" with 2 columns and "out.xlsx" with 1 column for its first sheet and 2 for its second one, the return will look like this:
 #' c(column_1, column_2, column_3, column_4, column_5, unique_separator, "1-2-out.csv", "3-3-sheet_1-out.xlsx", 4-5-sheet_2-out.xlsx)
-#'
 #' @param pattern is a vector containin the file extension of the spreadsheets ("xlsx", "csv"...)
 #' @param path is the path where are located the files
 #' @param sep_ is a vector containing the separator for each csv type file in order following the operating system file order, if the vector does not match the number of the csv files found, it will assume the separator for the rest of the files is the same as the last csv file found. It means that if you know the separator is the same for all the csv type files, you just have to put the separator once in the vector.
 #' @param unique_sep is a pattern that you know will never be in your input files
 #' @param rec alloaw to get files recursively 
-#' 
 #' If x is the return value, to see all the files name, position of the columns and possible sheet name associanted with, do the following: 
 #' @examples print(x[(grep(unique_sep, x)[1]+1):length(x)]). 
 #' If you just want to see the columns do the following: 
 #' @examples print(x[1:(grep(unique_sep, x) - 1)])
-#'
 #' @export
 
 see_inside <- function(pattern_, path_=".", sep_=c(","), unique_sep="#####", rec=F){
@@ -2952,14 +2930,13 @@ see_inside <- function(pattern_, path_=".", sep_=c(","), unique_sep="#####", rec
 #' val_replacer
 #' 
 #' Allow to replace value from dataframe to another one.
-#' 
 #' @param df is the input dataframe
 #' @param val_replaced is a vector of the value(s) to be replaced
 #' @param val_replacor is the value that will replace val_replaced
 #' @param df_rpt is the replacement matrix and has to be the same dimension as df. Only the indexes that are equal to TRUE will be authorized indexes for the values to be replaced in the input matrix
 #' @export
 
-val_replacer <- function(df, val_replaced=F, val_replacor=T, df_rpt=NA){
+val_replacer <- function(df, val_replaced, val_replacor=T, df_rpt=NA){
   
   for (i in 1:(ncol(df))){
     
@@ -2991,8 +2968,7 @@ val_replacer <- function(df, val_replaced=F, val_replacor=T, df_rpt=NA){
 
 #' see_idx
 #'
-#' Allow to find the indexes of the elements of the first vector in the second.
-#'
+#' Allow to find the indexes of the elements of the first vector in the second. If the element(s) is not found, the element returned at the same index will be "FALSE".
 #' @param v1 is the first vector
 #' @param v2 is the second vector
 #' @export
@@ -3002,8 +2978,18 @@ see_idx <- function(v1, v2, exclude_val="######", no_more=F){
   rtnl <- c()
  
   for (i in 1:length(v1)){
-    
-    rtnl <- append(rtnl, grep(v1[i], v2))
+
+    if (length(grep(v1[i], v2)) > 0){
+
+            r_idx <- paste(r_idx, collapse="-")
+
+    }else{
+
+            r_idx <- F
+
+    }
+
+    rtnl <- append(rtnl, r_idx)
     
     if (no_more == T){ v2[rtnl[length(rtnl)]] <- exclude_val }
     
@@ -3014,6 +3000,7 @@ see_idx <- function(v1, v2, exclude_val="######", no_more=F){
 }
 
 #' date_sort
+#'
 #' Allow to ascendely or desendely sort dates in a vector.
 #' @param vec is the vector containing the dates.
 #' @param asc is a boolean variable, that if set to TRUE will sort the dates ascendely and descendely if set to FALSE
@@ -3053,4 +3040,217 @@ date_sort <- function(vec, asc=F, sep="-"){
   return(vec[s_vec_idx])
  
 }
+
+#' file_rec2 
+#' 
+#' Allow to find the directories and the subdirectories with a specified end and start depth value from a path. This function might be more powerfull than file_rec because it uses a custom algorythm that does not nee to perform a full recursive search before tuning it to only find the directories with a good value of depth. Depth example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
+#' @param xmax is the depth value
+#' @param xmin is the minimum value of depth
+#' @param pathc is the reference path, from which depth value is equal to 1
+#' @export
+
+file_rec2 <- function(xmax, xmin=1, pathc="."){
+
+        pathc2 <- pathc
+
+        ref <- list.dirs(pathc, recursive=F)
+
+        exclude_temp <- c()
+
+        for (i in 1:xmax){ exclude_temp <- append(exclude_temp, c()) }
+
+        exclude_f <- c("#")
+
+        while (sum(exclude_f == ref) < length(ref)){
+
+                if (length(grep("#", exclude_f)) > 0){
+
+                        exclude_f <- c()
+
+                }
+
+                t = 1
+
+                alf <- c("##")
+
+                while (t <= xmax & length(alf) > 0){
+
+                        alf <- list.dirs(pathc, recursive=F)
+
+                        exclude_idx <- c()
+
+                        if (length(exclude_temp) > 0){
+
+                                for (i in 1:length(exclude_temp)){  
+
+                                        in_t <- match(T, exclude_temp[i] == alf)
+
+                                        if (is.na(in_t) == F){
+
+                                                exclude_idx <- append(exclude_idx, in_t)
+
+                                        }
+
+                                } 
+
+                        }
+
+                        if (length(exclude_idx) > 0){ alf <- alf[-exclude_idx] }
+
+                        if (length(alf) > 0 & t < xmax){
+
+                                pathc <- alf[1]
+
+                        }
+
+                        t = t + 1
+
+                }
+
+                exclude_temp <- append(exclude_temp, pathc)
+
+                ret_pathc <- pathc
+
+                pathc <- paste(unlist(str_split(pathc, "/"))[1:str_count(pathc, "/")], collapse="/")
+
+                if (pathc == pathc2){ exclude_f <- append(exclude_f, ret_pathc) }
+                
+        }
+
+        ret <- grep(T, (str_count(exclude_temp, "/") < xmin))
+
+        if (length(ret) > 0){
+
+                return(exclude_temp[-ret])
+
+        }else{
+
+                return(exclude_temp)
+
+        }
+
+}
+
+#' file_rec
+#'
+#' Allow to get all the files recursively from a path according to an end and start depth value. If you want to have an other version of this function that uses a more sophisticated algorythm (which can be faster), check file_rec2. Depth example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
+#' @param xmax is the end depth value
+#' @param xmin is the start depth value
+#' @param pathc is the reference path 
+#' @export
+
+file_rec <- function(xmax, xmin=1, pathc="."){
+
+        vec <- list.dirs(pathc, recursive=T)
+
+        rtnl <- c()
+
+        for (i in 1:length(vec)){
+
+                if (str_count(vec[i], "/") <= xmax & str_count(vec[i], "/") >= xmin){
+
+                        rtnl <- append(rtnl, vec[i])
+
+                }
+
+        }
+
+        return(rtnl)
+
+}
+
+#' get_rec 
+#'
+#' Allow to get the value of directorie depth from a path.
+#' @param pathc is the reference path
+#' example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
+#' @export
+
+get_rec <- function(pathc="."){
+
+        vec <- list.dirs(pathc, recursive=T)
+
+        rtnl <- c()
+
+        for (i in 1:length(vec)){
+
+                rtnl <- append(rtnl, str_count(vec[i], "/"))
+
+        }
+
+        return(max(rtnl))
+
+}
+
+#' list_files
+#' 
+#' A list.files() based function addressing the need of listing the files with extension a or or extension b ...
+#' @param pathc is the path, can be a vector of multiple path because list.files() supports it.
+#' @param patternc is a vector containing all the exensions you want
+#' @export
+
+list_files <- function(patternc, pathc="."){
+
+       rtnl <- c()
+
+       for (i in 1:length(patternc)){
+
+               rtnl <- append(rtnl, list.files(path=pathc, pattern=patternc[i]))
+
+       }
+
+       return(sort(rtnl))
+
+}
+
+#' match_n2
+#'
+#' Allow to get the indexes for the nth occurence of a value in a vector. Example: c(1, 2, 3, 1, 2), the first occurence of 1 and 2 is at index 1 and 2 respectively, but the second occurence is respectively at the 4th and 5th index.
+#' @param vec is th einput vector
+#' mc is a vector containing the values you want to get the index for the nth occurence in vec
+#' @param n is a vector containing the occurences for each value in mc so if i have mc <- c(3, 27) and n <- c(1, 2), i want the first occurence for 3 and the second for 27 in vec. If the length of n is inferior of the length of mc, m will extend with its last value as new arguments. It means that if mc <- c(3, 27) but n <- c(1) so n will extend to c(1, 1), so we will get the first occurence of 3 and 27 in vec. 
+#' @param wnb is a string you are sure is not in mc
+#' @export
+
+match_n2 <- function(vec, mc, n, wnb="#####"){
+
+        vec2 <- vec
+
+        for (I in 1:length(n)){
+
+                vec <- vec2
+
+                for (i in 1:n[I]){
+                
+                        vec[match(mc[I], vec)] <- wnb
+
+                }
+
+        }
+
+        return(match(mc, vec2))
+
+}
+
+#' match_n
+#'
+#' Allow to get the indexes for the nth occurence of a value in a vector. Example: c(1, 2, 3, 1, 2), the first occurence of 1 and 2 is at index 1 and 2 respectively, but the second occurence is respectively at the 4th and 5th index.
+#' @param vec is th einput vector
+#' mc is a vector containing the values you want to get the index for the nth occurence in vec
+#' @param is the value of the occurence
+#' @param wnb is a string you are sure is not in mc
+#' @export
+
+match_n <- function(vec, mc, n=1, wnb="#####"){
+
+        for (i in 1:n){
+        
+                vec[match(mc, vec)] <- wnb
+
+        }
+
+        return(match(mc, vec2))
+
+}
+
 

@@ -15,11 +15,10 @@ multitud(l, sep_ = "")
 }
 \description{
 From a list containing vectors allow to generate a vector following this rule:
+list(c("a", "b"), c("1", "2"), c("A", "Z", "E")) --> c("a1A", "a2A", "b1A", "b2A", "a1Z", ...)
 
 From a list containing vectors allow to generate a vector following this rule:
 }
 \details{
-list(c("a", "b"), c("1", "2"), c("A", "Z", "E")) --> c("a1A", "a2A", "b1A", "b2A", "a1Z", ...)
-
 list(c("a", "b"), c("1", "2"), c("A", "Z", "E")) --> c("a1A", "a2A", "b1A", "b2A", "a1Z", ...)
 }

@@ -13,6 +13,8 @@ insert_df(df_in, df_ins, ins_loc)
 
 \item{df_ins}{is the dataset to be inserted
 ins_loc is a vector containg two parameters (row, column) of the begining for the insertion}
+
+\item{ins_loc}{is a vector containg two parameters (row, column) of the begining for the insertion}
 }
 \description{
 Allow to insert dataframe into another dataframe according to coordinates (row, column) from the dataframe that will be inserted

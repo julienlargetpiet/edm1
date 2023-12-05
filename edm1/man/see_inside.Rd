@@ -34,5 +34,4 @@ c(column_1, column_2, column_3, column_4, column_5, unique_separator, "1-2-out.c
 print(x[(grep(unique_sep, x)[1]+1):length(x)]). 
 If you just want to see the columns do the following: 
 print(x[1:(grep(unique_sep, x) - 1)])
-
 }

@@ -2,7 +2,8 @@
 % Please edit documentation in R/all_fun.R, R/all_fun_quarantine.R
 \name{unique_pos}
 \alias{unique_pos}
-\title{unique_pos}
+\title{unique_pos
+Allow to find indexes of the unique values from a vector.}
 \usage{
 unique_pos(vec)
 
@@ -12,7 +13,5 @@ unique_pos(vec)
 \item{vec}{is the input vector}
 }
 \description{
-Return the indexes of the first unique values from a vector
-
 Return the indexes of the first unique values from a vector
 }

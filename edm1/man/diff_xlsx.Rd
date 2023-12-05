@@ -64,7 +64,7 @@ diff_xlsx(
 \item{pattern_only}{will cover differences by pattern if overwritten is set to TRUE}
 }
 \description{
-Allow to see the difference between two datasets and output it into an xlsx file
+Allow to see the difference between two datasets and output it into an xlsx file. If the dimensions of the new datasets are bigger than the old one, only the matching cells will be compared, if the dimensions of the new one are lower than the old one, there will be an error.
 
 Allow to see the difference between two datasets and output it into an xlsx file
 }

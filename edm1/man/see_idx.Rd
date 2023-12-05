@@ -12,5 +12,5 @@ see_idx(v1, v2, exclude_val = "######", no_more = F)
 \item{v2}{is the second vector}
 }
 \description{
-Allow to find the indexes of the elements of the first vector in the second.
+Allow to find the indexes of the elements of the first vector in the second. If the element(s) is not found, the element returned at the same index will be "FALSE".
 }
