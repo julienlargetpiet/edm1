@@ -191,7 +191,7 @@ Allow to get the letter of a spreadsheet based column by the number ex: 703 = AA
 
 `x` is the number of the column 
 
-### cost and taxes
+### cost_and_taxes
 
         `cost_and_taxes(qte=NA, pu=NA, prix_ht=NA, tva=NA, prix_ttc=NA,
                            prix_tva=NA, pu_ttc=NA, adjust=NA, prix_d_ht=NA,
@@ -559,4 +559,36 @@ mc is a vector containing the values you want to get the index for the nth occur
 `is` the value of the occurence
 
 `wnb` is a string you are sure is not in mc
+
+### see_file
+
+        `see_file(string_, index_ext=1, ext=T)`
+
+Allow to get the filename or its extension
+
+`string_` is the input string
+
+`index_ext` is the occurence of the dot that separates the filename and its extension
+
+`ext` is a boolean that if set to TRUE, will return the file extension and if set to FALSE, will return filename
+
+
+### append_row
+
+        `(df_in, df, hmn=1, na_col=c(), unique_do_not_know=NA)`
+
+Append the last row from dataframe to the another or same dataframe
+
+`df_in` is the dataframe from which the row will append to another or the same  dataframe
+
+`df` is the dataframe to which the row will append
+
+`hmn` is how many time the last row will be appended
+
+`na_col` is a vector containing the columns that won't append and will be replaced by another value (unique_do_not_know)
+
+`unique_do_not_know` is the value of the non appending column in the appending row
+
+
+
 
