@@ -2,8 +2,10 @@ library(stringr)
 library(openxlsx)
 library(stringi)
 
+#' @title
 #' diff_xlsx
 #'
+#' @description
 #' Allow to see the difference between two datasets and output it into an xlsx file. If the dimensions of the new datasets are bigger than the old one, only the matching cells will be compared, if the dimensions of the new one are lower than the old one, there will be an error.  
 #' @param file_ is the file where the data is
 #' @param sht is the sheet where the data is
@@ -328,7 +330,7 @@ pattern_tuning <- function(pattrn, spe_nb, spe_l, exclude_type, hmn=1, rg=c(0, 0
 
 #' can_be_num
 #'
-#' Return TRUE if a variable can be converted to a number and FALSE if not
+#' Return TRUE if a variable can be converted to a number and FALSE if not (supports float)
 #' @param x is the input value
 #' @export
 
@@ -342,11 +344,23 @@ can_be_num <- function(x){
 
         vec_bool <- c()
 
-        v_ref <- c("1", "2", "3", "4", "5", "6", "7", "8", "9", "0")    
+        v_ref <- c("1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ".")    
 
         v_wrk <- unlist(str_split(x, ""), v_ref)
 
-        for (i in 1:length(v_wrk)){ vec_bool <- append(vec_bool, sum(grepl(v_wrk[i], v_ref))) }
+        for (i in 1:length(v_wrk)){ 
+
+                if (v_wrk[i] == "."){ 
+
+                        vec_bool <- append(vec_bool, sum(grepl("\\.", v_ref))) 
+
+                }else{
+
+                        vec_bool <- append(vec_bool, sum(grepl(v_wrk[i], v_ref))) 
+
+                }
+
+        }
 
         if (sum(vec_bool) == length(vec_bool)){
 
@@ -832,7 +846,7 @@ nb_to_letter <- function(x){
   
 }
 
-#' cost and taxes
+#' cost_and_taxes
 #'
 #' Allow to calculate basic variables related to cost and taxes from a bunch of products (elements)
 #' So put every variable you know in the following order:
@@ -1175,7 +1189,7 @@ cost_and_taxes <- function(qte=NA, pu=NA, prix_ht=NA, tva=NA, prix_ttc=NA,
 
 # xx-month-xxxx -> xx-xx-xxxx
 
-#' formate_date
+#' format_date
 #'
 #' Allow to convert xx-month-xxxx date type to xx-xx-xxxx
 #' @param f_dialect are the months from the language of which the month come
@@ -3235,7 +3249,7 @@ match_n2 <- function(vec, mc, n, wnb="#####"){
 #' match_n
 #'
 #' Allow to get the indexes for the nth occurence of a value in a vector. Example: c(1, 2, 3, 1, 2), the first occurence of 1 and 2 is at index 1 and 2 respectively, but the second occurence is respectively at the 4th and 5th index.
-#' @param vec is th einput vector
+#' @param vec is th input vector
 #' mc is a vector containing the values you want to get the index for the nth occurence in vec
 #' @param is the value of the occurence
 #' @param wnb is a string you are sure is not in mc
