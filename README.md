@@ -1,3 +1,20 @@
+# edm1
+
+Is a set of tolls to help manage your data in R.
+
+# Installation
+
+For now it is not available in the CRAN mirrors, so the installation is from source only.
+
+1. `git clone https://github.com/iro0087/edm`
+2. `cd edm/edm1` (or with windows synthax)
+3. `R` got you in the R shell
+4. `install.packages("devtools")`
+5. `library("devtools")`
+6. `build()`
+7. `install()`
+8. Now you can import `edm1` like any other package with `library("edm1")`
+
 
 # `append_row`
 
