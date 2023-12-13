@@ -7,7 +7,7 @@
 match_n(vec, mc, n = 1, wnb = "#####")
 }
 \arguments{
-\item{vec}{is th einput vector
+\item{vec}{is th input vector
 mc is a vector containing the values you want to get the index for the nth occurence in vec}
 
 \item{wnb}{is a string you are sure is not in mc}
