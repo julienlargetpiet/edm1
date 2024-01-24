@@ -30,7 +30,7 @@ data_gen(
 
 \item{type_distri}{is a vector which, for each column, associate a type of distribution ("random", "poisson", "gaussian"), it meas that non only the number but also the length of the string will be randomly generated according to these distribution laws}
 
-\item{str_source}{is the source (vector) from which the character creating random string are (defult set to the occidental alphabet)}
+\item{str_source}{is the source (vector) from which the character creating random string are (default set to the occidental alphabet)}
 
 \item{round_l}{is a vector which, for each column containing number, associate a round value}
 

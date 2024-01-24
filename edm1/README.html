@@ -1,0 +1,2708 @@
+
+<!DOCTYPE html><html><head><title>R: append_row</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>append_row</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='append_row'>append_row</h2>
+
+<h3>Description</h3>
+
+<p>Append the last row from dataframe to the another or same dataframe
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>append_row(df_in, df, hmn = 1, na_col = c(), unique_do_not_know = NA)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="append_row_:_df_in">df_in</code></td>
+<td>
+<p>is the dataframe from which the row will append to another or the same  dataframe</p>
+</td></tr>
+<tr><td><code id="append_row_:_df">df</code></td>
+<td>
+<p>is the dataframe to which the row will append</p>
+</td></tr>
+<tr><td><code id="append_row_:_hmn">hmn</code></td>
+<td>
+<p>is how many time the last row will be appended</p>
+</td></tr>
+<tr><td><code id="append_row_:_na_col">na_col</code></td>
+<td>
+<p>is a vector containing the columns that won't append and will be replaced by another value (unique_do_not_know)</p>
+</td></tr>
+<tr><td><code id="append_row_:_unique_do_not_know">unique_do_not_know</code></td>
+<td>
+<p>is the value of the non appending column in the appending row</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: can_be_num</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>can_be_num</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='can_be_num'>can_be_num</h2>
+
+<h3>Description</h3>
+
+<p>Return TRUE if a variable can be converted to a number and FALSE if not (supports float)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>can_be_num(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="can_be_num_:_x">x</code></td>
+<td>
+<p>is the input value</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: change_date</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>change_date</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='change_date'>change_date</h2>
+
+<h3>Description</h3>
+
+<p>Allow to add to a date second-minute-hour-day-month-year
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>change_date(
+  date_,
+  sep_,
+  day_ = NA,
+  month_ = NA,
+  year_ = NA,
+  hour_ = NA,
+  min_ = NA,
+  second_ = NA,
+  frmt = "snhdmy"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="change_date_:_date_">date_</code></td>
+<td>
+<p>is the input date</p>
+</td></tr>
+<tr><td><code id="change_date_:_sep_">sep_</code></td>
+<td>
+<p>is the date separator</p>
+</td></tr>
+<tr><td><code id="change_date_:_day_">day_</code></td>
+<td>
+<p>is the day to add (can be negative)</p>
+</td></tr>
+<tr><td><code id="change_date_:_month_">month_</code></td>
+<td>
+<p>is the month to add (can be negative)</p>
+</td></tr>
+<tr><td><code id="change_date_:_year_">year_</code></td>
+<td>
+<p>is the year to add (can be negative)</p>
+</td></tr>
+<tr><td><code id="change_date_:_hour_">hour_</code></td>
+<td>
+<p>is the hour to add (can be negative)</p>
+</td></tr>
+<tr><td><code id="change_date_:_min_">min_</code></td>
+<td>
+<p>is the minute to add (can be negative)</p>
+</td></tr>
+<tr><td><code id="change_date_:_second_">second_</code></td>
+<td>
+<p>is the second to add (can be negative)</p>
+</td></tr>
+<tr><td><code id="change_date_:_frmt">frmt</code></td>
+<td>
+<p>is the format of the input date, (deault set to &quot;snhdmy&quot; (second, minute, hour, day, month, year), so all variable are taken in count),
+if you only want to work with standard date for example change this variable to &quot;dmy&quot;</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: closest_date</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>closest_date</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='closest_date'>closest_date</h2>
+
+<h3>Description</h3>
+
+<p>return the closest dates from a vector compared to the input date
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>closest_date(
+  vec,
+  date_,
+  frmt,
+  sep_ = "/",
+  sep_vec = "/",
+  only_ = "both",
+  head = NA
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="closest_date_:_vec">vec</code></td>
+<td>
+<p>is a vector containing the dates to be compared to the input date</p>
+</td></tr>
+<tr><td><code id="closest_date_:_date_">date_</code></td>
+<td>
+<p>is the input date</p>
+</td></tr>
+<tr><td><code id="closest_date_:_frmt">frmt</code></td>
+<td>
+<p>is the format of the input date, (deault set to &quot;snhdmy&quot; (second, minute, hour, day, month, year), so all variable are taken in count),
+if you only want to work with standard date for example change this variable to &quot;dmy&quot;</p>
+</td></tr>
+<tr><td><code id="closest_date_:_sep_">sep_</code></td>
+<td>
+<p>is the separator for the input date</p>
+</td></tr>
+<tr><td><code id="closest_date_:_sep_vec">sep_vec</code></td>
+<td>
+<p>is the separator for the dates contained in vec</p>
+</td></tr>
+<tr><td><code id="closest_date_:_head">head</code></td>
+<td>
+<p>is the number of dates that will be returned (default set to NA so all dates in vec will be returned)</p>
+</td></tr>
+<tr><td><code id="closest_date_:_only">only</code></td>
+<td>
+<p>is can be changed to &quot;+&quot; or &quot;-&quot; to repectively only return the higher dates and the lower dates (default set to &quot;both&quot;)</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: cost_and_taxes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>cost_and_taxes</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='cost_and_taxes'>cost_and_taxes</h2>
+
+<h3>Description</h3>
+
+<p>Allow to calculate basic variables related to cost and taxes from a bunch of products (elements)
+So put every variable you know in the following order:
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>cost_and_taxes(
+  qte = NA,
+  pu = NA,
+  prix_ht = NA,
+  tva = NA,
+  prix_ttc = NA,
+  prix_tva = NA,
+  pu_ttc = NA,
+  adjust = NA,
+  prix_d_ht = NA,
+  prix_d_ttc = NA,
+  pu_d = NA,
+  pu_d_ttc = NA
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="cost_and_taxes_:_qte">qte</code></td>
+<td>
+<p>is the quantity of elements</p>
+</td></tr>
+<tr><td><code id="cost_and_taxes_:_pu">pu</code></td>
+<td>
+<p>is the price of a single elements without taxes</p>
+</td></tr>
+<tr><td><code id="cost_and_taxes_:_prix_ht">prix_ht</code></td>
+<td>
+<p>is the duty-free price of the whole set of elements</p>
+</td></tr>
+<tr><td><code id="cost_and_taxes_:_tva">tva</code></td>
+<td>
+<p>is the percentage of all taxes</p>
+</td></tr>
+<tr><td><code id="cost_and_taxes_:_prix_ttc">prix_ttc</code></td>
+<td>
+<p>is the price of all the elements with taxes</p>
+</td></tr>
+<tr><td><code id="cost_and_taxes_:_prix_tva">prix_tva</code></td>
+<td>
+<p>is the cost of all the taxes</p>
+</td></tr>
+<tr><td><code id="cost_and_taxes_:_pu_ttc">pu_ttc</code></td>
+<td>
+<p>is the price of a single element taxes included</p>
+</td></tr>
+<tr><td><code id="cost_and_taxes_:_adjust">adjust</code></td>
+<td>
+<p>is the discount percentage</p>
+</td></tr>
+<tr><td><code id="cost_and_taxes_:_prix_d_ht">prix_d_ht</code></td>
+<td>
+<p>is the free-duty price of an element after discount</p>
+</td></tr>
+<tr><td><code id="cost_and_taxes_:_prix_d_ttc">prix_d_ttc</code></td>
+<td>
+<p>is the price with taxes of an element after discount</p>
+</td></tr>
+<tr><td><code id="cost_and_taxes_:_pu_d">pu_d</code></td>
+<td>
+<p>is the price of a single element after discount and without taxes</p>
+</td></tr>
+<tr><td><code id="cost_and_taxes_:_pu_d_ttc">pu_d_ttc</code></td>
+<td>
+<p>is the free-duty price of a single element after discount
+the function return a vector with the previous variables in the same order
+those that could not be calculated will be represented with NA value</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: data_gen</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>data_gen</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='data_gen'>data_gen</h2>
+
+<h3>Description</h3>
+
+<p>Allo to generate in a csv all kind of data you can imagine according to what you provide
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>data_gen(
+  type_ = c("number", "mixed", "string"),
+  strt_l = c(0, 0, 10),
+  nb_r = c(50, 10, 40),
+  output = "gened.csv",
+  properties = c("1-5", "1-5", "1-5"),
+  type_distri = c("random", "random", "random"),
+  str_source = c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n",
+    "o", "p", "q", "r", "s", "t", "u", "w", "x", "y", "z"),
+  round_l = c(0, 0, 0),
+  sep_ = ","
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="data_gen_:_type_">type_</code></td>
+<td>
+<p>is a vector for wich argument is a column, a column can be made of numbers (&quot;number&quot;), string (&quot;string&quot;) or both (&quot;mixed&quot;)</p>
+</td></tr>
+<tr><td><code id="data_gen_:_strt_l">strt_l</code></td>
+<td>
+<p>is a vector containing for each column the row from which the data will begin to be generated</p>
+</td></tr>
+<tr><td><code id="data_gen_:_nb_r">nb_r</code></td>
+<td>
+<p>is a vector containing for each column, the number of row full from generated data</p>
+</td></tr>
+<tr><td><code id="data_gen_:_output">output</code></td>
+<td>
+<p>is the name of the output csv file</p>
+</td></tr>
+<tr><td><code id="data_gen_:_properties">properties</code></td>
+<td>
+<p>is linked to type_distri because it is the parameters (&quot;min_val-max_val&quot;) for &quot;random type&quot;, (&quot;u-x&quot;) for the poisson distribution, (&quot;u-d&quot;) for gaussian distribution</p>
+</td></tr>
+<tr><td><code id="data_gen_:_type_distri">type_distri</code></td>
+<td>
+<p>is a vector which, for each column, associate a type of distribution (&quot;random&quot;, &quot;poisson&quot;, &quot;gaussian&quot;), it meas that non only the number but also the length of the string will be randomly generated according to these distribution laws</p>
+</td></tr>
+<tr><td><code id="data_gen_:_str_source">str_source</code></td>
+<td>
+<p>is the source (vector) from which the character creating random string are (default set to the occidental alphabet)</p>
+</td></tr>
+<tr><td><code id="data_gen_:_round_l">round_l</code></td>
+<td>
+<p>is a vector which, for each column containing number, associate a round value</p>
+</td></tr>
+<tr><td><code id="data_gen_:_sep_">sep_</code></td>
+<td>
+<p>is the separator used to write data in the csv</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>new generated data in addition to saving it in the output
+</p>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: data_meshup</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>data_meshup</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='data_meshup'>data_meshup</h2>
+
+<h3>Description</h3>
+
+<p>Allow to automatically arrange 1 dimensional data according to vector and parameters
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>data_meshup(
+  data,
+  cols = NA,
+  file_ = NA,
+  sep_ = ";",
+  organisation = c(2, 1, 0),
+  unic_sep1 = "_",
+  unic_sep2 = "-"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="data_meshup_:_data">data</code></td>
+<td>
+<p>is the data provided (vector) each column is separated by a unic separator and each dataset from the same column is separated by another unic separator (ex: c(&quot;<em>&quot;, c(&quot;d&quot;, &quot;-&quot;, &quot;e&quot;, &quot;-&quot;, &quot;f&quot;), &quot;</em>&quot;, c(&quot;a&quot;, &quot;a1&quot;, &quot;-&quot;, &quot;b&quot;, &quot;-&quot;, &quot;c&quot;, &quot;c1&quot;)&quot;_&quot;)</p>
+</td></tr>
+<tr><td><code id="data_meshup_:_cols">cols</code></td>
+<td>
+<p>is the colnames of the data generated in a csv</p>
+</td></tr>
+<tr><td><code id="data_meshup_:_file_">file_</code></td>
+<td>
+<p>is the file to which the data will be outputed</p>
+</td></tr>
+<tr><td><code id="data_meshup_:_sep_">sep_</code></td>
+<td>
+<p>is the separator of the csv outputed</p>
+</td></tr>
+<tr><td><code id="data_meshup_:_organisation">organisation</code></td>
+<td>
+<p>is the way variables include themselves, for instance ,resuming precedent example, if organisation=c(1, 0) so the data output will be:
+d, a
+d, a1
+e, c
+f, c
+f, c1</p>
+</td></tr>
+<tr><td><code id="data_meshup_:_unic_sep1">unic_sep1</code></td>
+<td>
+<p>is the unic separator between variables (default is &quot;_&quot;)</p>
+</td></tr>
+<tr><td><code id="data_meshup_:_unic_sep2">unic_sep2</code></td>
+<td>
+<p>is the unic separator between datasets (default is &quot;-&quot;)</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: date_sort</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>date_sort</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='date_sort'>date_sort</h2>
+
+<h3>Description</h3>
+
+<p>Allow to ascendely or desendely sort dates in a vector.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>date_sort(vec, asc = F, sep = "-")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="date_sort_:_vec">vec</code></td>
+<td>
+<p>is the vector containing the dates.</p>
+</td></tr>
+<tr><td><code id="date_sort_:_asc">asc</code></td>
+<td>
+<p>is a boolean variable, that if set to TRUE will sort the dates ascendely and descendely if set to FALSE</p>
+</td></tr>
+<tr><td><code id="date_sort_:_sep">sep</code></td>
+<td>
+<p>is the separator of the date strings ex: &quot;11-12-1998&quot; the separator is &quot;-&quot;</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: days_from_month</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>days_from_month</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='days_from_month'>days_from_month</h2>
+
+<h3>Description</h3>
+
+<p>Allow to find the number of days month from a month date, take in count leap year
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>days_from_month(date_, sep_)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="days_from_month_:_date_">date_</code></td>
+<td>
+<p>is the input date</p>
+</td></tr>
+<tr><td><code id="days_from_month_:_sep_">sep_</code></td>
+<td>
+<p>is the separator of the input date</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: df_tuned</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>df_tuned</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='df_tuned'>df_tuned</h2>
+
+<h3>Description</h3>
+
+<p>Allow to return a list from a dataframe following these rules:
+First situation, I want the vectors from the returned list be composed of values that are separated by special values contained in a vector
+ex: data.frame(c(1, 1, 2, 1), c(1, 1, 2, 1), c(1, 1, 1, 2)) will return list(c(1, 1), c(1, 1, 1), c(1, 1, 1, 1)) or
+list(c(1, 1, 2), c(1, 1, 1, 2), c(1, 1, 1, 1, 2)) if i have chosen to take in count the 2. As you noticed here the value to stop is 2 but it can be several contained in a vector
+Second situation: I want to return a list for every jump of 3.
+If i take this dataframe data.frame(c(1, 1, 2, 1, 4, 4), c(1, 1, 2, 1, 3, 3), c(1, 1, 1, 2, 3, 3)) it will return list(c(1, 1, 2), c(1, 4, 4), c(1, 1, 2), c(1, 3, 3), c(1, 1, 1), c(2, 3, 3))
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>df_tuned(df, val_to_stop, index_rc = NA, included = "yes")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="df_tuned_:_df">df</code></td>
+<td>
+<p>is the input data.frame</p>
+</td></tr>
+<tr><td><code id="df_tuned_:_val_to_stop">val_to_stop</code></td>
+<td>
+<p>is the vector containing the values to stop</p>
+</td></tr>
+<tr><td><code id="df_tuned_:_index_rc">index_rc</code></td>
+<td>
+<p>is the value for the jump (default set to NA so default will be first case)</p>
+</td></tr>
+<tr><td><code id="df_tuned_:_included">included</code></td>
+<td>
+<p>is if the values to stop has to be also returned in the vectors (defaultn set to &quot;yes&quot;)</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: diff_xlsx</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>diff_xlsx</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='diff_xlsx'>diff_xlsx</h2>
+
+<h3>Description</h3>
+
+<p>Allow to see the difference between two datasets and output it into an xlsx file. If the dimensions of the new datasets are bigger than the old one, only the matching cells will be compared, if the dimensions of the new one are lower than the old one, there will be an error.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>diff_xlsx(
+  file_,
+  sht,
+  v_old_begin,
+  v_old_end,
+  v_new_begin,
+  v_new_end,
+  df2 = NA,
+  overwrite = T,
+  color_ = "red",
+  pattern = "",
+  output = "out.xlsx",
+  new_val = T,
+  pattern_only = T
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="diff_xlsx_:_file_">file_</code></td>
+<td>
+<p>is the file where the data is</p>
+</td></tr>
+<tr><td><code id="diff_xlsx_:_sht">sht</code></td>
+<td>
+<p>is the sheet where the data is</p>
+</td></tr>
+<tr><td><code id="diff_xlsx_:_v_old_begin">v_old_begin</code></td>
+<td>
+<p>is a vector containing the coordinates (row, column) where the data to be compared starts</p>
+</td></tr>
+<tr><td><code id="diff_xlsx_:_v_old_end">v_old_end</code></td>
+<td>
+<p>is the same but for its end</p>
+</td></tr>
+<tr><td><code id="diff_xlsx_:_v_new_begin">v_new_begin</code></td>
+<td>
+<p>is the coordinates where the comparator data starts</p>
+</td></tr>
+<tr><td><code id="diff_xlsx_:_v_new_end">v_new_end</code></td>
+<td>
+<p>is the same but for its end
+If the dimensions of the new datasets are bigger than the old one, only the matching cells will be compared, if the dimensions of the new one are lower than the old one, there will be an error.</p>
+</td></tr>
+<tr><td><code id="diff_xlsx_:_df2">df2</code></td>
+<td>
+<p>is optional, if the comparator dataset is directly a dataframe</p>
+</td></tr>
+<tr><td><code id="diff_xlsx_:_overwrite">overwrite</code></td>
+<td>
+<p>allow to overwrite differences is (set to T by default)</p>
+</td></tr>
+<tr><td><code id="diff_xlsx_:_color_">color_</code></td>
+<td>
+<p>is the color the differences will be outputed</p>
+</td></tr>
+<tr><td><code id="diff_xlsx_:_pattern">pattern</code></td>
+<td>
+<p>is the pattern that will be added to the differences if overwritten is set to TRUE</p>
+</td></tr>
+<tr><td><code id="diff_xlsx_:_output">output</code></td>
+<td>
+<p>is the name of the outputed xlsx (can be set to NA if no output)</p>
+</td></tr>
+<tr><td><code id="diff_xlsx_:_new_val">new_val</code></td>
+<td>
+<p>if overwrite is TRUE, then the differences will be overwritten by the comparator data</p>
+</td></tr>
+<tr><td><code id="diff_xlsx_:_pattern_only">pattern_only</code></td>
+<td>
+<p>will cover differences by pattern if overwritten is set to TRUE</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: extrm_dates</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>extrm_dates</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='extrm_dates'>extrm_dates</h2>
+
+<h3>Description</h3>
+
+<p>Allow to find the minimum or the maximum of a date in a vector. The format of dates is Year/Month/Day.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>extrm_dates(inpt_l, extrm = "min", sep = "-")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="extrm_dates_:_inpt_l">inpt_l</code></td>
+<td>
+<p>is the input vector</p>
+</td></tr>
+<tr><td><code id="extrm_dates_:_extrm">extrm</code></td>
+<td>
+<p>is either &quot;min&quot; or &quot;max&quot;, defaults to &quot;min&quot;</p>
+</td></tr>
+<tr><td><code id="extrm_dates_:_sep">sep</code></td>
+<td>
+<p>is the separator of the dates, defaults to &quot;-&quot;</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: file_rec2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>file_rec2</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='file_rec2'>file_rec2</h2>
+
+<h3>Description</h3>
+
+<p>Allow to find the directories and the subdirectories with a specified end and start depth value from a path. This function might be more powerfull than file_rec because it uses a custom algorythm that does not nee to perform a full recursive search before tuning it to only find the directories with a good value of depth. Depth example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>file_rec2(xmax, xmin = 1, pathc = ".")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="file_rec2_:_xmax">xmax</code></td>
+<td>
+<p>is the depth value</p>
+</td></tr>
+<tr><td><code id="file_rec2_:_xmin">xmin</code></td>
+<td>
+<p>is the minimum value of depth</p>
+</td></tr>
+<tr><td><code id="file_rec2_:_pathc">pathc</code></td>
+<td>
+<p>is the reference path, from which depth value is equal to 1</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: file_rec</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>file_rec</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='file_rec'>file_rec</h2>
+
+<h3>Description</h3>
+
+<p>Allow to get all the files recursively from a path according to an end and start depth value. If you want to have an other version of this function that uses a more sophisticated algorythm (which can be faster), check file_rec2. Depth example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>file_rec(xmax, xmin = 1, pathc = ".")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="file_rec_:_xmax">xmax</code></td>
+<td>
+<p>is the end depth value</p>
+</td></tr>
+<tr><td><code id="file_rec_:_xmin">xmin</code></td>
+<td>
+<p>is the start depth value</p>
+</td></tr>
+<tr><td><code id="file_rec_:_pathc">pathc</code></td>
+<td>
+<p>is the reference path</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: fillr</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>fillr</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='fillr'>fillr</h2>
+
+<h3>Description</h3>
+
+<p>Allow to fill a vector by the last element n times
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>fillr(inpt_v, ptrn_fill = "...\\d")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="fillr_:_inpt_v">inpt_v</code></td>
+<td>
+<p>is the input vector</p>
+</td></tr>
+<tr><td><code id="fillr_:_ptrtn_fill">ptrtn_fill</code></td>
+<td>
+<p>is the pattern used to detect where the function has to fill the vector by the last element n times. It defaults to &quot;...\d&quot; where &quot;\d&quot; is the regex for an int value. So this paramater has to have &quot;\d&quot; which designates n.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>fillr(c("a", "b", "...3", "c"))
+</code></pre>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: format_date</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>format_date</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='format_date'>format_date</h2>
+
+<h3>Description</h3>
+
+<p>Allow to convert xx-month-xxxx date type to xx-xx-xxxx
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>format_date(f_dialect, sentc, sep_in = "-", sep_out = "-")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="format_date_:_f_dialect">f_dialect</code></td>
+<td>
+<p>are the months from the language of which the month come</p>
+</td></tr>
+<tr><td><code id="format_date_:_sentc">sentc</code></td>
+<td>
+<p>is the date to convert</p>
+</td></tr>
+<tr><td><code id="format_date_:_sep_in">sep_in</code></td>
+<td>
+<p>is the separator of the dat input (default is &quot;-&quot;)</p>
+</td></tr>
+<tr><td><code id="format_date_:_sep_out">sep_out</code></td>
+<td>
+<p>is the separator of the converted date (default is &quot;-&quot;)</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: geo_min</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>geo_min</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='geo_min'>geo_min</h2>
+
+<h3>Description</h3>
+
+<p>Return a dataframe containing the nearest geographical points (row) according to established geographical points (column).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>geo_min(inpt_df, established_df)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="geo_min_:_inpt_df">inpt_df</code></td>
+<td>
+<p>is the input dataframe of the set of geographical points to be classified, its firts column is for latitude, the second for the longitude and the third, if exists, is for the altitude. Each point is one row.</p>
+</td></tr>
+<tr><td><code id="geo_min_:_established_df">established_df</code></td>
+<td>
+<p>is the dataframe containing the coordiantes of the established geographical points</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>in_ &lt;- data.frame(c(11, 33, 55), c(113, -143, 167))
+
+in2_ &lt;- data.frame(c(12, 55), c(115, 165))
+
+print(geo_min(inpt_df=in_, established_df=in2_))
+
+in_ &lt;- data.frame(c(51, 23, 55), c(113, -143, 167), c(6, 5, 1))
+
+in2_ &lt;- data.frame(c(12, 55), c(115, 165), c(2, 5))
+
+geo_min(inpt_df=in_, established_df=in2_)
+</code></pre>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: get_rec</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>get_rec</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='get_rec'>get_rec</h2>
+
+<h3>Description</h3>
+
+<p>Allow to get the value of directorie depth from a path.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>get_rec(pathc = ".")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="get_rec_:_pathc">pathc</code></td>
+<td>
+<p>is the reference path
+example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: globe</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>globe</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='globe'>globe</h2>
+
+<h3>Description</h3>
+
+<p>Allow to calculate the distances between a set of geographical points and another established geographical point. If the altitude is not filled, so the result returned won't take in count the altitude.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>globe(lat_f, long_f, alt_f = NA, lat_n, long_n, alt_n = NA)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="globe_:_lat_f">lat_f</code></td>
+<td>
+<p>is the latitude of the established geographical point</p>
+</td></tr>
+<tr><td><code id="globe_:_long_f">long_f</code></td>
+<td>
+<p>is the altitude of the established geographical point, defaults to NA</p>
+</td></tr>
+<tr><td><code id="globe_:_lat_n">lat_n</code></td>
+<td>
+<p>is a vector containing the altitude of the set of points, defaults to NA</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>globe(lat_f=23, long_f=112, alt_f=NA, lat_n=c(2, 82), long_n=c(165, -55), alt_n=NA) 
+</code></pre>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: groupr_df</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>groupr_df</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='groupr_df'>groupr_df</h2>
+
+<h3>Description</h3>
+
+<p>Allow to create groups from a dataframe. Indeed, you can create conditions that lead to a flag value for each cell of the input dataframeaccording to the cell value. This function is based on see_df and nestr_df2 functions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>groupr_df(inpt_df, condition_lst, val_lst, conjunction_lst, rtn_val_pos = c())
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="groupr_df_:_inpt_df">inpt_df</code></td>
+<td>
+<p>is the input dataframe</p>
+</td></tr>
+<tr><td><code id="groupr_df_:_condition_lst">condition_lst</code></td>
+<td>
+<p>is a list containing all the condition as a vector for each group</p>
+</td></tr>
+<tr><td><code id="groupr_df_:_val_lst">val_lst</code></td>
+<td>
+<p>is a list containing all the values associated with condition_lst as a vector for each group</p>
+</td></tr>
+<tr><td><code id="groupr_df_:_conjunction_lst">conjunction_lst</code></td>
+<td>
+<p>is a list containing all the conjunctions associated with condition_lst and val_lst as a vector for each group</p>
+</td></tr>
+<tr><td><code id="groupr_df_:_rtn_val_pos">rtn_val_pos</code></td>
+<td>
+<p>is a vector containing all the group flag value like this ex: c(&quot;flag1&quot;, &quot;flag2&quot;, &quot;flag3&quot;)</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>interactive()
+df1 &lt;- data.frame(c(1, 2, 1), c(45, 22, 88), c(44, 88, 33))
+
+val_lst &lt;- list(list(c(1), c(1)), list(c(2)), list(c(44)))
+
+condition_lst &lt;- list(c("&gt;", "&lt;"), c("%%"), c("=="))
+
+conjunction_lst &lt;- list(c("|"), c(), c())
+
+rtn_val_pos &lt;- c("+", "+", "+")
+
+groupr_df(inpt_df=df1, val_lst=val_lst, condition_lst=condition_lst, 
+conjunction_lst=conjunction_lst, rtn_val_pos=rtn_val_pos)
+</code></pre>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: insert_df</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>insert_df</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='insert_df'>insert_df</h2>
+
+<h3>Description</h3>
+
+<p>Allow to insert dataframe into another dataframe according to coordinates (row, column) from the dataframe that will be inserted
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>insert_df(df_in, df_ins, ins_loc)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="insert_df_:_df_in">df_in</code></td>
+<td>
+<p>is the dataframe that will be inserted</p>
+</td></tr>
+<tr><td><code id="insert_df_:_df_ins">df_ins</code></td>
+<td>
+<p>is the dataset to be inserted</p>
+</td></tr>
+<tr><td><code id="insert_df_:_ins_loc">ins_loc</code></td>
+<td>
+<p>is a vector containg two parameters (row, column) of the begining for the insertion</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: letter_to_nb</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>letter_to_nb</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='letter_to_nb'>letter_to_nb</h2>
+
+<h3>Description</h3>
+
+<p>Allow to get the number of a spreadsheet based column by the letter ex: AAA = 703
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>letter_to_nb(letter)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="letter_to_nb_:_letter">letter</code></td>
+<td>
+<p>is the letter (name of the column)</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: list_files</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>list_files</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='list_files'>list_files</h2>
+
+<h3>Description</h3>
+
+<p>A list.files() based function addressing the need of listing the files with extension a or or extension b ...
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>list_files(patternc, pathc = ".")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="list_files_:_patternc">patternc</code></td>
+<td>
+<p>is a vector containing all the exensions you want</p>
+</td></tr>
+<tr><td><code id="list_files_:_pathc">pathc</code></td>
+<td>
+<p>is the path, can be a vector of multiple path because list.files() supports it.</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: match_n2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>match_n2</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='match_n2'>match_n2</h2>
+
+<h3>Description</h3>
+
+<p>Allow to get the indexes for the nth occurence of a value in a vector. Example: c(1, 2, 3, 1, 2), the first occurence of 1 and 2 is at index 1 and 2 respectively, but the second occurence is respectively at the 4th and 5th index.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>match_n2(vec, mc, n, wnb = "#####")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="match_n2_:_vec">vec</code></td>
+<td>
+<p>is th einput vector
+mc is a vector containing the values you want to get the index for the nth occurence in vec</p>
+</td></tr>
+<tr><td><code id="match_n2_:_n">n</code></td>
+<td>
+<p>is a vector containing the occurences for each value in mc so if i have mc &lt;- c(3, 27) and n &lt;- c(1, 2), i want the first occurence for 3 and the second for 27 in vec. If the length of n is inferior of the length of mc, m will extend with its last value as new arguments. It means that if mc &lt;- c(3, 27) but n &lt;- c(1) so n will extend to c(1, 1), so we will get the first occurence of 3 and 27 in vec.</p>
+</td></tr>
+<tr><td><code id="match_n2_:_wnb">wnb</code></td>
+<td>
+<p>is a string you are sure is not in mc</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: match_n</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>match_n</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='match_n'>match_n</h2>
+
+<h3>Description</h3>
+
+<p>Allow to get the indexes for the nth occurence of a value in a vector. Example: c(1, 2, 3, 1, 2), the first occurence of 1 and 2 is at index 1 and 2 respectively, but the second occurence is respectively at the 4th and 5th index.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>match_n(vec, mc, n = 1, wnb = "#####")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="match_n_:_vec">vec</code></td>
+<td>
+<p>is th input vector
+mc is a vector containing the values you want to get the index for the nth occurence in vec</p>
+</td></tr>
+<tr><td><code id="match_n_:_wnb">wnb</code></td>
+<td>
+<p>is a string you are sure is not in mc</p>
+</td></tr>
+<tr><td><code id="match_n_:_is">is</code></td>
+<td>
+<p>the value of the occurence</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: multitud</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>multitud</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='multitud'>multitud</h2>
+
+<h3>Description</h3>
+
+<p>From a list containing vectors allow to generate a vector following this rule:
+list(c(&quot;a&quot;, &quot;b&quot;), c(&quot;1&quot;, &quot;2&quot;), c(&quot;A&quot;, &quot;Z&quot;, &quot;E&quot;)) &ndash;&gt; c(&quot;a1A&quot;, &quot;a2A&quot;, &quot;b1A&quot;, &quot;b2A&quot;, &quot;a1Z&quot;, ...)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>multitud(l, sep_ = "")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="multitud_:_l">l</code></td>
+<td>
+<p>is the list</p>
+</td></tr>
+<tr><td><code id="multitud_:_sep_">sep_</code></td>
+<td>
+<p>is the separator between elements (default is set to &quot;&quot; as you see in the example)</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: nb_to_letter</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>nb_to_letter</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='nb_to_letter'>nb_to_letter</h2>
+
+<h3>Description</h3>
+
+<p>Allow to get the letter of a spreadsheet based column by the number ex: 703 = AAA
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>nb_to_letter(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="nb_to_letter_:_x">x</code></td>
+<td>
+<p>is the number of the column</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: nestr_df1</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>nestr_df1</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='nestr_df1'>nestr_df1</h2>
+
+<h3>Description</h3>
+
+<p>Allow to write a value (1a) to a dataframe (1b) to its cells that have the same coordinates (row and column) than the cells whose value is equal to a another special value (2a), from another another dataframe (2b). The value (1a) depends of the cell  value coordinates of the third dataframe (3b). If a cell coordinates (1c) of the first dataframe (1b) do not correspond to the coordinates of a good returning cell value (2a) from the dataframe (2b), so this cell (1c) can have its value changed to the same cell coordinates value (3a) of a third dataframe (4b), if (4b) is not det to NA.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>nestr_df1(inptf_df, inptt_pos_df, inpt_neg_df = NA, nestr_df, yes_val = T)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="nestr_df1_:_inptt_pos_df">inptt_pos_df</code></td>
+<td>
+<p>is the dataframe (2b) that corresponds to the (1a) values</p>
+</td></tr>
+<tr><td><code id="nestr_df1_:_inpt_neg_df">inpt_neg_df</code></td>
+<td>
+<p>is the dataframe (4b) that has the (3a) values, defaults to NA</p>
+</td></tr>
+<tr><td><code id="nestr_df1_:_nestr_df">nestr_df</code></td>
+<td>
+<p>is the dataframe (2b) that has the special value (2a)</p>
+</td></tr>
+<tr><td><code id="nestr_df1_:_yes_val">yes_val</code></td>
+<td>
+<p>is the special value (2a)</p>
+</td></tr>
+<tr><td><code id="nestr_df1_:_inpt_df">inpt_df</code></td>
+<td>
+<p>is the input dataframe (1b)</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>nestr_df1(inpt_df=data.fame(c(1, 2, 1), c(1, 5, 7)), 
+inptt_pos_df=data.frame(c(4, 4, 3), c(2, 1, 2)), 
+inptt_pos_df=data.frame(c(44, 44, 33), c(12, 12, 12)), 
+nestr_df=data.frame(c(T, F, T), c(F, F, T), yes_val=T)) 
+</code></pre>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: nestr_df2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>nestr_df2</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='nestr_df2'>nestr_df2</h2>
+
+<h3>Description</h3>
+
+<p>Allow to write a special value (1a) in the cells of a dataframe (1b) that correspond (row and column) to whose of another dataframe (2b) that return another special value (2a). The cells whose coordinates do not match the coordinates of the dataframe (2b), another special value can be written (3a) if not set to NA.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>nestr_df2(inptf_df, rtn_pos, rtn_neg = NA, nestr_df, yes_val = T)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="nestr_df2_:_rtn_pos">rtn_pos</code></td>
+<td>
+<p>is the special value (1a)</p>
+</td></tr>
+<tr><td><code id="nestr_df2_:_rtn_neg">rtn_neg</code></td>
+<td>
+<p>is the special value (3a)</p>
+</td></tr>
+<tr><td><code id="nestr_df2_:_nestr_df">nestr_df</code></td>
+<td>
+<p>is the dataframe (2b)</p>
+</td></tr>
+<tr><td><code id="nestr_df2_:_yes_val">yes_val</code></td>
+<td>
+<p>is the special value (2a)</p>
+</td></tr>
+<tr><td><code id="nestr_df2_:_inpt_df">inpt_df</code></td>
+<td>
+<p>is the input dataframe (1b)</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>nestr_df2(inpt_df=data.fame(c(1, 2, 1), c(1, 5, 7)), rtn_pos="yes", 
+rtn_neg="no", nestr_df=data.frame(c(T, F, T), c(F, F, T), yes_val=T)) 
+</code></pre>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: pattern_generator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>pattern_generator</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='pattern_generator'>pattern_generator</h2>
+
+<h3>Description</h3>
+
+<p>Allow to create patterns which have a part that is varying randomly each time.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>pattern_generator(base_, from_, lngth, hmn = 1, after = 1)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="pattern_generator_:_base_">base_</code></td>
+<td>
+<p>is the pattern that will be kept</p>
+</td></tr>
+<tr><td><code id="pattern_generator_:_from_">from_</code></td>
+<td>
+<p>is the vector from which the element of the varying part will be generated</p>
+</td></tr>
+<tr><td><code id="pattern_generator_:_hmn">hmn</code></td>
+<td>
+<p>is how many of varying pattern from the same base will be created</p>
+</td></tr>
+<tr><td><code id="pattern_generator_:_after">after</code></td>
+<td>
+<p>is set to 1 by default, it means that the varying part will be after the fixed part, set to 0 if you want the varying part to be before</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: pattern_gettr</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>pattern_gettr</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='pattern_gettr'>pattern_gettr</h2>
+
+<h3>Description</h3>
+
+<p>Search for pattern(s) contained in a vector in another vector and return a list containing matched one (first index) and their position (second index) according to these rules:
+First case: Search for patterns strictly, it means that the searched pattern(s) will be matched only if the patterns containded in the vector that is beeing explored by the function are present like this c(&quot;pattern_searched&quot;, &quot;other&quot;, ..., &quot;pattern_searched&quot;) and not as c(&quot;other_thing pattern_searched other_thing&quot;, &quot;other&quot;, ..., &quot;pattern_searched other_thing&quot;)
+Second case: It is the opposite to the first case, it means that if the pattern is partially present like in the first position and the last, it will be considered like a matched pattern
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>pattern_gettr(
+  word_,
+  vct,
+  occ = c(1),
+  strict,
+  btwn,
+  all_in_word = "yes",
+  notatall = "###"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="pattern_gettr_:_word_">word_</code></td>
+<td>
+<p>is the vector containing the patterns</p>
+</td></tr>
+<tr><td><code id="pattern_gettr_:_vct">vct</code></td>
+<td>
+<p>is the vector being searched for patterns</p>
+</td></tr>
+<tr><td><code id="pattern_gettr_:_occ">occ</code></td>
+<td>
+<p>a vector containing the occurence of the pattern in word_ to be matched in the vector being searched, if the occurence is 2 for the nth pattern in word_ and only one occurence is found in vct so no pattern will be matched, put &quot;forever&quot; to no longer depend on the occurence for the associated pattern</p>
+</td></tr>
+<tr><td><code id="pattern_gettr_:_strict">strict</code></td>
+<td>
+<p>a vector containing the &quot;strict&quot; condition for each nth vector in word_ (&quot;strict&quot; is the string to activate this option)</p>
+</td></tr>
+<tr><td><code id="pattern_gettr_:_btwn">btwn</code></td>
+<td>
+<p>is a vector containing the condition (&quot;yes&quot; to activate this option) meaning that if &quot;yes&quot;, all elements between two matched patern in vct will be returned , so the patterns you enter in word_ have to be in the order you think it will appear in vct</p>
+</td></tr>
+<tr><td><code id="pattern_gettr_:_all_in_word">all_in_word</code></td>
+<td>
+<p>is a value (default set to &quot;yes&quot;, &quot;no&quot; to activate this option) that, if activated, won't authorized a previous matched pattern to be matched again</p>
+</td></tr>
+<tr><td><code id="pattern_gettr_:_notatall">notatall</code></td>
+<td>
+<p>is a string that you are sure is not present in vct
+REGEX can also be used as pattern</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: pattern_tuning</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>pattern_tuning</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='pattern_tuning'>pattern_tuning</h2>
+
+<h3>Description</h3>
+
+<p>Allow to tune a pattern very precisely and output a vector containing its variations n times.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>pattern_tuning(pattrn, spe_nb, spe_l, exclude_type, hmn = 1, rg = c(0, 0))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="pattern_tuning_:_pattrn">pattrn</code></td>
+<td>
+<p>is the character that will be tuned</p>
+</td></tr>
+<tr><td><code id="pattern_tuning_:_spe_nb">spe_nb</code></td>
+<td>
+<p>is the number of new character that will be replaced</p>
+</td></tr>
+<tr><td><code id="pattern_tuning_:_spe_l">spe_l</code></td>
+<td>
+<p>is the source vector from which the new characters will replace old ones</p>
+</td></tr>
+<tr><td><code id="pattern_tuning_:_exclude_type">exclude_type</code></td>
+<td>
+<p>is character that won't be replaced</p>
+</td></tr>
+<tr><td><code id="pattern_tuning_:_hmn">hmn</code></td>
+<td>
+<p>is how many output the function will return</p>
+</td></tr>
+<tr><td><code id="pattern_tuning_:_rg">rg</code></td>
+<td>
+<p>is a vector with two parameters (index of the first letter that will be replaced, index of the last letter that will be replaced) default is set to all the letters from the source pattern</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: ptrn_switchr</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>ptrn_switchr</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='ptrn_switchr'>ptrn_switchr</h2>
+
+<h3>Description</h3>
+
+<p>Allow to switch, copy pattern for each element in a vector. Here a pattern is the values that are separated by a same separator. Example: &quot;xx-xxx-xx&quot; or &quot;xx/xx/xxxx&quot;. The xx like values can be swicthed or copied from whatever index to whatever index. Here, the index is like this 1-2-3 etcetera, it is relative of the separator.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>ptrn_switchr(inpt_l, f_idx_l = c(), t_idx_l = c(), sep = "-", default_val = NA)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="ptrn_switchr_:_inpt_l">inpt_l</code></td>
+<td>
+<p>is the input vector</p>
+</td></tr>
+<tr><td><code id="ptrn_switchr_:_f_idx_l">f_idx_l</code></td>
+<td>
+<p>is a vector containing the indexes of the pattern you want to be altered.</p>
+</td></tr>
+<tr><td><code id="ptrn_switchr_:_t_idx_l">t_idx_l</code></td>
+<td>
+<p>is a vector containing the indexes to which the indexes in f_idx_l are related.</p>
+</td></tr>
+<tr><td><code id="ptrn_switchr_:_sep">sep</code></td>
+<td>
+<p>is the separator, defaults to &quot;-&quot;</p>
+</td></tr>
+<tr><td><code id="ptrn_switchr_:_default_val">default_val</code></td>
+<td>
+<p>is the default value , if not set to NA, of the pattern at the indexes in f_idx_l. If it is not set to NA, you do not need to fill t_idx_l because this is the vector containing the indexes of the patterns that will be set as new values relatively to the indexes in f_idx_l. Defaults to NA.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>ptrn_switchr(inpt_l=c("2022-01-11", "2022-01-14", "2022-01-21", 
+"2022-01-01"), f_idx_l=c(1, 2, 3), t_idx_l=c(3, 2, 1))
+ptrn_switchr(inpt_l=c("2022-01-11", "2022-01-14", "2022-01-21", 
+"2022-01-01"), f_idx_l=c(1), default_val="ee")
+</code></pre>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: ptrn_twkr</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>ptrn_twkr</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='ptrn_twkr'>ptrn_twkr</h2>
+
+<h3>Description</h3>
+
+<p>Allow to modify the pattern length of element in a vector according to arguments. What is here defined as a pattern is something like this xx-xx-xx or xx/xx/xxx... So it is defined by the separator
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>ptrn_twkr(inpt_l, depth = "max", sep = "-", default_val = "0", add_sep = T)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="ptrn_twkr_:_inpt_l">inpt_l</code></td>
+<td>
+<p>is the input vector</p>
+</td></tr>
+<tr><td><code id="ptrn_twkr_:_depth">depth</code></td>
+<td>
+<p>is the number (numeric) of separator it will keep as a result. To keep the number of separator of the element that has the minimum amount of separator do depth=&quot;min&quot; and depth=&quot;max&quot; (character) for the opposite. This value defaults to &quot;max&quot;.</p>
+</td></tr>
+<tr><td><code id="ptrn_twkr_:_sep">sep</code></td>
+<td>
+<p>is the separator of the pattern, defaults to &quot;-&quot;</p>
+</td></tr>
+<tr><td><code id="ptrn_twkr_:_default_val">default_val</code></td>
+<td>
+<p>is the default val that will be placed between the separator, defaults to &quot;00&quot;</p>
+</td></tr>
+<tr><td><code id="ptrn_twkr_:_add_sep">add_sep</code></td>
+<td>
+<p>defaults to TRUE. If set to FALSE, it will remove the separator for the patterns that are included in the interval between the depth amount of separator and the actual number of separator of the element.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>v &lt;- c("2012-06-22", "2012-06-23", "2022-09-12", "2022")
+ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=T)
+</code></pre>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: see_df</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>see_df</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='see_df'>see_df</h2>
+
+<h3>Description</h3>
+
+<p>Allow to return a datafame with special value cells (ex: TRUE) where the condition entered are respected and another special value cell (ex: FALSE) where these are not
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>see_df(df, condition_l, val_l, conjunction_l = c(), rt_val = T, f_val = F)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="see_df_:_df">df</code></td>
+<td>
+<p>is the input dataframe</p>
+</td></tr>
+<tr><td><code id="see_df_:_condition_l">condition_l</code></td>
+<td>
+<p>is the vector of the possible conditions (&quot;==&quot;, &quot;&gt;&quot;, &quot;&lt;&quot;, &quot;!=&quot;, &quot;%%&quot;) (equal, greater than, lower than, not equal to, is divisible by), you can put the same condition n times.</p>
+</td></tr>
+<tr><td><code id="see_df_:_val_l">val_l</code></td>
+<td>
+<p>is the list of vectors containing the values related to condition_l (so the vector of values has to be placed in the same order)</p>
+</td></tr>
+<tr><td><code id="see_df_:_conjunction_l">conjunction_l</code></td>
+<td>
+<p>contains the | or &amp; conjunctions, so if the length of condition_l is equal to 3, there will be 2 conjunctions. If the length of conjunction_l is inferior to the length of condition_l minus 1, conjunction_l will match its goal length value with its last argument as the last arguments. For example, c(&quot;&amp;&quot;, &quot;|&quot;, &quot;&amp;&quot;) with a goal length value of 5 &ndash;&gt; c(&quot;&amp;&quot;, &quot;|&quot;, &quot;&amp;&quot;, &quot;&amp;&quot;, &quot;&amp;&quot;)</p>
+</td></tr>
+<tr><td><code id="see_df_:_rt_val">rt_val</code></td>
+<td>
+<p>is a special value cell returned when the conditions are respected</p>
+</td></tr>
+<tr><td><code id="see_df_:_f_val">f_val</code></td>
+<td>
+<p>is a special value cell returned when the conditions are not respected</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function will return an error if number only comparative conditions are given in addition to having character values in the input dataframe.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>see_df(df, c("%%", "=="), list(c(2, 11), c(3)), list("|") 
+#will return all the values that are divisible by 2 and 11 
+#and all the values that are equal to 3 from the dataframe 
+</code></pre>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: see_file</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>see_file</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='see_file'>see_file</h2>
+
+<h3>Description</h3>
+
+<p>Allow to get the filename or its extension
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>see_file(string_, index_ext = 1, ext = T)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="see_file_:_string_">string_</code></td>
+<td>
+<p>is the input string</p>
+</td></tr>
+<tr><td><code id="see_file_:_index_ext">index_ext</code></td>
+<td>
+<p>is the occurence of the dot that separates the filename and its extension</p>
+</td></tr>
+<tr><td><code id="see_file_:_ext">ext</code></td>
+<td>
+<p>is a boolean that if set to TRUE, will return the file extension and if set to FALSE, will return filename</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: see_idx</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>see_idx</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='see_idx'>see_idx</h2>
+
+<h3>Description</h3>
+
+<p>Allow to find the indexes of the elements of the first vector in the second. If the element(s) is not found, the element returned at the same index will be &quot;FALSE&quot;.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>see_idx(v1, v2, exclude_val = "######", no_more = F)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="see_idx_:_v1">v1</code></td>
+<td>
+<p>is the first vector</p>
+</td></tr>
+<tr><td><code id="see_idx_:_v2">v2</code></td>
+<td>
+<p>is the second vector</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: see_inside</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>see_inside</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='see_inside'>see_inside</h2>
+
+<h3>Description</h3>
+
+<p>Return a list containing all the column of the files in the current directory with a chosen file extension and its associated file and sheet if xlsx. For example if i have 2 files &quot;out.csv&quot; with 2 columns and &quot;out.xlsx&quot; with 1 column for its first sheet and 2 for its second one, the return will look like this:
+c(column_1, column_2, column_3, column_4, column_5, unique_separator, &quot;1-2-out.csv&quot;, &quot;3-3-sheet_1-out.xlsx&quot;, 4-5-sheet_2-out.xlsx)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>see_inside(pattern_, path_ = ".", sep_ = c(","), unique_sep = "#####", rec = F)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="see_inside_:_sep_">sep_</code></td>
+<td>
+<p>is a vector containing the separator for each csv type file in order following the operating system file order, if the vector does not match the number of the csv files found, it will assume the separator for the rest of the files is the same as the last csv file found. It means that if you know the separator is the same for all the csv type files, you just have to put the separator once in the vector.</p>
+</td></tr>
+<tr><td><code id="see_inside_:_unique_sep">unique_sep</code></td>
+<td>
+<p>is a pattern that you know will never be in your input files</p>
+</td></tr>
+<tr><td><code id="see_inside_:_rec">rec</code></td>
+<td>
+<p>alloaw to get files recursively
+If x is the return value, to see all the files name, position of the columns and possible sheet name associanted with, do the following:</p>
+</td></tr>
+<tr><td><code id="see_inside_:_pattern">pattern</code></td>
+<td>
+<p>is a vector containin the file extension of the spreadsheets (&quot;xlsx&quot;, &quot;csv&quot;...)</p>
+</td></tr>
+<tr><td><code id="see_inside_:_path">path</code></td>
+<td>
+<p>is the path where are located the files</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>print(x[(grep(unique_sep, x)[1]+1):length(x)]). 
+If you just want to see the columns do the following: 
+print(x[1:(grep(unique_sep, x) - 1)])
+</code></pre>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: unique_pos</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>unique_pos</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='unique_pos'>unique_pos</h2>
+
+<h3>Description</h3>
+
+<p>Allow to find indexes of the unique values from a vector.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>unique_pos(vec)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="unique_pos_:_vec">vec</code></td>
+<td>
+<p>is the input vector</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: until_stnl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>until_stnl</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='until_stnl'>until_stnl</h2>
+
+<h3>Description</h3>
+
+<p>Maxes a vector to a chosen length
+ex: if i want my vector c(1, 2) to be 5 of length this function will return me: c(1, 2, 1, 2, 1)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>until_stnl(vec1, goal)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="until_stnl_:_vec1">vec1</code></td>
+<td>
+<p>is the input vector</p>
+</td></tr>
+<tr><td><code id="until_stnl_:_goal">goal</code></td>
+<td>
+<p>is the length to reach</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: val_replacer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>val_replacer</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='val_replacer'>val_replacer</h2>
+
+<h3>Description</h3>
+
+<p>Allow to replace value from dataframe to another one.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>val_replacer(df, val_replaced, val_replacor = T, df_rpt = NA)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="val_replacer_:_df">df</code></td>
+<td>
+<p>is the input dataframe</p>
+</td></tr>
+<tr><td><code id="val_replacer_:_val_replaced">val_replaced</code></td>
+<td>
+<p>is a vector of the value(s) to be replaced</p>
+</td></tr>
+<tr><td><code id="val_replacer_:_val_replacor">val_replacor</code></td>
+<td>
+<p>is the value that will replace val_replaced</p>
+</td></tr>
+<tr><td><code id="val_replacer_:_df_rpt">df_rpt</code></td>
+<td>
+<p>is the replacement matrix and has to be the same dimension as df. Only the indexes that are equal to TRUE will be authorized indexes for the values to be replaced in the input matrix</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: vec_in_df</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>vec_in_df</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='vec_in_df'>vec_in_df</h2>
+
+<h3>Description</h3>
+
+<p>Allow to see if vectors are present in a dataframe
+ex: 1, 2, 1
+3, 4, 1
+1, 5, 8
+the vector c(4, 1) with the coefficient 1 and the start position at the second column is containded in the dataframe
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>vec_in_df(df_, vec_l, coeff_, strt_l, distinct = "NA")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="vec_in_df_:_df_">df_</code></td>
+<td>
+<p>is the input dataframe</p>
+</td></tr>
+<tr><td><code id="vec_in_df_:_vec_l">vec_l</code></td>
+<td>
+<p>is a list the vectors</p>
+</td></tr>
+<tr><td><code id="vec_in_df_:_coeff_">coeff_</code></td>
+<td>
+<p>is the related coefficient of the vector</p>
+</td></tr>
+<tr><td><code id="vec_in_df_:_strt_l">strt_l</code></td>
+<td>
+<p>is a vector containing the start position for each vector</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: vlookup_df</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>vlookup_df</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='vlookup_df'>vlookup_df</h2>
+
+<h3>Description</h3>
+
+<p>Alow to perform a vlookup on a dataframe
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>vlookup_df(df, v_id, col_id = 1, included_col_id = "yes")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="vlookup_df_:_df">df</code></td>
+<td>
+<p>is the input dataframe</p>
+</td></tr>
+<tr><td><code id="vlookup_df_:_v_id">v_id</code></td>
+<td>
+<p>is a vector containing the ids</p>
+</td></tr>
+<tr><td><code id="vlookup_df_:_col_id">col_id</code></td>
+<td>
+<p>is the column that contains the ids (default is equal to 1)</p>
+</td></tr>
+<tr><td><code id="vlookup_df_:_included_col_id">included_col_id</code></td>
+<td>
+<p>is if the result should return the col_id (default set to yes)</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: v_to_df</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>v_to_df</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='v_to_df'>v_to_df</h2>
+
+<h3>Description</h3>
+
+<p>Allow to convert a vector to a dataframe according to a separator.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>v_to_df(inpt_v, sep = "-")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="v_to_df_:_inpt_v">inpt_v</code></td>
+<td>
+<p>is the input vector</p>
+</td></tr>
+<tr><td><code id="v_to_df_:_sep">sep</code></td>
+<td>
+<p>is the separator used to seprate the columns</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>v &lt;- c("aa-yy-uu", "zz-gg-hhh", "zz-gg-hhh", "zz-gg-hhh")
+v_to_df(inpt_v=v, sep="-")
+</code></pre>
+
+
+</div>
+</body></html>

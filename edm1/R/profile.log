@@ -1,0 +1,662 @@
+FUNCTION  <SNR>38_Remove_Matches()
+    Defined: /usr/share/nvim/runtime/plugin/matchparen.vim:197
+Called 8 times
+Total time:   0.000055
+ Self time:   0.000055
+
+count  total (s)   self (s)
+    8              0.000026   if exists('w:paren_hl_on') && w:paren_hl_on
+                                silent! call matchdelete(3)
+                                let w:paren_hl_on = 0
+    8              0.000004   endif
+
+FUNCTION  GetRIndent()
+    Defined: /usr/share/nvim/runtime/indent/r.vim:212
+Called 3 times
+Total time:   1.923586
+ Self time:   0.000934
+
+count  total (s)   self (s)
+                            
+    3              0.000011   let clnum = line(".")    " current line
+                            
+    3              0.000006   let cline = getline(clnum)
+    3              0.000011   if cline =~ '^\s*#'
+                                if g:r_indent_ess_comments == 1
+                                  if cline =~ '^\s*###'
+                                    return 0
+                                  endif
+                                  if cline !~ '^\s*##'
+                                    return g:r_indent_comment_column
+                                  endif
+                                endif
+    3              0.000001   endif
+                            
+    3   0.000284   0.000012   let cline = SanitizeRLine(cline)
+                            
+    3              0.000006   if cline =~ '^\s*}'
+                                let indline = s:Get_matching_brace(clnum, '{', '}', 1)
+                                if indline > 0 && indline != clnum
+                                  let iline = SanitizeRLine(getline(indline))
+                                  if s:Get_paren_balance(iline, "(", ")") == 0 || iline =~ '(\s*{$'
+                                    return indent(indline)
+                                  else
+                                    let indline = s:Get_matching_brace(indline, '(', ')', 1)
+                                    return indent(indline)
+                                  endif
+                                endif
+    3              0.000001   endif
+                            
+    3              0.000006   if cline =~ '^\s*)$'
+                                let indline = s:Get_matching_brace(clnum, '(', ')', 1)
+                                return indent(indline)
+    3              0.000001   endif
+                            
+                              " Find the first non blank line above the current line
+    3   0.000092   0.000012   let lnum = s:Get_prev_line(clnum)
+                              " Hit the start of the file, use zero indent.
+    3              0.000002   if lnum == 0
+                                return 0
+    3              0.000001   endif
+                            
+    3   0.000348   0.000011   let line = SanitizeRLine(getline(lnum))
+                            
+    3              0.000003   if &filetype == "rhelp"
+                                if cline =~ '^\\dontshow{' || cline =~ '^\\dontrun{' || cline =~ '^\\donttest{' || cline =~ '^\\testonly{'
+                                  return 0
+                                endif
+                                if line =~ '^\\examples{' || line =~ '^\\usage{' || line =~ '^\\dontshow{' || line =~ '^\\dontrun{' || line =~ '^\\donttest{' || line =~ '^\\testonly{'
+                                  return 0
+                                endif
+    3              0.000001   endif
+                            
+    3              0.000003   if &filetype == "rnoweb" && line =~ "^<<.*>>="
+                                return 0
+    3              0.000001   endif
+                            
+    3              0.000008   if cline =~ '^\s*{' && s:Get_paren_balance(cline, '{', '}') > 0
+                                if g:r_indent_ess_compatible && line =~ ')$'
+                                  let nlnum = lnum
+                                  let nline = line
+                                  while s:Get_paren_balance(nline, '(', ')') < 0
+                                    let nlnum = s:Get_prev_line(nlnum)
+                                    let nline = SanitizeRLine(getline(nlnum)) . nline
+                                  endwhile
+                                  if nline =~ '^\s*function\s*(' && indent(nlnum) == shiftwidth()
+                                    return 0
+                                  endif
+                                endif
+                                if s:Get_paren_balance(line, "(", ")") == 0
+                                  return indent(lnum)
+                                endif
+    3              0.000001   endif
+                            
+                              " line is an incomplete command:
+    3              0.000023   if line =~ '\<\(if\|while\|for\|function\)\s*()$' || line =~ '\<else$' || line =~ '<-$' || line =~ '->$'
+                                return indent(lnum) + shiftwidth()
+    3              0.000001   endif
+                            
+                              " Deal with () and []
+                            
+    3   0.000042   0.000013   let pb = s:Get_paren_balance(line, '(', ')')
+                            
+    3              0.000016   if line =~ '^\s*{$' || line =~ '(\s*{' || (pb == 0 && (line =~ '{$' || line =~ '(\s*{$'))
+                                return indent(lnum) + shiftwidth()
+    3              0.000001   endif
+                            
+    3              0.000008   let s:curtabstop = repeat(' ', &tabstop)
+                            
+    3              0.000003   if g:r_indent_align_args == 1
+    3              0.000003     if pb > 0 && line =~ '{$'
+                                  return s:Get_last_paren_idx(line, '(', ')', pb) + shiftwidth()
+    3              0.000001     endif
+                            
+    3   0.000041   0.000012     let bb = s:Get_paren_balance(line, '[', ']')
+                            
+    3              0.000002     if pb > 0
+                                  if &filetype == "rhelp"
+                                    let ind = s:Get_last_paren_idx(line, '(', ')', pb)
+                                  else
+                                    let ind = s:Get_last_paren_idx(getline(lnum), '(', ')', pb)
+                                  endif
+                                  return ind
+    3              0.000001     endif
+                            
+    3              0.000003     if pb < 0 && line =~ '.*[,&|\-\*+<>]$'
+                                  let lnum = s:Get_prev_line(lnum)
+                                  while pb < 1 && lnum > 0
+                                    let line = SanitizeRLine(getline(lnum))
+                                    let line = substitute(line, '\t', s:curtabstop, "g")
+                                    let ind = strlen(line)
+                                    while ind > 0
+                                      if line[ind] == ')'
+                                        let pb -= 1
+                                      else
+                                        if line[ind] == '('
+                                          let pb += 1
+                                        endif
+                                      endif
+                                      if pb == 1
+                                        return ind + 1
+                                      endif
+                                      let ind -= 1
+                                    endwhile
+                                    let lnum -= 1
+                                  endwhile
+                                  return 0
+    3              0.000001     endif
+                            
+    3              0.000002     if bb > 0
+                                  let ind = s:Get_last_paren_idx(getline(lnum), '[', ']', bb)
+                                  return ind
+    3              0.000001     endif
+    3              0.000001   endif
+                            
+    3              0.000003   let post_block = 0
+    3   0.000045   0.000016   if line =~ '}$' && s:Get_paren_balance(line, '{', '}') < 0
+    3   1.810932   0.000014     let lnum = s:Get_matching_brace(lnum, '{', '}', 0)
+    3   0.009295   0.000011     let line = SanitizeRLine(getline(lnum))
+    3              0.000008     if lnum > 0 && line =~ '^\s*{'
+                                  let lnum = s:Get_prev_line(lnum)
+                                  let line = SanitizeRLine(getline(lnum))
+    3              0.000001     endif
+    3   0.000041   0.000013     let pb = s:Get_paren_balance(line, '(', ')')
+    3              0.000003     let post_block = 1
+    3              0.000001   endif
+                            
+                              " Indent after operator pattern
+    3   0.000057   0.000012   let olnum = s:Get_prev_line(lnum)
+    3              0.000004   let oline = getline(olnum)
+    3              0.000002   if olnum > 0
+    3              0.000039     if substitute(line, '#.*', '', '') =~ g:r_indent_op_pattern && s:Get_paren_balance(line, "(", ")") == 0
+                                  if substitute(oline, '#.*', '', '') =~ g:r_indent_op_pattern && s:Get_paren_balance(line, "(", ")") == 0
+                                    return indent(lnum)
+                                  else
+                                    return indent(lnum) + shiftwidth()
+                                  endif
+    3              0.000001     else
+    3              0.000018       if substitute(oline, '#.*', '', '') =~ g:r_indent_op_pattern && s:Get_paren_balance(line, "(", ")") == 0
+                                    return indent(lnum) - shiftwidth()
+    3              0.000001       endif
+    3              0.000001     endif
+                              elseif substitute(line, '#.*', '', '') =~ g:r_indent_op_pattern && s:Get_paren_balance(line, "(", ")") == 0
+                                return indent(lnum) + shiftwidth()
+    3              0.000001   endif
+                            
+    3              0.000003   let post_fun = 0
+    3              0.000003   if pb < 0 && line !~ ')\s*[,&|\-\*+<>]$'
+                                let post_fun = 1
+                                while pb < 0 && lnum > 0
+                                  let lnum -= 1
+                                  let linepiece = SanitizeRLine(getline(lnum))
+                                  let pb += s:Get_paren_balance(linepiece, "(", ")")
+                                  let line = linepiece . line
+                                endwhile
+                                if line =~ '{$' && post_block == 0
+                                  return indent(lnum) + shiftwidth()
+                                endif
+                            
+                                " Now we can do some tests again
+                                if cline =~ '^\s*{'
+                                  return indent(lnum)
+                                endif
+                                if post_block == 0
+                                  let newl = SanitizeRLine(line)
+                                  if newl =~ '\<\(if\|while\|for\|function\)\s*()$' || newl =~ '\<else$' || newl =~ '<-$'
+                                    return indent(lnum) + shiftwidth()
+                                  endif
+                                endif
+    3              0.000001   endif
+                            
+    3              0.000006   if cline =~ '^\s*else'
+                                if line =~ '<-\s*if\s*()'
+                                  return indent(lnum) + shiftwidth()
+                                else
+                                  if line =~ '\<if\s*()'
+                                    return indent(lnum)
+                                  else
+                                    return indent(lnum) - shiftwidth()
+                                  endif
+                                endif
+    3              0.000001   endif
+                            
+    3   0.000042   0.000013   let bb = s:Get_paren_balance(line, '[', ']')
+    3              0.000003   if bb < 0 && line =~ '.*]'
+                                while bb < 0 && lnum > 0
+                                  let lnum -= 1
+                                  let linepiece = SanitizeRLine(getline(lnum))
+                                  let bb += s:Get_paren_balance(linepiece, "[", "]")
+                                  let line = linepiece . line
+                                endwhile
+                                let line = s:RDelete_parens(line)
+    3              0.000001   endif
+                            
+    3   0.000056   0.000011   let plnum = s:Get_prev_line(lnum)
+    3              0.000003   let ppost_else = 0
+    3              0.000002   if plnum > 0
+    3   0.000334   0.000011     let pline = SanitizeRLine(getline(plnum))
+    3              0.000003     let ppost_block = 0
+    3              0.000006     if pline =~ '}$'
+    3              0.000003       let ppost_block = 1
+    3   0.093825   0.000014       let plnum = s:Get_matching_brace(plnum, '{', '}', 0)
+    3   0.007377   0.000011       let pline = SanitizeRLine(getline(plnum))
+    3              0.000008       if pline =~ '^\s*{$' && plnum > 0
+                                    let plnum = s:Get_prev_line(plnum)
+                                    let pline = SanitizeRLine(getline(plnum))
+    3              0.000001       endif
+    3              0.000001     endif
+                            
+    3              0.000006     if pline =~ 'else$'
+                                  let ppost_else = 1
+                                  let plnum = s:Get_matching_if(plnum, 0)
+                                  let pline = SanitizeRLine(getline(plnum))
+    3              0.000001     endif
+                            
+    3              0.000010     if pline =~ '^\s*else\s*if\s*('
+                                  let pplnum = s:Get_prev_line(plnum)
+                                  let ppline = SanitizeRLine(getline(pplnum))
+                                  while ppline =~ '^\s*else\s*if\s*(' || ppline =~ '^\s*if\s*()\s*\S$'
+                                    let plnum = pplnum
+                                    let pline = ppline
+                                    let pplnum = s:Get_prev_line(plnum)
+                                    let ppline = SanitizeRLine(getline(pplnum))
+                                  endwhile
+                                  while ppline =~ '\<\(if\|while\|for\|function\)\s*()$' || ppline =~ '\<else$' || ppline =~ '<-$'
+                                    let plnum = pplnum
+                                    let pline = ppline
+                                    let pplnum = s:Get_prev_line(plnum)
+                                    let ppline = SanitizeRLine(getline(pplnum))
+                                  endwhile
+    3              0.000001     endif
+                            
+    3   0.000043   0.000014     let ppb = s:Get_paren_balance(pline, '(', ')')
+    3              0.000004     if ppb < 0 && (pline =~ ')\s*{$' || pline =~ ')$')
+                                  while ppb < 0 && plnum > 0
+                                    let plnum -= 1
+                                    let linepiece = SanitizeRLine(getline(plnum))
+                                    let ppb += s:Get_paren_balance(linepiece, "(", ")")
+                                    let pline = linepiece . pline
+                                  endwhile
+                                  let pline = s:RDelete_parens(pline)
+    3              0.000001     endif
+    3              0.000001   endif
+                            
+    3              0.000006   let ind = indent(lnum)
+                            
+    3              0.000004   if g:r_indent_align_args == 0 && pb != 0
+                                let ind += pb * shiftwidth()
+                                return ind
+    3              0.000001   endif
+                            
+    3              0.000003   if g:r_indent_align_args == 0 && bb != 0
+                                let ind += bb * shiftwidth()
+                                return ind
+    3              0.000001   endif
+                            
+    3              0.000002   if plnum > 0
+    3              0.000004     let pind = indent(plnum)
+                              else
+                                let pind = 0
+    3              0.000001   endif
+                            
+    3              0.000007   if ind == pind || (ind == (pind  + shiftwidth()) && pline =~ '{$' && ppost_else == 0)
+    3              0.000002     return ind
+                              endif
+                            
+                              let pline = getline(plnum)
+                              let pbb = s:Get_paren_balance(pline, '[', ']')
+                            
+                              while pind < ind && plnum > 0 && ppb == 0 && pbb == 0
+                                let ind = pind
+                                let plnum = s:Get_prev_line(plnum)
+                                let pline = getline(plnum)
+                                let ppb = s:Get_paren_balance(pline, '(', ')')
+                                let pbb = s:Get_paren_balance(pline, '[', ']')
+                                while pline =~ '^\s*else'
+                                  let plnum = s:Get_matching_if(plnum, 1)
+                                  let pline = getline(plnum)
+                                  let ppb = s:Get_paren_balance(pline, '(', ')')
+                                  let pbb = s:Get_paren_balance(pline, '[', ']')
+                                endwhile
+                                let pind = indent(plnum)
+                                if ind == (pind  + shiftwidth()) && pline =~ '{$'
+                                  return ind
+                                endif
+                              endwhile
+                            
+                              return ind
+
+FUNCTION  <SNR>38_Highlight_Matching_Pair()
+    Defined: /usr/share/nvim/runtime/plugin/matchparen.vim:39
+Called 8 times
+Total time:   0.000404
+ Self time:   0.000349
+
+count  total (s)   self (s)
+                              " Remove any previous match.
+    8   0.000086   0.000031   call s:Remove_Matches()
+                            
+                              " Avoid that we remove the popup menu.
+                              " Return when there are no colors (looks like the cursor jumps).
+    8              0.000021   if pumvisible() || (&t_Co < 8 && !has("gui_running"))
+                                return
+    8              0.000003   endif
+                            
+                              " Get the character under the cursor and check if it's in 'matchpairs'.
+    8              0.000016   let c_lnum = line('.')
+    8              0.000012   let c_col = col('.')
+    8              0.000006   let before = 0
+                            
+    8              0.000013   let text = getline(c_lnum)
+    8              0.000051   let matches = matchlist(text, '\(.\)\=\%'.c_col.'c\(.\=\)')
+    8              0.000011   if empty(matches)
+                                let [c_before, c] = ['', '']
+    8              0.000003   else
+    8              0.000019     let [c_before, c] = matches[1:2]
+    8              0.000003   endif
+    8              0.000047   let plist = split(&matchpairs, '.\zs[:,]')
+    8              0.000015   let i = index(plist, c)
+    8              0.000006   if i < 0
+                                " not found, in Insert mode try character before the cursor
+    8              0.000013     if c_col > 1 && (mode() == 'i' || mode() == 'R')
+                                  let before = strlen(c_before)
+                                  let c = c_before
+                                  let i = index(plist, c)
+    8              0.000003     endif
+    8              0.000005     if i < 0
+                                  " not found, nothing to do
+    8              0.000004       return
+                                endif
+                              endif
+                            
+                              " Figure out the arguments for searchpairpos().
+                              if i % 2 == 0
+                                let s_flags = 'nW'
+                                let c2 = plist[i + 1]
+                              else
+                                let s_flags = 'nbW'
+                                let c2 = c
+                                let c = plist[i - 1]
+                              endif
+                              if c == '['
+                                let c = '\['
+                                let c2 = '\]'
+                              endif
+                            
+                              " Find the match.  When it was just before the cursor move it there for a
+                              " moment.
+                              if before > 0
+                                let has_getcurpos = exists("*getcurpos")
+                                if has_getcurpos
+                                  " getcurpos() is more efficient but doesn't exist before 7.4.313.
+                                  let save_cursor = getcurpos()
+                                else
+                                  let save_cursor = winsaveview()
+                                endif
+                                call cursor(c_lnum, c_col - before)
+                              endif
+                            
+                              if !has("syntax") || !exists("g:syntax_on")
+                                let s_skip = "0"
+                              else
+                                " Build an expression that detects whether the current cursor position is
+                                " in certain syntax types (string, comment, etc.), for use as
+                                " searchpairpos()'s skip argument.
+                                " We match "escape" for special items, such as lispEscapeSpecial, and
+                                " match "symbol" for lispBarSymbol.
+                                let s_skip = 'synstack(".", col("."))' . '->indexof({_, id -> synIDattr(id, "name") =~? ' . '"string\\|character\\|singlequote\\|escape\\|symbol\\|comment"}) >= 0'
+                                " If executing the expression determines that the cursor is currently in
+                                " one of the syntax types, then we want searchpairpos() to find the pair
+                                " within those syntax types (i.e., not skip).  Otherwise, the cursor is
+                                " outside of the syntax types and s_skip should keep its value so we skip
+                                " any matching pair inside the syntax types.
+                                " Catch if this throws E363: pattern uses more memory than 'maxmempattern'.
+                                try
+                                  execute 'if ' . s_skip . ' | let s_skip = "0" | endif'
+                                catch /^Vim\%((\a\+)\)\=:E363/
+                                  " We won't find anything, so skip searching, should keep Vim responsive.
+                                  return
+                                endtry
+                              endif
+                            
+                              " Limit the search to lines visible in the window.
+                              let stoplinebottom = line('w$')
+                              let stoplinetop = line('w0')
+                              if i % 2 == 0
+                                let stopline = stoplinebottom
+                              else
+                                let stopline = stoplinetop
+                              endif
+                            
+                              " Limit the search time to 300 msec to avoid a hang on very long lines.
+                              " This fails when a timeout is not supported.
+                              if mode() == 'i' || mode() == 'R'
+                                let timeout = exists("b:matchparen_insert_timeout") ? b:matchparen_insert_timeout : g:matchparen_insert_timeout
+                              else
+                                let timeout = exists("b:matchparen_timeout") ? b:matchparen_timeout : g:matchparen_timeout
+                              endif
+                              try
+                                let [m_lnum, m_col] = searchpairpos(c, '', c2, s_flags, s_skip, stopline, timeout)
+                              catch /E118/
+                                " Can't use the timeout, restrict the stopline a bit more to avoid taking
+                                " a long time on closed folds and long lines.
+                                " The "viewable" variables give a range in which we can scroll while
+                                " keeping the cursor at the same position.
+                                " adjustedScrolloff accounts for very large numbers of scrolloff.
+                                let adjustedScrolloff = min([&scrolloff, (line('w$') - line('w0')) / 2])
+                                let bottom_viewable = min([line('$'), c_lnum + &lines - adjustedScrolloff - 2])
+                                let top_viewable = max([1, c_lnum-&lines+adjustedScrolloff + 2])
+                                " one of these stoplines will be adjusted below, but the current values are
+                                " minimal boundaries within the current window
+                                if i % 2 == 0
+                                  if has("byte_offset") && has("syntax_items") && &smc > 0
+                            	let stopbyte = min([line2byte("$"), line2byte(".") + col(".") + &smc * 2])
+                            	let stopline = min([bottom_viewable, byte2line(stopbyte)])
+                                  else
+                            	let stopline = min([bottom_viewable, c_lnum + 100])
+                                  endif
+                                  let stoplinebottom = stopline
+                                else
+                                  if has("byte_offset") && has("syntax_items") && &smc > 0
+                            	let stopbyte = max([1, line2byte(".") + col(".") - &smc * 2])
+                            	let stopline = max([top_viewable, byte2line(stopbyte)])
+                                  else
+                            	let stopline = max([top_viewable, c_lnum - 100])
+                                  endif
+                                  let stoplinetop = stopline
+                                endif
+                                let [m_lnum, m_col] = searchpairpos(c, '', c2, s_flags, s_skip, stopline)
+                              endtry
+                            
+                              if before > 0
+                                if has_getcurpos
+                                  call setpos('.', save_cursor)
+                                else
+                                  call winrestview(save_cursor)
+                                endif
+                              endif
+                            
+                              " If a match is found setup match highlighting.
+                              if m_lnum > 0 && m_lnum >= stoplinetop && m_lnum <= stoplinebottom 
+                                if exists('*matchaddpos')
+                                  call matchaddpos('MatchParen', [[c_lnum, c_col - before], [m_lnum, m_col]], 10, 3)
+                                else
+                                  exe '3match MatchParen /\(\%' . c_lnum . 'l\%' . (c_col - before) . 'c\)\|\(\%' . m_lnum . 'l\%' . m_col . 'c\)/'
+                                endif
+                                let w:paren_hl_on = 1
+                              endif
+
+FUNCTION  SanitizeRLine()
+    Defined: /usr/share/nvim/runtime/indent/r.vim:201
+Called 1590 times
+Total time:   1.894127
+ Self time:   0.027703
+
+count  total (s)   self (s)
+ 1590   1.337960   0.005969   let newline = s:RDelete_quotes(a:line)
+ 1590   0.540586   0.006152   let newline = s:RDelete_parens(newline)
+ 1590              0.003589   let newline = substitute(newline, '#.*', "", "")
+ 1590              0.006199   let newline = substitute(newline, '\s*$', "", "")
+ 1590              0.001673   if &filetype == "rhelp" && newline =~ '^\\method{.*}{.*}(.*'
+                                let newline = substitute(newline, '^\\method{\(.*\)}{.*}', '\1', "")
+ 1590              0.000496   endif
+ 1590              0.000962   return newline
+
+FUNCTION  <SNR>54_Get_paren_balance()
+    Defined: /usr/share/nvim/runtime/indent/r.vim:113
+Called 3183 times
+Total time:   0.028652
+ Self time:   0.028652
+
+count  total (s)   self (s)
+ 3183              0.007319   let line2 = substitute(a:line, a:o, "", "g")
+ 3183              0.005620   let openp = strlen(a:line) - strlen(line2)
+ 3183              0.006642   let line3 = substitute(line2, a:c, "", "g")
+ 3183              0.005339   let closep = strlen(line2) - strlen(line3)
+ 3183              0.002421   return openp - closep
+
+FUNCTION  <SNR>54_RDelete_quotes()
+    Defined: /usr/share/nvim/runtime/indent/r.vim:35
+Called 1590 times
+Total time:   1.331991
+ Self time:   1.331991
+
+count  total (s)   self (s)
+ 1590              0.001196   let i = 0
+ 1590              0.000992   let j = 0
+ 1590              0.001143   let line1 = ""
+ 1590              0.001991   let llen = strlen(a:line)
+59607              0.035099   while i < llen
+58017              0.047656     if a:line[i] == '"'
+   90              0.000063       let i += 1
+   90              0.000077       let line1 = line1 . 's'
+  210              0.000605       while !(a:line[i] == '"' && ((i > 1 && a:line[i-1] == '\' && a:line[i-2] == '\') || a:line[i-1] != '\')) && i < llen
+  120              0.000084         let i += 1
+  210              0.000069       endwhile
+   90              0.000078       if a:line[i] == '"'
+   90              0.000063         let i += 1
+   90              0.000026       endif
+57927              0.014756     else
+57927              0.048995       if a:line[i] == "'"
+                                    let i += 1
+                                    let line1 = line1 . 's'
+                                    while !(a:line[i] == "'" && ((i > 1 && a:line[i-1] == '\' && a:line[i-2] == '\') || a:line[i-1] != '\')) && i < llen
+                                      let i += 1
+                                    endwhile
+                                    if a:line[i] == "'"
+                                      let i += 1
+                                    endif
+57927              0.014400       else
+57927              0.047907         if a:line[i] == "`"
+                                      let i += 1
+                                      let line1 = line1 . 's'
+                                      while a:line[i] != "`" && i < llen
+                                        let i += 1
+                                      endwhile
+                                      if a:line[i] == "`"
+                                        let i += 1
+                                      endif
+57927              0.013908         endif
+57927              0.014611       endif
+58017              0.013104     endif
+58017              0.032726     if i == llen
+                                  break
+58017              0.012691     endif
+58017              0.066101     let line1 = line1 . a:line[i]
+58017              0.036384     let j += 1
+58017              0.034507     let i += 1
+59607              0.019554   endwhile
+ 1590              0.000969   return line1
+
+FUNCTION  <SNR>54_RDelete_parens()
+    Defined: /usr/share/nvim/runtime/indent/r.vim:84
+Called 1590 times
+Total time:   0.534434
+ Self time:   0.519960
+
+count  total (s)   self (s)
+ 1590   0.020580   0.006106   if s:Get_paren_balance(a:line, "(", ")") != 0
+                                return a:line
+ 1590              0.000482   endif
+ 1590              0.001029   let i = 0
+ 1590              0.000946   let j = 0
+ 1590              0.001103   let line1 = ""
+ 1590              0.001930   let llen = strlen(a:line)
+49776              0.028782   while i < llen
+48186              0.055359     let line1 = line1 . a:line[i]
+48186              0.039666     if a:line[i] == '('
+  363              0.000271       let nop = 1
+10284              0.008025       while nop > 0 && i < llen
+ 9921              0.006789         let i += 1
+ 9921              0.008264         if a:line[i] == ')'
+  648              0.000486           let nop -= 1
+ 9273              0.002470         else
+ 9273              0.007211           if a:line[i] == '('
+  285              0.000220             let nop += 1
+ 9273              0.002493           endif
+ 9921              0.002353         endif
+10284              0.002653       endwhile
+  363              0.000427       let line1 = line1 . a:line[i]
+48186              0.011747     endif
+48186              0.028989     let i += 1
+49776              0.015049   endwhile
+ 1590              0.000944   return line1
+
+FUNCTION  <SNR>54_Get_matching_brace()
+    Defined: /usr/share/nvim/runtime/indent/r.vim:121
+Called 6 times
+Total time:   1.904729
+ Self time:   0.014176
+
+count  total (s)   self (s)
+    6   0.000660   0.000022   let line = SanitizeRLine(getline(a:linenr))
+    6              0.000005   if a:delbrace == 1
+                                let line = substitute(line, '{$', "", "")
+    6              0.000002   endif
+    6   0.000081   0.000026   let pb = s:Get_paren_balance(line, a:o, a:c)
+    6              0.000005   let i = a:linenr
+ 1575              0.001292   while pb != 0 && i > 1
+ 1569              0.001067     let i -= 1
+ 1569   1.900748   0.010886     let pb += s:Get_paren_balance(SanitizeRLine(getline(i)), a:o, a:c)
+ 1575              0.000590   endwhile
+    6              0.000003   return i
+
+FUNCTION  <SNR>54_Get_prev_line()
+    Defined: /usr/share/nvim/runtime/indent/r.vim:189
+Called 9 times
+Total time:   0.000171
+ Self time:   0.000171
+
+count  total (s)   self (s)
+    9              0.000011   let lnum = a:lineno - 1
+    9              0.000013   let data = getline( lnum )
+   24              0.000076   while lnum > 0 && (data =~ '^\s*#' || data =~ '^\s*$')
+   15              0.000014     let lnum = lnum - 1
+   15              0.000018     let data = getline( lnum )
+   24              0.000012   endwhile
+    9              0.000005   return lnum
+
+FUNCTIONS SORTED ON TOTAL TIME
+count  total (s)   self (s)  function
+    3   1.923586   0.000934  GetRIndent()
+    6   1.904729   0.014176  <SNR>54_Get_matching_brace()
+ 1590   1.894127   0.027703  SanitizeRLine()
+ 1590   1.331991             <SNR>54_RDelete_quotes()
+ 1590   0.534434   0.519960  <SNR>54_RDelete_parens()
+ 3183   0.028652             <SNR>54_Get_paren_balance()
+    8   0.000404   0.000349  <SNR>38_Highlight_Matching_Pair()
+    9   0.000171             <SNR>54_Get_prev_line()
+    8   0.000055             <SNR>38_Remove_Matches()
+
+FUNCTIONS SORTED ON SELF TIME
+count  total (s)   self (s)  function
+ 1590              1.331991  <SNR>54_RDelete_quotes()
+ 1590   0.534434   0.519960  <SNR>54_RDelete_parens()
+ 3183              0.028652  <SNR>54_Get_paren_balance()
+ 1590   1.894127   0.027703  SanitizeRLine()
+    6   1.904729   0.014176  <SNR>54_Get_matching_brace()
+    3   1.923586   0.000934  GetRIndent()
+    8   0.000404   0.000349  <SNR>38_Highlight_Matching_Pair()
+    9              0.000171  <SNR>54_Get_prev_line()
+    8              0.000055  <SNR>38_Remove_Matches()
+

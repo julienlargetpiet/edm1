@@ -377,6 +377,7 @@ can_be_num <- function(x){
 }
 
 #' unique_pos
+#'
 #' Allow to find indexes of the unique values from a vector. 
 #' @param vec is the input vector
 #' @export
@@ -399,13 +400,18 @@ unique_pos <- function(vec){
 #' @param output is the name of the output csv file
 #' @param type_distri is a vector which, for each column, associate a type of distribution ("random", "poisson", "gaussian"), it meas that non only the number but also the length of the string will be randomly generated according to these distribution laws
 #' @param properties is linked to type_distri because it is the parameters ("min_val-max_val") for "random type", ("u-x") for the poisson distribution, ("u-d") for gaussian distribution
-#' @param str_source is the source (vector) from which the character creating random string are (defult set to the occidental alphabet)
+#' @param str_source is the source (vector) from which the character creating random string are (default set to the occidental alphabet)
 #' @param round_l is a vector which, for each column containing number, associate a round value
 #' @param sep_ is the separator used to write data in the csv
 #' @return new generated data in addition to saving it in the output
 #' @export
 
-data_gen <- function(type_=c("number", "mixed", "string"), strt_l=c(0, 0, 10), nb_r=c(50, 10, 40), output="gened.csv", properties=c("1-5", "1-5", "1-5"), type_distri=c("random", "random", "random"), str_source=c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "w", "x", "y", "z"), round_l=c(0, 0, 0), sep_=","){
+data_gen <- function(type_=c("number", "mixed", "string"), strt_l=c(0, 0, 10), nb_r=c(50, 10, 40), output="gened.csv", 
+                     properties=c("1-5", "1-5", "1-5"), type_distri=c("random", "random", "random"), 
+                     str_source=c("a", "b", "c", "d", "e", "f", "g", 
+                                  "h", "i", "j", "k", "l", "m", 
+                                  "n", "o", "p", "q", "r", "s", "t", "u", "w", "x", "y", "z"), 
+                     round_l=c(0, 0, 0), sep_=","){
   
   v_get1 <- c()
   
@@ -1403,13 +1409,19 @@ df_tuned <- function(df, val_to_stop, index_rc=NA, included="yes"){
 
 #' see_df
 #' 
-#' Allow to return a datafame with TRUE cells where the condition entered are respected and FALSE where these are not
+#' Allow to return a datafame with special value cells (ex: TRUE) where the condition entered are respected and another special value cell (ex: FALSE) where these are not
 #' @param df is the input dataframe
-#' @param condition_l is the vector of the possible conditions ("==", ">", "<", "!=", "%%", "%%r") (equal, greater than, lower than, not equal to, is divisible by, divides), you can put the same condition n times. 
+#' @param condition_l is the vector of the possible conditions ("==", ">", "<", "!=", "%%") (equal, greater than, lower than, not equal to, is divisible by), you can put the same condition n times. 
 #' @param val_l is the list of vectors containing the values related to condition_l (so the vector of values has to be placed in the same order)
 #' @param conjunction_l contains the | or & conjunctions, so if the length of condition_l is equal to 3, there will be 2 conjunctions. If the length of conjunction_l is inferior to the length of condition_l minus 1, conjunction_l will match its goal length value with its last argument as the last arguments. For example, c("&", "|", "&") with a goal length value of 5 --> c("&", "|", "&", "&", "&")
-#' @examples see_df(df, c("%%", "=="), list(c(2, 11), c(3)), list("|") will return all the values that are divisible by 2 and 11 and all the values that are equal to 3 from the dataframe  
+#' @param rt_val is a special value cell returned when the conditions are respected
+#' @param f_val is a special value cell returned when the conditions are not respected
+#' @details This function will return an error if number only comparative conditions are given in addition to having character values in the input dataframe.
 #' @export
+#' @examples 
+#' see_df(df, c("%%", "=="), list(c(2, 11), c(3)), list("|") 
+#' #will return all the values that are divisible by 2 and 11 
+#' #and all the values that are equal to 3 from the dataframe 
 
 see_df <- function(df, condition_l, val_l, conjunction_l=c(), rt_val=T, f_val=F){
 
@@ -1425,7 +1437,7 @@ see_df <- function(df, condition_l, val_l, conjunction_l=c(), rt_val=T, f_val=F)
 
         df_rtnl <- data.frame(matrix(f_val, ncol=ncol(df), nrow=nrow(df)))
 
-        all_op <- c("==", ">", "<", "!=", "%%", "%%r")
+        all_op <- c("==", ">", "<", "!=", "%%")
 
         for (I in 1:ncol(df)){
 
@@ -1698,70 +1710,6 @@ see_df <- function(df, condition_l, val_l, conjunction_l=c(), rt_val=T, f_val=F)
                                 if (condition_l[t] == "%%" & already == 0){
 
                                         if (sum(df[i, I] %% unlist(val_l[t])) == 0){
-
-                                                checked_l <- append(checked_l, T)
-
-                                                if (length(condition_l) > 1 & t > 1){
-
-                                                        bfr <- conjunction_l[previous:t]
-
-                                                        if (t == length(condition_l)){
-
-                                                                if (length(checked_l) == length(bfr)){
-
-                                                                        already <- 1
-
-                                                                        df_rtnl[i, I] <- rt_val
-
-                                                                }
-
-                                                        }else if (conjunction_l[t] == "|"){
-
-                                                                if (length(checked_l) == length(bfr)){
-
-                                                                        already <- 1
-
-                                                                        df_rtnl[i, I] <- rt_val
-
-                                                                }
-
-                                                        }
-
-                                                }else if (length(condition_l) == 1){
-
-                                                        df_rtnl[i, I] <- rt_val
-
-                                                }else {
-
-                                                        if (conjunction_l[1] == "|"){
-
-                                                                df_rtnl[i, I] <- rt_val
-
-                                                                checked_l <- c()
-
-                                                        }
-
-                                                }
-
-                                        }
-
-                                        if (t <= length(conjunction_l)){ 
-
-                                                if (conjunction_l[t] == "|"){
-
-                                                        checked_l <- c()
-
-                                                        previous = t + 1 
-
-                                                }
-
-                                        }
-
-                                }
-
-                                if (condition_l[t] == "%%r" & already == 0){
-
-                                        if (sum(unlist(val_l[t]) %% df[i, I]) == 0){
 
                                                 checked_l <- append(checked_l, T)
 
@@ -3266,5 +3214,1080 @@ match_n <- function(vec, mc, n=1, wnb="#####"){
         return(match(mc, vec2))
 
 }
+
+
+#' ptrn_twkr
+#'
+#' Allow to modify the pattern length of element in a vector according to arguments. What is here defined as a pattern is something like this xx-xx-xx or xx/xx/xxx... So it is defined by the separator
+#' @param inpt_l is the input vector
+#' @param depth is the number (numeric) of separator it will keep as a result. To keep the number of separator of the element that has the minimum amount of separator do depth="min" and depth="max" (character) for the opposite. This value defaults to "max".
+#' @param sep is the separator of the pattern, defaults to "-"
+#' @param default_val is the default val that will be placed between the separator, defaults to "00" 
+#' @param add_sep defaults to TRUE. If set to FALSE, it will remove the separator for the patterns that are included in the interval between the depth amount of separator and the actual number of separator of the element. 
+#' @export
+#'
+#' @examples
+#' v <- c("2012-06-22", "2012-06-23", "2022-09-12", "2022")
+#' ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=T)
+
+ptrn_twkr <- function(inpt_l, depth="max", sep="-", 
+                      default_val="0", add_sep=T){
+  
+  ln <- length(inpt_l)
+  
+  if (depth == "min"){
+    
+    pre_val <- str_count(inpt_l[1], sep)
+    
+    for (i in 2:ln){
+      
+      if (str_count(inpt_l[i], sep) < pre_val){
+        
+        pre_val <- str_count(inpt_l[i], sep)
+        
+      }
+      
+    }
+    
+    depth <- pre_val
+    
+  }
+
+  if (depth == "max"){
+    
+    pre_val <- str_count(inpt_l[1], sep)
+    
+    for (i in 2:ln){
+      
+      if (str_count(inpt_l[i], sep) > pre_val){
+        
+        pre_val <- str_count(inpt_l[i], sep)
+        
+      }
+      
+    }
+    
+    depth <- pre_val
+    
+  }
+
+  for (I in 1:ln){
+   
+    hmn <- str_count(inpt_l[I], "-")
+    
+    if (hmn < depth){
+     
+      inpt_l[I] <- paste0(inpt_l[I], sep, default_val)
+
+      diff <- depth - hmn - 1
+
+      if (diff > 0){
+      
+                if (add_sep == T){
+                  
+                  for (i in 1:diff){
+                  
+                    inpt_l[I] <- paste0(inpt_l[I], sep, default_val)
+                  
+                  }
+                
+                }else{
+                  
+                  for (i in 1:diff){
+                    
+                    inpt_l[I] <- paste0(inpt_l[I], default_val)
+                    
+                  }
+                  
+                }
+
+     }
+    
+    }else if(depth < hmn){
+
+        if (add_sep == T){
+
+                inpt_l[I] <- paste(unlist(strsplit(inpt_l[I], split=sep))[1:(depth+1)], collapse=sep)
+
+        }else{
+
+                inpt_l[I] <- paste(unlist(strsplit(inpt_l[I], split=sep))[1:(depth+1)], collapse="")
+       
+        }
+
+    }
+
+  }
+    
+  return(inpt_l)
+  
+}
+
+#' extrm_dates
+#' 
+#' Allow to find the minimum or the maximum of a date in a vector. The format of dates is Year/Month/Day.
+#' @param inpt_l is the input vector
+#' @param extrm is either "min" or "max", defaults to "min"
+#' @param sep is the separator of the dates, defaults to "-"
+#' @export
+
+extrm_dates <- function(inpt_l, extrm="min", sep="-"){
+  
+  rtn <- ""
+  
+  for (I in 1:length(unlist(strsplit(inpt_l[1], sep)))){
+    
+    lnd <- length(inpt_l)
+    
+    if (lnd == 1){ return(inpt_l[1]) }
+    
+    cur_dte_l <- c()
+    
+    cur_val <- unlist(strsplit(inpt_l[1], sep))[I]
+    
+    if (extrm == "min"){
+      
+      for (i in 2:lnd){
+        
+        if(unlist(strsplit(inpt_l[i], sep))[I] < cur_val){
+          
+          cur_val <- unlist(strsplit(inpt_l[i], sep))[I]
+          
+        }else{
+          
+          inpt_l[i] <- "#"
+          
+        }
+        
+      }
+      
+    }else{
+      
+      for (i in 2:lnd){
+        
+        if(unlist(strsplit(inpt_l[i], sep))[I] > cur_val){
+          
+          cur_val <- unlist(strsplit(inpt_l[i], sep))[I]
+          
+        }else{
+          
+          inpt_l[i] <- "#"
+          
+        }
+        
+      }
+      
+    }
+    
+  if (rtn == ""){
+    
+    rtn <- cur_val
+    
+  }else{
+    
+    rtn <- paste0(rtn, sep, cur_val)
+    
+  }
+    
+    inpt_l <- inpt_l[!(inpt_l=="#")]
+    
+  }
+  
+  return(rtn)
+  
+}
+
+#' fillr
+#' 
+#' Allow to fill a vector by the last element n times
+#' @param inpt_v is the input vector
+#' @param ptrtn_fill is the pattern used to detect where the function has to fill the vector by the last element n times. It defaults to "...\\d" where "\\d" is the regex for an int value. So this paramater has to have "\\d" which designates n.
+#' @export
+#' @examples
+#' fillr(c("a", "b", "...3", "c"))
+
+fillr <- function(inpt_v, ptrn_fill="...\\d"){
+  
+  ptrn <- grep(ptrn_fill, inpt_v)
+
+  while (length(ptrn) > 0){
+   
+    ptrn <- grep(ptrn_fill, inpt_v)
+
+    idx <- ptrn[1] 
+    
+    untl <- as.numeric(c(unlist(strsplit(inpt_v[idx], split="\\.")))[4]) - 1
+   
+    pre_val <- inpt_v[(idx - 1)]
+
+    inpt_v[idx] <- pre_val
+
+    if (untl > 0){
+    
+      for (i in 1:untl){
+        
+        inpt_v <- append(inpt_v, pre_val, idx)
+        
+      }
+      
+    }
+
+  ptrn <- grep(ptrn_fill, inpt_v)
+    
+  }
+  
+  return(inpt_v)
+  
+}
+
+#' ptrn_switchr
+#' 
+#' Allow to switch, copy pattern for each element in a vector. Here a pattern is the values that are separated by a same separator. Example: "xx-xxx-xx" or "xx/xx/xxxx". The xx like values can be swicthed or copied from whatever index to whatever index. Here, the index is like this 1-2-3 etcetera, it is relative of the separator. 
+#' @param inpt_l is the input vector
+#' @param f_idx_l is a vector containing the indexes of the pattern you want to be altered.
+#' @param t_idx_l is a vector containing the indexes to which the indexes in f_idx_l are related.
+#' @param sep is the separator, defaults to "-"
+#' @param default_val is the default value , if not set to NA, of the pattern at the indexes in f_idx_l. If it is not set to NA, you do not need to fill t_idx_l because this is the vector containing the indexes of the patterns that will be set as new values relatively to the indexes in f_idx_l. Defaults to NA.
+#' @export
+#' @examples 
+#' ptrn_switchr(inpt_l=c("2022-01-11", "2022-01-14", "2022-01-21", 
+#' "2022-01-01"), f_idx_l=c(1, 2, 3), t_idx_l=c(3, 2, 1))
+#' ptrn_switchr(inpt_l=c("2022-01-11", "2022-01-14", "2022-01-21", 
+#' "2022-01-01"), f_idx_l=c(1), default_val="ee")
+
+ptrn_switchr <- function(inpt_l, f_idx_l=c(), t_idx_l=c(), sep="-", default_val=NA){
+
+        if (is.na(default_val) == T){
+
+                for (I in 1:length(inpt_l)){
+
+                        pre_val <- unlist(strsplit(inpt_l[I], split=sep))
+
+                        pre_val2 <- pre_val
+
+                        for (i in 1:length(f_idx_l)){
+
+                               pre_val2[f_idx_l[i]] <- pre_val[t_idx_l[i]]
+
+                        }
+
+                        inpt_l[I] <- paste(pre_val2, collapse=sep)
+
+                }
+
+        }else{
+
+                for (I in 1:length(inpt_l)){
+
+                        pre_val <- unlist(strsplit(inpt_l[I], split=sep))
+
+                        for (i in 1:length(f_idx_l)){
+
+                               pre_val[f_idx_l[i]] <- default_val
+
+                        }
+
+                        inpt_l[I] <- paste(pre_val, collapse=sep)
+
+                }
+
+        }
+
+        return(inpt_l)
+
+}
+
+#' v_to_df
+#'
+#' Allow to convert a vector to a dataframe according to a separator.
+#' @param inpt_v is the input vector
+#' @param sep is the separator used to seprate the columns
+#' @export
+#' @examples 
+#' v <- c("aa-yy-uu", "zz-gg-hhh", "zz-gg-hhh", "zz-gg-hhh")
+#' v_to_df(inpt_v=v, sep="-")
+
+v_to_df <- function(inpt_v, sep="-"){
+
+        n_col <- str_count(inpt_v[1], sep) + 1
+
+        pre_l <- strsplit(inpt_v, sep)
+
+        pre_v <- c(unlist(pre_l[1])[1])
+
+        for (i in 2:length(inpt_v)){
+
+                pre_v <- c(pre_v, unlist(pre_l[i])[1])
+
+        }
+
+        rtn_df <- data.frame(pre_v)
+
+        for (I in 2:n_col){
+
+                pre_v <- c(unlist(pre_l[1])[I])
+
+                for (i in 2:length(inpt_v)){
+
+                        pre_v <- c(pre_v, unlist(pre_l[i])[I])
+
+                }
+
+                rtn_df <- cbind(rtn_df, pre_v)
+
+        }
+
+        return(rtn_df)
+}
+
+#' globe
+#'
+#' Allow to calculate the distances between a set of geographical points and another established geographical point. If the altitude is not filled, so the result returned won't take in count the altitude.
+#' @param lat_f is the latitude of the established geographical point
+#' @param long_f is the longitude of the established geographical point
+#' @param long_f is the altitude of the established geographical point, defaults to NA
+#' @param lat_n is a vector containing the latitude of the set of points
+#' @param lat_n is a vector containing the longitude of the set of points
+#' @param lat_n is a vector containing the altitude of the set of points, defaults to NA
+#' @export
+#' @examples
+#' globe(lat_f=23, long_f=112, alt_f=NA, lat_n=c(2, 82), long_n=c(165, -55), alt_n=NA) 
+
+globe <- function(lat_f, long_f, alt_f=NA, lat_n, long_n, alt_n=NA){
+
+        rtn_l <- c()
+
+        for (i in 1:length(lat_n)){
+
+               sin_comp <- abs(sin(pi * ((lat_n[i] + 90) / 180)))
+
+               if (abs(long_f - long_n[i]) != 0){
+
+                       delta_long <- (40075 / (360 / abs(long_f - long_n[i]))) * sin_comp
+
+               }else{
+
+                       delat_long <- 0
+
+               }
+
+               if (abs(lat_f - lat_n[i]) != 0){
+
+                        delta_lat <- 20037.5 / (180 / abs(lat_f - lat_n[i]))
+
+               }else{
+
+                        delta_lat <- 0
+
+               }
+
+               delta_f <- (delta_lat ** 2 + delta_long ** 2) ** 0.5
+
+               if (is.na(alt_n[i]) == F & is.na(alt_f) == F){
+
+                        delta_f <- ((alt_n[i] - alt_f) ** 2 + delta_f ** 2) ** 0.5
+
+               }
+
+               rtn_l <- append(rtn_l, delta_f, after=length(rtn_l))
+
+        }
+
+        return(rtn_l)
+
+}
+
+#' geo_min
+#' 
+#' Return a dataframe containing the nearest geographical points (row) according to established geographical points (column).
+#' @param inpt_df is the input dataframe of the set of geographical points to be classified, its firts column is for latitude, the second for the longitude and the third, if exists, is for the altitude. Each point is one row.
+#' @param established_df is the dataframe containing the coordiantes of the established geographical points
+#' @export
+#' @examples
+#'in_ <- data.frame(c(11, 33, 55), c(113, -143, 167))
+#'
+#'in2_ <- data.frame(c(12, 55), c(115, 165))
+#'
+#'print(geo_min(inpt_df=in_, established_df=in2_))
+#'
+#'in_ <- data.frame(c(51, 23, 55), c(113, -143, 167), c(6, 5, 1))
+#'
+#'in2_ <- data.frame(c(12, 55), c(115, 165), c(2, 5))
+#'
+#'geo_min(inpt_df=in_, established_df=in2_)
+
+geo_min <- function(inpt_df, established_df){
+
+       globe <- function(lat_f, long_f, alt_f=NA, lat_n, long_n, alt_n=NA){
+
+               sin_comp <- abs(sin(pi * ((lat_n + 90) / 180)))
+
+               if (abs(long_f - long_n) != 0){
+
+                       delta_long <- (40075 / (360 / abs(long_f - long_n))) * sin_comp
+
+               }else{
+
+                       delat_long <- 0
+
+               }
+
+               if (abs(lat_f - lat_n) != 0){
+
+                        delta_lat <- 20037.5 / (180 / abs(lat_f - lat_n))
+
+               }else{
+
+                        delta_lat <- 0
+
+               }
+
+               delta_f <- (delta_lat ** 2 + delta_long ** 2) ** 0.5
+
+               if (is.na(alt_n) == F & is.na(alt_f) == F){
+
+                        delta_f <- ((alt_n - alt_f) ** 2 + delta_f ** 2) ** 0.5
+
+               }
+
+               return(delta_f)
+
+       }
+
+      flag_delta_l <- c()
+
+      rtn_df <- data.frame(matrix(nrow=nrow(inpt_df), ncol=nrow(established_df)))
+
+      if (ncol(inpt_df) == 3){
+
+              for (i in 1:nrow(inpt_df)){
+
+                      flag_delta_l <- c(flag_delta_l, globe(lat_f=established_df[1, 1], long_f=established_df[1, 2], alt_f=established_df[1, 3], lat_n=inpt_df[i, 1], long_n=inpt_df[i, 2], alt_n=inpt_df[i, 3]))
+
+              }
+
+              rtn_df[,1] <- flag_delta_l
+
+              if (nrow(established_df) > 1){
+
+                      for (I in 2:nrow(established_df)){
+
+                               for (i in 1:nrow(inpt_df)){
+
+                                        idx <- which(is.na(rtn_df[i,]) == F)
+
+                                        res <- globe(lat_f=established_df[I, 1], long_f=established_df[I, 2], alt_f=established_df[I, 3], lat_n=inpt_df[i, 1], long_n=inpt_df[i, 2], alt_n=inpt_df[i, 3])
+
+                                        if (rtn_df[i, 1:(I-1)][idx] > res){
+
+                                               rtn_df[i, I] <- rtn_df[i, idx] 
+
+                                               rtn_df[i, idx] <- NA 
+
+                                        }
+
+                                }
+
+                        }
+
+              }
+
+      }else{
+
+              for (i in 1:nrow(inpt_df)){
+
+                      flag_delta_l <- c(flag_delta_l, globe(lat_f=established_df[1, 1], long_f=established_df[1, 2], lat_n=inpt_df[i, 1], long_n=inpt_df[i, 2]))
+
+              }
+
+              rtn_df[,1] <- flag_delta_l
+
+              if (nrow(established_df) > 1){
+
+                      for (I in 2:nrow(established_df)){
+
+                               for (i in 1:nrow(inpt_df)){
+
+                                        idx <- which(is.na(rtn_df[i,]) == F)
+
+                                        res <- globe(lat_f=established_df[I, 1], long_f=established_df[I, 2], lat_n=inpt_df[i, 1], long_n=inpt_df[i, 2])
+
+                                        if (rtn_df[i, 1:(I-1)][idx] > res){
+
+                                               rtn_df[i, I] <- res 
+
+                                               rtn_df[i, idx] <- NA 
+
+                                        }
+
+                               }
+
+                        }
+
+              }
+
+      }
+
+      return(rtn_df)
+
+}
+
+#' nestr_df2
+#'
+#' Allow to write a special value (1a) in the cells of a dataframe (1b) that correspond (row and column) to whose of another dataframe (2b) that return another special value (2a). The cells whose coordinates do not match the coordinates of the dataframe (2b), another special value can be written (3a) if not set to NA. 
+#' @param inpt_df is the input dataframe (1b)
+#' @param rtn_pos is the special value (1a)
+#' @param rtn_neg is the special value (3a) 
+#' @param nestr_df is the dataframe (2b)
+#' @param yes_val is the special value (2a) 
+#' @export
+#' @examples
+#' nestr_df2(inpt_df=data.fame(c(1, 2, 1), c(1, 5, 7)), rtn_pos="yes", 
+#' rtn_neg="no", nestr_df=data.frame(c(T, F, T), c(F, F, T), yes_val=T)) 
+
+nestr_df2 <- function(inptf_df, rtn_pos, rtn_neg=NA, nestr_df, yes_val=T){
+
+        if (is.na(rtn_neg) == T){
+
+                for (I in 1:ncol(nestr_df)){
+
+                        for (i in 1:nrow(nestr_df)){
+
+                                if (nestr_df[i, I] == yes_val){
+
+                                        inptf_df[i, I] <- rtn_pos
+
+                                }
+
+                        }
+
+                }
+
+        }else{
+
+                for (I in 1:ncol(nestr_df)){
+
+                        for (i in 1:nrow(nestr_df)){
+
+                                if (nestr_df[i, I] == yes_val){
+
+                                        inptf_df[i, I] <- rtn_pos
+
+                                }else{
+
+                                        inptf_df[i, I] <- rtn_neg
+
+                                }
+
+                        }
+
+                }
+
+        }
+
+    return(inptf_df)
+
+}
+
+#' nestr_df1
+#'
+#' Allow to write a value (1a) to a dataframe (1b) to its cells that have the same coordinates (row and column) than the cells whose value is equal to a another special value (2a), from another another dataframe (2b). The value (1a) depends of the cell  value coordinates of the third dataframe (3b). If a cell coordinates (1c) of the first dataframe (1b) do not correspond to the coordinates of a good returning cell value (2a) from the dataframe (2b), so this cell (1c) can have its value changed to the same cell coordinates value (3a) of a third dataframe (4b), if (4b) is not det to NA.
+#' @param inpt_df is the input dataframe (1b)
+#' @param inptt_pos_df is the dataframe (2b) that corresponds to the (1a) values
+#' @param inpt_neg_df is the dataframe (4b) that has the (3a) values, defaults to NA
+#' @param nestr_df is the dataframe (2b) that has the special value (2a)
+#' @param yes_val is the special value (2a)
+#' @export
+#' @examples
+#' nestr_df1(inpt_df=data.fame(c(1, 2, 1), c(1, 5, 7)), 
+#' inptt_pos_df=data.frame(c(4, 4, 3), c(2, 1, 2)), 
+#' inptt_pos_df=data.frame(c(44, 44, 33), c(12, 12, 12)), 
+#' nestr_df=data.frame(c(T, F, T), c(F, F, T), yes_val=T)) 
+
+nestr_df1 <- function(inptf_df, inptt_pos_df, inpt_neg_df=NA, nestr_df, yes_val=T){
+
+        if (is.na(inpt_neg_df) == T){
+
+                for (I in 1:ncol(nestr_df)){
+
+                        for (i in 1:nrow(nestr_df)){
+
+                                if (nestr_df[i, I] == yes_val){
+
+                                        inptf_df[i, I] <- inptt_df[i, I]
+
+                                }
+
+                        }
+
+                }
+
+        }else{
+
+                for (I in 1:ncol(nestr_df)){
+
+                        for (i in 1:nrow(nestr_df)){
+
+                                if (nestr_df[i, I] == yes_val){
+
+                                        inptf_df[i, I] <- inptt_pos_df[i, I]
+
+                                }else{
+
+                                        inptf_df[i, I] <- inptt_neg_df[i, I]
+
+                                }
+
+                        }
+
+                }
+
+        }
+
+    return(inptf_df)
+
+}
+
+#' groupr_df
+#' 
+#' Allow to create groups from a dataframe. Indeed, you can create conditions that lead to a flag value for each cell of the input dataframeaccording to the cell value. This function is based on see_df and nestr_df2 functions.
+#' @param inpt_df is the input dataframe
+#' @param condition_lst is a list containing all the condition as a vector for each group
+#' @param val_lst is a list containing all the values associated with condition_lst as a vector for each group
+#' @param conjunction_lst is a list containing all the conjunctions associated with condition_lst and val_lst as a vector for each group
+#' @param rtn_val_pos is a vector containing all the group flag value like this ex: c("flag1", "flag2", "flag3") 
+#' @export
+#' @examples interactive()
+#'df1 <- data.frame(c(1, 2, 1), c(45, 22, 88), c(44, 88, 33))
+#'
+#'val_lst <- list(list(c(1), c(1)), list(c(2)), list(c(44)))
+#'
+#'condition_lst <- list(c(">", "<"), c("%%"), c("=="))
+#'
+#'conjunction_lst <- list(c("|"), c(), c())
+#'
+#'rtn_val_pos <- c("+", "+", "+")
+#'
+#'groupr_df(inpt_df=df1, val_lst=val_lst, condition_lst=condition_lst, 
+#'conjunction_lst=conjunction_lst, rtn_val_pos=rtn_val_pos)
+
+groupr_df <- function(inpt_df, condition_lst, val_lst, conjunction_lst, rtn_val_pos=c()){
+ 
+        nestr_df2 <- function(inptf_df, rtn_pos, rtn_neg=NA, nestr_df, yes_val=T){
+
+                if (is.na(rtn_neg) == T){
+
+                        for (I in 1:ncol(nestr_df)){
+
+                                for (i in 1:nrow(nestr_df)){
+
+                                        if (nestr_df[i, I] == yes_val){
+
+                                                inptf_df[i, I] <- rtn_pos
+
+                                        }
+
+                                }
+
+                        }
+
+                }else{
+
+                        for (I in 1:ncol(nestr_df)){
+
+                                for (i in 1:nrow(nestr_df)){
+
+                                        if (nestr_df[i, I] == yes_val){
+
+                                                inptf_df[i, I] <- rtn_pos
+
+                                        }else{
+
+                                                inptf_df[i, I] <- rtn_neg
+
+                                        }
+
+                                }
+
+                        }
+
+                }
+
+            return(inptf_df)
+
+        }
+ 
+        see_df <- function(df, condition_l, val_l, conjunction_l=c(), rt_val=T, f_val=F){
+
+                if (length(condition_l) > 1 & length(conjunction_l) < (length(condition_l) - 1)){
+
+                        for (i in (length(conjunction_l)+1):length(condiction_l)){
+
+                                conjunction_l <- append(conjunction_l, conjunction_l[length(conjunction_l)])
+
+                        }
+
+                }
+
+                df_rtnl <- data.frame(matrix(f_val, ncol=ncol(df), nrow=nrow(df)))
+
+                all_op <- c("==", ">", "<", "!=", "%%")
+
+                for (I in 1:ncol(df)){
+
+                        for (i in 1:nrow(df)){
+
+                                checked_l <- c()
+
+                                previous = 1
+
+                                for (t in 1:length(condition_l)){
+
+                                        already <- 0
+
+                                        if (condition_l[t] == "==" & already == 0){
+
+                                                if (df[i, I] %in% unlist(val_l[t])){
+
+                                                        checked_l <- append(checked_l, T)
+
+                                                        if (length(condition_l) > 1 & t > 1){
+
+                                                                bfr <- conjunction_l[previous:t]
+
+                                                                if (t == length(condition_l)){
+
+                                                                        if (length(checked_l) == length(bfr)){
+
+                                                                                already <- 1
+
+                                                                                df_rtnl[i, I] <- rt_val
+
+                                                                        }
+
+                                                                }else if (conjunction_l[t] == "|"){
+
+                                                                        if (length(checked_l) == length(bfr)){
+
+                                                                                already <- 1
+
+                                                                                df_rtnl[i, I] <- rt_val
+
+                                                                        }
+
+                                                                }
+
+                                                        }else if (length(condition_l) == 1){
+
+                                                                df_rtnl[i, I] <- rt_val
+
+                                                        }else {
+
+                                                                if (conjunction_l[1] == "|"){
+
+                                                                        df_rtnl[i, I] <- rt_val
+
+                                                                        checked_l <- c()
+
+                                                                }
+
+                                                        }
+
+                                                }
+
+                                                if (t <= length(conjunction_l)){ 
+
+                                                        if (conjunction_l[t] == "|"){
+
+                                                                checked_l <- c()
+
+                                                                previous = t + 1 
+
+                                                        }
+
+                                                }
+
+                                        }
+
+                                        if (condition_l[t] == ">" & already == 0){
+
+                                                if (all(df[i, I] > unlist(val_l[t])) == T){
+
+                                                        checked_l <- append(checked_l, T)
+
+                                                        if (length(condition_l) > 1 & t > 1){
+
+                                                                bfr <- conjunction_l[previous:t]
+
+                                                                if (t == length(condition_l)){
+
+                                                                        if (length(checked_l) == length(bfr)){
+
+                                                                                already <- 1
+
+                                                                                df_rtnl[i, I] <- rt_val
+
+                                                                        }
+
+                                                                }else if (conjunction_l[t] == "|"){
+
+                                                                        if (length(checked_l) == length(bfr)){
+
+                                                                                already <- 1
+
+                                                                                df_rtnl[i, I] <- rt_val
+
+                                                                        }
+
+                                                                }
+
+                                                        }else if (length(condition_l) == 1){
+
+                                                                df_rtnl[i, I] <- rt_val
+
+                                                        }else {
+
+                                                                if (conjunction_l[1] == "|"){
+
+                                                                        df_rtnl[i, I] <- rt_val
+
+                                                                        checked_l <- c()
+
+                                                                }
+
+                                                        }
+
+                                                }
+
+                                                if (t <= length(conjunction_l)){ 
+
+                                                        if (conjunction_l[t] == "|"){
+
+                                                                checked_l <- c()
+
+                                                                previous = t + 1 
+
+                                                        }
+
+                                                }
+
+                                        }
+
+                                        if (condition_l[t] == "<" & already == 0){
+
+                                                if (all(df[i, I] < unlist(val_l[t]))){
+
+                                                        checked_l <- append(checked_l, T)
+
+                                                        if (length(condition_l) > 1 & t > 1){
+
+                                                                bfr <- conjunction_l[previous:t]
+
+                                                                if (t == length(condition_l)){
+
+                                                                        if (length(checked_l) == length(bfr)){
+
+                                                                                already <- 1
+
+                                                                                df_rtnl[i, I] <- rt_val
+
+                                                                        }
+
+                                                                }else if (conjunction_l[t] == "|"){
+
+                                                                        if (length(checked_l) == length(bfr)){
+
+                                                                                already <- 1
+
+                                                                                df_rtnl[i, I] <- rt_val
+
+                                                                        }
+
+                                                                }
+
+                                                        }else if (length(condition_l) == 1){
+
+                                                                df_rtnl[i, I] <- rt_val
+
+                                                        }else {
+
+                                                                if (conjunction_l[1] == "|"){
+
+                                                                        df_rtnl[i, I] <- rt_val
+
+                                                                        checked_l <- c()
+
+                                                                }
+
+                                                        }
+
+                                                }
+
+                                                if (t <= length(conjunction_l)){ 
+
+                                                        if (conjunction_l[t] == "|"){
+
+                                                                checked_l <- c()
+
+                                                                previous = t + 1 
+
+                                                        }
+
+                                                }
+
+                                        }
+
+                                        if (condition_l[t] == "!=" & already == 0){
+
+                                                if (!(df[i, I] %in% unlist(val_l[t])) == T){
+
+                                                        checked_l <- append(checked_l, T)
+
+                                                        if (length(condition_l) > 1 & t > 1){
+
+                                                                bfr <- conjunction_l[previous:t]
+
+                                                                if (t == length(condition_l)){
+
+                                                                        if (length(checked_l) == length(bfr)){
+
+                                                                                already <- 1
+
+                                                                                df_rtnl[i, I] <- rt_val
+
+                                                                        }
+
+                                                                }else if (conjunction_l[t] == "|"){
+
+                                                                        if (length(checked_l) == length(bfr)){
+
+                                                                                already <- 1
+
+                                                                                df_rtnl[i, I] <- rt_val
+
+                                                                        }
+
+                                                                }
+
+                                                        }else if (length(condition_l) == 1){
+
+                                                                df_rtnl[i, I] <- rt_val
+
+                                                        }else {
+
+                                                                if (conjunction_l[1] == "|"){
+
+                                                                        df_rtnl[i, I] <- rt_val
+
+                                                                        checked_l <- c()
+
+                                                                }
+
+                                                        }
+
+                                                }
+
+                                                if (t <= length(conjunction_l)){ 
+
+                                                        if (conjunction_l[t] == "|"){
+
+                                                                checked_l <- c()
+
+                                                                previous = t + 1 
+
+                                                        }
+
+                                                }
+
+                                        }
+
+                                        if (condition_l[t] == "%%" & already == 0){
+
+                                                if (sum(df[i, I] %% unlist(val_l[t])) == 0){
+
+                                                        checked_l <- append(checked_l, T)
+
+                                                        if (length(condition_l) > 1 & t > 1){
+
+                                                                bfr <- conjunction_l[previous:t]
+
+                                                                if (t == length(condition_l)){
+
+                                                                        if (length(checked_l) == length(bfr)){
+
+                                                                                already <- 1
+
+                                                                                df_rtnl[i, I] <- rt_val
+
+                                                                        }
+
+                                                                }else if (conjunction_l[t] == "|"){
+
+                                                                        if (length(checked_l) == length(bfr)){
+
+                                                                                already <- 1
+
+                                                                                df_rtnl[i, I] <- rt_val
+
+                                                                        }
+
+                                                                }
+
+                                                        }else if (length(condition_l) == 1){
+
+                                                                df_rtnl[i, I] <- rt_val
+
+                                                        }else {
+
+                                                                if (conjunction_l[1] == "|"){
+
+                                                                        df_rtnl[i, I] <- rt_val
+
+                                                                        checked_l <- c()
+
+                                                                }
+
+                                                        }
+
+                                                }
+
+                                                if (t <= length(conjunction_l)){ 
+
+                                                        if (conjunction_l[t] == "|"){
+
+                                                                checked_l <- c()
+
+                                                                previous = t + 1 
+
+                                                        }
+
+                                                }
+
+                                        }
+
+                                }
+                                
+                        }
+
+                }
+
+          return(df_rtnl)
+
+        }
+              
+        rtn_df <- data.frame(matrix(nrow=nrow(inpt_df), ncol=ncol(inpt_df)))
+
+        for (I in 1:length(condition_lst)){
+
+                pre_df <- see_df(df=inpt_df, condition_l=unlist(condition_lst[I]), val_l=unlist(val_lst[I]), conjunction_l=unlist(conjunction_lst[I])) 
+
+                rtn_df <- nestr_df2(inptf_df=rtn_df, nestr_df=pre_df, rtn_pos=rtn_val_pos[I], rtn_neg=NA)  
+
+        }
+
+        return(rtn_df)
+
+}
+
 
 
