@@ -127,8 +127,8 @@ Argument      |Description
 `frmt`     |     is the format of the input date, (deault set to "snhdmy" (second, minute, hour, day, month, year), so all variable are taken in count), if you only want to work with standard date for example change this variable to "dmy"
 `sep_`     |     is the separator for the input date
 `sep_vec`     |     is the separator for the dates contained in vec
+`only_`     |     is can be changed to "+" or "-" to repectively only return the higher dates and the lower dates (default set to "both")
 `head`     |     is the number of dates that will be returned (default set to NA so all dates in vec will be returned)
-`only`     |     is can be changed to "+" or "-" to repectively only return the higher dates and the lower dates (default set to "both")
 
 
 # `cost_and_taxes`
@@ -499,7 +499,7 @@ fillr(inpt_v, ptrn_fill = "...\\d")
 Argument      |Description
 ------------- |----------------
 `inpt_v`     |     is the input vector
-`ptrtn_fill`     |     is the pattern used to detect where the function has to fill the vector by the last element n times. It defaults to "...\d" where "\d" is the regex for an int value. So this paramater has to have "\d" which designates n.
+`ptrn_fill`     |     is the pattern used to detect where the function has to fill the vector by the last element n times. It defaults to "...\d" where "\d" is the regex for an int value. So this paramater has to have "\d" which designates n.
 
 
 ## Examples
@@ -624,8 +624,11 @@ globe(lat_f, long_f, alt_f = NA, lat_n, long_n, alt_n = NA)
 Argument      |Description
 ------------- |----------------
 `lat_f`     |     is the latitude of the established geographical point
-`long_f`     |     is the altitude of the established geographical point, defaults to NA
-`lat_n`     |     is a vector containing the altitude of the set of points, defaults to NA
+`long_f`     |     is the longitude of the established geographical point
+`alt_f`     |     is the altitude of the established geographical point, defaults to NA
+`lat_n`     |     is a vector containing the latitude of the set of points
+`long_n`     |     is a vector containing the longitude of the set of points
+`alt_n`     |     is a vector containing the altitude of the set of points, defaults to NA
 
 
 ## Examples
@@ -778,9 +781,10 @@ match_n(vec, mc, n = 1, wnb = "#####")
 
 Argument      |Description
 ------------- |----------------
-`vec`     |     is th input vector mc is a vector containing the values you want to get the index for the nth occurence in vec
+`vec`     |     is th input vector
+`mc`     |     is a vector containing the values you want to get the index for the nth occurence in vec
+`n`     |     is the value of the occurence
 `wnb`     |     is a string you are sure is not in mc
-`is`     |     the value of the occurence
 
 
 # `match_n2`
@@ -804,7 +808,8 @@ match_n2(vec, mc, n, wnb = "#####")
 
 Argument      |Description
 ------------- |----------------
-`vec`     |     is th einput vector mc is a vector containing the values you want to get the index for the nth occurence in vec
+`vec`     |     is th einput vector
+`mc`     |     is a vector containing the values you want to get the index for the nth occurence in vec
 `n`     |     is a vector containing the occurences for each value in mc so if i have mc <- c(3, 27) and n <- c(1, 2), i want the first occurence for 3 and the second for 27 in vec. If the length of n is inferior of the length of mc, m will extend with its last value as new arguments. It means that if mc <- c(3, 27) but n <- c(1) so n will extend to c(1, 1), so we will get the first occurence of 3 and 27 in vec.
 `wnb`     |     is a string you are sure is not in mc
 
@@ -880,11 +885,11 @@ nestr_df1(inptf_df, inptt_pos_df, inpt_neg_df = NA, nestr_df, yes_val = T)
 
 Argument      |Description
 ------------- |----------------
+`inptf_df`     |     is the input dataframe (1b)
 `inptt_pos_df`     |     is the dataframe (2b) that corresponds to the (1a) values
 `inpt_neg_df`     |     is the dataframe (4b) that has the (3a) values, defaults to NA
 `nestr_df`     |     is the dataframe (2b) that has the special value (2a)
 `yes_val`     |     is the special value (2a)
-`inpt_df`     |     is the input dataframe (1b)
 
 
 ## Examples
@@ -918,11 +923,11 @@ nestr_df2(inptf_df, rtn_pos, rtn_neg = NA, nestr_df, yes_val = T)
 
 Argument      |Description
 ------------- |----------------
+`inptf_df`     |     is the input dataframe (1b)
 `rtn_pos`     |     is the special value (1a)
 `rtn_neg`     |     is the special value (3a)
 `nestr_df`     |     is the dataframe (2b)
 `yes_val`     |     is the special value (2a)
-`inpt_df`     |     is the input dataframe (1b)
 
 
 ## Examples
@@ -946,7 +951,7 @@ Allow to create patterns which have a part that is varying randomly each time.
 ## Usage
 
 ```r
-pattern_generator(base_, from_, lngth, hmn = 1, after = 1)
+pattern_generator(base_, from_, nb, hmn = 1, after = 1, sep = "")
 ```
 
 
@@ -955,9 +960,11 @@ pattern_generator(base_, from_, lngth, hmn = 1, after = 1)
 Argument      |Description
 ------------- |----------------
 `base_`     |     is the pattern that will be kept
-`from_`     |     is the vector from which the element of the varying part will be generated
+`from_`     |     is the vector from which the elements of the random part will be generated
+`nb`     |     is the number of random pattern chosen for the varying part
 `hmn`     |     is how many of varying pattern from the same base will be created
 `after`     |     is set to 1 by default, it means that the varying part will be after the fixed part, set to 0 if you want the varying part to be before
+`sep`     |     is the separator between all patterns in the returned value
 
 
 # `pattern_gettr`
@@ -1195,6 +1202,8 @@ Argument      |Description
 ------------- |----------------
 `v1`     |     is the first vector
 `v2`     |     is the second vector
+`exclude_val`     |     is a value you know is not present in the 2 vectors
+`no_more`     |     is a boolean that, if set to TRUE, will remove all the first found value in the second vector after those has been found. It defaults to FALSE.
 
 
 # `see_inside`
@@ -1219,11 +1228,11 @@ see_inside(pattern_, path_ = ".", sep_ = c(","), unique_sep = "#####", rec = F)
 
 Argument      |Description
 ------------- |----------------
+`pattern_`     |     is a vector containin the file extension of the spreadsheets ("xlsx", "csv"...)
+`path_`     |     is the path where are located the files
 `sep_`     |     is a vector containing the separator for each csv type file in order following the operating system file order, if the vector does not match the number of the csv files found, it will assume the separator for the rest of the files is the same as the last csv file found. It means that if you know the separator is the same for all the csv type files, you just have to put the separator once in the vector.
 `unique_sep`     |     is a pattern that you know will never be in your input files
 `rec`     |     alloaw to get files recursively If x is the return value, to see all the files name, position of the columns and possible sheet name associanted with, do the following:
-`pattern`     |     is a vector containin the file extension of the spreadsheets ("xlsx", "csv"...)
-`path`     |     is the path where are located the files
 
 
 ## Examples
@@ -1374,6 +1383,7 @@ Argument      |Description
 `vec_l`     |     is a list the vectors
 `coeff_`     |     is the related coefficient of the vector
 `strt_l`     |     is a vector containing the start position for each vector
+`distinct`     |     is a value you are sure is not in df_, defaults to "NA"
 
 
 # `vlookup_df`
