@@ -1411,7 +1411,7 @@ df_tuned <- function(df, val_to_stop, index_rc=NA, included="yes"){
 
 #' see_df
 #' 
-#' Allow to return a datafame with special value cells (ex: TRUE) where the condition entered are respected and another special value cell (ex: FALSE) where these are not
+#' Allow to return a dataframe with special value cells (ex: TRUE) where the condition entered are respected and another special value cell (ex: FALSE) where these are not
 #' @param df is the input dataframe
 #' @param condition_l is the vector of the possible conditions ("==", ">", "<", "!=", "%%") (equal, greater than, lower than, not equal to, is divisible by), you can put the same condition n times. 
 #' @param val_l is the list of vectors containing the values related to condition_l (so the vector of values has to be placed in the same order)
@@ -1420,10 +1420,6 @@ df_tuned <- function(df, val_to_stop, index_rc=NA, included="yes"){
 #' @param f_val is a special value cell returned when the conditions are not respected
 #' @details This function will return an error if number only comparative conditions are given in addition to having character values in the input dataframe.
 #' @export
-#' @examples 
-#' see_df(df, c("%%", "=="), list(c(2, 11), c(3)), list("|") 
-#' #will return all the values that are divisible by 2 and 11 
-#' #and all the values that are equal to 3 from the dataframe 
 
 see_df <- function(df, condition_l, val_l, conjunction_l=c(), rt_val=T, f_val=F){
 
@@ -2823,11 +2819,12 @@ see_file <- function(string_, index_ext=1, ext=T){
 #' @param path_ is the path where are located the files
 #' @param sep_ is a vector containing the separator for each csv type file in order following the operating system file order, if the vector does not match the number of the csv files found, it will assume the separator for the rest of the files is the same as the last csv file found. It means that if you know the separator is the same for all the csv type files, you just have to put the separator once in the vector.
 #' @param unique_sep is a pattern that you know will never be in your input files
-#' @param rec alloaw to get files recursively 
+#' @param rec is a boolean allows to get files recursively if set to TRUE, defaults to TRUE 
 #' If x is the return value, to see all the files name, position of the columns and possible sheet name associanted with, do the following: 
-#' @examples print(x[(grep(unique_sep, x)[1]+1):length(x)]). 
-#' If you just want to see the columns do the following: 
-#' @examples print(x[1:(grep(unique_sep, x) - 1)])
+#' Examples: 
+#' print(x[(grep(unique_sep, x)[1]+1):length(x)]) 
+#' #If you just want to see the columns do the following: 
+#' print(x[1:(grep(unique_sep, x) - 1)])
 #' @export
 
 see_inside <- function(pattern_, path_=".", sep_=c(","), unique_sep="#####", rec=F){
@@ -3232,8 +3229,9 @@ match_n <- function(vec, mc, n=1, wnb="#####"){
 #' @export
 #'
 #' @examples
+#'library("stringr")
 #' v <- c("2012-06-22", "2012-06-23", "2022-09-12", "2022")
-#' ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=T)
+#' ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=TRUE)
 
 ptrn_twkr <- function(inpt_l, depth="max", sep="-", 
                       default_val="0", add_sep=T){
@@ -3509,6 +3507,7 @@ ptrn_switchr <- function(inpt_l, f_idx_l=c(), t_idx_l=c(), sep="-", default_val=
 #' @param sep is the separator used to seprate the columns
 #' @export
 #' @examples 
+#' library("stringr")
 #' v <- c("aa-yy-uu", "zz-gg-hhh", "zz-gg-hhh", "zz-gg-hhh")
 #' v_to_df(inpt_v=v, sep="-")
 
@@ -3747,8 +3746,8 @@ geo_min <- function(inpt_df, established_df){
 #' @param yes_val is the special value (2a) 
 #' @export
 #' @examples
-#' nestr_df2(inpt_df=data.fame(c(1, 2, 1), c(1, 5, 7)), rtn_pos="yes", 
-#' rtn_neg="no", nestr_df=data.frame(c(T, F, T), c(F, F, T), yes_val=T)) 
+#' nestr_df2(inptf_df=data.frame(c(1, 2, 1), c(1, 5, 7)), rtn_pos="yes", 
+#' rtn_neg="no", nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE)), yes_val=TRUE) 
 
 nestr_df2 <- function(inptf_df, rtn_pos, rtn_neg=NA, nestr_df, yes_val=T){
 
@@ -3804,14 +3803,14 @@ nestr_df2 <- function(inptf_df, rtn_pos, rtn_neg=NA, nestr_df, yes_val=T){
 #' @param yes_val is the special value (2a)
 #' @export
 #' @examples
-#' nestr_df1(inpt_df=data.fame(c(1, 2, 1), c(1, 5, 7)), 
+#' nestr_df1(inptf_df=data.frame(c(1, 2, 1), c(1, 5, 7)), 
 #' inptt_pos_df=data.frame(c(4, 4, 3), c(2, 1, 2)), 
-#' inptt_pos_df=data.frame(c(44, 44, 33), c(12, 12, 12)), 
-#' nestr_df=data.frame(c(T, F, T), c(F, F, T), yes_val=T)) 
+#' inptt_neg_df=data.frame(c(44, 44, 33), c(12, 12, 12)), 
+#' nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE)), yes_val=TRUE) 
 
-nestr_df1 <- function(inptf_df, inptt_pos_df, inpt_neg_df=NA, nestr_df, yes_val=T){
+nestr_df1 <- function(inptf_df, inptt_pos_df, nestr_df, yes_val=T, inptt_neg_df=NA){
 
-        if (is.na(inpt_neg_df) == T){
+        if (all(is.na(inptt_neg_df)) == T){
 
                 for (I in 1:ncol(nestr_df)){
 

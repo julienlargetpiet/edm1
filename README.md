@@ -877,7 +877,7 @@ Allow to write a value (1a) to a dataframe (1b) to its cells that have the same 
 ## Usage
 
 ```r
-nestr_df1(inptf_df, inptt_pos_df, inpt_neg_df = NA, nestr_df, yes_val = T)
+nestr_df1(inptf_df, inptt_pos_df, nestr_df, yes_val = T, inptt_neg_df = NA)
 ```
 
 
@@ -887,18 +887,18 @@ Argument      |Description
 ------------- |----------------
 `inptf_df`     |     is the input dataframe (1b)
 `inptt_pos_df`     |     is the dataframe (2b) that corresponds to the (1a) values
-`inpt_neg_df`     |     is the dataframe (4b) that has the (3a) values, defaults to NA
 `nestr_df`     |     is the dataframe (2b) that has the special value (2a)
 `yes_val`     |     is the special value (2a)
+`inpt_neg_df`     |     is the dataframe (4b) that has the (3a) values, defaults to NA
 
 
 ## Examples
 
 ```r
-nestr_df1(inpt_df=data.fame(c(1, 2, 1), c(1, 5, 7)),
+nestr_df1(inptf_df=data.frame(c(1, 2, 1), c(1, 5, 7)),
 inptt_pos_df=data.frame(c(4, 4, 3), c(2, 1, 2)),
-inptt_pos_df=data.frame(c(44, 44, 33), c(12, 12, 12)),
-nestr_df=data.frame(c(T, F, T), c(F, F, T), yes_val=T))
+inptt_neg_df=data.frame(c(44, 44, 33), c(12, 12, 12)),
+nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE)), yes_val=TRUE)
 ```
 
 
@@ -933,8 +933,8 @@ Argument      |Description
 ## Examples
 
 ```r
-nestr_df2(inpt_df=data.fame(c(1, 2, 1), c(1, 5, 7)), rtn_pos="yes",
-rtn_neg="no", nestr_df=data.frame(c(T, F, T), c(F, F, T), yes_val=T))
+nestr_df2(inptf_df=data.frame(c(1, 2, 1), c(1, 5, 7)), rtn_pos="yes",
+rtn_neg="no", nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE)), yes_val=TRUE)
 ```
 
 
@@ -1105,8 +1105,9 @@ Argument      |Description
 ## Examples
 
 ```r
+library("stringr")
 v <- c("2012-06-22", "2012-06-23", "2022-09-12", "2022")
-ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=T)
+ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=TRUE)
 ```
 
 
@@ -1117,7 +1118,7 @@ see_df
 
 ## Description
 
-Allow to return a datafame with special value cells (ex: TRUE) where the condition entered are respected and another special value cell (ex: FALSE) where these are not
+Allow to return a dataframe with special value cells (ex: TRUE) where the condition entered are respected and another special value cell (ex: FALSE) where these are not
 
 
 ## Usage
@@ -1142,15 +1143,6 @@ Argument      |Description
 ## Details
 
 This function will return an error if number only comparative conditions are given in addition to having character values in the input dataframe.
-
-
-## Examples
-
-```r
-see_df(df, c("%%", "=="), list(c(2, 11), c(3)), list("|")
-#will return all the values that are divisible by 2 and 11
-#and all the values that are equal to 3 from the dataframe
-```
 
 
 # `see_file`
@@ -1232,16 +1224,7 @@ Argument      |Description
 `path_`     |     is the path where are located the files
 `sep_`     |     is a vector containing the separator for each csv type file in order following the operating system file order, if the vector does not match the number of the csv files found, it will assume the separator for the rest of the files is the same as the last csv file found. It means that if you know the separator is the same for all the csv type files, you just have to put the separator once in the vector.
 `unique_sep`     |     is a pattern that you know will never be in your input files
-`rec`     |     alloaw to get files recursively If x is the return value, to see all the files name, position of the columns and possible sheet name associanted with, do the following:
-
-
-## Examples
-
-```r
-print(x[(grep(unique_sep, x)[1]+1):length(x)]).
-If you just want to see the columns do the following:
-print(x[1:(grep(unique_sep, x) - 1)])
-```
+`rec`     |     is a boolean allows to get files recursively if set to TRUE, defaults to TRUE If x is the return value, to see all the files name, position of the columns and possible sheet name associanted with, do the following: Examples: print(x[(grep(unique_sep, x) [1](#1) +1):length(x)]) #If you just want to see the columns do the following: print(x [1:(grep(unique_sep, x) - 1)](#1:(grep(uniquesep,_x)_-_1)) )
 
 
 # `unique_pos`
@@ -1322,6 +1305,7 @@ Argument      |Description
 ## Examples
 
 ```r
+library("stringr")
 v <- c("aa-yy-uu", "zz-gg-hhh", "zz-gg-hhh", "zz-gg-hhh")
 v_to_df(inpt_v=v, sep="-")
 ```

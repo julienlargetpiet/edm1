@@ -21,6 +21,7 @@ ptrn_twkr(inpt_l, depth = "max", sep = "-", default_val = "0", add_sep = T)
 Allow to modify the pattern length of element in a vector according to arguments. What is here defined as a pattern is something like this xx-xx-xx or xx/xx/xxx... So it is defined by the separator
 }
 \examples{
+library("stringr")
 v <- c("2012-06-22", "2012-06-23", "2022-09-12", "2022")
-ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=T)
+ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=TRUE)
 }

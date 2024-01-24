@@ -4,25 +4,25 @@
 \alias{nestr_df1}
 \title{nestr_df1}
 \usage{
-nestr_df1(inptf_df, inptt_pos_df, inpt_neg_df = NA, nestr_df, yes_val = T)
+nestr_df1(inptf_df, inptt_pos_df, nestr_df, yes_val = T, inptt_neg_df = NA)
 }
 \arguments{
 \item{inptf_df}{is the input dataframe (1b)}
 
 \item{inptt_pos_df}{is the dataframe (2b) that corresponds to the (1a) values}
 
-\item{inpt_neg_df}{is the dataframe (4b) that has the (3a) values, defaults to NA}
-
 \item{nestr_df}{is the dataframe (2b) that has the special value (2a)}
 
 \item{yes_val}{is the special value (2a)}
+
+\item{inpt_neg_df}{is the dataframe (4b) that has the (3a) values, defaults to NA}
 }
 \description{
 Allow to write a value (1a) to a dataframe (1b) to its cells that have the same coordinates (row and column) than the cells whose value is equal to a another special value (2a), from another another dataframe (2b). The value (1a) depends of the cell  value coordinates of the third dataframe (3b). If a cell coordinates (1c) of the first dataframe (1b) do not correspond to the coordinates of a good returning cell value (2a) from the dataframe (2b), so this cell (1c) can have its value changed to the same cell coordinates value (3a) of a third dataframe (4b), if (4b) is not det to NA.
 }
 \examples{
-nestr_df1(inpt_df=data.fame(c(1, 2, 1), c(1, 5, 7)), 
+nestr_df1(inptf_df=data.frame(c(1, 2, 1), c(1, 5, 7)), 
 inptt_pos_df=data.frame(c(4, 4, 3), c(2, 1, 2)), 
-inptt_pos_df=data.frame(c(44, 44, 33), c(12, 12, 12)), 
-nestr_df=data.frame(c(T, F, T), c(F, F, T), yes_val=T)) 
+inptt_neg_df=data.frame(c(44, 44, 33), c(12, 12, 12)), 
+nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE)), yes_val=TRUE) 
 }

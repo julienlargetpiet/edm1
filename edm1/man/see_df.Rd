@@ -20,13 +20,8 @@ see_df(df, condition_l, val_l, conjunction_l = c(), rt_val = T, f_val = F)
 \item{f_val}{is a special value cell returned when the conditions are not respected}
 }
 \description{
-Allow to return a datafame with special value cells (ex: TRUE) where the condition entered are respected and another special value cell (ex: FALSE) where these are not
+Allow to return a dataframe with special value cells (ex: TRUE) where the condition entered are respected and another special value cell (ex: FALSE) where these are not
 }
 \details{
 This function will return an error if number only comparative conditions are given in addition to having character values in the input dataframe.
-}
-\examples{
-see_df(df, c("\%\%", "=="), list(c(2, 11), c(3)), list("|") 
-#will return all the values that are divisible by 2 and 11 
-#and all the values that are equal to 3 from the dataframe 
 }

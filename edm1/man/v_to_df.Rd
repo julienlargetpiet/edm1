@@ -15,6 +15,7 @@ v_to_df(inpt_v, sep = "-")
 Allow to convert a vector to a dataframe according to a separator.
 }
 \examples{
+library("stringr")
 v <- c("aa-yy-uu", "zz-gg-hhh", "zz-gg-hhh", "zz-gg-hhh")
 v_to_df(inpt_v=v, sep="-")
 }
