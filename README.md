@@ -1,20 +1,3 @@
-# edm1
-
-Is a set of tolls to help manage your data in R.
-
-# Installation
-
-For now it is not available in the CRAN mirrors, so the installation is from source only.
-
-1. `git clone https://github.com/iro0087/edm`
-2. `cd edm/edm1` (or with windows synthax)
-3. `R` got you in the R shell
-4. `install.packages("devtools")`
-5. `library("devtools")`
-6. `build()`
-7. `install()`
-8. Now you can import `edm1` like any other package with `library("edm1")`
-
 
 # `append_row`
 
@@ -235,7 +218,7 @@ Argument      |Description
 `output`     |     is the name of the output csv file
 `properties`     |     is linked to type_distri because it is the parameters ("min_val-max_val") for "random type", ("u-x") for the poisson distribution, ("u-d") for gaussian distribution
 `type_distri`     |     is a vector which, for each column, associate a type of distribution ("random", "poisson", "gaussian"), it meas that non only the number but also the length of the string will be randomly generated according to these distribution laws
-`str_source`     |     is the source (vector) from which the character creating random string are (defult set to the occidental alphabet)
+`str_source`     |     is the source (vector) from which the character creating random string are (default set to the occidental alphabet)
 `round_l`     |     is a vector which, for each column containing number, associate a round value
 `sep_`     |     is the separator used to write data in the csv
 
@@ -416,6 +399,32 @@ Argument      |Description
 `pattern_only`     |     will cover differences by pattern if overwritten is set to TRUE
 
 
+# `extrm_dates`
+
+extrm_dates
+
+
+## Description
+
+Allow to find the minimum or the maximum of a date in a vector. The format of dates is Year/Month/Day.
+
+
+## Usage
+
+```r
+extrm_dates(inpt_l, extrm = "min", sep = "-")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_l`     |     is the input vector
+`extrm`     |     is either "min" or "max", defaults to "min"
+`sep`     |     is the separator of the dates, defaults to "-"
+
+
 # `file_rec`
 
 file_rec
@@ -468,6 +477,38 @@ Argument      |Description
 `pathc`     |     is the reference path, from which depth value is equal to 1
 
 
+# `fillr`
+
+fillr
+
+
+## Description
+
+Allow to fill a vector by the last element n times
+
+
+## Usage
+
+```r
+fillr(inpt_v, ptrn_fill = "...\\d")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`ptrtn_fill`     |     is the pattern used to detect where the function has to fill the vector by the last element n times. It defaults to "...\d" where "\d" is the regex for an int value. So this paramater has to have "\d" which designates n.
+
+
+## Examples
+
+```r
+fillr(c("a", "b", "...3", "c"))
+```
+
+
 # `format_date`
 
 format_date
@@ -495,6 +536,48 @@ Argument      |Description
 `sep_out`     |     is the separator of the converted date (default is "-")
 
 
+# `geo_min`
+
+geo_min
+
+
+## Description
+
+Return a dataframe containing the nearest geographical points (row) according to established geographical points (column).
+
+
+## Usage
+
+```r
+geo_min(inpt_df, established_df)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_df`     |     is the input dataframe of the set of geographical points to be classified, its firts column is for latitude, the second for the longitude and the third, if exists, is for the altitude. Each point is one row.
+`established_df`     |     is the dataframe containing the coordiantes of the established geographical points
+
+
+## Examples
+
+```r
+in_ <- data.frame(c(11, 33, 55), c(113, -143, 167))
+
+in2_ <- data.frame(c(12, 55), c(115, 165))
+
+print(geo_min(inpt_df=in_, established_df=in2_))
+
+in_ <- data.frame(c(51, 23, 55), c(113, -143, 167), c(6, 5, 1))
+
+in2_ <- data.frame(c(12, 55), c(115, 165), c(2, 5))
+
+geo_min(inpt_df=in_, established_df=in2_)
+```
+
+
 # `get_rec`
 
 get_rec
@@ -517,6 +600,86 @@ get_rec(pathc = ".")
 Argument      |Description
 ------------- |----------------
 `pathc`     |     is the reference path example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
+
+
+# `globe`
+
+globe
+
+
+## Description
+
+Allow to calculate the distances between a set of geographical points and another established geographical point. If the altitude is not filled, so the result returned won't take in count the altitude.
+
+
+## Usage
+
+```r
+globe(lat_f, long_f, alt_f = NA, lat_n, long_n, alt_n = NA)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`lat_f`     |     is the latitude of the established geographical point
+`long_f`     |     is the altitude of the established geographical point, defaults to NA
+`lat_n`     |     is a vector containing the altitude of the set of points, defaults to NA
+
+
+## Examples
+
+```r
+globe(lat_f=23, long_f=112, alt_f=NA, lat_n=c(2, 82), long_n=c(165, -55), alt_n=NA)
+```
+
+
+# `groupr_df`
+
+groupr_df
+
+
+## Description
+
+Allow to create groups from a dataframe. Indeed, you can create conditions that lead to a flag value for each cell of the input dataframeaccording to the cell value. This function is based on see_df and nestr_df2 functions.
+
+
+## Usage
+
+```r
+groupr_df(inpt_df, condition_lst, val_lst, conjunction_lst, rtn_val_pos = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_df`     |     is the input dataframe
+`condition_lst`     |     is a list containing all the condition as a vector for each group
+`val_lst`     |     is a list containing all the values associated with condition_lst as a vector for each group
+`conjunction_lst`     |     is a list containing all the conjunctions associated with condition_lst and val_lst as a vector for each group
+`rtn_val_pos`     |     is a vector containing all the group flag value like this ex: c("flag1", "flag2", "flag3")
+
+
+## Examples
+
+```r
+interactive()
+df1 <- data.frame(c(1, 2, 1), c(45, 22, 88), c(44, 88, 33))
+
+val_lst <- list(list(c(1), c(1)), list(c(2)), list(c(44)))
+
+condition_lst <- list(c(">", "<"), c("%%"), c("=="))
+
+conjunction_lst <- list(c("|"), c(), c())
+
+rtn_val_pos <- c("+", "+", "+")
+
+groupr_df(inpt_df=df1, val_lst=val_lst, condition_lst=condition_lst,
+conjunction_lst=conjunction_lst, rtn_val_pos=rtn_val_pos)
+```
 
 
 # `insert_df`
@@ -696,6 +859,80 @@ Argument      |Description
 `x`     |     is the number of the column
 
 
+# `nestr_df1`
+
+nestr_df1
+
+
+## Description
+
+Allow to write a value (1a) to a dataframe (1b) to its cells that have the same coordinates (row and column) than the cells whose value is equal to a another special value (2a), from another another dataframe (2b). The value (1a) depends of the cell  value coordinates of the third dataframe (3b). If a cell coordinates (1c) of the first dataframe (1b) do not correspond to the coordinates of a good returning cell value (2a) from the dataframe (2b), so this cell (1c) can have its value changed to the same cell coordinates value (3a) of a third dataframe (4b), if (4b) is not det to NA.
+
+
+## Usage
+
+```r
+nestr_df1(inptf_df, inptt_pos_df, inpt_neg_df = NA, nestr_df, yes_val = T)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inptt_pos_df`     |     is the dataframe (2b) that corresponds to the (1a) values
+`inpt_neg_df`     |     is the dataframe (4b) that has the (3a) values, defaults to NA
+`nestr_df`     |     is the dataframe (2b) that has the special value (2a)
+`yes_val`     |     is the special value (2a)
+`inpt_df`     |     is the input dataframe (1b)
+
+
+## Examples
+
+```r
+nestr_df1(inpt_df=data.fame(c(1, 2, 1), c(1, 5, 7)),
+inptt_pos_df=data.frame(c(4, 4, 3), c(2, 1, 2)),
+inptt_pos_df=data.frame(c(44, 44, 33), c(12, 12, 12)),
+nestr_df=data.frame(c(T, F, T), c(F, F, T), yes_val=T))
+```
+
+
+# `nestr_df2`
+
+nestr_df2
+
+
+## Description
+
+Allow to write a special value (1a) in the cells of a dataframe (1b) that correspond (row and column) to whose of another dataframe (2b) that return another special value (2a). The cells whose coordinates do not match the coordinates of the dataframe (2b), another special value can be written (3a) if not set to NA.
+
+
+## Usage
+
+```r
+nestr_df2(inptf_df, rtn_pos, rtn_neg = NA, nestr_df, yes_val = T)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`rtn_pos`     |     is the special value (1a)
+`rtn_neg`     |     is the special value (3a)
+`nestr_df`     |     is the dataframe (2b)
+`yes_val`     |     is the special value (2a)
+`inpt_df`     |     is the input dataframe (1b)
+
+
+## Examples
+
+```r
+nestr_df2(inpt_df=data.fame(c(1, 2, 1), c(1, 5, 7)), rtn_pos="yes",
+rtn_neg="no", nestr_df=data.frame(c(T, F, T), c(F, F, T), yes_val=T))
+```
+
+
 # `pattern_generator`
 
 pattern_generator
@@ -792,6 +1029,80 @@ Argument      |Description
 `rg`     |     is a vector with two parameters (index of the first letter that will be replaced, index of the last letter that will be replaced) default is set to all the letters from the source pattern
 
 
+# `ptrn_switchr`
+
+ptrn_switchr
+
+
+## Description
+
+Allow to switch, copy pattern for each element in a vector. Here a pattern is the values that are separated by a same separator. Example: "xx-xxx-xx" or "xx/xx/xxxx". The xx like values can be swicthed or copied from whatever index to whatever index. Here, the index is like this 1-2-3 etcetera, it is relative of the separator.
+
+
+## Usage
+
+```r
+ptrn_switchr(inpt_l, f_idx_l = c(), t_idx_l = c(), sep = "-", default_val = NA)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_l`     |     is the input vector
+`f_idx_l`     |     is a vector containing the indexes of the pattern you want to be altered.
+`t_idx_l`     |     is a vector containing the indexes to which the indexes in f_idx_l are related.
+`sep`     |     is the separator, defaults to "-"
+`default_val`     |     is the default value , if not set to NA, of the pattern at the indexes in f_idx_l. If it is not set to NA, you do not need to fill t_idx_l because this is the vector containing the indexes of the patterns that will be set as new values relatively to the indexes in f_idx_l. Defaults to NA.
+
+
+## Examples
+
+```r
+ptrn_switchr(inpt_l=c("2022-01-11", "2022-01-14", "2022-01-21",
+"2022-01-01"), f_idx_l=c(1, 2, 3), t_idx_l=c(3, 2, 1))
+ptrn_switchr(inpt_l=c("2022-01-11", "2022-01-14", "2022-01-21",
+"2022-01-01"), f_idx_l=c(1), default_val="ee")
+```
+
+
+# `ptrn_twkr`
+
+ptrn_twkr
+
+
+## Description
+
+Allow to modify the pattern length of element in a vector according to arguments. What is here defined as a pattern is something like this xx-xx-xx or xx/xx/xxx... So it is defined by the separator
+
+
+## Usage
+
+```r
+ptrn_twkr(inpt_l, depth = "max", sep = "-", default_val = "0", add_sep = T)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_l`     |     is the input vector
+`depth`     |     is the number (numeric) of separator it will keep as a result. To keep the number of separator of the element that has the minimum amount of separator do depth="min" and depth="max" (character) for the opposite. This value defaults to "max".
+`sep`     |     is the separator of the pattern, defaults to "-"
+`default_val`     |     is the default val that will be placed between the separator, defaults to "00"
+`add_sep`     |     defaults to TRUE. If set to FALSE, it will remove the separator for the patterns that are included in the interval between the depth amount of separator and the actual number of separator of the element.
+
+
+## Examples
+
+```r
+v <- c("2012-06-22", "2012-06-23", "2022-09-12", "2022")
+ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=T)
+```
+
+
 # `see_df`
 
 see_df
@@ -799,7 +1110,7 @@ see_df
 
 ## Description
 
-Allow to return a datafame with TRUE cells where the condition entered are respected and FALSE where these are not
+Allow to return a datafame with special value cells (ex: TRUE) where the condition entered are respected and another special value cell (ex: FALSE) where these are not
 
 
 ## Usage
@@ -814,15 +1125,24 @@ see_df(df, condition_l, val_l, conjunction_l = c(), rt_val = T, f_val = F)
 Argument      |Description
 ------------- |----------------
 `df`     |     is the input dataframe
-`condition_l`     |     is the vector of the possible conditions ("==", ">", "<", "!=", "%%", "%%r") (equal, greater than, lower than, not equal to, is divisible by, divides), you can put the same condition n times.
+`condition_l`     |     is the vector of the possible conditions ("==", ">", "<", "!=", "%%") (equal, greater than, lower than, not equal to, is divisible by), you can put the same condition n times.
 `val_l`     |     is the list of vectors containing the values related to condition_l (so the vector of values has to be placed in the same order)
 `conjunction_l`     |     contains the | or & conjunctions, so if the length of condition_l is equal to 3, there will be 2 conjunctions. If the length of conjunction_l is inferior to the length of condition_l minus 1, conjunction_l will match its goal length value with its last argument as the last arguments. For example, c("&", "|", "&") with a goal length value of 5 --> c("&", "|", "&", "&", "&")
+`rt_val`     |     is a special value cell returned when the conditions are respected
+`f_val`     |     is a special value cell returned when the conditions are not respected
+
+
+## Details
+
+This function will return an error if number only comparative conditions are given in addition to having character values in the input dataframe.
 
 
 ## Examples
 
 ```r
-see_df(df, c("%%", "=="), list(c(2, 11), c(3)), list("|") will return all the values that are divisible by 2 and 11 and all the values that are equal to 3 from the dataframe
+see_df(df, c("%%", "=="), list(c(2, 11), c(3)), list("|")
+#will return all the values that are divisible by 2 and 11
+#and all the values that are equal to 3 from the dataframe
 ```
 
 
@@ -918,13 +1238,11 @@ print(x[1:(grep(unique_sep, x) - 1)])
 # `unique_pos`
 
 unique_pos
- Allow to find indexes of the unique values from a vector.
 
 
 ## Description
 
-unique_pos
- Allow to find indexes of the unique values from a vector.
+Allow to find indexes of the unique values from a vector.
 
 
 ## Usage
@@ -965,6 +1283,39 @@ Argument      |Description
 ------------- |----------------
 `vec1`     |     is the input vector
 `goal`     |     is the length to reach
+
+
+# `v_to_df`
+
+v_to_df
+
+
+## Description
+
+Allow to convert a vector to a dataframe according to a separator.
+
+
+## Usage
+
+```r
+v_to_df(inpt_v, sep = "-")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`sep`     |     is the separator used to seprate the columns
+
+
+## Examples
+
+```r
+v <- c("aa-yy-uu", "zz-gg-hhh", "zz-gg-hhh", "zz-gg-hhh")
+v_to_df(inpt_v=v, sep="-")
+```
 
 
 # `val_replacer`
