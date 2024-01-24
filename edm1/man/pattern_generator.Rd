@@ -4,16 +4,20 @@
 \alias{pattern_generator}
 \title{pattern_generator}
 \usage{
-pattern_generator(base_, from_, lngth, hmn = 1, after = 1)
+pattern_generator(base_, from_, nb, hmn = 1, after = 1, sep = "")
 }
 \arguments{
 \item{base_}{is the pattern that will be kept}
 
-\item{from_}{is the vector from which the element of the varying part will be generated}
+\item{from_}{is the vector from which the elements of the random part will be generated}
+
+\item{nb}{is the number of random pattern chosen for the varying part}
 
 \item{hmn}{is how many of varying pattern from the same base will be created}
 
 \item{after}{is set to 1 by default, it means that the varying part will be after the fixed part, set to 0 if you want the varying part to be before}
+
+\item{sep}{is the separator between all patterns in the returned value}
 }
 \description{
 Allow to create patterns which have a part that is varying randomly each time.

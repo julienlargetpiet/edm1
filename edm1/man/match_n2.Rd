@@ -7,8 +7,9 @@
 match_n2(vec, mc, n, wnb = "#####")
 }
 \arguments{
-\item{vec}{is th einput vector
-mc is a vector containing the values you want to get the index for the nth occurence in vec}
+\item{vec}{is th einput vector}
+
+\item{mc}{is a vector containing the values you want to get the index for the nth occurence in vec}
 
 \item{n}{is a vector containing the occurences for each value in mc so if i have mc <- c(3, 27) and n <- c(1, 2), i want the first occurence for 3 and the second for 27 in vec. If the length of n is inferior of the length of mc, m will extend with its last value as new arguments. It means that if mc <- c(3, 27) but n <- c(1) so n will extend to c(1, 1), so we will get the first occurence of 3 and 27 in vec.}
 

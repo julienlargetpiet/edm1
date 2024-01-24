@@ -9,9 +9,15 @@ globe(lat_f, long_f, alt_f = NA, lat_n, long_n, alt_n = NA)
 \arguments{
 \item{lat_f}{is the latitude of the established geographical point}
 
-\item{long_f}{is the altitude of the established geographical point, defaults to NA}
+\item{long_f}{is the longitude of the established geographical point}
 
-\item{lat_n}{is a vector containing the altitude of the set of points, defaults to NA}
+\item{alt_f}{is the altitude of the established geographical point, defaults to NA}
+
+\item{lat_n}{is a vector containing the latitude of the set of points}
+
+\item{long_n}{is a vector containing the longitude of the set of points}
+
+\item{alt_n}{is a vector containing the altitude of the set of points, defaults to NA}
 }
 \description{
 Allow to calculate the distances between a set of geographical points and another established geographical point. If the altitude is not filled, so the result returned won't take in count the altitude.

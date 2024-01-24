@@ -7,16 +7,16 @@
 see_inside(pattern_, path_ = ".", sep_ = c(","), unique_sep = "#####", rec = F)
 }
 \arguments{
+\item{pattern_}{is a vector containin the file extension of the spreadsheets ("xlsx", "csv"...)}
+
+\item{path_}{is the path where are located the files}
+
 \item{sep_}{is a vector containing the separator for each csv type file in order following the operating system file order, if the vector does not match the number of the csv files found, it will assume the separator for the rest of the files is the same as the last csv file found. It means that if you know the separator is the same for all the csv type files, you just have to put the separator once in the vector.}
 
 \item{unique_sep}{is a pattern that you know will never be in your input files}
 
 \item{rec}{alloaw to get files recursively
 If x is the return value, to see all the files name, position of the columns and possible sheet name associanted with, do the following:}
-
-\item{pattern}{is a vector containin the file extension of the spreadsheets ("xlsx", "csv"...)}
-
-\item{path}{is the path where are located the files}
 }
 \description{
 Return a list containing all the column of the files in the current directory with a chosen file extension and its associated file and sheet if xlsx. For example if i have 2 files "out.csv" with 2 columns and "out.xlsx" with 1 column for its first sheet and 2 for its second one, the return will look like this:

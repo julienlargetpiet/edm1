@@ -180,12 +180,14 @@ insert_df <- function(df_in, df_ins, ins_loc){
 #'
 #' Allow to create patterns which have a part that is varying randomly each time.
 #' @param base_ is the pattern that will be kept
-#' @param from_ is the vector from which the element of the varying part will be generated
+#' @param from_ is the vector from which the elements of the random part will be generated
 #' @param hmn is how many of varying pattern from the same base will be created
 #' @param after is set to 1 by default, it means that the varying part will be after the fixed part, set to 0 if you want the varying part to be before 
+#' @param nb is the number of random pattern chosen for the varying part
+#' @param sep is the separator between all patterns in the returned value
 #' @export
 
-pattern_generator <- function(base_, from_, lngth, hmn=1, after=1){
+pattern_generator <- function(base_, from_, nb, hmn=1, after=1, sep=""){
   
   rtnl <- c()
   
@@ -195,7 +197,7 @@ pattern_generator <- function(base_, from_, lngth, hmn=1, after=1){
   
   for (I in 1:hmn){
     
-    for (i in 1:lngth){
+    for (i in 1:nb){
       
       idx <- round(runif(1, 1, length(from_)), 0)
       
@@ -211,7 +213,7 @@ pattern_generator <- function(base_, from_, lngth, hmn=1, after=1){
       
     }
     
-    base_ <- stri_paste(base_, collapse="")
+    base_ <- stri_paste(base_, collapse=sep)
     
     rtnl <- append(rtnl, base_)
     
@@ -1884,6 +1886,7 @@ days_from_month <- function(date_, sep_){
 #' @param vec_l is a list the vectors
 #' @param coeff_ is the related coefficient of the vector
 #' @param strt_l is a vector containing the start position for each vector
+#' @param distinct is a value you are sure is not in df_, defaults to "NA" 
 #' @export
 
 vec_in_df <- function(df_, vec_l, coeff_, strt_l, distinct="NA"){
@@ -2040,7 +2043,7 @@ vec_in_df <- function(df_, vec_l, coeff_, strt_l, distinct="NA"){
 #' if you only want to work with standard date for example change this variable to "dmy"
 #' @param sep_ is the separator for the input date
 #' @param sep_vec is the separator for the dates contained in vec
-#' @param only is can be changed to "+" or "-" to repectively only return the higher dates and the lower dates (default set to "both")
+#' @param only_ is can be changed to "+" or "-" to repectively only return the higher dates and the lower dates (default set to "both")
 #' @param head is the number of dates that will be returned (default set to NA so all dates in vec will be returned)
 #' @export
 
@@ -2816,8 +2819,8 @@ see_file <- function(string_, index_ext=1, ext=T){
 #'
 #' Return a list containing all the column of the files in the current directory with a chosen file extension and its associated file and sheet if xlsx. For example if i have 2 files "out.csv" with 2 columns and "out.xlsx" with 1 column for its first sheet and 2 for its second one, the return will look like this:
 #' c(column_1, column_2, column_3, column_4, column_5, unique_separator, "1-2-out.csv", "3-3-sheet_1-out.xlsx", 4-5-sheet_2-out.xlsx)
-#' @param pattern is a vector containin the file extension of the spreadsheets ("xlsx", "csv"...)
-#' @param path is the path where are located the files
+#' @param pattern_ is a vector containin the file extension of the spreadsheets ("xlsx", "csv"...)
+#' @param path_ is the path where are located the files
 #' @param sep_ is a vector containing the separator for each csv type file in order following the operating system file order, if the vector does not match the number of the csv files found, it will assume the separator for the rest of the files is the same as the last csv file found. It means that if you know the separator is the same for all the csv type files, you just have to put the separator once in the vector.
 #' @param unique_sep is a pattern that you know will never be in your input files
 #' @param rec alloaw to get files recursively 
@@ -2933,6 +2936,8 @@ val_replacer <- function(df, val_replaced, val_replacor=T, df_rpt=NA){
 #' Allow to find the indexes of the elements of the first vector in the second. If the element(s) is not found, the element returned at the same index will be "FALSE".
 #' @param v1 is the first vector
 #' @param v2 is the second vector
+#' @param exclude_val is a value you know is not present in the 2 vectors
+#' @param no_more is a boolean that, if set to TRUE, will remove all the first found value in the second vector after those has been found. It defaults to FALSE. 
 #' @export
 
 see_idx <- function(v1, v2, exclude_val="######", no_more=F){
@@ -2943,11 +2948,11 @@ see_idx <- function(v1, v2, exclude_val="######", no_more=F){
 
     if (length(grep(v1[i], v2)) > 0){
 
-            r_idx <- paste(r_idx, collapse="-")
+            r_idx <- match(v1[i], v2)
 
     }else{
 
-            r_idx <- F
+            r_idx <- "F"
 
     }
 
@@ -3169,7 +3174,7 @@ list_files <- function(patternc, pathc="."){
 #'
 #' Allow to get the indexes for the nth occurence of a value in a vector. Example: c(1, 2, 3, 1, 2), the first occurence of 1 and 2 is at index 1 and 2 respectively, but the second occurence is respectively at the 4th and 5th index.
 #' @param vec is th einput vector
-#' mc is a vector containing the values you want to get the index for the nth occurence in vec
+#' @param mc is a vector containing the values you want to get the index for the nth occurence in vec
 #' @param n is a vector containing the occurences for each value in mc so if i have mc <- c(3, 27) and n <- c(1, 2), i want the first occurence for 3 and the second for 27 in vec. If the length of n is inferior of the length of mc, m will extend with its last value as new arguments. It means that if mc <- c(3, 27) but n <- c(1) so n will extend to c(1, 1), so we will get the first occurence of 3 and 27 in vec. 
 #' @param wnb is a string you are sure is not in mc
 #' @export
@@ -3198,8 +3203,8 @@ match_n2 <- function(vec, mc, n, wnb="#####"){
 #'
 #' Allow to get the indexes for the nth occurence of a value in a vector. Example: c(1, 2, 3, 1, 2), the first occurence of 1 and 2 is at index 1 and 2 respectively, but the second occurence is respectively at the 4th and 5th index.
 #' @param vec is th input vector
-#' mc is a vector containing the values you want to get the index for the nth occurence in vec
-#' @param is the value of the occurence
+#' @param mc is a vector containing the values you want to get the index for the nth occurence in vec
+#' @param n is the value of the occurence
 #' @param wnb is a string you are sure is not in mc
 #' @export
 
@@ -3401,7 +3406,7 @@ extrm_dates <- function(inpt_l, extrm="min", sep="-"){
 #' 
 #' Allow to fill a vector by the last element n times
 #' @param inpt_v is the input vector
-#' @param ptrtn_fill is the pattern used to detect where the function has to fill the vector by the last element n times. It defaults to "...\\d" where "\\d" is the regex for an int value. So this paramater has to have "\\d" which designates n.
+#' @param ptrn_fill is the pattern used to detect where the function has to fill the vector by the last element n times. It defaults to "...\\d" where "\\d" is the regex for an int value. So this paramater has to have "\\d" which designates n.
 #' @export
 #' @examples
 #' fillr(c("a", "b", "...3", "c"))
@@ -3545,10 +3550,10 @@ v_to_df <- function(inpt_v, sep="-"){
 #' Allow to calculate the distances between a set of geographical points and another established geographical point. If the altitude is not filled, so the result returned won't take in count the altitude.
 #' @param lat_f is the latitude of the established geographical point
 #' @param long_f is the longitude of the established geographical point
-#' @param long_f is the altitude of the established geographical point, defaults to NA
+#' @param alt_f is the altitude of the established geographical point, defaults to NA
 #' @param lat_n is a vector containing the latitude of the set of points
-#' @param lat_n is a vector containing the longitude of the set of points
-#' @param lat_n is a vector containing the altitude of the set of points, defaults to NA
+#' @param long_n is a vector containing the longitude of the set of points
+#' @param alt_n is a vector containing the altitude of the set of points, defaults to NA
 #' @export
 #' @examples
 #' globe(lat_f=23, long_f=112, alt_f=NA, lat_n=c(2, 82), long_n=c(165, -55), alt_n=NA) 
@@ -3735,7 +3740,7 @@ geo_min <- function(inpt_df, established_df){
 #' nestr_df2
 #'
 #' Allow to write a special value (1a) in the cells of a dataframe (1b) that correspond (row and column) to whose of another dataframe (2b) that return another special value (2a). The cells whose coordinates do not match the coordinates of the dataframe (2b), another special value can be written (3a) if not set to NA. 
-#' @param inpt_df is the input dataframe (1b)
+#' @param inptf_df is the input dataframe (1b)
 #' @param rtn_pos is the special value (1a)
 #' @param rtn_neg is the special value (3a) 
 #' @param nestr_df is the dataframe (2b)
@@ -3792,7 +3797,7 @@ nestr_df2 <- function(inptf_df, rtn_pos, rtn_neg=NA, nestr_df, yes_val=T){
 #' nestr_df1
 #'
 #' Allow to write a value (1a) to a dataframe (1b) to its cells that have the same coordinates (row and column) than the cells whose value is equal to a another special value (2a), from another another dataframe (2b). The value (1a) depends of the cell  value coordinates of the third dataframe (3b). If a cell coordinates (1c) of the first dataframe (1b) do not correspond to the coordinates of a good returning cell value (2a) from the dataframe (2b), so this cell (1c) can have its value changed to the same cell coordinates value (3a) of a third dataframe (4b), if (4b) is not det to NA.
-#' @param inpt_df is the input dataframe (1b)
+#' @param inptf_df is the input dataframe (1b)
 #' @param inptt_pos_df is the dataframe (2b) that corresponds to the (1a) values
 #' @param inpt_neg_df is the dataframe (4b) that has the (3a) values, defaults to NA
 #' @param nestr_df is the dataframe (2b) that has the special value (2a)

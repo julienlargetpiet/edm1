@@ -14,6 +14,8 @@ vec_in_df(df_, vec_l, coeff_, strt_l, distinct = "NA")
 \item{coeff_}{is the related coefficient of the vector}
 
 \item{strt_l}{is a vector containing the start position for each vector}
+
+\item{distinct}{is a value you are sure is not in df_, defaults to "NA"}
 }
 \description{
 Allow to see if vectors are present in a dataframe

@@ -7,6 +7,8 @@
 nestr_df2(inptf_df, rtn_pos, rtn_neg = NA, nestr_df, yes_val = T)
 }
 \arguments{
+\item{inptf_df}{is the input dataframe (1b)}
+
 \item{rtn_pos}{is the special value (1a)}
 
 \item{rtn_neg}{is the special value (3a)}
@@ -14,8 +16,6 @@ nestr_df2(inptf_df, rtn_pos, rtn_neg = NA, nestr_df, yes_val = T)
 \item{nestr_df}{is the dataframe (2b)}
 
 \item{yes_val}{is the special value (2a)}
-
-\item{inpt_df}{is the input dataframe (1b)}
 }
 \description{
 Allow to write a special value (1a) in the cells of a dataframe (1b) that correspond (row and column) to whose of another dataframe (2b) that return another special value (2a). The cells whose coordinates do not match the coordinates of the dataframe (2b), another special value can be written (3a) if not set to NA.

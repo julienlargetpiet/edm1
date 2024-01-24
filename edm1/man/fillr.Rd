@@ -9,7 +9,7 @@ fillr(inpt_v, ptrn_fill = "...\\\\d")
 \arguments{
 \item{inpt_v}{is the input vector}
 
-\item{ptrtn_fill}{is the pattern used to detect where the function has to fill the vector by the last element n times. It defaults to "...\\d" where "\\d" is the regex for an int value. So this paramater has to have "\\d" which designates n.}
+\item{ptrn_fill}{is the pattern used to detect where the function has to fill the vector by the last element n times. It defaults to "...\\d" where "\\d" is the regex for an int value. So this paramater has to have "\\d" which designates n.}
 }
 \description{
 Allow to fill a vector by the last element n times

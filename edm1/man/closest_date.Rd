@@ -26,9 +26,9 @@ if you only want to work with standard date for example change this variable to 
 
 \item{sep_vec}{is the separator for the dates contained in vec}
 
-\item{head}{is the number of dates that will be returned (default set to NA so all dates in vec will be returned)}
+\item{only_}{is can be changed to "+" or "-" to repectively only return the higher dates and the lower dates (default set to "both")}
 
-\item{only}{is can be changed to "+" or "-" to repectively only return the higher dates and the lower dates (default set to "both")}
+\item{head}{is the number of dates that will be returned (default set to NA so all dates in vec will be returned)}
 }
 \description{
 return the closest dates from a vector compared to the input date

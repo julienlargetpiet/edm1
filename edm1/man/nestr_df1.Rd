@@ -7,6 +7,8 @@
 nestr_df1(inptf_df, inptt_pos_df, inpt_neg_df = NA, nestr_df, yes_val = T)
 }
 \arguments{
+\item{inptf_df}{is the input dataframe (1b)}
+
 \item{inptt_pos_df}{is the dataframe (2b) that corresponds to the (1a) values}
 
 \item{inpt_neg_df}{is the dataframe (4b) that has the (3a) values, defaults to NA}
@@ -14,8 +16,6 @@ nestr_df1(inptf_df, inptt_pos_df, inpt_neg_df = NA, nestr_df, yes_val = T)
 \item{nestr_df}{is the dataframe (2b) that has the special value (2a)}
 
 \item{yes_val}{is the special value (2a)}
-
-\item{inpt_df}{is the input dataframe (1b)}
 }
 \description{
 Allow to write a value (1a) to a dataframe (1b) to its cells that have the same coordinates (row and column) than the cells whose value is equal to a another special value (2a), from another another dataframe (2b). The value (1a) depends of the cell  value coordinates of the third dataframe (3b). If a cell coordinates (1c) of the first dataframe (1b) do not correspond to the coordinates of a good returning cell value (2a) from the dataframe (2b), so this cell (1c) can have its value changed to the same cell coordinates value (3a) of a third dataframe (4b), if (4b) is not det to NA.

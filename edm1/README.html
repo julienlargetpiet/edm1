@@ -254,13 +254,13 @@ if you only want to work with standard date for example change this variable to 
 <td>
 <p>is the separator for the dates contained in vec</p>
 </td></tr>
+<tr><td><code id="closest_date_:_only_">only_</code></td>
+<td>
+<p>is can be changed to &quot;+&quot; or &quot;-&quot; to repectively only return the higher dates and the lower dates (default set to &quot;both&quot;)</p>
+</td></tr>
 <tr><td><code id="closest_date_:_head">head</code></td>
 <td>
 <p>is the number of dates that will be returned (default set to NA so all dates in vec will be returned)</p>
-</td></tr>
-<tr><td><code id="closest_date_:_only">only</code></td>
-<td>
-<p>is can be changed to &quot;+&quot; or &quot;-&quot; to repectively only return the higher dates and the lower dates (default set to &quot;both&quot;)</p>
 </td></tr>
 </table>
 
@@ -1008,7 +1008,7 @@ function processMathHTML() {
 <td>
 <p>is the input vector</p>
 </td></tr>
-<tr><td><code id="fillr_:_ptrtn_fill">ptrtn_fill</code></td>
+<tr><td><code id="fillr_:_ptrn_fill">ptrn_fill</code></td>
 <td>
 <p>is the pattern used to detect where the function has to fill the vector by the last element n times. It defaults to &quot;...\d&quot; where &quot;\d&quot; is the regex for an int value. So this paramater has to have &quot;\d&quot; which designates n.</p>
 </td></tr>
@@ -1229,9 +1229,21 @@ function processMathHTML() {
 </td></tr>
 <tr><td><code id="globe_:_long_f">long_f</code></td>
 <td>
+<p>is the longitude of the established geographical point</p>
+</td></tr>
+<tr><td><code id="globe_:_alt_f">alt_f</code></td>
+<td>
 <p>is the altitude of the established geographical point, defaults to NA</p>
 </td></tr>
 <tr><td><code id="globe_:_lat_n">lat_n</code></td>
+<td>
+<p>is a vector containing the latitude of the set of points</p>
+</td></tr>
+<tr><td><code id="globe_:_long_n">long_n</code></td>
+<td>
+<p>is a vector containing the longitude of the set of points</p>
+</td></tr>
+<tr><td><code id="globe_:_alt_n">alt_n</code></td>
 <td>
 <p>is a vector containing the altitude of the set of points, defaults to NA</p>
 </td></tr>
@@ -1505,8 +1517,11 @@ function processMathHTML() {
 <table>
 <tr><td><code id="match_n2_:_vec">vec</code></td>
 <td>
-<p>is th einput vector
-mc is a vector containing the values you want to get the index for the nth occurence in vec</p>
+<p>is th einput vector</p>
+</td></tr>
+<tr><td><code id="match_n2_:_mc">mc</code></td>
+<td>
+<p>is a vector containing the values you want to get the index for the nth occurence in vec</p>
 </td></tr>
 <tr><td><code id="match_n2_:_n">n</code></td>
 <td>
@@ -1558,16 +1573,19 @@ function processMathHTML() {
 <table>
 <tr><td><code id="match_n_:_vec">vec</code></td>
 <td>
-<p>is th input vector
-mc is a vector containing the values you want to get the index for the nth occurence in vec</p>
+<p>is th input vector</p>
+</td></tr>
+<tr><td><code id="match_n_:_mc">mc</code></td>
+<td>
+<p>is a vector containing the values you want to get the index for the nth occurence in vec</p>
+</td></tr>
+<tr><td><code id="match_n_:_n">n</code></td>
+<td>
+<p>is the value of the occurence</p>
 </td></tr>
 <tr><td><code id="match_n_:_wnb">wnb</code></td>
 <td>
 <p>is a string you are sure is not in mc</p>
-</td></tr>
-<tr><td><code id="match_n_:_is">is</code></td>
-<td>
-<p>the value of the occurence</p>
 </td></tr>
 </table>
 
@@ -1702,6 +1720,10 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
+<tr><td><code id="nestr_df1_:_inptf_df">inptf_df</code></td>
+<td>
+<p>is the input dataframe (1b)</p>
+</td></tr>
 <tr><td><code id="nestr_df1_:_inptt_pos_df">inptt_pos_df</code></td>
 <td>
 <p>is the dataframe (2b) that corresponds to the (1a) values</p>
@@ -1717,10 +1739,6 @@ function processMathHTML() {
 <tr><td><code id="nestr_df1_:_yes_val">yes_val</code></td>
 <td>
 <p>is the special value (2a)</p>
-</td></tr>
-<tr><td><code id="nestr_df1_:_inpt_df">inpt_df</code></td>
-<td>
-<p>is the input dataframe (1b)</p>
 </td></tr>
 </table>
 
@@ -1771,6 +1789,10 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
+<tr><td><code id="nestr_df2_:_inptf_df">inptf_df</code></td>
+<td>
+<p>is the input dataframe (1b)</p>
+</td></tr>
 <tr><td><code id="nestr_df2_:_rtn_pos">rtn_pos</code></td>
 <td>
 <p>is the special value (1a)</p>
@@ -1786,10 +1808,6 @@ function processMathHTML() {
 <tr><td><code id="nestr_df2_:_yes_val">yes_val</code></td>
 <td>
 <p>is the special value (2a)</p>
-</td></tr>
-<tr><td><code id="nestr_df2_:_inpt_df">inpt_df</code></td>
-<td>
-<p>is the input dataframe (1b)</p>
 </td></tr>
 </table>
 
@@ -1831,7 +1849,7 @@ function processMathHTML() {
 
 <h3>Usage</h3>
 
-<pre><code class='language-R'>pattern_generator(base_, from_, lngth, hmn = 1, after = 1)
+<pre><code class='language-R'>pattern_generator(base_, from_, nb, hmn = 1, after = 1, sep = "")
 </code></pre>
 
 
@@ -1844,7 +1862,11 @@ function processMathHTML() {
 </td></tr>
 <tr><td><code id="pattern_generator_:_from_">from_</code></td>
 <td>
-<p>is the vector from which the element of the varying part will be generated</p>
+<p>is the vector from which the elements of the random part will be generated</p>
+</td></tr>
+<tr><td><code id="pattern_generator_:_nb">nb</code></td>
+<td>
+<p>is the number of random pattern chosen for the varying part</p>
 </td></tr>
 <tr><td><code id="pattern_generator_:_hmn">hmn</code></td>
 <td>
@@ -1853,6 +1875,10 @@ function processMathHTML() {
 <tr><td><code id="pattern_generator_:_after">after</code></td>
 <td>
 <p>is set to 1 by default, it means that the varying part will be after the fixed part, set to 0 if you want the varying part to be before</p>
+</td></tr>
+<tr><td><code id="pattern_generator_:_sep">sep</code></td>
+<td>
+<p>is the separator between all patterns in the returned value</p>
 </td></tr>
 </table>
 
@@ -2311,6 +2337,14 @@ function processMathHTML() {
 <td>
 <p>is the second vector</p>
 </td></tr>
+<tr><td><code id="see_idx_:_exclude_val">exclude_val</code></td>
+<td>
+<p>is a value you know is not present in the 2 vectors</p>
+</td></tr>
+<tr><td><code id="see_idx_:_no_more">no_more</code></td>
+<td>
+<p>is a boolean that, if set to TRUE, will remove all the first found value in the second vector after those has been found. It defaults to FALSE.</p>
+</td></tr>
 </table>
 
 
@@ -2352,6 +2386,14 @@ c(column_1, column_2, column_3, column_4, column_5, unique_separator, &quot;1-2-
 <h3>Arguments</h3>
 
 <table>
+<tr><td><code id="see_inside_:_pattern_">pattern_</code></td>
+<td>
+<p>is a vector containin the file extension of the spreadsheets (&quot;xlsx&quot;, &quot;csv&quot;...)</p>
+</td></tr>
+<tr><td><code id="see_inside_:_path_">path_</code></td>
+<td>
+<p>is the path where are located the files</p>
+</td></tr>
 <tr><td><code id="see_inside_:_sep_">sep_</code></td>
 <td>
 <p>is a vector containing the separator for each csv type file in order following the operating system file order, if the vector does not match the number of the csv files found, it will assume the separator for the rest of the files is the same as the last csv file found. It means that if you know the separator is the same for all the csv type files, you just have to put the separator once in the vector.</p>
@@ -2364,14 +2406,6 @@ c(column_1, column_2, column_3, column_4, column_5, unique_separator, &quot;1-2-
 <td>
 <p>alloaw to get files recursively
 If x is the return value, to see all the files name, position of the columns and possible sheet name associanted with, do the following:</p>
-</td></tr>
-<tr><td><code id="see_inside_:_pattern">pattern</code></td>
-<td>
-<p>is a vector containin the file extension of the spreadsheets (&quot;xlsx&quot;, &quot;csv&quot;...)</p>
-</td></tr>
-<tr><td><code id="see_inside_:_path">path</code></td>
-<td>
-<p>is the path where are located the files</p>
 </td></tr>
 </table>
 
@@ -2589,6 +2623,10 @@ the vector c(4, 1) with the coefficient 1 and the start position at the second c
 <tr><td><code id="vec_in_df_:_strt_l">strt_l</code></td>
 <td>
 <p>is a vector containing the start position for each vector</p>
+</td></tr>
+<tr><td><code id="vec_in_df_:_distinct">distinct</code></td>
+<td>
+<p>is a value you are sure is not in df_, defaults to &quot;NA&quot;</p>
 </td></tr>
 </table>
 

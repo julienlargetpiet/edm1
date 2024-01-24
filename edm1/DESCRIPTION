@@ -6,12 +6,12 @@ Authors@R:
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Author: person('Julien', 'Larget-Piet', role = c('aut', 'cre'))
 Description: What the package does (one paragraph).
-License: GPL-3
+License: GPL-2
 description: Set of tools to manage mostly dataframe and character.
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-Imports:
-  openxlsx,
-  stringr,
-  stringi,
+Imports: openxlsx, stringr, stringi,
+NeedsCompilation: no
+Packaged: 2024-01-24 20:38:33 UTC; kvv
+Maintainer: Julien Larget-Piet <julien.larget-piet@edu.univ-eiffel.fr>
