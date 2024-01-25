@@ -1,3 +1,5 @@
+juiif
+
 
 # `append_row`
 
@@ -1118,7 +1120,7 @@ see_df
 
 ## Description
 
-Allow to return a dataframe with special value cells (ex: TRUE) where the condition entered are respected and another special value cell (ex: FALSE) where these are not
+Allow to return a dataframe with special value cells (ex: TRUE) where the conditions entered are respected and another special value cell (ex: FALSE) where these are not
 
 
 ## Usage
