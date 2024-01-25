@@ -1,3 +1,12 @@
+# Install
+
+`>library("devtools")`
+`>build()`
+`>install()`
+
+# Requirements
+
+`stringr, stringi, openxlsx`
 
 # `append_row`
 
