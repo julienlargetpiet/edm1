@@ -1,7 +1,7 @@
 # Install
 
-`>library("devtools")`
-`>build()`
+`>library("devtools")` \
+`>build()` \
 `>install()`
 
 # Requirements
