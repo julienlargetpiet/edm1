@@ -1,3 +1,15 @@
+# Install
+
+`>library("devtools")` \
+`>build()` \
+`>install()`
+
+These commands should be run in the directory of the package.
+
+# Requirements
+
+`stringr, stringi, openxlsx`
+
 # `append_row`
 
 append_row

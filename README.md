@@ -4,6 +4,8 @@
 `>build()` \
 `>install()`
 
+These commands should be run in the directory of the package.
+
 # Requirements
 
 `stringr, stringi, openxlsx`
