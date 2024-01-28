@@ -1,14 +1,53 @@
-# Install
 
-`>library("devtools")` \
-`>build()` \
-`>install()`
+# `all_stat`
 
-These commands should be run in the directory of the package.
+all_stat
 
-# Requirements
 
-`stringr, stringi, openxlsx`
+## Description
+
+Allow to see all the main statistics indicators (mean, median, variance, standard deviation, sum) of variables in a dataframe by the modality of a variable in a column of the input datarame.
+
+
+## Usage
+
+```r
+all_stat(inpt_v, var_add = c(), stat_var = c(), inpt_df)
+```
+
+
+## Examples
+
+```r
+df <- data.frame("mod"=c("first", "seco", "seco", "first", "first", "third", "first"),
+"var1"=c(11, 22, 21, 22, 22, 11, 9),
+"var2"=c("d", "d", "z", "z", "z", "d", "z"),
+"var3"=c(45, 44, 43, 46, 45, 45, 42),
+"var4"=c("A", "A", "A", "A", "B", "C", "C"))
+
+all_stat(inpt_v=c("first", "seco"), var_add = c("var1", "var2", "var3", "var4"),
+stat_var=c("sum", "mean", "median", "sd", "occu-var2/", "occu-var4/", "variance"),
+inpt_df=df)
+
+modal_v var_vector occu sum mean  med standard_devaition         variance
+first
+var1       64   16 16.5   6.97614984548545 48.6666666666667
+var2-d    1
+var2-z    3
+var3      178 44.5   45   1.73205080756888                3
+var4-A    2
+var4-B    1
+var4-C    1
+seco
+var1       43 21.5 21.5  0.707106781186548              0.5
+var2-d    1
+var2-z    1
+var3       87 43.5 43.5  0.707106781186548              0.5
+var4-A    2
+var4-B    0
+var4-C    0
+```
+
 
 # `append_row`
 
@@ -949,6 +988,23 @@ rtn_neg="no", nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE)), 
 ```
 
 
+# `occu`
+
+occu
+
+
+## Description
+
+Allow to see the occurence of each variable in a vector. Returns a datafame with, as the first column, the all the unique variable of the vector and , in he second column, their occurence respectively.
+
+
+## Usage
+
+```r
+occu(inpt_v)
+```
+
+
 # `pattern_generator`
 
 pattern_generator
@@ -1129,7 +1185,7 @@ see_df
 
 ## Description
 
-Allow to return a dataframe with special value cells (ex: TRUE) where the conditions entered are respected and another special value cell (ex: FALSE) where these are not
+Allow to return a dataframe with special value cells (ex: TRUE) where the condition entered are respected and another special value cell (ex: FALSE) where these are not
 
 
 ## Usage

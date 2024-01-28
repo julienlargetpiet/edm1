@@ -1,4 +1,70 @@
 
+<!DOCTYPE html><html><head><title>R: all_stat</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>all_stat</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='all_stat'>all_stat</h2>
+
+<h3>Description</h3>
+
+<p>Allow to see all the main statistics indicators (mean, median, variance, standard deviation, sum) of variables in a dataframe by the modality of a variable in a column of the input datarame.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>all_stat(inpt_v, var_add = c(), stat_var = c(), inpt_df)
+</code></pre>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>df &lt;- data.frame("mod"=c("first", "seco", "seco", "first", "first", "third", "first"), 
+                "var1"=c(11, 22, 21, 22, 22, 11, 9), 
+               "var2"=c("d", "d", "z", "z", "z", "d", "z"), 
+               "var3"=c(45, 44, 43, 46, 45, 45, 42),
+              "var4"=c("A", "A", "A", "A", "B", "C", "C"))
+
+all_stat(inpt_v=c("first", "seco"), var_add = c("var1", "var2", "var3", "var4"), 
+ stat_var=c("sum", "mean", "median", "sd", "occu-var2/", "occu-var4/", "variance"), 
+ inpt_df=df)
+
+  modal_v var_vector occu sum mean  med standard_devaition         variance
+  first                                                                  
+              var1       64   16 16.5   6.97614984548545 48.6666666666667
+            var2-d    1                                                  
+            var2-z    3                                                  
+              var3      178 44.5   45   1.73205080756888                3
+            var4-A    2                                                  
+            var4-B    1                                                  
+            var4-C    1                                                  
+   seco                                                                  
+              var1       43 21.5 21.5  0.707106781186548              0.5
+            var2-d    1                                                  
+            var2-z    1                                                  
+              var3       87 43.5 43.5  0.707106781186548              0.5
+            var4-A    2                                                  
+            var4-B    0                                                  
+            var4-C    0                                                  
+</code></pre>
+
+
+</div>
+</body></html>
 <!DOCTYPE html><html><head><title>R: append_row</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
@@ -1713,7 +1779,7 @@ function processMathHTML() {
 
 <h3>Usage</h3>
 
-<pre><code class='language-R'>nestr_df1(inptf_df, inptt_pos_df, inpt_neg_df = NA, nestr_df, yes_val = T)
+<pre><code class='language-R'>nestr_df1(inptf_df, inptt_pos_df, nestr_df, yes_val = T, inptt_neg_df = NA)
 </code></pre>
 
 
@@ -1728,10 +1794,6 @@ function processMathHTML() {
 <td>
 <p>is the dataframe (2b) that corresponds to the (1a) values</p>
 </td></tr>
-<tr><td><code id="nestr_df1_:_inpt_neg_df">inpt_neg_df</code></td>
-<td>
-<p>is the dataframe (4b) that has the (3a) values, defaults to NA</p>
-</td></tr>
 <tr><td><code id="nestr_df1_:_nestr_df">nestr_df</code></td>
 <td>
 <p>is the dataframe (2b) that has the special value (2a)</p>
@@ -1740,15 +1802,19 @@ function processMathHTML() {
 <td>
 <p>is the special value (2a)</p>
 </td></tr>
+<tr><td><code id="nestr_df1_:_inpt_neg_df">inpt_neg_df</code></td>
+<td>
+<p>is the dataframe (4b) that has the (3a) values, defaults to NA</p>
+</td></tr>
 </table>
 
 
 <h3>Examples</h3>
 
-<pre><code class='language-R'>nestr_df1(inpt_df=data.fame(c(1, 2, 1), c(1, 5, 7)), 
+<pre><code class='language-R'>nestr_df1(inptf_df=data.frame(c(1, 2, 1), c(1, 5, 7)), 
 inptt_pos_df=data.frame(c(4, 4, 3), c(2, 1, 2)), 
-inptt_pos_df=data.frame(c(44, 44, 33), c(12, 12, 12)), 
-nestr_df=data.frame(c(T, F, T), c(F, F, T), yes_val=T)) 
+inptt_neg_df=data.frame(c(44, 44, 33), c(12, 12, 12)), 
+nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE)), yes_val=TRUE) 
 </code></pre>
 
 
@@ -1814,8 +1880,42 @@ function processMathHTML() {
 
 <h3>Examples</h3>
 
-<pre><code class='language-R'>nestr_df2(inpt_df=data.fame(c(1, 2, 1), c(1, 5, 7)), rtn_pos="yes", 
-rtn_neg="no", nestr_df=data.frame(c(T, F, T), c(F, F, T), yes_val=T)) 
+<pre><code class='language-R'>nestr_df2(inptf_df=data.frame(c(1, 2, 1), c(1, 5, 7)), rtn_pos="yes", 
+rtn_neg="no", nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE)), yes_val=TRUE) 
+</code></pre>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: occu</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>occu</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='occu'>occu</h2>
+
+<h3>Description</h3>
+
+<p>Allow to see the occurence of each variable in a vector. Returns a datafame with, as the first column, the all the unique variable of the vector and , in he second column, their occurence respectively.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>occu(inpt_v)
 </code></pre>
 
 
@@ -2157,8 +2257,9 @@ function processMathHTML() {
 
 <h3>Examples</h3>
 
-<pre><code class='language-R'>v &lt;- c("2012-06-22", "2012-06-23", "2022-09-12", "2022")
-ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=T)
+<pre><code class='language-R'>library("stringr")
+v &lt;- c("2012-06-22", "2012-06-23", "2022-09-12", "2022")
+ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=TRUE)
 </code></pre>
 
 
@@ -2186,7 +2287,7 @@ function processMathHTML() {
 
 <h3>Description</h3>
 
-<p>Allow to return a datafame with special value cells (ex: TRUE) where the condition entered are respected and another special value cell (ex: FALSE) where these are not
+<p>Allow to return a dataframe with special value cells (ex: TRUE) where the condition entered are respected and another special value cell (ex: FALSE) where these are not
 </p>
 
 
@@ -2230,14 +2331,6 @@ function processMathHTML() {
 
 <p>This function will return an error if number only comparative conditions are given in addition to having character values in the input dataframe.
 </p>
-
-
-<h3>Examples</h3>
-
-<pre><code class='language-R'>see_df(df, c("%%", "=="), list(c(2, 11), c(3)), list("|") 
-#will return all the values that are divisible by 2 and 11 
-#and all the values that are equal to 3 from the dataframe 
-</code></pre>
 
 
 </div>
@@ -2404,18 +2497,14 @@ c(column_1, column_2, column_3, column_4, column_5, unique_separator, &quot;1-2-
 </td></tr>
 <tr><td><code id="see_inside_:_rec">rec</code></td>
 <td>
-<p>alloaw to get files recursively
-If x is the return value, to see all the files name, position of the columns and possible sheet name associanted with, do the following:</p>
+<p>is a boolean allows to get files recursively if set to TRUE, defaults to TRUE
+If x is the return value, to see all the files name, position of the columns and possible sheet name associanted with, do the following:
+Examples:
+print(x[(grep(unique_sep, x)1+1):length(x)])
+#If you just want to see the columns do the following:
+print(x1:(grep(unique_sep, x) - 1))</p>
 </td></tr>
 </table>
-
-
-<h3>Examples</h3>
-
-<pre><code class='language-R'>print(x[(grep(unique_sep, x)[1]+1):length(x)]). 
-If you just want to see the columns do the following: 
-print(x[1:(grep(unique_sep, x) - 1)])
-</code></pre>
 
 
 </div>
@@ -2737,7 +2826,8 @@ function processMathHTML() {
 
 <h3>Examples</h3>
 
-<pre><code class='language-R'>v &lt;- c("aa-yy-uu", "zz-gg-hhh", "zz-gg-hhh", "zz-gg-hhh")
+<pre><code class='language-R'>library("stringr")
+v &lt;- c("aa-yy-uu", "zz-gg-hhh", "zz-gg-hhh", "zz-gg-hhh")
 v_to_df(inpt_v=v, sep="-")
 </code></pre>
 

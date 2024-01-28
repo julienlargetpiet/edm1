@@ -4293,5 +4293,308 @@ groupr_df <- function(inpt_df, condition_lst, val_lst, conjunction_lst, rtn_val_
 
 }
 
+#' occu
+#' 
+#' Allow to see the occurence of each variable in a vector. Returns a datafame with, as the first column, the all the unique variable of the vector and , in he second column, their occurence respectively.
+
+occu <- function(inpt_v){
+
+    presence <- which(inpt_v == "")
+
+    if (length(presence) > 0){ inpt_v <- inpt_v[-presence] }
+
+    occu_v <- c()
+    
+    modal_v <- c()
+
+    for (el in inpt_v){
+      
+      if (length(grep(el, modal_v)) == 1){
+        
+        idx <- which(modal_v == el)
+        
+        occu_v[idx] = occu_v[idx] + 1
+        
+      }else{
+        
+        occu_v <- append(x=occu_v, values=1, after=length(occu_v))
+        
+        modal_v <- append(x=modal_v, values=el, after=length(occu_v))
+       
+      }
+    
+    }
+
+    return(data.frame("var"=modal_v, "occurence"=occu_v))
+ 
+}
+
+
+#' all_stat
+#'
+#' Allow to see all the main statistics indicators (mean, median, variance, standard deviation, sum) of variables in a dataframe by the modality of a variable in a column of the input datarame.
+#' @examples
+#' df <- data.frame("mod"=c("first", "seco", "seco", "first", "first", "third", "first"), 
+#'                 "var1"=c(11, 22, 21, 22, 22, 11, 9), 
+#'                "var2"=c("d", "d", "z", "z", "z", "d", "z"), 
+#'                "var3"=c(45, 44, 43, 46, 45, 45, 42),
+#'               "var4"=c("A", "A", "A", "A", "B", "C", "C"))
+#'
+#' all_stat(inpt_v=c("first", "seco"), var_add = c("var1", "var2", "var3", "var4"), 
+#'  stat_var=c("sum", "mean", "median", "sd", "occu-var2/", "occu-var4/", "variance"), 
+#'  inpt_df=df)
+#'
+#'   modal_v var_vector occu sum mean  med standard_devaition         variance
+#'   first                                                                  
+#'               var1       64   16 16.5   6.97614984548545 48.6666666666667
+#'             var2-d    1                                                  
+#'             var2-z    3                                                  
+#'               var3      178 44.5   45   1.73205080756888                3
+#'             var4-A    2                                                  
+#'             var4-B    1                                                  
+#'             var4-C    1                                                  
+#'    seco                                                                  
+#'               var1       43 21.5 21.5  0.707106781186548              0.5
+#'             var2-d    1                                                  
+#'             var2-z    1                                                  
+#'               var3       87 43.5 43.5  0.707106781186548              0.5
+#'             var4-A    2                                                  
+#'             var4-B    0                                                  
+#'             var4-C    0                                                  
+
+
+all_stat <- function(inpt_v, var_add=c(), stat_var=c(), inpt_df){
+ 
+  presence <- which(inpt_v == "")
+    
+  if (length(presence) > 0){ inpt_v <- inpt_v[-presence] }
+  
+  fillr <- function(inpt_v, ptrn_fill="...\\d"){
+    
+    ptrn <- grep(ptrn_fill, inpt_v)
+    
+    while (length(ptrn) > 0){
+      
+      ptrn <- grep(ptrn_fill, inpt_v)
+      
+      idx <- ptrn[1]
+      
+      untl <- as.numeric(c(unlist(strsplit(inpt_v[idx], split="\\.")))[4]) - 1
+      
+      pre_val <- inpt_v[(idx - 1)]
+      
+      inpt_v[idx] <- pre_val
+      
+      if (untl > 0){
+        
+        for (i in 1:untl){
+          
+          inpt_v <- append(inpt_v, pre_val, idx)
+          
+        }
+        
+      }
+      
+      ptrn <- grep(ptrn_fill, inpt_v)
+      
+    }
+    
+    return(inpt_v)
+    
+  }
+ 
+  pre_var <- grep("occu-", stat_var)
+
+  col_ns <- colnames(inpt_df)
+
+  if (length(pre_var) > 0){ 
+
+          u_val <- c()
+
+          mod_idx <- c()
+
+          idx_col <- c()
+
+          for (idx in pre_var){
+
+                  col_ <- unlist(strsplit(stat_var[idx], split=""))
+
+                  end_beg <- str_locate(stat_var[idx], "-(.*?)/")
+
+                  col_2 <- paste(col_[(end_beg[1]+1):(end_beg[2]-1)], collapse="")
+
+                  col_ <- which(col_ns == col_2)[1] 
+
+                  un_v <- unique(df[, col_])
+
+                  for (i in 1:length(un_v)){ idx_col <- c(idx_col, col_) }
+
+                  pre_occu <- paste(col_2, un_v, sep="-")
+
+                  u_val <- c(u_val, un_v)
+
+                  idx_vd <- which(var_add == col_2)
+
+                  var_add[idx_vd] <- pre_occu[1] 
+
+                  var_add <- append(x=var_add, values=pre_occu[2:length(pre_occu)], after=idx_vd)
+
+                  mod_idx <- c(mod_idx, c(idx_vd:(idx_vd+length(un_v)-1)))
+
+          }
+
+  }
+
+  extend <- paste("...", as.character(length(var_add) - 1))
+
+  if (length(var_add) > 0){
+  
+    list_stat <- list()
+    
+    modal_v <- c()
+    
+    var_vector <- c()
+    
+    for (el in inpt_v){
+      
+      modal_v <- c(modal_v, el, fillr(inpt_v=c("", extend)))
+      
+      var_vector <- c(var_vector, "", var_add)
+      
+    }
+
+    rtn_df <- data.frame(modal_v, var_vector)
+
+    pre_length_var_add <- length(var_add)
+
+    if (length(mod_idx) > 0){
+
+        vec_cur <- c(matrix(nrow=length(var_vector), ncol=1, data=""))
+
+        for (vr in 1:length(inpt_v)){
+
+            for (idx in 1:length(mod_idx)){
+
+                cur_col <- df[, idx_col[idx]]
+
+                vec_cur[length(var_add) * (vr - 1) + mod_idx[idx] + vr] <- sum(cur_col[df[, 1] == inpt_v[vr]] == u_val[idx])
+
+            }
+
+        }
+
+        stat_var <- stat_var[-grep("occu-", stat_var)]
+
+        rtn_df <- cbind(rtn_df, "occu"=vec_cur)
+
+        var_add <- var_add[-mod_idx]
+
+    }
+
+    mod_idx <- c(1:pre_length_var_add)[-mod_idx]
+
+    for (st in stat_var){
+
+        vec_cur <- c(matrix(nrow=length(var_vector), ncol=1, data=""))
+
+        if (st == "variance"){
+
+            for (vr in 1:length(inpt_v)){
+
+                for (idx in 1:length(var_add)){
+
+                    cur_col <- df[, which(col_ns == var_add[idx])]
+
+                    vec_cur[pre_length_var_add * (vr - 1) + mod_idx[idx] + vr] <- var(cur_col[df[,1] == inpt_v[vr]]) 
+
+                }
+
+            }
+
+            rtn_df <- cbind(rtn_df, "variance"=vec_cur)
+
+        }
+        
+        if (st == "sd"){
+
+            for (vr in 1:length(inpt_v)){
+
+                for (idx in 1:length(var_add)){
+
+                    cur_col <- df[, which(col_ns == var_add[idx])]
+
+                    vec_cur[pre_length_var_add * (vr - 1) + mod_idx[idx] + vr] <- sd(cur_col[df[,1] == inpt_v[vr]]) 
+
+                }
+
+            }
+
+            rtn_df <- cbind(rtn_df, "standard_devaition"=vec_cur)
+
+        }
+        
+        if (st == "sum"){
+
+            for (vr in 1:length(inpt_v)){
+
+                for (idx in 1:length(var_add)){
+
+                    cur_col <- df[, which(col_ns == var_add[idx])]
+
+                    vec_cur[pre_length_var_add * (vr - 1) + mod_idx[idx] + vr] <- sum(cur_col[df[,1] == inpt_v[vr]]) 
+
+                }
+
+            }
+
+            rtn_df <- cbind(rtn_df, "sum"=vec_cur)
+
+        }
+
+        if (st == "median"){
+
+            for (vr in 1:length(inpt_v)){
+
+                for (idx in 1:length(var_add)){
+
+                    cur_col <- df[, which(col_ns == var_add[idx])]
+
+                    vec_cur[pre_length_var_add * (vr - 1) + mod_idx[idx] + vr] <- median(cur_col[df[,1] == inpt_v[vr]]) 
+
+                }
+
+            }
+
+            rtn_df <- cbind(rtn_df, "med"=vec_cur)
+
+        }
+
+        if (st == "mean"){
+
+            for (vr in 1:length(inpt_v)){
+
+                for (idx in 1:length(var_add)){
+
+                    cur_col <- df[, which(col_ns == var_add[idx])]
+
+                    vec_cur[pre_length_var_add * (vr - 1) + mod_idx[idx] + vr] <- mean(cur_col[df[,1] == inpt_v[vr]]) 
+
+                }
+
+            }
+
+        rtn_df <- cbind(rtn_df, "mean"=vec_cur)
+
+        }
+
+    }
+    
+  }else{ df <- data.frame(inpt_v) }
+
+  return(rtn_df)
+
+}
+
+
 
 

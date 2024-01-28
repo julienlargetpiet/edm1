@@ -1,0 +1,512 @@
+Hmm ... looks like a package
+Converting parsed Rd's to LaTeX ....
+Creating pdf output from LaTeX ...
+
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-02-22> (./Rd2.tex
+(/usr/share/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2022/07/02 v1.4n Standard LaTeX document class
+(/usr/share/texmf-dist/tex/latex/base/bk10.clo))
+(/usr/share/texmf/tex/latex/Rd.sty
+(/usr/share/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/share/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/share/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texmf-dist/tex/latex/base/alltt.sty)
+(/usr/share/texmf-dist/tex/latex/tools/verbatim.sty)
+(/usr/share/texmf-dist/tex/latex/url/url.sty)
+(/usr/share/texmf-dist/tex/latex/base/textcomp.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texmf-dist/tex/latex/amsfonts/amsfonts.sty)
+(/usr/share/texmf-dist/tex/latex/amsfonts/amssymb.sty)
+(/usr/share/texmf-dist/tex/latex/jknapltx/mathrsfs.sty)
+(/usr/share/texmf-dist/tex/generic/iftex/iftex.sty)
+(/usr/share/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/share/texmf-dist/tex/latex/psnfss/times.sty)
+(/usr/share/texmf-dist/tex/latex/graphics/color.sty
+(/usr/share/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/share/texmf-dist/tex/latex/graphics-def/pdftex.def)
+(/usr/share/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/share/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/share/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(/usr/share/texmf-dist/tex/generic/infwarerr/infwarerr.sty))
+(/usr/share/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/share/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
+(/usr/share/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(/usr/share/texmf-dist/tex/generic/pdfescape/pdfescape.sty)
+(/usr/share/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/share/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty)
+(/usr/share/texmf-dist/tex/latex/auxhook/auxhook.sty)
+(/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/share/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/share/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+(/usr/share/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
+(/usr/share/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/share/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/share/texmf-dist/tex/generic/etexcmds/etexcmds.sty)
+(/usr/share/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/share/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/share/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(/usr/share/texmf-dist/tex/latex/base/atbegshi-ltx.sty))
+(/usr/share/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/share/texmf-dist/tex/latex/base/atveryend-ltx.sty)
+(/usr/share/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(/usr/share/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty))))
+(/usr/share/texmf-dist/tex/latex/base/makeidx.sty)
+(/usr/share/texmf-dist/tex/latex/base/inputenc.sty)
+Writing index file Rd2.idx
+(/usr/share/texmf-dist/tex/latex/psnfss/t1ptm.fd)
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def)
+No file Rd2.aux.
+(/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/share/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
+(/usr/share/texmf-dist/tex/latex/psnfss/t1pcr.fd)
+(/usr/share/texmf-dist/tex/latex/psnfss/t1phv.fd)
+No file Rd2.toc.
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(/usr/share/texmf-dist/tex/latex/jknapltx/ursfs.fd)
+Overfull \hbox (18.78088pt too wide) in paragraph at lines 42--42
+ []\T1/pcr/m/n/10 append_row(df_in, df, hmn = 1, na_col = c(), unique_do_not_kn
+ow = NA) 
+
+Overfull \hbox (2.20773pt too wide) in paragraph at lines 48--49
+[]\T1/ptm/m/n/10 is the dataframe from which the row will ap-pend to an-other o
+r the same dataframe 
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fon
+ts/enc/dvips/base/8r.enc}] [2] [3]
+Overfull \hbox (120.78088pt too wide) in paragraph at lines 233--233
+ []  \T1/pcr/m/n/10 str_source = c("a", "b", "c", "d", "e", "f", "g", "h", "i",
+ "j", "k", "l", "m", "n",[] 
+[4] [5] [6] [7]
+Overfull \hbox (17.56721pt too wide) in paragraph at lines 441--442
+[]\T1/ptm/m/n/10 Allow to find the min-i-mum or the max-i-mum of a date in a ve
+c-tor. The for-mat of dates is Year/Month/Day. 
+[8] [9] [10]
+Overfull \hbox (1.5473pt too wide) in paragraph at lines 570--571
+[]\T1/ptm/m/n/10 is the dataframe con-tain-ing the co-or-diantes of the es-tab-
+lished ge-o-graph-i-cal points 
+[11]
+Overfull \hbox (52.98038pt too wide) in paragraph at lines 639--639
+ []\T1/pcr/m/n/9 globe(lat_f=23, long_f=112, alt_f=NA, lat_n=c(2, 82), long_n=c
+(165, -55), alt_n=NA) 
+
+Overfull \hbox (72.78088pt too wide) in paragraph at lines 651--651
+ []\T1/pcr/m/n/10 groupr_df(inpt_df, condition_lst, val_lst, conjunction_lst, r
+tn_val_pos = c()) 
+[12] [13] [14] [15]
+Overfull \hbox (54.78088pt too wide) in paragraph at lines 842--842
+ []\T1/pcr/m/n/10 nestr_df1(inptf_df, inptt_pos_df, nestr_df, yes_val = T, inpt
+t_neg_df = NA) 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 865--865
+ []\T1/pcr/m/n/9 nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE
+)), yes_val=TRUE)[] 
+[16]
+Overfull \hbox (106.98032pt too wide) in paragraph at lines 898--898
+ []\T1/pcr/m/n/9 rtn_neg="no", nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALS
+E, FALSE, TRUE)), yes_val=TRUE)[] 
+[17] [18]
+Overfull \hbox (48.78088pt too wide) in paragraph at lines 979--979
+ []\T1/pcr/m/n/10 pattern_tuning(pattrn, spe_nb, spe_l, exclude_type, hmn = 1, 
+rg = c(0, 0)) 
+
+Overfull \hbox (78.78088pt too wide) in paragraph at lines 1007--1007
+ []\T1/pcr/m/n/10 ptrn_switchr(inpt_l, f_idx_l = c(), t_idx_l = c(), sep = "-",
+ default_val = NA) 
+[19]
+Overfull \hbox (54.78088pt too wide) in paragraph at lines 1042--1042
+ []\T1/pcr/m/n/10 ptrn_twkr(inpt_l, depth = "max", sep = "-", default_val = "0"
+, add_sep = T) 
+
+Overfull \hbox (48.78088pt too wide) in paragraph at lines 1076--1076
+ []\T1/pcr/m/n/10 see_df(df, condition_l, val_l, conjunction_l = c(), rt_val = 
+T, f_val = F) 
+[20] [21]
+Overfull \hbox (78.78088pt too wide) in paragraph at lines 1155--1155
+ []\T1/pcr/m/n/10 see_inside(pattern_, path_ = ".", sep_ = c(","), unique_sep =
+ "#####", rec = F) 
+
+Overfull \hbox (16.64742pt too wide) in paragraph at lines 1169--1175
+\T1/ptm/m/n/10 sheet name as-so-cianted with, do the fol-low-ing: Ex-am-ples: p
+rint(x[(grep(unique_sep,
+
+Overfull \hbox (77.37729pt too wide) in paragraph at lines 1169--1175
+\T1/ptm/m/n/10 x)[][]1[][][]+1):length(x)]) #If you just want to see the column
+s do the fol-low-ing: print(x[][]1:(grep(unique_sep,
+[22] [23] [24]
+No file Rd2.ind.
+[25] (/tmp/RtmpwfS5Qy/Rd2pdf18bfde7f8a062e/Rd2.aux)
+
+Package rerunfilecheck Warning: File `Rd2.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )
+(see the transcript file for additional information)
+pdfTeX warning (dest): name{Rfn.1:\(grep\(unique.Rul.sep,\040x\)\040.Rdash.\040
+1\)} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{Rfn.1} has been referenced but does not exist, repl
+aced by a fixed one
+
+</usr/share/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-dis
+t/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/ti
+mes/utmb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/sh
+are/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/ty
+pe1/urw/times/utmri8a.pfb>
+Output written on Rd2.pdf (25 pages, 117224 bytes).
+Transcript written on Rd2.log.
+This is makeindex, version 2.17 [TeX Live 2023] (kpathsea + Thai support).
+Scanning input file Rd2.idx....done (46 entries accepted, 0 rejected).
+Sorting entries....done (273 comparisons).
+Generating output file Rd2.ind....done (96 lines written, 0 warnings).
+Output written in Rd2.ind.
+Transcript written in Rd2.ilg.
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-02-22> (./Rd2.tex
+(/usr/share/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2022/07/02 v1.4n Standard LaTeX document class
+(/usr/share/texmf-dist/tex/latex/base/bk10.clo))
+(/usr/share/texmf/tex/latex/Rd.sty
+(/usr/share/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/share/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/share/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texmf-dist/tex/latex/base/alltt.sty)
+(/usr/share/texmf-dist/tex/latex/tools/verbatim.sty)
+(/usr/share/texmf-dist/tex/latex/url/url.sty)
+(/usr/share/texmf-dist/tex/latex/base/textcomp.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texmf-dist/tex/latex/amsfonts/amsfonts.sty)
+(/usr/share/texmf-dist/tex/latex/amsfonts/amssymb.sty)
+(/usr/share/texmf-dist/tex/latex/jknapltx/mathrsfs.sty)
+(/usr/share/texmf-dist/tex/generic/iftex/iftex.sty)
+(/usr/share/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/share/texmf-dist/tex/latex/psnfss/times.sty)
+(/usr/share/texmf-dist/tex/latex/graphics/color.sty
+(/usr/share/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/share/texmf-dist/tex/latex/graphics-def/pdftex.def)
+(/usr/share/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/share/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/share/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(/usr/share/texmf-dist/tex/generic/infwarerr/infwarerr.sty))
+(/usr/share/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/share/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
+(/usr/share/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(/usr/share/texmf-dist/tex/generic/pdfescape/pdfescape.sty)
+(/usr/share/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/share/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty)
+(/usr/share/texmf-dist/tex/latex/auxhook/auxhook.sty)
+(/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/share/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/share/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+(/usr/share/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
+(/usr/share/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/share/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/share/texmf-dist/tex/generic/etexcmds/etexcmds.sty)
+(/usr/share/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/share/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/share/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(/usr/share/texmf-dist/tex/latex/base/atbegshi-ltx.sty))
+(/usr/share/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/share/texmf-dist/tex/latex/base/atveryend-ltx.sty)
+(/usr/share/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(/usr/share/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty))))
+(/usr/share/texmf-dist/tex/latex/base/makeidx.sty)
+(/usr/share/texmf-dist/tex/latex/base/inputenc.sty)
+Writing index file Rd2.idx
+(/usr/share/texmf-dist/tex/latex/psnfss/t1ptm.fd)
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def)
+(/tmp/RtmpwfS5Qy/Rd2pdf18bfde7f8a062e/Rd2.aux)
+(/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/tmp/RtmpwfS5Qy/Rd2pdf18bfde7f8a062e/Rd2.out)
+(/tmp/RtmpwfS5Qy/Rd2pdf18bfde7f8a062e/Rd2.out)
+(/usr/share/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
+(/usr/share/texmf-dist/tex/latex/psnfss/t1pcr.fd)
+(/usr/share/texmf-dist/tex/latex/psnfss/t1phv.fd)
+(/tmp/RtmpwfS5Qy/Rd2pdf18bfde7f8a062e/Rd2.toc
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(/usr/share/texmf-dist/tex/latex/jknapltx/ursfs.fd) [1{/var/lib/texmf/fonts/map
+/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}])
+
+Overfull \hbox (18.78088pt too wide) in paragraph at lines 42--42
+ []\T1/pcr/m/n/10 append_row(df_in, df, hmn = 1, na_col = c(), unique_do_not_kn
+ow = NA) 
+
+Overfull \hbox (2.20773pt too wide) in paragraph at lines 48--49
+[]\T1/ptm/m/n/10 is the dataframe from which the row will ap-pend to an-other o
+r the same dataframe 
+[2] [3] [4]
+Overfull \hbox (120.78088pt too wide) in paragraph at lines 233--233
+ []  \T1/pcr/m/n/10 str_source = c("a", "b", "c", "d", "e", "f", "g", "h", "i",
+ "j", "k", "l", "m", "n",[] 
+[5] [6] [7] [8]
+Overfull \hbox (17.56721pt too wide) in paragraph at lines 441--442
+[]\T1/ptm/m/n/10 Allow to find the min-i-mum or the max-i-mum of a date in a ve
+c-tor. The for-mat of dates is Year/Month/Day. 
+[9] [10] [11]
+Overfull \hbox (1.5473pt too wide) in paragraph at lines 570--571
+[]\T1/ptm/m/n/10 is the dataframe con-tain-ing the co-or-diantes of the es-tab-
+lished ge-o-graph-i-cal points 
+[12]
+Overfull \hbox (52.98038pt too wide) in paragraph at lines 639--639
+ []\T1/pcr/m/n/9 globe(lat_f=23, long_f=112, alt_f=NA, lat_n=c(2, 82), long_n=c
+(165, -55), alt_n=NA) 
+
+Overfull \hbox (72.78088pt too wide) in paragraph at lines 651--651
+ []\T1/pcr/m/n/10 groupr_df(inpt_df, condition_lst, val_lst, conjunction_lst, r
+tn_val_pos = c()) 
+[13] [14] [15] [16]
+Overfull \hbox (54.78088pt too wide) in paragraph at lines 842--842
+ []\T1/pcr/m/n/10 nestr_df1(inptf_df, inptt_pos_df, nestr_df, yes_val = T, inpt
+t_neg_df = NA) 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 865--865
+ []\T1/pcr/m/n/9 nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE
+)), yes_val=TRUE)[] 
+[17]
+Overfull \hbox (106.98032pt too wide) in paragraph at lines 898--898
+ []\T1/pcr/m/n/9 rtn_neg="no", nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALS
+E, FALSE, TRUE)), yes_val=TRUE)[] 
+[18] [19]
+Overfull \hbox (48.78088pt too wide) in paragraph at lines 979--979
+ []\T1/pcr/m/n/10 pattern_tuning(pattrn, spe_nb, spe_l, exclude_type, hmn = 1, 
+rg = c(0, 0)) 
+
+Overfull \hbox (78.78088pt too wide) in paragraph at lines 1007--1007
+ []\T1/pcr/m/n/10 ptrn_switchr(inpt_l, f_idx_l = c(), t_idx_l = c(), sep = "-",
+ default_val = NA) 
+[20]
+Overfull \hbox (54.78088pt too wide) in paragraph at lines 1042--1042
+ []\T1/pcr/m/n/10 ptrn_twkr(inpt_l, depth = "max", sep = "-", default_val = "0"
+, add_sep = T) 
+
+Overfull \hbox (48.78088pt too wide) in paragraph at lines 1076--1076
+ []\T1/pcr/m/n/10 see_df(df, condition_l, val_l, conjunction_l = c(), rt_val = 
+T, f_val = F) 
+[21] [22]
+Overfull \hbox (78.78088pt too wide) in paragraph at lines 1155--1155
+ []\T1/pcr/m/n/10 see_inside(pattern_, path_ = ".", sep_ = c(","), unique_sep =
+ "#####", rec = F) 
+
+Overfull \hbox (16.64742pt too wide) in paragraph at lines 1169--1175
+\T1/ptm/m/n/10 sheet name as-so-cianted with, do the fol-low-ing: Ex-am-ples: p
+rint(x[(grep(unique_sep,
+
+Overfull \hbox (77.37729pt too wide) in paragraph at lines 1169--1175
+\T1/ptm/m/n/10 x)[][]1[][][]+1):length(x)]) #If you just want to see the column
+s do the fol-low-ing: print(x[][]1:(grep(unique_sep,
+[23] [24] [25] (/tmp/RtmpwfS5Qy/Rd2pdf18bfde7f8a062e/Rd2.ind [26] [27])
+(/tmp/RtmpwfS5Qy/Rd2pdf18bfde7f8a062e/Rd2.aux)
+
+Package rerunfilecheck Warning: File `Rd2.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )
+(see the transcript file for additional information)
+pdfTeX warning (dest): name{Rfn.1:\(grep\(unique.Rul.sep,\040x\)\040.Rdash.\040
+1\)} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{Rfn.1} has been referenced but does not exist, repl
+aced by a fixed one
+
+</usr/share/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-dis
+t/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/ti
+mes/utmb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/sh
+are/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/ty
+pe1/urw/times/utmri8a.pfb>
+Output written on Rd2.pdf (27 pages, 124762 bytes).
+Transcript written on Rd2.log.
+This is makeindex, version 2.17 [TeX Live 2023] (kpathsea + Thai support).
+Scanning input file Rd2.idx....done (46 entries accepted, 0 rejected).
+Sorting entries....done (273 comparisons).
+Generating output file Rd2.ind....done (96 lines written, 0 warnings).
+Output written in Rd2.ind.
+Transcript written in Rd2.ilg.
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-02-22> (./Rd2.tex
+(/usr/share/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2022/07/02 v1.4n Standard LaTeX document class
+(/usr/share/texmf-dist/tex/latex/base/bk10.clo))
+(/usr/share/texmf/tex/latex/Rd.sty
+(/usr/share/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/share/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/share/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texmf-dist/tex/latex/base/alltt.sty)
+(/usr/share/texmf-dist/tex/latex/tools/verbatim.sty)
+(/usr/share/texmf-dist/tex/latex/url/url.sty)
+(/usr/share/texmf-dist/tex/latex/base/textcomp.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texmf-dist/tex/latex/amsfonts/amsfonts.sty)
+(/usr/share/texmf-dist/tex/latex/amsfonts/amssymb.sty)
+(/usr/share/texmf-dist/tex/latex/jknapltx/mathrsfs.sty)
+(/usr/share/texmf-dist/tex/generic/iftex/iftex.sty)
+(/usr/share/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/share/texmf-dist/tex/latex/psnfss/times.sty)
+(/usr/share/texmf-dist/tex/latex/graphics/color.sty
+(/usr/share/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/share/texmf-dist/tex/latex/graphics-def/pdftex.def)
+(/usr/share/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/share/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/share/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(/usr/share/texmf-dist/tex/generic/infwarerr/infwarerr.sty))
+(/usr/share/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/share/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
+(/usr/share/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(/usr/share/texmf-dist/tex/generic/pdfescape/pdfescape.sty)
+(/usr/share/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/share/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty)
+(/usr/share/texmf-dist/tex/latex/auxhook/auxhook.sty)
+(/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/share/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/share/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+(/usr/share/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
+(/usr/share/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/share/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/share/texmf-dist/tex/generic/etexcmds/etexcmds.sty)
+(/usr/share/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/share/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/share/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(/usr/share/texmf-dist/tex/latex/base/atbegshi-ltx.sty))
+(/usr/share/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/share/texmf-dist/tex/latex/base/atveryend-ltx.sty)
+(/usr/share/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(/usr/share/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty))))
+(/usr/share/texmf-dist/tex/latex/base/makeidx.sty)
+(/usr/share/texmf-dist/tex/latex/base/inputenc.sty)
+Writing index file Rd2.idx
+(/usr/share/texmf-dist/tex/latex/psnfss/t1ptm.fd)
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def)
+(/tmp/RtmpwfS5Qy/Rd2pdf18bfde7f8a062e/Rd2.aux)
+(/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/tmp/RtmpwfS5Qy/Rd2pdf18bfde7f8a062e/Rd2.out)
+(/tmp/RtmpwfS5Qy/Rd2pdf18bfde7f8a062e/Rd2.out)
+(/usr/share/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
+(/usr/share/texmf-dist/tex/latex/psnfss/t1pcr.fd)
+(/usr/share/texmf-dist/tex/latex/psnfss/t1phv.fd)
+(/tmp/RtmpwfS5Qy/Rd2pdf18bfde7f8a062e/Rd2.toc
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(/usr/share/texmf-dist/tex/latex/jknapltx/ursfs.fd) [1{/var/lib/texmf/fonts/map
+/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}])
+
+Overfull \hbox (18.78088pt too wide) in paragraph at lines 42--42
+ []\T1/pcr/m/n/10 append_row(df_in, df, hmn = 1, na_col = c(), unique_do_not_kn
+ow = NA) 
+
+Overfull \hbox (2.20773pt too wide) in paragraph at lines 48--49
+[]\T1/ptm/m/n/10 is the dataframe from which the row will ap-pend to an-other o
+r the same dataframe 
+[2] [3] [4]
+Overfull \hbox (120.78088pt too wide) in paragraph at lines 233--233
+ []  \T1/pcr/m/n/10 str_source = c("a", "b", "c", "d", "e", "f", "g", "h", "i",
+ "j", "k", "l", "m", "n",[] 
+[5] [6] [7] [8]
+Overfull \hbox (17.56721pt too wide) in paragraph at lines 441--442
+[]\T1/ptm/m/n/10 Allow to find the min-i-mum or the max-i-mum of a date in a ve
+c-tor. The for-mat of dates is Year/Month/Day. 
+[9] [10] [11]
+Overfull \hbox (1.5473pt too wide) in paragraph at lines 570--571
+[]\T1/ptm/m/n/10 is the dataframe con-tain-ing the co-or-diantes of the es-tab-
+lished ge-o-graph-i-cal points 
+[12]
+Overfull \hbox (52.98038pt too wide) in paragraph at lines 639--639
+ []\T1/pcr/m/n/9 globe(lat_f=23, long_f=112, alt_f=NA, lat_n=c(2, 82), long_n=c
+(165, -55), alt_n=NA) 
+
+Overfull \hbox (72.78088pt too wide) in paragraph at lines 651--651
+ []\T1/pcr/m/n/10 groupr_df(inpt_df, condition_lst, val_lst, conjunction_lst, r
+tn_val_pos = c()) 
+[13] [14] [15] [16]
+Overfull \hbox (54.78088pt too wide) in paragraph at lines 842--842
+ []\T1/pcr/m/n/10 nestr_df1(inptf_df, inptt_pos_df, nestr_df, yes_val = T, inpt
+t_neg_df = NA) 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 865--865
+ []\T1/pcr/m/n/9 nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE
+)), yes_val=TRUE)[] 
+[17]
+Overfull \hbox (106.98032pt too wide) in paragraph at lines 898--898
+ []\T1/pcr/m/n/9 rtn_neg="no", nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALS
+E, FALSE, TRUE)), yes_val=TRUE)[] 
+[18] [19]
+Overfull \hbox (48.78088pt too wide) in paragraph at lines 979--979
+ []\T1/pcr/m/n/10 pattern_tuning(pattrn, spe_nb, spe_l, exclude_type, hmn = 1, 
+rg = c(0, 0)) 
+
+Overfull \hbox (78.78088pt too wide) in paragraph at lines 1007--1007
+ []\T1/pcr/m/n/10 ptrn_switchr(inpt_l, f_idx_l = c(), t_idx_l = c(), sep = "-",
+ default_val = NA) 
+[20]
+Overfull \hbox (54.78088pt too wide) in paragraph at lines 1042--1042
+ []\T1/pcr/m/n/10 ptrn_twkr(inpt_l, depth = "max", sep = "-", default_val = "0"
+, add_sep = T) 
+
+Overfull \hbox (48.78088pt too wide) in paragraph at lines 1076--1076
+ []\T1/pcr/m/n/10 see_df(df, condition_l, val_l, conjunction_l = c(), rt_val = 
+T, f_val = F) 
+[21] [22]
+Overfull \hbox (78.78088pt too wide) in paragraph at lines 1155--1155
+ []\T1/pcr/m/n/10 see_inside(pattern_, path_ = ".", sep_ = c(","), unique_sep =
+ "#####", rec = F) 
+
+Overfull \hbox (16.64742pt too wide) in paragraph at lines 1169--1175
+\T1/ptm/m/n/10 sheet name as-so-cianted with, do the fol-low-ing: Ex-am-ples: p
+rint(x[(grep(unique_sep,
+
+Overfull \hbox (77.37729pt too wide) in paragraph at lines 1169--1175
+\T1/ptm/m/n/10 x)[][]1[][][]+1):length(x)]) #If you just want to see the column
+s do the fol-low-ing: print(x[][]1:(grep(unique_sep,
+[23] [24] [25] (/tmp/RtmpwfS5Qy/Rd2pdf18bfde7f8a062e/Rd2.ind [26] [27])
+(/tmp/RtmpwfS5Qy/Rd2pdf18bfde7f8a062e/Rd2.aux) )
+(see the transcript file for additional information)
+pdfTeX warning (dest): name{Rfn.1:\(grep\(unique.Rul.sep,\040x\)\040.Rdash.\040
+1\)} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{Rfn.1} has been referenced but does not exist, repl
+aced by a fixed one
+
+</usr/share/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-dis
+t/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/ti
+mes/utmb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/sh
+are/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/ty
+pe1/urw/times/utmri8a.pfb>
+Output written on Rd2.pdf (27 pages, 125480 bytes).
+Transcript written on Rd2.log.
+Saving output to ‘edm1-manual.pdf’ ...
+Done
+You may want to clean up by 'rm -Rf /tmp/RtmpwfS5Qy/Rd2pdf18bfde7f8a062e'
