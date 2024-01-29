@@ -8,7 +8,7 @@ all_stat
 
 Allow to see all the main statistics indicators (mean, median, variance, standard deviation, sum) of variables in a dataframe by the modality of a variable in a column of the input datarame. In addition to that, you can get the occurence of other qualitative variables by your chosen qualitative variable, you have just to precise it in the vector "stat_var" where all the statistics indicators are given with "occu-var_you_want/".
 
-![Uploading capt_allstat.jpg…]()
+![capt_allstat](https://github.com/julienlargetpiet/edm1/assets/114911243/d787c74c-ace9-4eb3-bb91-36a8a1e10ca0)
 
 
 ## Usage
