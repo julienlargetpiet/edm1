@@ -4346,7 +4346,7 @@ occu <- function(inpt_v){
 #'               "var4"=c("A", "A", "A", "A", "B", "C", "C"))
 #'
 #' all_stat(inpt_v=c("first", "seco"), var_add = c("var1", "var2", "var3", "var4"), 
-#'  stat_var=c("sum", "mean", "median", "sd", "occu-var2/", "occu-var4/", "variance", "quantile-75/"), 
+#'  stat_var=c("sum", "mean", "median", "sd", "occu-var2/", "occu-var4/", "variance", "quantile-0.75/"), 
 #'  inpt_df=df)
 
 
