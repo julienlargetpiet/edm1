@@ -4333,7 +4333,7 @@ occu <- function(inpt_v){
 
 #' all_stat
 #'
-#' Allow to see all the main statistics indicators (mean, median, variance, standard deviation, sum, max, min) of variables in a dataframe by the modality of a variable in a column of the input datarame. In addition to that, you can get the occurence of other qualitative variables by your chosen qualitative variable, you have just to precise it in the vector "stat_var" where all the statistics indicators are given with "occu-var_you_want/".
+#' Allow to see all the main statistics indicators (mean, median, variance, standard deviation, sum, max, min, quantile) of variables in a dataframe by the modality of a variable in a column of the input datarame. In addition to that, you can get the occurence of other qualitative variables by your chosen qualitative variable, you have just to precise it in the vector "stat_var" where all the statistics indicators are given with "occu-var_you_want/".
 #' @param inpt_v is the modalities of the variables 
 #' @param var_add is the variables you want to get the stats from
 #' @param stat_var is the stats indicators you want
@@ -4346,7 +4346,7 @@ occu <- function(inpt_v){
 #'               "var4"=c("A", "A", "A", "A", "B", "C", "C"))
 #'
 #' all_stat(inpt_v=c("first", "seco"), var_add = c("var1", "var2", "var3", "var4"), 
-#'  stat_var=c("sum", "mean", "median", "sd", "occu-var2/", "occu-var4/", "variance"), 
+#'  stat_var=c("sum", "mean", "median", "sd", "occu-var2/", "occu-var4/", "variance", "quantile-75/"), 
 #'  inpt_df=df)
 #'
 #'   modal_v var_vector occu sum mean  med standard_devaition         variance
@@ -4610,6 +4610,33 @@ all_stat <- function(inpt_v, var_add=c(), stat_var=c(), inpt_df){
 
         }
 
+        if (length(grep("quantile", st)) > 0){
+
+            idx_v <- str_locate(st, "-(.*?)/")
+
+            nb_quant <- as.numeric(paste(unlist(strsplit(x=st, split=""))[(idx_v[1]+1):(idx_v[2]-1)], collapse=""))
+
+            print(nb_quant)
+
+            for (vr in 1:length(inpt_v)){
+
+                for (idx in 1:length(var_add)){
+
+                    cur_col <- df[, which(col_ns == var_add[idx])]
+
+                    vec_cur[pre_length_var_add * (vr - 1) + mod_idx[idx] + vr] <- quantile(cur_col[df[,1] == inpt_v[vr]], 
+                    probs=nb_quant) 
+
+                }
+
+            }
+
+        rtn_df <- cbind(rtn_df, "X"=vec_cur)
+
+        colnames(rtn_df)[length(colnames(rtn_df))] <- paste("quantile-", as.character(nb_quant), sep="")
+
+        }
+
         if (st == "mean"){
 
             for (vr in 1:length(inpt_v)){
@@ -4635,7 +4662,6 @@ all_stat <- function(inpt_v, var_add=c(), stat_var=c(), inpt_df){
   return(rtn_df)
 
 }
-
 
 
 

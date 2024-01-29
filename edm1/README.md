@@ -6,7 +6,7 @@ all_stat
 
 ## Description
 
-Allow to see all the main statistics indicators (mean, median, variance, standard deviation, sum, max, min) of variables in a dataframe by the modality of a variable in a column of the input datarame. In addition to that, you can get the occurence of other qualitative variables by your chosen qualitative variable, you have just to precise it in the vector "stat_var" where all the statistics indicators are given with "occu-var_you_want/".
+Allow to see all the main statistics indicators (mean, median, variance, standard deviation, sum, max, min, quantile) of variables in a dataframe by the modality of a variable in a column of the input datarame. In addition to that, you can get the occurence of other qualitative variables by your chosen qualitative variable, you have just to precise it in the vector "stat_var" where all the statistics indicators are given with "occu-var_you_want/".
 
 
 ## Usage
@@ -36,7 +36,7 @@ df <- data.frame("mod"=c("first", "seco", "seco", "first", "first", "third", "fi
 "var4"=c("A", "A", "A", "A", "B", "C", "C"))
 
 all_stat(inpt_v=c("first", "seco"), var_add = c("var1", "var2", "var3", "var4"),
-stat_var=c("sum", "mean", "median", "sd", "occu-var2/", "occu-var4/", "variance"),
+stat_var=c("sum", "mean", "median", "sd", "occu-var2/", "occu-var4/", "variance", "quantile-75/"),
 inpt_df=df)
 
 modal_v var_vector occu sum mean  med standard_devaition         variance
