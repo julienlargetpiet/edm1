@@ -4294,8 +4294,9 @@ groupr_df <- function(inpt_df, condition_lst, val_lst, conjunction_lst, rtn_val_
 }
 
 #' occu
-#' 
+#'
 #' Allow to see the occurence of each variable in a vector. Returns a datafame with, as the first column, the all the unique variable of the vector and , in he second column, their occurence respectively.
+#' @param inpt_v the input dataframe
 
 occu <- function(inpt_v){
 
@@ -4333,6 +4334,10 @@ occu <- function(inpt_v){
 #' all_stat
 #'
 #' Allow to see all the main statistics indicators (mean, median, variance, standard deviation, sum) of variables in a dataframe by the modality of a variable in a column of the input datarame. In addition to that, you can get the occurence of other qualitative variables by your chosen qualitative variable, you have just to precise it in the vector "stat_var" where all the statistics indicators are given with "occu-var_you_want/".
+#' @param inpt_v is the modalities of the variables 
+#' @param var_add is the variables you want to get the stats from
+#' @param stat_var is the stats indicators you want
+#' @param inpt_df is the input dataframe
 #' @examples
 #' df <- data.frame("mod"=c("first", "seco", "seco", "first", "first", "third", "first"), 
 #'                 "var1"=c(11, 22, 21, 22, 22, 11, 9), 

@@ -6,6 +6,9 @@
 \usage{
 occu(inpt_v)
 }
+\arguments{
+\item{inpt_v}{the input dataframe}
+}
 \description{
 Allow to see the occurence of each variable in a vector. Returns a datafame with, as the first column, the all the unique variable of the vector and , in he second column, their occurence respectively.
 }

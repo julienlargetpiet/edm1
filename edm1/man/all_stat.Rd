@@ -6,6 +6,15 @@
 \usage{
 all_stat(inpt_v, var_add = c(), stat_var = c(), inpt_df)
 }
+\arguments{
+\item{inpt_v}{is the modalities of the variables}
+
+\item{var_add}{is the variables you want to get the stats from}
+
+\item{stat_var}{is the stats indicators you want}
+
+\item{inpt_df}{is the input dataframe}
+}
 \description{
 Allow to see all the main statistics indicators (mean, median, variance, standard deviation, sum) of variables in a dataframe by the modality of a variable in a column of the input datarame. In addition to that, you can get the occurence of other qualitative variables by your chosen qualitative variable, you have just to precise it in the vector "stat_var" where all the statistics indicators are given with "occu-var_you_want/".
 }

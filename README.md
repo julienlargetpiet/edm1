@@ -16,6 +16,16 @@ all_stat(inpt_v, var_add = c(), stat_var = c(), inpt_df)
 ```
 
 
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the modalities of the variables
+`var_add`     |     is the variables you want to get the stats from
+`stat_var`     |     is the stats indicators you want
+`inpt_df`     |     is the input dataframe
+
+
 ## Examples
 
 ```r
@@ -47,7 +57,6 @@ var4-A    2
 var4-B    0
 var4-C    0
 ```
-![capt_allstat](https://github.com/julienlargetpiet/edm1/assets/114911243/5a506a5f-00fa-4c2b-b5b9-4087132e96d4)
 
 
 # `append_row`
@@ -1004,6 +1013,13 @@ Allow to see the occurence of each variable in a vector. Returns a datafame with
 ```r
 occu(inpt_v)
 ```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     the input dataframe
 
 
 # `pattern_generator`

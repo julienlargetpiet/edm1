@@ -16,6 +16,16 @@ all_stat(inpt_v, var_add = c(), stat_var = c(), inpt_df)
 ```
 
 
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the modalities of the variables
+`var_add`     |     is the variables you want to get the stats from
+`stat_var`     |     is the stats indicators you want
+`inpt_df`     |     is the input dataframe
+
+
 ## Examples
 
 ```r
@@ -1003,6 +1013,13 @@ Allow to see the occurence of each variable in a vector. Returns a datafame with
 ```r
 occu(inpt_v)
 ```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     the input dataframe
 
 
 # `pattern_generator`
