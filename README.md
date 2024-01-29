@@ -40,6 +40,8 @@ stat_var=c("sum", "mean", "median", "sd", "occu-var2/", "occu-var4/", "variance"
 inpt_df=df)
 ```
 
+![allstat](https://github.com/julienlargetpiet/edm1/assets/114911243/d832e425-8867-4be7-9d52-f2bd9494a2c3)
+
 
 # `append_row`
 
