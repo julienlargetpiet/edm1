@@ -4333,7 +4333,7 @@ occu <- function(inpt_v){
 
 #' all_stat
 #'
-#' Allow to see all the main statistics indicators (mean, median, variance, standard deviation, sum) of variables in a dataframe by the modality of a variable in a column of the input datarame. In addition to that, you can get the occurence of other qualitative variables by your chosen qualitative variable, you have just to precise it in the vector "stat_var" where all the statistics indicators are given with "occu-var_you_want/".
+#' Allow to see all the main statistics indicators (mean, median, variance, standard deviation, sum, max, min) of variables in a dataframe by the modality of a variable in a column of the input datarame. In addition to that, you can get the occurence of other qualitative variables by your chosen qualitative variable, you have just to precise it in the vector "stat_var" where all the statistics indicators are given with "occu-var_you_want/".
 #' @param inpt_v is the modalities of the variables 
 #' @param var_add is the variables you want to get the stats from
 #' @param stat_var is the stats indicators you want
@@ -4501,6 +4501,42 @@ all_stat <- function(inpt_v, var_add=c(), stat_var=c(), inpt_df){
     for (st in stat_var){
 
         vec_cur <- c(matrix(nrow=length(var_vector), ncol=1, data=""))
+
+        if (st == "max"){
+
+            for (vr in 1:length(inpt_v)){
+
+                for (idx in 1:length(var_add)){
+
+                    cur_col <- df[, which(col_ns == var_add[idx])]
+
+                    vec_cur[pre_length_var_add * (vr - 1) + mod_idx[idx] + vr] <- max(cur_col[df[,1] == inpt_v[vr]]) 
+
+                }
+
+            }
+
+            rtn_df <- cbind(rtn_df, "max"=vec_cur)
+
+        }
+
+        if (st == "min"){
+
+            for (vr in 1:length(inpt_v)){
+
+                for (idx in 1:length(var_add)){
+
+                    cur_col <- df[, which(col_ns == var_add[idx])]
+
+                    vec_cur[pre_length_var_add * (vr - 1) + mod_idx[idx] + vr] <- min(cur_col[df[,1] == inpt_v[vr]]) 
+
+                }
+
+            }
+
+            rtn_df <- cbind(rtn_df, "min"=vec_cur)
+
+        }
 
         if (st == "variance"){
 
