@@ -47,6 +47,7 @@ var4-A    2
 var4-B    0
 var4-C    0
 ```
+![capt_allstat](https://github.com/julienlargetpiet/edm1/assets/114911243/5a506a5f-00fa-4c2b-b5b9-4087132e96d4)
 
 
 # `append_row`
