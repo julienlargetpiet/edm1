@@ -753,6 +753,82 @@ Argument      |Description
 `ins_loc`     |     is a vector containg two parameters (row, column) of the begining for the insertion
 
 
+# `inter_max`
+
+inter_max
+
+
+## Description
+
+Takes as input a list of vectors composed of ints or floats ascendly ordered (intervals) that can have a different step to one of another element ex: list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3))
+ The function will return the list of lists altered according to the maximum step found in the input list.
+
+
+## Usage
+
+```r
+inter_max(inpt_l, max_ = -1000, get_lst = T)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_l`     |     is the input list
+`max_`     |     is a value you are sure is the minimum step value of all the sub-lists
+`get_lst`     |     is the parameter that, if set to True, will keep the last values of vectors in the return value if the last step exceeds the end value of the vector.
+
+
+# `inter_min`
+
+inter_min
+
+
+## Description
+
+Takes as input a list of vectors composed of ints or floats ascendly ordered (intervals) that can have a different step to one of another element ex: list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3))
+ This function will return the list of vectors with the same steps preserving the begin and end value of each interval.
+ The way the algorythmn searches the common step of all the sub-lists is also given by the user as a parameter, see `how_to` paramaters.
+
+
+## Usage
+
+```r
+inter_min(
+  inpt_l,
+  min_ = 1000,
+  sensi = 3,
+  sensi2 = 3,
+  how_to_op = c("divide"),
+  how_to_val = c(3)
+)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_l`     |     is the input list containing all the intervals
+`min_`     |     is a value you are sure is superior to the maximum step value in all the intervals
+`sensi`     |     is the decimal accuracy of how the difference between each value n to n+1 in an interval is calculated
+`sensi2`     |     is the decimal accuracy of how the value with the common step is calculated in all the intervals
+`how_to_op`     |     is a vector containing the operations to perform to the pre-common step value, defaults to only "divide". The operations can be "divide", "substract", "multiply" or "add". All type of operations can be in this parameter.
+`how_to_val`     |     is a vector containing the value relatives to the operations in `hot_to_op` , defaults to 3 output from ex:
+
+
+## Examples
+
+```r
+[[0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2
+.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0], [0, 0.1, 0.2, 0.3, 0.4, 0.
+5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8
+, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0], [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0,
+2.1, 2.2, 2.3]]
+```
+
+
 # `letter_to_nb`
 
 letter_to_nb

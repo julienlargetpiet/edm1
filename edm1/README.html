@@ -1458,6 +1458,144 @@ function processMathHTML() {
 
 </div>
 </body></html>
+<!DOCTYPE html><html><head><title>R: inter_max</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>inter_max</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='inter_max'>inter_max</h2>
+
+<h3>Description</h3>
+
+<p>Takes as input a list of vectors composed of ints or floats ascendly ordered (intervals) that can have a different step to one of another element ex: list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3))
+The function will return the list of lists altered according to the maximum step found in the input list.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>inter_max(inpt_l, max_ = -1000, get_lst = T)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inter_max_:_inpt_l">inpt_l</code></td>
+<td>
+<p>is the input list</p>
+</td></tr>
+<tr><td><code id="inter_max_:_max_">max_</code></td>
+<td>
+<p>is a value you are sure is the minimum step value of all the sub-lists</p>
+</td></tr>
+<tr><td><code id="inter_max_:_get_lst">get_lst</code></td>
+<td>
+<p>is the parameter that, if set to True, will keep the last values of vectors in the return value if the last step exceeds the end value of the vector.</p>
+</td></tr>
+</table>
+
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: inter_min</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>inter_min</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='inter_min'>inter_min</h2>
+
+<h3>Description</h3>
+
+<p>Takes as input a list of vectors composed of ints or floats ascendly ordered (intervals) that can have a different step to one of another element ex: list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3))
+This function will return the list of vectors with the same steps preserving the begin and end value of each interval.
+The way the algorythmn searches the common step of all the sub-lists is also given by the user as a parameter, see <code>how_to</code> paramaters.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>inter_min(
+  inpt_l,
+  min_ = 1000,
+  sensi = 3,
+  sensi2 = 3,
+  how_to_op = c("divide"),
+  how_to_val = c(3)
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inter_min_:_inpt_l">inpt_l</code></td>
+<td>
+<p>is the input list containing all the intervals</p>
+</td></tr>
+<tr><td><code id="inter_min_:_min_">min_</code></td>
+<td>
+<p>is a value you are sure is superior to the maximum step value in all the intervals</p>
+</td></tr>
+<tr><td><code id="inter_min_:_sensi">sensi</code></td>
+<td>
+<p>is the decimal accuracy of how the difference between each value n to n+1 in an interval is calculated</p>
+</td></tr>
+<tr><td><code id="inter_min_:_sensi2">sensi2</code></td>
+<td>
+<p>is the decimal accuracy of how the value with the common step is calculated in all the intervals</p>
+</td></tr>
+<tr><td><code id="inter_min_:_how_to_op">how_to_op</code></td>
+<td>
+<p>is a vector containing the operations to perform to the pre-common step value, defaults to only &quot;divide&quot;. The operations can be &quot;divide&quot;, &quot;substract&quot;, &quot;multiply&quot; or &quot;add&quot;. All type of operations can be in this parameter.</p>
+</td></tr>
+<tr><td><code id="inter_min_:_how_to_val">how_to_val</code></td>
+<td>
+<p>is a vector containing the value relatives to the operations in <code>hot_to_op</code>, defaults to 3
+output from ex:</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+[[0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2
+.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0], [0, 0.1, 0.2, 0.3, 0.4, 0.
+5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8
+, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0], [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0,
+2.1, 2.2, 2.3]]
+</code></pre>
+
+
+</div>
+</body></html>
 <!DOCTYPE html><html><head><title>R: letter_to_nb</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
