@@ -4598,8 +4598,6 @@ all_stat <- function(inpt_v, var_add=c(), stat_var=c(), inpt_df){
 
             nb_quant <- as.numeric(paste(unlist(strsplit(x=st, split=""))[(idx_v[1]+1):(idx_v[2]-1)], collapse=""))
 
-            print(nb_quant)
-
             for (vr in 1:length(inpt_v)){
 
                 for (idx in 1:length(var_add)){
@@ -4913,6 +4911,1083 @@ inter_max <- function(inpt_l, max_=-1000, get_lst=T){
     return(inpt_l)
 
 }
+
+#chs_df <- function(inpt_df, occu=1, id_, default_val="no_val"){
+#
+#    if (typeof(id_) == "character"){
+#
+#        id_ <- match(id_, colnames(inpt_df)) 
+#
+#    }
+#
+#    ids <- unique(inpt_df[, id_]) 
+#
+#    rtn_v <- c()
+#
+#    rtn_df <- data.frame(matrix(nrow=1, ncol=ncol(inpt_df)))
+#
+#    for (i in 1:length(ids)){ 
+#
+#        pre_df <- inpt_df[inpt_df[, id_] == ids[i], ]
+#
+#        if (nrow(pre_df) >= max(occu)){
+#
+#            colnames(pre_df) <- colnames(rtn_df)
+#
+#            rtn_df <- rbind(rtn_df, pre_df[occu, ])
+#
+#        }else if (default_val != "no_val"){
+#
+#            if (min(occu) <= nrow(pre_df)){
+#
+#                pre_df <- pre_df[min(occu):nrow(pre_df),]
+#
+#                colnames(pre_df) <- colnames(rtn_df)
+#
+#                rtn_df <- rbind(rtn_df, pre_df)
+#
+#            }
+#
+#            if (default_val != "no_val"){
+#
+#                pre_df <- matrix(data=default_val, nrow=1, ncol=ncol(pre_df))
+#
+#                colnames(pre_df) <- colnames(rtn_df)
+#
+#                rtn_df <- rbind(rtn_df, pre_df)
+#
+#                rtn_df[nrow(rtn_df), id_] <- ids[i]
+#
+#            }
+#
+#        }
+#
+#    }
+#
+#    rtn_df <- rtn_df[-1,]
+#
+#    return(rtn_df)
+#
+#}
+#
+#df2 <- data.frame("val"=c(3, 7, 2, 4, 1, 2), "ids"=c("a", "z", "z", "z", "z", "a"), "bool"=c(T, F, F, F, T, T), 
+#                  "second_ids"=c(13, 12, 8, 34, 22, 12))
+#
+#print(chs_df(inpt_df=df2, occu=1:3, id_=2, default_val="no_val"))
+
+#' incr_fillr
+#' 
+#' Take a vector uniquely composed by double and sorted ascendingly, a step, another vector of elements whose length is equal to the length of the first vector, and a default value. If an element of the vector is not equal to its predecessor minus a user defined step, so these can be the output according to the parameters (see example):
+#' @param inpt_v is the asending double only composed vector
+#' @param wrk_v is the other vector (size equal to inpt_v), defaults to NA
+#' @param default_val is the default value put when the difference between two following elements of inpt_v is greater than step, defaults to NA
+#' @param step is the allowed difference between two elements of inpt_v
+#' @examples
+#' print(incr_fillr(inpt_v=c(1, 2, 4, 5, 9, 10), 
+#'                 wrk_v=NA, 
+#'                 default_val="increasing"))
+#'
+#' [1]  1  2  3  4  5  6  7  8  9 10
+#'
+#' print(incr_fillr(inpt_v=c(1, 1, 2, 4, 5, 9), 
+#'                 wrk_v=c("ok", "ok", "ok", "ok", "ok"), 
+#'                 default_val=NA))
+#'
+#' [1] "ok" "ok" "ok" NA   "ok" "ok" NA   NA   NA  
+#'
+#' print(incr_fillr(inpt_v=c(1, 2, 4, 5, 9, 10), 
+#'                 wrk_v=NA, 
+#'                 default_val="NAN"))
+#'
+#' [1] "1"   "2"   "NAN" "4"   "5"   "NAN" "NAN" "NAN" "9"   "10" 
+
+incr_fillr <- function(inpt_v, wrk_v=NA, default_val=NA, step=1){
+
+    if (all(is.na(wrk_v))){
+
+        rtn_v <- inpt_v
+
+    }else{
+
+        rtn_v <- wrk_v
+
+    }
+
+    if (is.na(default_val)){
+
+        i = 2
+
+        while (i <= length(inpt_v)){
+
+            if (is.na(inpt_v[(i-1)]) == F){
+
+                if ((inpt_v[(i-1)] + step) < inpt_v[i]){
+
+                    rtn_v <- append(x=rtn_v, values=default_val, after=(i-1))
+
+                    inpt_v <- append(x=inpt_v, values=default_val, after=(i-1))
+
+                    bf_val = inpt_v[(i-1)] + 1
+
+                }
+
+            }else if ((bf_val + step) < inpt_v[i]){
+
+                    rtn_v <- append(x=rtn_v, values=default_val, after=(i-1))
+
+                    inpt_v <- append(x=inpt_v, values=default_val, after=(i-1))
+
+                    bf_val = bf_val + 1
+
+            }
+
+            i = i + 1
+
+        }
+
+    }else if (default_val != "increasing"){
+
+        i = 2
+
+        while (i <= length(inpt_v)){
+
+            if (inpt_v[(i-1)] != default_val){
+
+                if ((as.numeric(inpt_v[(i-1)]) + step) < as.numeric(inpt_v[i])){
+
+                    rtn_v <- append(x=rtn_v, values=default_val, after=(i-1))
+
+                    inpt_v <- append(x=inpt_v, values=default_val, after=(i-1))
+
+                    bf_val = as.numeric(inpt_v[(i-1)]) + 1
+
+                }
+
+            }else if ((bf_val + step) < as.numeric(inpt_v[i])){
+
+                    inpt_v <- append(x=inpt_v, values=default_val, after=(i-1))
+
+                    rtn_v <- append(x=rtn_v, values=default_val, after=(i-1))
+
+                    bf_val = bf_val + 1
+
+            }
+
+            i = i + 1
+
+        }
+
+    }else{
+
+        i = 2
+
+        while (i <= length(rtn_v)){
+
+            if ((inpt_v[(i-1)] + step) < inpt_v[i]){
+
+                rtn_v <- append(x=rtn_v, values=(inpt_v[(i-1)]+1), after=(i-1))
+
+                inpt_v <- append(x=inpt_v, values=(inpt_v[(i-1)]+1), after=(i-1))
+
+            }
+
+            i = i + 1
+
+        }
+
+    }
+
+    return(rtn_v)
+
+}
+
+#' paste_df
+#' 
+#' Return a vector composed of pasted elements from the input dataframe at the same index.
+#' @param inpt_df is the input dataframe
+#' @param sep is the separator between pasted elements, defaults to ""
+#' @examples
+#' print(paste_df(inpt_df=data.frame(c(1, 2, 1), c(33, 22, 55))))
+#'
+#' [1] "133" "222" "155"
+
+paste_df <- function(inpt_df, sep=""){
+
+    if (ncol(as.data.frame(inpt_df)) == 1){ 
+
+        return(inpt_df) 
+
+    }else {
+
+        rtn_df <- inpt_df[,1]
+
+        for (i in 2:ncol(inpt_df)){
+
+            rtn_df <- paste(rtn_df, inpt_df[,i], sep=sep)
+
+        }
+
+        return(rtn_df)
+
+    }
+
+}
+
+#' nest_v
+#' 
+#' Nest two vectors according to the following parameters.
+#' @param f_v is the vector that will welcome the nested vector t_v
+#' @param t_v is the imbriquator vector
+#' @param step defines after how many elements of f_v the next element of t_v can be put in the output
+#' @param after defines after how many elements of f_v, the begining of t_v can be put 
+#' @examples
+#' print(nest_v(f_v=c(1, 2, 3, 4, 5, 6), t_v=c("oui", "oui2", "oui3", "oui4", "oui5", "oui6"), step=2, after=2))
+#'
+#' [1] "1"    "2"    "oui"  "3"    "4"    "oui2" "5"    "6"    "oui3" "oui4"
+
+nest_v <- function(f_v, t_v, step=1, after=1){
+
+    cnt = after
+
+    for (i in 1:length(t_v)){
+
+        f_v <- append(x=f_v, values=t_v[i], after=cnt)
+
+        cnt = cnt + step + 1
+
+    }
+
+    return(f_v)
+
+}
+
+#' fixer_nest_v
+#'
+#' Retur the elements of a vector "wrk_v" (1) that corresponds to the pattern of elements in another vector "cur_v" (2) according to another vector "pttrn_v" (3) that contains the patterof eleemnts.
+#' @examples
+#'print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "non", "peut-etre"), pttrn_v=c("oui", "non", "peut-etre"), 
+#'                   wrk_v=c(1, 2, 3, 4, 5, 6)))
+#'
+#'[1] 1 2 3 4 5 6
+#'
+#'print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "non", "peut-etre"), pttrn_v=c("oui", "non"), 
+#'                   wrk_v=c(1, 2, 3, 4, 5, 6)))
+#'
+#'[1]  1  2 NA  4  5 NA
+
+fixer_nest_v <- function(cur_v, pttrn_v, wrk_v){
+
+    cnt = 1
+
+    cnt2 = 0
+
+    for (i in 1:length(cur_v)){
+
+        if (pttrn_v[cnt] != cur_v[i]){
+
+            if (cnt2 == 0){
+
+                idx <- (cnt2*length(pttrn_v)-1) + match(T, str_detect(pttrn_v, paste0("\\b(", cur_v[i], ")\\b"))) 
+
+            }else{
+
+                idx <- cnt2*length(pttrn_v) + match(T, str_detect(pttrn_v, paste0("\\b(", cur_v[i], ")\\b"))) 
+
+            }
+
+            rtain_val <- wrk_v[idx]
+
+            wrk_v[idx] <- wrk_v[i] 
+
+            wrk_v[i] <- rtain_val
+
+            rtain_val <- cur_v[idx]
+
+            cur_v[idx] <- cur_v[i]
+
+            cur_v[i] <- rtain_val
+
+            if (cnt == length(pttrn_v)){ cnt = 1; cnt2 = cnt2 + 1 }else if (cnt > 1) { cnt = cnt + 1 }
+
+        }else{
+
+            if (cnt == length(pttrn_v)){ cnt = 1; cnt2 = cnt2 + 1 }else { cnt = cnt + 1 }
+
+        }
+
+    }
+
+    return(wrk_v)
+
+}
+
+#' lst_flatnr
+#'
+#' Flatten a list to a vector
+#' @param lst_flatnr
+#' @examples
+#'print(lst_flatnr(inpt_l=list(c(1, 2), c(5, 3), c(7, 2, 7))))
+#'
+#'[1] 1 2 5 3 7 2 7
+
+lst_flatnr <- function(inpt_l){
+
+    rtn_v <- c()
+
+    for (el in inpt_l){
+
+        rtn_v <- c(rtn_v, el)
+
+    }
+
+    return(rtn_v)
+
+}
+
+#' extrt_only_v
+#' 
+#' return the elements from a vector "inpt_v" that are in another vector "pttrn_v"
+#' @param inpt_v is the input vector 
+#' @param pttrn_v is the vector contining all the elements that can be in inpt_v 
+#' @examples
+#'print(extrt_only_v(inpt_v=c("oui", "non", "peut", "oo", "ll", "oui", "non", "oui", "oui"), pttrn_v=c("oui")))
+#'
+#'[1] "oui" "oo"  "oui" "oui" "oui"
+
+extrt_only_v <- function(inpt_v, pttrn_v){
+
+    rtn_v <- c()
+
+    for (el in inpt_v){
+
+        if (el %in% pttrn_v){ rtn_v <- c(rtn_v, el) }
+
+    }
+
+    return(rtn_v)
+
+}
+
+#' fittr_v
+#'
+#' Return the indexes of elements contained in "w_v" according to "f_v"
+#' @param f_v is the input vector
+#' @param w_v is the vector containing the elements that can be in f_v
+#' @examples
+#'print(fittr_v(f_v=c("non", "non", "non", "oui"), w_v=c("oui", "non", "non")))
+#'
+#'[1] 4 1 2
+
+fittr_v <- function(f_v, w_v, nvr_here=NA){
+
+    rtn_v <- c()
+
+    for (el in w_v){
+
+        idx <- match(el, f_v)
+
+        rtn_v <- c(rtn_v, idx)
+
+        f_v[idx] <- nvr_here
+
+    }
+
+    return(rtn_v)
+
+}
+
+#' calc_occu_v
+#'
+#' Rearanges the index of a vector "w_v" to match the occurences of the common elements in another vector "f_v"
+#' @examples
+#'print(calc_occu_v(f_v=c("e", "a", "z", NA, "a"), w_v=c("a", "a", "z")))
+#'
+#'[1] 1 3 2
+
+calc_occu_v <- function(f_v, w_v, nvr_here=NA){
+
+    rtn_v <- c()
+
+    idx_status <- c()
+
+    f_v2 <- f_v
+
+    for (el in 1:length(w_v)){
+
+        cur_ids <- match(w_v[el], f_v)
+
+        f_v[cur_ids] <- nvr_here
+
+        idx_status <- c(idx_status, cur_ids)
+
+    }
+
+    for (i in sort(idx_status)){
+
+        idx <- match(f_v2[i], w_v)
+
+        rtn_v <- c(rtn_v, idx)
+
+        w_v[idx] <- nvr_here
+
+    }
+
+    return(rtn_v)
+
+}
+
+#' appndr
+#'
+#' Append to a vector "inpt_v" a special value "val" n times "mmn". The appending begins at "strt" index.
+#' @param inpt_v is the input vector
+#' @param val is the special value
+#' @param hmn is the number of special value element added
+#' @param strt is the index from which appending begins, defaults to max which means the end of "inpt_v"
+
+appndr <- function(inpt_v, val=NA, hmn, strt="max"){
+
+    if (strt == "max"){
+
+        strt <- length(inpt_v)
+
+    }
+
+    if (hmn > 0){
+
+        for (i in hmn){ inpt_v <- append(x=inpt_v, values=val, after=strt) }
+
+    }
+
+    return(inpt_v)
+
+}
+
+#' any_join_df
+#'
+#' Allow to perform SQL joints with more features
+#' @param inpt_df_l is a list containing all the dataframe
+#' @param join_type is the joint type. Defaults to inner but can be changed to a vector containing all the dataframes you want to take their ids to don external joints.
+#' @param join_spe can be equal to a vector to do an external joints on all the dataframes. In this case, join_type should not be equal to "inner"
+#' @param id_v is a vector containing all the ids name of the dataframes. The ids names can be changed to number of their columns taking in count their position in inpt_df_l. It means that if my id is in the third column of the second dataframe and the first dataframe have 5 columns, the column number of the ids is 5 + 3 = 8
+#' @param excl_col is a vector containing the column names to exclude, if this vector is filled so "rtn_col" should not be filled. You can also put the column number in the manner indicated for "id_v". Defaults to c()
+#' @param rtn_col is a vector containing the column names to retain, if this vector is filled so "excl_col" should not be filled. You can also put the column number in the manner indicated for "id_v". Defaults to c()
+#' @param d_val is the default val when here is no match 
+#' @examples
+#'
+#'df1 <- data.frame("val"=c(1, 1, 2, 4), "ids"=c("e", "a", "z", "a"), 
+#'"last"=c("oui", "oui", "non", "oui"),
+#'"second_ids"=c(13, 11, 12, 8))
+#'
+#'df2 <- data.frame("val"=c(3, 7, 2, 4, 1, 2), "ids"=c("a", "z", "z", "a", "a", "a"), 
+#'"bool"=c(T, F, F, F, T, T),
+#'"second_ids"=c(13, 12, 8, 34, 22, 12))
+#'
+#'df3 <- data.frame("val"=c(1, 9, 2, 4), "ids"=c("a", "a", "z", "a"), 
+#'"last"=c("oui", "oui", "non", "oui"),
+#'"second_ids"=c(13, 11, 12, 8))
+#'
+#'print(any_join_df(inpt_df_l=list(df1, df2, df3), join_type="inner", 
+#'id_v=c("ids", "second_ids"), 
+#'                  excl_col=c(), rtn_col=c()))
+#'  ids val ids last second_ids val ids  bool second_ids val ids last second_ids
+#'3 z12   2   z  non         12   7   z FALSE         12   2   z  non         12
+#'
+#'print(any_join_df(inpt_df_l=list(df1, df2, df3), join_type="inner", id_v=c("ids"), 
+#'
+#'  ids val ids last second_ids val ids  bool second_ids val ids last second_ids
+#'2   a   1   a  oui         11   3   a  TRUE         13   1   a  oui         13
+#'3   z   2   z  non         12   7   z FALSE         12   9   a  oui         11
+#'4   a   4   a  oui          8   4   a FALSE         34   2   z  non         12
+#'
+#'print(any_join_df(inpt_df_l=list(df1, df2, df3), join_type=c(1), id_v=c("ids"), 
+#'                  excl_col=c(), rtn_col=c()))
+#'
+#'  ids val ids last second_ids  val  ids  bool second_ids  val  ids last
+#'1   e   1   e  oui         13 <NA> <NA>  <NA>       <NA> <NA> <NA> <NA>
+#'2   a   1   a  oui         11    3    a  TRUE         13    1    a  oui
+#'3   z   2   z  non         12    7    z FALSE         12    2    z  non
+#'4   a   4   a  oui          8    4    a FALSE         34    9    a  oui
+#'  second_ids
+#'1       <NA>
+#'2         13
+#'3         12
+#'4         11
+#'
+#'print(any_join_df(inpt_df_l=list(df2, df1, df3), join_type=c(1, 3), id_v=c("ids", "second_ids"), 
+#'                  excl_col=c(), rtn_col=c()))
+#'   ids  val  ids  bool second_ids  val  ids last second_ids  val  ids last
+#'1  a13    3    a  TRUE         13 <NA> <NA> <NA>       <NA>    1    a  oui
+#'2  z12    7    z FALSE         12    2    z  non         12    2    z  non
+#'3   z8    2    z FALSE          8 <NA> <NA> <NA>       <NA> <NA> <NA> <NA>
+#'4  a34    4    a FALSE         34 <NA> <NA> <NA>       <NA> <NA> <NA> <NA>
+#'5  a22    1    a  TRUE         22 <NA> <NA> <NA>       <NA> <NA> <NA> <NA>
+#'6  a12    2    a  TRUE         12 <NA> <NA> <NA>       <NA> <NA> <NA> <NA>
+#'7  a13 <NA> <NA>  <NA>       <NA> <NA> <NA> <NA>       <NA> <NA> <NA> <NA>
+#'8  a11 <NA> <NA>  <NA>       <NA>    1    a  oui         11    9    a  oui
+#'9  z12 <NA> <NA>  <NA>       <NA> <NA> <NA> <NA>       <NA> <NA> <NA> <NA>
+#'10  a8 <NA> <NA>  <NA>       <NA>    4    a  oui          8    4    a  oui
+#'   second_ids
+#'1          13
+#'2          12
+#'3        <NA>
+#'4        <NA>
+#'5        <NA>
+#'6        <NA>
+#'7        <NA>
+#'8          11
+#'9        <NA>
+#'10          8
+#'
+#'print(any_join_df(inpt_df_l=list(df1, df2, df3), join_type=c(1), id_v=c("ids"), 
+#'                  excl_col=c(), rtn_col=c()))
+#'
+#'ids val ids last second_ids  val  ids  bool second_ids  val  ids last
+#'1   e   1   e  oui         13 <NA> <NA>  <NA>       <NA> <NA> <NA> <NA>
+#'2   a   1   a  oui         11    3    a  TRUE         13    1    a  oui
+#'3   z   2   z  non         12    7    z FALSE         12    2    z  non
+#'4   a   4   a  oui          8    4    a FALSE         34    9    a  oui
+#'  second_ids
+#'1       <NA>
+#'2         13
+#'3         12
+#'4         11
+
+any_join_df <- function(inpt_df_l, join_type="inner", join_spe=NA, id_v=c(),  
+                    excl_col=c(), rtn_col=c(), d_val=NA){
+
+    incr_fillr <- function(inpt_v, wrk_v=NA, default_val=NA, step=1){
+
+            if (all(is.na(wrk_v))){
+
+                rtn_v <- inpt_v
+
+            }else{
+
+                rtn_v <- wrk_v
+
+            }
+
+            if (is.na(default_val)){
+
+                i = 2
+
+                while (i <= length(inpt_v)){
+
+                    if (is.na(inpt_v[(i-1)]) == F){
+
+                        if ((inpt_v[(i-1)] + step) < inpt_v[i]){
+
+                            rtn_v <- append(x=rtn_v, values=default_val, after=(i-1))
+
+                            inpt_v <- append(x=inpt_v, values=default_val, after=(i-1))
+
+                            bf_val = inpt_v[(i-1)] + 1
+
+                        }
+
+                    }else if ((bf_val + step) < inpt_v[i]){
+
+                            rtn_v <- append(x=rtn_v, values=default_val, after=(i-1))
+
+                            inpt_v <- append(x=inpt_v, values=default_val, after=(i-1))
+
+                            bf_val = bf_val + 1
+
+                    }
+
+                    i = i + 1
+
+                }
+
+            }else if (default_val != "increasing"){
+
+                i = 2
+
+                while (i <= length(inpt_v)){
+
+                    if (inpt_v[(i-1)] != default_val){
+
+                        if ((as.numeric(inpt_v[(i-1)]) + step) < as.numeric(inpt_v[i])){
+
+                            rtn_v <- append(x=rtn_v, values=default_val, after=(i-1))
+
+                            inpt_v <- append(x=inpt_v, values=default_val, after=(i-1))
+
+                            bf_val = as.numeric(inpt_v[(i-1)]) + 1
+
+                        }
+
+                    }else if ((bf_val + step) < as.numeric(inpt_v[i])){
+
+                            inpt_v <- append(x=inpt_v, values=default_val, after=(i-1))
+
+                            rtn_v <- append(x=rtn_v, values=default_val, after=(i-1))
+
+                            bf_val = bf_val + 1
+
+                    }
+
+                    i = i + 1
+
+                }
+
+            }else{
+
+                i = 2
+
+                while (i <= length(rtn_v)){
+
+                    if ((inpt_v[(i-1)] + step) < inpt_v[i]){
+
+                        rtn_v <- append(x=rtn_v, values=(inpt_v[(i-1)]+1), after=(i-1))
+
+                        inpt_v <- append(x=inpt_v, values=(inpt_v[(i-1)]+1), after=(i-1))
+
+                    }
+
+                    i = i + 1
+
+                }
+
+            }
+
+            return(rtn_v)
+
+    }
+
+    fixer_nest_v <- function(cur_v, pttrn_v, wrk_v){
+
+            cnt = 1
+
+            cnt2 = 0
+
+            for (i in 1:length(cur_v)){
+
+                if (pttrn_v[cnt] != cur_v[i]){
+
+                    if (cnt2 == 0){
+
+                        idx <- (cnt2*length(pttrn_v)-1) + match(T, str_detect(pttrn_v, paste0("\\b(", cur_v[i], ")\\b"))) 
+
+                    }else{
+
+                        idx <- cnt2*length(pttrn_v) + match(T, str_detect(pttrn_v, paste0("\\b(", cur_v[i], ")\\b"))) 
+
+                    }
+
+                    rtain_val <- wrk_v[idx]
+
+                    wrk_v[idx] <- wrk_v[i] 
+
+                    wrk_v[i] <- rtain_val
+
+                    rtain_val <- cur_v[idx]
+
+                    cur_v[idx] <- cur_v[i]
+
+                    cur_v[i] <- rtain_val
+
+                    if (cnt == length(pttrn_v)){ cnt = 1; cnt2 = cnt2 + 1 }else if (cnt > 1) { cnt = cnt + 1 }
+
+                }else{
+
+                    if (cnt == length(pttrn_v)){ cnt = 1; cnt2 = cnt2 + 1 }else { cnt = cnt + 1 }
+
+                }
+
+            }
+
+            return(wrk_v)
+
+        }
+
+    appndr <- function(inpt_v, val=NA, hmn, strt="max"){
+
+        if (strt == "max"){
+
+            strt <- length(inpt_v)
+
+        }
+
+        if (hmn > 0){
+
+            for (i in hmn){ inpt_v <- append(x=inpt_v, values=val, after=strt) }
+
+        }
+
+        return(inpt_v)
+
+    }
+
+    calc_occu_v <- function(f_v, w_v, nvr_here=NA){
+
+            rtn_v <- c()
+
+            idx_status <- c()
+
+            f_v2 <- f_v
+
+            for (el in 1:length(w_v)){
+
+                cur_ids <- match(w_v[el], f_v)
+
+                f_v[cur_ids] <- nvr_here
+
+                idx_status <- c(idx_status, cur_ids)
+
+            }
+
+            for (i in sort(idx_status)){
+
+                idx <- match(f_v2[i], w_v)
+
+                rtn_v <- c(rtn_v, idx)
+
+                w_v[idx] <- nvr_here
+
+            }
+
+            return(rtn_v)
+
+    }
+
+    extrt_only_v <- function(inpt_v, pttrn_v){
+
+            rtn_v <- c()
+
+            for (el in inpt_v){
+
+                if (el %in% pttrn_v){ rtn_v <- c(rtn_v, el) }
+
+            }
+
+            return(rtn_v)
+
+    }
+
+    nest_v <- function(f_v, t_v, step=1, after=1){
+
+        cnt = after
+
+        for (i in 1:length(t_v)){
+
+            f_v <- append(x=f_v, values=t_v[i], after=cnt)
+
+            cnt = cnt + step + 1
+
+        }
+
+        return(f_v)
+
+    }
+
+    paste_df <- function(inpt_df, sep=""){
+
+        if (ncol(as.data.frame(inpt_df)) == 1){ 
+
+            return(inpt_df) 
+
+        }else {
+
+            rtn_df <- inpt_df[,1]
+
+            for (i in 2:ncol(inpt_df)){
+
+                rtn_df <- paste(rtn_df, inpt_df[,i], sep=sep)
+
+            }
+
+            return(rtn_df)
+
+        }
+
+    }
+
+    n_row <- 1
+
+    col_intel <- c()
+
+    for (df_ in inpt_df_l){ 
+
+        if (nrow(df_) > n_row){ n_row <- nrow(df_) }
+
+        col_intel <- c(col_intel, (sum(col_intel) + ncol(df_)))
+
+    }
+
+    cl_nms <- colnames(as.data.frame(inpt_df_l[1]))
+
+    if (length(inpt_df_l) > 1){
+
+            for (i in 2:length(inpt_df_l)){
+
+                cl_nms <- c(cl_nms, colnames(as.data.frame(inpt_df_l[i])))
+
+            }
+
+    }
+
+    if (length(excl_col) > 0 & length(rtn_col) == 0){
+
+            pre_col <- c(1:sum(mapply(function(x) return(ncol(x)), inpt_df_l)))
+
+            if (typeof(excl_col) == "character"){
+
+                excl_col2 <- c() 
+
+                for (el in excl_col){ excl_col2 <- c(excl_col2, match(el, cl_nms)) }
+
+                pre_col <- pre_col[-excl_col2]
+
+            }else{
+
+                pre_col <- pre_col[-excl_col]
+
+            }
+
+    }else if ((length(excl_col) + length(rtn_col)) == 0){
+
+        pre_col <- c(1:sum(mapply(function(x) return(ncol(x)), inpt_df_l)))
+
+    }else{
+
+        if (typeof(rtn_col) == "character"){
+
+            pre_col <- c()
+
+            for (el in rtn_col){ pre_col <- c(pre_col, match(el, cl_nms)) }
+
+        }else{
+
+            pre_col <- rtn_col
+
+        }
+
+    }
+
+    if (typeof(id_v) == "character"){
+
+        id_v2 <- which(cl_nms == id_v[1])
+
+        if (length(id_v) > 1){
+
+            for (i in 2:length(id_v)){ id_v2 <- nest_v(f_v=id_v2, t_v=which(cl_nms == id_v[i]), after=(i-1)) }
+
+        }
+
+        id_v2 <- fixer_nest_v(cur_v=extrt_only_v(inpt_v=cl_nms, pttrn_v=id_v), pttrn_v=id_v, wrk_v=id_v2)
+
+    }
+
+    col_intel_cnt = 1 
+
+    id_v_cnt = 1
+
+    pre_col <- sort(pre_col)
+
+    substrct <- 0
+
+    ids_val_func <- function(x){
+
+            lst_el <- length(which(lst_ids == x))
+
+            if (length(which(cur_ids == x)) > lst_el){ 
+
+                    return(which(cur_ids == x)[1:lst_el]) 
+
+            }else {
+
+                    return(which(cur_ids == x)[1:length(which(cur_ids == x))])
+
+            }
+
+    }
+
+    if (all(join_type == "inner") & all(is.na(join_spe)) == T){
+
+        cur_df <- as.data.frame(inpt_df_l[1])
+
+        cur_id_v <- id_v2[1:length(id_v)]
+
+        rtn_df <- cur_df[, cur_id_v]
+
+        cur_ids <- paste_df(cur_df[, cur_id_v])
+
+        rtn_df <- data.frame(cur_ids)
+
+        cur_ids_val <- c(1:nrow(cur_df))
+
+        for (cur_col in pre_col){
+
+            while (col_intel[col_intel_cnt] < cur_col){
+
+                lst_ids <- cur_ids[cur_ids_val]
+
+                id_v_cnt = id_v_cnt + length(id_v)
+
+                col_intel_cnt = col_intel_cnt + 1
+
+                cur_df <- as.data.frame(inpt_df_l[col_intel_cnt])
+
+                cur_id_v <- id_v2[id_v_cnt:(id_v_cnt+length(id_v)-1)] 
+
+                cur_ids <- paste_df(cur_df[, 
+                    cur_id_v-(sum(mapply(function(x) return(ncol(x)), inpt_df_l[1:(col_intel_cnt-1)])))])
+
+                cur_ids_val2 <- sort(lst_flatnr(mapply(function(x) return(which(lst_ids == x)), unique(cur_ids))))
+
+                rtn_df <- rtn_df[cur_ids_val2, ]
+
+                cur_ids_val <- sort(lst_flatnr(mapply(function(x) return(ids_val_func(x)), unique(lst_ids[cur_ids_val2]))))
+
+                substrct <- sum(mapply(function(x) return(ncol(x)), inpt_df_l[1:(col_intel_cnt-1)]))
+
+            }
+
+            pre_rtn_df <- cur_df[cur_ids_val, (cur_col - substrct)]
+
+            rtn_df <- cbind(rtn_df, pre_rtn_df)
+
+            colnames(rtn_df)[length(colnames(rtn_df))] <- cl_nms[cur_col]
+
+        }
+
+        colnames(rtn_df)[1] <- "ids"
+
+        return(rtn_df)
+
+    }else{
+
+        spe_match <- function(f_v, w_v, nvr_here=NA){
+
+            rtn_v <- c()
+
+            for (i in 1:length(w_v)){
+
+                idx <- match(w_v[i], f_v)
+
+                rtn_v <- c(rtn_v, idx)
+
+                f_v[idx] <- nvr_here
+
+            }
+
+            return(rtn_v)
+
+        }
+
+        if (is.na(join_spe)){
+
+                strt_id <- 1
+
+                cur_df <- as.data.frame(inpt_df_l[join_type[1]])
+
+                cur_id_v <- id_v2[strt_id:length(id_v)]
+
+                cur_ids <- paste_df(cur_df[, cur_id_v])
+
+                if (length(join_type) > 1){
+
+                        join_type <- join_type[2:length(join_type)]
+
+                        for (df in join_type){
+
+                                    strt_id <- length(id_v) * (df-1) + 1
+
+                                    cur_df <- as.data.frame(inpt_df_l[df])
+
+                                    cur_id_v <- id_v2[strt_id:(strt_id+length(id_v)-1)]
+
+                                    cur_ids <- c(cur_ids, paste_df(cur_df[, 
+                                cur_id_v - sum(mapply(function(x) return(ncol(x)), inpt_df_l[1:(df-1)]))]))
+
+                        }
+
+                        cur_df <- as.data.frame(inpt_df_l[1])
+
+                }
+
+                lst_ids <- cur_ids
+
+                cur_ids_val <- sort(lst_flatnr(mapply(function(x) return(which(lst_ids == x)), unique(cur_ids))))
+
+        }else{
+
+                lst_ids <- cur_ids
+
+                cur_df <- as.data.frame(inpt_df_l[1])
+
+                cur_id_v <- id_v2[1:length(id_v)]
+
+                cur_ids <- paste_df(cur_df[, cur_id_v])
+
+                cur_ids_val <- sort(lst_flatnr(mapply(function(x) return((which(lst_ids == x))), unique(cur_ids))))
+
+        }
+
+        rtn_df <- data.frame(cur_ids)
+
+        cur_ids_val2 <- c(1:nrow(rtn_df)) 
+
+        calc_ids <- c(1:length(lst_ids))
+
+        for (cur_col in pre_col){
+
+            while (col_intel[col_intel_cnt] < cur_col){
+
+                col_intel_cnt = col_intel_cnt + 1
+
+                substrct <- sum(mapply(function(x) return(ncol(x)), inpt_df_l[1:(col_intel_cnt-1)]))
+
+                cur_df <- as.data.frame(inpt_df_l[col_intel_cnt])
+
+                id_v_cnt = id_v_cnt + length(id_v)
+
+                cur_id_v <- id_v2[id_v_cnt:(id_v_cnt+(length(id_v)-1))]
+
+                cur_ids <- paste_df(cur_df[, (cur_id_v - substrct)])
+
+                cur_ids_val2 <- lst_flatnr(mapply(function(x) return(ids_val_func(x)), unique(lst_ids)))
+
+                cur_ids_val2 <- cur_ids_val2[is.na(cur_ids_val2)==F]
+
+                cur_ids_val <- sort(spe_match(f_v=lst_ids, w_v=cur_ids[cur_ids_val2]))
+
+                cur_ids_val <- c(0, cur_ids_val)
+
+                calc_ids <- calc_occu_v(f_v=lst_ids, w_v=cur_ids[cur_ids_val2])
+
+                calc_ids <- calc_ids[(is.na(calc_ids)==F)]
+
+            }
+
+            pre_rtn_df <- cur_df[cur_ids_val2, 
+                (cur_col - substrct)]
+
+            pre_rtn_df <- pre_rtn_df[calc_ids]
+
+            pre_rtn_df <- incr_fillr(inpt_v=unique(c(cur_ids_val, length(lst_ids))), wrk_v=c("NA", pre_rtn_df), 
+                                     default_val=d_val)
+
+            pre_rtn_df <- appndr(inpt_v=pre_rtn_df, val=d_val, hmn=(length(lst_ids) - (length(pre_rtn_df) - 1)), strt="max")
+
+            rtn_df <- cbind(rtn_df, pre_rtn_df[2:length(pre_rtn_df)])
+
+            colnames(rtn_df)[length(colnames(rtn_df))] <- cl_nms[cur_col]
+
+        }
+
+        colnames(rtn_df)[1] <- "ids"
+
+        return(rtn_df)
+        
+    }
+
+}
+
+
+
+
 
 
 

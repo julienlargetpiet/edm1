@@ -40,7 +40,126 @@ stat_var=c("sum", "mean", "median", "sd", "occu-var2/", "occu-var4/", "variance"
 inpt_df=df)
 ```
 
-![allstat](https://github.com/julienlargetpiet/edm1/assets/114911243/d832e425-8867-4be7-9d52-f2bd9494a2c3)
+
+# `any_join_df`
+
+any_join_df
+
+
+## Description
+
+Allow to perform SQL joints with more features
+
+
+## Usage
+
+```r
+any_join_df(
+  inpt_df_l,
+  join_type = "inner",
+  join_spe = NA,
+  id_v = c(),
+  excl_col = c(),
+  rtn_col = c(),
+  d_val = NA
+)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_df_l`     |     is a list containing all the dataframe
+`join_type`     |     is the joint type. Defaults to inner but can be changed to a vector containing all the dataframes you want to take their ids to don external joints.
+`join_spe`     |     can be equal to a vector to do an external joints on all the dataframes. In this case, join_type should not be equal to "inner"
+`id_v`     |     is a vector containing all the ids name of the dataframes. The ids names can be changed to number of their columns taking in count their position in inpt_df_l. It means that if my id is in the third column of the second dataframe and the first dataframe have 5 columns, the column number of the ids is 5 + 3 = 8
+`excl_col`     |     is a vector containing the column names to exclude, if this vector is filled so "rtn_col" should not be filled. You can also put the column number in the manner indicated for "id_v". Defaults to c()
+`rtn_col`     |     is a vector containing the column names to retain, if this vector is filled so "excl_col" should not be filled. You can also put the column number in the manner indicated for "id_v". Defaults to c()
+`d_val`     |     is the default val when here is no match
+
+
+## Examples
+
+```r
+df1 <- data.frame("val"=c(1, 1, 2, 4), "ids"=c("e", "a", "z", "a"),
+"last"=c("oui", "oui", "non", "oui"),
+"second_ids"=c(13, 11, 12, 8))
+
+df2 <- data.frame("val"=c(3, 7, 2, 4, 1, 2), "ids"=c("a", "z", "z", "a", "a", "a"),
+"bool"=c(T, F, F, F, T, T),
+"second_ids"=c(13, 12, 8, 34, 22, 12))
+
+df3 <- data.frame("val"=c(1, 9, 2, 4), "ids"=c("a", "a", "z", "a"),
+"last"=c("oui", "oui", "non", "oui"),
+"second_ids"=c(13, 11, 12, 8))
+
+print(any_join_df(inpt_df_l=list(df1, df2, df3), join_type="inner",
+id_v=c("ids", "second_ids"),
+excl_col=c(), rtn_col=c()))
+ids val ids last second_ids val ids  bool second_ids val ids last second_ids
+3 z12   2   z  non         12   7   z FALSE         12   2   z  non         12
+
+print(any_join_df(inpt_df_l=list(df1, df2, df3), join_type="inner", id_v=c("ids"),
+
+ids val ids last second_ids val ids  bool second_ids val ids last second_ids
+2   a   1   a  oui         11   3   a  TRUE         13   1   a  oui         13
+3   z   2   z  non         12   7   z FALSE         12   9   a  oui         11
+4   a   4   a  oui          8   4   a FALSE         34   2   z  non         12
+
+print(any_join_df(inpt_df_l=list(df1, df2, df3), join_type=c(1), id_v=c("ids"),
+excl_col=c(), rtn_col=c()))
+
+ids val ids last second_ids  val  ids  bool second_ids  val  ids last
+1   e   1   e  oui         13 <NA> <NA>  <NA>       <NA> <NA> <NA> <NA>
+2   a   1   a  oui         11    3    a  TRUE         13    1    a  oui
+3   z   2   z  non         12    7    z FALSE         12    2    z  non
+4   a   4   a  oui          8    4    a FALSE         34    9    a  oui
+second_ids
+1       <NA>
+2         13
+3         12
+4         11
+
+print(any_join_df(inpt_df_l=list(df2, df1, df3), join_type=c(1, 3), id_v=c("ids", "second_ids"),
+excl_col=c(), rtn_col=c()))
+ids  val  ids  bool second_ids  val  ids last second_ids  val  ids last
+1  a13    3    a  TRUE         13 <NA> <NA> <NA>       <NA>    1    a  oui
+2  z12    7    z FALSE         12    2    z  non         12    2    z  non
+3   z8    2    z FALSE          8 <NA> <NA> <NA>       <NA> <NA> <NA> <NA>
+4  a34    4    a FALSE         34 <NA> <NA> <NA>       <NA> <NA> <NA> <NA>
+5  a22    1    a  TRUE         22 <NA> <NA> <NA>       <NA> <NA> <NA> <NA>
+6  a12    2    a  TRUE         12 <NA> <NA> <NA>       <NA> <NA> <NA> <NA>
+7  a13 <NA> <NA>  <NA>       <NA> <NA> <NA> <NA>       <NA> <NA> <NA> <NA>
+8  a11 <NA> <NA>  <NA>       <NA>    1    a  oui         11    9    a  oui
+9  z12 <NA> <NA>  <NA>       <NA> <NA> <NA> <NA>       <NA> <NA> <NA> <NA>
+10  a8 <NA> <NA>  <NA>       <NA>    4    a  oui          8    4    a  oui
+second_ids
+1          13
+2          12
+3        <NA>
+4        <NA>
+5        <NA>
+6        <NA>
+7        <NA>
+8          11
+9        <NA>
+10          8
+
+print(any_join_df(inpt_df_l=list(df1, df2, df3), join_type=c(1), id_v=c("ids"),
+excl_col=c(), rtn_col=c()))
+
+ids val ids last second_ids  val  ids  bool second_ids  val  ids last
+1   e   1   e  oui         13 <NA> <NA>  <NA>       <NA> <NA> <NA> <NA>
+2   a   1   a  oui         11    3    a  TRUE         13    1    a  oui
+3   z   2   z  non         12    7    z FALSE         12    2    z  non
+4   a   4   a  oui          8    4    a FALSE         34    9    a  oui
+second_ids
+1       <NA>
+2         13
+3         12
+4         11
+```
 
 
 # `append_row`
@@ -69,6 +188,59 @@ Argument      |Description
 `hmn`     |     is how many time the last row will be appended
 `na_col`     |     is a vector containing the columns that won't append and will be replaced by another value (unique_do_not_know)
 `unique_do_not_know`     |     is the value of the non appending column in the appending row
+
+
+# `appndr`
+
+appndr
+
+
+## Description
+
+Append to a vector "inpt_v" a special value "val" n times "mmn". The appending begins at "strt" index.
+
+
+## Usage
+
+```r
+appndr(inpt_v, val = NA, hmn, strt = "max")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`val`     |     is the special value
+`hmn`     |     is the number of special value element added
+`strt`     |     is the index from which appending begins, defaults to max which means the end of "inpt_v"
+
+
+# `calc_occu_v`
+
+calc_occu_v
+
+
+## Description
+
+Rearanges the index of a vector "w_v" to match the occurences of the common elements in another vector "f_v"
+
+
+## Usage
+
+```r
+calc_occu_v(f_v, w_v, nvr_here = NA)
+```
+
+
+## Examples
+
+```r
+print(calc_occu_v(f_v=c("e", "a", "z", NA, "a"), w_v=c("a", "a", "z")))
+
+[1] 1 3 2
+```
 
 
 # `can_be_num`
@@ -469,6 +641,40 @@ Argument      |Description
 `sep`     |     is the separator of the dates, defaults to "-"
 
 
+# `extrt_only_v`
+
+extrt_only_v
+
+
+## Description
+
+return the elements from a vector "inpt_v" that are in another vector "pttrn_v"
+
+
+## Usage
+
+```r
+extrt_only_v(inpt_v, pttrn_v)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`pttrn_v`     |     is the vector contining all the elements that can be in inpt_v
+
+
+## Examples
+
+```r
+print(extrt_only_v(inpt_v=c("oui", "non", "peut", "oo", "ll", "oui", "non", "oui", "oui"), pttrn_v=c("oui")))
+
+[1] "oui" "oo"  "oui" "oui" "oui"
+```
+
+
 # `file_rec`
 
 file_rec
@@ -550,6 +756,72 @@ Argument      |Description
 
 ```r
 fillr(c("a", "b", "...3", "c"))
+```
+
+
+# `fittr_v`
+
+fittr_v
+
+
+## Description
+
+Return the indexes of elements contained in "w_v" according to "f_v"
+
+
+## Usage
+
+```r
+fittr_v(f_v, w_v, nvr_here = NA)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`f_v`     |     is the input vector
+`w_v`     |     is the vector containing the elements that can be in f_v
+
+
+## Examples
+
+```r
+print(fittr_v(f_v=c("non", "non", "non", "oui"), w_v=c("oui", "non", "non")))
+
+[1] 4 1 2
+```
+
+
+# `fixer_nest_v`
+
+fixer_nest_v
+
+
+## Description
+
+Retur the elements of a vector "wrk_v" (1) that corresponds to the pattern of elements in another vector "cur_v" (2) according to another vector "pttrn_v" (3) that contains the patterof eleemnts.
+
+
+## Usage
+
+```r
+fixer_nest_v(cur_v, pttrn_v, wrk_v)
+```
+
+
+## Examples
+
+```r
+print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "non", "peut-etre"), pttrn_v=c("oui", "non", "peut-etre"),
+wrk_v=c(1, 2, 3, 4, 5, 6)))
+
+[1] 1 2 3 4 5 6
+
+print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "non", "peut-etre"), pttrn_v=c("oui", "non"),
+wrk_v=c(1, 2, 3, 4, 5, 6)))
+
+[1]  1  2 NA  4  5 NA
 ```
 
 
@@ -729,6 +1001,56 @@ conjunction_lst=conjunction_lst, rtn_val_pos=rtn_val_pos)
 ```
 
 
+# `incr_fillr`
+
+incr_fillr
+
+
+## Description
+
+Take a vector uniquely composed by double and sorted ascendingly, a step, another vector of elements whose length is equal to the length of the first vector, and a default value. If an element of the vector is not equal to its predecessor minus a user defined step, so these can be the output according to the parameters (see example):
+
+
+## Usage
+
+```r
+incr_fillr(inpt_v, wrk_v = NA, default_val = NA, step = 1)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the asending double only composed vector
+`wrk_v`     |     is the other vector (size equal to inpt_v), defaults to NA
+`default_val`     |     is the default value put when the difference between two following elements of inpt_v is greater than step, defaults to NA
+`step`     |     is the allowed difference between two elements of inpt_v
+
+
+## Examples
+
+```r
+print(incr_fillr(inpt_v=c(1, 2, 4, 5, 9, 10),
+wrk_v=NA,
+default_val="increasing"))
+
+[1]  1  2  3  4  5  6  7  8  9 10
+
+print(incr_fillr(inpt_v=c(1, 1, 2, 4, 5, 9),
+wrk_v=c("ok", "ok", "ok", "ok", "ok"),
+default_val=NA))
+
+[1] "ok" "ok" "ok" NA   "ok" "ok" NA   NA   NA
+
+print(incr_fillr(inpt_v=c(1, 2, 4, 5, 9, 10),
+wrk_v=NA,
+default_val="NAN"))
+
+[1] "1"   "2"   "NAN" "4"   "5"   "NAN" "NAN" "NAN" "9"   "10"
+```
+
+
 # `insert_df`
 
 insert_df
@@ -880,6 +1202,32 @@ Argument      |Description
 `pathc`     |     is the path, can be a vector of multiple path because list.files() supports it.
 
 
+# `lst_flatnr`
+
+lst_flatnr
+
+
+## Description
+
+Flatten a list to a vector
+
+
+## Usage
+
+```r
+lst_flatnr(inpt_l)
+```
+
+
+## Examples
+
+```r
+print(lst_flatnr(inpt_l=list(c(1, 2), c(5, 3), c(7, 2, 7))))
+
+[1] 1 2 5 3 7 2 7
+```
+
+
 # `match_n`
 
 match_n
@@ -984,6 +1332,42 @@ Argument      |Description
 `x`     |     is the number of the column
 
 
+# `nest_v`
+
+nest_v
+
+
+## Description
+
+Nest two vectors according to the following parameters.
+
+
+## Usage
+
+```r
+nest_v(f_v, t_v, step = 1, after = 1)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`f_v`     |     is the vector that will welcome the nested vector t_v
+`t_v`     |     is the imbriquator vector
+`step`     |     defines after how many elements of f_v the next element of t_v can be put in the output
+`after`     |     defines after how many elements of f_v, the begining of t_v can be put
+
+
+## Examples
+
+```r
+print(nest_v(f_v=c(1, 2, 3, 4, 5, 6), t_v=c("oui", "oui2", "oui3", "oui4", "oui5", "oui6"), step=2, after=2))
+
+[1] "1"    "2"    "oui"  "3"    "4"    "oui2" "5"    "6"    "oui3" "oui4"
+```
+
+
 # `nestr_df1`
 
 nestr_df1
@@ -1080,6 +1464,40 @@ occu(inpt_v)
 Argument      |Description
 ------------- |----------------
 `inpt_v`     |     the input dataframe
+
+
+# `paste_df`
+
+paste_df
+
+
+## Description
+
+Return a vector composed of pasted elements from the input dataframe at the same index.
+
+
+## Usage
+
+```r
+paste_df(inpt_df, sep = "")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_df`     |     is the input dataframe
+`sep`     |     is the separator between pasted elements, defaults to ""
+
+
+## Examples
+
+```r
+print(paste_df(inpt_df=data.frame(c(1, 2, 1), c(33, 22, 55))))
+
+[1] "133" "222" "155"
+```
 
 
 # `pattern_generator`
