@@ -5392,12 +5392,13 @@ appndr <- function(inpt_v, val=NA, hmn, strt="max"){
 #'  ids val ids last second_ids val ids  bool second_ids val ids last second_ids
 #'3 z12   2   z  non         12   7   z FALSE         12   2   z  non         12
 #'
-#'print(any_join_df(inpt_df_l=list(df1, df2, df3), join_type="inner", id_v=c("ids"), 
+#'print(any_join_df(inpt_df_l=list(df1, df2, df3), join_type="inner", id_v=c("ids"),
+#'excl_col=c(), rtn_col=c()))
 #'
 #'  ids val ids last second_ids val ids  bool second_ids val ids last second_ids
 #'2   a   1   a  oui         11   3   a  TRUE         13   1   a  oui         13
-#'3   z   2   z  non         12   7   z FALSE         12   9   a  oui         11
-#'4   a   4   a  oui          8   4   a FALSE         34   2   z  non         12
+#'3   z   2   z  non         12   7   z FALSE         12   2   z  non         12
+#'4   a   4   a  oui          8   4   a FALSE         34   9   a  oui         11
 #'
 #'print(any_join_df(inpt_df_l=list(df1, df2, df3), join_type=c(1), id_v=c("ids"), 
 #'                  excl_col=c(), rtn_col=c()))
@@ -5817,6 +5818,8 @@ any_join_df <- function(inpt_df_l, join_type="inner", join_spe=NA, id_v=c(),
 
         cur_ids_val <- c(1:nrow(cur_df))
 
+        calc_ids <- c(1:nrow(rtn_df))
+
         for (cur_col in pre_col){
 
             while (col_intel[col_intel_cnt] < cur_col){
@@ -5842,9 +5845,15 @@ any_join_df <- function(inpt_df_l, join_type="inner", join_spe=NA, id_v=c(),
 
                 substrct <- sum(mapply(function(x) return(ncol(x)), inpt_df_l[1:(col_intel_cnt-1)]))
 
+                calc_ids <- calc_occu_v(f_v=lst_ids, w_v=cur_ids[cur_ids_val])
+
+                calc_ids <- calc_ids[is.na(calc_ids)==F]
+
             }
 
             pre_rtn_df <- cur_df[cur_ids_val, (cur_col - substrct)]
+
+            pre_rtn_df <- pre_rtn_df[calc_ids]
 
             rtn_df <- cbind(rtn_df, pre_rtn_df)
 
@@ -5984,9 +5993,6 @@ any_join_df <- function(inpt_df_l, join_type="inner", join_spe=NA, id_v=c(),
     }
 
 }
-
-
-
 
 
 

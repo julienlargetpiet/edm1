@@ -101,11 +101,12 @@ ids val ids last second_ids val ids  bool second_ids val ids last second_ids
 3 z12   2   z  non         12   7   z FALSE         12   2   z  non         12
 
 print(any_join_df(inpt_df_l=list(df1, df2, df3), join_type="inner", id_v=c("ids"),
+excl_col=c(), rtn_col=c()))
 
 ids val ids last second_ids val ids  bool second_ids val ids last second_ids
 2   a   1   a  oui         11   3   a  TRUE         13   1   a  oui         13
-3   z   2   z  non         12   7   z FALSE         12   9   a  oui         11
-4   a   4   a  oui          8   4   a FALSE         34   2   z  non         12
+3   z   2   z  non         12   7   z FALSE         12   2   z  non         12
+4   a   4   a  oui          8   4   a FALSE         34   9   a  oui         11
 
 print(any_join_df(inpt_df_l=list(df1, df2, df3), join_type=c(1), id_v=c("ids"),
 excl_col=c(), rtn_col=c()))
