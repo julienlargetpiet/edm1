@@ -310,6 +310,233 @@ Argument      |Description
 `frmt`     |     is the format of the input date, (deault set to "snhdmy" (second, minute, hour, day, month, year), so all variable are taken in count), if you only want to work with standard date for example change this variable to "dmy"
 
 
+# `chr_removr`
+
+chr_removr
+
+
+## Description
+
+Allow to remove certain characters contained in a vector "ptrn_v" from elements in a another vector "inpt_v".
+
+
+## Usage
+
+```r
+chr_removr(inpt_v, ptrn_v)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector containing all the elements that may have the characters to be removed
+`ptrn_v`     |     is the vector containing all the characters that will be removed
+
+
+## Examples
+
+```r
+print(chr_removr(inpt_v=c("oui?", "!oui??", "non", "!non"), ptrn_v=c("?")))
+[1] "oui"  "!oui" "non"  "!non"
+
+print(chr_removr(inpt_v=c("oui?", "!oui??", "non", "!non"), ptrn_v=c("?", "!")))
+[1] "oui" "oui" "non" "non"
+```
+
+
+# `closer_ptrn_adv`
+
+closer_ptrn_adv
+
+
+## Description
+
+Allow to find how patterns are far or near between each other relatively to a vector containing characters at each index ("base_v"). The function gets the sum of the indexes of each pattern letter relatively to the characters in base_v. So each pattern can be compared.
+
+
+## Usage
+
+```r
+closer_ptrn_adv(
+  inpt_v,
+  res = "raw_stat",
+  default_val = "?",
+  base_v = c(default_val, letters),
+  c_word = NA
+)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector containing all the patterns to be analyzed
+`res`     |     is a parameter controling the result. If set to "raw_stat", each word in inpt_v will come with its score (indexes of its letters relatively to base_v). If set to something else, so "c_word" parameter must be filled.
+`default_val`     |     is the value that will be added to all patterns that do not equal the length of the longest pattern in inpt_v. Those get this value added to make all patterns equal in length so they can be compared, defaults to "?"
+`base_v`     |     is the vector from which all pattern get its result (letters indexes for each pattern relatively to base_v), defaults to c("default_val", letters). "default_val" is another parameter and letters is all the western alphabetic letters in a vector
+`c_word`     |     is a pattern from which the nearest to the farest pattern in inpt_v will be compared
+
+
+## Examples
+
+```r
+print(closer_ptrn_adv(inpt_v=c("aurevoir", "bonnour", "nonnour", "fin", "mois", "bonjour"), res="word", c_word="bonjour"))
+
+[[1]]
+[1]  1  5 15 17 38 65
+
+[[2]]
+[1] "bonjour"  "bonnour"  "aurevoir" "nonnour"  "mois"     "fin"
+
+print(closer_ptrn_adv(inpt_v=c("aurevoir", "bonnour", "nonnour", "fin", "mois")))
+
+[[1]]
+[1] 117 107 119  37  64
+
+[[2]]
+[1] "aurevoir" "bonnour"  "nonnour"  "fin"      "mois"
+```
+
+
+# `closer_ptrn`
+
+closer_ptrn
+
+
+## Description
+
+Take a vector of patterns as input and output each chosen word with their closest patterns from chosen patterns.
+
+
+## Usage
+
+```r
+closer_ptrn(
+  inpt_v,
+  default_val = "?",
+  base_v = c(default_val, letters),
+  excl_v = c(),
+  rtn_v = c(),
+  sub_excl_v = c(),
+  sub_rtn_v = c()
+)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector containing all the patterns
+`excl_v`     |     is the vector containing all the patterns from inpt_v to exclude for comparing them to others patterns. If this parameter is filled, so "rtn_v" must be empty.
+`rtn_v`     |     is the vector containing all the patterns from inpt_v to keep for comparing them to others patterns. If this parameter is filled, so "rtn_v" must be empty.
+`sub_excl_v`     |     is the vector containing all the patterns from inpt_v to exclude for using them to compare to another pattern. If this parameter is filled, so "sub_rtn_v" must be empty.
+`sub_rtn_v`     |     is the vector containing all the patterns from inpt_v to retain for using them to compare to another pattern. If this parameter is filled, so "sub_excl_v" must be empty.
+
+
+## Examples
+
+```r
+print(closer_ptrn(inpt_v=c("bonjour", "lpoerc", "nonnour", "bonnour", "nonjour", "aurevoir")))
+
+[[1]]
+[1] "bonjour"
+
+[[2]]
+[1] "lpoerc"   "nonnour"  "bonnour"  "nonjour"  "aurevoir"
+
+[[3]]
+[1] 1 1 2 7 8
+
+[[4]]
+[1] "lpoerc"
+
+[[5]]
+[1] "bonjour"  "nonnour"  "bonnour"  "nonjour"  "aurevoir"
+
+[[6]]
+[1] 7 7 7 7 7
+
+[[7]]
+[1] "nonnour"
+
+[[8]]
+[1] "bonjour"  "lpoerc"   "bonnour"  "nonjour"  "aurevoir"
+
+[[9]]
+[1] 1 1 2 7 8
+
+[[10]]
+[1] "bonnour"
+
+[[11]]
+[1] "bonjour"  "lpoerc"   "nonnour"  "nonjour"  "aurevoir"
+
+[[12]]
+[1] 1 1 2 7 8
+
+[[13]]
+[1] "nonjour"
+
+[[14]]
+[1] "bonjour"  "lpoerc"   "nonnour"  "bonnour"  "aurevoir"
+
+[[15]]
+[1] 1 1 2 7 8
+
+[[16]]
+[1] "aurevoir"
+
+[[17]]
+[1] "bonjour" "lpoerc"  "nonnour" "bonnour" "nonjour"
+
+[[18]]
+[1] 7 8 8 8 8
+print(closer_ptrn(inpt_v=c("bonjour", "lpoerc", "nonnour", "bonnour", "nonjour", "aurevoir"), excl_v=c("nonnour", "nonjour"),
+sub_excl_v=c("nonnour")))
+
+[1] 3 5
+[[1]]
+[1] "bonjour"
+
+[[2]]
+[1] "lpoerc"   "bonnour"  "nonjour"  "aurevoir"
+
+[[3]]
+[1] 1 1 7 8
+
+[[4]]
+[1] "lpoerc"
+
+[[5]]
+[1] "bonjour"  "bonnour"  "nonjour"  "aurevoir"
+
+[[6]]
+[1] 7 7 7 7
+
+[[7]]
+[1] "bonnour"
+
+[[8]]
+[1] "bonjour"  "lpoerc"   "bonnour"  "nonjour"  "aurevoir"
+
+[[9]]
+[1] 0 1 2 7 8
+
+[[10]]
+[1] "aurevoir"
+
+[[11]]
+[1] "bonjour"  "lpoerc"   "nonjour"  "aurevoir"
+
+[[12]]
+[1] 0 7 8 8
+```
+
+
 # `closest_date`
 
 closest_date
@@ -346,6 +573,83 @@ Argument      |Description
 `sep_vec`     |     is the separator for the dates contained in vec
 `only_`     |     is can be changed to "+" or "-" to repectively only return the higher dates and the lower dates (default set to "both")
 `head`     |     is the number of dates that will be returned (default set to NA so all dates in vec will be returned)
+
+
+# `clusterizer_v`
+
+clusterizer_v
+
+
+## Description
+
+Allow to output clusters of elements. Takes as input a vector "inpt_v" containing a sequence of number. Can also take another vector "w_v" that has the same size of inpt_v because its elements are related to it. The way the clusters are made is related to an accuracy value which is "c_val". It means that if the difference between the values associated to 2 elements is superior to c_val, these two elements are in distinct clusters.
+
+
+## Usage
+
+```r
+clusterizer_v(inpt_v, w_v = NA, c_val)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the vector containing the sequence of number
+`w_v`     |     is the vector containing the elements related to inpt_v, defaults to NA
+`c_val`     |     is the accuracy of the clusterization
+
+
+## Examples
+
+```r
+print(clusterizer_v(inpt_v=sample.int(20, 26, replace=T), w_v=NA, c_val=0.9))
+
+[[1]]
+[[1]][[1]]
+[1] "j" "v"
+
+[[1]][[2]]
+[1] "x"
+
+[[1]][[3]]
+[1] "e" "m" "p" "s" "t" "b" "q" "z" "f"
+
+[[1]][[4]]
+[1] "a" "i"
+
+[[1]][[5]]
+[1] "c" "n" "o" "g" "u" "y" "h" "l"
+
+[[1]][[6]]
+[1] "d" "r" "w" "k"
+
+
+[[2]]
+[1] "1"  "2"  "-"  "4"  "4"  "-"  "6"  "10" "-"  "12" "12" "-"  "14" "16" "-"
+[16] "18" "19"
+
+print(clusterizer_v(inpt_v=sample.int(40, 26, replace=T), w_v=letters, c_val=0.29))
+
+
+[[1]]
+[[1]][[1]]
+[1] "a" "b" "c" "d" "e" "f" "g" "h"
+
+[[1]][[2]]
+[1] "i" "j" "k" "l"
+
+[[1]][[3]]
+[1] "m" "n"
+
+[[1]][[4]]
+[1] "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
+
+
+[[2]]
+[1] "1"  "5"  "-"  "8"  "10" "-"  "12" "13" "-"  "15" "20"
+```
 
 
 # `cost_and_taxes`
@@ -614,6 +918,43 @@ Argument      |Description
 `output`     |     is the name of the outputed xlsx (can be set to NA if no output)
 `new_val`     |     if overwrite is TRUE, then the differences will be overwritten by the comparator data
 `pattern_only`     |     will cover differences by pattern if overwritten is set to TRUE
+
+
+# `equalizer_v`
+
+equalizer_v
+
+
+## Description
+
+Takes a vector of character as an input and returns a vector with the elements at the same size. The size can be chosen via depth parameter.
+
+
+## Usage
+
+```r
+equalizer_v(inpt_v, depth = "max", default_val = "?")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector containing all the characters
+`depth`     |     is the depth parameter, defaults to "max" which means that it is equal to the character number of the element(s) in inpt_v that has the most
+`default_val`     |     is the default value that will be added to the output characters if those has an inferior length (characters) than the value of depth
+
+
+## Examples
+
+```r
+print(equalizer_v(inpt_v=c("aa", "zzz", "q"), depth=2))
+[1] "aa" "zz" "q?"
+
+print(equalizer_v(inpt_v=c("aa", "zzz", "q"), depth=12))
+[1] "aa??????????" "zzz?????????" "q???????????"
+```
 
 
 # `extrm_dates`
@@ -1671,6 +2012,40 @@ Argument      |Description
 library("stringr")
 v <- c("2012-06-22", "2012-06-23", "2022-09-12", "2022")
 ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=TRUE)
+```
+
+
+# `rearangr_v`
+
+rearangr_v
+
+
+## Description
+
+Reanranges a vector "w_v" according to another vector "inpt_v". inpt_v contains a sequence of number. inpt_v and w_v have the same size and their indexes are related. The output will be a vector containing all the elements of w_v rearanges in descending or asending order according to inpt_v
+
+
+## Usage
+
+```r
+rearangr_v(inpt_v, w_v, how = "increasing")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the vector that contains the sequance of number
+`w_v`     |     is the vector containing the elements related to inpt_v
+`how`     |     is the way the elements of w_v will be outputed according to if inpt_v will be sorted ascendigly or descendingly
+
+
+## Examples
+
+```r
+print(rearangr_v(inpt_v=c(23, 21, 56), w_v=c("oui", "peut", "non"), how="decreasing"))
+[1] "non"  "oui"  "peut"
 ```
 
 

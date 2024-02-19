@@ -5994,6 +5994,873 @@ any_join_df <- function(inpt_df_l, join_type="inner", join_spe=NA, id_v=c(),
 
 }
 
+#' equalizer_v
+#'
+#' Takes a vector of character as an input and returns a vector with the elements at the same size. The size can be chosen via depth parameter.
+#'
+#' @param inpt_v is the input vector containing all the characters
+#' @param depth is the depth parameter, defaults to "max" which means that it is equal to the character number of the element(s) in inpt_v that has the most 
+#' @param default_val is the default value that will be added to the output characters if those has an inferior length (characters) than the value of depth 
+#' @examples 
+#'  print(equalizer_v(inpt_v=c("aa", "zzz", "q"), depth=2))
+#'  [1] "aa" "zz" "q?"
+#'
+#'  print(equalizer_v(inpt_v=c("aa", "zzz", "q"), depth=12))
+#'  [1] "aa??????????" "zzz?????????" "q???????????"
+
+equalizer_v <- function(inpt_v, depth="max", default_val="?"){
+
+        if (depth == "min"){ 
+
+           depth <- nchar(inpt_v[1]) 
+
+            if (length(inpt_v) > 1){
+
+                    for (ptrn in inpt_v[2:length(inpt_v)]){
+
+                        if (nchar(ptrn) < depth){ depth <- nchar(ptrn) }
+
+                    }
+
+            }
+
+        }
+
+        if (depth == "max"){ 
+
+           depth <- nchar(inpt_v[1]) 
+
+            if (length(inpt_v) > 1){
+
+                    for (ptrn in inpt_v[2:length(inpt_v)]){
+
+                        if (nchar(ptrn) > depth){ depth <- nchar(ptrn) }
+
+                    }
+
+            }
+
+        }
+
+        rtn_v <- c()
+
+        for (ptrn in inpt_v){
+
+                if (nchar(ptrn) < depth){ 
+
+                        for (i in 1:(depth-nchar(ptrn))){ ptrn <- paste0(ptrn, default_val) }
+                       
+                        rtn_v <- c(rtn_v, ptrn)
+
+                }else{
+
+                        rtn_v <- c(rtn_v, paste(unlist(strsplit(x=ptrn, split=""))[1:depth], collapse=""))
+
+                }
+
+        }
+
+
+        return(rtn_v)
+
+}
+
+#' rearangr_v
+#'
+#' Reanranges a vector "w_v" according to another vector "inpt_v". inpt_v contains a sequence of number. inpt_v and w_v have the same size and their indexes are related. The output will be a vector containing all the elements of w_v rearanges in descending or asending order according to inpt_v
+#'
+#' @param inpt_v is the vector that contains the sequance of number
+#' @param w_v is the vector containing the elements related to inpt_v
+#' @param how is the way the elements of w_v will be outputed according to if inpt_v will be sorted ascendigly or descendingly
+#' @examples 
+#' print(rearangr_v(inpt_v=c(23, 21, 56), w_v=c("oui", "peut", "non"), how="decreasing"))
+#' [1] "non"  "oui"  "peut"
+
+rearangr_v <- function(inpt_v, w_v, how="increasing"){
+
+    rtn_v <- c()
+
+    pre_v <- inpt_v
+
+    if (how == "increasing"){
+
+        inpt_v <- sort(inpt_v)
+
+    }else {
+
+        inpt_v <- sort(inpt_v, decreasing=T)
+
+    }
+
+    for (el in inpt_v){
+
+        idx <- match(el, pre_v)
+
+        rtn_v <- c(rtn_v, w_v[idx])
+
+        pre_v[idx] <- NA
+
+    }
+
+    return(rtn_v)
+
+}
+
+#' clusterizer_v
+#' 
+#' Allow to output clusters of elements. Takes as input a vector "inpt_v" containing a sequence of number. Can also take another vector "w_v" that has the same size of inpt_v because its elements are related to it. The way the clusters are made is related to an accuracy value which is "c_val". It means that if the difference between the values associated to 2 elements is superior to c_val, these two elements are in distinct clusters.
+#' 
+#' @param inpt_v is the vector containing the sequence of number
+#' @param w_v is the vector containing the elements related to inpt_v, defaults to NA
+#' @param c_val is the accuracy of the clusterization
+#' 
+#' @examples
+#'  print(clusterizer_v(inpt_v=sample.int(20, 26, replace=T), w_v=NA, c_val=0.9))
+#' 
+#'[[1]]
+#'[[1]][[1]]
+#'[1] "j" "v"
+#'
+#'[[1]][[2]]
+#'[1] "x"
+#'
+#'[[1]][[3]]
+#'[1] "e" "m" "p" "s" "t" "b" "q" "z" "f"
+#'
+#'[[1]][[4]]
+#'[1] "a" "i"
+#'
+#'[[1]][[5]]
+#'[1] "c" "n" "o" "g" "u" "y" "h" "l"
+#'
+#'[[1]][[6]]
+#'[1] "d" "r" "w" "k"
+#'
+#'
+#'[[2]]
+#' [1] "1"  "2"  "-"  "4"  "4"  "-"  "6"  "10" "-"  "12" "12" "-"  "14" "16" "-" 
+#'[16] "18" "19"
+#' 
+#' print(clusterizer_v(inpt_v=sample.int(40, 26, replace=T), w_v=letters, c_val=0.29))
+#'
+#'
+#'[[1]]
+#'[[1]][[1]]
+#'[1] "a" "b" "c" "d" "e" "f" "g" "h"
+#'
+#'[[1]][[2]]
+#'[1] "i" "j" "k" "l"
+#'
+#'[[1]][[3]]
+#'[1] "m" "n"
+#'
+#'[[1]][[4]]
+#' [1] "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
+#'
+#'
+#'[[2]]
+#' [1] "1"  "5"  "-"  "8"  "10" "-"  "12" "13" "-"  "15" "20"
+
+clusterizer_v <- function(inpt_v, w_v=NA, c_val){
+
+    rearangr_v <- function(inpt_v, w_v, how="increasing"){
+
+            rtn_v <- c()
+
+            pre_v <- inpt_v
+
+            if (how == "increasing"){
+
+                inpt_v <- sort(inpt_v)
+
+            }else {
+
+                inpt_v <- sort(inpt_v, decreasing=T)
+
+            }
+
+            for (el in inpt_v){
+
+                idx <- match(el, pre_v)
+
+                rtn_v <- c(rtn_v, w_v[idx])
+
+                pre_v[idx] <- NA
+
+            }
+
+            return(rtn_v)
+
+    }
+
+    inpt_v <- sort(inpt_v)
+
+    idx_v <- c()
+
+    rtn_l <- list() 
+
+    if (all(is.na(w_v)) == F){
+
+            w_v <- rearangr_v(inpt_v=inpt_v, w_v=w_v)
+
+            pre_v <- c(w_v[1])
+
+            pre_idx <- inpt_v[1]
+
+            if (length(inpt_v) > 1){
+
+                    for (i in 2:length(inpt_v)){
+
+                        if ((inpt_v[i] - inpt_v[i - 1]) > c_val){
+
+                                rtn_l <- append(rtn_l, list(pre_v))
+
+                                idx_v <- c(idx_v, "-", pre_idx, inpt_v[i-1])
+
+                                pre_idx <- inpt_v[i]
+
+                                pre_v <- c()
+
+                        }
+
+                        pre_v <- c(pre_v, w_v[i])
+
+                    }
+
+                    rtn_l <- append(rtn_l, list(pre_v))
+
+                    idx_v <- c(idx_v, "-", pre_idx, inpt_v[length(inpt_v)])
+
+            }else{
+
+                rtn_l <- append(rtn_l, pre_v[1])
+
+            }
+
+    }else{
+
+            pre_v <- c(inpt_v[1])
+
+            pre_idx <- inpt_v[1]
+
+            if (length(inpt_v) > 1){
+
+                    for (i in 2:length(inpt_v)){
+
+                        if ((inpt_v[i] - inpt_v[i - 1]) > c_val){
+
+                                rtn_l <- append(rtn_l, list(pre_v))
+
+                                idx_v <- c(idx_v, "-", pre_idx, inpt_v[i-1])
+
+                                pre_idx <- inpt_v[i]
+
+                                pre_v <- c()
+
+                        }
+                                
+                        pre_v <- c(pre_v, inpt_v[i])
+
+                    }
+
+                    rtn_l <- append(rtn_l, list(pre_v))
+
+                    idx_v <- c(idx_v, "-", pre_idx, inpt_v[length(inpt_v)])
+
+            }else{
+
+                rtn_l <- append(rtn_l, pre_v[1])
+
+            }
+
+    }
+
+    return(list(rtn_l, idx_v[2:length(idx_v)]))
+
+}
+
+#' chr_removr
+#'
+#' Allow to remove certain characters contained in a vector "ptrn_v" from elements in a another vector "inpt_v".
+#' 
+#' @param inpt_v is the input vector containing all the elements that may have the characters to be removed 
+#' @param ptrn_v is the vector containing all the characters that will be removed
+#' 
+#' @examples
+#' print(chr_removr(inpt_v=c("oui?", "!oui??", "non", "!non"), ptrn_v=c("?")))
+#' [1] "oui"  "!oui" "non"  "!non"
+#' 
+#' print(chr_removr(inpt_v=c("oui?", "!oui??", "non", "!non"), ptrn_v=c("?", "!")))
+#' [1] "oui" "oui" "non" "non"
+
+chr_removr <- function(inpt_v, ptrn_v){
+
+        rm_fun <- function(x){
+
+            rm_ids <- c()
+
+            cur_chr <- unlist(strsplit(x, split=""))
+
+            for (ptrn in ptrn_v){
+
+                    rm_ids <- c(rm_ids, which(cur_chr == ptrn))
+
+            }
+
+            if (length(rm_ids) == 0){
+
+                    return(x)
+
+            }else {
+
+                    cur_chr <- cur_chr[-rm_ids]
+
+                    return(paste(cur_chr, collapse=""))
+
+            }
+
+        }
+      
+        rtn_v <- mapply(function(x) return(rm_fun(x)), inpt_v) 
+
+        return(as.vector(rtn_v))
+
+}
+
+#' closer_ptrn_adv
+#' 
+#' Allow to find how patterns are far or near between each other relatively to a vector containing characters at each index ("base_v"). The function gets the sum of the indexes of each pattern letter relatively to the characters in base_v. So each pattern can be compared.
+#' 
+#' @param inpt_v is the input vector containing all the patterns to be analyzed
+#' @param res is a parameter controling the result. If set to "raw_stat", each word in inpt_v will come with its score (indexes of its letters relatively to base_v). If set to something else, so "c_word" parameter must be filled.
+#' @param c_word is a pattern from which the nearest to the farest pattern in inpt_v will be compared 
+#' @param base_v is the vector from which all pattern get its result (letters indexes for each pattern relatively to base_v), defaults to c("default_val", letters). "default_val" is another parameter and letters is all the western alphabetic letters in a vector
+#' @param default_val is the value that will be added to all patterns that do not equal the length of the longest pattern in inpt_v. Those get this value added to make all patterns equal in length so they can be compared, defaults to "?"
+#' 
+#' @examples
+#' print(closer_ptrn_adv(inpt_v=c("aurevoir", "bonnour", "nonnour", "fin", "mois", "bonjour"), res="word", c_word="bonjour"))
+#' 
+#'[[1]]
+#'[1]  1  5 15 17 38 65
+#'
+#'[[2]]
+#'[1] "bonjour"  "bonnour"  "aurevoir" "nonnour"  "mois"     "fin"     
+#' 
+#' print(closer_ptrn_adv(inpt_v=c("aurevoir", "bonnour", "nonnour", "fin", "mois")))
+#' 
+#'[[1]]
+#'[1] 117 107 119  37  64
+#'
+#'[[2]]
+#'[1] "aurevoir" "bonnour"  "nonnour"  "fin"      "mois"    
+
+closer_ptrn_adv <- function(inpt_v, res="raw_stat", default_val="?", base_v=c(default_val, letters), c_word=NA){
+
+        chr_removr <- function(inpt_v, ptrn_v){
+
+                rm_fun <- function(x){
+
+                    rm_ids <- c()
+
+                    cur_chr <- unlist(strsplit(x, split=""))
+
+                    for (ptrn in ptrn_v){
+
+                            rm_ids <- c(rm_ids, which(cur_chr == ptrn))
+
+                    }
+
+                    if (length(rm_ids) == 0){
+
+                            return(x)
+
+                    }else {
+
+                            cur_chr <- cur_chr[-rm_ids]
+
+                            return(paste(cur_chr, collapse=""))
+
+                    }
+
+                }
+              
+                rtn_v <- mapply(function(x) return(rm_fun(x)), inpt_v) 
+
+                return(as.vector(rtn_v))
+
+        }
+
+        rearangr_v <- function(inpt_v, w_v, how="increasing"){
+
+            rtn_v <- c()
+
+            pre_v <- inpt_v
+
+            if (how == "increasing"){
+
+                inpt_v <- sort(inpt_v)
+
+            }else {
+
+                inpt_v <- sort(inpt_v, decreasing=T)
+
+            }
+
+            for (el in inpt_v){
+
+                idx <- match(el, pre_v)
+
+                rtn_v <- c(rtn_v, w_v[idx])
+
+                pre_v[idx] <- NA
+
+            }
+
+            return(rtn_v)
+
+        }
+
+        equalizer_v <- function(inpt_v, depth="max", default_val="?"){
+
+                if (depth == "min"){ 
+
+                   depth <- nchar(inpt_v[1]) 
+
+                    if (length(inpt_v) > 1){
+
+                            for (ptrn in inpt_v[2:length(inpt_v)]){
+
+                                if (nchar(ptrn) < depth){ depth <- nchar(ptrn) }
+
+                            }
+
+                    }
+
+                }
+
+                if (depth == "max"){ 
+
+                   depth <- nchar(inpt_v[1]) 
+
+                    if (length(inpt_v) > 1){
+
+                            for (ptrn in inpt_v[2:length(inpt_v)]){
+
+                                if (nchar(ptrn) > depth){ depth <- nchar(ptrn) }
+
+                            }
+
+                    }
+
+                }
+
+                rtn_v <- c()
+
+                for (ptrn in inpt_v){
+
+                        if (nchar(ptrn) < depth){ 
+
+                                for (i in 1:(depth-nchar(ptrn))){ ptrn <- paste0(ptrn, default_val) }
+                               
+                                rtn_v <- c(rtn_v, ptrn)
+
+                        }else{
+
+                                rtn_v <- c(rtn_v, paste(unlist(strsplit(x=ptrn, split=""))[1:depth], collapse=""))
+
+                        }
+
+                }
+
+
+                return(rtn_v)
+
+    }
+
+    inpt_v <- equalizer_v(inpt_v=inpt_v, default_val=default_val)
+
+    ref_v <- base_v
+
+    res_v <- c()
+
+    for (ptrn in inpt_v){
+
+        cur_delta = 0
+
+        ptrn <- unlist(strsplit(ptrn, split=""))
+
+        for (ltr in ptrn){
+
+            cur_delta = cur_delta + match(ltr, base_v)
+
+        }
+
+        res_v <- c(res_v, cur_delta)
+
+    }
+
+    if (res == "raw_stat"){
+
+         return(list(res_v, chr_removr(inpt_v=inpt_v, ptrn_v=c(default_val))))
+
+    }else if (is.na(c_word) == F){
+
+        cur_delta = 0
+
+        for (ltr in unlist(strsplit(c_word, split=""))){
+
+            cur_delta = cur_delta + match(ltr, base_v)
+
+        }
+
+        cur_delta <- abs(res_v - cur_delta)
+
+        inpt_v <- rearangr_v(inpt_v=cur_delta, w_v=inpt_v, how="increasing")
+
+        return(list(sort(cur_delta, decreasing=F), chr_removr(inpt_v=inpt_v, ptrn_v=c(default_val))))
+
+    }
+
+}
+
+#' closer_ptrn
+#'
+#' Take a vector of patterns as input and output each chosen word with their closest patterns from chosen patterns. 
+#' 
+#' @param inpt_v is the input vector containing all the patterns
+#' @param excl_v is the vector containing all the patterns from inpt_v to exclude for comparing them to others patterns. If this parameter is filled, so "rtn_v" must be empty.
+#' @param rtn_v is the vector containing all the patterns from inpt_v to keep for comparing them to others patterns. If this parameter is filled, so "rtn_v" must be empty.
+#' @param sub_excl_v is the vector containing all the patterns from inpt_v to exclude for using them to compare to another pattern. If this parameter is filled, so "sub_rtn_v" must be empty.
+#' @param sub_rtn_v is the vector containing all the patterns from inpt_v to retain for using them to compare to another pattern. If this parameter is filled, so "sub_excl_v" must be empty.
+#' @examples
+#' 
+#' print(closer_ptrn(inpt_v=c("bonjour", "lpoerc", "nonnour", "bonnour", "nonjour", "aurevoir")))
+#'
+#'[[1]]
+#'[1] "bonjour"
+#'
+#'[[2]]
+#'[1] "lpoerc"   "nonnour"  "bonnour"  "nonjour"  "aurevoir"
+#'
+#'[[3]]
+#'[1] 1 1 2 7 8
+#'
+#'[[4]]
+#'[1] "lpoerc"
+#'
+#'[[5]]
+#'[1] "bonjour"  "nonnour"  "bonnour"  "nonjour"  "aurevoir"
+#'
+#'[[6]]
+#'[1] 7 7 7 7 7
+#'
+#'[[7]]
+#'[1] "nonnour"
+#'
+#'[[8]]
+#'[1] "bonjour"  "lpoerc"   "bonnour"  "nonjour"  "aurevoir"
+#'
+#'[[9]]
+#'[1] 1 1 2 7 8
+#'
+#'[[10]]
+#'[1] "bonnour"
+#'
+#'[[11]]
+#'[1] "bonjour"  "lpoerc"   "nonnour"  "nonjour"  "aurevoir"
+#'
+#'[[12]]
+#'[1] 1 1 2 7 8
+#'
+#'[[13]]
+#'[1] "nonjour"
+#'
+#'[[14]]
+#'[1] "bonjour"  "lpoerc"   "nonnour"  "bonnour"  "aurevoir"
+#'
+#'[[15]]
+#'[1] 1 1 2 7 8
+#'
+#'[[16]]
+#'[1] "aurevoir"
+#'
+#'[[17]]
+#'[1] "bonjour" "lpoerc"  "nonnour" "bonnour" "nonjour"
+#'
+#'[[18]]
+#'[1] 7 8 8 8 8
+#' print(closer_ptrn(inpt_v=c("bonjour", "lpoerc", "nonnour", "bonnour", "nonjour", "aurevoir"), excl_v=c("nonnour", "nonjour"),
+#'                  sub_excl_v=c("nonnour")))
+#'
+#'[1] 3 5
+#'[[1]]
+#'[1] "bonjour"
+#'
+#'[[2]]
+#'[1] "lpoerc"   "bonnour"  "nonjour"  "aurevoir"
+#'
+#'[[3]]
+#'[1] 1 1 7 8
+#'
+#'[[4]]
+#'[1] "lpoerc"
+#'
+#'[[5]]
+#'[1] "bonjour"  "bonnour"  "nonjour"  "aurevoir"
+#'
+#'[[6]]
+#'[1] 7 7 7 7
+#'
+#'[[7]]
+#'[1] "bonnour"
+#'
+#'[[8]]
+#'[1] "bonjour"  "lpoerc"   "bonnour"  "nonjour"  "aurevoir"
+#'
+#'[[9]]
+#'[1] 0 1 2 7 8
+#'
+#'[[10]]
+#'[1] "aurevoir"
+#'
+#'[[11]]
+#'[1] "bonjour"  "lpoerc"   "nonjour"  "aurevoir"
+#'
+#'[[12]]
+#'[1] 0 7 8 8
+
+closer_ptrn <- function(inpt_v, default_val="?", base_v=c(default_val, letters), excl_v=c(), rtn_v=c(), 
+                        sub_excl_v=c(), sub_rtn_v=c()){
+
+        rearangr_v <- function(inpt_v, w_v, how="increasing"){
+
+            rtn_v <- c()
+
+            pre_v <- inpt_v
+
+            if (how == "increasing"){
+
+                inpt_v <- sort(inpt_v)
+
+            }else {
+
+                inpt_v <- sort(inpt_v, decreasing=T)
+
+            }
+
+            for (el in inpt_v){
+
+                idx <- match(el, pre_v)
+
+                rtn_v <- c(rtn_v, w_v[idx])
+
+                pre_v[idx] <- NA
+
+            }
+
+            return(rtn_v)
+
+        }
+
+        chr_removr <- function(inpt_v, ptrn_v){
+
+                rm_fun <- function(x){
+
+                    rm_ids <- c()
+
+                    cur_chr <- unlist(strsplit(x, split=""))
+
+                    for (ptrn in ptrn_v){
+
+                            rm_ids <- c(rm_ids, which(cur_chr == ptrn))
+
+                    }
+
+                    if (length(rm_ids) == 0){
+
+                            return(x)
+
+                    }else {
+
+                            cur_chr <- cur_chr[-rm_ids]
+
+                            return(paste(cur_chr, collapse=""))
+
+                    }
+
+                }
+              
+                rtn_v <- mapply(function(x) return(rm_fun(x)), inpt_v) 
+
+                return(as.vector(rtn_v))
+
+        }
+
+        equalizer_v <- function(inpt_v, depth="max", default_val="?"){
+
+                if (depth == "min"){ 
+
+                   depth <- nchar(inpt_v[1]) 
+
+                    if (length(inpt_v) > 1){
+
+                            for (ptrn in inpt_v[2:length(inpt_v)]){
+
+                                if (nchar(ptrn) < depth){ depth <- nchar(ptrn) }
+
+                            }
+
+                    }
+
+                }
+
+                if (depth == "max"){ 
+
+                   depth <- nchar(inpt_v[1]) 
+
+                    if (length(inpt_v) > 1){
+
+                            for (ptrn in inpt_v[2:length(inpt_v)]){
+
+                                if (nchar(ptrn) > depth){ depth <- nchar(ptrn) }
+
+                            }
+
+                    }
+
+                }
+
+                rtn_v <- c()
+
+                for (ptrn in inpt_v){
+
+                        if (nchar(ptrn) < depth){ 
+
+                                for (i in 1:(depth-nchar(ptrn))){ ptrn <- paste0(ptrn, default_val) }
+                               
+                                rtn_v <- c(rtn_v, ptrn)
+
+                        }else{
+
+                                rtn_v <- c(rtn_v, paste(unlist(strsplit(x=ptrn, split=""))[1:depth], collapse=""))
+
+                        }
+
+                }
+
+
+                return(rtn_v)
+
+    }
+
+    inpt_v <- equalizer_v(inpt_v=inpt_v, default_val=default_val)
+
+    ref_v <- base_v
+
+    res_l <- list()
+
+    for (ptrn in inpt_v){
+
+        cur_delta = c()
+
+        ptrn <- unlist(strsplit(ptrn, split=""))
+
+        for (ltr in ptrn){
+
+            cur_delta = c(cur_delta, match(ltr, base_v))
+
+        }
+
+        res_l <- append(res_l, list(cur_delta))
+
+    }
+
+    rtn_l <- list()
+
+    rmids <- c()
+
+    sub_rmids <- c()
+
+    if (length(excl_v) > 0){
+
+        rmids <- as.vector(mapply(function(x) return(match(x, chr_removr(inpt_v=inpt_v, ptrn_v=c(default_val)))), excl_v))     
+
+    }
+
+    if (length(rtn_v) > 0){
+
+        rmids <- c(1:length(inpt_v))[-as.vector(mapply(function(x) return(match(x, chr_removr(inpt_v=inpt_v, ptrn_v=c(default_val)))), rtn_v))]
+
+    }
+
+    if (length(sub_excl_v) > 0){
+
+        sub_rmids <-  as.vector(mapply(function(x) return(match(x, chr_removr(inpt_v=inpt_v, ptrn_v=c(default_val)))), sub_excl_v))     
+
+    }
+
+    if (length(sub_rtn_v) > 0){
+
+        sub_rmids <- c(1:length(inpt_v))[-as.vector(mapply(function(x) return(match(x, c(inpt_v=inpt_v, ptrn_v=c(default_val)))), sub_rtn_v))]
+
+    }
+
+    if (length(rmids) > 0){
+
+        inpt_v2 <- inpt_v[-rmids] 
+
+        res_l2 <- res_l[-rmids]
+
+    }else{
+
+        inpt_v2 <- inpt_v
+
+        res_l2 <- res_l
+
+    }
+
+    print(rmids)
+
+    for (f_ptrn in 1:length(res_l2)){
+
+            pre_l <- list(chr_removr(inpt_v=inpt_v2[f_ptrn], ptrn_v=default_val))
+
+            pre_v <- c()
+
+            f_ptrn_v <- unlist(res_l2[f_ptrn])
+
+            for (cur_ptrn in res_l[-c(sub_rmids, (match(inpt_v[f_ptrn], inpt_v)))]){
+
+                    diff_val = 0
+
+                    for (pos in 1:length(cur_ptrn)){
+
+                        if (cur_ptrn[pos] != f_ptrn_v[pos]){
+
+                            diff_val = diff_val + 1 
+
+                        }
+
+                    }
+
+                    pre_v <- c(pre_v, diff_val)
+
+            }
+
+            pre_ptrn <- chr_removr(inpt_v=inpt_v[-c(sub_rmids, 
+                                        (match(inpt_v[f_ptrn], inpt_v)))], ptrn_v=c(default_val))
+
+            pre_l <- append(x=pre_l, values=list(pre_ptrn))
+
+            pre_l <- append(x=pre_l, values=list(sort(pre_v)))
+
+            rtn_l <- append(x=rtn_l, values=pre_l)
+
+    }
+  
+    return(rtn_l)
+
+}
 
 
 

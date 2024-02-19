@@ -41,6 +41,128 @@ inpt_df=df)
 ```
 
 
+# `any_join_df`
+
+any_join_df
+
+
+## Description
+
+Allow to perform SQL joints with more features
+
+
+## Usage
+
+```r
+any_join_df(
+  inpt_df_l,
+  join_type = "inner",
+  join_spe = NA,
+  id_v = c(),
+  excl_col = c(),
+  rtn_col = c(),
+  d_val = NA
+)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_df_l`     |     is a list containing all the dataframe
+`join_type`     |     is the joint type. Defaults to inner but can be changed to a vector containing all the dataframes you want to take their ids to don external joints.
+`join_spe`     |     can be equal to a vector to do an external joints on all the dataframes. In this case, join_type should not be equal to "inner"
+`id_v`     |     is a vector containing all the ids name of the dataframes. The ids names can be changed to number of their columns taking in count their position in inpt_df_l. It means that if my id is in the third column of the second dataframe and the first dataframe have 5 columns, the column number of the ids is 5 + 3 = 8
+`excl_col`     |     is a vector containing the column names to exclude, if this vector is filled so "rtn_col" should not be filled. You can also put the column number in the manner indicated for "id_v". Defaults to c()
+`rtn_col`     |     is a vector containing the column names to retain, if this vector is filled so "excl_col" should not be filled. You can also put the column number in the manner indicated for "id_v". Defaults to c()
+`d_val`     |     is the default val when here is no match
+
+
+## Examples
+
+```r
+df1 <- data.frame("val"=c(1, 1, 2, 4), "ids"=c("e", "a", "z", "a"),
+"last"=c("oui", "oui", "non", "oui"),
+"second_ids"=c(13, 11, 12, 8))
+
+df2 <- data.frame("val"=c(3, 7, 2, 4, 1, 2), "ids"=c("a", "z", "z", "a", "a", "a"),
+"bool"=c(T, F, F, F, T, T),
+"second_ids"=c(13, 12, 8, 34, 22, 12))
+
+df3 <- data.frame("val"=c(1, 9, 2, 4), "ids"=c("a", "a", "z", "a"),
+"last"=c("oui", "oui", "non", "oui"),
+"second_ids"=c(13, 11, 12, 8))
+
+print(any_join_df(inpt_df_l=list(df1, df2, df3), join_type="inner",
+id_v=c("ids", "second_ids"),
+excl_col=c(), rtn_col=c()))
+ids val ids last second_ids val ids  bool second_ids val ids last second_ids
+3 z12   2   z  non         12   7   z FALSE         12   2   z  non         12
+
+print(any_join_df(inpt_df_l=list(df1, df2, df3), join_type="inner", id_v=c("ids"),
+excl_col=c(), rtn_col=c()))
+
+ids val ids last second_ids val ids  bool second_ids val ids last second_ids
+2   a   1   a  oui         11   3   a  TRUE         13   1   a  oui         13
+3   z   2   z  non         12   7   z FALSE         12   2   z  non         12
+4   a   4   a  oui          8   4   a FALSE         34   9   a  oui         11
+
+print(any_join_df(inpt_df_l=list(df1, df2, df3), join_type=c(1), id_v=c("ids"),
+excl_col=c(), rtn_col=c()))
+
+ids val ids last second_ids  val  ids  bool second_ids  val  ids last
+1   e   1   e  oui         13 <NA> <NA>  <NA>       <NA> <NA> <NA> <NA>
+2   a   1   a  oui         11    3    a  TRUE         13    1    a  oui
+3   z   2   z  non         12    7    z FALSE         12    2    z  non
+4   a   4   a  oui          8    4    a FALSE         34    9    a  oui
+second_ids
+1       <NA>
+2         13
+3         12
+4         11
+
+print(any_join_df(inpt_df_l=list(df2, df1, df3), join_type=c(1, 3), id_v=c("ids", "second_ids"),
+excl_col=c(), rtn_col=c()))
+ids  val  ids  bool second_ids  val  ids last second_ids  val  ids last
+1  a13    3    a  TRUE         13 <NA> <NA> <NA>       <NA>    1    a  oui
+2  z12    7    z FALSE         12    2    z  non         12    2    z  non
+3   z8    2    z FALSE          8 <NA> <NA> <NA>       <NA> <NA> <NA> <NA>
+4  a34    4    a FALSE         34 <NA> <NA> <NA>       <NA> <NA> <NA> <NA>
+5  a22    1    a  TRUE         22 <NA> <NA> <NA>       <NA> <NA> <NA> <NA>
+6  a12    2    a  TRUE         12 <NA> <NA> <NA>       <NA> <NA> <NA> <NA>
+7  a13 <NA> <NA>  <NA>       <NA> <NA> <NA> <NA>       <NA> <NA> <NA> <NA>
+8  a11 <NA> <NA>  <NA>       <NA>    1    a  oui         11    9    a  oui
+9  z12 <NA> <NA>  <NA>       <NA> <NA> <NA> <NA>       <NA> <NA> <NA> <NA>
+10  a8 <NA> <NA>  <NA>       <NA>    4    a  oui          8    4    a  oui
+second_ids
+1          13
+2          12
+3        <NA>
+4        <NA>
+5        <NA>
+6        <NA>
+7        <NA>
+8          11
+9        <NA>
+10          8
+
+print(any_join_df(inpt_df_l=list(df1, df2, df3), join_type=c(1), id_v=c("ids"),
+excl_col=c(), rtn_col=c()))
+
+ids val ids last second_ids  val  ids  bool second_ids  val  ids last
+1   e   1   e  oui         13 <NA> <NA>  <NA>       <NA> <NA> <NA> <NA>
+2   a   1   a  oui         11    3    a  TRUE         13    1    a  oui
+3   z   2   z  non         12    7    z FALSE         12    2    z  non
+4   a   4   a  oui          8    4    a FALSE         34    9    a  oui
+second_ids
+1       <NA>
+2         13
+3         12
+4         11
+```
+
+
 # `append_row`
 
 append_row
@@ -67,6 +189,59 @@ Argument      |Description
 `hmn`     |     is how many time the last row will be appended
 `na_col`     |     is a vector containing the columns that won't append and will be replaced by another value (unique_do_not_know)
 `unique_do_not_know`     |     is the value of the non appending column in the appending row
+
+
+# `appndr`
+
+appndr
+
+
+## Description
+
+Append to a vector "inpt_v" a special value "val" n times "mmn". The appending begins at "strt" index.
+
+
+## Usage
+
+```r
+appndr(inpt_v, val = NA, hmn, strt = "max")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`val`     |     is the special value
+`hmn`     |     is the number of special value element added
+`strt`     |     is the index from which appending begins, defaults to max which means the end of "inpt_v"
+
+
+# `calc_occu_v`
+
+calc_occu_v
+
+
+## Description
+
+Rearanges the index of a vector "w_v" to match the occurences of the common elements in another vector "f_v"
+
+
+## Usage
+
+```r
+calc_occu_v(f_v, w_v, nvr_here = NA)
+```
+
+
+## Examples
+
+```r
+print(calc_occu_v(f_v=c("e", "a", "z", NA, "a"), w_v=c("a", "a", "z")))
+
+[1] 1 3 2
+```
 
 
 # `can_be_num`
@@ -135,6 +310,233 @@ Argument      |Description
 `frmt`     |     is the format of the input date, (deault set to "snhdmy" (second, minute, hour, day, month, year), so all variable are taken in count), if you only want to work with standard date for example change this variable to "dmy"
 
 
+# `chr_removr`
+
+chr_removr
+
+
+## Description
+
+Allow to remove certain characters contained in a vector "ptrn_v" from elements in a another vector "inpt_v".
+
+
+## Usage
+
+```r
+chr_removr(inpt_v, ptrn_v)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector containing all the elements that may have the characters to be removed
+`ptrn_v`     |     is the vector containing all the characters that will be removed
+
+
+## Examples
+
+```r
+print(chr_removr(inpt_v=c("oui?", "!oui??", "non", "!non"), ptrn_v=c("?")))
+[1] "oui"  "!oui" "non"  "!non"
+
+print(chr_removr(inpt_v=c("oui?", "!oui??", "non", "!non"), ptrn_v=c("?", "!")))
+[1] "oui" "oui" "non" "non"
+```
+
+
+# `closer_ptrn_adv`
+
+closer_ptrn_adv
+
+
+## Description
+
+Allow to find how patterns are far or near between each other relatively to a vector containing characters at each index ("base_v"). The function gets the sum of the indexes of each pattern letter relatively to the characters in base_v. So each pattern can be compared.
+
+
+## Usage
+
+```r
+closer_ptrn_adv(
+  inpt_v,
+  res = "raw_stat",
+  default_val = "?",
+  base_v = c(default_val, letters),
+  c_word = NA
+)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector containing all the patterns to be analyzed
+`res`     |     is a parameter controling the result. If set to "raw_stat", each word in inpt_v will come with its score (indexes of its letters relatively to base_v). If set to something else, so "c_word" parameter must be filled.
+`default_val`     |     is the value that will be added to all patterns that do not equal the length of the longest pattern in inpt_v. Those get this value added to make all patterns equal in length so they can be compared, defaults to "?"
+`base_v`     |     is the vector from which all pattern get its result (letters indexes for each pattern relatively to base_v), defaults to c("default_val", letters). "default_val" is another parameter and letters is all the western alphabetic letters in a vector
+`c_word`     |     is a pattern from which the nearest to the farest pattern in inpt_v will be compared
+
+
+## Examples
+
+```r
+print(closer_ptrn_adv(inpt_v=c("aurevoir", "bonnour", "nonnour", "fin", "mois", "bonjour"), res="word", c_word="bonjour"))
+
+[[1]]
+[1]  1  5 15 17 38 65
+
+[[2]]
+[1] "bonjour"  "bonnour"  "aurevoir" "nonnour"  "mois"     "fin"
+
+print(closer_ptrn_adv(inpt_v=c("aurevoir", "bonnour", "nonnour", "fin", "mois")))
+
+[[1]]
+[1] 117 107 119  37  64
+
+[[2]]
+[1] "aurevoir" "bonnour"  "nonnour"  "fin"      "mois"
+```
+
+
+# `closer_ptrn`
+
+closer_ptrn
+
+
+## Description
+
+Take a vector of patterns as input and output each chosen word with their closest patterns from chosen patterns.
+
+
+## Usage
+
+```r
+closer_ptrn(
+  inpt_v,
+  default_val = "?",
+  base_v = c(default_val, letters),
+  excl_v = c(),
+  rtn_v = c(),
+  sub_excl_v = c(),
+  sub_rtn_v = c()
+)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector containing all the patterns
+`excl_v`     |     is the vector containing all the patterns from inpt_v to exclude for comparing them to others patterns. If this parameter is filled, so "rtn_v" must be empty.
+`rtn_v`     |     is the vector containing all the patterns from inpt_v to keep for comparing them to others patterns. If this parameter is filled, so "rtn_v" must be empty.
+`sub_excl_v`     |     is the vector containing all the patterns from inpt_v to exclude for using them to compare to another pattern. If this parameter is filled, so "sub_rtn_v" must be empty.
+`sub_rtn_v`     |     is the vector containing all the patterns from inpt_v to retain for using them to compare to another pattern. If this parameter is filled, so "sub_excl_v" must be empty.
+
+
+## Examples
+
+```r
+print(closer_ptrn(inpt_v=c("bonjour", "lpoerc", "nonnour", "bonnour", "nonjour", "aurevoir")))
+
+[[1]]
+[1] "bonjour"
+
+[[2]]
+[1] "lpoerc"   "nonnour"  "bonnour"  "nonjour"  "aurevoir"
+
+[[3]]
+[1] 1 1 2 7 8
+
+[[4]]
+[1] "lpoerc"
+
+[[5]]
+[1] "bonjour"  "nonnour"  "bonnour"  "nonjour"  "aurevoir"
+
+[[6]]
+[1] 7 7 7 7 7
+
+[[7]]
+[1] "nonnour"
+
+[[8]]
+[1] "bonjour"  "lpoerc"   "bonnour"  "nonjour"  "aurevoir"
+
+[[9]]
+[1] 1 1 2 7 8
+
+[[10]]
+[1] "bonnour"
+
+[[11]]
+[1] "bonjour"  "lpoerc"   "nonnour"  "nonjour"  "aurevoir"
+
+[[12]]
+[1] 1 1 2 7 8
+
+[[13]]
+[1] "nonjour"
+
+[[14]]
+[1] "bonjour"  "lpoerc"   "nonnour"  "bonnour"  "aurevoir"
+
+[[15]]
+[1] 1 1 2 7 8
+
+[[16]]
+[1] "aurevoir"
+
+[[17]]
+[1] "bonjour" "lpoerc"  "nonnour" "bonnour" "nonjour"
+
+[[18]]
+[1] 7 8 8 8 8
+print(closer_ptrn(inpt_v=c("bonjour", "lpoerc", "nonnour", "bonnour", "nonjour", "aurevoir"), excl_v=c("nonnour", "nonjour"),
+sub_excl_v=c("nonnour")))
+
+[1] 3 5
+[[1]]
+[1] "bonjour"
+
+[[2]]
+[1] "lpoerc"   "bonnour"  "nonjour"  "aurevoir"
+
+[[3]]
+[1] 1 1 7 8
+
+[[4]]
+[1] "lpoerc"
+
+[[5]]
+[1] "bonjour"  "bonnour"  "nonjour"  "aurevoir"
+
+[[6]]
+[1] 7 7 7 7
+
+[[7]]
+[1] "bonnour"
+
+[[8]]
+[1] "bonjour"  "lpoerc"   "bonnour"  "nonjour"  "aurevoir"
+
+[[9]]
+[1] 0 1 2 7 8
+
+[[10]]
+[1] "aurevoir"
+
+[[11]]
+[1] "bonjour"  "lpoerc"   "nonjour"  "aurevoir"
+
+[[12]]
+[1] 0 7 8 8
+```
+
+
 # `closest_date`
 
 closest_date
@@ -171,6 +573,83 @@ Argument      |Description
 `sep_vec`     |     is the separator for the dates contained in vec
 `only_`     |     is can be changed to "+" or "-" to repectively only return the higher dates and the lower dates (default set to "both")
 `head`     |     is the number of dates that will be returned (default set to NA so all dates in vec will be returned)
+
+
+# `clusterizer_v`
+
+clusterizer_v
+
+
+## Description
+
+Allow to output clusters of elements. Takes as input a vector "inpt_v" containing a sequence of number. Can also take another vector "w_v" that has the same size of inpt_v because its elements are related to it. The way the clusters are made is related to an accuracy value which is "c_val". It means that if the difference between the values associated to 2 elements is superior to c_val, these two elements are in distinct clusters.
+
+
+## Usage
+
+```r
+clusterizer_v(inpt_v, w_v = NA, c_val)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the vector containing the sequence of number
+`w_v`     |     is the vector containing the elements related to inpt_v, defaults to NA
+`c_val`     |     is the accuracy of the clusterization
+
+
+## Examples
+
+```r
+print(clusterizer_v(inpt_v=sample.int(20, 26, replace=T), w_v=NA, c_val=0.9))
+
+[[1]]
+[[1]][[1]]
+[1] "j" "v"
+
+[[1]][[2]]
+[1] "x"
+
+[[1]][[3]]
+[1] "e" "m" "p" "s" "t" "b" "q" "z" "f"
+
+[[1]][[4]]
+[1] "a" "i"
+
+[[1]][[5]]
+[1] "c" "n" "o" "g" "u" "y" "h" "l"
+
+[[1]][[6]]
+[1] "d" "r" "w" "k"
+
+
+[[2]]
+[1] "1"  "2"  "-"  "4"  "4"  "-"  "6"  "10" "-"  "12" "12" "-"  "14" "16" "-"
+[16] "18" "19"
+
+print(clusterizer_v(inpt_v=sample.int(40, 26, replace=T), w_v=letters, c_val=0.29))
+
+
+[[1]]
+[[1]][[1]]
+[1] "a" "b" "c" "d" "e" "f" "g" "h"
+
+[[1]][[2]]
+[1] "i" "j" "k" "l"
+
+[[1]][[3]]
+[1] "m" "n"
+
+[[1]][[4]]
+[1] "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
+
+
+[[2]]
+[1] "1"  "5"  "-"  "8"  "10" "-"  "12" "13" "-"  "15" "20"
+```
 
 
 # `cost_and_taxes`
@@ -441,6 +920,43 @@ Argument      |Description
 `pattern_only`     |     will cover differences by pattern if overwritten is set to TRUE
 
 
+# `equalizer_v`
+
+equalizer_v
+
+
+## Description
+
+Takes a vector of character as an input and returns a vector with the elements at the same size. The size can be chosen via depth parameter.
+
+
+## Usage
+
+```r
+equalizer_v(inpt_v, depth = "max", default_val = "?")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector containing all the characters
+`depth`     |     is the depth parameter, defaults to "max" which means that it is equal to the character number of the element(s) in inpt_v that has the most
+`default_val`     |     is the default value that will be added to the output characters if those has an inferior length (characters) than the value of depth
+
+
+## Examples
+
+```r
+print(equalizer_v(inpt_v=c("aa", "zzz", "q"), depth=2))
+[1] "aa" "zz" "q?"
+
+print(equalizer_v(inpt_v=c("aa", "zzz", "q"), depth=12))
+[1] "aa??????????" "zzz?????????" "q???????????"
+```
+
+
 # `extrm_dates`
 
 extrm_dates
@@ -465,6 +981,40 @@ Argument      |Description
 `inpt_l`     |     is the input vector
 `extrm`     |     is either "min" or "max", defaults to "min"
 `sep`     |     is the separator of the dates, defaults to "-"
+
+
+# `extrt_only_v`
+
+extrt_only_v
+
+
+## Description
+
+return the elements from a vector "inpt_v" that are in another vector "pttrn_v"
+
+
+## Usage
+
+```r
+extrt_only_v(inpt_v, pttrn_v)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`pttrn_v`     |     is the vector contining all the elements that can be in inpt_v
+
+
+## Examples
+
+```r
+print(extrt_only_v(inpt_v=c("oui", "non", "peut", "oo", "ll", "oui", "non", "oui", "oui"), pttrn_v=c("oui")))
+
+[1] "oui" "oo"  "oui" "oui" "oui"
+```
 
 
 # `file_rec`
@@ -548,6 +1098,72 @@ Argument      |Description
 
 ```r
 fillr(c("a", "b", "...3", "c"))
+```
+
+
+# `fittr_v`
+
+fittr_v
+
+
+## Description
+
+Return the indexes of elements contained in "w_v" according to "f_v"
+
+
+## Usage
+
+```r
+fittr_v(f_v, w_v, nvr_here = NA)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`f_v`     |     is the input vector
+`w_v`     |     is the vector containing the elements that can be in f_v
+
+
+## Examples
+
+```r
+print(fittr_v(f_v=c("non", "non", "non", "oui"), w_v=c("oui", "non", "non")))
+
+[1] 4 1 2
+```
+
+
+# `fixer_nest_v`
+
+fixer_nest_v
+
+
+## Description
+
+Retur the elements of a vector "wrk_v" (1) that corresponds to the pattern of elements in another vector "cur_v" (2) according to another vector "pttrn_v" (3) that contains the patterof eleemnts.
+
+
+## Usage
+
+```r
+fixer_nest_v(cur_v, pttrn_v, wrk_v)
+```
+
+
+## Examples
+
+```r
+print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "non", "peut-etre"), pttrn_v=c("oui", "non", "peut-etre"),
+wrk_v=c(1, 2, 3, 4, 5, 6)))
+
+[1] 1 2 3 4 5 6
+
+print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "non", "peut-etre"), pttrn_v=c("oui", "non"),
+wrk_v=c(1, 2, 3, 4, 5, 6)))
+
+[1]  1  2 NA  4  5 NA
 ```
 
 
@@ -727,6 +1343,56 @@ conjunction_lst=conjunction_lst, rtn_val_pos=rtn_val_pos)
 ```
 
 
+# `incr_fillr`
+
+incr_fillr
+
+
+## Description
+
+Take a vector uniquely composed by double and sorted ascendingly, a step, another vector of elements whose length is equal to the length of the first vector, and a default value. If an element of the vector is not equal to its predecessor minus a user defined step, so these can be the output according to the parameters (see example):
+
+
+## Usage
+
+```r
+incr_fillr(inpt_v, wrk_v = NA, default_val = NA, step = 1)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the asending double only composed vector
+`wrk_v`     |     is the other vector (size equal to inpt_v), defaults to NA
+`default_val`     |     is the default value put when the difference between two following elements of inpt_v is greater than step, defaults to NA
+`step`     |     is the allowed difference between two elements of inpt_v
+
+
+## Examples
+
+```r
+print(incr_fillr(inpt_v=c(1, 2, 4, 5, 9, 10),
+wrk_v=NA,
+default_val="increasing"))
+
+[1]  1  2  3  4  5  6  7  8  9 10
+
+print(incr_fillr(inpt_v=c(1, 1, 2, 4, 5, 9),
+wrk_v=c("ok", "ok", "ok", "ok", "ok"),
+default_val=NA))
+
+[1] "ok" "ok" "ok" NA   "ok" "ok" NA   NA   NA
+
+print(incr_fillr(inpt_v=c(1, 2, 4, 5, 9, 10),
+wrk_v=NA,
+default_val="NAN"))
+
+[1] "1"   "2"   "NAN" "4"   "5"   "NAN" "NAN" "NAN" "9"   "10"
+```
+
+
 # `insert_df`
 
 insert_df
@@ -878,6 +1544,32 @@ Argument      |Description
 `pathc`     |     is the path, can be a vector of multiple path because list.files() supports it.
 
 
+# `lst_flatnr`
+
+lst_flatnr
+
+
+## Description
+
+Flatten a list to a vector
+
+
+## Usage
+
+```r
+lst_flatnr(inpt_l)
+```
+
+
+## Examples
+
+```r
+print(lst_flatnr(inpt_l=list(c(1, 2), c(5, 3), c(7, 2, 7))))
+
+[1] 1 2 5 3 7 2 7
+```
+
+
 # `match_n`
 
 match_n
@@ -982,6 +1674,42 @@ Argument      |Description
 `x`     |     is the number of the column
 
 
+# `nest_v`
+
+nest_v
+
+
+## Description
+
+Nest two vectors according to the following parameters.
+
+
+## Usage
+
+```r
+nest_v(f_v, t_v, step = 1, after = 1)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`f_v`     |     is the vector that will welcome the nested vector t_v
+`t_v`     |     is the imbriquator vector
+`step`     |     defines after how many elements of f_v the next element of t_v can be put in the output
+`after`     |     defines after how many elements of f_v, the begining of t_v can be put
+
+
+## Examples
+
+```r
+print(nest_v(f_v=c(1, 2, 3, 4, 5, 6), t_v=c("oui", "oui2", "oui3", "oui4", "oui5", "oui6"), step=2, after=2))
+
+[1] "1"    "2"    "oui"  "3"    "4"    "oui2" "5"    "6"    "oui3" "oui4"
+```
+
+
 # `nestr_df1`
 
 nestr_df1
@@ -1078,6 +1806,40 @@ occu(inpt_v)
 Argument      |Description
 ------------- |----------------
 `inpt_v`     |     the input dataframe
+
+
+# `paste_df`
+
+paste_df
+
+
+## Description
+
+Return a vector composed of pasted elements from the input dataframe at the same index.
+
+
+## Usage
+
+```r
+paste_df(inpt_df, sep = "")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_df`     |     is the input dataframe
+`sep`     |     is the separator between pasted elements, defaults to ""
+
+
+## Examples
+
+```r
+print(paste_df(inpt_df=data.frame(c(1, 2, 1), c(33, 22, 55))))
+
+[1] "133" "222" "155"
+```
 
 
 # `pattern_generator`
@@ -1250,6 +2012,40 @@ Argument      |Description
 library("stringr")
 v <- c("2012-06-22", "2012-06-23", "2022-09-12", "2022")
 ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=TRUE)
+```
+
+
+# `rearangr_v`
+
+rearangr_v
+
+
+## Description
+
+Reanranges a vector "w_v" according to another vector "inpt_v". inpt_v contains a sequence of number. inpt_v and w_v have the same size and their indexes are related. The output will be a vector containing all the elements of w_v rearanges in descending or asending order according to inpt_v
+
+
+## Usage
+
+```r
+rearangr_v(inpt_v, w_v, how = "increasing")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the vector that contains the sequance of number
+`w_v`     |     is the vector containing the elements related to inpt_v
+`how`     |     is the way the elements of w_v will be outputed according to if inpt_v will be sorted ascendigly or descendingly
+
+
+## Examples
+
+```r
+print(rearangr_v(inpt_v=c(23, 21, 56), w_v=c("oui", "peut", "non"), how="decreasing"))
+[1] "non"  "oui"  "peut"
 ```
 
 
