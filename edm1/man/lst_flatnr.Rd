@@ -6,6 +6,9 @@
 \usage{
 lst_flatnr(inpt_l)
 }
+\arguments{
+\item{lst_flatnr}{is the input list}
+}
 \description{
 Flatten a list to a vector
 }

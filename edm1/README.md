@@ -416,8 +416,7 @@ Take a vector of patterns as input and output each chosen word with their closes
 ```r
 closer_ptrn(
   inpt_v,
-  default_val = "?",
-  base_v = c(default_val, letters),
+  base_v = c("?", letters),
   excl_v = c(),
   rtn_v = c(),
   sub_excl_v = c(),
@@ -431,6 +430,7 @@ closer_ptrn(
 Argument      |Description
 ------------- |----------------
 `inpt_v`     |     is the input vector containing all the patterns
+`base_v`     |     must contain all the characters that the patterns are succeptible to contain, defaults to c("?", letters). "?" is necessary because it is internaly the default value added to each element that does not have a suffiient length compared to the longest pattern in inpt_v. If set to NA, the function will find by itself the elements to be filled with but it may takes an extra time
 `excl_v`     |     is the vector containing all the patterns from inpt_v to exclude for comparing them to others patterns. If this parameter is filled, so "rtn_v" must be empty.
 `rtn_v`     |     is the vector containing all the patterns from inpt_v to keep for comparing them to others patterns. If this parameter is filled, so "rtn_v" must be empty.
 `sub_excl_v`     |     is the vector containing all the patterns from inpt_v to exclude for using them to compare to another pattern. If this parameter is filled, so "sub_rtn_v" must be empty.
@@ -1561,6 +1561,13 @@ lst_flatnr(inpt_l)
 ```
 
 
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`lst_flatnr`     |     is the input list
+
+
 ## Examples
 
 ```r
@@ -2163,6 +2170,39 @@ Argument      |Description
 `sep_`     |     is a vector containing the separator for each csv type file in order following the operating system file order, if the vector does not match the number of the csv files found, it will assume the separator for the rest of the files is the same as the last csv file found. It means that if you know the separator is the same for all the csv type files, you just have to put the separator once in the vector.
 `unique_sep`     |     is a pattern that you know will never be in your input files
 `rec`     |     is a boolean allows to get files recursively if set to TRUE, defaults to TRUE If x is the return value, to see all the files name, position of the columns and possible sheet name associanted with, do the following: Examples: print(x[(grep(unique_sep, x) [1](#1) +1):length(x)]) #If you just want to see the columns do the following: print(x [1:(grep(unique_sep, x) - 1)](#1:(grep(uniquesep,_x)_-_1)) )
+
+
+# `unique_ltr_from_v`
+
+unique_ltr_from_v
+
+
+## Description
+
+Returns the unique characters contained in all the elements from an input vector "inpt_v"
+
+
+## Usage
+
+```r
+unique_ltr_from_v(inpt_v, keep_v = c("?", "!", ":", "&", ",", ".", letters))
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector containing all the elements
+`keep_v`     |     is the vector containing all the characters that the elements in inpt_v may contain
+
+
+## Examples
+
+```r
+print(unique_ltr_from_v(inpt_v=c("bonjour", "lpoerc", "nonnour", "bonnour", "nonjour", "aurevoir")))
+[1] "b" "o" "n" "j" "u" "r" "l" "p" "e" "c" "a" "v" "i"
+```
 
 
 # `unique_pos`

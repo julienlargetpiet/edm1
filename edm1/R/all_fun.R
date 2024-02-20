@@ -5224,7 +5224,9 @@ fixer_nest_v <- function(cur_v, pttrn_v, wrk_v){
 #' lst_flatnr
 #'
 #' Flatten a list to a vector
-#' @param lst_flatnr
+#' 
+#' @param lst_flatnr is the input list
+#'
 #' @examples
 #'print(lst_flatnr(inpt_l=list(c(1, 2), c(5, 3), c(7, 2, 7))))
 #'
@@ -6523,6 +6525,47 @@ closer_ptrn_adv <- function(inpt_v, res="raw_stat", default_val="?", base_v=c(de
 
 }
 
+#' unique_ltr_from_v 
+#'
+#' Returns the unique characters contained in all the elements from an input vector "inpt_v"
+#'
+#' @param inpt_v is the input vector containing all the elements
+#' @param keep_v is the vector containing all the characters that the elements in inpt_v may contain
+#'
+#' @examples
+#' print(unique_ltr_from_v(inpt_v=c("bonjour", "lpoerc", "nonnour", "bonnour", "nonjour", "aurevoir")))
+#'  [1] "b" "o" "n" "j" "u" "r" "l" "p" "e" "c" "a" "v" "i" 
+
+unique_ltr_from_v <- function(inpt_v, keep_v=c("?", "!", ":", "&", ",", ".", letters)){
+
+    cnt = 1
+
+    add_v <- c(1)
+
+    rtn_v <- c()
+
+    while (length(keep_v) > 0 & cnt <= length(inpt_v)){
+
+            add_v <- as.vector(mapply(function(x) return(match(x, keep_v)), unlist(strsplit(inpt_v[cnt], split=""))))
+
+            if (all(is.na(add_v)) == F){
+
+                add_v <- add_v[(is.na(add_v)==F)]
+
+                rtn_v <- c(rtn_v, keep_v[unique(add_v)])
+
+                keep_v <- keep_v[-add_v]
+
+            }
+
+            cnt = cnt + 1
+
+    }
+
+    return(rtn_v)
+
+}
+
 #' closer_ptrn
 #'
 #' Take a vector of patterns as input and output each chosen word with their closest patterns from chosen patterns. 
@@ -6532,6 +6575,7 @@ closer_ptrn_adv <- function(inpt_v, res="raw_stat", default_val="?", base_v=c(de
 #' @param rtn_v is the vector containing all the patterns from inpt_v to keep for comparing them to others patterns. If this parameter is filled, so "rtn_v" must be empty.
 #' @param sub_excl_v is the vector containing all the patterns from inpt_v to exclude for using them to compare to another pattern. If this parameter is filled, so "sub_rtn_v" must be empty.
 #' @param sub_rtn_v is the vector containing all the patterns from inpt_v to retain for using them to compare to another pattern. If this parameter is filled, so "sub_excl_v" must be empty.
+#' @param base_v must contain all the characters that the patterns are succeptible to contain, defaults to c("?", letters). "?" is necessary because it is internaly the default value added to each element that does not have a suffiient length compared to the longest pattern in inpt_v. If set to NA, the function will find by itself the elements to be filled with but it may takes an extra time 
 #' @examples
 #' 
 #' print(closer_ptrn(inpt_v=c("bonjour", "lpoerc", "nonnour", "bonnour", "nonjour", "aurevoir")))
@@ -6629,8 +6673,50 @@ closer_ptrn_adv <- function(inpt_v, res="raw_stat", default_val="?", base_v=c(de
 #'[[12]]
 #'[1] 0 7 8 8
 
-closer_ptrn <- function(inpt_v, default_val="?", base_v=c(default_val, letters), excl_v=c(), rtn_v=c(), 
+closer_ptrn <- function(inpt_v, base_v=c("?", letters), excl_v=c(), rtn_v=c(), 
                         sub_excl_v=c(), sub_rtn_v=c()){
+
+        unique_ltr_from_v <- function(inpt_v, keep_v=c("?", "!", ":", "&", ",", ".", letters)){
+
+            cnt = 1
+
+            add_v <- c(1)
+
+            rtn_v <- c()
+
+            while (length(keep_v) > 0 & cnt <= length(inpt_v)){
+
+                    add_v <- as.vector(mapply(function(x) return(match(x, keep_v)), unlist(strsplit(inpt_v[cnt], split=""))))
+
+                    if (all(is.na(add_v)) == F){
+
+                        add_v <- add_v[(is.na(add_v)==F)]
+
+                        rtn_v <- c(rtn_v, keep_v[unique(add_v)])
+
+                        keep_v <- keep_v[-add_v]
+
+                    }
+
+                    cnt = cnt + 1
+
+            }
+
+            return(rtn_v)
+
+        }
+
+        default_val <- "?"
+
+        if (all(is.na(base_v))){
+
+            base_v <- unique_ltr_from_v(inpt_v=inpt_v)
+
+        }
+
+        if (("?" %in% base_v) == F) { base_v <- c(base_v, "?") }
+
+        print(base_v)
 
         rearangr_v <- function(inpt_v, w_v, how="increasing"){
 
@@ -6775,6 +6861,8 @@ closer_ptrn <- function(inpt_v, default_val="?", base_v=c(default_val, letters),
 
     }
 
+    print(res_l)
+
     rtn_l <- list()
 
     rmids <- c()
@@ -6819,8 +6907,6 @@ closer_ptrn <- function(inpt_v, default_val="?", base_v=c(default_val, letters),
 
     }
 
-    print(rmids)
-
     for (f_ptrn in 1:length(res_l2)){
 
             pre_l <- list(chr_removr(inpt_v=inpt_v2[f_ptrn], ptrn_v=default_val))
@@ -6861,6 +6947,11 @@ closer_ptrn <- function(inpt_v, default_val="?", base_v=c(default_val, letters),
     return(rtn_l)
 
 }
+
+
+
+
+
 
 
 

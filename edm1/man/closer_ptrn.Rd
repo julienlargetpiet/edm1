@@ -6,8 +6,7 @@
 \usage{
 closer_ptrn(
   inpt_v,
-  default_val = "?",
-  base_v = c(default_val, letters),
+  base_v = c("?", letters),
   excl_v = c(),
   rtn_v = c(),
   sub_excl_v = c(),
@@ -16,6 +15,8 @@ closer_ptrn(
 }
 \arguments{
 \item{inpt_v}{is the input vector containing all the patterns}
+
+\item{base_v}{must contain all the characters that the patterns are succeptible to contain, defaults to c("?", letters). "?" is necessary because it is internaly the default value added to each element that does not have a suffiient length compared to the longest pattern in inpt_v. If set to NA, the function will find by itself the elements to be filled with but it may takes an extra time}
 
 \item{excl_v}{is the vector containing all the patterns from inpt_v to exclude for comparing them to others patterns. If this parameter is filled, so "rtn_v" must be empty.}
 
