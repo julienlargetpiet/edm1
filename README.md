@@ -1,4 +1,3 @@
-This repo is in maintenance.
 
 # `all_stat`
 
