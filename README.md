@@ -1,5 +1,12 @@
 ![alt text](logo.png)
 
+# Manual Installation 
+
+`
+> library("devtools")
+> build()
+> install()
+`
 
 # `all_stat`
 
