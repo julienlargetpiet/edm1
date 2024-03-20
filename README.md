@@ -3,9 +3,9 @@
 # Manual Installation 
 
 `
-> library("devtools") \
-> build() \
-> install() \
+\> library("devtools") \
+\> build() \
+\> install() \
 `
 
 # `all_stat`
