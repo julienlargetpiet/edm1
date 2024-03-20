@@ -19,6 +19,7 @@ incr_fillr(inpt_v, wrk_v = NA, default_val = NA, step = 1)
 Take a vector uniquely composed by double and sorted ascendingly, a step, another vector of elements whose length is equal to the length of the first vector, and a default value. If an element of the vector is not equal to its predecessor minus a user defined step, so these can be the output according to the parameters (see example):
 }
 \examples{
+
 print(incr_fillr(inpt_v=c(1, 2, 4, 5, 9, 10), 
                 wrk_v=NA, 
                 default_val="increasing"))
@@ -36,4 +37,5 @@ print(incr_fillr(inpt_v=c(1, 2, 4, 5, 9, 10),
                 default_val="NAN"))
 
 [1] "1"   "2"   "NAN" "4"   "5"   "NAN" "NAN" "NAN" "9"   "10" 
+
 }

@@ -1,0 +1,54 @@
+* installing *source* package ‘edm1’ ...
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+   modal_v var_vector occu sum mean  med standard_devaition         variance
+1    first                                                                  
+2                var1       64   16 16.5   6.97614984548545 48.6666666666667
+3              var2-d    1                                                  
+4              var2-z    3                                                  
+5                var3      178 44.5   45   1.73205080756888                3
+6              var4-A    2                                                  
+7              var4-B    1                                                  
+8              var4-C    1                                                  
+9     seco                                                                  
+10               var1       43 21.5 21.5  0.707106781186548              0.5
+11             var2-d    1                                                  
+12             var2-z    1                                                  
+13               var3       87 43.5 43.5  0.707106781186548              0.5
+14             var4-A    2                                                  
+15             var4-B    0                                                  
+16             var4-C    0                                                  
+   quantile-0.75
+1               
+2             22
+3               
+4               
+5          45.25
+6               
+7               
+8               
+9               
+10         21.75
+11              
+12              
+13         43.75
+14              
+15              
+16              
+   ids X1  X2
+2  oui 10 122
+3  non  4  77
+4 peut  2  32
+   ids X1  X2
+2  oui 10 122
+3  non  4  77
+4 peut  2  32
+Note: erreur possible dans 'read.xlsx(file_, sheet = sht, ' : argument inutilisé (col_names = NA) 
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (edm1)

@@ -18,3 +18,14 @@ vlookup_df(df, v_id, col_id = 1, included_col_id = "yes")
 \description{
 Alow to perform a vlookup on a dataframe
 }
+\examples{
+df1 <- data.frame(c("az1", "az3", "az4", "az2"), c(1:4), c(4:1))
+
+print(vlookup_df(df=df1, v_id=c("az1", "az2", "az3", "az4")))
+
+   c..az1....az3....az4....az2.. c.1.4. c.4.1.
+2                            az1      1      4
+4                            az2      4      1
+21                           az3      2      3
+3                            az4      3      2
+}

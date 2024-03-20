@@ -4,7 +4,14 @@
 \alias{pattern_tuning}
 \title{pattern_tuning}
 \usage{
-pattern_tuning(pattrn, spe_nb, spe_l, exclude_type, hmn = 1, rg = c(0, 0))
+pattern_tuning(
+  pattrn,
+  spe_nb,
+  spe_l,
+  exclude_type,
+  hmn = 1,
+  rg = c(1, nchar(pattrn))
+)
 }
 \arguments{
 \item{pattrn}{is the character that will be tuned}
@@ -21,4 +28,9 @@ pattern_tuning(pattrn, spe_nb, spe_l, exclude_type, hmn = 1, rg = c(0, 0))
 }
 \description{
 Allow to tune a pattern very precisely and output a vector containing its variations n times.
+}
+\examples{
+print(pattern_tuning(pattrn="oui", spe_nb=2, spe_l=c("e", "r", "T", "O"), exclude_type="o", hmn=3))
+
+[1] "orT" "oTr" "oOi"
 }

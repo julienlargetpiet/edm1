@@ -15,7 +15,9 @@ paste_df(inpt_df, sep = "")
 Return a vector composed of pasted elements from the input dataframe at the same index.
 }
 \examples{
+
 print(paste_df(inpt_df=data.frame(c(1, 2, 1), c(33, 22, 55))))
 
 [1] "133" "222" "155"
+
 }

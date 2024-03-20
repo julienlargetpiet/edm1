@@ -15,15 +15,27 @@ geo_min(inpt_df, established_df)
 Return a dataframe containing the nearest geographical points (row) according to established geographical points (column).
 }
 \examples{
+
 in_ <- data.frame(c(11, 33, 55), c(113, -143, 167))
 
 in2_ <- data.frame(c(12, 55), c(115, 165))
 
 print(geo_min(inpt_df=in_, established_df=in2_))
 
+         X1       X2
+1   245.266       NA
+2 24200.143       NA
+3        NA 127.7004
+
 in_ <- data.frame(c(51, 23, 55), c(113, -143, 167), c(6, 5, 1))
 
 in2_ <- data.frame(c(12, 55), c(115, 165), c(2, 5))
 
-geo_min(inpt_df=in_, established_df=in2_)
+print(geo_min(inpt_df=in_, established_df=in2_))
+
+        X1       X2
+1       NA 4343.720
+2 26465.63       NA
+3       NA 5825.517
+
 }

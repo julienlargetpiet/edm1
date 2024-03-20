@@ -35,9 +35,44 @@ df <- data.frame("mod"=c("first", "seco", "seco", "first", "first", "third", "fi
 "var3"=c(45, 44, 43, 46, 45, 45, 42),
 "var4"=c("A", "A", "A", "A", "B", "C", "C"))
 
-all_stat(inpt_v=c("first", "seco"), var_add = c("var1", "var2", "var3", "var4"),
+print(all_stat(inpt_v=c("first", "seco"), var_add = c("var1", "var2", "var3", "var4"),
 stat_var=c("sum", "mean", "median", "sd", "occu-var2/", "occu-var4/", "variance", "quantile-0.75/"),
-inpt_df=df)
+inpt_df=df))
+
+modal_v var_vector occu sum mean  med standard_devaition         variance
+1    first
+2                var1       64   16 16.5   6.97614984548545 48.6666666666667
+3              var2-d    1
+4              var2-z    3
+5                var3      178 44.5   45   1.73205080756888                3
+6              var4-A    2
+7              var4-B    1
+8              var4-C    1
+9     seco
+10               var1       43 21.5 21.5  0.707106781186548              0.5
+11             var2-d    1
+12             var2-z    1
+13               var3       87 43.5 43.5  0.707106781186548              0.5
+14             var4-A    2
+15             var4-B    0
+16             var4-C    0
+quantile-0.75
+1
+2             22
+3
+4
+5          45.25
+6
+7
+8
+9
+10         21.75
+11
+12
+13         43.75
+14
+15
+16
 ```
 
 
@@ -163,34 +198,6 @@ second_ids
 ```
 
 
-# `append_row`
-
-append_row
-
-
-## Description
-
-Append the last row from dataframe to the another or same dataframe
-
-
-## Usage
-
-```r
-append_row(df_in, df, hmn = 1, na_col = c(), unique_do_not_know = NA)
-```
-
-
-## Arguments
-
-Argument      |Description
-------------- |----------------
-`df_in`     |     is the dataframe from which the row will append to another or the same  dataframe
-`df`     |     is the dataframe to which the row will append
-`hmn`     |     is how many time the last row will be appended
-`na_col`     |     is a vector containing the columns that won't append and will be replaced by another value (unique_do_not_know)
-`unique_do_not_know`     |     is the value of the non appending column in the appending row
-
-
 # `appndr`
 
 appndr
@@ -218,29 +225,56 @@ Argument      |Description
 `strt`     |     is the index from which appending begins, defaults to max which means the end of "inpt_v"
 
 
-# `calc_occu_v`
+## Examples
 
-calc_occu_v
+```r
+print(appndr(inpt_v=c(1:3), val="oui", hmn=5))
+
+[1] "1"   "2"   "3"   "oui" "oui" "oui" "oui" "oui"
+
+print(appndr(inpt_v=c(1:3), val="oui", hmn=5, strt=1))
+
+[1] "1"   "oui" "oui" "oui" "oui" "oui" "2"   "3"
+```
+
+
+# `better_match`
+
+better_match
 
 
 ## Description
 
-Rearanges the index of a vector "w_v" to match the occurences of the common elements in another vector "f_v"
+Allow to get the nth element matched in a vector
 
 
 ## Usage
 
 ```r
-calc_occu_v(f_v, w_v, nvr_here = NA)
+better_match(inpt_v = c(), ptrn, untl = 1, nvr_here = NA)
 ```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`ptrn`     |     is the pattern to be matched
+`untl`     |     is the maximum number of matched pattern outputed
+`nvr_here`     |     is a value you are sure is not present in inpt_v
 
 
 ## Examples
 
 ```r
-print(calc_occu_v(f_v=c("e", "a", "z", NA, "a"), w_v=c("a", "a", "z")))
+print(better_match(inpt_v=c(1:12, 3, 4, 33, 3), ptrn=3, untl=1))
 
-[1] 1 3 2
+[1] 3
+
+print(better_match(inpt_v=c(1:12, 3, 4, 33, 3), ptrn=3, untl=5))
+
+[1]  3 13 16
 ```
 
 
@@ -268,81 +302,17 @@ Argument      |Description
 `x`     |     is the input value
 
 
-# `change_date`
-
-change_date
-
-
-## Description
-
-Allow to add to a date second-minute-hour-day-month-year
-
-
-## Usage
-
-```r
-change_date(
-  date_,
-  sep_,
-  day_ = NA,
-  month_ = NA,
-  year_ = NA,
-  hour_ = NA,
-  min_ = NA,
-  second_ = NA,
-  frmt = "snhdmy"
-)
-```
-
-
-## Arguments
-
-Argument      |Description
-------------- |----------------
-`date_`     |     is the input date
-`sep_`     |     is the date separator
-`day_`     |     is the day to add (can be negative)
-`month_`     |     is the month to add (can be negative)
-`year_`     |     is the year to add (can be negative)
-`hour_`     |     is the hour to add (can be negative)
-`min_`     |     is the minute to add (can be negative)
-`second_`     |     is the second to add (can be negative)
-`frmt`     |     is the format of the input date, (deault set to "snhdmy" (second, minute, hour, day, month, year), so all variable are taken in count), if you only want to work with standard date for example change this variable to "dmy"
-
-
-# `chr_removr`
-
-chr_removr
-
-
-## Description
-
-Allow to remove certain characters contained in a vector "ptrn_v" from elements in a another vector "inpt_v".
-
-
-## Usage
-
-```r
-chr_removr(inpt_v, ptrn_v)
-```
-
-
-## Arguments
-
-Argument      |Description
-------------- |----------------
-`inpt_v`     |     is the input vector containing all the elements that may have the characters to be removed
-`ptrn_v`     |     is the vector containing all the characters that will be removed
-
-
 ## Examples
 
 ```r
-print(chr_removr(inpt_v=c("oui?", "!oui??", "non", "!non"), ptrn_v=c("?")))
-[1] "oui"  "!oui" "non"  "!non"
-
-print(chr_removr(inpt_v=c("oui?", "!oui??", "non", "!non"), ptrn_v=c("?", "!")))
-[1] "oui" "oui" "non" "non"
+print(can_be_num("34.677"))
+[1] TRUE
+print(can_be_num("34"))
+[1] TRUE
+print(can_be_num("3rt4"))
+[1] FALSE
+print(can_be_num(34))
+[1] TRUE
 ```
 
 
@@ -537,44 +507,6 @@ sub_excl_v=c("nonnour")))
 ```
 
 
-# `closest_date`
-
-closest_date
-
-
-## Description
-
-return the closest dates from a vector compared to the input date
-
-
-## Usage
-
-```r
-closest_date(
-  vec,
-  date_,
-  frmt,
-  sep_ = "/",
-  sep_vec = "/",
-  only_ = "both",
-  head = NA
-)
-```
-
-
-## Arguments
-
-Argument      |Description
-------------- |----------------
-`vec`     |     is a vector containing the dates to be compared to the input date
-`date_`     |     is the input date
-`frmt`     |     is the format of the input date, (deault set to "snhdmy" (second, minute, hour, day, month, year), so all variable are taken in count), if you only want to work with standard date for example change this variable to "dmy"
-`sep_`     |     is the separator for the input date
-`sep_vec`     |     is the separator for the dates contained in vec
-`only_`     |     is can be changed to "+" or "-" to repectively only return the higher dates and the lower dates (default set to "both")
-`head`     |     is the number of dates that will be returned (default set to NA so all dates in vec will be returned)
-
-
 # `clusterizer_v`
 
 clusterizer_v
@@ -582,7 +514,7 @@ clusterizer_v
 
 ## Description
 
-Allow to output clusters of elements. Takes as input a vector "inpt_v" containing a sequence of number. Can also take another vector "w_v" that has the same size of inpt_v because its elements are related to it. The way the clusters are made is related to an accuracy value which is "c_val". It means that if the difference between the values associated to 2 elements is superior to c_val, these two elements are in distinct clusters.
+Allow to output clusters of elements. Takes as input a vector "inpt_v" containing a sequence of number. Can also take another vector "w_v" that has the same size of inpt_v because its elements are related to it. The way the clusters are made is related to an accuracy value which is "c_val". It means that if the difference between the values associated to 2 elements is superior to c_val, these two elements are in distinct clusters. The second element of the outputed list is the begin and end value of each cluster.
 
 
 ## Usage
@@ -608,47 +540,261 @@ print(clusterizer_v(inpt_v=sample.int(20, 26, replace=T), w_v=NA, c_val=0.9))
 
 [[1]]
 [[1]][[1]]
-[1] "j" "v"
+[1] 1
 
 [[1]][[2]]
-[1] "x"
+[1] 2
 
 [[1]][[3]]
-[1] "e" "m" "p" "s" "t" "b" "q" "z" "f"
+[1] 3
 
 [[1]][[4]]
-[1] "a" "i"
+[1] 4
 
 [[1]][[5]]
-[1] "c" "n" "o" "g" "u" "y" "h" "l"
+[1] 5 5
 
 [[1]][[6]]
-[1] "d" "r" "w" "k"
+[1] 6 6 6 6
+
+[[1]][[7]]
+[1] 7 7 7
+
+[[1]][[8]]
+[1] 8 8 8
+
+[[1]][[9]]
+[1] 9
+
+[[1]][[10]]
+[1] 10
+
+[[1]][[11]]
+[1] 12
+
+[[1]][[12]]
+[1] 13 13 13
+
+[[1]][[13]]
+[1] 18 18 18
+
+[[1]][[14]]
+[1] 20
 
 
 [[2]]
-[1] "1"  "2"  "-"  "4"  "4"  "-"  "6"  "10" "-"  "12" "12" "-"  "14" "16" "-"
-[16] "18" "19"
+[1] "1"  "1"  "-"  "2"  "2"  "-"  "3"  "3"  "-"  "4"  "4"  "-"  "5"  "5"  "-"
+[16] "6"  "6"  "-"  "7"  "7"  "-"  "8"  "8"  "-"  "9"  "9"  "-"  "10" "10" "-"
+[31] "12" "12" "-"  "13" "13" "-"  "18" "18" "-"  "20" "20"
 
 print(clusterizer_v(inpt_v=sample.int(40, 26, replace=T), w_v=letters, c_val=0.29))
 
-
 [[1]]
 [[1]][[1]]
-[1] "a" "b" "c" "d" "e" "f" "g" "h"
+[1] "a"
 
 [[1]][[2]]
-[1] "i" "j" "k" "l"
+[1] "b"
 
 [[1]][[3]]
-[1] "m" "n"
+[1] "c" "d"
 
 [[1]][[4]]
-[1] "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
+[1] "e" "f"
+
+[[1]][[5]]
+[1] "g" "h" "i" "j"
+
+[[1]][[6]]
+[1] "k"
+
+[[1]][[7]]
+[1] "l"
+
+[[1]][[8]]
+[1] "m" "n"
+
+[[1]][[9]]
+[1] "o"
+
+[[1]][[10]]
+[1] "p"
+
+[[1]][[11]]
+[1] "q" "r"
+
+[[1]][[12]]
+[1] "s" "t" "u"
+
+[[1]][[13]]
+[1] "v"
+
+[[1]][[14]]
+[1] "w"
+
+[[1]][[15]]
+[1] "x"
+
+[[1]][[16]]
+[1] "y"
+
+[[1]][[17]]
+[1] "z"
 
 
 [[2]]
-[1] "1"  "5"  "-"  "8"  "10" "-"  "12" "13" "-"  "15" "20"
+[1] "13" "13" "-"  "14" "14" "-"  "15" "15" "-"  "16" "16" "-"  "17" "17" "-"
+[16] "19" "19" "-"  "21" "21" "-"  "22" "22" "-"  "23" "23" "-"  "25" "25" "-"
+[31] "27" "27" "-"  "29" "29" "-"  "30" "30" "-"  "31" "31" "-"  "34" "34" "-"
+[46] "35" "35" "-"  "37" "37"
+```
+
+
+# `colins_df`
+
+colins_df
+
+
+## Description
+
+Allow to insert vectors into a dataframe.
+
+
+## Usage
+
+```r
+colins_df(inpt_df, target_col = list(), target_pos = list())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_df`     |     is the dataframe where vectors will be inserted
+`target_col`     |     is a list containing all the vectors to be inserted
+`target_pos`     |     is a list containing the vectors made of the columns names or numbers where the associated vectors from target_col will be inserted after
+
+
+## Examples
+
+```r
+df1 <- data.frame("frst_col"=c(1:5), "scd_col"=c(5:1))
+
+print(colins_df(inpt_df=df1, target_col=list(c("oui", "oui", "oui", "non", "non"), c("u", "z", "z", "z", "u")),
+target_pos=list(c("frst_col", "scd_col"), c("scd_col"))))
+
+frst_col cur_col scd_col cur_col.1 cur_col
+1        1     oui       5       oui       u
+2        2     oui       4       oui       z
+3        3     oui       3       oui       z
+4        4     non       2       non       z
+5        5     non       1       non       u
+
+print(colins_df(inpt_df=df1, target_col=list(c("oui", "oui", "oui", "non", "non"), c("u", "z", "z", "z", "u")),
+target_pos=list(c(1, 2), c("frst_col"))))
+
+frst_col cur_col scd_col cur_col cur_col
+1        1     oui       5       u     oui
+2        2     oui       4       z     oui
+3        3     oui       3       z     oui
+4        4     non       2       z     non
+5        5     non       1       u     non
+```
+
+
+# `converter_date`
+
+converter_date
+
+
+## Description
+
+Allow to convert any date like second/minute/hour/day/month/year to either second, minute...year. The input date should not necessarily have all its time units (second, minute...) but all the time units according to a format. Example: "snhdmy" is for second, hour, minute, day, month, year. And "mdy" is for month, day, year.
+
+
+## Usage
+
+```r
+converter_date(inpt_date, convert_to, frmt = "snhdmy", sep_ = "-")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_date`     |     is the input date
+`convert_to`     |     is the time unit the input date will be converted ("s", "n", "h", "d", "m", "y")
+`frmt`     |     is the format of the input date
+`sep_n`     |     is the separator of the input date. For example this input date "12-07-2012" has "-" as a separator
+
+
+## Examples
+
+```r
+print(converter_date(inpt_date="14-04-11-2024", sep_="-", frmt="hdmy", convert_to="m"))
+
+[1] 24299.15
+
+print(converter_date(inpt_date="14-04-11-2024", sep_="-", frmt="hdmy", convert_to="y"))
+
+[1] 2024.929
+
+print(converter_date(inpt_date="14-04-11-2024", sep_="-", frmt="hdmy", convert_to="s"))
+
+[1] 63900626400
+
+print(converter_date(inpt_date="63900626400", sep_="-", frmt="s", convert_to="y"))
+
+[1] 2024.929
+
+print(converter_date(inpt_date="2024", sep_="-", frmt="y", convert_to="s"))
+
+[1] 63873964800
+```
+
+
+# `converter_format`
+
+converter_format
+
+
+## Description
+
+Allow to convert a format to another
+
+
+## Usage
+
+```r
+converter_format(inpt_val, sep_ = "-", inpt_frmt, frmt, default_val = "00")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_val`     |     is the input value that is linked to the format
+`sep_`     |     is the separator of the value in inpt_val
+`inpt_frmt`     |     is the format of the input value
+`frmt`     |     is the format you want to convert to
+`default_val`     |     is the default value given to the units that are not present in the input format
+
+
+## Examples
+
+```r
+print(converter_format(inpt_val="23-12-05-1567", sep_="-",
+inpt_frmt="shmy", frmt="snhdmy", default_val="00"))
+
+[1] "23-00-12-00-05-1567"
+
+print(converter_format(inpt_val="23-12-05-1567", sep_="-",
+inpt_frmt="shmy", frmt="Pnhdmy", default_val="00"))
+
+[1] "00-00-12-00-05-1567"
 ```
 
 
@@ -701,6 +847,63 @@ Argument      |Description
 `pu_d_ttc`     |     is the free-duty price of a single element after discount the function return a vector with the previous variables in the same order those that could not be calculated will be represented with NA value
 
 
+## Examples
+
+```r
+print(cost_and_taxes(pu=45, prix_ttc=21, qte=3423))
+
+[1]  3.423000e+03  4.500000e+01  4.500000e+01 -9.998637e-01  2.100000e+01
+[6] -1.540140e+05  4.500000e+01            NA            NA            NA
+[11]            NA            NA
+```
+
+
+# `cut_v`
+
+v_to_df
+
+
+## Description
+
+Allow to convert a vector to a dataframe according to a separator.
+
+
+## Usage
+
+```r
+cut_v(inpt_v, sep_ = "")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`sep_`     |     is the separator of the elements in inpt_v, defaults to ""
+
+
+## Examples
+
+```r
+print(cut_v(inpt_v=c("oui", "non", "oui", "non")))
+
+X.o. X.u. X.i.
+oui "o"  "u"  "i"
+non "n"  "o"  "n"
+oui "o"  "u"  "i"
+non "n"  "o"  "n"
+
+print(cut_v(inpt_v=c("ou-i", "n-on", "ou-i", "n-on"), sep_="-"))
+
+X.ou. X.i.
+ou-i "ou"  "i"
+n-on "n"   "on"
+ou-i "ou"  "i"
+n-on "n"   "on"
+```
+
+
 # `data_gen`
 
 data_gen
@@ -718,7 +921,7 @@ data_gen(
   type_ = c("number", "mixed", "string"),
   strt_l = c(0, 0, 10),
   nb_r = c(50, 10, 40),
-  output = "gened.csv",
+  output = NA,
   properties = c("1-5", "1-5", "1-5"),
   type_distri = c("random", "random", "random"),
   str_source = c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n",
@@ -733,20 +936,88 @@ data_gen(
 
 Argument      |Description
 ------------- |----------------
-`type_`     |     is a vector for wich argument is a column, a column can be made of numbers ("number"), string ("string") or both ("mixed")
+`type_`     |     is a vector. Its arguments designates a column, a column can be made of numbers ("number"), string ("string") or both ("mixed")
 `strt_l`     |     is a vector containing for each column the row from which the data will begin to be generated
 `nb_r`     |     is a vector containing for each column, the number of row full from generated data
-`output`     |     is the name of the output csv file
+`output`     |     is the name of the output csv file, defaults to NA so no csv will be outputed by default
 `properties`     |     is linked to type_distri because it is the parameters ("min_val-max_val") for "random type", ("u-x") for the poisson distribution, ("u-d") for gaussian distribution
 `type_distri`     |     is a vector which, for each column, associate a type of distribution ("random", "poisson", "gaussian"), it meas that non only the number but also the length of the string will be randomly generated according to these distribution laws
 `str_source`     |     is the source (vector) from which the character creating random string are (default set to the occidental alphabet)
-`round_l`     |     is a vector which, for each column containing number, associate a round value
+`round_l`     |     is a vector which, for each column containing number, associate a round value, if the type of the value is numeric
 `sep_`     |     is the separator used to write data in the csv
 
 
 ## Value
 
 new generated data in addition to saving it in the output
+
+
+## Examples
+
+```r
+print(data_gen())
+
+X1   X2    X3
+1   4    2  <NA>
+2   2    4  <NA>
+3   5    2  <NA>
+4   2 abcd  <NA>
+5   4 abcd  <NA>
+6   2    4  <NA>
+7   2  abc  <NA>
+8   4  abc  <NA>
+9   4    3  <NA>
+10  4  abc  abcd
+11  5 <NA>   abc
+12  4 <NA>   abc
+13  1 <NA>    ab
+14  1 <NA> abcde
+15  2 <NA>   abc
+16  4 <NA>     a
+17  1 <NA>  abcd
+18  4 <NA>    ab
+19  2 <NA>  abcd
+20  3 <NA>    ab
+21  3 <NA>  abcd
+22  2 <NA>     a
+23  4 <NA>   abc
+24  1 <NA>  abcd
+25  4 <NA>   abc
+26  4 <NA>    ab
+27  2 <NA>   abc
+28  5 <NA>    ab
+29  3 <NA>   abc
+30  5 <NA>  abcd
+31  2 <NA>   abc
+32  2 <NA>   abc
+33  1 <NA>    ab
+34  5 <NA>     a
+35  4 <NA>    ab
+36  1 <NA>    ab
+37  1 <NA> abcde
+38  5 <NA>   abc
+39  4 <NA>    ab
+40  5 <NA> abcde
+41  2 <NA>    ab
+42  3 <NA>    ab
+43  2 <NA>    ab
+44  4 <NA>  abcd
+45  5 <NA>  abcd
+46  3 <NA>  abcd
+47  2 <NA>  abcd
+48  3 <NA>  abcd
+49  3 <NA>  abcd
+50  4 <NA>     a
+
+print(data_gen(strt_l=c(0, 0, 0), nb_r=c(5, 5, 5)))
+
+X1    X2   X3
+1  2     a  abc
+2  3 abcde   ab
+3  4 abcde    a
+4  1     3  abc
+5  3     a abcd
+```
 
 
 # `data_meshup`
@@ -778,29 +1049,52 @@ data_meshup(
 
 Argument      |Description
 ------------- |----------------
-`data`     |     is the data provided (vector) each column is separated by a unic separator and each dataset from the same column is separated by another unic separator (ex: c(" ", c("d", "-", "e", "-", "f"), " ", c("a", "a1", "-", "b", "-", "c", "c1")"_")
-`cols`     |     is the colnames of the data generated in a csv
-`file_`     |     is the file to which the data will be outputed
+`data`     |     is the data provided (vector) each column is separated by a unic separator and each dataset from the same column is separated by another unic separator (ex: c(" ", c("d", "-", "e", "-", "f"), " ", c("a", "a1", "-", "b", "-", "c", "c1"), "_")
+`cols`     |     are the colnames of the data generated in a csv
+`file_`     |     is the file to which the data will be outputed, defaults to NA which means that the functio will return the dataframe generated and won't write it to a csv file
 `sep_`     |     is the separator of the csv outputed
 `organisation`     |     is the way variables include themselves, for instance ,resuming precedent example, if organisation=c(1, 0) so the data output will be: d, a d, a1 e, c f, c f, c1
 `unic_sep1`     |     is the unic separator between variables (default is "_")
 `unic_sep2`     |     is the unic separator between datasets (default is "-")
 
 
-# `date_sort`
+## Examples
 
-date_sort
+```r
+print(data_meshup(data=c("_", c("-", "d", "-", "e", "-", "f"), "_", c("-", "a", "a1", "-", "B", "r", "uy", "-", "c", "c1"), "_"), organisation=c(1, 0)))
+X1 X2
+1  d  a
+2  d a1
+3  e  B
+4  e  r
+5  e uy
+6  f  c
+7  f c1
+```
+
+
+# `date_addr`
+
+date_addr
 
 
 ## Description
 
-Allow to ascendely or desendely sort dates in a vector.
+Allow to add or substract two dates that have the same time unit or not
 
 
 ## Usage
 
 ```r
-date_sort(vec, asc = F, sep = "-")
+date_addr(
+  date1,
+  date2,
+  add = F,
+  frmt1,
+  frmt2 = frmt1,
+  sep_ = "-",
+  convert_to = "dmy"
+)
 ```
 
 
@@ -808,25 +1102,64 @@ date_sort(vec, asc = F, sep = "-")
 
 Argument      |Description
 ------------- |----------------
-`vec`     |     is the vector containing the dates.
-`asc`     |     is a boolean variable, that if set to TRUE will sort the dates ascendely and descendely if set to FALSE
-`sep`     |     is the separator of the date strings ex: "11-12-1998" the separator is "-"
+`date1`     |     is the date from which the second date will be added or substracted
+`date2`     |     is the date that will be added or will substract date1
+`add`     |     equals to FALSE if you want date1 - date2 and TRUE if you want date1 + date2
+`frmt1`     |     is the format of date1 (snhdmy) (second, minute, hour, day, monthn year)
+`frmt2`     |     is the format of date2 (snhdmy)
+`sep_`     |     is the separator of date1 and date2
+`convert_to`     |     is the format of the outputed date
 
 
-# `days_from_month`
+## Examples
 
-days_from_month
+```r
+print(date_addr(date1="25-02", date2="58-12-08", frmt1="dm", frmt2="shd", sep_="-",
+convert_to="dmy"))
+
+[1] "18-2-0"
+
+print(date_addr(date1="25-02", date2="58-12-08", frmt1="dm", frmt2="shd", sep_="-",
+convert_to="dmy", add=T))
+
+[1] "3-3-0"
+
+print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy", frmt2="dm", sep_="-",
+convert_to="dmy", add=T))
+
+[1] "27-3-2024"
+
+print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy", frmt2="dm", sep_="-",
+convert_to="dmy", add=F))
+
+[1] "23-1-2024"
+
+print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy", frmt2="dm", sep_="-",
+convert_to="n", add=F))
+
+[1] "1064596320"
+
+print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy", frmt2="dm", sep_="-",
+convert_to="s", add=F))
+
+[1] "63875779200"
+```
+
+
+# `date_converter_reverse`
+
+date_converter_reverse
 
 
 ## Description
 
-Allow to find the number of days month from a month date, take in count leap year
+Allow to convert single date value like 2025.36 year to a date like second/minutehour/day/month/year (snhdmy)
 
 
 ## Usage
 
 ```r
-days_from_month(date_, sep_)
+date_converter_reverse(inpt_date, convert_to = "dmy", frmt = "y", sep_ = "-")
 ```
 
 
@@ -834,29 +1167,47 @@ days_from_month(date_, sep_)
 
 Argument      |Description
 ------------- |----------------
-`date_`     |     is the input date
-`sep_`     |     is the separator of the input date
+`inpt_date`     |     is the input date
+`convert_to`     |     is the date format the input date will be converted
+`frmt`     |     is the time unit of the input date
+`sep_`     |     is the separator of the outputed date
 
 
-# `df_tuned`
+## Examples
 
-df_tuned
+```r
+print(date_converter_reverse(inpt_date="2024.929", convert_to="hmy", frmt="y", sep_="-"))
+
+[1] "110-11-2024"
+
+print(date_converter_reverse(inpt_date="2024.929", convert_to="dmy", frmt="y", sep_="-"))
+
+[1] "4-11-2024"
+
+print(date_converter_reverse(inpt_date="2024.929", convert_to="hdmy", frmt="y", sep_="-"))
+
+[1] "14-4-11-2024"
+
+print(date_converter_reverse(inpt_date="2024.929", convert_to="dhym", frmt="y", sep_="-"))
+
+[1] "4-14-2024-11"
+```
+
+
+# `dcr_untl`
+
+dcr_untl
 
 
 ## Description
 
-Allow to return a list from a dataframe following these rules:
- First situation, I want the vectors from the returned list be composed of values that are separated by special values contained in a vector
- ex: data.frame(c(1, 1, 2, 1), c(1, 1, 2, 1), c(1, 1, 1, 2)) will return list(c(1, 1), c(1, 1, 1), c(1, 1, 1, 1)) or
- list(c(1, 1, 2), c(1, 1, 1, 2), c(1, 1, 1, 1, 2)) if i have chosen to take in count the 2. As you noticed here the value to stop is 2 but it can be several contained in a vector
- Second situation: I want to return a list for every jump of 3.
- If i take this dataframe data.frame(c(1, 1, 2, 1, 4, 4), c(1, 1, 2, 1, 3, 3), c(1, 1, 1, 2, 3, 3)) it will return list(c(1, 1, 2), c(1, 4, 4), c(1, 1, 2), c(1, 3, 3), c(1, 1, 1), c(2, 3, 3))
+Allow to get the final value of a incremental or decremental loop.
 
 
 ## Usage
 
 ```r
-df_tuned(df, val_to_stop, index_rc = NA, included = "yes")
+dcr_untl(strt_val, cr_val, stop_val = 0)
 ```
 
 
@@ -864,10 +1215,69 @@ df_tuned(df, val_to_stop, index_rc = NA, included = "yes")
 
 Argument      |Description
 ------------- |----------------
-`df`     |     is the input data.frame
-`val_to_stop`     |     is the vector containing the values to stop
-`index_rc`     |     is the value for the jump (default set to NA so default will be first case)
-`included`     |     is if the values to stop has to be also returned in the vectors (defaultn set to "yes")
+`strt_val`     |     is the start value
+`cr_val`     |     is the incremental (or decremental value)
+`stop_val`     |     is the value where the loop has to stop
+
+
+## Examples
+
+```r
+print(dcr_untl(strt_val=50, cr_val=-5, stop_val=5))
+
+[1] 9
+
+print(dcr_untl(strt_val=50, cr_val=5, stop_val=450))
+
+[1] 80
+```
+
+
+# `dcr_val`
+
+dcr_val
+
+
+## Description
+
+Allow to get the end value after an incremental (or decremental loop)
+
+
+## Usage
+
+```r
+dcr_val(strt_val, cr_val, stop_val = 0)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`strt_val`     |     is the start value
+`cr_val`     |     is the incremental or decremental value
+`stop_val`     |     is the value the loop has to stop
+
+
+## Examples
+
+```r
+print(dcr_val(strt_val=50, cr_val=-5, stop_val=5))
+
+[1] 5
+
+print(dcr_val(strt_val=47, cr_val=-5, stop_val=5))
+
+[1] 7
+
+print(dcr_val(strt_val=50, cr_val=5, stop_val=450))
+
+[1] 450
+
+print(dcr_val(strt_val=53, cr_val=5, stop_val=450))
+
+[1] 448
+```
 
 
 # `diff_xlsx`
@@ -957,32 +1367,6 @@ print(equalizer_v(inpt_v=c("aa", "zzz", "q"), depth=12))
 ```
 
 
-# `extrm_dates`
-
-extrm_dates
-
-
-## Description
-
-Allow to find the minimum or the maximum of a date in a vector. The format of dates is Year/Month/Day.
-
-
-## Usage
-
-```r
-extrm_dates(inpt_l, extrm = "min", sep = "-")
-```
-
-
-## Arguments
-
-Argument      |Description
-------------- |----------------
-`inpt_l`     |     is the input vector
-`extrm`     |     is either "min" or "max", defaults to "min"
-`sep`     |     is the separator of the dates, defaults to "-"
-
-
 # `extrt_only_v`
 
 extrt_only_v
@@ -1013,60 +1397,8 @@ Argument      |Description
 ```r
 print(extrt_only_v(inpt_v=c("oui", "non", "peut", "oo", "ll", "oui", "non", "oui", "oui"), pttrn_v=c("oui")))
 
-[1] "oui" "oo"  "oui" "oui" "oui"
+[1] "oui" "oui" "oui" "oui"
 ```
-
-
-# `file_rec`
-
-file_rec
-
-
-## Description
-
-Allow to get all the files recursively from a path according to an end and start depth value. If you want to have an other version of this function that uses a more sophisticated algorythm (which can be faster), check file_rec2. Depth example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
-
-
-## Usage
-
-```r
-file_rec(xmax, xmin = 1, pathc = ".")
-```
-
-
-## Arguments
-
-Argument      |Description
-------------- |----------------
-`xmax`     |     is the end depth value
-`xmin`     |     is the start depth value
-`pathc`     |     is the reference path
-
-
-# `file_rec2`
-
-file_rec2
-
-
-## Description
-
-Allow to find the directories and the subdirectories with a specified end and start depth value from a path. This function might be more powerfull than file_rec because it uses a custom algorythm that does not nee to perform a full recursive search before tuning it to only find the directories with a good value of depth. Depth example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
-
-
-## Usage
-
-```r
-file_rec2(xmax, xmin = 1, pathc = ".")
-```
-
-
-## Arguments
-
-Argument      |Description
-------------- |----------------
-`xmax`     |     is the depth value
-`xmin`     |     is the minimum value of depth
-`pathc`     |     is the reference path, from which depth value is equal to 1
 
 
 # `fillr`
@@ -1097,41 +1429,9 @@ Argument      |Description
 ## Examples
 
 ```r
-fillr(c("a", "b", "...3", "c"))
-```
+print(fillr(c("a", "b", "...3", "c")))
 
-
-# `fittr_v`
-
-fittr_v
-
-
-## Description
-
-Return the indexes of elements contained in "w_v" according to "f_v"
-
-
-## Usage
-
-```r
-fittr_v(f_v, w_v, nvr_here = NA)
-```
-
-
-## Arguments
-
-Argument      |Description
-------------- |----------------
-`f_v`     |     is the input vector
-`w_v`     |     is the vector containing the elements that can be in f_v
-
-
-## Examples
-
-```r
-print(fittr_v(f_v=c("non", "non", "non", "oui"), w_v=c("oui", "non", "non")))
-
-[1] 4 1 2
+[1] "a" "b" "b" "b" "b" "c"
 ```
 
 
@@ -1167,6 +1467,58 @@ wrk_v=c(1, 2, 3, 4, 5, 6)))
 ```
 
 
+# `fold_rec`
+
+fold_rec
+
+
+## Description
+
+Allow to get all the files recursively from a path according to an end and start depth value. If you want to have an other version of this function that uses a more sophisticated algorythm (which can be faster), check file_rec2. Depth example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
+
+
+## Usage
+
+```r
+fold_rec(xmax, xmin = 1, pathc = ".")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`xmax`     |     is the end depth value
+`xmin`     |     is the start depth value
+`pathc`     |     is the reference path
+
+
+# `fold_rec2`
+
+fold_rec2
+
+
+## Description
+
+Allow to find the directories and the subdirectories with a specified end and start depth value from a path. This function might be more powerfull than file_rec because it uses a custom algorythm that does not nee to perform a full recursive search before tuning it to only find the directories with a good value of depth. Depth example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
+
+
+## Usage
+
+```r
+fold_rec2(xmax, xmin = 1, pathc = ".")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`xmax`     |     is the depth value
+`xmin`     |     is the minimum value of depth
+`pathc`     |     is the reference path, from which depth value is equal to 1
+
+
 # `format_date`
 
 format_date
@@ -1192,6 +1544,16 @@ Argument      |Description
 `sentc`     |     is the date to convert
 `sep_in`     |     is the separator of the dat input (default is "-")
 `sep_out`     |     is the separator of the converted date (default is "-")
+
+
+## Examples
+
+```r
+print(format_date(f_dialect=c("janvier", "février", "mars", "avril", "mai", "juin",
+"juillet", "aout", "septembre", "octobre", "novembre", "décembre"), sentc="11-septembre-2023"))
+
+[1] "11-09-2023"
+```
 
 
 # `geo_min`
@@ -1228,11 +1590,21 @@ in2_ <- data.frame(c(12, 55), c(115, 165))
 
 print(geo_min(inpt_df=in_, established_df=in2_))
 
+X1       X2
+1   245.266       NA
+2 24200.143       NA
+3        NA 127.7004
+
 in_ <- data.frame(c(51, 23, 55), c(113, -143, 167), c(6, 5, 1))
 
 in2_ <- data.frame(c(12, 55), c(115, 165), c(2, 5))
 
-geo_min(inpt_df=in_, established_df=in2_)
+print(geo_min(inpt_df=in_, established_df=in2_))
+
+X1       X2
+1       NA 4343.720
+2 26465.63       NA
+3       NA 5825.517
 ```
 
 
@@ -1292,7 +1664,13 @@ Argument      |Description
 ## Examples
 
 ```r
-globe(lat_f=23, long_f=112, alt_f=NA, lat_n=c(2, 82), long_n=c(165, -55), alt_n=NA)
+print(globe(lat_f=23, long_f=112, alt_f=NA, lat_n=c(2, 82), long_n=c(165, -55), alt_n=NA))
+
+[1] 6342.844 7059.080
+
+print(globe(lat_f=23, long_f=112, alt_f=8, lat_n=c(2, 82), long_n=c(165, -55), alt_n=c(8, -2)))
+
+[1] 6342.844 7059.087
 ```
 
 
@@ -1328,18 +1706,74 @@ Argument      |Description
 
 ```r
 interactive()
+
 df1 <- data.frame(c(1, 2, 1), c(45, 22, 88), c(44, 88, 33))
 
-val_lst <- list(list(c(1), c(1)), list(c(2)), list(c(44)))
+val_lst <- list(list(c(1), c(1)), list(c(2)), list(c(44, 88)))
 
-condition_lst <- list(c(">", "<"), c("%%"), c("=="))
+condition_lst <- list(c(">", "<"), c("%%"), c("==", "=="))
 
-conjunction_lst <- list(c("|"), c(), c())
+conjunction_lst <- list(c("|"), c(), c("|"))
 
-rtn_val_pos <- c("+", "+", "+")
+rtn_val_pos <- c("+", "++", "+++")
 
-groupr_df(inpt_df=df1, val_lst=val_lst, condition_lst=condition_lst,
-conjunction_lst=conjunction_lst, rtn_val_pos=rtn_val_pos)
+print(groupr_df(inpt_df=df1, val_lst=val_lst, condition_lst=condition_lst,
+conjunction_lst=conjunction_lst, rtn_val_pos=rtn_val_pos))
+
+X1  X2  X3
+1 <NA>   + +++
+2   ++  ++ +++
+3 <NA> +++   +
+```
+
+
+# `id_keepr`
+
+id_keepr_df
+
+
+## Description
+
+Allow to get the original indexes after multiple equality comparaison according to the original number of row
+
+
+## Usage
+
+```r
+id_keepr(inpt_df, col_v = c(), el_v = c(), rstr_l = NA)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_df`     |     is the input dataframe
+`col_v`     |     is the vector containing the column numbers or names to be compared to their respective elements in "el_v"
+`el_v`     |     is a vector containing the elements that may be contained in their respective column described in "col_v"
+`rstr_l`     |     is a list containing the vector composed of the indexes of the elements chosen for each comparison. If the length of the list is inferior to the lenght of comparisons, so the last vector of rstr_l will be the same as the last one to fill make rstr_l equal in term of length to col_v and el_v
+
+
+## Examples
+
+```r
+df1 <- data.frame(c("oui", "oui", "oui", "non", "oui"), c("opui", "op", "op", "zez", "zez"), c(5:1), c(1:5))
+
+print(id_keepr(inpt_df=df1, col_v=c(1, 2), el_v=c("oui", "op")))
+
+[1] 2 3
+
+print(id_keepr(inpt_df=df1, col_v=c(1, 2), el_v=c("oui", "op"), rstr_l=list(c(1:5), c(3, 2, 2, 2, 3))))
+
+[1] 2 3
+
+print(id_keepr(inpt_df=df1, col_v=c(1, 2), el_v=c("oui", "op"), rstr_l=list(c(1:5), c(3))))
+
+[1] 3
+
+print(id_keepr(inpt_df=df1, col_v=c(1, 2), el_v=c("oui", "op"), rstr_l=list(c(1:5))))
+
+[1] 2 3
 ```
 
 
@@ -1419,6 +1853,39 @@ Argument      |Description
 `ins_loc`     |     is a vector containg two parameters (row, column) of the begining for the insertion
 
 
+## Examples
+
+```r
+df1 <- data.frame(c(1, 4), c(5, 3))
+
+df2 <- data.frame(c(1, 3, 5, 6), c(1:4), c(5, 4, 5, "ereer"))
+
+print(insert_df(df_in=df2, df_ins=df1, ins_loc=c(4, 2)))
+
+c.1..3..5..6. c.1.4. c.5..4..5...ereer..
+1             1      1                   5
+2             3      2                   4
+3             5      3                   5
+4             6      1                   5
+
+print(insert_df(df_in=df2, df_ins=df1, ins_loc=c(3, 2)))
+
+c.1..3..5..6. c.1.4. c.5..4..5...ereer..
+1             1      1                   5
+2             3      2                   4
+3             5      1                   5
+4             6      4                   3
+
+print(insert_df(df_in=df2, df_ins=df1, ins_loc=c(2, 2)))
+
+c.1..3..5..6. c.1.4. c.5..4..5...ereer..
+1             1      1                   5
+2             3      1                   5
+3             5      4                   3
+4             6      4               ereer
+```
+
+
 # `inter_max`
 
 inter_max
@@ -1444,6 +1911,33 @@ Argument      |Description
 `inpt_l`     |     is the input list
 `max_`     |     is a value you are sure is the minimum step value of all the sub-lists
 `get_lst`     |     is the parameter that, if set to True, will keep the last values of vectors in the return value if the last step exceeds the end value of the vector.
+
+
+## Examples
+
+```r
+print(inter_max(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3)), get_lst=T))
+
+[[1]]
+[1] 0 4
+
+[[2]]
+[1] 0 4
+
+[[3]]
+[1] 1.0 2.3
+
+print(inter_max(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3)), get_lst=F))
+
+[[1]]
+[1] 0 4
+
+[[2]]
+[1] 0 4
+
+[[3]]
+[1] 1
+```
 
 
 # `inter_min`
@@ -1487,11 +1981,123 @@ Argument      |Description
 ## Examples
 
 ```r
-[[0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2
-.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0], [0, 0.1, 0.2, 0.3, 0.4, 0.
-5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8
-, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0], [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0,
-2.1, 2.2, 2.3]]
+print(inter_min(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3))))
+
+[[1]]
+[1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8
+[20] 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.0 3.1 3.2 3.3 3.4 3.5 3.6 3.7
+[39] 3.8 3.9 4.0
+
+[[2]]
+[1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8
+[20] 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.0 3.1 3.2 3.3 3.4 3.5 3.6 3.7
+[39] 3.8 3.9 4.0
+
+[[3]]
+[1] 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3
+```
+
+
+# `is_divisible`
+
+is_divisible
+
+
+## Description
+
+Takes a vector as an input and returns all the elements that are divisible by all choosen numbers from another vector.
+
+
+## Usage
+
+```r
+is_divisible(inpt_v = c(), divisible_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`divisible_v`     |     is the vector containing all the numbers that will try to divide those contained in inpt_v
+
+
+## Examples
+
+```r
+print(is_divisible(inpt_v=c(1:111), divisible_v=c(2, 4, 5)))
+
+[1]  20  40  60  80 100
+```
+
+
+# `isnt_divisible`
+
+isnt_divisible
+
+
+## Description
+
+Takes a vector as an input and returns all the elements that are not divisible by all choosen numbers from another vector.
+
+
+## Usage
+
+```r
+isnt_divisible(inpt_v = c(), divisible_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`divisible_v`     |     is the vector containing all the numbers that will try to divide those contained in inpt_v
+
+
+## Examples
+
+```r
+print(isnt_divisible(inpt_v=c(1:111), divisible_v=c(2, 4, 5)))
+
+[1]   1   3   7   9  11  13  17  19  21  23  27  29  31  33  37  39  41  43  47
+[20]  49  51  53  57  59  61  63  67  69  71  73  77  79  81  83  87  89  91  93
+[39]  97  99 101 103 107 109 111
+```
+
+
+# `leap_yr`
+
+bsx_year
+
+
+## Description
+
+Get if the year is leap
+
+
+## Usage
+
+```r
+leap_yr(year)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`year`     |     is the input year
+
+
+## Examples
+
+```r
+print(leap_yr(year=2024))
+
+[1] TRUE
 ```
 
 
@@ -1517,6 +2123,15 @@ letter_to_nb(letter)
 Argument      |Description
 ------------- |----------------
 `letter`     |     is the letter (name of the column)
+
+
+## Examples
+
+```r
+print(letter_to_nb("rty"))
+
+[1] 12713
+```
 
 
 # `list_files`
@@ -1577,60 +2192,6 @@ print(lst_flatnr(inpt_l=list(c(1, 2), c(5, 3), c(7, 2, 7))))
 ```
 
 
-# `match_n`
-
-match_n
-
-
-## Description
-
-Allow to get the indexes for the nth occurence of a value in a vector. Example: c(1, 2, 3, 1, 2), the first occurence of 1 and 2 is at index 1 and 2 respectively, but the second occurence is respectively at the 4th and 5th index.
-
-
-## Usage
-
-```r
-match_n(vec, mc, n = 1, wnb = "#####")
-```
-
-
-## Arguments
-
-Argument      |Description
-------------- |----------------
-`vec`     |     is th input vector
-`mc`     |     is a vector containing the values you want to get the index for the nth occurence in vec
-`n`     |     is the value of the occurence
-`wnb`     |     is a string you are sure is not in mc
-
-
-# `match_n2`
-
-match_n2
-
-
-## Description
-
-Allow to get the indexes for the nth occurence of a value in a vector. Example: c(1, 2, 3, 1, 2), the first occurence of 1 and 2 is at index 1 and 2 respectively, but the second occurence is respectively at the 4th and 5th index.
-
-
-## Usage
-
-```r
-match_n2(vec, mc, n, wnb = "#####")
-```
-
-
-## Arguments
-
-Argument      |Description
-------------- |----------------
-`vec`     |     is th einput vector
-`mc`     |     is a vector containing the values you want to get the index for the nth occurence in vec
-`n`     |     is a vector containing the occurences for each value in mc so if i have mc <- c(3, 27) and n <- c(1, 2), i want the first occurence for 3 and the second for 27 in vec. If the length of n is inferior of the length of mc, m will extend with its last value as new arguments. It means that if mc <- c(3, 27) but n <- c(1) so n will extend to c(1, 1), so we will get the first occurence of 3 and 27 in vec.
-`wnb`     |     is a string you are sure is not in mc
-
-
 # `multitud`
 
 multitud
@@ -1639,7 +2200,7 @@ multitud
 ## Description
 
 From a list containing vectors allow to generate a vector following this rule:
- list(c("a", "b"), c("1", "2"), c("A", "Z", "E")) --> c("a1A", "a2A", "b1A", "b2A", "a1Z", ...)
+ list(c("a", "b"), c("1", "2"), c("A", "Z", "E")) --> c("a1A", "b1A", "a2A", "b2A", a1Z, ...)
 
 
 ## Usage
@@ -1655,6 +2216,18 @@ Argument      |Description
 ------------- |----------------
 `l`     |     is the list
 `sep_`     |     is the separator between elements (default is set to "" as you see in the example)
+
+
+## Examples
+
+```r
+print(multitud(l=list(c("a", "b"), c("1", "2"), c("A", "Z", "E"), c("Q", "F")), sep_="/"))
+
+[1] "a/1/A/Q" "b/1/A/Q" "a/2/A/Q" "b/2/A/Q" "a/1/Z/Q" "b/1/Z/Q" "a/2/Z/Q"
+[8] "b/2/Z/Q" "a/1/E/Q" "b/1/E/Q" "a/2/E/Q" "b/2/E/Q" "a/1/A/F" "b/1/A/F"
+[15] "a/2/A/F" "b/2/A/F" "a/1/Z/F" "b/1/Z/F" "a/2/Z/F" "b/2/Z/F" "a/1/E/F"
+[22] "b/1/E/F" "a/2/E/F" "b/2/E/F"
+```
 
 
 # `nb_to_letter`
@@ -1679,6 +2252,15 @@ nb_to_letter(x)
 Argument      |Description
 ------------- |----------------
 `x`     |     is the number of the column
+
+
+## Examples
+
+```r
+print(nb_to_letter(12713))
+
+[1] "rty"
+```
 
 
 # `nest_v`
@@ -1724,7 +2306,7 @@ nestr_df1
 
 ## Description
 
-Allow to write a value (1a) to a dataframe (1b) to its cells that have the same coordinates (row and column) than the cells whose value is equal to a another special value (2a), from another another dataframe (2b). The value (1a) depends of the cell  value coordinates of the third dataframe (3b). If a cell coordinates (1c) of the first dataframe (1b) do not correspond to the coordinates of a good returning cell value (2a) from the dataframe (2b), so this cell (1c) can have its value changed to the same cell coordinates value (3a) of a third dataframe (4b), if (4b) is not det to NA.
+Allow to write a value (1a) to a dataframe (1b) to its cells that have the same coordinates (row and column) than the cells whose value is equal to a another special value (2a), from another another dataframe (2b). The value (1a) depends of the cell  value coordinates of the third dataframe (3b). If a cell coordinates (1c) of the first dataframe (1b) does not correspond to the coordinates of a good returning cell value (2a) from the dataframe (2b), so this cell (1c) can have its value changed to the same cell coordinates value (3a) of a third dataframe (4b), if (4b) is not set to NA.
 
 
 ## Usage
@@ -1742,16 +2324,31 @@ Argument      |Description
 `inptt_pos_df`     |     is the dataframe (2b) that corresponds to the (1a) values
 `nestr_df`     |     is the dataframe (2b) that has the special value (2a)
 `yes_val`     |     is the special value (2a)
-`inpt_neg_df`     |     is the dataframe (4b) that has the (3a) values, defaults to NA
+`inptt_neg_df`     |     is the dataframe (4b) that has the (3a) values, defaults to NA
 
 
 ## Examples
 
 ```r
-nestr_df1(inptf_df=data.frame(c(1, 2, 1), c(1, 5, 7)),
+print(nestr_df1(inptf_df=data.frame(c(1, 2, 1), c(1, 5, 7)),
 inptt_pos_df=data.frame(c(4, 4, 3), c(2, 1, 2)),
 inptt_neg_df=data.frame(c(44, 44, 33), c(12, 12, 12)),
-nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE)), yes_val=TRUE)
+nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE)), yes_val=TRUE))
+
+c.1..2..1. c.1..5..7.
+1          4         12
+2         44         12
+3          3          2
+
+print(nestr_df1(inptf_df=data.frame(c(1, 2, 1), c(1, 5, 7)),
+inptt_pos_df=data.frame(c(4, 4, 3), c(2, 1, 2)),
+inptt_neg_df=NA,
+nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE)), yes_val=TRUE))
+
+c.1..2..1. c.1..5..7.
+1          4          1
+2          2          5
+3          3          2
 ```
 
 
@@ -1786,8 +2383,94 @@ Argument      |Description
 ## Examples
 
 ```r
-nestr_df2(inptf_df=data.frame(c(1, 2, 1), c(1, 5, 7)), rtn_pos="yes",
-rtn_neg="no", nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE)), yes_val=TRUE)
+print(nestr_df2(inptf_df=data.frame(c(1, 2, 1), c(1, 5, 7)), rtn_pos="yes",
+rtn_neg="no", nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE)), yes_val=TRUE))
+
+c.1..2..1. c.1..5..7.
+1        yes         no
+2         no         no
+3        yes        yes
+```
+
+
+# `new_ordered`
+
+new_ordered
+
+
+## Description
+
+Returns the indexes of elements contained in "w_v" according to "f_v"
+
+
+## Usage
+
+```r
+new_ordered(f_v, w_v, nvr_here = NA)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`f_v`     |     is the input vector
+`w_v`     |     is the vector containing the elements that can be in f_v
+`nvr_here`     |     is a value you are sure is not present in f_v
+
+
+## Examples
+
+```r
+print(fittr_v(f_v=c("non", "non", "non", "oui"), w_v=c("oui", "non", "non")))
+
+[1] 4 1 2
+```
+
+
+# `non_unique`
+
+non_unique
+
+
+## Description
+
+Returns the element that are not unique from the input vector
+
+
+## Usage
+
+```r
+non_unique(inpt_v, occu = ">-1-")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector containing the elements
+`occu`     |     is a parameter that specifies the occurence of the elements that must be returned, defaults to ">-1-" it means that the function will return all the elements that are present more than one time in inpt_v. The synthax is the following "comparaison_type-actual_value-". The comparaison type may be "==" or ">". Occu can also be a vector containing all the occurence that must have the elements to be returned.
+
+
+## Examples
+
+```r
+print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non")))
+
+[1] "oui" "non"
+
+print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu="==-2-"))
+
+[1] "oui"
+
+print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu=">-2-"))
+
+[1] "non"
+
+print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu=c(1, 3)))
+
+[1] "non"   "peut"  "peut1"
 ```
 
 
@@ -1813,6 +2496,18 @@ occu(inpt_v)
 Argument      |Description
 ------------- |----------------
 `inpt_v`     |     the input dataframe
+
+
+## Examples
+
+```r
+print(occu(inpt_v=c("oui", "peut", "peut", "non", "oui")))
+
+var occurence
+1  oui         2
+2 peut         2
+3  non         1
+```
 
 
 # `paste_df`
@@ -1878,6 +2573,19 @@ Argument      |Description
 `sep`     |     is the separator between all patterns in the returned value
 
 
+## Examples
+
+```r
+print(pattern_generator(base_="oui", from_=c("er", "re", "ere"), nb=1, hmn=3))
+
+[1] "ouier" "ouire" "ouier"
+
+print(pattern_generator(base_="oui", from_=c("er", "re", "ere"), nb=2, hmn=3, after=0, sep="-"))
+
+[1] "er-re-o-u-i"  "ere-re-o-u-i" "ere-er-o-u-i"
+```
+
+
 # `pattern_gettr`
 
 pattern_gettr
@@ -1887,7 +2595,7 @@ pattern_gettr
 
 Search for pattern(s) contained in a vector in another vector and return a list containing matched one (first index) and their position (second index) according to these rules:
  First case: Search for patterns strictly, it means that the searched pattern(s) will be matched only if the patterns containded in the vector that is beeing explored by the function are present like this c("pattern_searched", "other", ..., "pattern_searched") and not as c("other_thing pattern_searched other_thing", "other", ..., "pattern_searched other_thing")
- Second case: It is the opposite to the first case, it means that if the pattern is partially present like in the first position and the last, it will be considered like a matched pattern
+ Second case: It is the opposite to the first case, it means that if the pattern is partially present like in the first position and the last, it will be considered like a matched pattern. REGEX can also be used as pattern
 
 
 ## Usage
@@ -1915,7 +2623,20 @@ Argument      |Description
 `strict`     |     a vector containing the "strict" condition for each nth vector in word_ ("strict" is the string to activate this option)
 `btwn`     |     is a vector containing the condition ("yes" to activate this option) meaning that if "yes", all elements between two matched patern in vct will be returned , so the patterns you enter in word_ have to be in the order you think it will appear in vct
 `all_in_word`     |     is a value (default set to "yes", "no" to activate this option) that, if activated, won't authorized a previous matched pattern to be matched again
-`notatall`     |     is a string that you are sure is not present in vct REGEX can also be used as pattern
+`notatall`     |     is a string that you are sure is not present in vct
+
+
+## Examples
+
+```r
+print(pattern_gettr(word_=c("oui", "non", "erer"), vct=c("oui", "oui", "non", "oui", "non", "opp", "opp", "erer", "non", "ok"), occ=c(1, 2, 1), btwn=c("no", "yes", "no"), strict=c("no", "no", "ee")))
+
+[[1]]
+[1] 1 5 8
+
+[[2]]
+[1] "oui"  "non"  "opp"  "opp"  "erer"
+```
 
 
 # `pattern_tuning`
@@ -1931,7 +2652,14 @@ Allow to tune a pattern very precisely and output a vector containing its variat
 ## Usage
 
 ```r
-pattern_tuning(pattrn, spe_nb, spe_l, exclude_type, hmn = 1, rg = c(0, 0))
+pattern_tuning(
+  pattrn,
+  spe_nb,
+  spe_l,
+  exclude_type,
+  hmn = 1,
+  rg = c(1, nchar(pattrn))
+)
 ```
 
 
@@ -1945,6 +2673,15 @@ Argument      |Description
 `exclude_type`     |     is character that won't be replaced
 `hmn`     |     is how many output the function will return
 `rg`     |     is a vector with two parameters (index of the first letter that will be replaced, index of the last letter that will be replaced) default is set to all the letters from the source pattern
+
+
+## Examples
+
+```r
+print(pattern_tuning(pattrn="oui", spe_nb=2, spe_l=c("e", "r", "T", "O"), exclude_type="o", hmn=3))
+
+[1] "orT" "oTr" "oOi"
+```
 
 
 # `ptrn_switchr`
@@ -1978,10 +2715,15 @@ Argument      |Description
 ## Examples
 
 ```r
-ptrn_switchr(inpt_l=c("2022-01-11", "2022-01-14", "2022-01-21",
-"2022-01-01"), f_idx_l=c(1, 2, 3), t_idx_l=c(3, 2, 1))
-ptrn_switchr(inpt_l=c("2022-01-11", "2022-01-14", "2022-01-21",
-"2022-01-01"), f_idx_l=c(1), default_val="ee")
+print(ptrn_switchr(inpt_l=c("2022-01-11", "2022-01-14", "2022-01-21",
+"2022-01-01"), f_idx_l=c(1, 2, 3), t_idx_l=c(3, 2, 1)))
+
+[1] "11-01-2022" "14-01-2022" "21-01-2022" "01-01-2022"
+
+print(ptrn_switchr(inpt_l=c("2022-01-11", "2022-01-14", "2022-01-21",
+"2022-01-01"), f_idx_l=c(1), default_val="ee"))
+
+[1] "ee-01-11" "ee-01-14" "ee-01-21" "ee-01-01"
 ```
 
 
@@ -1998,7 +2740,14 @@ Allow to modify the pattern length of element in a vector according to arguments
 ## Usage
 
 ```r
-ptrn_twkr(inpt_l, depth = "max", sep = "-", default_val = "0", add_sep = T)
+ptrn_twkr(
+  inpt_l,
+  depth = "max",
+  sep = "-",
+  default_val = "0",
+  add_sep = T,
+  end_ = T
+)
 ```
 
 
@@ -2011,14 +2760,25 @@ Argument      |Description
 `sep`     |     is the separator of the pattern, defaults to "-"
 `default_val`     |     is the default val that will be placed between the separator, defaults to "00"
 `add_sep`     |     defaults to TRUE. If set to FALSE, it will remove the separator for the patterns that are included in the interval between the depth amount of separator and the actual number of separator of the element.
+`end_`     |     is if the default_val will be added at the end or at the beginning of each element that lacks length compared to depth
 
 
 ## Examples
 
 ```r
-library("stringr")
 v <- c("2012-06-22", "2012-06-23", "2022-09-12", "2022")
+
 ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=TRUE)
+
+[1] "2012-06-22" "2012-06-23" "2022-09-12" "2022-00-00"
+
+ptrn_twkr(inpt_l=v, depth=1, sep="-", default_val="00", add_sep=TRUE)
+
+[1] "2012-06" "2012-06" "2022-09" "2022-00"
+
+ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=TRUE, end_=F)
+
+[1] "2012-06-22" "2012-06-23" "2022-09-12" "00-00-2022"
 ```
 
 
@@ -2056,6 +2816,128 @@ print(rearangr_v(inpt_v=c(23, 21, 56), w_v=c("oui", "peut", "non"), how="decreas
 ```
 
 
+# `regroupr`
+
+regroupr
+
+
+## Description
+
+Allow to sort data like "c(X1/Y1/Z1, X2/Y1/Z2, ...)" to what you want. For example it can be to "c(X1/Y1/21, X1/Y1/Z2, ...)"
+
+
+## Usage
+
+```r
+regroupr(
+  inpt_v,
+  sep_ = "-",
+  order = c(1:length(unlist(strsplit(x = inpt_v[1], split = sep_)))),
+  l_order = NA
+)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector containing all the data you want to sort in a specific way. All the sub-elements should be separated by a unique separator such as "-" or "/"
+`sep_`     |     is the unique separator separating the sub-elements in each elements of inpt_v
+`order`     |     is a vector describing the way the elements should be sorted. For example if you want this dataset  "c(X1/Y1/Z1, X2/Y1/Z2, ...)" to be sorted by the last element you should have order=c(3:1), for example, and it should returns something like this c(X1/Y1/Z1, X2/Y1/Z1, X1/Y2/Z1, ...) assuming you have only two values for X.
+`l_order`     |     is a list containing the vectors of values you want to order first for each sub-elements
+
+
+## Examples
+
+```r
+vec <- multitud(l=list(c("a", "b"), c("1", "2"), c("A", "Z", "E"), c("Q", "F")), sep_="/")
+
+
+print(vec)
+
+[1] "a/1/A/Q" "b/1/A/Q" "a/2/A/Q" "b/2/A/Q" "a/1/Z/Q" "b/1/Z/Q" "a/2/Z/Q"
+[8] "b/2/Z/Q" "a/1/E/Q" "b/1/E/Q" "a/2/E/Q" "b/2/E/Q" "a/1/A/F" "b/1/A/F"
+[15] "a/2/A/F" "b/2/A/F" "a/1/Z/F" "b/1/Z/F" "a/2/Z/F" "b/2/Z/F" "a/1/E/F"
+[22] "b/1/E/F" "a/2/E/F" "b/2/E/F"
+
+print(regroupr(inpt_v=vec, sep_="/"))
+
+[1] "a/1/1/1"   "a/1/2/2"   "a/1/3/3"   "a/1/4/4"   "a/1/5/5"   "a/1/6/6"
+[7] "a/2/7/7"   "a/2/8/8"   "a/2/9/9"   "a/2/10/10" "a/2/11/11" "a/2/12/12"
+[13] "b/1/13/13" "b/1/14/14" "b/1/15/15" "b/1/16/16" "b/1/17/17" "b/1/18/18"
+[19] "b/2/19/19" "b/2/20/20" "b/2/21/21" "b/2/22/22" "b/2/23/23" "b/2/24/24"
+
+vec <- vec[-2]
+
+print(regroupr(inpt_v=vec, sep_="/"))
+
+[1] "a/1/1/1"   "a/1/2/2"   "a/1/3/3"   "a/1/4/4"   "a/1/5/5"   "a/1/6/6"
+[7] "a/2/7/7"   "a/2/8/8"   "a/2/9/9"   "a/2/10/10" "a/2/11/11" "a/2/12/12"
+[13] "b/1/13/13" "b/1/14/14" "b/1/15/15" "b/1/16/16" "b/1/17/17" "b/2/18/18"
+[19] "b/2/19/19" "b/2/20/20" "b/2/21/21" "b/2/22/22" "b/2/23/23"
+
+print(regroupr(inpt_v=vec, sep_="/", order=c(4:1)))
+
+[1] "1/1/A/Q"   "2/2/A/Q"   "3/3/A/Q"   "4/4/A/Q"   "5/5/Z/Q"   "6/6/Z/Q"
+[7] "7/7/Z/Q"   "8/8/Z/Q"   "9/9/E/Q"   "10/10/E/Q" "11/11/E/Q" "12/12/E/Q"
+[13] "13/13/A/F" "14/14/A/F" "15/15/A/F" "16/16/A/F" "17/17/Z/F" "18/18/Z/F"
+[19] "19/19/Z/F" "20/20/Z/F" "21/21/E/F" "22/22/E/F" "23/23/E/F" "24/24/E/F"
+```
+
+
+# `save_untl`
+
+save_untl
+
+
+## Description
+
+Get the elements in each vector from a list that are located before certain values
+
+
+## Usage
+
+```r
+save_untl(inpt_l = list(), val_to_stop_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_l`     |     is the input list containing all the vectors
+`val_to_stop`     |     is a vector containing the values that marks the end of the vectors returned in the returned list, see the examples
+
+
+## Examples
+
+```r
+print(save_untl(inpt_l=list(c(1:4), c(1, 1, 3, 4), c(1, 2, 4, 3)), val_to_stop_v=c(3, 4)))
+
+[[1]]
+[1] 1 2
+
+[[2]]
+[1] 1 1
+
+[[3]]
+[1] 1 2
+
+print(save_untl(inpt_l=list(c(1:4), c(1, 1, 3, 4), c(1, 2, 4, 3)), val_to_stop_v=c(3)))
+
+[[1]]
+[1] 1 2
+
+[[2]]
+[1] 1 1
+
+[[3]]
+[1] 1 2 4
+```
+
+
 # `see_df`
 
 see_df
@@ -2078,9 +2960,9 @@ see_df(df, condition_l, val_l, conjunction_l = c(), rt_val = T, f_val = F)
 Argument      |Description
 ------------- |----------------
 `df`     |     is the input dataframe
-`condition_l`     |     is the vector of the possible conditions ("==", ">", "<", "!=", "%%") (equal, greater than, lower than, not equal to, is divisible by), you can put the same condition n times.
-`val_l`     |     is the list of vectors containing the values related to condition_l (so the vector of values has to be placed in the same order)
-`conjunction_l`     |     contains the | or & conjunctions, so if the length of condition_l is equal to 3, there will be 2 conjunctions. If the length of conjunction_l is inferior to the length of condition_l minus 1, conjunction_l will match its goal length value with its last argument as the last arguments. For example, c("&", "|", "&") with a goal length value of 5 --> c("&", "|", "&", "&", "&")
+`condition_l`     |     is the vector of the possible conditions ("==", ">", "<", "!=", "%%", "reg", "not_reg", "sup_nchar", "inf_nchar", "nchar") (equal to some elements in a vector, greater than, lower than, not equal to, is divisible by, the regex condition returns TRUE, the regex condition returns FALSE, the length of the elements is strictly superior to X, the length of the element is strictly inferior to X, the length of the element is equal to one element in a vector), you can put the same condition n times.
+`val_l`     |     is the list of vectors containing the values or vector of values related to condition_l (so the vector of values has to be placed in the same order)
+`conjunction_l`     |     contains the and or conjunctions, so if the length of condition_l is equal to 3, there will be 2 conjunctions. If the length of conjunction_l is inferior to the length of condition_l minus 1, conjunction_l will match its goal length value with its last argument as the last arguments. For example, c("&", "|", "&") with a goal length value of 5 --> c("&", "|", "&", "&", "&")
 `rt_val`     |     is a special value cell returned when the conditions are respected
 `f_val`     |     is a special value cell returned when the conditions are not respected
 
@@ -2088,6 +2970,42 @@ Argument      |Description
 ## Details
 
 This function will return an error if number only comparative conditions are given in addition to having character values in the input dataframe.
+
+
+## Examples
+
+```r
+df1 <- data.frame(c(1, 2, 4), c("a", "a", "zu"))
+
+print(see_df(df=df1, condition_l=c("nchar"), val_l=list(c(1))))
+
+X1    X2
+1 TRUE  TRUE
+2 TRUE  TRUE
+3 TRUE FALSE
+
+print(see_df(df=df1, condition_l=c("=="), val_l=list(c("a", 1))))
+
+X1    X2
+1  TRUE  TRUE
+2 FALSE  TRUE
+3 FALSE FALSE
+
+
+print(see_df(df=df1, condition_l=c("nchar"), val_l=list(c(1, 2))))
+
+X1   X2
+1 TRUE TRUE
+2 TRUE TRUE
+3 TRUE TRUE
+
+print(see_df(df=df1, condition_l=c("not_reg"), val_l=list("[a-z]")))
+
+X1    X2
+1 TRUE FALSE
+2 TRUE FALSE
+3 TRUE FALSE
+```
 
 
 # `see_file`
@@ -2116,6 +3034,23 @@ Argument      |Description
 `ext`     |     is a boolean that if set to TRUE, will return the file extension and if set to FALSE, will return filename
 
 
+## Examples
+
+```r
+print(see_file(string_="file.abc.xyz"))
+
+[1] ".abc.xyz"
+
+print(see_file(string_="file.abc.xyz", ext=F))
+
+[1] "file"
+
+print(see_file(string_="file.abc.xyz", index_ext=2))
+
+[1] ".xyz"
+```
+
+
 # `see_idx`
 
 see_idx
@@ -2123,13 +3058,13 @@ see_idx
 
 ## Description
 
-Allow to find the indexes of the elements of the first vector in the second. If the element(s) is not found, the element returned at the same index will be "FALSE".
+Returns a boolean vector to see if a set of elements contained in v1 is also contained in another vector (v2)
 
 
 ## Usage
 
 ```r
-see_idx(v1, v2, exclude_val = "######", no_more = F)
+see_idx(v1, v2, exclude_val = "######")
 ```
 
 
@@ -2139,8 +3074,15 @@ Argument      |Description
 ------------- |----------------
 `v1`     |     is the first vector
 `v2`     |     is the second vector
-`exclude_val`     |     is a value you know is not present in the 2 vectors
-`no_more`     |     is a boolean that, if set to TRUE, will remove all the first found value in the second vector after those has been found. It defaults to FALSE.
+
+
+## Examples
+
+```r
+print(see_idx(v1=c("oui", "non", "peut", "oo"), v2=c("oui", "peut", "oui")))
+
+[1]  TRUE FALSE  TRUE  FALSE
+```
 
 
 # `see_inside`
@@ -2170,6 +3112,106 @@ Argument      |Description
 `sep_`     |     is a vector containing the separator for each csv type file in order following the operating system file order, if the vector does not match the number of the csv files found, it will assume the separator for the rest of the files is the same as the last csv file found. It means that if you know the separator is the same for all the csv type files, you just have to put the separator once in the vector.
 `unique_sep`     |     is a pattern that you know will never be in your input files
 `rec`     |     is a boolean allows to get files recursively if set to TRUE, defaults to TRUE If x is the return value, to see all the files name, position of the columns and possible sheet name associanted with, do the following: Examples: print(x[(grep(unique_sep, x) [1](#1) +1):length(x)]) #If you just want to see the columns do the following: print(x [1:(grep(unique_sep, x) - 1)](#1:(grep(uniquesep,_x)_-_1)) )
+
+
+# `str_remove_untl`
+
+str_remove_untl
+
+
+## Description
+
+Allow to remove pattern within elements from a vector precisely according to their occurence.
+
+
+## Usage
+
+```r
+str_remove_untl(
+  inpt_v,
+  ptrn_rm_v = c(),
+  untl = list(c(1)),
+  nvr_following_ptrn = "NA"
+)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`ptrn_rm_v`     |     is a vector containing the patterns to remove
+`untl`     |     is a list containing the occurence(s) of each pattern to remove in the elements.
+`nvr_following_ptrn`     |     is a sequel of characters that you are sure is not present in any of the elements in inpt_v
+
+
+## Examples
+
+```r
+vec <- c("45/56-/98mm", "45/56-/98mm", "45/56-/98-mm//")
+
+print(str_remove_untl(inpt_v=vec, ptrn_rm_v=c("-", "/"), untl=list(c("max"), c(1))))
+
+[1] "4556/98mm"   "4556/98mm"   "4556/98mm//"
+
+print(str_remove_untl(inpt_v=vec, ptrn_rm_v=c("-", "/"), untl=list(c("max"), c(1:2))))
+
+[1] "455698mm"   "455698mm"   "455698mm//"
+
+print(str_remove_untl(inpt_v=vec[1], ptrn_rm_v=c("-", "/"), untl=c("max")))
+
+[1] "455698mm" "455698mm" "455698mm"
+```
+
+
+# `unique_df`
+
+unique_df
+
+
+## Description
+
+Returns the input dataframe with the unique columns or rows.
+
+
+## Usage
+
+```r
+unique_df(inpt_df, col = F)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_df`     |     is the input dataframe
+`col`     |     is a parameter that specifies if the dataframe returned should have unique columns or rows, defaults to F, so the dataframe returned by default has unique rows
+
+
+## Examples
+
+```r
+df1 <- data.frame(c(1, 2, 1, 3), c("a", "z", "a", "p"))
+
+print(unique_df(inpt_df=df1))
+
+c.1..2..1..3. c..a....z....a....p..
+1             1                     a
+2             2                     z
+4             3                     p
+
+df1 <- data.frame(c(1, 2, 1, 3), c("a", "z", "a", "p"), c(1, 2, 1, 3))
+
+print(unique_df(inpt_df=df1, col=T))
+
+cur_v cur_v
+1     1     a
+2     2     z
+3     1     a
+4     3     p
+```
 
 
 # `unique_ltr_from_v`
@@ -2229,6 +3271,14 @@ Argument      |Description
 `vec`     |     is the input vector
 
 
+## Examples
+
+```r
+print(unique_pos(c(3, 4, 3, 5, 6)))
+[1] 1 2 4 5
+```
+
+
 # `until_stnl`
 
 until_stnl
@@ -2255,37 +3305,13 @@ Argument      |Description
 `goal`     |     is the length to reach
 
 
-# `v_to_df`
-
-v_to_df
-
-
-## Description
-
-Allow to convert a vector to a dataframe according to a separator.
-
-
-## Usage
-
-```r
-v_to_df(inpt_v, sep = "-")
-```
-
-
-## Arguments
-
-Argument      |Description
-------------- |----------------
-`inpt_v`     |     is the input vector
-`sep`     |     is the separator used to seprate the columns
-
-
 ## Examples
 
 ```r
-library("stringr")
-v <- c("aa-yy-uu", "zz-gg-hhh", "zz-gg-hhh", "zz-gg-hhh")
-v_to_df(inpt_v=v, sep="-")
+print(until_stnl(vec1=c(1, 3, 2), goal=56))
+
+[1] 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3
+[39] 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3
 ```
 
 
@@ -2313,7 +3339,19 @@ Argument      |Description
 `df`     |     is the input dataframe
 `val_replaced`     |     is a vector of the value(s) to be replaced
 `val_replacor`     |     is the value that will replace val_replaced
-`df_rpt`     |     is the replacement matrix and has to be the same dimension as df. Only the indexes that are equal to TRUE will be authorized indexes for the values to be replaced in the input matrix
+
+
+## Examples
+
+```r
+print(val_replacer(df=data.frame(c(1, "oo4", T, F), c(T, F, T, T)), val_replaced=c(T), val_replacor="NA"))
+
+c.1...oo4...T..F. c.T..F..T..T.
+1                 1            NA
+2               oo4         FALSE
+3                NA            NA
+4             FALSE            NA
+```
 
 
 # `vec_in_df`
@@ -2323,17 +3361,13 @@ vec_in_df
 
 ## Description
 
-Allow to see if vectors are present in a dataframe
- ex: 1, 2, 1
- 3, 4, 1
- 1, 5, 8
- the vector c(4, 1) with the coefficient 1 and the start position at the second column is containded in the dataframe
+Allow to get if a vector is in a dataframe. Returns the row and column of the vector in the dataframe if the vector is contained in the dataframe.
 
 
 ## Usage
 
 ```r
-vec_in_df(df_, vec_l, coeff_, strt_l, distinct = "NA")
+vec_in_df(inpt_df, inpt_vec = c(), coeff = 0, stop_untl = 1, conventional = F)
 ```
 
 
@@ -2341,11 +3375,98 @@ vec_in_df(df_, vec_l, coeff_, strt_l, distinct = "NA")
 
 Argument      |Description
 ------------- |----------------
-`df_`     |     is the input dataframe
-`vec_l`     |     is a list the vectors
-`coeff_`     |     is the related coefficient of the vector
-`strt_l`     |     is a vector containing the start position for each vector
-`distinct`     |     is a value you are sure is not in df_, defaults to "NA"
+`inpt_df`     |     is the input dataframe
+`inpt_vec`     |     is the vector that may be in the input dataframe
+`coeff`     |     is the "slope coefficient" of inpt_vec
+`stop_untl`     |     is the maximum number of the input vector the function returns, if in the dataframe
+`conventinal`     |     is if a positive slope coefficient means that the vector goes upward or downward
+
+
+## Examples
+
+```r
+df1 <- data.frame(c(1:5), c(5:1), c("a", "z", "z", "z", "a"))
+
+print(df1)
+
+c.1.5. c.5.1. c..a....z....z....z....a..
+1      1      5                          a
+2      2      4                          z
+3      3      3                          z
+4      4      2                          z
+5      5      1                          a
+
+print(vec_in_df(inpt_df=df1, inpt_vec=c(5, 4, "z"), coeff=1))
+
+NULL
+
+print(vec_in_df(inpt_df=df1, inpt_vec=c(5, 2, "z"), coeff=1))
+
+[1] 5 1
+
+print(vec_in_df(inpt_df=df1, inpt_vec=c(3, "z"), coeff=1))
+
+[1] 3 2
+
+print(vec_in_df(inpt_df=df1, inpt_vec=c(4, "z"), coeff=-1))
+
+[1] 2 2
+
+print(vec_in_df(inpt_df=df1, inpt_vec=c(2, 3, "z"), coeff=-1))
+
+[1] 2 1
+
+print(vec_in_df(inpt_df=df1, inpt_vec=c(5, 2, "z"), coeff=-1, conventional=T))
+
+[1] 5 1
+
+df1[4, 2] <- 1
+
+print(vec_in_df(inpt_df=df1, inpt_vec=c(1, "z"), coeff=-1, conventional=T, stop_untl=4))
+
+[1] 4 2 5 2
+```
+
+
+# `vector_replacor`
+
+vector_replacor
+
+
+## Description
+
+Allow to replace certain values in a vector.
+
+
+## Usage
+
+```r
+vector_replacor(inpt_v = c(), sus_val = c(), rpl_val = c(), grep_ = F)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`sus_val`     |     is a vector containing all the values that will be replaced
+`rpl_val`     |     is a vector containing the value of the elements to be replaced (sus_val), so sus_val and rpl_val should be the same size
+`grep_`     |     is if the elements in sus_val should be equal to the elements to replace in inpt_v or if they just should found in the elements
+
+
+## Examples
+
+```r
+print(vector_replacor(inpt_v=c(1:15), sus_val=c(3, 6, 8, 12), rpl_val=c("oui", "non", "e", "a")))
+
+[1] "1"   "2"   "oui" "4"   "5"   "non" "7"   "e"   "9"   "10"  "11"  "a"
+[13] "13"  "14"  "15"
+
+print(vector_replacor(inpt_v=c("non", "zez", "pp a ftf", "fdfd", "assistance", "ert", "repas", "repos"), sus_val=c("pp", "as", "re"), rpl_val=c("oui", "non", "zz"), grep_=T))
+
+[1] "non"  "zez"  "oui"  "fdfd" "non"  "ert"  "non"  "zz"
+```
 
 
 # `vlookup_df`
@@ -2373,5 +3494,73 @@ Argument      |Description
 `v_id`     |     is a vector containing the ids
 `col_id`     |     is the column that contains the ids (default is equal to 1)
 `included_col_id`     |     is if the result should return the col_id (default set to yes)
+
+
+## Examples
+
+```r
+df1 <- data.frame(c("az1", "az3", "az4", "az2"), c(1:4), c(4:1))
+
+print(vlookup_df(df=df1, v_id=c("az1", "az2", "az3", "az4")))
+
+c..az1....az3....az4....az2.. c.1.4. c.4.1.
+2                            az1      1      4
+4                            az2      4      1
+21                           az3      2      3
+3                            az4      3      2
+```
+
+
+# `wider_df`
+
+wider_df
+
+
+## Description
+
+Takes a dataframe as an input and the column to split according to a seprator.
+
+
+## Usage
+
+```r
+wider_df(inpt_df, col_to_splt = c(), sep_ = "-")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_df`     |     is the input dataframe
+`col_to_splt`     |     is a vector containing the number or the colnames of the columns to split according to a separator
+`sep_`     |     is the separator of the elements to split to new columns in the input dataframe
+
+
+## Examples
+
+```r
+df1 <- data.frame(c(1:5), c("o-y", "hj-yy", "er-y", "k-ll", "ooo-mm"), c(5:1))
+
+df2 <- data.frame(c(1:5), c("o-y", "hj-yy", "er-y", "k-ll", "ooo-mm"))
+
+print(wider_df(inpt_df=df1, col_to_splt=c(2), sep_="-"))
+
+pre_df X.o.  X.y.
+o-y    1      "o"   "y"  5
+hj-yy  2      "hj"  "yy" 4
+er-y   3      "er"  "y"  3
+k-ll   4      "k"   "ll" 2
+ooo-mm 5      "ooo" "mm" 1
+
+print(wider_df(inpt_df=df2, col_to_splt=c(2), sep_="-"))
+
+pre_df X.o.  X.y.
+o-y    1      "o"   "y"
+hj-yy  2      "hj"  "yy"
+er-y   3      "er"  "y"
+k-ll   4      "k"   "ll"
+ooo-mm 5      "ooo" "mm"
+```
 
 

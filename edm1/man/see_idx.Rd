@@ -4,17 +4,20 @@
 \alias{see_idx}
 \title{see_idx}
 \usage{
-see_idx(v1, v2, exclude_val = "######", no_more = F)
+see_idx(v1, v2, exclude_val = "######")
 }
 \arguments{
 \item{v1}{is the first vector}
 
 \item{v2}{is the second vector}
-
-\item{exclude_val}{is a value you know is not present in the 2 vectors}
-
-\item{no_more}{is a boolean that, if set to TRUE, will remove all the first found value in the second vector after those has been found. It defaults to FALSE.}
 }
 \description{
-Allow to find the indexes of the elements of the first vector in the second. If the element(s) is not found, the element returned at the same index will be "FALSE".
+Returns a boolean vector to see if a set of elements contained in v1 is also contained in another vector (v2)
+}
+\examples{
+
+print(see_idx(v1=c("oui", "non", "peut", "oo"), v2=c("oui", "peut", "oui")))
+
+[1]  TRUE FALSE  TRUE  FALSE
+
 }

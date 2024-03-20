@@ -12,3 +12,7 @@ unique_pos(vec)
 \description{
 Allow to find indexes of the unique values from a vector.
 }
+\examples{
+print(unique_pos(c(3, 4, 3, 5, 6)))
+[1] 1 2 4 5
+}

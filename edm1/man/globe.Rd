@@ -23,5 +23,13 @@ globe(lat_f, long_f, alt_f = NA, lat_n, long_n, alt_n = NA)
 Allow to calculate the distances between a set of geographical points and another established geographical point. If the altitude is not filled, so the result returned won't take in count the altitude.
 }
 \examples{
-globe(lat_f=23, long_f=112, alt_f=NA, lat_n=c(2, 82), long_n=c(165, -55), alt_n=NA) 
+
+print(globe(lat_f=23, long_f=112, alt_f=NA, lat_n=c(2, 82), long_n=c(165, -55), alt_n=NA)) 
+
+[1] 6342.844 7059.080
+
+print(globe(lat_f=23, long_f=112, alt_f=8, lat_n=c(2, 82), long_n=c(165, -55), alt_n=c(8, -2)))
+
+[1] 6342.844 7059.087
+
 }

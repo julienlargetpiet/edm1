@@ -15,11 +15,11 @@ data_meshup(
 )
 }
 \arguments{
-\item{data}{is the data provided (vector) each column is separated by a unic separator and each dataset from the same column is separated by another unic separator (ex: c("\emph{", c("d", "-", "e", "-", "f"), "}", c("a", "a1", "-", "b", "-", "c", "c1")"_")}
+\item{data}{is the data provided (vector) each column is separated by a unic separator and each dataset from the same column is separated by another unic separator (ex: c("\emph{", c("d", "-", "e", "-", "f"), "}", c("a", "a1", "-", "b", "-", "c", "c1"), "_")}
 
-\item{cols}{is the colnames of the data generated in a csv}
+\item{cols}{are the colnames of the data generated in a csv}
 
-\item{file_}{is the file to which the data will be outputed}
+\item{file_}{is the file to which the data will be outputed, defaults to NA which means that the functio will return the dataframe generated and won't write it to a csv file}
 
 \item{sep_}{is the separator of the csv outputed}
 
@@ -36,4 +36,15 @@ f, c1}
 }
 \description{
 Allow to automatically arrange 1 dimensional data according to vector and parameters
+}
+\examples{
+print(data_meshup(data=c("_", c("-", "d", "-", "e", "-", "f"), "_", c("-", "a", "a1", "-", "B", "r", "uy", "-", "c", "c1"), "_"), organisation=c(1, 0)))
+  X1 X2
+1  d  a
+2  d a1
+3  e  B
+4  e  r
+5  e uy
+6  f  c
+7  f c1
 }

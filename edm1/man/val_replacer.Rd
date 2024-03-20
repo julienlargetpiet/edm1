@@ -12,9 +12,18 @@ val_replacer(df, val_replaced, val_replacor = T, df_rpt = NA)
 \item{val_replaced}{is a vector of the value(s) to be replaced}
 
 \item{val_replacor}{is the value that will replace val_replaced}
-
-\item{df_rpt}{is the replacement matrix and has to be the same dimension as df. Only the indexes that are equal to TRUE will be authorized indexes for the values to be replaced in the input matrix}
 }
 \description{
 Allow to replace value from dataframe to another one.
+}
+\examples{
+
+print(val_replacer(df=data.frame(c(1, "oo4", T, F), c(T, F, T, T)), val_replaced=c(T), val_replacor="NA"))
+
+  c.1...oo4...T..F. c.T..F..T..T.
+1                 1            NA
+2               oo4         FALSE
+3                NA            NA
+4             FALSE            NA
+
 }

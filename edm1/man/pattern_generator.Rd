@@ -22,3 +22,13 @@ pattern_generator(base_, from_, nb, hmn = 1, after = 1, sep = "")
 \description{
 Allow to create patterns which have a part that is varying randomly each time.
 }
+\examples{
+print(pattern_generator(base_="oui", from_=c("er", "re", "ere"), nb=1, hmn=3))
+
+[1] "ouier" "ouire" "ouier"
+
+print(pattern_generator(base_="oui", from_=c("er", "re", "ere"), nb=2, hmn=3, after=0, sep="-"))
+
+[1] "er-re-o-u-i"  "ere-re-o-u-i" "ere-er-o-u-i"
+
+}

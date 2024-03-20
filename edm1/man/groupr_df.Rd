@@ -22,16 +22,23 @@ Allow to create groups from a dataframe. Indeed, you can create conditions that 
 }
 \examples{
 interactive()
+
 df1 <- data.frame(c(1, 2, 1), c(45, 22, 88), c(44, 88, 33))
+                                                                      
+val_lst <- list(list(c(1), c(1)), list(c(2)), list(c(44, 88)))
 
-val_lst <- list(list(c(1), c(1)), list(c(2)), list(c(44)))
+condition_lst <- list(c(">", "<"), c("\%\%"), c("==", "=="))
 
-condition_lst <- list(c(">", "<"), c("\%\%"), c("=="))
+conjunction_lst <- list(c("|"), c(), c("|"))
 
-conjunction_lst <- list(c("|"), c(), c())
+rtn_val_pos <- c("+", "++", "+++")
 
-rtn_val_pos <- c("+", "+", "+")
+print(groupr_df(inpt_df=df1, val_lst=val_lst, condition_lst=condition_lst, 
+conjunction_lst=conjunction_lst, rtn_val_pos=rtn_val_pos))
 
-groupr_df(inpt_df=df1, val_lst=val_lst, condition_lst=condition_lst, 
-conjunction_lst=conjunction_lst, rtn_val_pos=rtn_val_pos)
+    X1  X2  X3
+1 <NA>   + +++
+2   ++  ++ +++
+3 <NA> +++   +
+
 }

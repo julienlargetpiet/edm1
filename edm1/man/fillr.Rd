@@ -15,5 +15,9 @@ fillr(inpt_v, ptrn_fill = "...\\\\d")
 Allow to fill a vector by the last element n times
 }
 \examples{
-fillr(c("a", "b", "...3", "c"))
+
+print(fillr(c("a", "b", "...3", "c")))
+
+[1] "a" "b" "b" "b" "b" "c"
+
 }

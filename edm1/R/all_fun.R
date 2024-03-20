@@ -134,6 +134,34 @@ diff_xlsx <- function(file_, sht, v_old_begin, v_old_end,
 #' @param df_in is the dataframe that will be inserted 
 #' @param df_ins is the dataset to be inserted
 #' @param ins_loc is a vector containg two parameters (row, column) of the begining for the insertion
+#' @examples 
+#'df1 <- data.frame(c(1, 4), c(5, 3))
+#'
+#'df2 <- data.frame(c(1, 3, 5, 6), c(1:4), c(5, 4, 5, "ereer"))
+#'
+#'print(insert_df(df_in=df2, df_ins=df1, ins_loc=c(4, 2)))
+#'
+#'  c.1..3..5..6. c.1.4. c.5..4..5...ereer..
+#'1             1      1                   5
+#'2             3      2                   4
+#'3             5      3                   5
+#'4             6      1                   5
+#'
+#'print(insert_df(df_in=df2, df_ins=df1, ins_loc=c(3, 2)))
+#'
+#'  c.1..3..5..6. c.1.4. c.5..4..5...ereer..
+#'1             1      1                   5
+#'2             3      2                   4
+#'3             5      1                   5
+#'4             6      4                   3
+#'
+#'print(insert_df(df_in=df2, df_ins=df1, ins_loc=c(2, 2)))
+#'
+#'  c.1..3..5..6. c.1.4. c.5..4..5...ereer..
+#'1             1      1                   5
+#'2             3      1                   5
+#'3             5      4                   3
+#'4             6      4               ereer
 #' @export
 
 insert_df <- function(df_in, df_ins, ins_loc){
@@ -141,7 +169,7 @@ insert_df <- function(df_in, df_ins, ins_loc){
   ins_loc <- ins_loc - 1
   
   df_pre1 <- df_in[0:ins_loc[1], 1:ncol(df_in)] 
-  
+ 
   if ((ins_loc[1] + nrow(df_ins)) > nrow(df_in)){
     
     df_pre2 <- df_in[(ins_loc[1]+1):nrow(df_in), 1:ncol(df_in)]
@@ -151,11 +179,19 @@ insert_df <- function(df_in, df_ins, ins_loc){
     row_end <- nrow(df_pre2)
     
   }else{
-    
+   
     df_pre2 <- df_in[(ins_loc[1]+1):(ins_loc[1]+nrow(df_ins)), 1:ncol(df_in)]
+   
+    if ((ins_loc[1]+nrow(df_ins)) < nrow(df_in)){
+
+        df_pre3 <- df_in[(ins_loc[1] + nrow(df_ins) + 1):nrow(df_in), 1:ncol(df_in)]
     
-    df_pre3 <- df_in[(ins_loc[1] + nrow(df_ins) + 1):nrow(df_in), 1:ncol(df_in)]
-    
+    }else {
+
+        df_pre3 <- df_in[0:0, 1:ncol(df_in)]
+
+    }
+
     row_end <- nrow(df_ins)
     
   }
@@ -185,6 +221,15 @@ insert_df <- function(df_in, df_ins, ins_loc){
 #' @param after is set to 1 by default, it means that the varying part will be after the fixed part, set to 0 if you want the varying part to be before 
 #' @param nb is the number of random pattern chosen for the varying part
 #' @param sep is the separator between all patterns in the returned value
+#' @examples
+#'print(pattern_generator(base_="oui", from_=c("er", "re", "ere"), nb=1, hmn=3))
+#'
+#' [1] "ouier" "ouire" "ouier"
+#'
+#'print(pattern_generator(base_="oui", from_=c("er", "re", "ere"), nb=2, hmn=3, after=0, sep="-"))
+#'
+#' [1] "er-re-o-u-i"  "ere-re-o-u-i" "ere-er-o-u-i"
+#'
 #' @export
 
 pattern_generator <- function(base_, from_, nb, hmn=1, after=1, sep=""){
@@ -234,61 +279,33 @@ pattern_generator <- function(base_, from_, nb, hmn=1, after=1, sep=""){
 #' @param exclude_type is character that won't be replaced
 #' @param hmn is how many output the function will return
 #' @param rg is a vector with two parameters (index of the first letter that will be replaced, index of the last letter that will be replaced) default is set to all the letters from the source pattern
+#' @examples
+#' print(pattern_tuning(pattrn="oui", spe_nb=2, spe_l=c("e", "r", "T", "O"), exclude_type="o", hmn=3))
+#' 
+#' [1] "orT" "oTr" "oOi"
 #' @export
 
-pattern_tuning <- function(pattrn, spe_nb, spe_l, exclude_type, hmn=1, rg=c(0, 0)){
+pattern_tuning <- function(pattrn, spe_nb, spe_l, exclude_type, hmn=1, rg=c(1, nchar(pattrn))){
   
   lngth <- nchar(pattrn)
   
-  if (rg[2] == 0){
-    
-    rg[2] = lngth
-    
-  }
-  
   rtnl <- c()
   
-  if (spe_nb < lngth | rg[1] < 0 | rg[2] > lngth){
+  if (spe_nb <= lngth & rg[1] > -1 & rg[2] < (lngth+1)){
     
-    pattrn2 <- unlist(str_split(pattrn, ""))
-    
-    pattrn_l <- c()
-    
-    for (i in 1:lngth){
-      
-      pattrn_l <- append(pattrn_l, pattrn2[i])
-      
-    }
+    pattrn_l <- unlist(strsplit(pattrn, ""))
     
     pattrn <- pattrn_l
     
     b_l <- c()
     
-    for (i in rg[1]:rg[2]){
-      
-      if (pattrn[i] %in% spe_l){
-        
-        b_l <- append(b_l, T)
-        
-      }else{
-        
-        b_l <- append(b_l, F)
-        
-      }
-      
-    }
-    
-    spe_nb_obj = sum(b_l)
-    
-    spe_nb_obj2 <- spe_nb_obj
-    
-    if (all(b_l) == F){
-      
-      for (I in 1:hmn){ 
-        
-        while (spe_nb_obj < spe_nb){
+    for (I in 1:hmn){ 
+       
+        cnt = 0
+
+        while (cnt <= spe_nb){
           
-          if (rg[2] == lngth & rg[1] == 0){
+          if (rg[2] == lngth & rg[1] == 1){
             
             idx <- round(runif(1, 1, lngth), 0)
             
@@ -298,28 +315,24 @@ pattern_tuning <- function(pattrn, spe_nb, spe_l, exclude_type, hmn=1, rg=c(0, 0
             
           }
           
-          if (sum(grepl(pattrn[idx], spe_l)) == 0 & sum(grepl(pattrn[idx], exclude_type)) == 0){
+          if (sum(grepl(pattrn[idx], exclude_type)) == 0){
             
             pattrn[idx] <- spe_l[round(runif(1, 1, length(spe_l)), 0)]
             
-            spe_nb_obj = spe_nb_obj + 1
-            
+            cnt = cnt + 1
+
           }
           
         }
         
-        spe_nb_obj = spe_nb_obj2
-        
-        pattrn <- stri_paste(pattrn, collapse="")
+        pattrn <- paste(pattrn, collapse="")
         
         rtnl <- append(rtnl, pattrn)
         
         pattrn <- pattrn_l 
         
-      }
-      
     }
-    
+      
     return(rtnl)
     
   }else{
@@ -334,6 +347,15 @@ pattern_tuning <- function(pattrn, spe_nb, spe_l, exclude_type, hmn=1, rg=c(0, 0
 #'
 #' Return TRUE if a variable can be converted to a number and FALSE if not (supports float)
 #' @param x is the input value
+#' @examples
+#' print(can_be_num("34.677"))
+#' [1] TRUE
+#' print(can_be_num("34"))
+#' [1] TRUE
+#' print(can_be_num("3rt4"))
+#' [1] FALSE
+#' print(can_be_num(34))
+#' [1] TRUE
 #' @export
 
 can_be_num <- function(x){
@@ -382,6 +404,9 @@ can_be_num <- function(x){
 #'
 #' Allow to find indexes of the unique values from a vector. 
 #' @param vec is the input vector
+#' @examples
+#' print(unique_pos(c(3, 4, 3, 5, 6)))
+#' [1] 1 2 4 5
 #' @export
 
 unique_pos <- function(vec){
@@ -392,23 +417,86 @@ unique_pos <- function(vec){
 
 }
 
-
 #' data_gen
 #'
 #' Allo to generate in a csv all kind of data you can imagine according to what you provide
-#' @param type_ is a vector for wich argument is a column, a column can be made of numbers ("number"), string ("string") or both ("mixed")
+#' @param type_ is a vector. Its arguments designates a column, a column can be made of numbers ("number"), string ("string") or both ("mixed")
 #' @param strt_l is a vector containing for each column the row from which the data will begin to be generated
 #' @param nb_r is a vector containing for each column, the number of row full from generated data  
-#' @param output is the name of the output csv file
+#' @param output is the name of the output csv file, defaults to NA so no csv will be outputed by default
 #' @param type_distri is a vector which, for each column, associate a type of distribution ("random", "poisson", "gaussian"), it meas that non only the number but also the length of the string will be randomly generated according to these distribution laws
 #' @param properties is linked to type_distri because it is the parameters ("min_val-max_val") for "random type", ("u-x") for the poisson distribution, ("u-d") for gaussian distribution
 #' @param str_source is the source (vector) from which the character creating random string are (default set to the occidental alphabet)
-#' @param round_l is a vector which, for each column containing number, associate a round value
+#' @param round_l is a vector which, for each column containing number, associate a round value, if the type of the value is numeric
 #' @param sep_ is the separator used to write data in the csv
 #' @return new generated data in addition to saving it in the output
+#' @examples
+#' 
+#' print(data_gen())
+#' 
+#'   X1   X2    X3
+#' 1   4    2  <NA>
+#' 2   2    4  <NA>
+#' 3   5    2  <NA>
+#' 4   2 abcd  <NA>
+#' 5   4 abcd  <NA>
+#' 6   2    4  <NA>
+#' 7   2  abc  <NA>
+#' 8   4  abc  <NA>
+#' 9   4    3  <NA>
+#' 10  4  abc  abcd
+#' 11  5 <NA>   abc
+#' 12  4 <NA>   abc
+#' 13  1 <NA>    ab
+#' 14  1 <NA> abcde
+#' 15  2 <NA>   abc
+#' 16  4 <NA>     a
+#' 17  1 <NA>  abcd
+#' 18  4 <NA>    ab
+#' 19  2 <NA>  abcd
+#' 20  3 <NA>    ab
+#' 21  3 <NA>  abcd
+#' 22  2 <NA>     a
+#' 23  4 <NA>   abc
+#' 24  1 <NA>  abcd
+#' 25  4 <NA>   abc
+#' 26  4 <NA>    ab
+#' 27  2 <NA>   abc
+#' 28  5 <NA>    ab
+#' 29  3 <NA>   abc
+#' 30  5 <NA>  abcd
+#' 31  2 <NA>   abc
+#' 32  2 <NA>   abc
+#' 33  1 <NA>    ab
+#' 34  5 <NA>     a
+#' 35  4 <NA>    ab
+#' 36  1 <NA>    ab
+#' 37  1 <NA> abcde
+#' 38  5 <NA>   abc
+#' 39  4 <NA>    ab
+#' 40  5 <NA> abcde
+#' 41  2 <NA>    ab
+#' 42  3 <NA>    ab
+#' 43  2 <NA>    ab
+#' 44  4 <NA>  abcd
+#' 45  5 <NA>  abcd
+#' 46  3 <NA>  abcd
+#' 47  2 <NA>  abcd
+#' 48  3 <NA>  abcd
+#' 49  3 <NA>  abcd
+#' 50  4 <NA>     a
+#'
+#' print(data_gen(strt_l=c(0, 0, 0), nb_r=c(5, 5, 5)))
+#' 
+#'   X1    X2   X3
+#' 1  2     a  abc
+#' 2  3 abcde   ab
+#' 3  4 abcde    a
+#' 4  1     3  abc
+#' 5  3     a abcd
 #' @export
 
-data_gen <- function(type_=c("number", "mixed", "string"), strt_l=c(0, 0, 10), nb_r=c(50, 10, 40), output="gened.csv", 
+data_gen <- function(type_=c("number", "mixed", "string"), strt_l=c(0, 0, 10), nb_r=c(50, 10, 40), output=NA, 
                      properties=c("1-5", "1-5", "1-5"), type_distri=c("random", "random", "random"), 
                      str_source=c("a", "b", "c", "d", "e", "f", "g", 
                                   "h", "i", "j", "k", "l", "m", 
@@ -620,9 +708,9 @@ data_gen <- function(type_=c("number", "mixed", "string"), strt_l=c(0, 0, 10), n
 #' data_meshup
 #'
 #' Allow to automatically arrange 1 dimensional data according to vector and parameters
-#' @param data is the data provided (vector) each column is separated by a unic separator and each dataset from the same column is separated by another unic separator (ex: c("_", c("d", "-", "e", "-", "f"), "_", c("a", "a1", "-", "b", "-", "c", "c1")"_")
-#' @param cols is the colnames of the data generated in a csv
-#' @param file_ is the file to which the data will be outputed
+#' @param data is the data provided (vector) each column is separated by a unic separator and each dataset from the same column is separated by another unic separator (ex: c("_", c("d", "-", "e", "-", "f"), "_", c("a", "a1", "-", "b", "-", "c", "c1"), "_")
+#' @param cols are the colnames of the data generated in a csv
+#' @param file_ is the file to which the data will be outputed, defaults to NA which means that the functio will return the dataframe generated and won't write it to a csv file
 #' @param sep_ is the separator of the csv outputed
 #' @param organisation is the way variables include themselves, for instance ,resuming precedent example, if organisation=c(1, 0) so the data output will be:
 #' d, a
@@ -632,12 +720,22 @@ data_gen <- function(type_=c("number", "mixed", "string"), strt_l=c(0, 0, 10), n
 #' f, c1
 #' @param unic_sep1 is the unic separator between variables (default is "_")
 #' @param unic_sep2 is the unic separator between datasets (default is "-")
+#' @examples
+#' print(data_meshup(data=c("_", c("-", "d", "-", "e", "-", "f"), "_", c("-", "a", "a1", "-", "B", "r", "uy", "-", "c", "c1"), "_"), organisation=c(1, 0)))
+#'   X1 X2
+#' 1  d  a
+#' 2  d a1
+#' 3  e  B
+#' 4  e  r
+#' 5  e uy
+#' 6  f  c
+#' 7  f c1
 #' @export
 
 data_meshup <- function(data, cols=NA, file_=NA, sep_=";", 
                         organisation=c(2, 1, 0), unic_sep1="_", 
                         unic_sep2="-"){
-  
+ 
   l_l <- c()
   
   l_lngth <- c()
@@ -651,10 +749,10 @@ data_meshup <- function(data, cols=NA, file_=NA, sep_=";",
   sep_dd <- str_detect(data, unic_sep2)
   
   hmn <- (sum(sep_dd[!is.na(sep_dd)]) / jsq) #numb of datasets
-  
+ 
   val_nb <- length(data) - (hmn * jsq + (jsq + 1))  
   
-  dataset_l <- which(str_detect("-", data))
+  dataset_l <- which(str_detect(unic_sep2, data))
   
   df <- data.frame(matrix(nrow = val_nb, ncol = jsq))
   
@@ -663,28 +761,28 @@ data_meshup <- function(data, cols=NA, file_=NA, sep_=";",
     idx_s = 0
     
     seq_l <- seq(I, length(dataset_l), hmn)
-    
+   
     for (i in 1:jsq){
       
       idx <- dataset_l[seq_l[i]]
       
       t = 1
       
-      sep_dd <- grepl(data[idx + t], c(unic_sep2, unic_sep1))
-      
-      while(sum(sep_dd[!is.na(sep_dd)]) == 0 & (idx + t <= length(data)) == T){
-        
+      sep_dd <- grepl(data[idx + 1], c(unic_sep2, unic_sep1))
+     
+      while(sum(sep_dd[!is.na(sep_dd)]) == 0 & (idx + t <= length(data))){
+       
         l_l <- append(l_l, data[idx + t])
         
         t = t + 1
         
-        sep_dd <- grepl(data[idx + t], c("-", "_"))
+        sep_dd <- grepl(data[idx + t], c(unic_sep2, unic_sep1))
         
       }
       
       l_lngth <- append(l_lngth, (t - 1))
       
-      df[1:length(l_l), i] <- l_l
+      df[1:(t-1), i] <- l_l
       
       l_l <- c()
       
@@ -695,11 +793,11 @@ data_meshup <- function(data, cols=NA, file_=NA, sep_=";",
       df2 <- data.frame(matrix(nrow=0, ncol=jsq))
       
     }
-    
+   
     old_max_row <- max(l_lngth, na.rm=T)
     
     l_lngth <- c()
-    
+  
     for (i in 1:jsq){
       
       v_rel <- df[, i]
@@ -707,9 +805,9 @@ data_meshup <- function(data, cols=NA, file_=NA, sep_=";",
       var_ = 1
       
       x = 1
-      
+     
       while (x <= organisation[i]){
-        
+       
         v_relb <- df[, i + x]
         
         val_ <- v_rel[var_] # val to be added
@@ -743,10 +841,10 @@ data_meshup <- function(data, cols=NA, file_=NA, sep_=";",
       }
       
     }
-    
+   
     df2 <- rbind(df2, df[1:old_max_row, 1:jsq])
     
-    df[1:nrow(df), 1:ncol(df)] = NA
+    df[1:nrow(df), 1:ncol(df)] <- NA
     
   }
   
@@ -772,6 +870,10 @@ data_meshup <- function(data, cols=NA, file_=NA, sep_=";",
 #'
 #' Allow to get the number of a spreadsheet based column by the letter ex: AAA = 703
 #' @param letter is the letter (name of the column)
+#' @examples
+#' print(letter_to_nb("rty"))
+#'
+#' [1] 12713
 #' @export
 
 letter_to_nb <- function(letter){
@@ -801,6 +903,10 @@ letter_to_nb <- function(letter){
 #'
 #' Allow to get the letter of a spreadsheet based column by the number ex: 703 = AAA
 #' @param x is the number of the column 
+#' @examples
+#' print(nb_to_letter(12713))
+#'
+#' [1] "rty"
 #' @export
 
 nb_to_letter <- function(x){
@@ -872,6 +978,12 @@ nb_to_letter <- function(x){
 #' @param pu_d_ttc is the free-duty price of a single element after discount
 #' the function return a vector with the previous variables in the same order
 #' those that could not be calculated will be represented with NA value
+#' @examples
+#' print(cost_and_taxes(pu=45, prix_ttc=21, qte=3423))
+#' 
+#' [1]  3.423000e+03  4.500000e+01  4.500000e+01 -9.998637e-01  2.100000e+01
+#' [6] -1.540140e+05  4.500000e+01            NA            NA            NA
+#' [11]            NA            NA
 #' @export
 
 cost_and_taxes <- function(qte=NA, pu=NA, prix_ht=NA, tva=NA, prix_ttc=NA,
@@ -1195,8 +1307,6 @@ cost_and_taxes <- function(qte=NA, pu=NA, prix_ht=NA, tva=NA, prix_ttc=NA,
   
 }
 
-# xx-month-xxxx -> xx-xx-xxxx
-
 #' format_date
 #'
 #' Allow to convert xx-month-xxxx date type to xx-xx-xxxx
@@ -1204,6 +1314,11 @@ cost_and_taxes <- function(qte=NA, pu=NA, prix_ht=NA, tva=NA, prix_ttc=NA,
 #' @param sentc is the date to convert
 #' @param sep_in is the separator of the dat input (default is "-")
 #' @param sep_out is the separator of the converted date (default is "-")
+#' @examples
+#' print(format_date(f_dialect=c("janvier", "février", "mars", "avril", "mai", "juin",
+#'                           "juillet", "aout", "septembre", "octobre", "novembre", "décembre"), sentc="11-septembre-2023"))
+#'
+#' [1] "11-09-2023"
 #' @export
 
 format_date <- function(f_dialect, sentc, sep_in="-", sep_out="-"){
@@ -1234,6 +1349,11 @@ format_date <- function(f_dialect, sentc, sep_in="-", sep_out="-"){
 #' ex: if i want my vector c(1, 2) to be 5 of length this function will return me: c(1, 2, 1, 2, 1) 
 #' @param vec1 is the input vector
 #' @param goal is the length to reach
+#' @examples
+#' print(until_stnl(vec1=c(1, 3, 2), goal=56))
+#'
+#'  [1] 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3
+#' [39] 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3
 #' @export
 
 until_stnl <- function(vec1, goal){
@@ -1268,7 +1388,17 @@ until_stnl <- function(vec1, goal){
 #' @param df is the input dataframe
 #' @param v_id is a vector containing the ids
 #' @param col_id is the column that contains the ids (default is equal to 1)
-#' @param included_col_id is if the result should return the col_id (default set to yes) 
+#' @param included_col_id is if the result should return the col_id (default set to yes)
+#' @examples
+#' df1 <- data.frame(c("az1", "az3", "az4", "az2"), c(1:4), c(4:1))
+#' 
+#' print(vlookup_df(df=df1, v_id=c("az1", "az2", "az3", "az4")))
+#'
+#'    c..az1....az3....az4....az2.. c.1.4. c.4.1.
+#' 2                            az1      1      4
+#' 4                            az2      4      1
+#' 21                           az3      2      3
+#' 3                            az4      3      2
 #' @export
 
 vlookup_df <- function(df, v_id, col_id=1, included_col_id="yes"){
@@ -1300,112 +1430,100 @@ vlookup_df <- function(df, v_id, col_id=1, included_col_id="yes"){
 #' multitud
 #'
 #' From a list containing vectors allow to generate a vector following this rule:
-#' list(c("a", "b"), c("1", "2"), c("A", "Z", "E")) --> c("a1A", "a2A", "b1A", "b2A", "a1Z", ...)
+#' list(c("a", "b"), c("1", "2"), c("A", "Z", "E")) --> c("a1A", "b1A", "a2A", "b2A", a1Z, ...)
 #' @param l is the list
 #' @param sep_ is the separator between elements (default is set to "" as you see in the example)
+#' @examples
+#' print(multitud(l=list(c("a", "b"), c("1", "2"), c("A", "Z", "E"), c("Q", "F")), sep_="/"))
+#' 
+#' [1] "a/1/A/Q" "b/1/A/Q" "a/2/A/Q" "b/2/A/Q" "a/1/Z/Q" "b/1/Z/Q" "a/2/Z/Q"
+#' [8] "b/2/Z/Q" "a/1/E/Q" "b/1/E/Q" "a/2/E/Q" "b/2/E/Q" "a/1/A/F" "b/1/A/F"
+#' [15] "a/2/A/F" "b/2/A/F" "a/1/Z/F" "b/1/Z/F" "a/2/Z/F" "b/2/Z/F" "a/1/E/F"
+#' [22] "b/1/E/F" "a/2/E/F" "b/2/E/F"
 #' @export
 
 multitud <- function(l, sep_=""){
   
   rtnl <- unlist(l[1])
-  
+
   for (I in 2:length(l)){
     
     rtnl2 <- c()
-    
+  
     cur_ <- unlist(l[I])
     
     for (i in 1:length(cur_)){
       
       for (t in 1:length(rtnl)){
         
-        rtnl2 <- append(rtnl2, paste(rtnl[t] , cur_[i], sep=sep_))
-        
+        rtnl2 <- append(rtnl2, paste(rtnl[t], cur_[i], sep=sep_))
+
       }
-      
+
     }
     
     rtnl <- rtnl2
     
   }
-  
+
   return(rtnl)
   
 }
 
-#' df_tuned 
+#' save_untl
 #'
-#' Allow to return a list from a dataframe following these rules:
-#' First situation, I want the vectors from the returned list be composed of values that are separated by special values contained in a vector 
-#' ex: data.frame(c(1, 1, 2, 1), c(1, 1, 2, 1), c(1, 1, 1, 2)) will return list(c(1, 1), c(1, 1, 1), c(1, 1, 1, 1)) or 
-#' list(c(1, 1, 2), c(1, 1, 1, 2), c(1, 1, 1, 1, 2)) if i have chosen to take in count the 2. As you noticed here the value to stop is 2 but it can be several contained in a vector
-#' Second situation: I want to return a list for every jump of 3.
-#' If i take this dataframe data.frame(c(1, 1, 2, 1, 4, 4), c(1, 1, 2, 1, 3, 3), c(1, 1, 1, 2, 3, 3)) it will return list(c(1, 1, 2), c(1, 4, 4), c(1, 1, 2), c(1, 3, 3), c(1, 1, 1), c(2, 3, 3)) 
-#' @param df is the input data.frame
-#' @param val_to_stop is the vector containing the values to stop
-#' @param index_rc is the value for the jump (default set to NA so default will be first case)
-#' @param included is if the values to stop has to be also returned in the vectors (defaultn set to "yes")
+#' Get the elements in each vector from a list that are located before certain values
+#'
+#' @param inpt_l is the input list containing all the vectors
+#' @param val_to_stop is a vector containing the values that marks the end of the vectors returned in the returned list, see the examples
+#' 
+#' @examples
+#' print(save_untl(inpt_l=list(c(1:4), c(1, 1, 3, 4), c(1, 2, 4, 3)), val_to_stop_v=c(3, 4)))
+#'
+#' [[1]]
+#' [1] 1 2
+#' 
+#' [[2]]
+#' [1] 1 1
+#' 
+#' [[3]]
+#' [1] 1 2
+#'
+#' print(save_untl(inpt_l=list(c(1:4), c(1, 1, 3, 4), c(1, 2, 4, 3)), val_to_stop_v=c(3)))
+#' 
+#' [[1]]
+#' [1] 1 2
+#' 
+#' [[2]]
+#' [1] 1 1
+#' 
+#' [[3]]
+#' [1] 1 2 4
 #' @export
 
-df_tuned <- function(df, val_to_stop, index_rc=NA, included="yes"){
+save_untl <- function(inpt_l=list(), val_to_stop_v=c()){
 
- rtnl_l <- list()
+        rtn_l <- list()
 
- for (I in 1:ncol(df)){
+        for (vec in inpt_l){
 
-        rtnl <- c()
+                t = 1
 
-        t = 1
+                cur_v <- c()
 
-        while (t <= nrow(df)){
+                while (!(vec[t] %in% val_to_stop_v) & t <= length(vec)){
 
-                if (is.na(index_rc) == T){
+                        cur_v <- c(cur_v, vec[t])
 
-                        while (!(df[t, I] %in% val_to_stop) == T & t <= nrow(df)){
-
-                                rtnl <- append(rtnl, df[t, I])
-
-                                t = t + 1
-
-                        }
-
-                        if (df[t, I] %in% val_to_stop & included == "yes"){ 
-
-                                rtnl_l <- append(rtnl_l, data.frame(rtnl)) 
-
-                                rtnl <- c()
-
-                        }
-
-                }else{
-
-                        while (t %% index_rc != 0 & t <= nrow(df)){
-
-                                rtnl <- append(rtnl, df[t, I])
-
-                                t = t + 1
-
-                        }
-
-                        if (t %% index_rc == 0){
-
-                                if (included == "yes"){ rtnl <- append(rtnl, df[t, I]) }
-
-                                rtnl_l <- append(rtnl_l, data.frame(rtnl))
-
-                                rtnl <- c()
-
-                        }
+                        t = t + 1
 
                 }
 
-                t = t + 1
+                rtn_l <- append(x=rtn_l, values=list(cur_v))
 
         }
 
- }
-
- return(rtnl_l)
+        return(rtn_l)
 
 }
 
@@ -1413,12 +1531,44 @@ df_tuned <- function(df, val_to_stop, index_rc=NA, included="yes"){
 #' 
 #' Allow to return a dataframe with special value cells (ex: TRUE) where the condition entered are respected and another special value cell (ex: FALSE) where these are not
 #' @param df is the input dataframe
-#' @param condition_l is the vector of the possible conditions ("==", ">", "<", "!=", "%%") (equal, greater than, lower than, not equal to, is divisible by), you can put the same condition n times. 
-#' @param val_l is the list of vectors containing the values related to condition_l (so the vector of values has to be placed in the same order)
-#' @param conjunction_l contains the | or & conjunctions, so if the length of condition_l is equal to 3, there will be 2 conjunctions. If the length of conjunction_l is inferior to the length of condition_l minus 1, conjunction_l will match its goal length value with its last argument as the last arguments. For example, c("&", "|", "&") with a goal length value of 5 --> c("&", "|", "&", "&", "&")
+#' @param condition_l is the vector of the possible conditions ("==", ">", "<", "!=", "%%", "reg", "not_reg", "sup_nchar", "inf_nchar", "nchar") (equal to some elements in a vector, greater than, lower than, not equal to, is divisible by, the regex condition returns TRUE, the regex condition returns FALSE, the length of the elements is strictly superior to X, the length of the element is strictly inferior to X, the length of the element is equal to one element in a vector), you can put the same condition n times. 
+#' @param val_l is the list of vectors containing the values or vector of values related to condition_l (so the vector of values has to be placed in the same order)
+#' @param conjunction_l contains the and or conjunctions, so if the length of condition_l is equal to 3, there will be 2 conjunctions. If the length of conjunction_l is inferior to the length of condition_l minus 1, conjunction_l will match its goal length value with its last argument as the last arguments. For example, c("&", "|", "&") with a goal length value of 5 --> c("&", "|", "&", "&", "&")
 #' @param rt_val is a special value cell returned when the conditions are respected
 #' @param f_val is a special value cell returned when the conditions are not respected
 #' @details This function will return an error if number only comparative conditions are given in addition to having character values in the input dataframe.
+#' @examples
+#' 
+#' df1 <- data.frame(c(1, 2, 4), c("a", "a", "zu"))
+#' 
+#' print(see_df(df=df1, condition_l=c("nchar"), val_l=list(c(1))))
+#' 
+#'     X1    X2
+#' 1 TRUE  TRUE
+#' 2 TRUE  TRUE
+#' 3 TRUE FALSE
+#' 
+#' print(see_df(df=df1, condition_l=c("=="), val_l=list(c("a", 1))))
+#' 
+#'     X1    X2
+#' 1  TRUE  TRUE
+#' 2 FALSE  TRUE
+#' 3 FALSE FALSE
+#'
+#' 
+#' print(see_df(df=df1, condition_l=c("nchar"), val_l=list(c(1, 2))))
+#' 
+#'     X1   X2
+#' 1 TRUE TRUE
+#' 2 TRUE TRUE
+#' 3 TRUE TRUE
+#'
+#' print(see_df(df=df1, condition_l=c("not_reg"), val_l=list("[a-z]")))
+#' 
+#'     X1    X2
+#' 1 TRUE FALSE
+#' 2 TRUE FALSE
+#' 3 TRUE FALSE
 #' @export
 
 see_df <- function(df, condition_l, val_l, conjunction_l=c(), rt_val=T, f_val=F){
@@ -1435,7 +1585,7 @@ see_df <- function(df, condition_l, val_l, conjunction_l=c(), rt_val=T, f_val=F)
 
         df_rtnl <- data.frame(matrix(f_val, ncol=ncol(df), nrow=nrow(df)))
 
-        all_op <- c("==", ">", "<", "!=", "%%")
+        all_op <- c("==", ">", "<", "!=", "%%", "reg", "not_reg", "sup_nchar", "inf_nchar", "nchar")
 
         for (I in 1:ncol(df)){
 
@@ -1511,9 +1661,7 @@ see_df <- function(df, condition_l, val_l, conjunction_l=c(), rt_val=T, f_val=F)
 
                                         }
 
-                                }
-
-                                if (condition_l[t] == ">" & already == 0){
+                                } else if (condition_l[t] == ">" & already == 0){
 
                                         if (all(df[i, I] > unlist(val_l[t])) == T){
 
@@ -1575,9 +1723,7 @@ see_df <- function(df, condition_l, val_l, conjunction_l=c(), rt_val=T, f_val=F)
 
                                         }
 
-                                }
-
-                                if (condition_l[t] == "<" & already == 0){
+                                } else if (condition_l[t] == "<" & already == 0){
 
                                         if (all(df[i, I] < unlist(val_l[t]))){
 
@@ -1639,9 +1785,7 @@ see_df <- function(df, condition_l, val_l, conjunction_l=c(), rt_val=T, f_val=F)
 
                                         }
 
-                                }
-
-                                if (condition_l[t] == "!=" & already == 0){
+                                } else if (condition_l[t] == "!=" & already == 0){
 
                                         if (!(df[i, I] %in% unlist(val_l[t])) == T){
 
@@ -1703,11 +1847,321 @@ see_df <- function(df, condition_l, val_l, conjunction_l=c(), rt_val=T, f_val=F)
 
                                         }
 
-                                }
-
-                                if (condition_l[t] == "%%" & already == 0){
+                                } else if (condition_l[t] == "%%" & already == 0){
 
                                         if (sum(df[i, I] %% unlist(val_l[t])) == 0){
+
+                                                checked_l <- append(checked_l, T)
+
+                                                if (length(condition_l) > 1 & t > 1){
+
+                                                        bfr <- conjunction_l[previous:t]
+
+                                                        if (t == length(condition_l)){
+
+                                                                if (length(checked_l) == length(bfr)){
+
+                                                                        already <- 1
+
+                                                                        df_rtnl[i, I] <- rt_val
+
+                                                                }
+
+                                                        }else if (conjunction_l[t] == "|"){
+
+                                                                if (length(checked_l) == length(bfr)){
+
+                                                                        already <- 1
+
+                                                                        df_rtnl[i, I] <- rt_val
+
+                                                                }
+
+                                                        }
+
+                                                }else if (length(condition_l) == 1){
+
+                                                        df_rtnl[i, I] <- rt_val
+
+                                                }else {
+
+                                                        if (conjunction_l[1] == "|"){
+
+                                                                df_rtnl[i, I] <- rt_val
+
+                                                                checked_l <- c()
+
+                                                        }
+
+                                                }
+
+                                        }
+
+                                        if (t <= length(conjunction_l)){ 
+
+                                                if (conjunction_l[t] == "|"){
+
+                                                        checked_l <- c()
+
+                                                        previous = t + 1 
+
+                                                }
+
+                                        }
+
+                                } else if (condition_l[t] == "reg" & already == 0){
+
+                                        if (str_detect(df[i, I], unlist(val_l[t]))){
+
+                                                checked_l <- append(checked_l, T)
+
+                                                if (length(condition_l) > 1 & t > 1){
+
+                                                        bfr <- conjunction_l[previous:t]
+
+                                                        if (t == length(condition_l)){
+
+                                                                if (length(checked_l) == length(bfr)){
+
+                                                                        already <- 1
+
+                                                                        df_rtnl[i, I] <- rt_val
+
+                                                                }
+
+                                                        }else if (conjunction_l[t] == "|"){
+
+                                                                if (length(checked_l) == length(bfr)){
+
+                                                                        already <- 1
+
+                                                                        df_rtnl[i, I] <- rt_val
+
+                                                                }
+
+                                                        }
+
+                                                }else if (length(condition_l) == 1){
+
+                                                        df_rtnl[i, I] <- rt_val
+
+                                                }else {
+
+                                                        if (conjunction_l[1] == "|"){
+
+                                                                df_rtnl[i, I] <- rt_val
+
+                                                                checked_l <- c()
+
+                                                        }
+
+                                                }
+
+                                        }
+
+                                        if (t <= length(conjunction_l)){ 
+
+                                                if (conjunction_l[t] == "|"){
+
+                                                        checked_l <- c()
+
+                                                        previous = t + 1 
+
+                                                }
+
+                                        }
+
+                                }  else if (condition_l[t] == "not_reg" & already == 0){
+
+                                        if ((str_detect(df[i, I], unlist(val_l[t]))) == F ){
+
+                                                checked_l <- append(checked_l, T)
+
+                                                if (length(condition_l) > 1 & t > 1){
+
+                                                        bfr <- conjunction_l[previous:t]
+
+                                                        if (t == length(condition_l)){
+
+                                                                if (length(checked_l) == length(bfr)){
+
+                                                                        already <- 1
+
+                                                                        df_rtnl[i, I] <- rt_val
+
+                                                                }
+
+                                                        }else if (conjunction_l[t] == "|"){
+
+                                                                if (length(checked_l) == length(bfr)){
+
+                                                                        already <- 1
+
+                                                                        df_rtnl[i, I] <- rt_val
+
+                                                                }
+
+                                                        }
+
+                                                }else if (length(condition_l) == 1){
+
+                                                        df_rtnl[i, I] <- rt_val
+
+                                                }else {
+
+                                                        if (conjunction_l[1] == "|"){
+
+                                                                df_rtnl[i, I] <- rt_val
+
+                                                                checked_l <- c()
+
+                                                        }
+
+                                                }
+
+                                        }
+
+                                        if (t <= length(conjunction_l)){ 
+
+                                                if (conjunction_l[t] == "|"){
+
+                                                        checked_l <- c()
+
+                                                        previous = t + 1 
+
+                                                }
+
+                                        }
+
+                                }  else if (condition_l[t] == "sup_nchar" & already == 0){
+
+                                        if (nchar(as.character(df[i, I])) > unlist(val_l[t])){
+
+                                                checked_l <- append(checked_l, T)
+
+                                                if (length(condition_l) > 1 & t > 1){
+
+                                                        bfr <- conjunction_l[previous:t]
+
+                                                        if (t == length(condition_l)){
+
+                                                                if (length(checked_l) == length(bfr)){
+
+                                                                        already <- 1
+
+                                                                        df_rtnl[i, I] <- rt_val
+
+                                                                }
+
+                                                        }else if (conjunction_l[t] == "|"){
+
+                                                                if (length(checked_l) == length(bfr)){
+
+                                                                        already <- 1
+
+                                                                        df_rtnl[i, I] <- rt_val
+
+                                                                }
+
+                                                        }
+
+                                                }else if (length(condition_l) == 1){
+
+                                                        df_rtnl[i, I] <- rt_val
+
+                                                }else {
+
+                                                        if (conjunction_l[1] == "|"){
+
+                                                                df_rtnl[i, I] <- rt_val
+
+                                                                checked_l <- c()
+
+                                                        }
+
+                                                }
+
+                                        }
+
+                                        if (t <= length(conjunction_l)){ 
+
+                                                if (conjunction_l[t] == "|"){
+
+                                                        checked_l <- c()
+
+                                                        previous = t + 1 
+
+                                                }
+
+                                        }
+
+                                }  else if (condition_l[t] == "inf_nchar" & already == 0){
+
+                                        if (nchar(as.character(df[i, I])) < unlist(val_l[t])){
+
+                                                checked_l <- append(checked_l, T)
+
+                                                if (length(condition_l) > 1 & t > 1){
+
+                                                        bfr <- conjunction_l[previous:t]
+
+                                                        if (t == length(condition_l)){
+
+                                                                if (length(checked_l) == length(bfr)){
+
+                                                                        already <- 1
+
+                                                                        df_rtnl[i, I] <- rt_val
+
+                                                                }
+
+                                                        }else if (conjunction_l[t] == "|"){
+
+                                                                if (length(checked_l) == length(bfr)){
+
+                                                                        already <- 1
+
+                                                                        df_rtnl[i, I] <- rt_val
+
+                                                                }
+
+                                                        }
+
+                                                }else if (length(condition_l) == 1){
+
+                                                        df_rtnl[i, I] <- rt_val
+
+                                                }else {
+
+                                                        if (conjunction_l[1] == "|"){
+
+                                                                df_rtnl[i, I] <- rt_val
+
+                                                                checked_l <- c()
+
+                                                        }
+
+                                                }
+
+                                        }
+
+                                        if (t <= length(conjunction_l)){ 
+
+                                                if (conjunction_l[t] == "|"){
+
+                                                        checked_l <- c()
+
+                                                        previous = t + 1 
+
+                                                }
+
+                                        }
+
+                                }
+
+                                if (condition_l[t] == "nchar" & already == 0){
+
+                                        if (nchar(as.character(df[i, I])) %in% unlist(val_l[t])){
 
                                                 checked_l <- append(checked_l, T)
 
@@ -1779,33 +2233,23 @@ see_df <- function(df, condition_l, val_l, conjunction_l=c(), rt_val=T, f_val=F)
 
 }
 
-#' days_from_month
+#' bsx_year 
 #'
-#' Allow to find the number of days month from a month date, take in count leap year 
-#' @param date_ is the input date
-#' @param sep_ is the separator of the input date
+#' Get if the year is leap
+#'
+#' @param year is the input year
+#' 
+#' @examples
+#'
+#' print(leap_yr(year=2024))
+#' 
+#' [1] TRUE
 #' @export
 
-days_from_month <- function(date_, sep_){
-  
-  can.be.numeric <- function(x) {
-    
-    numNAs <- sum(is.na(x))
-    
-    numNAs_new <- suppressWarnings(sum(is.na(as.numeric(x))))
-    
-    return(numNAs_new == numNAs)
-    
-  }
-  
-  x <- unlist(str_split(date_, sep_))
-  
-  month <- x[2]
+leap_yr <- function(year){
 
-  year <- x[length(x)]
-  
-  year <- as.numeric(year)
-  
+  if (year == 0){ return(F) }
+
   if (year %% 4 == 0){
     
     if (year %% 100 == 0){
@@ -1831,752 +2275,427 @@ days_from_month <- function(date_, sep_){
     bsx <- F
     
   }
-  
-  l_nm <- c(31, 00, 31, 30, 31, 30, 31, 31,
-            30, 31, 30, 31)
-  
-  if (can.be.numeric(month) == T){
-    
-    nm <- as.numeric(month)
-    
-    month <- dialect[nm]
-    
-    indx <- match(month, dialect)
-    
-    rtnl <- l_nm[indx]
-    
-  }else{
-    
-    indx <- match(month, dialect)
-    
-    rtnl <- l_nm[indx]
-    
-  }
-  
-  if (rtnl == 00){
-    
-    if (bsx == T){
-      
-      rtnl <- 29
-      
-    }else{
-      
-      rtnl <- 28
-      
-    }
-    
-  }
-  
-  return(rtnl)
-  
+
+  return(bsx)
+
 }
 
-#' vec_in_df
+#' is_divisible
 #'
-#' Allow to see if vectors are present in a dataframe
-#'ex: 1, 2, 1
-#'    3, 4, 1
-#'    1, 5, 8
-#' the vector c(4, 1) with the coefficient 1 and the start position at the second column is containded in the dataframe
-#' @param df_ is the input dataframe
-#' @param vec_l is a list the vectors
-#' @param coeff_ is the related coefficient of the vector
-#' @param strt_l is a vector containing the start position for each vector
-#' @param distinct is a value you are sure is not in df_, defaults to "NA" 
+#' Takes a vector as an input and returns all the elements that are divisible by all choosen numbers from another vector.
+#'
+#' @param inpt_v is the input vector
+#' @param divisible_v is the vector containing all the numbers that will try to divide those contained in inpt_v
+#' @examples
+#'
+#'  print(is_divisible(inpt_v=c(1:111), divisible_v=c(2, 4, 5)))
+#'
+#'  [1]  20  40  60  80 100
+#'
 #' @export
 
-vec_in_df <- function(df_, vec_l, coeff_, strt_l, distinct="NA"){
+is_divisible <- function(inpt_v=c(), divisible_v=c()){
 
-        rtnl_f <- c()
+        cnt = 1
 
-        rtnl_pos_f <- c()
+        while (length(inpt_v) > 0 & cnt < (length(divisible_v) + 1)){
 
-        hmn_lf <- c()
+                inpt_v <- inpt_v[(inpt_v %% divisible_v[cnt]) == 0]
 
-        for (I in 1:length(vec_l)){
-
-                vec <- unlist(vec_l[I])
-
-                rtnl <- c()
-
-                rtnl_pos <- c()
-
-                hmn_l <- c()
-                
-                indx_l <- which(df_[1:nrow(df_), strt_l[I]] == vec[1])
-
-                btm = indx_l[1] 
-
-                top = indx_l[length(indx_l)]
-
-                indx_l <- which(df_[btm:top, strt_l[I]] == vec[1])
-
-                v_previous <- indx_l
-
-                if (length(indx_l) > 0){
-
-                        rtnl <- append(rtnl, vec[1])
-
-                }else{
-
-                        rtnl <- append(rtnl, distinct)
-
-                }
-
-                y = 1
-
-                while (y <= length(indx_l)){
-
-                        if (!(indx_l[y] %in% v_previous) == T){
-
-                                indx_l <- indx_l[-y]
-
-                        }
-
-                        y = y + 1
-
-                }
-
-                ti = 2
-
-                for (i in (strt_l[I]+1):(strt_l[I]+length(vec) - 1)){ 
-
-                        if (btm + coeff_[I] > 0 & btm + coeff_[I] <= nrow(df_)){
-
-                                btm = btm + coeff_[I]
-                       
-                        }else{
-
-                                btm = 1
-
-                        }
-
-                        if (top + coeff_[I] > 0 & top + coeff_[I] <= nrow(df_)){
-
-                                top = top + coeff_[I]
-
-                        }else{ 
-
-                                top = nrow(df_) 
-
-                        }
-
-                        indx_l <- which(df_[btm:top, i] == vec[ti]) 
-
-                        if (length(indx_l) > 0){
-
-                                rtnl <- append(rtnl, vec[ti])
-
-                        }else{
-
-                                rtnl <- append(rtnl, distinct)
-
-                        }
-
-                        y = 1
-
-                        while (y <= length(indx_l)){
-
-                                if (!((indx_l[y] - coeff_[I]) %in% v_previous) == T){ 
-
-                                        indx_l <- indx_l[-y]
-
-                                }
-
-                                y = y + 1
-
-                        }
-
-                        v_previous <- indx_l
-
-                        ti = ti + 1
-
-                }
-
-                if (all(rtnl == vec) == T){
-
-                        hmn_l <- append(hmn_l, length(indx_l))
-
-                        for (t in 1:length(indx_l)){
-
-                                rtnl_pos <- append(rtnl_pos, (indx_l[t] - coeff_[I] * (length(vec) - 1)))
-
-                                rtnl_pos <- append(rtnl_pos, indx_l[t])
-
-                        }
-
-                        hmn_lf <- append(hmn_lf, hmn_l)
-
-                        rtnl_pos_f <- append(rtnl_pos_f, rtnl_pos)
-
-                        rtnl_pos_f <- append(rtnl_pos_f, "|")
-
-                        rtnl_f <- append(rtnl_f, T)
-
-                }else{
-
-                        rtnl_f <- append(rtnl_f, F)
-
-                        rtnl_pos_f <- append(rtnl_pos_f, "|")
-
-                }
+                cnt = cnt + 1
 
         }
 
-        return(list(rtnl_f, rtnl_pos_f, hmn_lf))
-        
+        return(inpt_v)
+
 }
 
-#returns the number of row that contains vectors (multiple in a list), coeff and strt_l may vary 
-#distinct is the value you are sure is not contained in the matrix 
-
-#' closest_date
+#' isnt_divisible
 #'
-#' return the closest dates from a vector compared to the input date
-#' @param date_ is the input date
-#' @param vec is a vector containing the dates to be compared to the input date
-#' @param frmt is the format of the input date, (deault set to "snhdmy" (second, minute, hour, day, month, year), so all variable are taken in count),
-#' if you only want to work with standard date for example change this variable to "dmy"
-#' @param sep_ is the separator for the input date
-#' @param sep_vec is the separator for the dates contained in vec
-#' @param only_ is can be changed to "+" or "-" to repectively only return the higher dates and the lower dates (default set to "both")
-#' @param head is the number of dates that will be returned (default set to NA so all dates in vec will be returned)
+#' Takes a vector as an input and returns all the elements that are not divisible by all choosen numbers from another vector.
+#'
+#' @param inpt_v is the input vector
+#' @param divisible_v is the vector containing all the numbers that will try to divide those contained in inpt_v
+#' @examples
+#'
+#'  print(isnt_divisible(inpt_v=c(1:111), divisible_v=c(2, 4, 5)))
+#'
+#'  [1]   1   3   7   9  11  13  17  19  21  23  27  29  31  33  37  39  41  43  47
+#' [20]  49  51  53  57  59  61  63  67  69  71  73  77  79  81  83  87  89  91  93
+#' [39]  97  99 101 103 107 109 111
+#'
 #' @export
 
-closest_date <- function(vec, date_, frmt, sep_="/", sep_vec="/", only_="both", head=NA){
+isnt_divisible <- function(inpt_v=c(), divisible_v=c()){
 
-        date_ <- unlist(str_split(date_, sep_))
+        cnt = 1
 
-        lc <- c("s", "n", "h", "d", "m", "y")
+        while (length(inpt_v) > 0 & cnt < (length(divisible_v) + 1)){
 
-        l_limit_max <- c(60, 60, 24, "check_l_nm", 12, 9999999)
+                inpt_v <- inpt_v[(inpt_v %% divisible_v[cnt]) != 0]
 
-        l_nm <- c(31, 28, 31, 30, 31, 30, 31, 31,
-            30, 31, 30, 31)
-
-        second_ <- NA
-
-        min_ <- NA
-
-        hour_ <- NA
-
-        day_ <- NA
-
-        month_ <- NA
-
-        year_ <- NA
-
-        l2 <- c()
-
-        l <- c(second_, min_, hour_, day_, month_, year_)
-
-        deb <- match(str_sub(frmt, 1, 1), lc)
-
-        fin <- match(str_sub(frmt, nchar(frmt), nchar(frmt)), lc)
-
-        df <- data.frame(matrix(NA, nrow=length(vec), ncol=(nchar(frmt) - 1)))
-
-        df_bool <- data.frame(matrix(NA, nrow=length(vec), ncol=(nchar(frmt) - 1)))
-       
-        for (I in 1:(length(date_)-1)){
-
-                cur <- as.numeric(date_[(length(date_) - (I - 1))])
-
-                idx <- fin - (I - 1)
-
-                val <- lc[idx]
-
-                if (val == "m"){
-
-                        m_ <- cur
-
-                }
-
-                if (l_limit_max[(idx-1)] == "check_l_nm"){
-
-                        multiplicator <- l_nm[cur]
-
-                }else{
-
-                        multiplicator <- as.numeric(l_limit_max[idx-1])
-
-                }
-          
-                to_diff <- cur * multiplicator + as.numeric(date_[(length(date_) - I)])
-                
-                for (i in 1:length(vec)){
-                  
-                        to_compare <- as.numeric(unlist(str_split(vec[i], sep_vec))[(length(date_) - (I-1))]) * multiplicator + as.numeric(unlist(str_split(vec[i], sep_vec))[(length(date_) - I)]) 
-                        
-                        df[i, I] <- abs(to_diff - to_compare)
-                        
-                        if ((to_compare - to_diff) < 0){
-                          
-                                df_bool[i, I] <- "-"
-
-                        }else{
-                          
-                                df_bool[i, I] <- "+"
-
-                        }
-
-                }
-                
-        }
-
-        if (is.na(head) == F){
-
-                jsq <- head
-
-        }else{
-
-                jsq <- nrow(df)
+                cnt = cnt + 1
 
         }
 
-        if (only_ == "+"){ 
+        return(inpt_v)
 
-                df <- df[grep(TRUE, df_bool[, 1]=="+"), ]
+}
 
-        }
+#' dcr_untl 
+#' 
+#' Allow to get the final value of a incremental or decremental loop. 
+#'
+#' @param strt_val is the start value
+#' @param cr_val is the incremental (or decremental value)
+#' @param stop_val is the value where the loop has to stop
+#' @examples
+#'
+#' print(dcr_untl(strt_val=50, cr_val=-5, stop_val=5))
+#'
+#' [1] 9
+#'
+#' print(dcr_untl(strt_val=50, cr_val=5, stop_val=450))
+#'
+#' [1] 80
+#' 
+#' @export
 
-        if (only_ == "-"){ 
+dcr_untl <- function(strt_val, cr_val, stop_val=0){
 
-                df <- df[grep(TRUE, df_bool[, 1]=="-"), ]
+        cnt = 1
 
-        }
+        if (cr_val < 0){
 
-        fundamental_bool <- df_bool[, 1]
-        
-        rtnl <- c()
-        
-        for (I in 1:nrow(df)){
-          
-          dfb <- df
-          
-          df_boolb <- df_bool
-          
-          indx_l <- c()
-          
-          val_tp <- c(1:nrow(df))
+            while ((strt_val + cr_val) > (stop_val)){
 
-          for (i in 1:ncol(df)){
-          
-            min_l <- which(min(dfb[, i]) == dfb[,i])
-          
-            val_tp <- val_tp[min_l]
+                strt_val = strt_val + cr_val
 
-            indx_l <- c()
+                cnt = cnt + 1
 
-            for (t in 1:length(min_l)){
-             
-              if (df_bool[min_l[t], i] != df_bool[min_l[t], 1]){
-                
-                indx_l <- append(indx_l, val_tp[t], after=0)
-                
-              }else{
-                
-                indx_l <- append(indx_l, val_tp[t])
-                
-              }
-            
             }
 
-            min_lb <- min_l
+        }else{
 
-            dfb <- dfb[min_l, ]
-            
-          }
-          
-          rtnl <- append(rtnl, indx_l[1])
-          
-          df[indx_l[1], ] <- max(df[,1])
-           
+            while ((strt_val + cr_val) < (stop_val)){
+
+                strt_val = strt_val + cr_val
+
+                cnt = cnt + 1
+
+            }
+
         }
-        
-  return(rtnl[1:jsq])
-        
+
+        return(cnt)
+
 }
 
-#' change_date
+#' dcr_val
 #'
-#' Allow to add to a date second-minute-hour-day-month-year
-#' @param date_ is the input date
-#' @param sep_ is the date separator
-#' @param day_ is the day to add (can be negative)
-#' @param month_ is the month to add (can be negative)
-#' @param year_ is the year to add (can be negative)
-#' @param hour_ is the hour to add (can be negative)
-#' @param min_ is the minute to add (can be negative)
-#' @param second_ is the second to add (can be negative)
-#' @param frmt is the format of the input date, (deault set to "snhdmy" (second, minute, hour, day, month, year), so all variable are taken in count),
-#' if you only want to work with standard date for example change this variable to "dmy"
+#' Allow to get the end value after an incremental (or decremental loop)
+#' 
+#' @param strt_val is the start value
+#' @param cr_val is the incremental or decremental value
+#' @param stop_val is the value the loop has to stop
+#' @examples
+#' @examples
+#'
+#' print(dcr_val(strt_val=50, cr_val=-5, stop_val=5))
+#'
+#' [1] 5
+#' 
+#' print(dcr_val(strt_val=47, cr_val=-5, stop_val=5))
+#' 
+#' [1] 7
+#' 
+#' print(dcr_val(strt_val=50, cr_val=5, stop_val=450))
+#' 
+#' [1] 450
+#' 
+#' print(dcr_val(strt_val=53, cr_val=5, stop_val=450))
+#' 
+#' [1] 448
+#' 
 #' @export
 
-change_date <- function(date_, sep_, day_  = NA, month_ = NA, 
-                        year_ = NA, hour_ = NA, min_ = NA, 
-                        second_ = NA, frmt="snhdmy"){
-  
-  frmt_l <- unlist(str_split(frmt, ""))
-  
-  date_ <- unlist(str_split(date_, sep_))
-  
-  l_nm <- c(31, 28, 31, 30, 31, 30, 31, 31,
-            30, 31, 30, 31)
-  
-  l_nmc1 <- c(31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365)
-  
-  l_nmc2 <- c(31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366)
-  
-  l <- c(second_, min_, hour_, day_, month_, year_)
-  
-  lc <- c("s", "n", "h", "d", "m", "y")
-  
-  deb <- match(frmt_l[1], lc)
-  
-  l_limit_min <- c()
-  
-  l_limit_max <- c()
-  
-  l_limit_min_pre <- c(0, 0, 0, 1, 1, -999999)
-  
-  l_limit_max_pre <- c(60, 60, 24, "check_l_nm", 12, 9999999)
-  
-  for (i in deb:(deb+nchar(frmt) - 1)){
-    
-    l_limit_min <- append(l_limit_min, l_limit_min_pre[i])
-    
-    l_limit_max <- append(l_limit_max, l_limit_max_pre[i])
-    
-  }
-  
-  rtnl <- c() 
-  
-  year <- NA
-  
-  mois <- NA
-  
-  t = 1
-  
-  for (i in deb:(deb + nchar(frmt) - 1)){
-    
-    rtnl <- append(rtnl, l[i])
-    
-    if (lc[i] == "m"){
-      
-      mois <- as.numeric(date_[t])
-      
-    }
-    
-    if (lc[i] == "y"){
-      
-      year <- as.numeric(date_[t])
-      
-    }
-    
-    t = t + 1
-    
-  }
-  
-  if (is.na(year) == F){
-    
-    if (year %% 4 == 0){
-      
-      if (year %% 100 == 0){
-        
-        if (year %% 400 == 0){
-          
-          l_nm[2] <- 29
-          
-          l_nmc <- l_nmc2
-          
+dcr_val <- function(strt_val, cr_val, stop_val=0){
+
+        cnt = 1
+
+        if (cr_val < 0){
+
+            while ((strt_val + cr_val) > (stop_val + cr_val / 2)){
+
+                strt_val = strt_val + cr_val
+
+                cnt = cnt + 1
+
+            }
+
         }else{
-          
-          l_nm[2] <- 28
-          
-          l_nmc <- l_nmc1
-          
+
+            while ((strt_val + cr_val) < (stop_val + cr_val / 2)){
+
+                strt_val = strt_val + cr_val
+
+                cnt = cnt + 1
+
+            }
+
         }
-        
-      }else{
-        
-        l_nm[2] <- 29
-        
-        l_nmc <- l_nmc2
-        
-      }
-      
-    }else{
-      
-      l_nm[2] <- 28
-      
-      l_nmc <- l_nmc1
-      
-    }
-    
-  }else{
-    
-    l_nm[2] <- 28
-    
-    l_nmc <- l_nmc1
-    
+
+        return(strt_val)
+
+}
+
+#' converter_date
+#' 
+#' Allow to convert any date like second/minute/hour/day/month/year to either second, minute...year. The input date should not necessarily have all its time units (second, minute...) but all the time units according to a format. Example: "snhdmy" is for second, hour, minute, day, month, year. And "mdy" is for month, day, year.
+#'
+#' @param inpt_date is the input date
+#' @param convert_to is the time unit the input date will be converted ("s", "n", "h", "d", "m", "y")
+#' @param frmt is the format of the input date
+#' @param sep_n is the separator of the input date. For example this input date "12-07-2012" has "-" as a separator
+#' @examples 
+#'
+#' print(converter_date(inpt_date="14-04-11-2024", sep_="-", frmt="hdmy", convert_to="m"))
+#' 
+#' [1] 24299.15
+#' 
+#' print(converter_date(inpt_date="14-04-11-2024", sep_="-", frmt="hdmy", convert_to="y"))
+#' 
+#' [1] 2024.929
+#'
+#' print(converter_date(inpt_date="14-04-11-2024", sep_="-", frmt="hdmy", convert_to="s"))
+#' 
+#' [1] 63900626400
+#'
+#' print(converter_date(inpt_date="63900626400", sep_="-", frmt="s", convert_to="y"))
+#'
+#' [1] 2024.929
+#'
+#' print(converter_date(inpt_date="2024", sep_="-", frmt="y", convert_to="s"))
+#'
+#' [1] 63873964800
+#' 
+#' @export
+
+converter_date <- function(inpt_date, convert_to, frmt="snhdmy", sep_="-"){
+
+  is_divisible <- function(inpt_v=c(), divisible_v=c()){
+
+        cnt = 1
+
+        while (length(inpt_v) > 0 & cnt < (length(divisible_v) + 1)){
+
+                inpt_v <- inpt_v[(inpt_v %% divisible_v[cnt]) == 0]
+
+                cnt = cnt + 1
+
+        }
+
+        return(inpt_v)
+
   }
-  
-  date_ <- as.numeric(date_)
-  
-  rtnl <- as.numeric(rtnl)
-  
-  for (i in 1:length(rtnl)){
-    
-    add_up <- abs(rtnl[i])
-    
-    rtnl[i] <- date_[i] + rtnl[i]
-    
-    if (rtnl[i] == l_limit_max[i] & str_sub(frmt, i, i) %in% c("h", "s", "n")){
-      
-      rtnl[i] <- 0
-      
-      if (i + 1 <= length(date_)){ date_[i+1] <- date_[i+1] + 1 }
-      
-    }
-    
-    if (l_limit_max[i] == "check_l_nm"){
-      
-      if (rtnl[i] < l_limit_min[i]){
-        
-        t = mois
-        
-        t2 = 1
-        
-        t3 = 1
-        
-        status <- 1
-        
-        all_b <- 0
-        
-        divider = l_nmc[12] * (t2 - 1) + (l_nmc[t] - l_nmc[mois - 1] * (status))  
-        
-        add_up <- abs(l_nmc[mois] - (l_nmc[mois] - rtnl[i]))
-        
-        reste <- add_up %% l_nm[mois]
-        
-        while (add_up %/% divider > 0){
-          
-          reste <- add_up %% l_nm[mois]
-          
-          if (t + 1 > (length(l_nmc) * t2)){
+
+  leap_yr <- function(year){
+
+          if (year == 0){ return(F) }
+
+          if (year %% 4 == 0){
             
-            if (status == 1){
+            if (year %% 100 == 0){
               
-              status2 = 1
-              
-              all_b <- l_nmc[t] - l_nmc[mois - 1] * status
-              
+              if (year %% 400 == 0){
+                
+                bsx <- T
+                
               }else{
                 
-                status2=0
-                
-                t2 = t2 + 1
+                bsx <- F
                 
               }
-              
-              status <- 0
-              
-              t = 1
-            
-          }
-          
-          divider = l_nmc[12] * (t2 - 1) + (l_nmc[t] - l_nmc[mois - 1] * (status))  
-          
-          t = t + 1
-          
-          t3 = t3 + 1
-          
-        } 
-        
-        rtnl[i] <- l_nm[mois] - reste
-        
-        if (i + 1 <= length(date_)){
-
-          if (t3 == 1){t3 = t3 + 1}
-                    
-          date_[i + 1] <- date_[i + 1] - (t3 - 1)
-          
-        }
-        
-      }
-      
-      if (rtnl[i] > l_nm[mois]){
-        
-        status <- 1
-        
-        status2 <- 0
-        
-        t = mois
-        
-        t2 = 1
-        
-        t3 = 1
-        
-        divider = l_nmc[12] * (t2 - 1) + (l_nmc[t] - l_nmc[mois - 1] * (status))  
-        
-        reste <- add_up %% l_nmc[t]
-        
-        all_b <- 0
-        
-        while (rtnl[i] %/% divider > 0){
-          
-          reste <- rtnl[i] %% divider
-          
-          if (t + 1 > (length(l_nmc) * t2)){
-            
-            if (status == 1){
-              
-              status2 = 1
-              
-              all_b <- l_nmc[t] - l_nmc[mois - 1] * status
               
             }else{
-                
-              status2=0
               
-              t2 = t2 + 1
+              bsx <- T
               
-              }
-            
-            status <- 0
-            
-            t = 1
-            
-          }
-          
-          t = t + 1
-          
-          t3 = t3 + 1
-          
-          divider = l_nmc[12] * (t2 - 1) + (l_nmc[t] - l_nmc[mois - 1] * status) + status2 * all_b
-            
-        }
-        
-        rtnl[i] <- reste
-        
-        if (i + 1 <= length(date_)){
-          
-          if (t3 == 1){t3 = t3 + 1}
-          
-          date_[i + 1] <- date_[i + 1] + (t3 - 1)
-          
-        }
-        
-      }
-      
-    }else{
-      
-      if (rtnl[i] < l_limit_min[i]){
-        
-        t = 1
-        
-        add_up <- as.numeric(l_limit_max[i]) - (as.numeric(l_limit_max[i]) + rtnl[i])
-        
-        reste <- add_up %% (as.numeric(l_limit_max[i]) * t)
-        
-        while (add_up %/% (as.numeric(l_limit_max[i]) * t) > 0){
-          
-          reste <- add_up %% (as.numeric(l_limit_max[i]) * t)
-          
-          t = t + 1
-          
-        } 
-        
-        if (str_sub(frmt, i, i) == "m"){
-          
-          rtnl[i] <- as.numeric(l_limit_max[i]) - reste
-          
-        }else{
-          
-          if (reste == 0){
-          
-            rtnl[i] <- 0
-            
-            t = t - 1
+            }
             
           }else{
             
-            rtnl[i] <- as.numeric(l_limit_max[i]) - reste 
-          
+            bsx <- F
+            
           }
-          
+
+          return(bsx)
+
+  }
+
+  inpt_date <- unlist(strsplit(x=inpt_date, split=sep_)) 
+
+  stay_date_v <- c("s", "n", "h", "d", "m", "y")
+
+  stay_date_val <- c(0, 0, 0, 0, 0, 0)
+
+  frmt <- unlist(strsplit(x=frmt, split=""))
+
+  for (el in 1:length(frmt)){
+
+          stay_date_val[grep(pattern=frmt[el], x=stay_date_v)] <- as.numeric(inpt_date[el]) 
+
+  }
+
+  l_dm1 <- c(31, 28, 31, 30, 31, 30, 31, 31,
+            30, 31, 30, 31)
+
+  l_dm2 <- c(31, 29, 31, 30, 31, 30, 31, 31,
+            30, 31, 30, 31)
+
+  if (!(leap_yr(year=stay_date_val[6]))){
+
+        l_dm <- l_dm1
+
+  }else if (stay_date_val[6] == 0){
+
+        l_dm <- c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+  }else{
+
+        l_dm <- l_dm2
+
+  }
+
+  may_bsx_v <- c(1:stay_date_val[6])
+
+  may_bsx_v <- may_bsx_v[may_bsx_v > 0] 
+
+  may_bsx_v <- may_bsx_v[(may_bsx_v %% 4) == 0]
+
+  val_mult <- c((1 / 86400), (1 / 1440), (1/24), 1, 0, 365)
+
+  day_val = 0
+
+  for (dt in length(stay_date_val):1){
+
+        day_val = day_val + stay_date_val[dt] * val_mult[dt] 
+
+  }
+
+  day_val = day_val + length(may_bsx_v[(may_bsx_v %% 100) != 0]) + length(is_divisible(inpt_v=may_bsx_v, divisible_v=c(100, 400))) 
+
+  if (str_detect(string=stay_date_val[5], pattern="\\.")){
+
+          all_part <- as.numeric(unlist(strsplit(x=as.character(stay_date_val[5]), split="\\.")))
+
+          int_part <- all_part[1]
+
+          if (int_part != 0){
+
+                day_val = day_val + sum(l_dm[1:int_part])
+
+          }else{ int_part <- 1 }
+
+          day_val = day_val + l_dm1[int_part] * as.numeric(paste("0.", all_part[2], sep=""))
+
+  }else if (stay_date_val[5] != 0){
+
+        day_val = day_val + sum(l_dm1[1:stay_date_val[5]]) 
+
+  }
+
+  val_mult2 <- c(60, 60, 24, 1)
+
+  idx_convert <- grep(pattern=convert_to, x=stay_date_v)
+
+  if (idx_convert < 5){
+
+        for (i in 4:idx_convert){
+
+            day_val = day_val * val_mult2[i]
+
         }
-        
-        if (i + 1 <= length(date_)){
-          
-          date_[i + 1] <- date_[i + 1] - t
-          
-        }
-        
-      }
-      
-      if (rtnl[i] > as.numeric(l_limit_max[i])){
-        
-        t = 1
-        
-        reste <- rtnl[i] %% (as.numeric(l_limit_max[i]) * t)
-        
-        while (rtnl[i] %/% (as.numeric(l_limit_max[i]) * t) > 0){
-          
-          reste <- rtnl[i] %% (as.numeric(l_limit_max[i]) * t)
-          
-          t = t + 1
-          
-        } 
-        
-        if (str_sub(frmt, i, i) == "m"){
-          
-          rtnl[i] <- reste
-          
+
+        return(day_val)
+
+  }else{
+
+    year = 0
+
+    l_dm <- l_dm1
+
+    month = 0
+
+    bsx_cnt = 0
+
+    while ((day_val / sum(l_dm)) >= 1 ){
+
+        l_dmb <- l_dm
+
+        day_val2 = day_val
+
+        day_val = day_val - sum(l_dm)
+
+        month = month + 12
+
+        year = year + 1
+
+        if (!(leap_yr(year=year))){
+
+                l_dm <- l_dm1
+
         }else{
-          
-          rtnl[i] <- reste
-          
-        }
-        
-        if (i + 1 <= length(date_)){
-          
-          date_[i + 1] <- date_[i + 1] + (t-1)
-          
-        }
-        
-      }
-      
+
+                bsx_cnt = bsx_cnt + 1
+
+                l_dm <- l_dm2
+
+        } 
+
     }
-    
-  }
-  
-  for (i in 1:length(rtnl)){
-    
-    if (nchar(rtnl[i]) == 1){
-      
-      rtnl[i] <- paste0("0", rtnl[i])
-      
+
+    if (leap_yr(year=year)){
+
+        day_val = day_val - 1
+
     }
-    
+
+    cnt = 1
+
+    while ((day_val / l_dm[cnt]) >= 1){
+
+        day_val = day_val - l_dm[cnt]
+
+        month = month + 1
+
+        cnt = cnt + 1 
+
+    }
+
+    month = month + (day_val / l_dm[cnt])
+
+    if (convert_to == "m"){
+
+            return(month)
+
+    }else{
+
+            year = year + ((month - 12 * year) / 12)
+
+            return(year)
+
+    }
+
   }
-  
-  rtnl2 <- ""
-  
-  for (i in 1:length(rtnl)){ rtnl2 <- paste0(rtnl2, "-", rtnl[i]) }  
-  
-  rtnl2 <- str_sub(rtnl2, 2, nchar(rtnl2))
-  
-  return(rtnl2)
-  
+
 }
 
 #' pattern_gettr 
 #'
 #' Search for pattern(s) contained in a vector in another vector and return a list containing matched one (first index) and their position (second index) according to these rules:
 #' First case: Search for patterns strictly, it means that the searched pattern(s) will be matched only if the patterns containded in the vector that is beeing explored by the function are present like this c("pattern_searched", "other", ..., "pattern_searched") and not as c("other_thing pattern_searched other_thing", "other", ..., "pattern_searched other_thing") 
-#' Second case: It is the opposite to the first case, it means that if the pattern is partially present like in the first position and the last, it will be considered like a matched pattern
+#' Second case: It is the opposite to the first case, it means that if the pattern is partially present like in the first position and the last, it will be considered like a matched pattern. REGEX can also be used as pattern 
 #' @param word_ is the vector containing the patterns
 #' @param vct is the vector being searched for patterns
 #' @param occ a vector containing the occurence of the pattern in word_ to be matched in the vector being searched, if the occurence is 2 for the nth pattern in word_ and only one occurence is found in vct so no pattern will be matched, put "forever" to no longer depend on the occurence for the associated pattern
@@ -2584,7 +2703,16 @@ change_date <- function(date_, sep_, day_  = NA, month_ = NA,
 #' @param btwn is a vector containing the condition ("yes" to activate this option) meaning that if "yes", all elements between two matched patern in vct will be returned , so the patterns you enter in word_ have to be in the order you think it will appear in vct 
 #' @param all_in_word is a value (default set to "yes", "no" to activate this option) that, if activated, won't authorized a previous matched pattern to be matched again
 #' @param notatall is a string that you are sure is not present in vct
-#' REGEX can also be used as pattern 
+#' @examples
+#'
+#' print(pattern_gettr(word_=c("oui", "non", "erer"), vct=c("oui", "oui", "non", "oui", "non", "opp", "opp", "erer", "non", "ok"), occ=c(1, 2, 1), btwn=c("no", "yes", "no"), strict=c("no", "no", "ee")))
+#'
+#' [[1]]
+#' [1] 1 5 8
+#' 
+#' [[2]]
+#' [1] "oui"  "non"  "opp"  "opp"  "erer"
+#'
 #' @export
 
 pattern_gettr <- function(word_, vct, occ=c(1), strict, btwn, all_in_word="yes", notatall="###"){
@@ -2755,38 +2883,27 @@ pattern_gettr <- function(word_, vct, occ=c(1), strict, btwn, all_in_word="yes",
   
 }
 
-#' append_row
-#'
-#' @description Append the last row from dataframe to the another or same dataframe
-#' @param df_in is the dataframe from which the row will append to another or the same  dataframe
-#' @param df is the dataframe to which the row will append
-#' @param hmn is how many time the last row will be appended
-#' @param na_col is a vector containing the columns that won't append and will be replaced by another value (unique_do_not_know)
-#' @param unique_do_not_know is the value of the non appending column in the appending row
-#' @export
-
-append_row <- function(df_in, df, hmn=1, na_col=c(), unique_do_not_know=NA){
-
-        appender <- df_in[nrow(df), ]
-
-        appender[na_col] <- unique_do_not_know
-
-        for (i in 1:hmn){
-
-                df <- rbind(df, appender)
-
-        }
-
-  return(df)
-
-}
-
 #' see_file
 #'
 #' Allow to get the filename or its extension
+#' 
 #' @param string_ is the input string
 #' @param index_ext is the occurence of the dot that separates the filename and its extension
 #' @param ext is a boolean that if set to TRUE, will return the file extension and if set to FALSE, will return filename
+#' @examples
+#' 
+#' print(see_file(string_="file.abc.xyz"))
+#'
+#' [1] ".abc.xyz"
+#'
+#'  print(see_file(string_="file.abc.xyz", ext=F))
+#'
+#' [1] "file"
+#'
+#' print(see_file(string_="file.abc.xyz", index_ext=2))
+#' 
+#' [1] ".xyz"
+#' 
 #' @export
 
 see_file <- function(string_, index_ext=1, ext=T){
@@ -2892,10 +3009,20 @@ see_inside <- function(pattern_, path_=".", sep_=c(","), unique_sep="#####", rec
 #' val_replacer
 #' 
 #' Allow to replace value from dataframe to another one.
+#'
 #' @param df is the input dataframe
 #' @param val_replaced is a vector of the value(s) to be replaced
 #' @param val_replacor is the value that will replace val_replaced
-#' @param df_rpt is the replacement matrix and has to be the same dimension as df. Only the indexes that are equal to TRUE will be authorized indexes for the values to be replaced in the input matrix
+#' @examples
+#'
+#' print(val_replacer(df=data.frame(c(1, "oo4", T, F), c(T, F, T, T)), val_replaced=c(T), val_replacor="NA"))
+#'
+#'   c.1...oo4...T..F. c.T..F..T..T.
+#' 1                 1            NA
+#' 2               oo4         FALSE
+#' 3                NA            NA
+#' 4             FALSE            NA
+#' 
 #' @export
 
 val_replacer <- function(df, val_replaced, val_replacor=T, df_rpt=NA){
@@ -2904,20 +3031,8 @@ val_replacer <- function(df, val_replaced, val_replacor=T, df_rpt=NA){
     
       for (i2 in 1:length(val_replaced)){
         
-        if (is.na(df_rpt) == F){
+        vec_pos <- grep(val_replaced[i2], df[, i])
           
-          vec_pos <- grep(val_replaced[i2], df[, i])
-          
-        }else{
-          
-          vec_pos <- grep(val_replaced[i2], df[, i])
-          
-          vec_pos2 <- grep(T, df_rpt[i])
-          
-          vec_pos <- grep(T, (vec_pos==vec_pos2))
-          
-        }
-    
         df[vec_pos, i] <- val_replacor
     
       }
@@ -2930,32 +3045,34 @@ val_replacer <- function(df, val_replaced, val_replacor=T, df_rpt=NA){
 
 #' see_idx
 #'
-#' Allow to find the indexes of the elements of the first vector in the second. If the element(s) is not found, the element returned at the same index will be "FALSE".
+#' Returns a boolean vector to see if a set of elements contained in v1 is also contained in another vector (v2)
 #' @param v1 is the first vector
 #' @param v2 is the second vector
-#' @param exclude_val is a value you know is not present in the 2 vectors
-#' @param no_more is a boolean that, if set to TRUE, will remove all the first found value in the second vector after those has been found. It defaults to FALSE. 
+#' @examples
+#'
+#' print(see_idx(v1=c("oui", "non", "peut", "oo"), v2=c("oui", "peut", "oui")))
+#'
+#' [1]  TRUE FALSE  TRUE  FALSE
+#'
 #' @export
 
-see_idx <- function(v1, v2, exclude_val="######", no_more=F){
+see_idx <- function(v1, v2, exclude_val="######"){
  
   rtnl <- c()
  
   for (i in 1:length(v1)){
 
-    if (length(grep(v1[i], v2)) > 0){
+    if (length(grep(pattern=v1[i], x=v2)) > 0){
 
-            r_idx <- match(v1[i], v2)
+            r_idx <- T
 
     }else{
 
-            r_idx <- "F"
+            r_idx <- F
 
     }
 
-    rtnl <- append(rtnl, r_idx)
-    
-    if (no_more == T){ v2[rtnl[length(rtnl)]] <- exclude_val }
+    rtnl <- append(x=rtnl, values=r_idx)
     
   }
  
@@ -2963,49 +3080,7 @@ see_idx <- function(v1, v2, exclude_val="######", no_more=F){
  
 }
 
-#' date_sort
-#'
-#' Allow to ascendely or desendely sort dates in a vector.
-#' @param vec is the vector containing the dates.
-#' @param asc is a boolean variable, that if set to TRUE will sort the dates ascendely and descendely if set to FALSE
-#' @param sep is the separator of the date strings ex: "11-12-1998" the separator is "-"
-#' @export
-
-date_sort <- function(vec, asc=F, sep="-"){
- 
-  vec2 <- str_split(vec, sep)
- 
-  s_vec <- c()
- 
-  for (i in 1:length(vec)){
-    
-    s_vec <- append(s_vec, prod(as.numeric(unlist(vec2[i]))))
-    
-  }
- 
-  if (asc==T){
- 
-    rtnl <- sort(s_vec, decreasing=F)
- 
-  }else{
-    
-    rtnl <- sort(s_vec, decreasing=T)
-    
-  }
- 
-  s_vec_idx <- c()
- 
-  for (i in 1:length(s_vec)){
-    
-    s_vec_idx <- append(s_vec_idx, grep(rtnl[i], s_vec))
-    
-  }
- 
-  return(vec[s_vec_idx])
- 
-}
-
-#' file_rec2 
+#' fold_rec2 
 #' 
 #' Allow to find the directories and the subdirectories with a specified end and start depth value from a path. This function might be more powerfull than file_rec because it uses a custom algorythm that does not nee to perform a full recursive search before tuning it to only find the directories with a good value of depth. Depth example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
 #' @param xmax is the depth value
@@ -3013,7 +3088,7 @@ date_sort <- function(vec, asc=F, sep="-"){
 #' @param pathc is the reference path, from which depth value is equal to 1
 #' @export
 
-file_rec2 <- function(xmax, xmin=1, pathc="."){
+fold_rec2 <- function(xmax, xmin=1, pathc="."){
 
         pathc2 <- pathc
 
@@ -3021,7 +3096,7 @@ file_rec2 <- function(xmax, xmin=1, pathc="."){
 
         exclude_temp <- c()
 
-        for (i in 1:xmax){ exclude_temp <- append(exclude_temp, c()) }
+        print(exclude_temp)
 
         exclude_f <- c("#")
 
@@ -3095,7 +3170,7 @@ file_rec2 <- function(xmax, xmin=1, pathc="."){
 
 }
 
-#' file_rec
+#' fold_rec
 #'
 #' Allow to get all the files recursively from a path according to an end and start depth value. If you want to have an other version of this function that uses a more sophisticated algorythm (which can be faster), check file_rec2. Depth example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
 #' @param xmax is the end depth value
@@ -3103,11 +3178,13 @@ file_rec2 <- function(xmax, xmin=1, pathc="."){
 #' @param pathc is the reference path 
 #' @export
 
-file_rec <- function(xmax, xmin=1, pathc="."){
+fold_rec <- function(xmax, xmin=1, pathc="."){
 
         vec <- list.dirs(pathc, recursive=T)
 
         rtnl <- c()
+
+        print(vec)
 
         for (i in 1:length(vec)){
 
@@ -3126,6 +3203,7 @@ file_rec <- function(xmax, xmin=1, pathc="."){
 #' get_rec 
 #'
 #' Allow to get the value of directorie depth from a path.
+#'
 #' @param pathc is the reference path
 #' example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
 #' @export
@@ -3149,6 +3227,7 @@ get_rec <- function(pathc="."){
 #' list_files
 #' 
 #' A list.files() based function addressing the need of listing the files with extension a or or extension b ...
+#'
 #' @param pathc is the path, can be a vector of multiple path because list.files() supports it.
 #' @param patternc is a vector containing all the exensions you want
 #' @export
@@ -3167,57 +3246,6 @@ list_files <- function(patternc, pathc="."){
 
 }
 
-#' match_n2
-#'
-#' Allow to get the indexes for the nth occurence of a value in a vector. Example: c(1, 2, 3, 1, 2), the first occurence of 1 and 2 is at index 1 and 2 respectively, but the second occurence is respectively at the 4th and 5th index.
-#' @param vec is th einput vector
-#' @param mc is a vector containing the values you want to get the index for the nth occurence in vec
-#' @param n is a vector containing the occurences for each value in mc so if i have mc <- c(3, 27) and n <- c(1, 2), i want the first occurence for 3 and the second for 27 in vec. If the length of n is inferior of the length of mc, m will extend with its last value as new arguments. It means that if mc <- c(3, 27) but n <- c(1) so n will extend to c(1, 1), so we will get the first occurence of 3 and 27 in vec. 
-#' @param wnb is a string you are sure is not in mc
-#' @export
-
-match_n2 <- function(vec, mc, n, wnb="#####"){
-
-        vec2 <- vec
-
-        for (I in 1:length(n)){
-
-                vec <- vec2
-
-                for (i in 1:n[I]){
-                
-                        vec[match(mc[I], vec)] <- wnb
-
-                }
-
-        }
-
-        return(match(mc, vec2))
-
-}
-
-#' match_n
-#'
-#' Allow to get the indexes for the nth occurence of a value in a vector. Example: c(1, 2, 3, 1, 2), the first occurence of 1 and 2 is at index 1 and 2 respectively, but the second occurence is respectively at the 4th and 5th index.
-#' @param vec is th input vector
-#' @param mc is a vector containing the values you want to get the index for the nth occurence in vec
-#' @param n is the value of the occurence
-#' @param wnb is a string you are sure is not in mc
-#' @export
-
-match_n <- function(vec, mc, n=1, wnb="#####"){
-
-        for (i in 1:n){
-        
-                vec[match(mc, vec)] <- wnb
-
-        }
-
-        return(match(mc, vec2))
-
-}
-
-
 #' ptrn_twkr
 #'
 #' Allow to modify the pattern length of element in a vector according to arguments. What is here defined as a pattern is something like this xx-xx-xx or xx/xx/xxx... So it is defined by the separator
@@ -3225,16 +3253,29 @@ match_n <- function(vec, mc, n=1, wnb="#####"){
 #' @param depth is the number (numeric) of separator it will keep as a result. To keep the number of separator of the element that has the minimum amount of separator do depth="min" and depth="max" (character) for the opposite. This value defaults to "max".
 #' @param sep is the separator of the pattern, defaults to "-"
 #' @param default_val is the default val that will be placed between the separator, defaults to "00" 
-#' @param add_sep defaults to TRUE. If set to FALSE, it will remove the separator for the patterns that are included in the interval between the depth amount of separator and the actual number of separator of the element. 
-#' @export
+#' @param add_sep defaults to TRUE. If set to FALSE, it will remove the separator for the patterns that are included in the interval between the depth amount of separator and the actual number of separator of the element.
+#' @param end_ is if the default_val will be added at the end or at the beginning of each element that lacks length compared to depth
 #'
 #' @examples
-#'library("stringr")
+#' 
 #' v <- c("2012-06-22", "2012-06-23", "2022-09-12", "2022")
+#'
 #' ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=TRUE)
+#'
+#' [1] "2012-06-22" "2012-06-23" "2022-09-12" "2022-00-00"
+#'
+#' ptrn_twkr(inpt_l=v, depth=1, sep="-", default_val="00", add_sep=TRUE)
+#'
+#' [1] "2012-06" "2012-06" "2022-09" "2022-00"
+#' 
+#'  ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=TRUE, end_=F)
+#'
+#' [1] "2012-06-22" "2012-06-23" "2022-09-12" "00-00-2022"
+#'
+#' @export
 
 ptrn_twkr <- function(inpt_l, depth="max", sep="-", 
-                      default_val="0", add_sep=T){
+                      default_val="0", add_sep=T, end_=T){
   
   ln <- length(inpt_l)
   
@@ -3274,129 +3315,109 @@ ptrn_twkr <- function(inpt_l, depth="max", sep="-",
     
   }
 
-  for (I in 1:ln){
-   
-    hmn <- str_count(inpt_l[I], "-")
-    
-    if (hmn < depth){
-     
-      inpt_l[I] <- paste0(inpt_l[I], sep, default_val)
+  if (end_){
 
-      diff <- depth - hmn - 1
+          for (I in 1:ln){
+           
+            hmn <- str_count(inpt_l[I], "-")
+            
+            if (hmn < depth){
+             
+              inpt_l[I] <- paste0(inpt_l[I], sep, default_val)
 
-      if (diff > 0){
-      
+              diff <- depth - hmn - 1
+
+              if (diff > 0){
+              
+                        if (add_sep == T){
+                          
+                          for (i in 1:diff){
+                          
+                            inpt_l[I] <- paste0(inpt_l[I], sep, default_val)
+                          
+                          }
+                        
+                        }else{
+                          
+                          for (i in 1:diff){
+                            
+                            inpt_l[I] <- paste0(inpt_l[I], default_val)
+                            
+                          }
+                          
+                        }
+
+             }
+            
+            }else if(depth < hmn){
+
                 if (add_sep == T){
-                  
-                  for (i in 1:diff){
-                  
-                    inpt_l[I] <- paste0(inpt_l[I], sep, default_val)
-                  
-                  }
-                
+
+                        inpt_l[I] <- paste(unlist(strsplit(inpt_l[I], split=sep))[1:(depth+1)], collapse=sep)
+
                 }else{
-                  
-                  for (i in 1:diff){
-                    
-                    inpt_l[I] <- paste0(inpt_l[I], default_val)
-                    
-                  }
-                  
+
+                        inpt_l[I] <- paste(unlist(strsplit(inpt_l[I], split=sep))[1:(depth+1)], collapse="")
+               
                 }
 
-     }
-    
-    }else if(depth < hmn){
+            }
 
-        if (add_sep == T){
-
-                inpt_l[I] <- paste(unlist(strsplit(inpt_l[I], split=sep))[1:(depth+1)], collapse=sep)
-
-        }else{
-
-                inpt_l[I] <- paste(unlist(strsplit(inpt_l[I], split=sep))[1:(depth+1)], collapse="")
-       
-        }
-
-    }
-
-  }
-    
-  return(inpt_l)
+          }
   
-}
-
-#' extrm_dates
-#' 
-#' Allow to find the minimum or the maximum of a date in a vector. The format of dates is Year/Month/Day.
-#' @param inpt_l is the input vector
-#' @param extrm is either "min" or "max", defaults to "min"
-#' @param sep is the separator of the dates, defaults to "-"
-#' @export
-
-extrm_dates <- function(inpt_l, extrm="min", sep="-"){
-  
-  rtn <- ""
-  
-  for (I in 1:length(unlist(strsplit(inpt_l[1], sep)))){
-    
-    lnd <- length(inpt_l)
-    
-    if (lnd == 1){ return(inpt_l[1]) }
-    
-    cur_dte_l <- c()
-    
-    cur_val <- unlist(strsplit(inpt_l[1], sep))[I]
-    
-    if (extrm == "min"){
-      
-      for (i in 2:lnd){
-        
-        if(unlist(strsplit(inpt_l[i], sep))[I] < cur_val){
-          
-          cur_val <- unlist(strsplit(inpt_l[i], sep))[I]
-          
-        }else{
-          
-          inpt_l[i] <- "#"
-          
-        }
-        
-      }
-      
-    }else{
-      
-      for (i in 2:lnd){
-        
-        if(unlist(strsplit(inpt_l[i], sep))[I] > cur_val){
-          
-          cur_val <- unlist(strsplit(inpt_l[i], sep))[I]
-          
-        }else{
-          
-          inpt_l[i] <- "#"
-          
-        }
-        
-      }
-      
-    }
-    
-  if (rtn == ""){
-    
-    rtn <- cur_val
-    
   }else{
-    
-    rtn <- paste0(rtn, sep, cur_val)
-    
+
+        for (I in 1:ln){
+           
+            hmn <- str_count(inpt_l[I], "-")
+            
+            if (hmn < depth){
+             
+              inpt_l[I] <- paste0(default_val, sep, inpt_l[I])
+
+              diff <- depth - hmn - 1
+
+              if (diff > 0){
+              
+                        if (add_sep == T){
+                          
+                          for (i in 1:diff){
+                          
+                            inpt_l[I] <- paste0(default_val, sep, inpt_l[I])
+                          
+                          }
+                        
+                        }else{
+                          
+                          for (i in 1:diff){
+                            
+                            inpt_l[I] <- paste0(default_val, inpt_l[I])
+                            
+                          }
+                          
+                        }
+
+             }
+            
+            }else if(depth < hmn){
+
+                if (add_sep == T){
+
+                        inpt_l[I] <- paste(unlist(strsplit(inpt_l[I], split=sep))[1:(depth+1)], collapse=sep)
+
+                }else{
+
+                        inpt_l[I] <- paste(unlist(strsplit(inpt_l[I], split=sep))[1:(depth+1)], collapse="")
+               
+                }
+
+            }
+
+          }
+
   }
-    
-    inpt_l <- inpt_l[!(inpt_l=="#")]
-    
-  }
-  
-  return(rtn)
+
+  return(inpt_l)
   
 }
 
@@ -3405,9 +3426,13 @@ extrm_dates <- function(inpt_l, extrm="min", sep="-"){
 #' Allow to fill a vector by the last element n times
 #' @param inpt_v is the input vector
 #' @param ptrn_fill is the pattern used to detect where the function has to fill the vector by the last element n times. It defaults to "...\\d" where "\\d" is the regex for an int value. So this paramater has to have "\\d" which designates n.
-#' @export
 #' @examples
-#' fillr(c("a", "b", "...3", "c"))
+#'
+#' print(fillr(c("a", "b", "...3", "c")))
+#'
+#' [1] "a" "b" "b" "b" "b" "c"
+#'
+#' @export
 
 fillr <- function(inpt_v, ptrn_fill="...\\d"){
   
@@ -3451,12 +3476,19 @@ fillr <- function(inpt_v, ptrn_fill="...\\d"){
 #' @param t_idx_l is a vector containing the indexes to which the indexes in f_idx_l are related.
 #' @param sep is the separator, defaults to "-"
 #' @param default_val is the default value , if not set to NA, of the pattern at the indexes in f_idx_l. If it is not set to NA, you do not need to fill t_idx_l because this is the vector containing the indexes of the patterns that will be set as new values relatively to the indexes in f_idx_l. Defaults to NA.
+#' @examples
+#' 
+#' print(ptrn_switchr(inpt_l=c("2022-01-11", "2022-01-14", "2022-01-21", 
+#' "2022-01-01"), f_idx_l=c(1, 2, 3), t_idx_l=c(3, 2, 1)))
+#'
+#' [1] "11-01-2022" "14-01-2022" "21-01-2022" "01-01-2022"
+#'
+#' print(ptrn_switchr(inpt_l=c("2022-01-11", "2022-01-14", "2022-01-21", 
+#' "2022-01-01"), f_idx_l=c(1), default_val="ee"))
+#' 
+#' [1] "ee-01-11" "ee-01-14" "ee-01-21" "ee-01-01"
+#'
 #' @export
-#' @examples 
-#' ptrn_switchr(inpt_l=c("2022-01-11", "2022-01-14", "2022-01-21", 
-#' "2022-01-01"), f_idx_l=c(1, 2, 3), t_idx_l=c(3, 2, 1))
-#' ptrn_switchr(inpt_l=c("2022-01-11", "2022-01-14", "2022-01-21", 
-#' "2022-01-01"), f_idx_l=c(1), default_val="ee")
 
 ptrn_switchr <- function(inpt_l, f_idx_l=c(), t_idx_l=c(), sep="-", default_val=NA){
 
@@ -3500,50 +3532,6 @@ ptrn_switchr <- function(inpt_l, f_idx_l=c(), t_idx_l=c(), sep="-", default_val=
 
 }
 
-#' v_to_df
-#'
-#' Allow to convert a vector to a dataframe according to a separator.
-#' @param inpt_v is the input vector
-#' @param sep is the separator used to seprate the columns
-#' @export
-#' @examples 
-#' library("stringr")
-#' v <- c("aa-yy-uu", "zz-gg-hhh", "zz-gg-hhh", "zz-gg-hhh")
-#' v_to_df(inpt_v=v, sep="-")
-
-v_to_df <- function(inpt_v, sep="-"){
-
-        n_col <- str_count(inpt_v[1], sep) + 1
-
-        pre_l <- strsplit(inpt_v, sep)
-
-        pre_v <- c(unlist(pre_l[1])[1])
-
-        for (i in 2:length(inpt_v)){
-
-                pre_v <- c(pre_v, unlist(pre_l[i])[1])
-
-        }
-
-        rtn_df <- data.frame(pre_v)
-
-        for (I in 2:n_col){
-
-                pre_v <- c(unlist(pre_l[1])[I])
-
-                for (i in 2:length(inpt_v)){
-
-                        pre_v <- c(pre_v, unlist(pre_l[i])[I])
-
-                }
-
-                rtn_df <- cbind(rtn_df, pre_v)
-
-        }
-
-        return(rtn_df)
-}
-
 #' globe
 #'
 #' Allow to calculate the distances between a set of geographical points and another established geographical point. If the altitude is not filled, so the result returned won't take in count the altitude.
@@ -3553,9 +3541,17 @@ v_to_df <- function(inpt_v, sep="-"){
 #' @param lat_n is a vector containing the latitude of the set of points
 #' @param long_n is a vector containing the longitude of the set of points
 #' @param alt_n is a vector containing the altitude of the set of points, defaults to NA
-#' @export
 #' @examples
-#' globe(lat_f=23, long_f=112, alt_f=NA, lat_n=c(2, 82), long_n=c(165, -55), alt_n=NA) 
+#' 
+#' print(globe(lat_f=23, long_f=112, alt_f=NA, lat_n=c(2, 82), long_n=c(165, -55), alt_n=NA)) 
+#'
+#' [1] 6342.844 7059.080
+#'
+#' print(globe(lat_f=23, long_f=112, alt_f=8, lat_n=c(2, 82), long_n=c(165, -55), alt_n=c(8, -2)))
+#'
+#' [1] 6342.844 7059.087
+#'
+#' @export
 
 globe <- function(lat_f, long_f, alt_f=NA, lat_n, long_n, alt_n=NA){
 
@@ -3606,20 +3602,31 @@ globe <- function(lat_f, long_f, alt_f=NA, lat_n, long_n, alt_n=NA){
 #' Return a dataframe containing the nearest geographical points (row) according to established geographical points (column).
 #' @param inpt_df is the input dataframe of the set of geographical points to be classified, its firts column is for latitude, the second for the longitude and the third, if exists, is for the altitude. Each point is one row.
 #' @param established_df is the dataframe containing the coordiantes of the established geographical points
-#' @export
 #' @examples
-#'in_ <- data.frame(c(11, 33, 55), c(113, -143, 167))
+#' 
+#' in_ <- data.frame(c(11, 33, 55), c(113, -143, 167))
+#' 
+#' in2_ <- data.frame(c(12, 55), c(115, 165))
+#' 
+#' print(geo_min(inpt_df=in_, established_df=in2_))
 #'
-#'in2_ <- data.frame(c(12, 55), c(115, 165))
+#'          X1       X2
+#' 1   245.266       NA
+#' 2 24200.143       NA
+#' 3        NA 127.7004
+#' 
+#' in_ <- data.frame(c(51, 23, 55), c(113, -143, 167), c(6, 5, 1))
+#' 
+#' in2_ <- data.frame(c(12, 55), c(115, 165), c(2, 5))
+#' 
+#' print(geo_min(inpt_df=in_, established_df=in2_))
 #'
-#'print(geo_min(inpt_df=in_, established_df=in2_))
-#'
-#'in_ <- data.frame(c(51, 23, 55), c(113, -143, 167), c(6, 5, 1))
-#'
-#'in2_ <- data.frame(c(12, 55), c(115, 165), c(2, 5))
-#'
-#'geo_min(inpt_df=in_, established_df=in2_)
-
+#'         X1       X2
+#' 1       NA 4343.720
+#' 2 26465.63       NA
+#' 3       NA 5825.517
+#' 
+#' @export
 geo_min <- function(inpt_df, established_df){
 
        globe <- function(lat_f, long_f, alt_f=NA, lat_n, long_n, alt_n=NA){
@@ -3744,10 +3751,17 @@ geo_min <- function(inpt_df, established_df){
 #' @param rtn_neg is the special value (3a) 
 #' @param nestr_df is the dataframe (2b)
 #' @param yes_val is the special value (2a) 
-#' @export
 #' @examples
-#' nestr_df2(inptf_df=data.frame(c(1, 2, 1), c(1, 5, 7)), rtn_pos="yes", 
-#' rtn_neg="no", nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE)), yes_val=TRUE) 
+#'
+#' print(nestr_df2(inptf_df=data.frame(c(1, 2, 1), c(1, 5, 7)), rtn_pos="yes", 
+#' rtn_neg="no", nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE)), yes_val=TRUE)) 
+#'
+#'   c.1..2..1. c.1..5..7.
+#' 1        yes         no
+#' 2         no         no
+#' 3        yes        yes
+#' 
+#' @export
 
 nestr_df2 <- function(inptf_df, rtn_pos, rtn_neg=NA, nestr_df, yes_val=T){
 
@@ -3795,18 +3809,35 @@ nestr_df2 <- function(inptf_df, rtn_pos, rtn_neg=NA, nestr_df, yes_val=T){
 
 #' nestr_df1
 #'
-#' Allow to write a value (1a) to a dataframe (1b) to its cells that have the same coordinates (row and column) than the cells whose value is equal to a another special value (2a), from another another dataframe (2b). The value (1a) depends of the cell  value coordinates of the third dataframe (3b). If a cell coordinates (1c) of the first dataframe (1b) do not correspond to the coordinates of a good returning cell value (2a) from the dataframe (2b), so this cell (1c) can have its value changed to the same cell coordinates value (3a) of a third dataframe (4b), if (4b) is not det to NA.
+#' Allow to write a value (1a) to a dataframe (1b) to its cells that have the same coordinates (row and column) than the cells whose value is equal to a another special value (2a), from another another dataframe (2b). The value (1a) depends of the cell  value coordinates of the third dataframe (3b). If a cell coordinates (1c) of the first dataframe (1b) does not correspond to the coordinates of a good returning cell value (2a) from the dataframe (2b), so this cell (1c) can have its value changed to the same cell coordinates value (3a) of a third dataframe (4b), if (4b) is not set to NA.
 #' @param inptf_df is the input dataframe (1b)
 #' @param inptt_pos_df is the dataframe (2b) that corresponds to the (1a) values
-#' @param inpt_neg_df is the dataframe (4b) that has the (3a) values, defaults to NA
+#' @param inptt_neg_df is the dataframe (4b) that has the (3a) values, defaults to NA
 #' @param nestr_df is the dataframe (2b) that has the special value (2a)
 #' @param yes_val is the special value (2a)
-#' @export
 #' @examples
-#' nestr_df1(inptf_df=data.frame(c(1, 2, 1), c(1, 5, 7)), 
+#'
+#' print(nestr_df1(inptf_df=data.frame(c(1, 2, 1), c(1, 5, 7)), 
 #' inptt_pos_df=data.frame(c(4, 4, 3), c(2, 1, 2)), 
 #' inptt_neg_df=data.frame(c(44, 44, 33), c(12, 12, 12)), 
-#' nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE)), yes_val=TRUE) 
+#' nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE)), yes_val=TRUE)) 
+#'
+#'   c.1..2..1. c.1..5..7.
+#' 1          4         12
+#' 2         44         12
+#' 3          3          2
+#'
+#' print(nestr_df1(inptf_df=data.frame(c(1, 2, 1), c(1, 5, 7)), 
+#' inptt_pos_df=data.frame(c(4, 4, 3), c(2, 1, 2)), 
+#' inptt_neg_df=NA, 
+#' nestr_df=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE)), yes_val=TRUE))
+#'
+#'    c.1..2..1. c.1..5..7.
+#' 1          4          1
+#' 2          2          5
+#' 3          3          2
+#' 
+#' @export
 
 nestr_df1 <- function(inptf_df, inptt_pos_df, nestr_df, yes_val=T, inptt_neg_df=NA){
 
@@ -3818,7 +3849,7 @@ nestr_df1 <- function(inptf_df, inptt_pos_df, nestr_df, yes_val=T, inptt_neg_df=
 
                                 if (nestr_df[i, I] == yes_val){
 
-                                        inptf_df[i, I] <- inptt_df[i, I]
+                                        inptf_df[i, I] <- inptt_pos_df[i, I]
 
                                 }
 
@@ -3862,18 +3893,26 @@ nestr_df1 <- function(inptf_df, inptt_pos_df, nestr_df, yes_val=T, inptt_neg_df=
 #' @param rtn_val_pos is a vector containing all the group flag value like this ex: c("flag1", "flag2", "flag3") 
 #' @export
 #' @examples interactive()
-#'df1 <- data.frame(c(1, 2, 1), c(45, 22, 88), c(44, 88, 33))
-#'
-#'val_lst <- list(list(c(1), c(1)), list(c(2)), list(c(44)))
-#'
-#'condition_lst <- list(c(">", "<"), c("%%"), c("=="))
-#'
-#'conjunction_lst <- list(c("|"), c(), c())
-#'
-#'rtn_val_pos <- c("+", "+", "+")
-#'
-#'groupr_df(inpt_df=df1, val_lst=val_lst, condition_lst=condition_lst, 
-#'conjunction_lst=conjunction_lst, rtn_val_pos=rtn_val_pos)
+#' 
+#' df1 <- data.frame(c(1, 2, 1), c(45, 22, 88), c(44, 88, 33))
+#'                                                                       
+#' val_lst <- list(list(c(1), c(1)), list(c(2)), list(c(44, 88)))
+#' 
+#' condition_lst <- list(c(">", "<"), c("%%"), c("==", "=="))
+#' 
+#' conjunction_lst <- list(c("|"), c(), c("|"))
+#' 
+#' rtn_val_pos <- c("+", "++", "+++")
+#' 
+#' print(groupr_df(inpt_df=df1, val_lst=val_lst, condition_lst=condition_lst, 
+#' conjunction_lst=conjunction_lst, rtn_val_pos=rtn_val_pos))
+#' 
+#'     X1  X2  X3
+#' 1 <NA>   + +++
+#' 2   ++  ++ +++
+#' 3 <NA> +++   +
+#' 
+#' @export
 
 groupr_df <- function(inpt_df, condition_lst, val_lst, conjunction_lst, rtn_val_pos=c()){
  
@@ -4296,7 +4335,18 @@ groupr_df <- function(inpt_df, condition_lst, val_lst, conjunction_lst, rtn_val_
 #' occu
 #'
 #' Allow to see the occurence of each variable in a vector. Returns a datafame with, as the first column, the all the unique variable of the vector and , in he second column, their occurence respectively.
+#' 
 #' @param inpt_v the input dataframe
+#' @examples
+#'
+#' print(occu(inpt_v=c("oui", "peut", "peut", "non", "oui")))
+#'
+#'    var occurence
+#' 1  oui         2
+#' 2 peut         2
+#' 3  non         1
+#' 
+#' @export
 
 occu <- function(inpt_v){
 
@@ -4330,7 +4380,6 @@ occu <- function(inpt_v){
  
 }
 
-
 #' all_stat
 #'
 #' Allow to see all the main statistics indicators (mean, median, variance, standard deviation, sum, max, min, quantile) of variables in a dataframe by the modality of a variable in a column of the input datarame. In addition to that, you can get the occurence of other qualitative variables by your chosen qualitative variable, you have just to precise it in the vector "stat_var" where all the statistics indicators are given with "occu-var_you_want/".
@@ -4339,16 +4388,53 @@ occu <- function(inpt_v){
 #' @param stat_var is the stats indicators you want
 #' @param inpt_df is the input dataframe
 #' @examples
+#'
 #' df <- data.frame("mod"=c("first", "seco", "seco", "first", "first", "third", "first"), 
 #'                 "var1"=c(11, 22, 21, 22, 22, 11, 9), 
 #'                "var2"=c("d", "d", "z", "z", "z", "d", "z"), 
 #'                "var3"=c(45, 44, 43, 46, 45, 45, 42),
 #'               "var4"=c("A", "A", "A", "A", "B", "C", "C"))
 #'
-#' all_stat(inpt_v=c("first", "seco"), var_add = c("var1", "var2", "var3", "var4"), 
+#' print(all_stat(inpt_v=c("first", "seco"), var_add = c("var1", "var2", "var3", "var4"), 
 #'  stat_var=c("sum", "mean", "median", "sd", "occu-var2/", "occu-var4/", "variance", "quantile-0.75/"), 
-#'  inpt_df=df)
-
+#'  inpt_df=df))
+#'
+#'    modal_v var_vector occu sum mean  med standard_devaition         variance
+#' 1    first                                                                  
+#' 2                var1       64   16 16.5   6.97614984548545 48.6666666666667
+#' 3              var2-d    1                                                  
+#' 4              var2-z    3                                                  
+#' 5                var3      178 44.5   45   1.73205080756888                3
+#' 6              var4-A    2                                                  
+#' 7              var4-B    1                                                  
+#' 8              var4-C    1                                                  
+#' 9     seco                                                                  
+#' 10               var1       43 21.5 21.5  0.707106781186548              0.5
+#' 11             var2-d    1                                                  
+#' 12             var2-z    1                                                  
+#' 13               var3       87 43.5 43.5  0.707106781186548              0.5
+#' 14             var4-A    2                                                  
+#' 15             var4-B    0                                                  
+#' 16             var4-C    0                                                  
+#'    quantile-0.75
+#' 1               
+#' 2             22
+#' 3               
+#' 4               
+#' 5          45.25
+#' 6               
+#' 7               
+#' 8               
+#' 9               
+#' 10         21.75
+#' 11              
+#' 12              
+#' 13         43.75
+#' 14              
+#' 15              
+#' 16              
+#'
+#' @export
 
 all_stat <- function(inpt_v, var_add=c(), stat_var=c(), inpt_df){
  
@@ -4656,12 +4742,23 @@ all_stat <- function(inpt_v, var_add=c(), stat_var=c(), inpt_df){
 #' @param how_to_val is a vector containing the value relatives to the operations in `hot_to_op`, defaults to 3
 #' output from ex:
 #' @examples
+#'
+#' print(inter_min(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3))))
+#'
+#'  [[1]]
+#'  [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8
+#' [20] 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.0 3.1 3.2 3.3 3.4 3.5 3.6 3.7
+#' [39] 3.8 3.9 4.0
 #' 
-#' [[0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2
-#' .3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0], [0, 0.1, 0.2, 0.3, 0.4, 0.
-#' 5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8
-#' , 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0], [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0,
-#' 2.1, 2.2, 2.3]]
+#' [[2]]
+#'  [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8
+#' [20] 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.0 3.1 3.2 3.3 3.4 3.5 3.6 3.7
+#' [39] 3.8 3.9 4.0
+#' 
+#' [[3]]
+#'  [1] 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3
+#' 
+#' @export
 
 inter_min <- function(inpt_l, min_=1000, sensi=3, sensi2=3, how_to_op=c("divide"),
                       how_to_val=c(3)){
@@ -4853,6 +4950,31 @@ inter_min <- function(inpt_l, min_=1000, sensi=3, sensi2=3, how_to_op=c("divide"
 #' @param inpt_l is the input list
 #' @param max_ is a value you are sure is the minimum step value of all the sub-lists
 #' @param get_lst is the parameter that, if set to True, will keep the last values of vectors in the return value if the last step exceeds the end value of the vector.
+#' @examples
+#'
+#' print(inter_max(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3)), get_lst=T))
+#'  
+#' [[1]]
+#' [1] 0 4
+#' 
+#' [[2]]
+#' [1] 0 4
+#' 
+#' [[3]]
+#' [1] 1.0 2.3
+#' 
+#' print(inter_max(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3)), get_lst=F))
+#'
+#'  [[1]]
+#' [1] 0 4
+#' 
+#' [[2]]
+#' [1] 0 4
+#' 
+#' [[3]]
+#' [1] 1
+#'
+#' @export
 
 inter_max <- function(inpt_l, max_=-1000, get_lst=T){
 
@@ -4912,69 +5034,6 @@ inter_max <- function(inpt_l, max_=-1000, get_lst=T){
 
 }
 
-#chs_df <- function(inpt_df, occu=1, id_, default_val="no_val"){
-#
-#    if (typeof(id_) == "character"){
-#
-#        id_ <- match(id_, colnames(inpt_df)) 
-#
-#    }
-#
-#    ids <- unique(inpt_df[, id_]) 
-#
-#    rtn_v <- c()
-#
-#    rtn_df <- data.frame(matrix(nrow=1, ncol=ncol(inpt_df)))
-#
-#    for (i in 1:length(ids)){ 
-#
-#        pre_df <- inpt_df[inpt_df[, id_] == ids[i], ]
-#
-#        if (nrow(pre_df) >= max(occu)){
-#
-#            colnames(pre_df) <- colnames(rtn_df)
-#
-#            rtn_df <- rbind(rtn_df, pre_df[occu, ])
-#
-#        }else if (default_val != "no_val"){
-#
-#            if (min(occu) <= nrow(pre_df)){
-#
-#                pre_df <- pre_df[min(occu):nrow(pre_df),]
-#
-#                colnames(pre_df) <- colnames(rtn_df)
-#
-#                rtn_df <- rbind(rtn_df, pre_df)
-#
-#            }
-#
-#            if (default_val != "no_val"){
-#
-#                pre_df <- matrix(data=default_val, nrow=1, ncol=ncol(pre_df))
-#
-#                colnames(pre_df) <- colnames(rtn_df)
-#
-#                rtn_df <- rbind(rtn_df, pre_df)
-#
-#                rtn_df[nrow(rtn_df), id_] <- ids[i]
-#
-#            }
-#
-#        }
-#
-#    }
-#
-#    rtn_df <- rtn_df[-1,]
-#
-#    return(rtn_df)
-#
-#}
-#
-#df2 <- data.frame("val"=c(3, 7, 2, 4, 1, 2), "ids"=c("a", "z", "z", "z", "z", "a"), "bool"=c(T, F, F, F, T, T), 
-#                  "second_ids"=c(13, 12, 8, 34, 22, 12))
-#
-#print(chs_df(inpt_df=df2, occu=1:3, id_=2, default_val="no_val"))
-
 #' incr_fillr
 #' 
 #' Take a vector uniquely composed by double and sorted ascendingly, a step, another vector of elements whose length is equal to the length of the first vector, and a default value. If an element of the vector is not equal to its predecessor minus a user defined step, so these can be the output according to the parameters (see example):
@@ -4983,6 +5042,7 @@ inter_max <- function(inpt_l, max_=-1000, get_lst=T){
 #' @param default_val is the default value put when the difference between two following elements of inpt_v is greater than step, defaults to NA
 #' @param step is the allowed difference between two elements of inpt_v
 #' @examples
+#'
 #' print(incr_fillr(inpt_v=c(1, 2, 4, 5, 9, 10), 
 #'                 wrk_v=NA, 
 #'                 default_val="increasing"))
@@ -5000,6 +5060,8 @@ inter_max <- function(inpt_l, max_=-1000, get_lst=T){
 #'                 default_val="NAN"))
 #'
 #' [1] "1"   "2"   "NAN" "4"   "5"   "NAN" "NAN" "NAN" "9"   "10" 
+#'
+#' @export
 
 incr_fillr <- function(inpt_v, wrk_v=NA, default_val=NA, step=1){
 
@@ -5107,9 +5169,12 @@ incr_fillr <- function(inpt_v, wrk_v=NA, default_val=NA, step=1){
 #' @param inpt_df is the input dataframe
 #' @param sep is the separator between pasted elements, defaults to ""
 #' @examples
+#' 
 #' print(paste_df(inpt_df=data.frame(c(1, 2, 1), c(33, 22, 55))))
 #'
 #' [1] "133" "222" "155"
+#'
+#' @export
 
 paste_df <- function(inpt_df, sep=""){
 
@@ -5141,9 +5206,12 @@ paste_df <- function(inpt_df, sep=""){
 #' @param step defines after how many elements of f_v the next element of t_v can be put in the output
 #' @param after defines after how many elements of f_v, the begining of t_v can be put 
 #' @examples
+#' 
 #' print(nest_v(f_v=c(1, 2, 3, 4, 5, 6), t_v=c("oui", "oui2", "oui3", "oui4", "oui5", "oui6"), step=2, after=2))
 #'
 #' [1] "1"    "2"    "oui"  "3"    "4"    "oui2" "5"    "6"    "oui3" "oui4"
+#' 
+#' @export
 
 nest_v <- function(f_v, t_v, step=1, after=1){
 
@@ -5174,6 +5242,7 @@ nest_v <- function(f_v, t_v, step=1, after=1){
 #'                   wrk_v=c(1, 2, 3, 4, 5, 6)))
 #'
 #'[1]  1  2 NA  4  5 NA
+#' @export
 
 fixer_nest_v <- function(cur_v, pttrn_v, wrk_v){
 
@@ -5231,6 +5300,7 @@ fixer_nest_v <- function(cur_v, pttrn_v, wrk_v){
 #'print(lst_flatnr(inpt_l=list(c(1, 2), c(5, 3), c(7, 2, 7))))
 #'
 #'[1] 1 2 5 3 7 2 7
+#' @export
 
 lst_flatnr <- function(inpt_l){
 
@@ -5254,7 +5324,8 @@ lst_flatnr <- function(inpt_l){
 #' @examples
 #'print(extrt_only_v(inpt_v=c("oui", "non", "peut", "oo", "ll", "oui", "non", "oui", "oui"), pttrn_v=c("oui")))
 #'
-#'[1] "oui" "oo"  "oui" "oui" "oui"
+#'[1] "oui" "oui" "oui" "oui"
+#' @export
 
 extrt_only_v <- function(inpt_v, pttrn_v){
 
@@ -5270,17 +5341,22 @@ extrt_only_v <- function(inpt_v, pttrn_v){
 
 }
 
-#' fittr_v
+#' new_ordered
 #'
-#' Return the indexes of elements contained in "w_v" according to "f_v"
+#' Returns the indexes of elements contained in "w_v" according to "f_v"
+#' 
 #' @param f_v is the input vector
 #' @param w_v is the vector containing the elements that can be in f_v
+#' @param nvr_here is a value you are sure is not present in f_v
 #' @examples
-#'print(fittr_v(f_v=c("non", "non", "non", "oui"), w_v=c("oui", "non", "non")))
 #'
-#'[1] 4 1 2
+#' print(fittr_v(f_v=c("non", "non", "non", "oui"), w_v=c("oui", "non", "non")))
+#'
+#' [1] 4 1 2
+#' 
+#' @export
 
-fittr_v <- function(f_v, w_v, nvr_here=NA){
+new_ordered <- function(f_v, w_v, nvr_here=NA){
 
     rtn_v <- c()
 
@@ -5298,46 +5374,6 @@ fittr_v <- function(f_v, w_v, nvr_here=NA){
 
 }
 
-#' calc_occu_v
-#'
-#' Rearanges the index of a vector "w_v" to match the occurences of the common elements in another vector "f_v"
-#' @examples
-#'print(calc_occu_v(f_v=c("e", "a", "z", NA, "a"), w_v=c("a", "a", "z")))
-#'
-#'[1] 1 3 2
-
-calc_occu_v <- function(f_v, w_v, nvr_here=NA){
-
-    rtn_v <- c()
-
-    idx_status <- c()
-
-    f_v2 <- f_v
-
-    for (el in 1:length(w_v)){
-
-        cur_ids <- match(w_v[el], f_v)
-
-        f_v[cur_ids] <- nvr_here
-
-        idx_status <- c(idx_status, cur_ids)
-
-    }
-
-    for (i in sort(idx_status)){
-
-        idx <- match(f_v2[i], w_v)
-
-        rtn_v <- c(rtn_v, idx)
-
-        w_v[idx] <- nvr_here
-
-    }
-
-    return(rtn_v)
-
-}
-
 #' appndr
 #'
 #' Append to a vector "inpt_v" a special value "val" n times "mmn". The appending begins at "strt" index.
@@ -5345,6 +5381,17 @@ calc_occu_v <- function(f_v, w_v, nvr_here=NA){
 #' @param val is the special value
 #' @param hmn is the number of special value element added
 #' @param strt is the index from which appending begins, defaults to max which means the end of "inpt_v"
+#' @examples
+#'
+#' print(appndr(inpt_v=c(1:3), val="oui", hmn=5))
+#'
+#' [1] "1"   "2"   "3"   "oui" "oui" "oui" "oui" "oui"
+#'
+#' print(appndr(inpt_v=c(1:3), val="oui", hmn=5, strt=1))
+#'
+#' [1] "1"   "oui" "oui" "oui" "oui" "oui" "2"   "3" 
+#' 
+#' @export
 
 appndr <- function(inpt_v, val=NA, hmn, strt="max"){
 
@@ -5356,7 +5403,7 @@ appndr <- function(inpt_v, val=NA, hmn, strt="max"){
 
     if (hmn > 0){
 
-        for (i in hmn){ inpt_v <- append(x=inpt_v, values=val, after=strt) }
+        for (i in 1:hmn){ inpt_v <- append(x=inpt_v, values=val, after=strt) }
 
     }
 
@@ -5454,6 +5501,7 @@ appndr <- function(inpt_v, val=NA, hmn, strt="max"){
 #'2         13
 #'3         12
 #'4         11
+#' @export
 
 any_join_df <- function(inpt_df_l, join_type="inner", join_spe=NA, id_v=c(),  
                     excl_col=c(), rtn_col=c(), d_val=NA){
@@ -6009,6 +6057,7 @@ any_join_df <- function(inpt_df_l, join_type="inner", join_spe=NA, id_v=c(),
 #'
 #'  print(equalizer_v(inpt_v=c("aa", "zzz", "q"), depth=12))
 #'  [1] "aa??????????" "zzz?????????" "q???????????"
+#' @export
 
 equalizer_v <- function(inpt_v, depth="max", default_val="?"){
 
@@ -6077,6 +6126,7 @@ equalizer_v <- function(inpt_v, depth="max", default_val="?"){
 #' @examples 
 #' print(rearangr_v(inpt_v=c(23, 21, 56), w_v=c("oui", "peut", "non"), how="decreasing"))
 #' [1] "non"  "oui"  "peut"
+#' @export
 
 rearangr_v <- function(inpt_v, w_v, how="increasing"){
 
@@ -6110,7 +6160,7 @@ rearangr_v <- function(inpt_v, w_v, how="increasing"){
 
 #' clusterizer_v
 #' 
-#' Allow to output clusters of elements. Takes as input a vector "inpt_v" containing a sequence of number. Can also take another vector "w_v" that has the same size of inpt_v because its elements are related to it. The way the clusters are made is related to an accuracy value which is "c_val". It means that if the difference between the values associated to 2 elements is superior to c_val, these two elements are in distinct clusters.
+#' Allow to output clusters of elements. Takes as input a vector "inpt_v" containing a sequence of number. Can also take another vector "w_v" that has the same size of inpt_v because its elements are related to it. The way the clusters are made is related to an accuracy value which is "c_val". It means that if the difference between the values associated to 2 elements is superior to c_val, these two elements are in distinct clusters. The second element of the outputed list is the begin and end value of each cluster.
 #' 
 #' @param inpt_v is the vector containing the sequence of number
 #' @param w_v is the vector containing the elements related to inpt_v, defaults to NA
@@ -6119,49 +6169,118 @@ rearangr_v <- function(inpt_v, w_v, how="increasing"){
 #' @examples
 #'  print(clusterizer_v(inpt_v=sample.int(20, 26, replace=T), w_v=NA, c_val=0.9))
 #' 
-#'[[1]]
-#'[[1]][[1]]
-#'[1] "j" "v"
-#'
-#'[[1]][[2]]
-#'[1] "x"
-#'
-#'[[1]][[3]]
-#'[1] "e" "m" "p" "s" "t" "b" "q" "z" "f"
-#'
-#'[[1]][[4]]
-#'[1] "a" "i"
-#'
-#'[[1]][[5]]
-#'[1] "c" "n" "o" "g" "u" "y" "h" "l"
-#'
-#'[[1]][[6]]
-#'[1] "d" "r" "w" "k"
-#'
-#'
-#'[[2]]
-#' [1] "1"  "2"  "-"  "4"  "4"  "-"  "6"  "10" "-"  "12" "12" "-"  "14" "16" "-" 
-#'[16] "18" "19"
+#'  [[1]]
+#' [[1]][[1]]
+#' [1] 1
+#' 
+#' [[1]][[2]]
+#' [1] 2
+#' 
+#' [[1]][[3]]
+#' [1] 3
+#' 
+#' [[1]][[4]]
+#' [1] 4
+#' 
+#' [[1]][[5]]
+#' [1] 5 5
+#' 
+#' [[1]][[6]]
+#' [1] 6 6 6 6
+#' 
+#' [[1]][[7]]
+#' [1] 7 7 7
+#' 
+#' [[1]][[8]]
+#' [1] 8 8 8
+#' 
+#' [[1]][[9]]
+#' [1] 9
+#' 
+#' [[1]][[10]]
+#' [1] 10
+#' 
+#' [[1]][[11]]
+#' [1] 12
+#' 
+#' [[1]][[12]]
+#' [1] 13 13 13
+#' 
+#' [[1]][[13]]
+#' [1] 18 18 18
+#' 
+#' [[1]][[14]]
+#' [1] 20
+#' 
+#' 
+#' [[2]]
+#'  [1] "1"  "1"  "-"  "2"  "2"  "-"  "3"  "3"  "-"  "4"  "4"  "-"  "5"  "5"  "-" 
+#' [16] "6"  "6"  "-"  "7"  "7"  "-"  "8"  "8"  "-"  "9"  "9"  "-"  "10" "10" "-" 
+#' [31] "12" "12" "-"  "13" "13" "-"  "18" "18" "-"  "20" "20"
 #' 
 #' print(clusterizer_v(inpt_v=sample.int(40, 26, replace=T), w_v=letters, c_val=0.29))
 #'
+#' [[1]]
+#' [[1]][[1]]
+#' [1] "a"
+#' 
+#' [[1]][[2]]
+#' [1] "b"
+#' 
+#' [[1]][[3]]
+#' [1] "c" "d"
+#' 
+#' [[1]][[4]]
+#' [1] "e" "f"
+#' 
+#' [[1]][[5]]
+#' [1] "g" "h" "i" "j"
+#' 
+#' [[1]][[6]]
+#' [1] "k"
+#' 
+#' [[1]][[7]]
+#' [1] "l"
+#' 
+#' [[1]][[8]]
+#' [1] "m" "n"
+#' 
+#' [[1]][[9]]
+#' [1] "o"
+#' 
+#' [[1]][[10]]
+#' [1] "p"
+#' 
+#' [[1]][[11]]
+#' [1] "q" "r"
+#' 
+#' [[1]][[12]]
+#' [1] "s" "t" "u"
+#' 
+#' [[1]][[13]]
+#' [1] "v"
+#' 
+#' [[1]][[14]]
+#' [1] "w"
+#' 
+#' [[1]][[15]]
+#' [1] "x"
+#' 
+#' [[1]][[16]]
+#' [1] "y"
+#' 
+#' [[1]][[17]]
+#' [1] "z"
+#' 
+#' 
+#' [[2]]
+#'  [1] "13" "13" "-"  "14" "14" "-"  "15" "15" "-"  "16" "16" "-"  "17" "17" "-" 
+#' [16] "19" "19" "-"  "21" "21" "-"  "22" "22" "-"  "23" "23" "-"  "25" "25" "-" 
+#' [31] "27" "27" "-"  "29" "29" "-"  "30" "30" "-"  "31" "31" "-"  "34" "34" "-" 
+#' [46] "35" "35" "-"  "37" "37"
+#' 
 #'
-#'[[1]]
-#'[[1]][[1]]
-#'[1] "a" "b" "c" "d" "e" "f" "g" "h"
-#'
-#'[[1]][[2]]
-#'[1] "i" "j" "k" "l"
-#'
-#'[[1]][[3]]
-#'[1] "m" "n"
-#'
-#'[[1]][[4]]
-#' [1] "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
-#'
-#'
-#'[[2]]
-#' [1] "1"  "5"  "-"  "8"  "10" "-"  "12" "13" "-"  "15" "20"
+#' @export
 
 clusterizer_v <- function(inpt_v, w_v=NA, c_val){
 
@@ -6281,54 +6400,6 @@ clusterizer_v <- function(inpt_v, w_v=NA, c_val){
 
 }
 
-#' chr_removr
-#'
-#' Allow to remove certain characters contained in a vector "ptrn_v" from elements in a another vector "inpt_v".
-#' 
-#' @param inpt_v is the input vector containing all the elements that may have the characters to be removed 
-#' @param ptrn_v is the vector containing all the characters that will be removed
-#' 
-#' @examples
-#' print(chr_removr(inpt_v=c("oui?", "!oui??", "non", "!non"), ptrn_v=c("?")))
-#' [1] "oui"  "!oui" "non"  "!non"
-#' 
-#' print(chr_removr(inpt_v=c("oui?", "!oui??", "non", "!non"), ptrn_v=c("?", "!")))
-#' [1] "oui" "oui" "non" "non"
-
-chr_removr <- function(inpt_v, ptrn_v){
-
-        rm_fun <- function(x){
-
-            rm_ids <- c()
-
-            cur_chr <- unlist(strsplit(x, split=""))
-
-            for (ptrn in ptrn_v){
-
-                    rm_ids <- c(rm_ids, which(cur_chr == ptrn))
-
-            }
-
-            if (length(rm_ids) == 0){
-
-                    return(x)
-
-            }else {
-
-                    cur_chr <- cur_chr[-rm_ids]
-
-                    return(paste(cur_chr, collapse=""))
-
-            }
-
-        }
-      
-        rtn_v <- mapply(function(x) return(rm_fun(x)), inpt_v) 
-
-        return(as.vector(rtn_v))
-
-}
-
 #' closer_ptrn_adv
 #' 
 #' Allow to find how patterns are far or near between each other relatively to a vector containing characters at each index ("base_v"). The function gets the sum of the indexes of each pattern letter relatively to the characters in base_v. So each pattern can be compared.
@@ -6355,6 +6426,7 @@ chr_removr <- function(inpt_v, ptrn_v){
 #'
 #'[[2]]
 #'[1] "aurevoir" "bonnour"  "nonnour"  "fin"      "mois"    
+#' @export
 
 closer_ptrn_adv <- function(inpt_v, res="raw_stat", default_val="?", base_v=c(default_val, letters), c_word=NA){
 
@@ -6535,6 +6607,7 @@ closer_ptrn_adv <- function(inpt_v, res="raw_stat", default_val="?", base_v=c(de
 #' @examples
 #' print(unique_ltr_from_v(inpt_v=c("bonjour", "lpoerc", "nonnour", "bonnour", "nonjour", "aurevoir")))
 #'  [1] "b" "o" "n" "j" "u" "r" "l" "p" "e" "c" "a" "v" "i" 
+#' @export
 
 unique_ltr_from_v <- function(inpt_v, keep_v=c("?", "!", ":", "&", ",", ".", letters)){
 
@@ -6672,6 +6745,7 @@ unique_ltr_from_v <- function(inpt_v, keep_v=c("?", "!", ":", "&", ",", ".", let
 #'
 #'[[12]]
 #'[1] 0 7 8 8
+#' @export
 
 closer_ptrn <- function(inpt_v, base_v=c("?", letters), excl_v=c(), rtn_v=c(), 
                         sub_excl_v=c(), sub_rtn_v=c()){
@@ -6948,11 +7022,2267 @@ closer_ptrn <- function(inpt_v, base_v=c("?", letters), excl_v=c(), rtn_v=c(),
 
 }
 
+#' v_to_df
+#'
+#' Allow to convert a vector to a dataframe according to a separator.
+#' 
+#' @param inpt_v is the input vector
+#' @param sep_ is the separator of the elements in inpt_v, defaults to ""
+#' 
+#' @examples
+#' print(cut_v(inpt_v=c("oui", "non", "oui", "non")))
+#' 
+#'     X.o. X.u. X.i.
+#' oui "o"  "u"  "i" 
+#' non "n"  "o"  "n" 
+#' oui "o"  "u"  "i" 
+#' non "n"  "o"  "n" 
+#' 
+#' print(cut_v(inpt_v=c("ou-i", "n-on", "ou-i", "n-on"), sep_="-"))
+#' 
+#'      X.ou. X.i.
+#' ou-i "ou"  "i" 
+#' n-on "n"   "on"
+#' ou-i "ou"  "i" 
+#' n-on "n"   "on"
+#' 
+#' @export
+
+cut_v <- function(inpt_v, sep_=""){
+
+        rtn_df <- data.frame(matrix(data=NA, nrow=0, ncol=length(unlist(strsplit(inpt_v[1], split=sep_)))))
+
+        for (el in inpt_v){ rtn_df <- rbind(rtn_df, unlist(strsplit(el, split=sep_))) }
+
+        return(rtn_df)
+
+}
+
+#' wider_df
+#'
+#' Takes a dataframe as an input and the column to split according to a seprator.
+#'
+#' @param inpt_df is the input dataframe
+#' @param col_to_splt is a vector containing the number or the colnames of the columns to split according to a separator
+#' @param sep_ is the separator of the elements to split to new columns in the input dataframe 
+#' @examples
+#' df1 <- data.frame(c(1:5), c("o-y", "hj-yy", "er-y", "k-ll", "ooo-mm"), c(5:1))
+#' 
+#' df2 <- data.frame(c(1:5), c("o-y", "hj-yy", "er-y", "k-ll", "ooo-mm"))
+#'  
+#' print(wider_df(inpt_df=df1, col_to_splt=c(2), sep_="-"))
+#'
+#'        pre_df X.o.  X.y.  
+#' o-y    1      "o"   "y"  5
+#' hj-yy  2      "hj"  "yy" 4
+#' er-y   3      "er"  "y"  3
+#' k-ll   4      "k"   "ll" 2
+#' ooo-mm 5      "ooo" "mm" 1
+#'
+#' print(wider_df(inpt_df=df2, col_to_splt=c(2), sep_="-"))
+#' 
+#'        pre_df X.o.  X.y.
+#' o-y    1      "o"   "y" 
+#' hj-yy  2      "hj"  "yy"
+#' er-y   3      "er"  "y" 
+#' k-ll   4      "k"   "ll"
+#' ooo-mm 5      "ooo" "mm"
+#' @export
+
+wider_df <- function(inpt_df, col_to_splt=c(), sep_="-"){
+
+        cut_v <- function(inpt_v, sep_=""){
+
+                rtn_df <- data.frame(matrix(data=NA, nrow=0, ncol=length(unlist(strsplit(inpt_v[1], split=sep_)))))
+
+                rtn_df <- t(mapply(function(x) return(rbind(rtn_df, unlist(strsplit(x, split=sep_)))), inpt_v))
+
+                return(rtn_df)
+
+        }
+
+        if (typeof(col_to_splt) == "character"){
+
+            for (i in 1:length(col_to_splt)){
+
+               col_to_splt[i] <- match(col_to_splt[i], colnames(inpt_df))
+
+            }
+
+            col_to_splt <- as.numeric(v)
+
+        }
+
+        for (cl in col_to_splt){
+
+            pre_df <- inpt_df[,1:(cl-1)]
+
+            cur_df <- cut_v(inpt_v=inpt_df[, cl], sep_=sep_) 
+
+            if (cl < ncol(inpt_df)){
+
+                    w_df <- cbind(pre_df, cur_df, inpt_df[, ((cl+1):ncol(inpt_df))])
+
+            }else{
+
+                    w_df <- cbind(pre_df, cur_df)
+
+            }
+
+        }
+
+    return(w_df)
+
+}
+
+#' colins_df
+#'
+#' Allow to insert vectors into a dataframe.
+#' 
+#' @param inpt_df is the dataframe where vectors will be inserted
+#' @param target_col is a list containing all the vectors to be inserted
+#' @param target_pos is a list containing the vectors made of the columns names or numbers where the associated vectors from target_col will be inserted after
+#'
+#' @examples
+#'
+#' df1 <- data.frame("frst_col"=c(1:5), "scd_col"=c(5:1))
+#' 
+#' print(colins_df(inpt_df=df1, target_col=list(c("oui", "oui", "oui", "non", "non"), c("u", "z", "z", "z", "u")), 
+#'                 target_pos=list(c("frst_col", "scd_col"), c("scd_col"))))
+#' 
+#'   frst_col cur_col scd_col cur_col.1 cur_col
+#' 1        1     oui       5       oui       u
+#' 2        2     oui       4       oui       z
+#' 3        3     oui       3       oui       z
+#' 4        4     non       2       non       z
+#' 5        5     non       1       non       u
+#'
+#' print(colins_df(inpt_df=df1, target_col=list(c("oui", "oui", "oui", "non", "non"), c("u", "z", "z", "z", "u")), 
+#'                 target_pos=list(c(1, 2), c("frst_col"))))
+#' 
+#'   frst_col cur_col scd_col cur_col cur_col
+#' 1        1     oui       5       u     oui
+#' 2        2     oui       4       z     oui
+#' 3        3     oui       3       z     oui
+#' 4        4     non       2       z     non
+#' 5        5     non       1       u     non
+#'
+#' @export
+
+colins_df <- function(inpt_df, target_col=list(), target_pos=list()){
+
+    cl_nms <- colnames(inpt_df)
+
+    for (id_vec in 1:length(target_pos)){
+
+            vec <- unlist(target_pos[id_vec])
+
+            if (typeof(vec) == "character"){
+
+                    pre_v <- c()
+
+                    for (el in vec){
+
+                        pre_v <- c(pre_v, match(el, cl_nms))
+
+                    }
+
+                    target_pos <- append(x=target_pos, values=list(pre_v), after=id_vec)
+
+                    target_pos <- target_pos[-id_vec]
+
+            }
+
+    }
+
+    for (cl in 1:length(target_col)){
+
+        cur_col <- unlist(target_col[cl])
+
+        cur_pos_v <- unlist(target_pos[cl])
+
+        for (pos in 1:length(cur_pos_v)){
+
+            idx <- cur_pos_v[pos]
+
+            if (idx == 0){
+
+                inpt_df <- cbind(cur_col, inpt_df[(idx+1):ncol(inpt_df)])
+
+            }else if (idx < ncol(inpt_df)){
+
+                inpt_df <- cbind(inpt_df[1:idx], cur_col, inpt_df[(idx+1):ncol(inpt_df)])
+
+            }else{
+
+                inpt_df <- cbind(inpt_df[1:idx], cur_col)
+
+            }
+
+            if (pos < length(cur_pos_v)){
+
+                cur_pos_v[(pos+1):length(cur_pos_v)] = cur_pos_v[(pos+1):length(cur_pos_v)] + 1 
+         
+            }
+
+            if (cl < length(target_pos)){
+
+                    for (i in (cl+1):length(target_pos)){
+
+                        target_pos <- append(x=target_pos, values=(unlist(target_pos[i])+1), after=i)
+
+                        target_pos <- target_pos[-i]
+                    
+                    } 
+
+            }
+
+        }
+
+    }
+
+  return(inpt_df)
+
+}
+
+#' id_keepr_df
+#'
+#' Allow to get the original indexes after multiple equality comparaison according to the original number of row
+#'
+#' @param inpt_df is the input dataframe
+#' @param col_v is the vector containing the column numbers or names to be compared to their respective elements in "el_v"
+#' @param el_v is a vector containing the elements that may be contained in their respective column described in "col_v" 
+#' @param rstr_l is a list containing the vector composed of the indexes of the elements chosen for each comparison. If the length of the list is inferior to the lenght of comparisons, so the last vector of rstr_l will be the same as the last one to fill make rstr_l equal in term of length to col_v and el_v
+#' @examples
+#' 
+#' df1 <- data.frame(c("oui", "oui", "oui", "non", "oui"), c("opui", "op", "op", "zez", "zez"), c(5:1), c(1:5))
+#' 
+#' print(id_keepr(inpt_df=df1, col_v=c(1, 2), el_v=c("oui", "op")))
+#'
+#' [1] 2 3
+#' 
+#' print(id_keepr(inpt_df=df1, col_v=c(1, 2), el_v=c("oui", "op"), rstr_l=list(c(1:5), c(3, 2, 2, 2, 3))))
+#'
+#' [1] 2 3
+#'
+#' print(id_keepr(inpt_df=df1, col_v=c(1, 2), el_v=c("oui", "op"), rstr_l=list(c(1:5), c(3))))
+#'
+#' [1] 3
+#'
+#' print(id_keepr(inpt_df=df1, col_v=c(1, 2), el_v=c("oui", "op"), rstr_l=list(c(1:5))))
+#' 
+#' [1] 2 3
+#' 
+#' @export
+
+id_keepr <- function(inpt_df, col_v=c(), el_v=c(), rstr_l=NA){
+
+    rtn_v <- c(1:nrow(inpt_df))
+
+    if (typeof(col_v) == "character"){
+
+        cl_nms <- colnames(inpt_df)
+
+        for (i in 1:length(col_v)){
+
+                col_v[i] <- match(col_v[i], cl_nms)
+
+        }
+
+        col_v <- as.numeric(col_v)
+
+    }
+
+    if (all(is.na(rstr_l))){
+
+        for (i in 1:length(col_v)){
+
+            rtn_v <- rtn_v[inpt_df[rtn_v, col_v[i]] == el_v[i]]  
+
+        }
+
+        return(rtn_v)
+
+    }else if (length(rstr_l) < length(col_v)){
+
+            lst_v <- unlist(rstr_l[length(rstr_l)])
+
+            for (i in (length(rstr_l)+1):length(col_v)){
+
+                rstr_l <- append(x=rstr_l, values=list(lst_v))
+
+            }
+
+    }
+
+    pre_vec <- c()
+
+    fun <- function() { return(c(pre_vec, F)) }
+
+    for (i in 1:length(col_v)){
+
+        pre_vec2 <- mapply(function(x) return(fun()), c(1:length(rtn_v)))
+
+        interst <- intersect(unlist(rstr_l[i]), rtn_v)
+
+        pre_vec2[interst] <- inpt_df[interst, col_v[i]] == el_v[i]
+
+        rtn_v <- rtn_v[pre_vec2]  
+
+    }
+
+    return(rtn_v)
+
+}
+
+#' unique_df
+#' 
+#' Returns the input dataframe with the unique columns or rows.
+#'
+#' @param inpt_df is the input dataframe
+#' @param col is a parameter that specifies if the dataframe returned should have unique columns or rows, defaults to F, so the dataframe returned by default has unique rows
+#' @examples
+#'
+#' df1 <- data.frame(c(1, 2, 1, 3), c("a", "z", "a", "p"))
+#' 
+#' print(unique_df(inpt_df=df1))
+#' 
+#'    c.1..2..1..3. c..a....z....a....p..
+#' 1             1                     a
+#' 2             2                     z
+#' 4             3                     p
+#' 
+#' df1 <- data.frame(c(1, 2, 1, 3), c("a", "z", "a", "p"), c(1, 2, 1, 3))
+#' 
+#' print(unique_df(inpt_df=df1, col=T))
+#' 
+#'   cur_v cur_v
+#' 1     1     a
+#' 2     2     z
+#' 3     1     a
+#' 4     3     p
+#' 
+#' @export
+
+unique_df <- function(inpt_df, col=F){
+
+        comp_l <- list()
+
+        if (col){
+
+                rtn_df <- data.frame(matrix(data=NA, nrow=nrow(inpt_df), ncol=0))
+
+                for (col in 1:ncol(inpt_df)){
+
+                        cur_v <- inpt_df[, col]
+
+                        if ((list(cur_v) %in% comp_l) == F){ rtn_df <- cbind(rtn_df, cur_v) }
+
+                        comp_l <- append(x=comp_l, values=list(cur_v))
+
+                }
+
+        }else{
+
+                rtn_df <- data.frame(matrix(data=NA, nrow=0, ncol=ncol(inpt_df)))
+
+                for (row in 1:nrow(inpt_df)){
+
+                        cur_v <- inpt_df[row, ]
+
+                        if ((list(cur_v) %in% comp_l) == F){ rtn_df <- rbind(rtn_df, cur_v) }
+
+                        comp_l <- append(x=comp_l, values=list(cur_v))
+
+                }
+
+        }
+
+    return(rtn_df)
+
+}
+
+#' non_unique
+#'
+#' Returns the element that are not unique from the input vector
+#'
+#' @param inpt_v  is the input vector containing the elements
+#' @param occu is a parameter that specifies the occurence of the elements that must be returned, defaults to ">-1-" it means that the function will return all the elements that are present more than one time in inpt_v. The synthax is the following "comparaison_type-actual_value-". The comparaison type may be "==" or ">". Occu can also be a vector containing all the occurence that must have the elements to be returned.
+#' @examples
+#' print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non")))
+#'
+#' [1] "oui" "non"
+#'
+#' print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu="==-2-"))
+#'
+#' [1] "oui"
+#'
+#' print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu=">-2-"))
+#'
+#' [1] "non"
+#' 
+#' print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu=c(1, 3)))
+#' 
+#' [1] "non"   "peut"  "peut1"
+#' @export
+
+non_unique <- function(inpt_v, occu=">-1-"){
+
+   rtn_v <- c()
+
+   if (typeof(occu) == "character"){
+
+           pre_vec <- str_locate(occu, "-(.*?)-")
+
+           occu_v <- unlist(strsplit(occu, split=""))
+
+           max_val <- as.numeric(occu_v[(pre_vec[1]+1):(pre_vec[length(pre_vec)]-1)])
+
+           comp_ <- paste(occu_v[1:(pre_vec[1] - 1)], collapse="")
+
+           if (comp_ == "=="){
+
+                for (el in unique(inpt_v)){ if (sum(inpt_v == el) == max_val) { rtn_v <- c(rtn_v, el) } }
+
+           }
+
+           if (comp_ == ">"){
+
+                for (el in unique(inpt_v)){ if (sum(inpt_v == el) > max_val) { rtn_v <- c(rtn_v, el) } }
+
+           }
+
+   }else{
+
+          for (el in unique(inpt_v)){ if (sum(inpt_v == el) %in% occu) { rtn_v <- c(rtn_v, el) } }
+
+   }
+
+   return(rtn_v)
+
+}
+
+r_print <- function(inpt_v, sep_="and", begn="This is", end=", voila!"){
+
+        rtn_val <- ""
+
+       for (el in inpt_v){ rtn_val <- paste(rtn_val, el, sep_, sep=" ") } 
+
+       return(paste(begn, rtn_val, end, sep=" "))
+
+}
+
+#' str_remove_untl
+#'
+#' Allow to remove pattern within elements from a vector precisely according to their occurence.
+#'
+#' @param inpt_v is the input vector
+#' @param ptrn_rm_v is a vector containing the patterns to remove
+#' @param untl is a list containing the occurence(s) of each pattern to remove in the elements.
+#' @param nvr_following_ptrn is a sequel of characters that you are sure is not present in any of the elements in inpt_v
+#'
+#' @examples
+#'
+#' vec <- c("45/56-/98mm", "45/56-/98mm", "45/56-/98-mm//")
+#' 
+#' print(str_remove_untl(inpt_v=vec, ptrn_rm_v=c("-", "/"), untl=list(c("max"), c(1))))
+#' 
+#' [1] "4556/98mm"   "4556/98mm"   "4556/98mm//"
+#' 
+#' print(str_remove_untl(inpt_v=vec, ptrn_rm_v=c("-", "/"), untl=list(c("max"), c(1:2))))
+#' 
+#' [1] "455698mm"   "455698mm"   "455698mm//"
+#'
+#' print(str_remove_untl(inpt_v=vec[1], ptrn_rm_v=c("-", "/"), untl=c("max")))
+#'
+#' [1] "455698mm" "455698mm" "455698mm"
+#' 
+#' @export
+
+str_remove_untl <- function(inpt_v, ptrn_rm_v=c(), untl=list(c(1)), nvr_following_ptrn="NA"){
+
+   rtn_v <- c()
+
+   if (length(untl) < length(ptrn_rm_v)){
+
+           for (i in 1:(length(ptrn_rm_v) - (length(untl)))){
+
+                   untl <- append(x=untl, values=list(unlist(untl[length(untl)])))
+
+           }
+
+   }
+
+   for (el in inpt_v){
+
+        pre_el <- el
+
+        cur_el <- el
+
+        for (ptrn in 1:length(ptrn_rm_v)) {
+
+                cur_el <- str_remove(string=cur_el, pattern=ptrn_rm_v[ptrn])
+
+                if (unlist(untl[ptrn])[1] == "max"){
+
+                        while (cur_el != pre_el){
+
+                                pre_el <- cur_el
+
+                                cur_el <- str_remove(string=cur_el, pattern=ptrn_rm_v[ptrn])
+
+                        }
+
+                }else {
+
+                        cur_untl <- unlist(untl[ptrn])
+
+                        cnt = 1
+
+                        pre_cnt <- 1
+
+                        rm_ids <- c()
+
+                        cur_el_vstr <- cur_el
+
+                        cur_untl <- cur_untl - 1
+
+                        cur_untl <- cur_untl[cur_untl > 0]
+
+                        cnt2 = -1
+
+                        while (cur_el_vstr != pre_el & cnt <= length(cur_untl)){
+
+                                for (i in pre_cnt:cur_untl[cnt]){
+
+                                        rm_id <- str_locate(string=cur_el_vstr, pattern=ptrn_rm_v[ptrn])
+
+                                        pre_el <- cur_el_vstr
+                                        
+                                        cur_el_vstr <- str_remove(string=cur_el_vstr, pattern=ptrn_rm_v[ptrn])
+
+                                        cnt2 = cnt2 + 1
+
+                                }
+
+                                rm_id <- rm_id + cnt2
+
+                                if (all(is.na(rm_id)) == F){  rm_ids <- c(rm_ids, rm_id[1]:rm_id[2]) }
+
+                                pre_cnt = cur_untl[cnt] + 1
+
+                                cnt = cnt + 1
+
+                        }
+
+                        if (length(rm_ids) > 0){
+
+                                cur_el <- unlist(strsplit(x=cur_el, split=""))[-rm_ids]
+
+                                cur_el <- paste(cur_el, collapse="")
+
+                        }
+
+                }
+
+        }
+
+        rtn_v <- c(rtn_v, cur_el)
+
+   }
+
+   return(rtn_v)
+
+}
+
+#' regroupr
+#'
+#' Allow to sort data like "c(X1/Y1/Z1, X2/Y1/Z2, ...)" to what you want. For example it can be to "c(X1/Y1/21, X1/Y1/Z2, ...)"
+#'
+#' @param inpt_v is the input vector containing all the data you want to sort in a specific way. All the sub-elements should be separated by a unique separator such as "-" or "/"
+#' @param sep_ is the unique separator separating the sub-elements in each elements of inpt_v
+#' @param order is a vector describing the way the elements should be sorted. For example if you want this dataset  "c(X1/Y1/Z1, X2/Y1/Z2, ...)" to be sorted by the last element you should have order=c(3:1), for example, and it should returns something like this c(X1/Y1/Z1, X2/Y1/Z1, X1/Y2/Z1, ...) assuming you have only two values for X. 
+#' @param l_order is a list containing the vectors of values you want to order first for each sub-elements
+#' @examples 
+#' vec <- multitud(l=list(c("a", "b"), c("1", "2"), c("A", "Z", "E"), c("Q", "F")), sep_="/")
+#' 
+#'
+#' print(vec)
+#' 
+#'  [1] "a/1/A/Q" "b/1/A/Q" "a/2/A/Q" "b/2/A/Q" "a/1/Z/Q" "b/1/Z/Q" "a/2/Z/Q"
+#'  [8] "b/2/Z/Q" "a/1/E/Q" "b/1/E/Q" "a/2/E/Q" "b/2/E/Q" "a/1/A/F" "b/1/A/F"
+#' [15] "a/2/A/F" "b/2/A/F" "a/1/Z/F" "b/1/Z/F" "a/2/Z/F" "b/2/Z/F" "a/1/E/F"
+#' [22] "b/1/E/F" "a/2/E/F" "b/2/E/F"
+#'
+#' print(regroupr(inpt_v=vec, sep_="/"))
+#'
+#'  [1] "a/1/1/1"   "a/1/2/2"   "a/1/3/3"   "a/1/4/4"   "a/1/5/5"   "a/1/6/6"  
+#'  [7] "a/2/7/7"   "a/2/8/8"   "a/2/9/9"   "a/2/10/10" "a/2/11/11" "a/2/12/12"
+#' [13] "b/1/13/13" "b/1/14/14" "b/1/15/15" "b/1/16/16" "b/1/17/17" "b/1/18/18"
+#' [19] "b/2/19/19" "b/2/20/20" "b/2/21/21" "b/2/22/22" "b/2/23/23" "b/2/24/24"
+#'
+#'  vec <- vec[-2]
+#'
+#'  print(regroupr(inpt_v=vec, sep_="/"))
+#'
+#'  [1] "a/1/1/1"   "a/1/2/2"   "a/1/3/3"   "a/1/4/4"   "a/1/5/5"   "a/1/6/6"  
+#'  [7] "a/2/7/7"   "a/2/8/8"   "a/2/9/9"   "a/2/10/10" "a/2/11/11" "a/2/12/12"
+#' [13] "b/1/13/13" "b/1/14/14" "b/1/15/15" "b/1/16/16" "b/1/17/17" "b/2/18/18"
+#' [19] "b/2/19/19" "b/2/20/20" "b/2/21/21" "b/2/22/22" "b/2/23/23"
+#'
+#' print(regroupr(inpt_v=vec, sep_="/", order=c(4:1)))
+#'
+#' [1] "1/1/A/Q"   "2/2/A/Q"   "3/3/A/Q"   "4/4/A/Q"   "5/5/Z/Q"   "6/6/Z/Q"  
+#'  [7] "7/7/Z/Q"   "8/8/Z/Q"   "9/9/E/Q"   "10/10/E/Q" "11/11/E/Q" "12/12/E/Q"
+#' [13] "13/13/A/F" "14/14/A/F" "15/15/A/F" "16/16/A/F" "17/17/Z/F" "18/18/Z/F"
+#' [19] "19/19/Z/F" "20/20/Z/F" "21/21/E/F" "22/22/E/F" "23/23/E/F" "24/24/E/F"
+#'
+#' @export
+
+regroupr <- function(inpt_v, sep_="-", order=c(1:length(unlist(strsplit(x=inpt_v[1], split=sep_)))), l_order=NA){
+
+        id_keepr <- function(inpt_df, col_v=c(), el_v=c(), rstr_l=NA){
+
+            rtn_v <- c(1:nrow(inpt_df))
+
+            if (typeof(col_v) == "character"){
+
+                cl_nms <- colnames(inpt_df)
+
+                for (i in 1:length(col_v)){
+
+                        col_v[i] <- match(col_v[i], cl_nms)
+
+                }
+
+                col_v <- as.numeric(col_v)
+
+            }
+
+            if (all(is.na(rstr_l))){
+
+                for (i in 1:length(col_v)){
+
+                    rtn_v <- rtn_v[inpt_df[rtn_v, col_v[i]] == el_v[i]]  
+
+                }
+
+                return(rtn_v)
+
+            }else if (length(rstr_l) < length(col_v)){
+
+                    lst_v <- unlist(rstr_l[length(rstr_l)])
+
+                    for (i in (length(rstr_l)+1):length(col_v)){
+
+                        rstr_l <- append(x=rstr_l, values=list(lst_v))
+
+                    }
+
+            }
+
+            pre_vec <- c()
+
+            fun <- function() { return(c(pre_vec, F)) }
+
+            for (i in 1:length(col_v)){
+
+                pre_vec2 <- mapply(function(x) return(fun()), c(1:length(rtn_v)))
+
+                interst <- intersect(unlist(rstr_l[i]), rtn_v)
+
+                pre_vec2[interst] <- (inpt_df[interst, col_v[i]] == el_v[i])
+
+                rtn_v <- rtn_v[pre_vec2]  
+
+            }
+
+            return(rtn_v)
+
+        }
+
+        colins_df <- function(inpt_df, target_col=list(), target_pos=list()){
+
+            cl_nms <- colnames(inpt_df)
+
+            for (id_vec in 1:length(target_pos)){
+
+                    vec <- unlist(target_pos[id_vec])
+
+                    if (typeof(vec) == "character"){
+
+                            pre_v <- c()
+
+                            for (el in vec){
+
+                                pre_v <- c(pre_v, match(el, cl_nms))
+
+                            }
+
+                            target_pos <- append(x=target_pos, values=list(pre_v), after=id_vec)
+
+                            target_pos <- target_pos[-id_vec]
+
+                    }
+
+            }
+
+            for (cl in 1:length(target_col)){
+
+                cur_col <- unlist(target_col[cl])
+
+                cur_pos_v <- unlist(target_pos[cl])
+
+                for (pos in 1:length(cur_pos_v)){
+
+                    idx <- cur_pos_v[pos]
+
+                    if (idx == 0){
+
+                        inpt_df <- cbind(cur_col, inpt_df[(idx+1):ncol(inpt_df)])
+
+                    }else if (idx < ncol(inpt_df)){
+
+                        inpt_df <- cbind(inpt_df[1:idx], cur_col, inpt_df[(idx+1):ncol(inpt_df)])
+
+                    }else{
+
+                        inpt_df <- cbind(inpt_df[1:idx], cur_col)
+
+                    }
+
+                    if (pos < length(cur_pos_v)){
+
+                        cur_pos_v[(pos+1):length(cur_pos_v)] = cur_pos_v[(pos+1):length(cur_pos_v)] + 1 
+                 
+                    }
+
+                    if (cl < length(target_pos)){
+
+                            for (i in (cl+1):length(target_pos)){
+
+                                target_pos <- append(x=target_pos, values=(unlist(target_pos[i])+1), after=i)
+
+                                target_pos <- target_pos[-i]
+                            
+                            } 
+
+                    }
+
+                }
+
+            }
+
+          return(inpt_df)
+
+    }
+    
+    cut_v <- function(inpt_v, sep_=""){
+
+        rtn_df <- data.frame(matrix(data=NA, nrow=0, ncol=length(unlist(strsplit(inpt_v[1], split=sep_)))))
+
+        for (el in inpt_v){ rtn_df <- rbind(rtn_df, unlist(strsplit(el, split=sep_))) }
+
+        return(rtn_df)
+
+    }
+
+    paste_df <- function(inpt_df, sep=""){
+
+            if (ncol(as.data.frame(inpt_df)) == 1){ 
+
+                return(inpt_df) 
+
+            }else {
+
+                rtn_df <- inpt_df[,1]
+
+                for (i in 2:ncol(inpt_df)){
+
+                    rtn_df <- paste(rtn_df, inpt_df[,i], sep=sep)
+
+                }
+
+                return(rtn_df)
+
+            }
+
+  }
+
+  w_df <- cut_v(inpt_v, sep_=sep_) 
+
+  if (all(is.na(l_order))){
+
+          l_order <- list()
+
+          for (i in order){
+
+                  l_order <- append(x=l_order, values=list(unique(w_df[,i])))
+
+          }
+
+  }
+
+  cur_el <- w_df[, order[1]]  
+
+  v_ids <- c(1:nrow(w_df))
+
+  rec_ids = 0
+
+  for (el in unlist(l_order[1])){
+
+    cur_ids <- which(cur_el == el)
+
+    v_ids[(rec_ids + 1):(rec_ids + length(cur_ids))] <- el 
+
+    rec_ids = rec_ids + length(cur_ids)
+
+  }
+
+  w_df <- cbind(w_df[, order[1]], w_df)
+
+  order <- order + 1
+
+  cnt = 2
+
+  for (I in order[2:length(order)]){
+
+        cur_el <- w_df[, I]
+
+        cur_v_ids <- c(1:nrow(w_df))
+
+        pre_bind_v <- c(1:nrow(w_df))
+
+        rec_ids <- c()
+
+        rec_ids2 <- c()
+
+        for (el in unique(v_ids)){ 
+
+                cur_ids_stay <- which(w_df[, 1] == el) 
+
+                rec_ids2 <- c(rec_ids, cur_ids_stay)
+
+                for (el2 in unlist(l_order[cnt])){
+
+                    cur_ids <- id_keepr(inpt_df=w_df, col_v=c(I), el_v=c(el2), rstr_l=list(list(cur_ids_stay))) 
+
+                    if (length(cur_ids) > 0){
+
+                        pre_bind_v[cur_ids] <- el2
+
+                        cur_v_ids[(length(rec_ids)+1):(length(rec_ids)+length(cur_ids))] <- el2
+
+                        rec_ids <- c(rec_ids, cur_ids)
+
+                    }
+
+                }
+
+        }
+
+        if (order[cnt] > order[(cnt-1)]){
+
+                w_df[, 1] <- paste_df(inpt_df=data.frame(w_df[, 1], pre_bind_v), sep="")
+
+                v_ids <- as.vector(mapply(function(x, y) return(paste(x, sep_, y, sep="")), v_ids, cur_v_ids))
+
+        }else{
+
+                w_df[, 1] <- paste_df(inpt_df=data.frame(pre_bind_v, w_df[, 1]), sep="")
+
+                v_ids <- as.vector(mapply(function(x, y) return(paste(y, sep_, x, sep="")), v_ids, cur_v_ids))
+
+        }
+
+        cnt = cnt + 1
+
+  }
+
+  return(v_ids)
+
+}
+
+#' vec_in_df
+#'
+#' Allow to get if a vector is in a dataframe. Returns the row and column of the vector in the dataframe if the vector is contained in the dataframe.
+#'
+#' @param inpt_df is the input dataframe
+#' @param inpt_vec is the vector that may be in the input dataframe
+#' @param coeff is the "slope coefficient" of inpt_vec
+#' @param conventinal is if a positive slope coefficient means that the vector goes upward or downward 
+#' @param stop_untl is the maximum number of the input vector the function returns, if in the dataframe 
+#' @examples
+#'
+#' df1 <- data.frame(c(1:5), c(5:1), c("a", "z", "z", "z", "a"))
+#' 
+#' print(df1)
+#' 
+#'   c.1.5. c.5.1. c..a....z....z....z....a..
+#' 1      1      5                          a
+#' 2      2      4                          z
+#' 3      3      3                          z
+#' 4      4      2                          z
+#' 5      5      1                          a
+#'
+#' print(vec_in_df(inpt_df=df1, inpt_vec=c(5, 4, "z"), coeff=1))
+#'
+#' NULL
+#' 
+#' print(vec_in_df(inpt_df=df1, inpt_vec=c(5, 2, "z"), coeff=1))
+#' 
+#' [1] 5 1
+#'
+#' print(vec_in_df(inpt_df=df1, inpt_vec=c(3, "z"), coeff=1))
+#'
+#' [1] 3 2
+#'
+#' print(vec_in_df(inpt_df=df1, inpt_vec=c(4, "z"), coeff=-1))
+#' 
+#'[1] 2 2
+#'
+#' print(vec_in_df(inpt_df=df1, inpt_vec=c(2, 3, "z"), coeff=-1))
+#' 
+#' [1] 2 1
+#' 
+#' print(vec_in_df(inpt_df=df1, inpt_vec=c(5, 2, "z"), coeff=-1, conventional=T))
+#'  
+#' [1] 5 1
+#'
+#' df1[4, 2] <- 1
+#' 
+#' print(vec_in_df(inpt_df=df1, inpt_vec=c(1, "z"), coeff=-1, conventional=T, stop_untl=4))
+#' 
+#' [1] 4 2 5 2
+#' 
+#' @export
+
+vec_in_df <- function(inpt_df, inpt_vec=c(), coeff=0, stop_untl=1, conventional=F){
+
+    if (conventional){ coeff <- coeff * -1 }
+
+    rtn_v <- c()
+
+    encounter_cnt = 0
+
+    if (coeff > -1){
+
+            for (I in 1:(ncol(inpt_df) - length(inpt_vec) + 1)){
+
+                    strt_id = 1 + (length(inpt_vec) * coeff)
+
+                    for (i in strt_id:nrow(inpt_df)){
+
+                        if (inpt_df[i, I] == inpt_vec[1]){
+
+                                cur_row = i
+
+                                cur_col = I 
+
+                                col_cnt = 1
+
+                                while (col_cnt < (length(inpt_vec) + 1) & inpt_df[cur_row, cur_col] == inpt_vec[col_cnt]){
+
+                                    cur_row = cur_row - coeff
+
+                                    if (!(col_cnt) == length(inpt_vec)){
+
+                                        cur_col = cur_col + 1
+
+                                    }
+
+                                    col_cnt = col_cnt + 1
+
+                                }
+
+                                if (cur_col == ncol(inpt_df)){
+
+                                        rtn_v <- c(rtn_v, i, I)
+
+                                        encounter_cnt = encounter_cnt + 1
+
+                                        if (encounter_cnt == stop_untl){
+
+                                                return(rtn_v)
+
+                                        }
+
+                                }
+
+                        }
+
+                    }
+
+            }
+
+    }else{
+
+            for (I in 1:(ncol(inpt_df) - length(inpt_vec) + 1)){
+
+                    strt_id = nrow(inpt_df) - (length(inpt_vec) * abs(coeff))
+
+                    for (i in 1:strt_id){
+
+                        if (inpt_df[i, I] == inpt_vec[1]){
+
+                                cur_row = i 
+
+                                cur_col = I
+
+                                col_cnt = 1
+
+                                while (col_cnt < (length(inpt_vec) + 1) & inpt_df[cur_row, cur_col] == inpt_vec[col_cnt]){
+
+                                    cur_row = cur_row + abs(coeff)
+
+                                    if (!(col_cnt) == length(inpt_vec)){
+
+                                        cur_col = cur_col + 1
+
+                                    }
+
+                                    col_cnt = col_cnt + 1
 
 
+                                }
+
+                                if (cur_col == ncol(inpt_df)){
+
+                                        rtn_v <- c(rtn_v, i, I)
+
+                                        encounter_cnt = encounter_cnt + 1
+
+                                        if (encounter_cnt == stop_untl){
+
+                                                return(rtn_v)
+
+                                        }
+
+                                }
+
+                        }
+
+                    }
+
+            }
+
+    }
+
+    return(rtn_v)
+
+}
+
+#' date_converter_reverse
+#'
+#' Allow to convert single date value like 2025.36 year to a date like second/minutehour/day/month/year (snhdmy)
+#' 
+#' @param inpt_date is the input date 
+#' @param convert_to is the date format the input date will be converted
+#' @param frmt is the time unit of the input date
+#' @param sep_ is the separator of the outputed date
+#' @examples
+#'
+#' print(date_converter_reverse(inpt_date="2024.929", convert_to="hmy", frmt="y", sep_="-"))
+#' 
+#' [1] "110-11-2024"
+#' 
+#' print(date_converter_reverse(inpt_date="2024.929", convert_to="dmy", frmt="y", sep_="-"))
+#'
+#' [1] "4-11-2024"
+#' 
+#' print(date_converter_reverse(inpt_date="2024.929", convert_to="hdmy", frmt="y", sep_="-"))
+#'
+#' [1] "14-4-11-2024"
+#' 
+#' print(date_converter_reverse(inpt_date="2024.929", convert_to="dhym", frmt="y", sep_="-"))
+#' 
+#' [1] "4-14-2024-11"
+#'
+#' @export
+
+date_converter_reverse <- function(inpt_date, convert_to="dmy", frmt="y", sep_="-"){
+ 
+        converter_date <- function(inpt_date, convert_to, frmt="snhdmy", sep_="-"){
+
+          is_divisible <- function(inpt_v=c(), divisible_v=c()){
+
+                cnt = 1
+
+                while (length(inpt_v) > 0 & cnt < (length(divisible_v) + 1)){
+
+                        inpt_v <- inpt_v[(inpt_v %% divisible_v[cnt]) == 0]
+
+                        cnt = cnt + 1
+
+                }
+
+                return(inpt_v)
+
+          }
+
+          leap_yr <- function(year){
+
+                  if (year == 0){ return(F) }
+
+                  if (year %% 4 == 0){
+                    
+                    if (year %% 100 == 0){
+                      
+                      if (year %% 400 == 0){
+                        
+                        bsx <- T
+                        
+                      }else{
+                        
+                        bsx <- F
+                        
+                      }
+                      
+                    }else{
+                      
+                      bsx <- T
+                      
+                    }
+                    
+                  }else{
+                    
+                    bsx <- F
+                    
+                  }
+
+                  return(bsx)
+
+          }
+
+          inpt_date <- unlist(strsplit(x=inpt_date, split=sep_)) 
+
+          stay_date_v <- c("s", "n", "h", "d", "m", "y")
+
+          stay_date_val <- c(0, 0, 0, 0, 0, 0)
+
+          frmt <- unlist(strsplit(x=frmt, split=""))
+
+          for (el in 1:length(frmt)){
+
+                  stay_date_val[grep(pattern=frmt[el], x=stay_date_v)] <- as.numeric(inpt_date[el]) 
+
+          }
+
+          l_dm1 <- c(31, 28, 31, 30, 31, 30, 31, 31,
+                    30, 31, 30, 31)
+
+          l_dm2 <- c(31, 29, 31, 30, 31, 30, 31, 31,
+                    30, 31, 30, 31)
+
+          if (!(leap_yr(year=stay_date_val[6]))){
+
+                l_dm <- l_dm1
+
+          }else if (stay_date_val[6] == 0){
+
+                l_dm <- c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+          }else{
+
+                l_dm <- l_dm2
+
+          }
+
+          may_bsx_v <- c(1:stay_date_val[6])
+
+          may_bsx_v <- may_bsx_v[may_bsx_v > 0] 
+
+          may_bsx_v <- may_bsx_v[(may_bsx_v %% 4) == 0]
+
+          val_mult <- c((1 / 86400), (1 / 1440), (1/24), 1, 0, 365)
+
+          day_val = 0
+
+          for (dt in length(stay_date_val):1){
+
+                day_val = day_val + stay_date_val[dt] * val_mult[dt] 
+
+          }
+
+          day_val = day_val + length(may_bsx_v[(may_bsx_v %% 100) != 0]) + length(is_divisible(inpt_v=may_bsx_v, divisible_v=c(100, 400))) 
+
+          if (str_detect(string=stay_date_val[5], pattern="\\.")){
+
+                  all_part <- as.numeric(unlist(strsplit(x=as.character(stay_date_val[5]), split="\\.")))
+
+                  int_part <- all_part[1]
+
+                  if (int_part != 0){
+
+                        day_val = day_val + sum(l_dm[1:int_part])
+
+                  }else{ int_part <- 1 }
+
+                  day_val = day_val + l_dm1[int_part] * as.numeric(paste("0.", all_part[2], sep=""))
+
+          }else if (stay_date_val[5] != 0){
+
+                day_val = day_val + sum(l_dm1[1:stay_date_val[5]]) 
+
+          }
+
+          val_mult2 <- c(60, 60, 24, 1)
+
+          idx_convert <- grep(pattern=convert_to, x=stay_date_v)
+
+          if (idx_convert < 5){
+
+                for (i in 4:idx_convert){
+
+                    day_val = day_val * val_mult2[i]
+
+                }
+
+                return(day_val)
+
+          }else{
+
+            year = 0
+
+            l_dm <- l_dm1
+
+            month = 0
+
+            bsx_cnt = 0
+
+            while ((day_val / sum(l_dm)) >= 1 ){
+
+                l_dmb <- l_dm
+
+                day_val2 = day_val
+
+                day_val = day_val - sum(l_dm)
+
+                month = month + 12
+
+                year = year + 1
+
+                if (!(leap_yr(year=year))){
+
+                        l_dm <- l_dm1
+
+                }else{
+
+                        bsx_cnt = bsx_cnt + 1
+
+                        l_dm <- l_dm2
+
+                } 
+
+            }
+
+            if (leap_yr(year=year)){
+
+                day_val = day_val - 1
+
+            }
+
+            cnt = 1
+
+            while ((day_val / l_dm[cnt]) >= 1){
+
+                day_val = day_val - l_dm[cnt]
+
+                month = month + 1
+
+                cnt = cnt + 1 
+
+            }
+
+            month = month + (day_val / l_dm[cnt])
+
+            if (convert_to == "m"){
+
+                    return(month)
+
+            }else{
+
+                    year = year + ((month - 12 * year) / 12)
+
+                    return(year)
+
+            }
+
+          }
+
+        }
+
+        date_symb <- c("s", "n", "h", "d", "m", "y")
+
+        date_val <- c(0, 0, 0, 0, 0, 0)
+
+        convert_to_v <- unlist(strsplit(x=convert_to, split=""))
+
+        pre_v <- c()
+
+        for (el in convert_to_v){
+
+            pre_v <- c(pre_v, grep(pattern=el, x=date_symb))
+
+        }
+
+        pre_v2 <- sort(x=pre_v, decreasing=T)
+
+        cvrt_v <- date_symb[pre_v2]
+
+        calcd <- as.character(converter_date(inpt_date=as.character(inpt_date), convert_to=cvrt_v[1], frmt=frmt)) 
+
+        if (str_detect(pattern="e", string=calcd)){ calcd <- "0.0001" }
+
+        pre_str <- as.numeric(unlist(strsplit(x=calcd, split="\\.")))
+
+        inpt_date <- paste("0.", pre_str[2], sep="")
+
+        date_val[pre_v2[1]] <- pre_str[1]
+
+        if (length(convert_to_v) > 1){
+
+            for (el in 1:(length(cvrt_v) - 1)){
+
+                calcd <- as.character(converter_date(inpt_date=as.character(inpt_date), convert_to=cvrt_v[el+1], frmt=cvrt_v[el]))
+               
+                pre_str <- as.numeric(unlist(strsplit(x=calcd, split="\\.")))
+
+                inpt_date <- paste("0.", pre_str[2], sep="")
+
+                date_val[pre_v2[el+1]] <- pre_str[1]
+
+            }
+
+        }
+
+    return(paste(date_val[pre_v], collapse=sep_))
+
+}
+
+#' converter_format
+#'
+#' Allow to convert a format to another
+#'
+#' @param inpt_val is the input value that is linked to the format
+#' @param inpt_frmt is the format of the input value
+#' @param sep_ is the separator of the value in inpt_val
+#' @param frmt is the format you want to convert to
+#' @param default_val is the default value given to the units that are not present in the input format
+#' @examples
+#'
+#' print(converter_format(inpt_val="23-12-05-1567", sep_="-", 
+#'                        inpt_frmt="shmy", frmt="snhdmy", default_val="00"))
+#'
+#' [1] "23-00-12-00-05-1567"
+#'
+#' print(converter_format(inpt_val="23-12-05-1567", sep_="-", 
+#'                        inpt_frmt="shmy", frmt="Pnhdmy", default_val="00"))
+#' 
+#' [1] "00-00-12-00-05-1567"
+#'
+#' @export
+
+converter_format <- function(inpt_val, sep_="-", inpt_frmt, 
+                             frmt, default_val="00"){
+
+        frmt <- unlist(strsplit(x=frmt, split=""))
+
+        inpt_frmt <- unlist(strsplit(x=inpt_frmt, split=""))
+        
+        inpt_val <- unlist(strsplit(x=inpt_val, split=sep_))
+
+        val_v <- c()
+
+        for (i in 1:length(frmt)){
+
+                val_v <- c(val_v, default_val)
+
+        }
+
+        for (el in 1:length(inpt_val)){
+
+                pre_grep <- grep(x=frmt, pattern=inpt_frmt[el])
+
+                if (!identical(pre_grep, integer(0))){
+
+                        val_v[pre_grep] <- inpt_val[el]
+
+                }
+
+        }
+
+        return(paste(val_v, collapse=sep_))
+
+}
+
+#' date_addr
+#' 
+#' Allow to add or substract two dates that have the same time unit or not
+#'
+#' @param date1 is the date from which the second date will be added or substracted
+#' @param date2 is the date that will be added or will substract date1
+#' @param add equals to FALSE if you want date1 - date2 and TRUE if you want date1 + date2
+#' @param frmt1 is the format of date1 (snhdmy) (second, minute, hour, day, monthn year)
+#' @param frmt2 is the format of date2 (snhdmy)
+#' @param sep_ is the separator of date1 and date2
+#' @param convert_to is the format of the outputed date
+#' @examples
+#'
+#' print(date_addr(date1="25-02", date2="58-12-08", frmt1="dm", frmt2="shd", sep_="-", 
+#'                 convert_to="dmy"))
+#'
+#' [1] "18-2-0"
+#'
+#' print(date_addr(date1="25-02", date2="58-12-08", frmt1="dm", frmt2="shd", sep_="-", 
+#'                 convert_to="dmy", add=T))
+#'
+#' [1] "3-3-0"
+#'
+#' print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy", frmt2="dm", sep_="-", 
+#'                 convert_to="dmy", add=T))
+#'
+#' [1] "27-3-2024"
+#'
+#' print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy", frmt2="dm", sep_="-", 
+#'                 convert_to="dmy", add=F))
+#' 
+#' [1] "23-1-2024" 
+#'
+#' print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy", frmt2="dm", sep_="-", 
+#'                  convert_to="n", add=F))
+#'
+#' [1] "1064596320"
+#' 
+#' print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy", frmt2="dm", sep_="-", 
+#'                  convert_to="s", add=F))
+#'
+#' [1] "63875779200"
+#'
+#' @export
 
 
+date_addr <- function(date1, date2, add=F, frmt1, frmt2=frmt1, sep_="-", convert_to="dmy"){
+ 
+        converter_format <- function(inpt_val, sep_="-", inpt_frmt, 
+                             frmt, default_val="00"){
 
+                frmt <- unlist(strsplit(x=frmt, split=""))
+
+                inpt_frmt <- unlist(strsplit(x=inpt_frmt, split=""))
+                
+                inpt_val <- unlist(strsplit(x=inpt_val, split=sep_))
+
+                val_v <- c()
+
+                for (i in 1:length(frmt)){
+
+                        val_v <- c(val_v, default_val)
+
+                }
+
+                for (el in 1:length(inpt_val)){
+
+                        pre_grep <- grep(x=frmt, pattern=inpt_frmt[el])
+
+                        if (!identical(pre_grep, integer(0))){
+
+                                val_v[pre_grep] <- inpt_val[el]
+
+                        }
+
+                }
+
+                return(paste(val_v, collapse=sep_))
+
+        }
+
+        converter_date <- function(inpt_date, convert_to, frmt="snhdmy", sep_="-"){
+
+          is_divisible <- function(inpt_v=c(), divisible_v=c()){
+
+                cnt = 1
+
+                while (length(inpt_v) > 0 & cnt < (length(divisible_v) + 1)){
+
+                        inpt_v <- inpt_v[(inpt_v %% divisible_v[cnt]) == 0]
+
+                        cnt = cnt + 1
+
+                }
+
+                return(inpt_v)
+
+          }
+
+          leap_yr <- function(year){
+
+                  if (year == 0){ return(F) }
+
+                  if (year %% 4 == 0){
+                    
+                    if (year %% 100 == 0){
+                      
+                      if (year %% 400 == 0){
+                        
+                        bsx <- T
+                        
+                      }else{
+                        
+                        bsx <- F
+                        
+                      }
+                      
+                    }else{
+                      
+                      bsx <- T
+                      
+                    }
+                    
+                  }else{
+                    
+                    bsx <- F
+                    
+                  }
+
+                  return(bsx)
+
+          }
+
+          inpt_date <- unlist(strsplit(x=inpt_date, split=sep_)) 
+
+          stay_date_v <- c("s", "n", "h", "d", "m", "y")
+
+          stay_date_val <- c(0, 0, 0, 0, 0, 0)
+
+          frmt <- unlist(strsplit(x=frmt, split=""))
+
+          for (el in 1:length(frmt)){
+
+                  stay_date_val[grep(pattern=frmt[el], x=stay_date_v)] <- as.numeric(inpt_date[el]) 
+
+          }
+
+          l_dm1 <- c(31, 28, 31, 30, 31, 30, 31, 31,
+                    30, 31, 30, 31)
+
+          l_dm2 <- c(31, 29, 31, 30, 31, 30, 31, 31,
+                    30, 31, 30, 31)
+
+          if (!(leap_yr(year=stay_date_val[6]))){
+
+                l_dm <- l_dm1
+
+          }else if (stay_date_val[6] == 0){
+
+                l_dm <- c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+          }else{
+
+                l_dm <- l_dm2
+
+          }
+
+          may_bsx_v <- c(1:stay_date_val[6])
+
+          may_bsx_v <- may_bsx_v[may_bsx_v > 0] 
+
+          may_bsx_v <- may_bsx_v[(may_bsx_v %% 4) == 0]
+
+          val_mult <- c((1 / 86400), (1 / 1440), (1/24), 1, 0, 365)
+
+          day_val = 0
+
+          for (dt in length(stay_date_val):1){
+
+                day_val = day_val + stay_date_val[dt] * val_mult[dt] 
+
+          }
+
+          day_val = day_val + length(may_bsx_v[(may_bsx_v %% 100) != 0]) + length(is_divisible(inpt_v=may_bsx_v, divisible_v=c(100, 400))) 
+
+          if (str_detect(string=stay_date_val[5], pattern="\\.")){
+
+                  all_part <- as.numeric(unlist(strsplit(x=as.character(stay_date_val[5]), split="\\.")))
+
+                  int_part <- all_part[1]
+
+                  if (int_part != 0){
+
+                        day_val = day_val + sum(l_dm[1:int_part])
+
+                  }else{ int_part <- 1 }
+
+                  day_val = day_val + l_dm1[int_part] * as.numeric(paste("0.", all_part[2], sep=""))
+
+          }else if (stay_date_val[5] != 0){
+
+                day_val = day_val + sum(l_dm1[1:stay_date_val[5]]) 
+
+          }
+
+          val_mult2 <- c(60, 60, 24, 1)
+
+          idx_convert <- grep(pattern=convert_to, x=stay_date_v)
+
+          if (idx_convert < 5){
+
+                for (i in 4:idx_convert){
+
+                    day_val = day_val * val_mult2[i]
+
+                }
+
+                return(day_val)
+
+          }else{
+
+            year = 0
+
+            l_dm <- l_dm1
+
+            month = 0
+
+            bsx_cnt = 0
+
+            while ((day_val / sum(l_dm)) >= 1 ){
+
+                l_dmb <- l_dm
+
+                day_val2 = day_val
+
+                day_val = day_val - sum(l_dm)
+
+                month = month + 12
+
+                year = year + 1
+
+                if (!(leap_yr(year=year))){
+
+                        l_dm <- l_dm1
+
+                }else{
+
+                        bsx_cnt = bsx_cnt + 1
+
+                        l_dm <- l_dm2
+
+                } 
+
+            }
+
+            if (leap_yr(year=year)){
+
+                day_val = day_val - 1
+
+            }
+
+            cnt = 1
+
+            while ((day_val / l_dm[cnt]) >= 1){
+
+                day_val = day_val - l_dm[cnt]
+
+                month = month + 1
+
+                cnt = cnt + 1 
+
+            }
+
+            month = month + (day_val / l_dm[cnt])
+
+            if (convert_to == "m"){
+
+                    return(month)
+
+            }else{
+
+                    year = year + ((month - 12 * year) / 12)
+
+                    return(year)
+
+            }
+
+          }
+
+        }
+
+        date_converter_reverse <- function(inpt_date, convert_to="dmy", frmt="y", sep_="-"){
+ 
+                converter_date <- function(inpt_date, convert_to, frmt="snhdmy", sep_="-"){
+
+                  is_divisible <- function(inpt_v=c(), divisible_v=c()){
+
+                        cnt = 1
+
+                        while (length(inpt_v) > 0 & cnt < (length(divisible_v) + 1)){
+
+                                inpt_v <- inpt_v[(inpt_v %% divisible_v[cnt]) == 0]
+
+                                cnt = cnt + 1
+
+                        }
+
+                        return(inpt_v)
+
+                  }
+
+                  leap_yr <- function(year){
+
+                          if (year == 0){ return(F) }
+
+                          if (year %% 4 == 0){
+                            
+                            if (year %% 100 == 0){
+                              
+                              if (year %% 400 == 0){
+                                
+                                bsx <- T
+                                
+                              }else{
+                                
+                                bsx <- F
+                                
+                              }
+                              
+                            }else{
+                              
+                              bsx <- T
+                              
+                            }
+                            
+                          }else{
+                            
+                            bsx <- F
+                            
+                          }
+
+                          return(bsx)
+
+                  }
+
+                  inpt_date <- unlist(strsplit(x=inpt_date, split=sep_)) 
+
+                  stay_date_v <- c("s", "n", "h", "d", "m", "y")
+
+                  stay_date_val <- c(0, 0, 0, 0, 0, 0)
+
+                  frmt <- unlist(strsplit(x=frmt, split=""))
+
+                  for (el in 1:length(frmt)){
+
+                          stay_date_val[grep(pattern=frmt[el], x=stay_date_v)] <- as.numeric(inpt_date[el]) 
+
+                  }
+
+                  l_dm1 <- c(31, 28, 31, 30, 31, 30, 31, 31,
+                            30, 31, 30, 31)
+
+                  l_dm2 <- c(31, 29, 31, 30, 31, 30, 31, 31,
+                            30, 31, 30, 31)
+
+                  if (!(leap_yr(year=stay_date_val[6]))){
+
+                        l_dm <- l_dm1
+
+                  }else if (stay_date_val[6] == 0){
+
+                        l_dm <- c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+                  }else{
+
+                        l_dm <- l_dm2
+
+                  }
+
+                  may_bsx_v <- c(1:stay_date_val[6])
+
+                  may_bsx_v <- may_bsx_v[may_bsx_v > 0] 
+
+                  may_bsx_v <- may_bsx_v[(may_bsx_v %% 4) == 0]
+
+                  val_mult <- c((1 / 86400), (1 / 1440), (1/24), 1, 0, 365)
+
+                  day_val = 0
+
+                  for (dt in length(stay_date_val):1){
+
+                        day_val = day_val + stay_date_val[dt] * val_mult[dt] 
+
+                  }
+
+                  day_val = day_val + length(may_bsx_v[(may_bsx_v %% 100) != 0]) + length(is_divisible(inpt_v=may_bsx_v, divisible_v=c(100, 400))) 
+
+                  if (str_detect(string=stay_date_val[5], pattern="\\.")){
+
+                          all_part <- as.numeric(unlist(strsplit(x=as.character(stay_date_val[5]), split="\\.")))
+
+                          int_part <- all_part[1]
+
+                          if (int_part != 0){
+
+                                day_val = day_val + sum(l_dm[1:int_part])
+
+                          }else{ int_part <- 1 }
+
+                          day_val = day_val + l_dm1[int_part] * as.numeric(paste("0.", all_part[2], sep=""))
+
+                  }else if (stay_date_val[5] != 0){
+
+                        day_val = day_val + sum(l_dm1[1:stay_date_val[5]]) 
+
+                  }
+
+                  val_mult2 <- c(60, 60, 24, 1)
+
+                  idx_convert <- grep(pattern=convert_to, x=stay_date_v)
+
+                  if (idx_convert < 5){
+
+                        for (i in 4:idx_convert){
+
+                            day_val = day_val * val_mult2[i]
+
+                        }
+
+                        return(day_val)
+
+                  }else{
+
+                    year = 0
+
+                    l_dm <- l_dm1
+
+                    month = 0
+
+                    bsx_cnt = 0
+
+                    while ((day_val / sum(l_dm)) >= 1 ){
+
+                        l_dmb <- l_dm
+
+                        day_val2 = day_val
+
+                        day_val = day_val - sum(l_dm)
+
+                        month = month + 12
+
+                        year = year + 1
+
+                        if (!(leap_yr(year=year))){
+
+                                l_dm <- l_dm1
+
+                        }else{
+
+                                bsx_cnt = bsx_cnt + 1
+
+                                l_dm <- l_dm2
+
+                        } 
+
+                    }
+
+                    if (leap_yr(year=year)){
+
+                        day_val = day_val - 1
+
+                    }
+
+                    cnt = 1
+
+                    while ((day_val / l_dm[cnt]) >= 1){
+
+                        day_val = day_val - l_dm[cnt]
+
+                        month = month + 1
+
+                        cnt = cnt + 1 
+
+                    }
+
+                    month = month + (day_val / l_dm[cnt])
+
+                    if (convert_to == "m"){
+
+                            return(month)
+
+                    }else{
+
+                            year = year + ((month - 12 * year) / 12)
+
+                            return(year)
+
+                    }
+
+                  }
+
+                }
+
+                date_symb <- c("s", "n", "h", "d", "m", "y")
+
+                date_val <- c(0, 0, 0, 0, 0, 0)
+
+                convert_to_v <- unlist(strsplit(x=convert_to, split=""))
+
+                pre_v <- c()
+
+                for (el in convert_to_v){
+
+                    pre_v <- c(pre_v, grep(pattern=el, x=date_symb))
+
+                }
+
+                pre_v2 <- sort(x=pre_v, decreasing=T)
+
+                cvrt_v <- date_symb[pre_v2]
+
+                calcd <- as.character(converter_date(inpt_date=as.character(inpt_date), convert_to=cvrt_v[1], frmt=frmt)) 
+
+                if (str_detect(pattern="e", string=calcd)){ calcd <- "0.0001" }
+
+                pre_str <- as.numeric(unlist(strsplit(x=calcd, split="\\.")))
+
+                inpt_date <- paste("0.", pre_str[2], sep="")
+
+                date_val[pre_v2[1]] <- pre_str[1]
+
+                if (length(convert_to_v) > 1){
+
+                    for (el in 1:(length(cvrt_v) - 1)){
+
+                        calcd <- as.character(converter_date(inpt_date=as.character(inpt_date), convert_to=cvrt_v[el+1], frmt=cvrt_v[el]))
+                       
+                        pre_str <- as.numeric(unlist(strsplit(x=calcd, split="\\.")))
+
+                        inpt_date <- paste("0.", pre_str[2], sep="")
+
+                        date_val[pre_v2[el+1]] <- pre_str[1]
+
+                    }
+
+                }
+
+            return(paste(date_val[pre_v], collapse=sep_))
+
+        }
+
+        ptrn_twkr <- function(inpt_l, depth="max", sep="-", 
+                              default_val="0", add_sep=T, end_=T){
+          
+          ln <- length(inpt_l)
+          
+          if (depth == "min"){
+            
+            pre_val <- str_count(inpt_l[1], sep)
+            
+            for (i in 2:ln){
+              
+              if (str_count(inpt_l[i], sep) < pre_val){
+                
+                pre_val <- str_count(inpt_l[i], sep)
+                
+              }
+              
+            }
+            
+            depth <- pre_val
+            
+          }
+
+          if (depth == "max"){
+            
+            pre_val <- str_count(inpt_l[1], sep)
+            
+            for (i in 2:ln){
+              
+              if (str_count(inpt_l[i], sep) > pre_val){
+                
+                pre_val <- str_count(inpt_l[i], sep)
+                
+              }
+              
+            }
+            
+            depth <- pre_val
+            
+          }
+
+          if (end_){
+
+                  for (I in 1:ln){
+                   
+                    hmn <- str_count(inpt_l[I], "-")
+                    
+                    if (hmn < depth){
+                     
+                      inpt_l[I] <- paste0(inpt_l[I], sep, default_val)
+
+                      diff <- depth - hmn - 1
+
+                      if (diff > 0){
+                      
+                                if (add_sep == T){
+                                  
+                                  for (i in 1:diff){
+                                  
+                                    inpt_l[I] <- paste0(inpt_l[I], sep, default_val)
+                                  
+                                  }
+                                
+                                }else{
+                                  
+                                  for (i in 1:diff){
+                                    
+                                    inpt_l[I] <- paste0(inpt_l[I], default_val)
+                                    
+                                  }
+                                  
+                                }
+
+                     }
+                    
+                    }else if(depth < hmn){
+
+                        if (add_sep == T){
+
+                                inpt_l[I] <- paste(unlist(strsplit(inpt_l[I], split=sep))[1:(depth+1)], collapse=sep)
+
+                        }else{
+
+                                inpt_l[I] <- paste(unlist(strsplit(inpt_l[I], split=sep))[1:(depth+1)], collapse="")
+                       
+                        }
+
+                    }
+
+                  }
+          
+          }else{
+
+                for (I in 1:ln){
+                   
+                    hmn <- str_count(inpt_l[I], "-")
+                    
+                    if (hmn < depth){
+                     
+                      inpt_l[I] <- paste0(default_val, sep, inpt_l[I])
+
+                      diff <- depth - hmn - 1
+
+                      if (diff > 0){
+                      
+                                if (add_sep == T){
+                                  
+                                  for (i in 1:diff){
+                                  
+                                    inpt_l[I] <- paste0(default_val, sep, inpt_l[I])
+                                  
+                                  }
+                                
+                                }else{
+                                  
+                                  for (i in 1:diff){
+                                    
+                                    inpt_l[I] <- paste0(default_val, inpt_l[I])
+                                    
+                                  }
+                                  
+                                }
+
+                     }
+                    
+                    }else if(depth < hmn){
+
+                        if (add_sep == T){
+
+                                inpt_l[I] <- paste(unlist(strsplit(inpt_l[I], split=sep))[1:(depth+1)], collapse=sep)
+
+                        }else{
+
+                                inpt_l[I] <- paste(unlist(strsplit(inpt_l[I], split=sep))[1:(depth+1)], collapse="")
+                       
+                        }
+
+                    }
+
+                  }
+
+          }
+
+          return(inpt_l)
+          
+        }
+
+        date_symb <- c("s", "n", "h", "d", "m", "y")
+
+        pre_v <- c()
+
+        for (el in unlist(strsplit(x=frmt1, split=""))){
+
+                pre_v <- c(pre_v, grep(x=date_symb, pattern=el))
+
+        }
+
+        min1 <- min(pre_v)
+
+        pre_v <- c()
+
+        for (el in unlist(strsplit(x=frmt2, split=""))){
+
+                pre_v <- c(pre_v, grep(x=date_symb, pattern=el))
+
+        }
+
+        min2 <- min(pre_v)
+
+        if (min1 >= min2){
+
+                min_ <- min2 
+
+        }
+
+        if (min1 < min2){
+
+                min_ <- min1
+
+        }
+
+        date1 <- converter_format(inpt_val=date1, inpt_frmt=frmt1, frmt="snhdmy", sep_=sep_) 
+
+        date2 <- converter_format(inpt_val=date2, inpt_frmt=frmt2, frmt="snhdmy", sep_=sep_) 
+
+        date1 <- converter_date(inpt_date=date1, frmt="snhdmy", convert_to=date_symb[min_], sep_=sep_)
+
+        date2 <- converter_date(inpt_date=date2, frmt="snhdmy", convert_to=date_symb[min_], sep_=sep_)
+
+        if (add){
+
+                datef <- date1 + date2
+
+        }else{
+
+                datef <- date1 - date2
+
+        }
+
+        return(date_converter_reverse(inpt_date=datef, frmt=date_symb[min_], 
+                                      convert_to=convert_to, sep_=sep_))
+
+}
+
+#' better_match
+#' 
+#' Allow to get the nth element matched in a vector
+#' 
+#' @param inpt_v is the input vector 
+#' @param ptrn is the pattern to be matched
+#' @param untl is the maximum number of matched pattern outputed
+#' @param nvr_here is a value you are sure is not present in inpt_v
+#' @examples
+#'
+#' print(better_match(inpt_v=c(1:12, 3, 4, 33, 3), ptrn=3, untl=1))
+#'
+#' [1] 3
+#'
+#' print(better_match(inpt_v=c(1:12, 3, 4, 33, 3), ptrn=3, untl=5))
+#'  
+#'  [1]  3 13 16
+#'
+#' @export
+
+better_match <- function(inpt_v=c(), ptrn, untl=1, nvr_here=NA){
+
+  rtn_v <- c()
+
+  cnt = 1
+
+  while (length(rtn_v) < untl & cnt < (length(inpt_v) + 1)){
+
+          pre_match <- match(x=ptrn, table=inpt_v)
+
+          if (!(is.na(pre_match))){
+
+                inpt_v[pre_match] <- nvr_here
+
+                rtn_v <- c(rtn_v, pre_match)
+
+          }
+
+          cnt = cnt + 1
+
+  }
+
+  return(rtn_v)
+
+}
+
+#' vector_replacor
+#'
+#' Allow to replace certain values in a vector.
+#'
+#' @param inpt_v is the input vector
+#' @param sus_val is a vector containing all the values that will be replaced
+#' @param rpl_val is a vector containing the value of the elements to be replaced (sus_val), so sus_val and rpl_val should be the same size
+#' @param grep_ is if the elements in sus_val should be equal to the elements to replace in inpt_v or if they just should found in the elements
+#' @examples
+#' 
+#' print(vector_replacor(inpt_v=c(1:15), sus_val=c(3, 6, 8, 12), rpl_val=c("oui", "non", "e", "a")))
+#'
+#'  [1] "1"   "2"   "oui" "4"   "5"   "non" "7"   "e"   "9"   "10"  "11"  "a"  
+#' [13] "13"  "14"  "15" 
+#' 
+#' print(vector_replacor(inpt_v=c("non", "zez", "pp a ftf", "fdfd", "assistance", "ert", "repas", "repos"), sus_val=c("pp", "as", "re"), rpl_val=c("oui", "non", "zz"), grep_=T))
+#' 
+#' [1] "non"  "zez"  "oui"  "fdfd" "non"  "ert"  "non"  "zz"  
+#'
+#' @export
+
+vector_replacor <- function(inpt_v=c(), sus_val=c(), rpl_val=c(), grep_=F){
+
+        if (grep_){
+
+            for (el in 1:length(inpt_v)){
+
+                    cnt = 1
+
+                    stop <- 0
+
+                    while (cnt < (length(sus_val) + 1) & stop == 0){
+
+                            if (str_detect(string=inpt_v[el], pattern=sus_val[cnt])){
+
+                                inpt_v[el] <- rpl_val[cnt]
+
+                                stop <- 1
+
+                            }
+
+                            cnt = cnt + 1
+
+                    }
+
+            }
+
+        }else{
+
+            for (el in 1:length(inpt_v)){
+
+                pre_match <- match(x=inpt_v[el], table=sus_val)
+
+                if (!(is.na(pre_match))){
+
+                        inpt_v[el] <- rpl_val[pre_match]
+
+                }
+
+            }
+
+        }
+
+    return(inpt_v)
+
+}
 
 
 

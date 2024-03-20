@@ -17,5 +17,5 @@ return the elements from a vector "inpt_v" that are in another vector "pttrn_v"
 \examples{
 print(extrt_only_v(inpt_v=c("oui", "non", "peut", "oo", "ll", "oui", "non", "oui", "oui"), pttrn_v=c("oui")))
 
-[1] "oui" "oo"  "oui" "oui" "oui"
+[1] "oui" "oui" "oui" "oui"
 }

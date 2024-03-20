@@ -4,7 +4,14 @@
 \alias{ptrn_twkr}
 \title{ptrn_twkr}
 \usage{
-ptrn_twkr(inpt_l, depth = "max", sep = "-", default_val = "0", add_sep = T)
+ptrn_twkr(
+  inpt_l,
+  depth = "max",
+  sep = "-",
+  default_val = "0",
+  add_sep = T,
+  end_ = T
+)
 }
 \arguments{
 \item{inpt_l}{is the input vector}
@@ -16,12 +23,26 @@ ptrn_twkr(inpt_l, depth = "max", sep = "-", default_val = "0", add_sep = T)
 \item{default_val}{is the default val that will be placed between the separator, defaults to "00"}
 
 \item{add_sep}{defaults to TRUE. If set to FALSE, it will remove the separator for the patterns that are included in the interval between the depth amount of separator and the actual number of separator of the element.}
+
+\item{end_}{is if the default_val will be added at the end or at the beginning of each element that lacks length compared to depth}
 }
 \description{
 Allow to modify the pattern length of element in a vector according to arguments. What is here defined as a pattern is something like this xx-xx-xx or xx/xx/xxx... So it is defined by the separator
 }
 \examples{
-library("stringr")
+
 v <- c("2012-06-22", "2012-06-23", "2022-09-12", "2022")
+
 ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=TRUE)
+
+[1] "2012-06-22" "2012-06-23" "2022-09-12" "2022-00-00"
+
+ptrn_twkr(inpt_l=v, depth=1, sep="-", default_val="00", add_sep=TRUE)
+
+[1] "2012-06" "2012-06" "2022-09" "2022-00"
+
+ ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=TRUE, end_=F)
+
+[1] "2012-06-22" "2012-06-23" "2022-09-12" "00-00-2022"
+
 }

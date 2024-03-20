@@ -15,3 +15,9 @@ until_stnl(vec1, goal)
 Maxes a vector to a chosen length
 ex: if i want my vector c(1, 2) to be 5 of length this function will return me: c(1, 2, 1, 2, 1)
 }
+\examples{
+print(until_stnl(vec1=c(1, 3, 2), goal=56))
+
+ [1] 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3
+[39] 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3
+}

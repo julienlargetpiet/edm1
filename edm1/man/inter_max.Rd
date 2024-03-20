@@ -17,3 +17,28 @@ inter_max(inpt_l, max_ = -1000, get_lst = T)
 Takes as input a list of vectors composed of ints or floats ascendly ordered (intervals) that can have a different step to one of another element ex: list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3))
 The function will return the list of lists altered according to the maximum step found in the input list.
 }
+\examples{
+
+print(inter_max(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3)), get_lst=T))
+ 
+[[1]]
+[1] 0 4
+
+[[2]]
+[1] 0 4
+
+[[3]]
+[1] 1.0 2.3
+
+print(inter_max(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3)), get_lst=F))
+
+ [[1]]
+[1] 0 4
+
+[[2]]
+[1] 0 4
+
+[[3]]
+[1] 1
+
+}

@@ -16,3 +16,32 @@ insert_df(df_in, df_ins, ins_loc)
 \description{
 Allow to insert dataframe into another dataframe according to coordinates (row, column) from the dataframe that will be inserted
 }
+\examples{
+df1 <- data.frame(c(1, 4), c(5, 3))
+
+df2 <- data.frame(c(1, 3, 5, 6), c(1:4), c(5, 4, 5, "ereer"))
+
+print(insert_df(df_in=df2, df_ins=df1, ins_loc=c(4, 2)))
+
+ c.1..3..5..6. c.1.4. c.5..4..5...ereer..
+1             1      1                   5
+2             3      2                   4
+3             5      3                   5
+4             6      1                   5
+
+print(insert_df(df_in=df2, df_ins=df1, ins_loc=c(3, 2)))
+
+ c.1..3..5..6. c.1.4. c.5..4..5...ereer..
+1             1      1                   5
+2             3      2                   4
+3             5      1                   5
+4             6      4                   3
+
+print(insert_df(df_in=df2, df_ins=df1, ins_loc=c(2, 2)))
+
+ c.1..3..5..6. c.1.4. c.5..4..5...ereer..
+1             1      1                   5
+2             3      1                   5
+3             5      4                   3
+4             6      4               ereer
+}

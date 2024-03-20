@@ -18,3 +18,9 @@ format_date(f_dialect, sentc, sep_in = "-", sep_out = "-")
 \description{
 Allow to convert xx-month-xxxx date type to xx-xx-xxxx
 }
+\examples{
+print(format_date(f_dialect=c("janvier", "février", "mars", "avril", "mai", "juin",
+                          "juillet", "aout", "septembre", "octobre", "novembre", "décembre"), sentc="11-septembre-2023"))
+
+[1] "11-09-2023"
+}

@@ -12,3 +12,13 @@ can_be_num(x)
 \description{
 Return TRUE if a variable can be converted to a number and FALSE if not (supports float)
 }
+\examples{
+print(can_be_num("34.677"))
+[1] TRUE
+print(can_be_num("34"))
+[1] TRUE
+print(can_be_num("3rt4"))
+[1] FALSE
+print(can_be_num(34))
+[1] TRUE
+}

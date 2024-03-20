@@ -21,8 +21,15 @@ ptrn_switchr(inpt_l, f_idx_l = c(), t_idx_l = c(), sep = "-", default_val = NA)
 Allow to switch, copy pattern for each element in a vector. Here a pattern is the values that are separated by a same separator. Example: "xx-xxx-xx" or "xx/xx/xxxx". The xx like values can be swicthed or copied from whatever index to whatever index. Here, the index is like this 1-2-3 etcetera, it is relative of the separator.
 }
 \examples{
-ptrn_switchr(inpt_l=c("2022-01-11", "2022-01-14", "2022-01-21", 
-"2022-01-01"), f_idx_l=c(1, 2, 3), t_idx_l=c(3, 2, 1))
-ptrn_switchr(inpt_l=c("2022-01-11", "2022-01-14", "2022-01-21", 
-"2022-01-01"), f_idx_l=c(1), default_val="ee")
+
+print(ptrn_switchr(inpt_l=c("2022-01-11", "2022-01-14", "2022-01-21", 
+"2022-01-01"), f_idx_l=c(1, 2, 3), t_idx_l=c(3, 2, 1)))
+
+[1] "11-01-2022" "14-01-2022" "21-01-2022" "01-01-2022"
+
+print(ptrn_switchr(inpt_l=c("2022-01-11", "2022-01-14", "2022-01-21", 
+"2022-01-01"), f_idx_l=c(1), default_val="ee"))
+
+[1] "ee-01-11" "ee-01-14" "ee-01-21" "ee-01-01"
+
 }

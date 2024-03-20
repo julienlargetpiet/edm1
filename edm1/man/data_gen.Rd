@@ -8,7 +8,7 @@ data_gen(
   type_ = c("number", "mixed", "string"),
   strt_l = c(0, 0, 10),
   nb_r = c(50, 10, 40),
-  output = "gened.csv",
+  output = NA,
   properties = c("1-5", "1-5", "1-5"),
   type_distri = c("random", "random", "random"),
   str_source = c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n",
@@ -18,13 +18,13 @@ data_gen(
 )
 }
 \arguments{
-\item{type_}{is a vector for wich argument is a column, a column can be made of numbers ("number"), string ("string") or both ("mixed")}
+\item{type_}{is a vector. Its arguments designates a column, a column can be made of numbers ("number"), string ("string") or both ("mixed")}
 
 \item{strt_l}{is a vector containing for each column the row from which the data will begin to be generated}
 
 \item{nb_r}{is a vector containing for each column, the number of row full from generated data}
 
-\item{output}{is the name of the output csv file}
+\item{output}{is the name of the output csv file, defaults to NA so no csv will be outputed by default}
 
 \item{properties}{is linked to type_distri because it is the parameters ("min_val-max_val") for "random type", ("u-x") for the poisson distribution, ("u-d") for gaussian distribution}
 
@@ -32,7 +32,7 @@ data_gen(
 
 \item{str_source}{is the source (vector) from which the character creating random string are (default set to the occidental alphabet)}
 
-\item{round_l}{is a vector which, for each column containing number, associate a round value}
+\item{round_l}{is a vector which, for each column containing number, associate a round value, if the type of the value is numeric}
 
 \item{sep_}{is the separator used to write data in the csv}
 }
@@ -41,4 +41,69 @@ new generated data in addition to saving it in the output
 }
 \description{
 Allo to generate in a csv all kind of data you can imagine according to what you provide
+}
+\examples{
+
+print(data_gen())
+
+  X1   X2    X3
+1   4    2  <NA>
+2   2    4  <NA>
+3   5    2  <NA>
+4   2 abcd  <NA>
+5   4 abcd  <NA>
+6   2    4  <NA>
+7   2  abc  <NA>
+8   4  abc  <NA>
+9   4    3  <NA>
+10  4  abc  abcd
+11  5 <NA>   abc
+12  4 <NA>   abc
+13  1 <NA>    ab
+14  1 <NA> abcde
+15  2 <NA>   abc
+16  4 <NA>     a
+17  1 <NA>  abcd
+18  4 <NA>    ab
+19  2 <NA>  abcd
+20  3 <NA>    ab
+21  3 <NA>  abcd
+22  2 <NA>     a
+23  4 <NA>   abc
+24  1 <NA>  abcd
+25  4 <NA>   abc
+26  4 <NA>    ab
+27  2 <NA>   abc
+28  5 <NA>    ab
+29  3 <NA>   abc
+30  5 <NA>  abcd
+31  2 <NA>   abc
+32  2 <NA>   abc
+33  1 <NA>    ab
+34  5 <NA>     a
+35  4 <NA>    ab
+36  1 <NA>    ab
+37  1 <NA> abcde
+38  5 <NA>   abc
+39  4 <NA>    ab
+40  5 <NA> abcde
+41  2 <NA>    ab
+42  3 <NA>    ab
+43  2 <NA>    ab
+44  4 <NA>  abcd
+45  5 <NA>  abcd
+46  3 <NA>  abcd
+47  2 <NA>  abcd
+48  3 <NA>  abcd
+49  3 <NA>  abcd
+50  4 <NA>     a
+
+print(data_gen(strt_l=c(0, 0, 0), nb_r=c(5, 5, 5)))
+
+  X1    X2   X3
+1  2     a  abc
+2  3 abcde   ab
+3  4 abcde    a
+4  1     3  abc
+5  3     a abcd
 }

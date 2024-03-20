@@ -16,3 +16,18 @@ see_file(string_, index_ext = 1, ext = T)
 \description{
 Allow to get the filename or its extension
 }
+\examples{
+
+print(see_file(string_="file.abc.xyz"))
+
+[1] ".abc.xyz"
+
+ print(see_file(string_="file.abc.xyz", ext=F))
+
+[1] "file"
+
+print(see_file(string_="file.abc.xyz", index_ext=2))
+
+[1] ".xyz"
+
+}
