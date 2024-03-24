@@ -18,7 +18,8 @@ Allow to replace value from dataframe to another one.
 }
 \examples{
 
-print(val_replacer(datf=data.frame(c(1, "oo4", TRUE, FALSE), c(TRUE, FALSE, TRUE, TRUE)), val_replaced=c(TRUE), val_replacor="NA"))
+print(val_replacer(datf=data.frame(c(1, "oo4", TRUE, FALSE), c(TRUE, FALSE, TRUE, TRUE)), 
+     val_replaced=c(TRUE), val_replacor="NA"))
 
 #  c.1...oo4...T..F. c.T..F..T..T.
 #1                 1            NA

@@ -36,7 +36,8 @@ datf <- data.frame("mod"=c("first", "seco", "seco", "first", "first", "third", "
 "var4"=c("A", "A", "A", "A", "B", "C", "C"))
 
 print(all_stat(inpt_v=c("first", "seco"), var_add = c("var1", "var2", "var3", "var4"),
-stat_var=c("sum", "mean", "median", "sd", "occu-var2/", "occu-var4/", "variance", "quantile-0.75/"),
+stat_var=c("sum", "mean", "median", "sd", "occu-var2/", "occu-var4/", "variance",
+"quantile-0.75/"),
 inpt_datf=datf))
 
 #   modal_v var_vector occu sum mean  med standard_devaition         variance
@@ -158,7 +159,8 @@ excl_col=c(), rtn_col=c()))
 #3         12
 #4         11
 
-print(any_join_datf(inpt_datf_l=list(datf2, datf1, datf3), join_type=c(1, 3), id_v=c("ids", "second_ids"),
+print(any_join_datf(inpt_datf_l=list(datf2, datf1, datf3), join_type=c(1, 3),
+id_v=c("ids", "second_ids"),
 excl_col=c(), rtn_col=c()))
 
 #   ids  val  ids  bool second_ids  val  ids last second_ids  val  ids last
@@ -362,7 +364,8 @@ Argument      |Description
 ## Examples
 
 ```r
-print(closer_ptrn_adv(inpt_v=c("aurevoir", "bonnour", "nonnour", "fin", "mois", "bonjour"), res="word", c_word="bonjour"))
+print(closer_ptrn_adv(inpt_v=c("aurevoir", "bonnour", "nonnour", "fin", "mois", "bonjour"),
+res="word", c_word="bonjour"))
 
 #[[1]]
 #[1]  1  5 15 17 38 65
@@ -475,7 +478,8 @@ print(closer_ptrn(inpt_v=c("bonjour", "lpoerc", "nonnour", "bonnour", "nonjour",
 #[[18]]
 #[1] 7 8 8 8 8
 
-print(closer_ptrn(inpt_v=c("bonjour", "lpoerc", "nonnour", "bonnour", "nonjour", "aurevoir"), excl_v=c("nonnour", "nonjour"),
+print(closer_ptrn(inpt_v=c("bonjour", "lpoerc", "nonnour", "bonnour", "nonjour", "aurevoir"),
+excl_v=c("nonnour", "nonjour"),
 sub_excl_v=c("nonnour")))
 
 #[1] 3 5
@@ -691,7 +695,8 @@ Argument      |Description
 ```r
 datf1 <- data.frame("frst_col"=c(1:5), "scd_col"=c(5:1))
 
-print(colins_datf(inpt_datf=datf1, target_col=list(c("oui", "oui", "oui", "non", "non"), c("u", "z", "z", "z", "u")),
+print(colins_datf(inpt_datf=datf1, target_col=list(c("oui", "oui", "oui", "non", "non"),
+c("u", "z", "z", "z", "u")),
 target_pos=list(c("frst_col", "scd_col"), c("scd_col"))))
 
 #  frst_col cur_col scd_col cur_col.1 cur_col
@@ -701,7 +706,8 @@ target_pos=list(c("frst_col", "scd_col"), c("scd_col"))))
 #4        4     non       2       non       z
 #5        5     non       1       non       u
 
-print(colins_datf(inpt_datf=datf1, target_col=list(c("oui", "oui", "oui", "non", "non"), c("u", "z", "z", "z", "u")),
+print(colins_datf(inpt_datf=datf1, target_col=list(c("oui", "oui", "oui", "non", "non"),
+c("u", "z", "z", "z", "u")),
 target_pos=list(c(1, 2), c("frst_col"))))
 
 #  frst_col cur_col scd_col cur_col cur_col
@@ -1070,7 +1076,8 @@ Argument      |Description
 ## Examples
 
 ```r
-print(data_meshup(data=c("_", c("-", "d", "-", "e", "-", "f"), "_", c("-", "a", "a1", "-", "B", "r", "uy", "-", "c", "c1"), "_"), organisation=c(1, 0)))
+print(data_meshup(data=c("_", c("-", "d", "-", "e", "-", "f"), "_",
+c("-", "a", "a1", "-", "B", "r", "uy", "-", "c", "c1"), "_"), organisation=c(1, 0)))
 
 #  X1 X2
 #1  d  a
@@ -1290,6 +1297,44 @@ print(dcr_val(strt_val=53, cr_val=5, stop_val=450))
 ```
 
 
+# `diff_datf`
+
+diff_datf
+
+
+## Description
+
+Returns a vector with the coordinates of the cell that are not equal between 2 dataframes (row, column).
+
+
+## Usage
+
+```r
+diff_datf(datf1, datf2)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`datf1`     |     is an an input dataframe
+`datf2`     |     is an an input dataframe
+
+
+## Examples
+
+```r
+datf1 <- data.frame(c(1:6), c("oui", "oui", "oui", "oui", "oui", "oui"), c(6:1))
+
+datf2 <- data.frame(c(1:7), c("oui", "oui", "oui", "oui", "non", "oui", "zz"))
+
+print(diff_datf(datf1=datf1, datf2=datf2))
+
+#[1] 5 1 5 2
+```
+
+
 # `equalizer_v`
 
 equalizer_v
@@ -1357,7 +1402,8 @@ Argument      |Description
 ## Examples
 
 ```r
-print(extrt_only_v(inpt_v=c("oui", "non", "peut", "oo", "ll", "oui", "non", "oui", "oui"), pttrn_v=c("oui")))
+print(extrt_only_v(inpt_v=c("oui", "non", "peut", "oo", "ll", "oui", "non", "oui", "oui"),
+pttrn_v=c("oui")))
 
 #[1] "oui" "oui" "oui" "oui"
 ```
@@ -1426,12 +1472,14 @@ Argument      |Description
 ## Examples
 
 ```r
-print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "non", "peut-etre"), pttrn_v=c("oui", "non", "peut-etre"),
+print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "non", "peut-etre"),
+pttrn_v=c("oui", "non", "peut-etre"),
 wrk_v=c(1, 2, 3, 4, 5, 6)))
 
 #[1] 1 2 3 4 5 6
 
-print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "non", "peut-etre"), pttrn_v=c("oui", "non"),
+print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "non", "peut-etre"),
+pttrn_v=c("oui", "non"),
 wrk_v=c(1, 2, 3, 4, 5, 6)))
 
 #[1]  1  2 NA  4  5 NA
@@ -1734,17 +1782,20 @@ Argument      |Description
 ## Examples
 
 ```r
-datf1 <- data.frame(c("oui", "oui", "oui", "non", "oui"), c("opui", "op", "op", "zez", "zez"), c(5:1), c(1:5))
+datf1 <- data.frame(c("oui", "oui", "oui", "non", "oui"),
+c("opui", "op", "op", "zez", "zez"), c(5:1), c(1:5))
 
 print(id_keepr(inpt_datf=datf1, col_v=c(1, 2), el_v=c("oui", "op")))
 
 #[1] 2 3
 
-print(id_keepr(inpt_datf=datf1, col_v=c(1, 2), el_v=c("oui", "op"), rstr_l=list(c(1:5), c(3, 2, 2, 2, 3))))
+print(id_keepr(inpt_datf=datf1, col_v=c(1, 2), el_v=c("oui", "op"),
+rstr_l=list(c(1:5), c(3, 2, 2, 2, 3))))
 
 #[1] 2 3
 
-print(id_keepr(inpt_datf=datf1, col_v=c(1, 2), el_v=c("oui", "op"), rstr_l=list(c(1:5), c(3))))
+print(id_keepr(inpt_datf=datf1, col_v=c(1, 2), el_v=c("oui", "op"),
+rstr_l=list(c(1:5), c(3))))
 
 #[1] 3
 
@@ -2267,7 +2318,8 @@ Argument      |Description
 ## Examples
 
 ```r
-print(nest_v(f_v=c(1, 2, 3, 4, 5, 6), t_v=c("oui", "oui2", "oui3", "oui4", "oui5", "oui6"), step=2, after=2))
+print(nest_v(f_v=c(1, 2, 3, 4, 5, 6), t_v=c("oui", "oui2", "oui3", "oui4", "oui5", "oui6"),
+step=2, after=2))
 
 #[1] "1"    "2"    "oui"  "3"    "4"    "oui2" "5"    "6"    "oui3" "oui4"
 ```
@@ -2608,7 +2660,9 @@ Argument      |Description
 ## Examples
 
 ```r
-print(pattern_gettr(word_=c("oui", "non", "erer"), vct=c("oui", "oui", "non", "oui", "non", "opp", "opp", "erer", "non", "ok"), occ=c(1, 2, 1), btwn=c("no", "yes", "no"), strict=c("no", "no", "ee")))
+print(pattern_gettr(word_=c("oui", "non", "erer"), vct=c("oui", "oui", "non", "oui",
+"non", "opp", "opp", "erer", "non", "ok"), occ=c(1, 2, 1),
+btwn=c("no", "yes", "no"), strict=c("no", "no", "ee")))
 
 #[[1]]
 #[1] 1 5 8
@@ -3336,7 +3390,8 @@ Argument      |Description
 ## Examples
 
 ```r
-print(val_replacer(datf=data.frame(c(1, "oo4", TRUE, FALSE), c(TRUE, FALSE, TRUE, TRUE)), val_replaced=c(TRUE), val_replacor="NA"))
+print(val_replacer(datf=data.frame(c(1, "oo4", TRUE, FALSE), c(TRUE, FALSE, TRUE, TRUE)),
+val_replaced=c(TRUE), val_replacor="NA"))
 
 #  c.1...oo4...T..F. c.T..F..T..T.
 #1                 1            NA
@@ -3456,12 +3511,15 @@ Argument      |Description
 ## Examples
 
 ```r
-print(vector_replacor(inpt_v=c(1:15), sus_val=c(3, 6, 8, 12), rpl_val=c("oui", "non", "e", "a")))
+print(vector_replacor(inpt_v=c(1:15), sus_val=c(3, 6, 8, 12),
+rpl_val=c("oui", "non", "e", "a")))
 
 # [1] "1"   "2"   "oui" "4"   "5"   "non" "7"   "e"   "9"   "10"  "11"  "a"
 #[13] "13"  "14"  "15"
 
-print(vector_replacor(inpt_v=c("non", "zez", "pp a ftf", "fdatfd", "assistance", "ert", "repas", "repos"), sus_val=c("pp", "as", "re"), rpl_val=c("oui", "non", "zz"), grep_=TRUE))
+print(vector_replacor(inpt_v=c("non", "zez", "pp a ftf", "fdatfd", "assistance",
+"ert", "repas", "repos"),
+sus_val=c("pp", "as", "re"), rpl_val=c("oui", "non", "zz"), grep_=TRUE))
 
 #[1] "non"  "zez"  "oui"  "fdatfd" "non"  "ert"  "non"  "zz"
 ```

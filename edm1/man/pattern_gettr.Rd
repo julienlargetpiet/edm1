@@ -35,7 +35,9 @@ Second case: It is the opposite to the first case, it means that if the pattern 
 }
 \examples{
 
-print(pattern_gettr(word_=c("oui", "non", "erer"), vct=c("oui", "oui", "non", "oui", "non", "opp", "opp", "erer", "non", "ok"), occ=c(1, 2, 1), btwn=c("no", "yes", "no"), strict=c("no", "no", "ee")))
+print(pattern_gettr(word_=c("oui", "non", "erer"), vct=c("oui", "oui", "non", "oui", 
+ "non", "opp", "opp", "erer", "non", "ok"), occ=c(1, 2, 1), 
+ btwn=c("no", "yes", "no"), strict=c("no", "no", "ee")))
 
 #[[1]]
 #[1] 1 5 8

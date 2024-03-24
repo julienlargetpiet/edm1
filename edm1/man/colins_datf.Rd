@@ -20,7 +20,8 @@ Allow to insert vectors into a dataframe.
 
 datf1 <- data.frame("frst_col"=c(1:5), "scd_col"=c(5:1))
 
-print(colins_datf(inpt_datf=datf1, target_col=list(c("oui", "oui", "oui", "non", "non"), c("u", "z", "z", "z", "u")), 
+print(colins_datf(inpt_datf=datf1, target_col=list(c("oui", "oui", "oui", "non", "non"), 
+             c("u", "z", "z", "z", "u")), 
                 target_pos=list(c("frst_col", "scd_col"), c("scd_col"))))
 
 #  frst_col cur_col scd_col cur_col.1 cur_col
@@ -30,7 +31,8 @@ print(colins_datf(inpt_datf=datf1, target_col=list(c("oui", "oui", "oui", "non",
 #4        4     non       2       non       z
 #5        5     non       1       non       u
 
-print(colins_datf(inpt_datf=datf1, target_col=list(c("oui", "oui", "oui", "non", "non"), c("u", "z", "z", "z", "u")), 
+print(colins_datf(inpt_datf=datf1, target_col=list(c("oui", "oui", "oui", "non", "non"), 
+             c("u", "z", "z", "z", "u")), 
                 target_pos=list(c(1, 2), c("frst_col"))))
 
 #  frst_col cur_col scd_col cur_col cur_col

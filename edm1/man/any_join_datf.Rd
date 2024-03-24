@@ -75,7 +75,8 @@ print(any_join_datf(inpt_datf_l=list(datf1, datf2, datf3), join_type=c(1), id_v=
 #3         12
 #4         11
 
-print(any_join_datf(inpt_datf_l=list(datf2, datf1, datf3), join_type=c(1, 3), id_v=c("ids", "second_ids"), 
+print(any_join_datf(inpt_datf_l=list(datf2, datf1, datf3), join_type=c(1, 3), 
+                 id_v=c("ids", "second_ids"), 
                  excl_col=c(), rtn_col=c()))
 
 #   ids  val  ids  bool second_ids  val  ids last second_ids  val  ids last

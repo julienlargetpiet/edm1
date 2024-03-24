@@ -27,7 +27,8 @@ datf <- data.frame("mod"=c("first", "seco", "seco", "first", "first", "third", "
               "var4"=c("A", "A", "A", "A", "B", "C", "C"))
 
 print(all_stat(inpt_v=c("first", "seco"), var_add = c("var1", "var2", "var3", "var4"), 
- stat_var=c("sum", "mean", "median", "sd", "occu-var2/", "occu-var4/", "variance", "quantile-0.75/"), 
+ stat_var=c("sum", "mean", "median", "sd", "occu-var2/", "occu-var4/", "variance", 
+"quantile-0.75/"), 
  inpt_datf=datf))
 
 #   modal_v var_vector occu sum mean  med standard_devaition         variance

@@ -39,7 +39,8 @@ Allow to automatically arrange 1 dimensional data according to vector and parame
 }
 \examples{
 
-print(data_meshup(data=c("_", c("-", "d", "-", "e", "-", "f"), "_", c("-", "a", "a1", "-", "B", "r", "uy", "-", "c", "c1"), "_"), organisation=c(1, 0)))
+print(data_meshup(data=c("_", c("-", "d", "-", "e", "-", "f"), "_", 
+     c("-", "a", "a1", "-", "B", "r", "uy", "-", "c", "c1"), "_"), organisation=c(1, 0)))
 
 #  X1 X2
 #1  d  a

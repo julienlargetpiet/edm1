@@ -20,12 +20,15 @@ Allow to replace certain values in a vector.
 }
 \examples{
 
-print(vector_replacor(inpt_v=c(1:15), sus_val=c(3, 6, 8, 12), rpl_val=c("oui", "non", "e", "a")))
+print(vector_replacor(inpt_v=c(1:15), sus_val=c(3, 6, 8, 12), 
+     rpl_val=c("oui", "non", "e", "a")))
 
 # [1] "1"   "2"   "oui" "4"   "5"   "non" "7"   "e"   "9"   "10"  "11"  "a"  
 #[13] "13"  "14"  "15" 
 
-print(vector_replacor(inpt_v=c("non", "zez", "pp a ftf", "fdatfd", "assistance", "ert", "repas", "repos"), sus_val=c("pp", "as", "re"), rpl_val=c("oui", "non", "zz"), grep_=TRUE))
+print(vector_replacor(inpt_v=c("non", "zez", "pp a ftf", "fdatfd", "assistance", 
+"ert", "repas", "repos"), 
+sus_val=c("pp", "as", "re"), rpl_val=c("oui", "non", "zz"), grep_=TRUE))
 
 #[1] "non"  "zez"  "oui"  "fdatfd" "non"  "ert"  "non"  "zz"  
 

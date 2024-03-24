@@ -18,12 +18,14 @@ Retur the elements of a vector "wrk_v" (1) that corresponds to the pattern of el
 }
 \examples{
 
-print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "non", "peut-etre"), pttrn_v=c("oui", "non", "peut-etre"), 
+print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "non", "peut-etre"), 
+             pttrn_v=c("oui", "non", "peut-etre"), 
                   wrk_v=c(1, 2, 3, 4, 5, 6)))
 
 #[1] 1 2 3 4 5 6
 
-print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "non", "peut-etre"), pttrn_v=c("oui", "non"), 
+print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "non", "peut-etre"), 
+                 pttrn_v=c("oui", "non"), 
                   wrk_v=c(1, 2, 3, 4, 5, 6)))
 
 #[1]  1  2 NA  4  5 NA

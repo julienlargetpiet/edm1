@@ -28,7 +28,8 @@ Allow to find how patterns are far or near between each other relatively to a ve
 }
 \examples{
 
-print(closer_ptrn_adv(inpt_v=c("aurevoir", "bonnour", "nonnour", "fin", "mois", "bonjour"), res="word", c_word="bonjour"))
+print(closer_ptrn_adv(inpt_v=c("aurevoir", "bonnour", "nonnour", "fin", "mois", "bonjour"), 
+     res="word", c_word="bonjour"))
 
 #[[1]]
 #[1]  1  5 15 17 38 65

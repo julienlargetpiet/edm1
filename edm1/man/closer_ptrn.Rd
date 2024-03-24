@@ -87,7 +87,8 @@ print(closer_ptrn(inpt_v=c("bonjour", "lpoerc", "nonnour", "bonnour", "nonjour",
 #[[18]]
 #[1] 7 8 8 8 8
 
-print(closer_ptrn(inpt_v=c("bonjour", "lpoerc", "nonnour", "bonnour", "nonjour", "aurevoir"), excl_v=c("nonnour", "nonjour"),
+print(closer_ptrn(inpt_v=c("bonjour", "lpoerc", "nonnour", "bonnour", "nonjour", "aurevoir"), 
+excl_v=c("nonnour", "nonjour"),
                  sub_excl_v=c("nonnour")))
 
 #[1] 3 5
