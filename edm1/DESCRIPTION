@@ -1,10 +1,10 @@
 Package: edm1
-Title: Simplify complex data manipulation
-Version: 0.0.0.9000
+Title: Simplify complex data manipulation 
+Version: 2.0.0.0
 Authors@R: 
     person("Julien", "Larget-Piet", , "julien.larget-piet@dreamRs.fr", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: Simplify complex data manipulation.
+Description: Provides complex sorting algorythms. Provides date manipulation algorythms. In addition to providing handy functions to discretize variables, an SQL joins alternatives, a set of function to work with geographical coordinates, and other functions to work with text mining.
 License: GPL (==3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
