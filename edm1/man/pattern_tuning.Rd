@@ -30,7 +30,9 @@ pattern_tuning(
 Allow to tune a pattern very precisely and output a vector containing its variations n times.
 }
 \examples{
+
 print(pattern_tuning(pattrn="oui", spe_nb=2, spe_l=c("e", "r", "T", "O"), exclude_type="o", hmn=3))
 
-[1] "orT" "oTr" "oOi"
+#[1] "orT" "oTr" "oOi"
+
 }

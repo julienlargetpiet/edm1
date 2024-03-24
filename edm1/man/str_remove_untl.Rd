@@ -29,14 +29,14 @@ vec <- c("45/56-/98mm", "45/56-/98mm", "45/56-/98-mm//")
 
 print(str_remove_untl(inpt_v=vec, ptrn_rm_v=c("-", "/"), untl=list(c("max"), c(1))))
 
-[1] "4556/98mm"   "4556/98mm"   "4556/98mm//"
+#[1] "4556/98mm"   "4556/98mm"   "4556/98mm//"
 
 print(str_remove_untl(inpt_v=vec, ptrn_rm_v=c("-", "/"), untl=list(c("max"), c(1:2))))
 
-[1] "455698mm"   "455698mm"   "455698mm//"
+#[1] "455698mm"   "455698mm"   "455698mm//"
 
 print(str_remove_untl(inpt_v=vec[1], ptrn_rm_v=c("-", "/"), untl=c("max")))
 
-[1] "455698mm" "455698mm" "455698mm"
+#[1] "455698mm" "455698mm" "455698mm"
 
 }

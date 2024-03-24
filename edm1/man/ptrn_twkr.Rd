@@ -9,8 +9,8 @@ ptrn_twkr(
   depth = "max",
   sep = "-",
   default_val = "0",
-  add_sep = T,
-  end_ = T
+  add_sep = TRUE,
+  end_ = TRUE
 )
 }
 \arguments{
@@ -35,14 +35,14 @@ v <- c("2012-06-22", "2012-06-23", "2022-09-12", "2022")
 
 ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=TRUE)
 
-[1] "2012-06-22" "2012-06-23" "2022-09-12" "2022-00-00"
+#[1] "2012-06-22" "2012-06-23" "2022-09-12" "2022-00-00"
 
 ptrn_twkr(inpt_l=v, depth=1, sep="-", default_val="00", add_sep=TRUE)
 
-[1] "2012-06" "2012-06" "2022-09" "2022-00"
+#[1] "2012-06" "2012-06" "2022-09" "2022-00"
 
- ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=TRUE, end_=F)
+ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=TRUE, end_=FALSE)
 
-[1] "2012-06-22" "2012-06-23" "2022-09-12" "00-00-2022"
+#[1] "2012-06-22" "2012-06-23" "2022-09-12" "00-00-2022"
 
 }

@@ -33,96 +33,98 @@ Take a vector of patterns as input and output each chosen word with their closes
 
 print(closer_ptrn(inpt_v=c("bonjour", "lpoerc", "nonnour", "bonnour", "nonjour", "aurevoir")))
 
-[[1]]
-[1] "bonjour"
+#[[1]]
+#[1] "bonjour"
+#
+#[[2]]
+#[1] "lpoerc"   "nonnour"  "bonnour"  "nonjour"  "aurevoir"
+#
+#[[3]]
+#[1] 1 1 2 7 8
+#
+#[[4]]
+#[1] "lpoerc"
+#
+#[[5]]
+#[1] "bonjour"  "nonnour"  "bonnour"  "nonjour"  "aurevoir"
+#
+#[[6]]
+#[1] 7 7 7 7 7
+#
+#[[7]]
+#[1] "nonnour"
+#
+#[[8]]
+#[1] "bonjour"  "lpoerc"   "bonnour"  "nonjour"  "aurevoir"
+#
+#[[9]]
+#[1] 1 1 2 7 8
+#
+#[[10]]
+#[1] "bonnour"
+#
+#[[11]]
+#[1] "bonjour"  "lpoerc"   "nonnour"  "nonjour"  "aurevoir"
+#
+#[[12]]
+#[1] 1 1 2 7 8
+#
+#[[13]]
+#[1] "nonjour"
+#
+#[[14]]
+#[1] "bonjour"  "lpoerc"   "nonnour"  "bonnour"  "aurevoir"
+#
+#[[15]]
+#[1] 1 1 2 7 8
+#
+#[[16]]
+#[1] "aurevoir"
+#
+#[[17]]
+#[1] "bonjour" "lpoerc"  "nonnour" "bonnour" "nonjour"
+#
+#[[18]]
+#[1] 7 8 8 8 8
 
-[[2]]
-[1] "lpoerc"   "nonnour"  "bonnour"  "nonjour"  "aurevoir"
-
-[[3]]
-[1] 1 1 2 7 8
-
-[[4]]
-[1] "lpoerc"
-
-[[5]]
-[1] "bonjour"  "nonnour"  "bonnour"  "nonjour"  "aurevoir"
-
-[[6]]
-[1] 7 7 7 7 7
-
-[[7]]
-[1] "nonnour"
-
-[[8]]
-[1] "bonjour"  "lpoerc"   "bonnour"  "nonjour"  "aurevoir"
-
-[[9]]
-[1] 1 1 2 7 8
-
-[[10]]
-[1] "bonnour"
-
-[[11]]
-[1] "bonjour"  "lpoerc"   "nonnour"  "nonjour"  "aurevoir"
-
-[[12]]
-[1] 1 1 2 7 8
-
-[[13]]
-[1] "nonjour"
-
-[[14]]
-[1] "bonjour"  "lpoerc"   "nonnour"  "bonnour"  "aurevoir"
-
-[[15]]
-[1] 1 1 2 7 8
-
-[[16]]
-[1] "aurevoir"
-
-[[17]]
-[1] "bonjour" "lpoerc"  "nonnour" "bonnour" "nonjour"
-
-[[18]]
-[1] 7 8 8 8 8
 print(closer_ptrn(inpt_v=c("bonjour", "lpoerc", "nonnour", "bonnour", "nonjour", "aurevoir"), excl_v=c("nonnour", "nonjour"),
                  sub_excl_v=c("nonnour")))
 
-[1] 3 5
-[[1]]
-[1] "bonjour"
+#[1] 3 5
+#[[1]]
+#[1] "bonjour"
+#
+#[[2]]
+#[1] "lpoerc"   "bonnour"  "nonjour"  "aurevoir"
+#
+#[[3]]
+#[1] 1 1 7 8
+#
+#[[4]]
+#[1] "lpoerc"
+#
+#[[5]]
+#[1] "bonjour"  "bonnour"  "nonjour"  "aurevoir"
+#
+#[[6]]
+#[1] 7 7 7 7
+#
+#[[7]]
+#[1] "bonnour"
+#
+#[[8]]
+#[1] "bonjour"  "lpoerc"   "bonnour"  "nonjour"  "aurevoir"
+#
+#[[9]]
+#[1] 0 1 2 7 8
+#
+#[[10]]
+#[1] "aurevoir"
+#
+#[[11]]
+#[1] "bonjour"  "lpoerc"   "nonjour"  "aurevoir"
+#
+#[[12]]
+#[1] 0 7 8 8
 
-[[2]]
-[1] "lpoerc"   "bonnour"  "nonjour"  "aurevoir"
-
-[[3]]
-[1] 1 1 7 8
-
-[[4]]
-[1] "lpoerc"
-
-[[5]]
-[1] "bonjour"  "bonnour"  "nonjour"  "aurevoir"
-
-[[6]]
-[1] 7 7 7 7
-
-[[7]]
-[1] "bonnour"
-
-[[8]]
-[1] "bonjour"  "lpoerc"   "bonnour"  "nonjour"  "aurevoir"
-
-[[9]]
-[1] 0 1 2 7 8
-
-[[10]]
-[1] "aurevoir"
-
-[[11]]
-[1] "bonjour"  "lpoerc"   "nonjour"  "aurevoir"
-
-[[12]]
-[1] 0 7 8 8
 }

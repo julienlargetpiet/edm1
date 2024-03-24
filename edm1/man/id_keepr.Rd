@@ -2,12 +2,12 @@
 % Please edit documentation in R/all_fun.R
 \name{id_keepr}
 \alias{id_keepr}
-\title{id_keepr_df}
+\title{id_keepr_datf}
 \usage{
-id_keepr(inpt_df, col_v = c(), el_v = c(), rstr_l = NA)
+id_keepr(inpt_datf, col_v = c(), el_v = c(), rstr_l = NA)
 }
 \arguments{
-\item{inpt_df}{is the input dataframe}
+\item{inpt_datf}{is the input dataframe}
 
 \item{col_v}{is the vector containing the column numbers or names to be compared to their respective elements in "el_v"}
 
@@ -20,22 +20,22 @@ Allow to get the original indexes after multiple equality comparaison according 
 }
 \examples{
 
-df1 <- data.frame(c("oui", "oui", "oui", "non", "oui"), c("opui", "op", "op", "zez", "zez"), c(5:1), c(1:5))
+datf1 <- data.frame(c("oui", "oui", "oui", "non", "oui"), c("opui", "op", "op", "zez", "zez"), c(5:1), c(1:5))
 
-print(id_keepr(inpt_df=df1, col_v=c(1, 2), el_v=c("oui", "op")))
+print(id_keepr(inpt_datf=datf1, col_v=c(1, 2), el_v=c("oui", "op")))
 
-[1] 2 3
+#[1] 2 3
 
-print(id_keepr(inpt_df=df1, col_v=c(1, 2), el_v=c("oui", "op"), rstr_l=list(c(1:5), c(3, 2, 2, 2, 3))))
+print(id_keepr(inpt_datf=datf1, col_v=c(1, 2), el_v=c("oui", "op"), rstr_l=list(c(1:5), c(3, 2, 2, 2, 3))))
 
-[1] 2 3
+#[1] 2 3
 
-print(id_keepr(inpt_df=df1, col_v=c(1, 2), el_v=c("oui", "op"), rstr_l=list(c(1:5), c(3))))
+print(id_keepr(inpt_datf=datf1, col_v=c(1, 2), el_v=c("oui", "op"), rstr_l=list(c(1:5), c(3))))
 
-[1] 3
+#[1] 3
 
-print(id_keepr(inpt_df=df1, col_v=c(1, 2), el_v=c("oui", "op"), rstr_l=list(c(1:5))))
+print(id_keepr(inpt_datf=datf1, col_v=c(1, 2), el_v=c("oui", "op"), rstr_l=list(c(1:5))))
 
-[1] 2 3
+#[1] 2 3
 
 }

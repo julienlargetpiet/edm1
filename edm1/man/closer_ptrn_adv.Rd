@@ -27,19 +27,21 @@ closer_ptrn_adv(
 Allow to find how patterns are far or near between each other relatively to a vector containing characters at each index ("base_v"). The function gets the sum of the indexes of each pattern letter relatively to the characters in base_v. So each pattern can be compared.
 }
 \examples{
+
 print(closer_ptrn_adv(inpt_v=c("aurevoir", "bonnour", "nonnour", "fin", "mois", "bonjour"), res="word", c_word="bonjour"))
 
-[[1]]
-[1]  1  5 15 17 38 65
-
-[[2]]
-[1] "bonjour"  "bonnour"  "aurevoir" "nonnour"  "mois"     "fin"     
+#[[1]]
+#[1]  1  5 15 17 38 65
+#
+#[[2]]
+#[1] "bonjour"  "bonnour"  "aurevoir" "nonnour"  "mois"     "fin"     
 
 print(closer_ptrn_adv(inpt_v=c("aurevoir", "bonnour", "nonnour", "fin", "mois")))
 
-[[1]]
-[1] 117 107 119  37  64
+#[[1]]
+#[1] 117 107 119  37  64
+#
+#[[2]]
+#[1] "aurevoir" "bonnour"  "nonnour"  "fin"      "mois"    
 
-[[2]]
-[1] "aurevoir" "bonnour"  "nonnour"  "fin"      "mois"    
 }

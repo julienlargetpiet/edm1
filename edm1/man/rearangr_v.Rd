@@ -17,6 +17,9 @@ rearangr_v(inpt_v, w_v, how = "increasing")
 Reanranges a vector "w_v" according to another vector "inpt_v". inpt_v contains a sequence of number. inpt_v and w_v have the same size and their indexes are related. The output will be a vector containing all the elements of w_v rearanges in descending or asending order according to inpt_v
 }
 \examples{
+
 print(rearangr_v(inpt_v=c(23, 21, 56), w_v=c("oui", "peut", "non"), how="decreasing"))
-[1] "non"  "oui"  "peut"
+
+#[1] "non"  "oui"  "peut"
+
 }

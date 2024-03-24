@@ -4,7 +4,7 @@
 \alias{see_file}
 \title{see_file}
 \usage{
-see_file(string_, index_ext = 1, ext = T)
+see_file(string_, index_ext = 1, ext = TRUE)
 }
 \arguments{
 \item{string_}{is the input string}
@@ -20,14 +20,14 @@ Allow to get the filename or its extension
 
 print(see_file(string_="file.abc.xyz"))
 
-[1] ".abc.xyz"
+#[1] ".abc.xyz"
 
- print(see_file(string_="file.abc.xyz", ext=F))
+print(see_file(string_="file.abc.xyz", ext=FALSE))
 
-[1] "file"
+#[1] "file"
 
 print(see_file(string_="file.abc.xyz", index_ext=2))
 
-[1] ".xyz"
+#[1] ".xyz"
 
 }

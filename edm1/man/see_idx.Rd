@@ -4,7 +4,7 @@
 \alias{see_idx}
 \title{see_idx}
 \usage{
-see_idx(v1, v2, exclude_val = "######")
+see_idx(v1, v2)
 }
 \arguments{
 \item{v1}{is the first vector}
@@ -18,6 +18,6 @@ Returns a boolean vector to see if a set of elements contained in v1 is also con
 
 print(see_idx(v1=c("oui", "non", "peut", "oo"), v2=c("oui", "peut", "oui")))
 
-[1]  TRUE FALSE  TRUE  FALSE
+#[1]  TRUE FALSE  TRUE  FALSE
 
 }

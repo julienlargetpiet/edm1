@@ -20,18 +20,18 @@ Allow to get the end value after an incremental (or decremental loop)
 
 print(dcr_val(strt_val=50, cr_val=-5, stop_val=5))
 
-[1] 5
+#[1] 5
 
 print(dcr_val(strt_val=47, cr_val=-5, stop_val=5))
 
-[1] 7
+#[1] 7
 
 print(dcr_val(strt_val=50, cr_val=5, stop_val=450))
 
-[1] 450
+#[1] 450
 
 print(dcr_val(strt_val=53, cr_val=5, stop_val=450))
 
-[1] 448
+#[1] 448
 
 }

@@ -25,11 +25,11 @@ Allow to convert a format to another
 print(converter_format(inpt_val="23-12-05-1567", sep_="-", 
                        inpt_frmt="shmy", frmt="snhdmy", default_val="00"))
 
-[1] "23-00-12-00-05-1567"
+#[1] "23-00-12-00-05-1567"
 
 print(converter_format(inpt_val="23-12-05-1567", sep_="-", 
                        inpt_frmt="shmy", frmt="Pnhdmy", default_val="00"))
 
-[1] "00-00-12-00-05-1567"
+#[1] "00-00-12-00-05-1567"
 
 }

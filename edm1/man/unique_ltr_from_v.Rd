@@ -15,6 +15,9 @@ unique_ltr_from_v(inpt_v, keep_v = c("?", "!", ":", "&", ",", ".", letters))
 Returns the unique characters contained in all the elements from an input vector "inpt_v"
 }
 \examples{
+
 print(unique_ltr_from_v(inpt_v=c("bonjour", "lpoerc", "nonnour", "bonnour", "nonjour", "aurevoir")))
- [1] "b" "o" "n" "j" "u" "r" "l" "p" "e" "c" "a" "v" "i" 
+
+#[1] "b" "o" "n" "j" "u" "r" "l" "p" "e" "c" "a" "v" "i" 
+
 }

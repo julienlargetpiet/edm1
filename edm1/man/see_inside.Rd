@@ -4,7 +4,13 @@
 \alias{see_inside}
 \title{see_inside}
 \usage{
-see_inside(pattern_, path_ = ".", sep_ = c(","), unique_sep = "#####", rec = F)
+see_inside(
+  pattern_,
+  path_ = ".",
+  sep_ = c(","),
+  unique_sep = "#####",
+  rec = FALSE
+)
 }
 \arguments{
 \item{pattern_}{is a vector containin the file extension of the spreadsheets ("xlsx", "csv"...)}
@@ -16,13 +22,8 @@ see_inside(pattern_, path_ = ".", sep_ = c(","), unique_sep = "#####", rec = F)
 \item{unique_sep}{is a pattern that you know will never be in your input files}
 
 \item{rec}{is a boolean allows to get files recursively if set to TRUE, defaults to TRUE
-If x is the return value, to see all the files name, position of the columns and possible sheet name associanted with, do the following:
-Examples:
-print(x[(grep(unique_sep, x)\link{1}+1):length(x)])
-#If you just want to see the columns do the following:
-print(x\link{1:(grep(unique_sep, x) - 1)})}
+If x is the return value, to see all the files name, position of the columns and possible sheet name associanted with, do the following:}
 }
 \description{
-Return a list containing all the column of the files in the current directory with a chosen file extension and its associated file and sheet if xlsx. For example if i have 2 files "out.csv" with 2 columns and "out.xlsx" with 1 column for its first sheet and 2 for its second one, the return will look like this:
-c(column_1, column_2, column_3, column_4, column_5, unique_separator, "1-2-out.csv", "3-3-sheet_1-out.xlsx", 4-5-sheet_2-out.xlsx)
+Return a list containing all the column of the files in the current directory with a chosen file extension and its associated file and sheet if xlsx. For example if i have 2 files "out.csv" with 2 columns and "out.xlsx" with 1 column for its first sheet and 2 for its second one, the return will look like this: c(column_1, column_2, column_3, column_4, column_5, unique_separator, "1-2-out.csv", "3-3-sheet_1-out.xlsx", 4-5-sheet_2-out.xlsx)
 }

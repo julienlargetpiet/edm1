@@ -20,10 +20,10 @@ Allow to get the final value of a incremental or decremental loop.
 
 print(dcr_untl(strt_val=50, cr_val=-5, stop_val=5))
 
-[1] 9
+#[1] 9
 
 print(dcr_untl(strt_val=50, cr_val=5, stop_val=450))
 
-[1] 80
+#[1] 80
 
 }

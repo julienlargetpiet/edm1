@@ -22,10 +22,10 @@ Allow to get the nth element matched in a vector
 
 print(better_match(inpt_v=c(1:12, 3, 4, 33, 3), ptrn=3, untl=1))
 
-[1] 3
+#[1] 3
 
 print(better_match(inpt_v=c(1:12, 3, 4, 33, 3), ptrn=3, untl=5))
  
- [1]  3 13 16
+#[1]  3 13 16
 
 }

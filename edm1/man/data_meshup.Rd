@@ -38,13 +38,16 @@ f, c1}
 Allow to automatically arrange 1 dimensional data according to vector and parameters
 }
 \examples{
+
 print(data_meshup(data=c("_", c("-", "d", "-", "e", "-", "f"), "_", c("-", "a", "a1", "-", "B", "r", "uy", "-", "c", "c1"), "_"), organisation=c(1, 0)))
-  X1 X2
-1  d  a
-2  d a1
-3  e  B
-4  e  r
-5  e uy
-6  f  c
-7  f c1
+
+#  X1 X2
+#1  d  a
+#2  d a1
+#3  e  B
+#4  e  r
+#5  e uy
+#6  f  c
+#7  f c1
+
 }

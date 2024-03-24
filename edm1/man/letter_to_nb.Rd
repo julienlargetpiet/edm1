@@ -13,7 +13,9 @@ letter_to_nb(letter)
 Allow to get the number of a spreadsheet based column by the letter ex: AAA = 703
 }
 \examples{
+
 print(letter_to_nb("rty"))
 
-[1] 12713
+#[1] 12713
+
 }

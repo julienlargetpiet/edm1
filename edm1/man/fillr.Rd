@@ -18,6 +18,6 @@ Allow to fill a vector by the last element n times
 
 print(fillr(c("a", "b", "...3", "c")))
 
-[1] "a" "b" "b" "b" "b" "c"
+#[1] "a" "b" "b" "b" "b" "c"
 
 }

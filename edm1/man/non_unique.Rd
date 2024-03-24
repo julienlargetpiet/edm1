@@ -15,19 +15,21 @@ non_unique(inpt_v, occu = ">-1-")
 Returns the element that are not unique from the input vector
 }
 \examples{
+
 print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non")))
 
-[1] "oui" "non"
+#[1] "oui" "non"
 
 print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu="==-2-"))
 
-[1] "oui"
+#[1] "oui"
 
 print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu=">-2-"))
 
-[1] "non"
+#[1] "non"
 
 print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu=c(1, 3)))
 
-[1] "non"   "peut"  "peut1"
+#[1] "non"   "peut"  "peut1"
+
 }

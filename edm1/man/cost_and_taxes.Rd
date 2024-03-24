@@ -42,18 +42,17 @@ cost_and_taxes(
 
 \item{pu_d}{is the price of a single element after discount and without taxes}
 
-\item{pu_d_ttc}{is the free-duty price of a single element after discount
-the function return a vector with the previous variables in the same order
-those that could not be calculated will be represented with NA value}
+\item{pu_d_ttc}{is the free-duty price of a single element after discount}
 }
 \description{
-Allow to calculate basic variables related to cost and taxes from a bunch of products (elements)
-So put every variable you know in the following order:
+Allow to calculate basic variables related to cost and taxes from a bunch of products (elements). So put every variable you know in the following order:
 }
 \examples{
+
 print(cost_and_taxes(pu=45, prix_ttc=21, qte=3423))
 
-[1]  3.423000e+03  4.500000e+01  4.500000e+01 -9.998637e-01  2.100000e+01
-[6] -1.540140e+05  4.500000e+01            NA            NA            NA
-[11]            NA            NA
+#[1]  3.423000e+03  4.500000e+01  4.500000e+01 -9.998637e-01  2.100000e+01
+#[6] -1.540140e+05  4.500000e+01            NA            NA            NA
+#[11]            NA            NA
+
 }

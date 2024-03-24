@@ -4,12 +4,12 @@
 \alias{geo_min}
 \title{geo_min}
 \usage{
-geo_min(inpt_df, established_df)
+geo_min(inpt_datf, established_datf)
 }
 \arguments{
-\item{inpt_df}{is the input dataframe of the set of geographical points to be classified, its firts column is for latitude, the second for the longitude and the third, if exists, is for the altitude. Each point is one row.}
+\item{inpt_datf}{is the input dataframe of the set of geographical points to be classified, its firts column is for latitude, the second for the longitude and the third, if exists, is for the altitude. Each point is one row.}
 
-\item{established_df}{is the dataframe containing the coordiantes of the established geographical points}
+\item{established_datf}{is the dataframe containing the coordiantes of the established geographical points}
 }
 \description{
 Return a dataframe containing the nearest geographical points (row) according to established geographical points (column).
@@ -20,22 +20,22 @@ in_ <- data.frame(c(11, 33, 55), c(113, -143, 167))
 
 in2_ <- data.frame(c(12, 55), c(115, 165))
 
-print(geo_min(inpt_df=in_, established_df=in2_))
+print(geo_min(inpt_datf=in_, established_datf=in2_))
 
-         X1       X2
-1   245.266       NA
-2 24200.143       NA
-3        NA 127.7004
+#         X1       X2
+#1   245.266       NA
+#2 24200.143       NA
+#3        NA 127.7004
 
 in_ <- data.frame(c(51, 23, 55), c(113, -143, 167), c(6, 5, 1))
 
 in2_ <- data.frame(c(12, 55), c(115, 165), c(2, 5))
 
-print(geo_min(inpt_df=in_, established_df=in2_))
+print(geo_min(inpt_datf=in_, established_datf=in2_))
 
-        X1       X2
-1       NA 4343.720
-2 26465.63       NA
-3       NA 5825.517
+#        X1       X2
+#1       NA 4343.720
+#2 26465.63       NA
+#3       NA 5825.517
 
 }

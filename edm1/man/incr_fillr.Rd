@@ -24,18 +24,18 @@ print(incr_fillr(inpt_v=c(1, 2, 4, 5, 9, 10),
                 wrk_v=NA, 
                 default_val="increasing"))
 
-[1]  1  2  3  4  5  6  7  8  9 10
+#[1]  1  2  3  4  5  6  7  8  9 10
 
 print(incr_fillr(inpt_v=c(1, 1, 2, 4, 5, 9), 
                 wrk_v=c("ok", "ok", "ok", "ok", "ok"), 
                 default_val=NA))
 
-[1] "ok" "ok" "ok" NA   "ok" "ok" NA   NA   NA  
+#[1] "ok" "ok" "ok" NA   "ok" "ok" NA   NA   NA  
 
 print(incr_fillr(inpt_v=c(1, 2, 4, 5, 9, 10), 
                 wrk_v=NA, 
                 default_val="NAN"))
 
-[1] "1"   "2"   "NAN" "4"   "5"   "NAN" "NAN" "NAN" "9"   "10" 
+#[1] "1"   "2"   "NAN" "4"   "5"   "NAN" "NAN" "NAN" "9"   "10" 
 
 }

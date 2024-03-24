@@ -7,13 +7,15 @@
 lst_flatnr(inpt_l)
 }
 \arguments{
-\item{lst_flatnr}{is the input list}
+\item{inpt_l}{is the input list}
 }
 \description{
 Flatten a list to a vector
 }
 \examples{
+
 print(lst_flatnr(inpt_l=list(c(1, 2), c(5, 3), c(7, 2, 7))))
 
-[1] 1 2 5 3 7 2 7
+#[1] 1 2 5 3 7 2 7
+
 }

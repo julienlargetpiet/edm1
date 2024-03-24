@@ -18,8 +18,8 @@ Returns the indexes of elements contained in "w_v" according to "f_v"
 }
 \examples{
 
-print(fittr_v(f_v=c("non", "non", "non", "oui"), w_v=c("oui", "non", "non")))
+print(new_ordered(f_v=c("non", "non", "non", "oui"), w_v=c("oui", "non", "non")))
 
-[1] 4 1 2
+#[1] 4 1 2
 
 }

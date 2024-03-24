@@ -16,9 +16,9 @@ Allow to see the occurence of each variable in a vector. Returns a datafame with
 
 print(occu(inpt_v=c("oui", "peut", "peut", "non", "oui")))
 
-   var occurence
-1  oui         2
-2 peut         2
-3  non         1
+#   var occurence
+#1  oui         2
+#2 peut         2
+#3  non         1
 
 }

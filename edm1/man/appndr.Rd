@@ -22,10 +22,10 @@ Append to a vector "inpt_v" a special value "val" n times "mmn". The appending b
 
 print(appndr(inpt_v=c(1:3), val="oui", hmn=5))
 
-[1] "1"   "2"   "3"   "oui" "oui" "oui" "oui" "oui"
+#[1] "1"   "2"   "3"   "oui" "oui" "oui" "oui" "oui"
 
 print(appndr(inpt_v=c(1:3), val="oui", hmn=5, strt=1))
 
-[1] "1"   "oui" "oui" "oui" "oui" "oui" "2"   "3" 
+#[1] "1"   "oui" "oui" "oui" "oui" "oui" "2"   "3" 
 
 }

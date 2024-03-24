@@ -16,5 +16,6 @@ Get if the year is leap
 
 print(leap_yr(year=2024))
 
-[1] TRUE
+#[1] TRUE
+
 }

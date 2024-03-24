@@ -12,10 +12,12 @@ extrt_only_v(inpt_v, pttrn_v)
 \item{pttrn_v}{is the vector contining all the elements that can be in inpt_v}
 }
 \description{
-return the elements from a vector "inpt_v" that are in another vector "pttrn_v"
+Returns the elements from a vector "inpt_v" that are in another vector "pttrn_v"
 }
 \examples{
+
 print(extrt_only_v(inpt_v=c("oui", "non", "peut", "oo", "ll", "oui", "non", "oui", "oui"), pttrn_v=c("oui")))
 
-[1] "oui" "oui" "oui" "oui"
+#[1] "oui" "oui" "oui" "oui"
+
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/all_fun.R
 \name{cut_v}
 \alias{cut_v}
-\title{v_to_df}
+\title{v_to_datf}
 \usage{
 cut_v(inpt_v, sep_ = "")
 }
@@ -15,20 +15,21 @@ cut_v(inpt_v, sep_ = "")
 Allow to convert a vector to a dataframe according to a separator.
 }
 \examples{
+
 print(cut_v(inpt_v=c("oui", "non", "oui", "non")))
 
-    X.o. X.u. X.i.
-oui "o"  "u"  "i" 
-non "n"  "o"  "n" 
-oui "o"  "u"  "i" 
-non "n"  "o"  "n" 
+#    X.o. X.u. X.i.
+#oui "o"  "u"  "i" 
+#non "n"  "o"  "n" 
+#oui "o"  "u"  "i" 
+#non "n"  "o"  "n" 
 
 print(cut_v(inpt_v=c("ou-i", "n-on", "ou-i", "n-on"), sep_="-"))
 
-     X.ou. X.i.
-ou-i "ou"  "i" 
-n-on "n"   "on"
-ou-i "ou"  "i" 
-n-on "n"   "on"
+#     X.ou. X.i.
+#ou-i "ou"  "i" 
+#n-on "n"   "on"
+#ou-i "ou"  "i" 
+#n-on "n"   "on"
 
 }

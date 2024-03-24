@@ -26,10 +26,10 @@ Allow to calculate the distances between a set of geographical points and anothe
 
 print(globe(lat_f=23, long_f=112, alt_f=NA, lat_n=c(2, 82), long_n=c(165, -55), alt_n=NA)) 
 
-[1] 6342.844 7059.080
+#[1] 6342.844 7059.080
 
 print(globe(lat_f=23, long_f=112, alt_f=8, lat_n=c(2, 82), long_n=c(165, -55), alt_n=c(8, -2)))
 
-[1] 6342.844 7059.087
+#[1] 6342.844 7059.087
 
 }

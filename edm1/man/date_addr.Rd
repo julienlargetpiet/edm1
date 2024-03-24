@@ -7,7 +7,7 @@
 date_addr(
   date1,
   date2,
-  add = F,
+  add = FALSE,
   frmt1,
   frmt2 = frmt1,
   sep_ = "-",
@@ -37,31 +37,31 @@ Allow to add or substract two dates that have the same time unit or not
 print(date_addr(date1="25-02", date2="58-12-08", frmt1="dm", frmt2="shd", sep_="-", 
                 convert_to="dmy"))
 
-[1] "18-2-0"
+#[1] "18-2-0"
 
 print(date_addr(date1="25-02", date2="58-12-08", frmt1="dm", frmt2="shd", sep_="-", 
-                convert_to="dmy", add=T))
+                convert_to="dmy", add=TRUE))
 
-[1] "3-3-0"
-
-print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy", frmt2="dm", sep_="-", 
-                convert_to="dmy", add=T))
-
-[1] "27-3-2024"
+#[1] "3-3-0"
 
 print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy", frmt2="dm", sep_="-", 
-                convert_to="dmy", add=F))
+                convert_to="dmy", add=TRUE))
 
-[1] "23-1-2024" 
-
-print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy", frmt2="dm", sep_="-", 
-                 convert_to="n", add=F))
-
-[1] "1064596320"
+#[1] "27-3-2024"
 
 print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy", frmt2="dm", sep_="-", 
-                 convert_to="s", add=F))
+                convert_to="dmy", add=FALSE))
 
-[1] "63875779200"
+#[1] "23-1-2024" 
+
+print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy", frmt2="dm", sep_="-", 
+                 convert_to="n", add=FALSE))
+
+#[1] "1064596320"
+
+print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy", frmt2="dm", sep_="-", 
+                 convert_to="s", add=FALSE))
+
+#[1] "63875779200"
 
 }

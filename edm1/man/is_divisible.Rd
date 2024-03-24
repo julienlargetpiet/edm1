@@ -18,6 +18,6 @@ Takes a vector as an input and returns all the elements that are divisible by al
 
  print(is_divisible(inpt_v=c(1:111), divisible_v=c(2, 4, 5)))
 
- [1]  20  40  60  80 100
+ #[1]  20  40  60  80 100
 
 }

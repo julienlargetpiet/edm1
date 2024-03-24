@@ -4,10 +4,10 @@
 \alias{val_replacer}
 \title{val_replacer}
 \usage{
-val_replacer(df, val_replaced, val_replacor = T, df_rpt = NA)
+val_replacer(datf, val_replaced, val_replacor = TRUE)
 }
 \arguments{
-\item{df}{is the input dataframe}
+\item{datf}{is the input dataframe}
 
 \item{val_replaced}{is a vector of the value(s) to be replaced}
 
@@ -18,12 +18,12 @@ Allow to replace value from dataframe to another one.
 }
 \examples{
 
-print(val_replacer(df=data.frame(c(1, "oo4", T, F), c(T, F, T, T)), val_replaced=c(T), val_replacor="NA"))
+print(val_replacer(datf=data.frame(c(1, "oo4", TRUE, FALSE), c(TRUE, FALSE, TRUE, TRUE)), val_replaced=c(TRUE), val_replacor="NA"))
 
-  c.1...oo4...T..F. c.T..F..T..T.
-1                 1            NA
-2               oo4         FALSE
-3                NA            NA
-4             FALSE            NA
+#  c.1...oo4...T..F. c.T..F..T..T.
+#1                 1            NA
+#2               oo4         FALSE
+#3                NA            NA
+#4             FALSE            NA
 
 }

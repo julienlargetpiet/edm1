@@ -22,18 +22,18 @@ Allow to convert single date value like 2025.36 year to a date like second/minut
 
 print(date_converter_reverse(inpt_date="2024.929", convert_to="hmy", frmt="y", sep_="-"))
 
-[1] "110-11-2024"
+#[1] "110-11-2024"
 
 print(date_converter_reverse(inpt_date="2024.929", convert_to="dmy", frmt="y", sep_="-"))
 
-[1] "4-11-2024"
+#[1] "4-11-2024"
 
 print(date_converter_reverse(inpt_date="2024.929", convert_to="hdmy", frmt="y", sep_="-"))
 
-[1] "14-4-11-2024"
+#[1] "14-4-11-2024"
 
 print(date_converter_reverse(inpt_date="2024.929", convert_to="dhym", frmt="y", sep_="-"))
 
-[1] "4-14-2024-11"
+#[1] "4-14-2024-11"
 
 }

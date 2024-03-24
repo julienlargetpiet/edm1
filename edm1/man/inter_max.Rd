@@ -4,7 +4,7 @@
 \alias{inter_max}
 \title{inter_max}
 \usage{
-inter_max(inpt_l, max_ = -1000, get_lst = T)
+inter_max(inpt_l, max_ = -1000, get_lst = TRUE)
 }
 \arguments{
 \item{inpt_l}{is the input list}
@@ -14,31 +14,30 @@ inter_max(inpt_l, max_ = -1000, get_lst = T)
 \item{get_lst}{is the parameter that, if set to True, will keep the last values of vectors in the return value if the last step exceeds the end value of the vector.}
 }
 \description{
-Takes as input a list of vectors composed of ints or floats ascendly ordered (intervals) that can have a different step to one of another element ex: list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3))
-The function will return the list of lists altered according to the maximum step found in the input list.
+Takes as input a list of vectors composed of ints or floats ascendly ordered (intervals) that can have a different step to one of another element ex: list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3)). The function will return the list of lists altered according to the maximum step found in the input list.
 }
 \examples{
 
-print(inter_max(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3)), get_lst=T))
+print(inter_max(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3)), get_lst=TRUE))
  
-[[1]]
-[1] 0 4
+#[[1]]
+#[1] 0 4
+#
+#[[2]]
+#[1] 0 4
+#
+#[[3]]
+#[1] 1.0 2.3
 
-[[2]]
-[1] 0 4
+print(inter_max(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3)), get_lst=FALSE))
 
-[[3]]
-[1] 1.0 2.3
-
-print(inter_max(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3)), get_lst=F))
-
- [[1]]
-[1] 0 4
-
-[[2]]
-[1] 0 4
-
-[[3]]
-[1] 1
+# [[1]]
+#[1] 0 4
+#
+#[[2]]
+#[1] 0 4
+#
+#[[3]]
+#[1] 1
 
 }
