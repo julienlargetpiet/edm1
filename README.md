@@ -1,4 +1,3 @@
-![alt text](logo.png)
 
 # `all_stat`
 
@@ -2813,6 +2812,44 @@ ptrn_twkr(inpt_l=v, depth=1, sep="-", default_val="00", add_sep=TRUE)
 ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=TRUE, end_=FALSE)
 
 #[1] "2012-06-22" "2012-06-23" "2022-09-12" "00-00-2022"
+```
+
+
+# `r_print`
+
+r_print
+
+
+## Description
+
+Allow to print vector elements in one row.
+
+
+## Usage
+
+```r
+r_print(inpt_v, sep_ = "and", begn = "This is", end = ", voila!")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`sep_`     |     is the separator between each elements
+`begn`     |     is the character put at the beginning of the print
+`end`     |     is the character put at the end of the print
+
+
+## Examples
+
+```r
+print(r_print(inpt_v=c(1:33)))
+
+#[1] "This is  1 and 2 and 3 and 4 and 5 and 6 and 7 and 8 and 9 and 10 and 11 and 12 and 13
+#and 14 and 15 and 16 and 17 and 18 and 19 and 20 and 21 and 22 and 23 and 24 and 25 and 26
+#and 27 and 28 and 29 and 30 and 31 and 32 and 33 and , voila!"
 ```
 
 
