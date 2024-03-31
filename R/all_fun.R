@@ -9286,4 +9286,60 @@ diff_datf <- function(datf1, datf2){
 
 }
 
+#' swipr
+#'
+#' Returns an ordered dataframes according to the elements order given. The input datafram has two columns, one with the ids whoch can be bonded to multiple elements in the other column.
+#'
+#' @param inpt_datf is the input dataframe
+#' @param how_to is a vector containing the elements in the order wanted
+#' @param id_w is the column number or the column name of the elements
+#' @param id_ids is the column number or the column name of the ids
+#' @examples
+#'
+#' datf <- data.frame("col1"=c("Af", "Al", "Al", "Al", "Arg", "Arg", "Arg", "Arm", "Arm"),
+#' 
+#'         "col2"=c("B", "B", "G", "S", "B", "S", "G", "B", "G"))
+#' 
+#' print(swipr(inpt_datf=datf, how_to=c("G", "S", "B")))
+#' 
+#' datf <- data.frame("col1"=c("Af", "Arg", "Al", "Al", "Arg", "Arg", "Arg", "Arm", "Arm"),
+#' 
+#'         "col2"=c("B", "B", "G", "S", "B", "S", "G", "B", "G"))
+#' 
+#' print(swipr(inpt_datf=datf, how_to=c("G", "S", "B"), id_w="col2", id_ids="col1"))
+#'
+#' @export
+
+swipr <- function(inpt_datf, how_to=c(), id_w=2, id_ids=1){
+
+       if (typeof(id_w) == "character"){
+
+               id_w <- match(id_w, colnames(inpt_datf))
+
+       }
+
+       if (typeof(id_ids) == "character"){
+
+               id_ids <- match(id_ids, colnames(inpt_datf))
+
+       }
+
+       for (el in unique(inpt_datf[, id_ids])){
+
+            cur_rows <- inpt_datf[, id_ids] == el
+
+            cur_v <- inpt_datf[cur_rows, id_w]
+
+            inpt_datf[cur_rows, id_w] <- how_to[sort(match(x=cur_v, table=how_to), 
+                                                     decreasing=FALSE)]
+
+       }
+
+  return(inpt_datf)
+
+}
+
+
+
+
 

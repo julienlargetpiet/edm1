@@ -1,4 +1,3 @@
-![](logo.png)
 
 # `all_stat`
 
