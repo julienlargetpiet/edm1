@@ -26,16 +26,16 @@ datf <- data.frame("col1"=c("Af", "Al", "Al", "Al", "Arg", "Arg", "Arg", "Arm", 
 
 print(swipr(inpt_datf=datf, how_to=c("G", "S", "B")))
 
-  col1 col2
-1   Af    B
-2   Al    G
-3   Al    S
-4   Al    B
-5  Arg    G
-6  Arg    S
-7  Arg    B
-8  Arm    G
-9  Arm    B
+#  col1 col2
+#1   Af    B
+#2   Al    G
+#3   Al    S
+#4   Al    B
+#5  Arg    G
+#6  Arg    S
+#7  Arg    B
+#8  Arm    G
+#9  Arm    B
 
 datf <- data.frame("col1"=c("Af", "Arg", "Al", "Al", "Arg", "Arg", "Arg", "Arm", "Arm"),
 
@@ -43,15 +43,15 @@ datf <- data.frame("col1"=c("Af", "Arg", "Al", "Al", "Arg", "Arg", "Arg", "Arm",
 
 print(swipr(inpt_datf=datf, how_to=c("G", "S", "B"), id_w="col2", id_ids="col1"))
 
-col1 col2
-1   Af    B
-2  Arg    G
-3   Al    G
-4   Al    S
-5  Arg    S
-6  Arg    B
-7  Arg    B
-8  Arm    G
-9  Arm    B
+#   col1 col2
+#1   Af    B
+#2  Arg    G
+#3   Al    G
+#4   Al    S
+#5  Arg    S
+#6  Arg    B
+#7  Arg    B
+#8  Arm    G
+#9  Arm    B
 
 }

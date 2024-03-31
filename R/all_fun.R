@@ -9302,16 +9302,16 @@ diff_datf <- function(datf1, datf2){
 #' 
 #' print(swipr(inpt_datf=datf, how_to=c("G", "S", "B")))
 #' 
-#'   col1 col2
-#' 1   Af    B
-#' 2   Al    G
-#' 3   Al    S
-#' 4   Al    B
-#' 5  Arg    G
-#' 6  Arg    S
-#' 7  Arg    B
-#' 8  Arm    G
-#' 9  Arm    B
+#' #  col1 col2
+#' #1   Af    B
+#' #2   Al    G
+#' #3   Al    S
+#' #4   Al    B
+#' #5  Arg    G
+#' #6  Arg    S
+#' #7  Arg    B
+#' #8  Arm    G
+#' #9  Arm    B
 #'
 #' datf <- data.frame("col1"=c("Af", "Arg", "Al", "Al", "Arg", "Arg", "Arg", "Arm", "Arm"),
 #' 
@@ -9319,16 +9319,16 @@ diff_datf <- function(datf1, datf2){
 #' 
 #' print(swipr(inpt_datf=datf, how_to=c("G", "S", "B"), id_w="col2", id_ids="col1"))
 #'
-#' col1 col2
-#' 1   Af    B
-#' 2  Arg    G
-#' 3   Al    G
-#' 4   Al    S
-#' 5  Arg    S
-#' 6  Arg    B
-#' 7  Arg    B
-#' 8  Arm    G
-#' 9  Arm    B
+#' #   col1 col2
+#' #1   Af    B
+#' #2  Arg    G
+#' #3   Al    G
+#' #4   Al    S
+#' #5  Arg    S
+#' #6  Arg    B
+#' #7  Arg    B
+#' #8  Arm    G
+#' #9  Arm    B
 #'
 #' @export
 swipr <- function(inpt_datf, how_to=c(), id_w=2, id_ids=1){
@@ -9373,11 +9373,11 @@ swipr <- function(inpt_datf, how_to=c(), id_w=2, id_ids=1){
 #' 
 #' print(cutr_v(inpt_v=test_v, untl="min"))
 #' 
-#' [1] "o" "n" "e" "a" "a" "d"
+#' #[1] "o" "n" "e" "a" "a" "d"
 #'
 #' print(cutr_v(inpt_v=test_v, untl=3))
 #'
-#' [1] "oui" "non" "ez"  "aa"  "a"   "dsf"
+#' #[1] "oui" "non" "ez"  "aa"  "a"   "dsf"
 #'
 #' @export
 

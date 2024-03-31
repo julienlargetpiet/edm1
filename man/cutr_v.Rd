@@ -20,10 +20,10 @@ test_v <- c("oui", "nonon", "ez", "aa", "a", "dsfsdsds")
 
 print(cutr_v(inpt_v=test_v, untl="min"))
 
-[1] "o" "n" "e" "a" "a" "d"
+#[1] "o" "n" "e" "a" "a" "d"
 
 print(cutr_v(inpt_v=test_v, untl=3))
 
-[1] "oui" "non" "ez"  "aa"  "a"   "dsf"
+#[1] "oui" "non" "ez"  "aa"  "a"   "dsf"
 
 }
