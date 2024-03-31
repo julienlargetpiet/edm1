@@ -9302,14 +9302,35 @@ diff_datf <- function(datf1, datf2){
 #' 
 #' print(swipr(inpt_datf=datf, how_to=c("G", "S", "B")))
 #' 
+#'   col1 col2
+#' 1   Af    B
+#' 2   Al    G
+#' 3   Al    S
+#' 4   Al    B
+#' 5  Arg    G
+#' 6  Arg    S
+#' 7  Arg    B
+#' 8  Arm    G
+#' 9  Arm    B
+#'
 #' datf <- data.frame("col1"=c("Af", "Arg", "Al", "Al", "Arg", "Arg", "Arg", "Arm", "Arm"),
 #' 
 #'         "col2"=c("B", "B", "G", "S", "B", "S", "G", "B", "G"))
 #' 
 #' print(swipr(inpt_datf=datf, how_to=c("G", "S", "B"), id_w="col2", id_ids="col1"))
 #'
+#' col1 col2
+#' 1   Af    B
+#' 2  Arg    G
+#' 3   Al    G
+#' 4   Al    S
+#' 5  Arg    S
+#' 6  Arg    B
+#' 7  Arg    B
+#' 8  Arm    G
+#' 9  Arm    B
+#'
 #' @export
-
 swipr <- function(inpt_datf, how_to=c(), id_w=2, id_ids=1){
 
        if (typeof(id_w) == "character"){
@@ -9339,7 +9360,53 @@ swipr <- function(inpt_datf, how_to=c(), id_w=2, id_ids=1){
 
 }
 
+#' cutr_v
+#'
+#' Allow to reduce all the elements in a vector to a defined size of nchar
+#'
+#' @param inpt_v is the input vector
+#' @param untl is the maximum size of nchar authorized by an element, defaults to "min", it means the shortest element in the list
+#'
+#' @examples
+#'
+#' test_v <- c("oui", "nonon", "ez", "aa", "a", "dsfsdsds")
+#' 
+#' print(cutr_v(inpt_v=test_v, untl="min"))
+#' 
+#' [1] "o" "n" "e" "a" "a" "d"
+#'
+#' print(cutr_v(inpt_v=test_v, untl=3))
+#'
+#' [1] "oui" "non" "ez"  "aa"  "a"   "dsf"
+#'
+#' @export
 
+cutr_v <- function(inpt_v, untl="min"){
 
+    if (untl == "min"){
+
+        untl_ <- nchar(inpt_v[1])
+
+        for (el in inpt_v[2:length(inpt_v)]){
+
+                if (nchar(el) < untl){ untl <- nchar(el) }
+
+        }
+
+    }
+
+    for (i in 1:length(inpt_v)){
+
+        if (nchar(inpt_v[i]) > untl){
+
+                inpt_v[i] <- paste(unlist(strsplit(x=inpt_v[i], split=""))[1:untl], collapse="")
+
+        }
+
+    }
+
+    return(inpt_v)
+
+}
 
 

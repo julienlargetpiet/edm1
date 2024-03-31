@@ -2,9 +2,9 @@
 
 # Install
 
--> git clone https://github.com/julienlargetpiet/edm1
+> git clone https://github.com/julienlargetpiet/edm1
 
--> cd edm1
+> cd edm1
 
 edm1 > R
 
@@ -17,7 +17,6 @@ R > install()
 # `all_stat`
 
 all_stat
-
 
 ## Description
 
@@ -930,6 +929,46 @@ print(cut_v(inpt_v=c("ou-i", "n-on", "ou-i", "n-on"), sep_="-"))
 #n-on "n"   "on"
 #ou-i "ou"  "i"
 #n-on "n"   "on"
+```
+
+
+# `cutr_v`
+
+cutr_v
+
+
+## Description
+
+Allow to reduce all the elements in a vector to a defined size of nchar
+
+
+## Usage
+
+```r
+cutr_v(inpt_v, untl = "min")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`untl`     |     is the maximum size of nchar authorized by an element, defaults to "min", it means the shortest element in the list
+
+
+## Examples
+
+```r
+test_v <- c("oui", "nonon", "ez", "aa", "a", "dsfsdsds")
+
+print(cutr_v(inpt_v=test_v, untl="min"))
+
+[1] "o" "n" "e" "a" "a" "d"
+
+print(cutr_v(inpt_v=test_v, untl=3))
+
+[1] "oui" "non" "ez"  "aa"  "a"   "dsf"
 ```
 
 
@@ -3298,11 +3337,33 @@ datf <- data.frame("col1"=c("Af", "Al", "Al", "Al", "Arg", "Arg", "Arg", "Arm", 
 
 print(swipr(inpt_datf=datf, how_to=c("G", "S", "B")))
 
+col1 col2
+1   Af    B
+2   Al    G
+3   Al    S
+4   Al    B
+5  Arg    G
+6  Arg    S
+7  Arg    B
+8  Arm    G
+9  Arm    B
+
 datf <- data.frame("col1"=c("Af", "Arg", "Al", "Al", "Arg", "Arg", "Arg", "Arm", "Arm"),
 
 "col2"=c("B", "B", "G", "S", "B", "S", "G", "B", "G"))
 
 print(swipr(inpt_datf=datf, how_to=c("G", "S", "B"), id_w="col2", id_ids="col1"))
+
+col1 col2
+1   Af    B
+2  Arg    G
+3   Al    G
+4   Al    S
+5  Arg    S
+6  Arg    B
+7  Arg    B
+8  Arm    G
+9  Arm    B
 ```
 
 
