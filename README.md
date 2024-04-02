@@ -1651,7 +1651,7 @@ geo_min(inpt_datf, established_datf)
 Argument      |Description
 ------------- |----------------
 `inpt_datf`     |     is the input dataframe of the set of geographical points to be classified, its firts column is for latitude, the second for the longitude and the third, if exists, is for the altitude. Each point is one row.
-`established_datf`     |     is the dataframe containing the coordiantes of the established geographical points
+`established_datf`     |     is the dataframe containing the coordinates of the established geographical points
 
 
 ## Examples
