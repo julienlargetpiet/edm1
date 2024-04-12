@@ -9409,4 +9409,148 @@ cutr_v <- function(inpt_v, untl="min"){
 
 }
 
+#' intersect_mod
+#'
+#' Returns the mods that have elements in common
+#'
+#' @param datf is the input dataframe
+#' @param inter_col is the column name or the column number of the values that may be commun betwee the different mods
+#' @param mod_col is the column name or the column number of the mods in the dataframe
+#' @param ordered_descendly, in case that the elements in commun are numeric, this option can be enabled by giving a value of TRUE or FALSE see examples
+#' @param n_min is the minimum elements in common a mod should have to be taken in count
+#'
+#' @examples
+#'
+#' datf <- data.frame("col1"=c("oui", "oui", "oui", "oui", "oui", "oui", 
+#'                      "non", "non", "non", "non", "ee", "ee", "ee"), "col2"=c(1:6, 2:5, 1:3))
+#' 
+#' print(intersect_mod(datf=datf, inter_col=2, mod_col=1, n_min=2))
+#' 
+#'    col1 col2
+#' 2   oui    2
+#' 3   oui    3
+#' 7   non    2
+#' 8   non    3
+#' 12   ee    2
+#' 13   ee    3
+#'
+#' print(intersect_mod(datf=datf, inter_col=2, mod_col=1, n_min=3))
+#'
+#'    col1 col2
+#' 2   oui    2
+#' 3   oui    3
+#' 4   oui    4
+#' 5   oui    5
+#' 7   non    2
+#' 8   non    3
+#' 9   non    4
+#' 10  non    5
+#'
+#' print(intersect_mod(datf=datf, inter_col=2, mod_col=1, n_min=5))
+#' 
+#'   col1 col2
+#' 1  oui    1
+#' 2  oui    2
+#' 3  oui    3
+#' 4  oui    4
+#' 5  oui    5
+#' 6  oui    6
+#' 
+#' datf <- data.frame("col1"=c("non", "non", "oui", "oui", "oui", "oui", 
+#'                       "non", "non", "non", "non", "ee", "ee", "ee"), "col2"=c(1:6, 2:5, 1:3))
+#' 
+#' print(intersect_mod(datf=datf, inter_col=2, mod_col=1, n_min=3))
+#' 
+#'    col1 col2
+#' 8   non    3
+#' 9   non    4
+#' 10  non    5
+#' 3   oui    3
+#' 4   oui    4
+#' 5   oui    5
+#' 
+#' @export
+
+intersect_mod <- function(datf, inter_col, mod_col, n_min, descendly_ordered=NA){
+
+    if (typeof(inter_col) == "character"){
+
+            inter_col <- match(inter_col, colnames(datf))
+
+    }
+
+    if (typeof(mod_col) == "character"){
+
+            mod_col <- match(mod_col, colnames(datf))
+
+    }
+
+    mods <- unique(datf[, mod_col])  
+
+    final_intersect <- as.numeric(datf[datf[, mod_col] == mods[1], inter_col])
+
+    mods2 <- c(mods[1])
+
+    if (length(mods) > 1){
+
+            for (i in 2:length(mods)){
+
+                    cur_val <- as.numeric(datf[datf[, mod_col] == mods[i], inter_col])
+
+                    if (length(intersect(final_intersect, cur_val)) >= n_min){
+
+                            final_intersect <- intersect(final_intersect, cur_val)
+
+                            mods2 <- c(mods2, mods[i])
+
+                    }
+
+            }
+
+    }
+
+    cur_datf <- datf[datf[, mod_col] == mods2[1], ]
+
+    if (!is.na(descendly_ordered)){
+
+            final_intersect <- sort(x=final_intersect, decreasing=FALSE)
+
+            rtn_datf <- cur_datf[sort(match(final_intersect, cur_datf[, inter_col]), decreasing=descendly_ordered), ]
+
+            if (length(mods2) > 1){
+
+                    for (i in 2:length(mods2)){
+
+                        cur_datf <- datf[datf[, mod_col] == mods2[i], ]
+
+                        rtn_datf <- rbind(rtn_datf, cur_datf[sort(match(final_intersect, cur_datf[, inter_col]), decreasing=descendly_ordered), ])
+    
+
+                    }
+
+            }
+
+    }else{
+
+            rtn_datf <- cur_datf[match(final_intersect, cur_datf[, inter_col]), ]
+
+            if (length(mods2) > 1){
+
+                    for (i in 2:length(mods2)){
+
+                        cur_datf <- datf[datf[, mod_col] == mods2[i], ]
+
+                        rtn_datf <- rbind(rtn_datf, cur_datf[match(final_intersect, cur_datf[, inter_col]), ])
+    
+
+                    }
+
+            }
+
+    }
+
+    return(rtn_datf)
+
+}
+
 
