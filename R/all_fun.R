@@ -316,13 +316,17 @@ can_be_num <- function(x){
 
         v_ref <- c("1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ".")    
 
-        v_wrk <- unlist(str_split(x, ""), v_ref)
+        v_wrk <- unlist(str_split(x, ""))
+
+        alrd <- TRUE
 
         for (i in 1:length(v_wrk)){ 
 
-                if (v_wrk[i] == "."){ 
+                if (v_wrk[i] == "." & alrd){ 
 
-                        vec_bool <- append(vec_bool, sum(grepl(pattern="\\.", x=v_ref))) 
+                        vec_bool <- append(vec_bool, 1) 
+
+                        alrd <- FALSE
 
                 }else{
 
