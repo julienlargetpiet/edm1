@@ -3338,7 +3338,7 @@ ptrn_twkr <- function(inpt_l, depth="max", sep="-",
 #'
 #' @export
 
-fillr <- function(inpt_v, ptrn_fill="...\\d"){
+fillr <- function(inpt_v, ptrn_fill="\\.\\.\\.\\d"){
   
   ptrn <- grep(ptrn_fill, inpt_v)
 
@@ -3349,19 +3349,27 @@ fillr <- function(inpt_v, ptrn_fill="...\\d"){
     idx <- ptrn[1] 
     
     untl <- as.numeric(c(unlist(strsplit(inpt_v[idx], split="\\.")))[4]) - 1
-   
+
+    if (untl > -1){
+
     pre_val <- inpt_v[(idx - 1)]
 
     inpt_v[idx] <- pre_val
 
     if (untl > 0){
-    
+   
       for (i in 1:untl){
         
         inpt_v <- append(inpt_v, pre_val, idx)
         
       }
       
+    }
+
+    }else{
+
+      inpt_v <- inpt_v[1]
+
     }
 
   ptrn <- grep(ptrn_fill, inpt_v)
