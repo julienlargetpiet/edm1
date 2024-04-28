@@ -247,6 +247,65 @@ pattern_tuning <- function(pattrn, spe_nb, spe_l, exclude_type, hmn=1, rg=c(1, n
 
 can_be_num <- function(x){
 
+        regex_spe_detect <- function(inpt){
+
+                fillr <- function(inpt_v, ptrn_fill="\\.\\.\\.\\d"){
+                  
+                  ptrn <- grep(ptrn_fill, inpt_v)
+
+                  while (length(ptrn) > 0){
+                   
+                    ptrn <- grep(ptrn_fill, inpt_v)
+
+                    idx <- ptrn[1] 
+                    
+                    untl <- as.numeric(c(unlist(strsplit(inpt_v[idx], split="\\.")))[4]) - 1
+                   
+                    pre_val <- inpt_v[(idx - 1)]
+
+                    inpt_v[idx] <- pre_val
+
+                    if (untl > 0){
+                    
+                      for (i in 1:untl){
+                        
+                        inpt_v <- append(inpt_v, pre_val, idx)
+                        
+                      }
+                      
+                    }
+
+                  ptrn <- grep(ptrn_fill, inpt_v)
+                    
+                  }
+                  
+                  return(inpt_v)
+                  
+                }
+
+           inpt <- unlist(strsplit(x=inpt, split=""))
+
+           may_be_v <- c("[", "]", "{", "}", "-", "_", ".", "(", ")", "/", "%", "*", "^", "?", "$")
+
+           pre_idx <- unique(match(x=inpt, table=may_be_v))
+
+           pre_idx <- pre_idx[!(is.na(pre_idx))]
+
+           for (el in may_be_v[pre_idx]){
+
+                   for (i in grep(pattern=paste("\\", el, sep=""), x=inpt)){
+
+                           inpt <- append(x=inpt, values="\\", after=(i-1))
+
+                   }
+
+           }
+
+        
+           return(paste(inpt, collapse=""))
+
+    }
+    
     if (typeof(x) == "double"){
 
             return(TRUE)
@@ -263,11 +322,11 @@ can_be_num <- function(x){
 
                 if (v_wrk[i] == "."){ 
 
-                        vec_bool <- append(vec_bool, sum(grepl("\\.", v_ref))) 
+                        vec_bool <- append(vec_bool, sum(grepl(pattern="\\.", x=v_ref))) 
 
                 }else{
 
-                        vec_bool <- append(vec_bool, sum(grepl(v_wrk[i], v_ref))) 
+                        vec_bool <- append(vec_bool, sum(grepl(pattern=regex_spe_detect(v_wrk[i]), x=v_ref))) 
 
                 }
 
