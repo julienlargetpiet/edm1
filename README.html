@@ -13,11 +13,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>all_stat</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='all_stat'>all_stat</h2>
+<h2>all_stat</h2>
 
 <h3>Description</h3>
 
@@ -34,19 +34,19 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="all_stat_:_inpt_v">inpt_v</code></td>
+<tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the modalities of the variables</p>
 </td></tr>
-<tr><td><code id="all_stat_:_var_add">var_add</code></td>
+<tr><td><code id="var_add">var_add</code></td>
 <td>
 <p>is the variables you want to get the stats from</p>
 </td></tr>
-<tr><td><code id="all_stat_:_stat_var">stat_var</code></td>
+<tr><td><code id="stat_var">stat_var</code></td>
 <td>
 <p>is the stats indicators you want</p>
 </td></tr>
-<tr><td><code id="all_stat_:_inpt_datf">inpt_datf</code></td>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
 <td>
 <p>is the input dataframe</p>
 </td></tr>
@@ -104,6 +104,7 @@ print(all_stat(inpt_v=c("first", "seco"), var_add = c("var1", "var2", "var3", "v
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -121,11 +122,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>any_join_datf</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='any_join_datf'>any_join_datf</h2>
+<h2>any_join_datf</h2>
 
 <h3>Description</h3>
 
@@ -150,31 +151,31 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="any_join_datf_:_inpt_datf_l">inpt_datf_l</code></td>
+<tr><td><code id="inpt_datf_l">inpt_datf_l</code></td>
 <td>
 <p>is a list containing all the dataframe</p>
 </td></tr>
-<tr><td><code id="any_join_datf_:_join_type">join_type</code></td>
+<tr><td><code id="join_type">join_type</code></td>
 <td>
 <p>is the joint type. Defaults to inner but can be changed to a vector containing all the dataframes you want to take their ids to don external joints.</p>
 </td></tr>
-<tr><td><code id="any_join_datf_:_join_spe">join_spe</code></td>
+<tr><td><code id="join_spe">join_spe</code></td>
 <td>
 <p>can be equal to a vector to do an external joints on all the dataframes. In this case, join_type should not be equal to &quot;inner&quot;</p>
 </td></tr>
-<tr><td><code id="any_join_datf_:_id_v">id_v</code></td>
+<tr><td><code id="id_v">id_v</code></td>
 <td>
 <p>is a vector containing all the ids name of the dataframes. The ids names can be changed to number of their columns taking in count their position in inpt_datf_l. It means that if my id is in the third column of the second dataframe and the first dataframe have 5 columns, the column number of the ids is 5 + 3 = 8</p>
 </td></tr>
-<tr><td><code id="any_join_datf_:_excl_col">excl_col</code></td>
+<tr><td><code id="excl_col">excl_col</code></td>
 <td>
 <p>is a vector containing the column names to exclude, if this vector is filled so &quot;rtn_col&quot; should not be filled. You can also put the column number in the manner indicated for &quot;id_v&quot;. Defaults to c()</p>
 </td></tr>
-<tr><td><code id="any_join_datf_:_rtn_col">rtn_col</code></td>
+<tr><td><code id="rtn_col">rtn_col</code></td>
 <td>
 <p>is a vector containing the column names to retain, if this vector is filled so &quot;excl_col&quot; should not be filled. You can also put the column number in the manner indicated for &quot;id_v&quot;. Defaults to c()</p>
 </td></tr>
-<tr><td><code id="any_join_datf_:_d_val">d_val</code></td>
+<tr><td><code id="d_val">d_val</code></td>
 <td>
 <p>is the default val when here is no match</p>
 </td></tr>
@@ -268,6 +269,7 @@ print(any_join_datf(inpt_datf_l=list(datf1, datf2, datf3), join_type=c(1), id_v=
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -285,11 +287,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>appndr</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='appndr'>appndr</h2>
+<h2>appndr</h2>
 
 <h3>Description</h3>
 
@@ -306,19 +308,19 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="appndr_:_inpt_v">inpt_v</code></td>
+<tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the input vector</p>
 </td></tr>
-<tr><td><code id="appndr_:_val">val</code></td>
+<tr><td><code id="val">val</code></td>
 <td>
 <p>is the special value</p>
 </td></tr>
-<tr><td><code id="appndr_:_hmn">hmn</code></td>
+<tr><td><code id="hmn">hmn</code></td>
 <td>
 <p>is the number of special value element added</p>
 </td></tr>
-<tr><td><code id="appndr_:_strt">strt</code></td>
+<tr><td><code id="strt">strt</code></td>
 <td>
 <p>is the index from which appending begins, defaults to max which means the end of &quot;inpt_v&quot;</p>
 </td></tr>
@@ -338,6 +340,7 @@ print(appndr(inpt_v=c(1:3), val="oui", hmn=5, strt=1))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -355,11 +358,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>better_match</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='better_match'>better_match</h2>
+<h2>better_match</h2>
 
 <h3>Description</h3>
 
@@ -376,19 +379,19 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="better_match_:_inpt_v">inpt_v</code></td>
+<tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the input vector</p>
 </td></tr>
-<tr><td><code id="better_match_:_ptrn">ptrn</code></td>
+<tr><td><code id="ptrn">ptrn</code></td>
 <td>
 <p>is the pattern to be matched</p>
 </td></tr>
-<tr><td><code id="better_match_:_untl">untl</code></td>
+<tr><td><code id="untl">untl</code></td>
 <td>
 <p>is the maximum number of matched pattern outputed</p>
 </td></tr>
-<tr><td><code id="better_match_:_nvr_here">nvr_here</code></td>
+<tr><td><code id="nvr_here">nvr_here</code></td>
 <td>
 <p>is a value you are sure is not present in inpt_v</p>
 </td></tr>
@@ -408,6 +411,7 @@ print(better_match(inpt_v=c(1:12, 3, 4, 33, 3), ptrn=3, untl=5))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -425,11 +429,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>can_be_num</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='can_be_num'>can_be_num</h2>
+<h2>can_be_num</h2>
 
 <h3>Description</h3>
 
@@ -446,7 +450,7 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="can_be_num_:_x">x</code></td>
+<tr><td><code id="x">x</code></td>
 <td>
 <p>is the input value</p>
 </td></tr>
@@ -474,6 +478,7 @@ print(can_be_num(34))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -491,11 +496,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>closer_ptrn_adv</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='closer_ptrn_adv'>closer_ptrn_adv</h2>
+<h2>closer_ptrn_adv</h2>
 
 <h3>Description</h3>
 
@@ -518,23 +523,23 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="closer_ptrn_adv_:_inpt_v">inpt_v</code></td>
+<tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the input vector containing all the patterns to be analyzed</p>
 </td></tr>
-<tr><td><code id="closer_ptrn_adv_:_res">res</code></td>
+<tr><td><code id="res">res</code></td>
 <td>
 <p>is a parameter controling the result. If set to &quot;raw_stat&quot;, each word in inpt_v will come with its score (indexes of its letters relatively to base_v). If set to something else, so &quot;c_word&quot; parameter must be filled.</p>
 </td></tr>
-<tr><td><code id="closer_ptrn_adv_:_default_val">default_val</code></td>
+<tr><td><code id="default_val">default_val</code></td>
 <td>
 <p>is the value that will be added to all patterns that do not equal the length of the longest pattern in inpt_v. Those get this value added to make all patterns equal in length so they can be compared, defaults to &quot;?&quot;</p>
 </td></tr>
-<tr><td><code id="closer_ptrn_adv_:_base_v">base_v</code></td>
+<tr><td><code id="base_v">base_v</code></td>
 <td>
 <p>is the vector from which all pattern get its result (letters indexes for each pattern relatively to base_v), defaults to c(&quot;default_val&quot;, letters). &quot;default_val&quot; is another parameter and letters is all the western alphabetic letters in a vector</p>
 </td></tr>
-<tr><td><code id="closer_ptrn_adv_:_c_word">c_word</code></td>
+<tr><td><code id="c_word">c_word</code></td>
 <td>
 <p>is a pattern from which the nearest to the farest pattern in inpt_v will be compared</p>
 </td></tr>
@@ -563,6 +568,7 @@ print(closer_ptrn_adv(inpt_v=c("aurevoir", "bonnour", "nonnour", "fin", "mois"))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -580,11 +586,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>closer_ptrn</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='closer_ptrn'>closer_ptrn</h2>
+<h2>closer_ptrn</h2>
 
 <h3>Description</h3>
 
@@ -608,27 +614,27 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="closer_ptrn_:_inpt_v">inpt_v</code></td>
+<tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the input vector containing all the patterns</p>
 </td></tr>
-<tr><td><code id="closer_ptrn_:_base_v">base_v</code></td>
+<tr><td><code id="base_v">base_v</code></td>
 <td>
 <p>must contain all the characters that the patterns are succeptible to contain, defaults to c(&quot;?&quot;, letters). &quot;?&quot; is necessary because it is internaly the default value added to each element that does not have a suffiient length compared to the longest pattern in inpt_v. If set to NA, the function will find by itself the elements to be filled with but it may takes an extra time</p>
 </td></tr>
-<tr><td><code id="closer_ptrn_:_excl_v">excl_v</code></td>
+<tr><td><code id="excl_v">excl_v</code></td>
 <td>
 <p>is the vector containing all the patterns from inpt_v to exclude for comparing them to others patterns. If this parameter is filled, so &quot;rtn_v&quot; must be empty.</p>
 </td></tr>
-<tr><td><code id="closer_ptrn_:_rtn_v">rtn_v</code></td>
+<tr><td><code id="rtn_v">rtn_v</code></td>
 <td>
 <p>is the vector containing all the patterns from inpt_v to keep for comparing them to others patterns. If this parameter is filled, so &quot;rtn_v&quot; must be empty.</p>
 </td></tr>
-<tr><td><code id="closer_ptrn_:_sub_excl_v">sub_excl_v</code></td>
+<tr><td><code id="sub_excl_v">sub_excl_v</code></td>
 <td>
 <p>is the vector containing all the patterns from inpt_v to exclude for using them to compare to another pattern. If this parameter is filled, so &quot;sub_rtn_v&quot; must be empty.</p>
 </td></tr>
-<tr><td><code id="closer_ptrn_:_sub_rtn_v">sub_rtn_v</code></td>
+<tr><td><code id="sub_rtn_v">sub_rtn_v</code></td>
 <td>
 <p>is the vector containing all the patterns from inpt_v to retain for using them to compare to another pattern. If this parameter is filled, so &quot;sub_excl_v&quot; must be empty.</p>
 </td></tr>
@@ -737,6 +743,7 @@ excl_v=c("nonnour", "nonjour"),
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -754,11 +761,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>clusterizer_v</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='clusterizer_v'>clusterizer_v</h2>
+<h2>clusterizer_v</h2>
 
 <h3>Description</h3>
 
@@ -775,15 +782,15 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="clusterizer_v_:_inpt_v">inpt_v</code></td>
+<tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the vector containing the sequence of number</p>
 </td></tr>
-<tr><td><code id="clusterizer_v_:_w_v">w_v</code></td>
+<tr><td><code id="w_v">w_v</code></td>
 <td>
 <p>is the vector containing the elements related to inpt_v, defaults to NA</p>
 </td></tr>
-<tr><td><code id="clusterizer_v_:_c_val">c_val</code></td>
+<tr><td><code id="c_val">c_val</code></td>
 <td>
 <p>is the accuracy of the clusterization</p>
 </td></tr>
@@ -906,6 +913,7 @@ print(clusterizer_v(inpt_v=sample.int(40, 26, replace=TRUE), w_v=letters, c_val=
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -923,11 +931,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>colins_datf</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='colins_datf'>colins_datf</h2>
+<h2>colins_datf</h2>
 
 <h3>Description</h3>
 
@@ -944,15 +952,15 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="colins_datf_:_inpt_datf">inpt_datf</code></td>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
 <td>
 <p>is the dataframe where vectors will be inserted</p>
 </td></tr>
-<tr><td><code id="colins_datf_:_target_col">target_col</code></td>
+<tr><td><code id="target_col">target_col</code></td>
 <td>
 <p>is a list containing all the vectors to be inserted</p>
 </td></tr>
-<tr><td><code id="colins_datf_:_target_pos">target_pos</code></td>
+<tr><td><code id="target_pos">target_pos</code></td>
 <td>
 <p>is a list containing the vectors made of the columns names or numbers where the associated vectors from target_col will be inserted after</p>
 </td></tr>
@@ -988,6 +996,7 @@ print(colins_datf(inpt_datf=datf1, target_col=list(c("oui", "oui", "oui", "non",
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -1005,11 +1014,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>converter_date</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='converter_date'>converter_date</h2>
+<h2>converter_date</h2>
 
 <h3>Description</h3>
 
@@ -1026,19 +1035,19 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="converter_date_:_inpt_date">inpt_date</code></td>
+<tr><td><code id="inpt_date">inpt_date</code></td>
 <td>
 <p>is the input date</p>
 </td></tr>
-<tr><td><code id="converter_date_:_convert_to">convert_to</code></td>
+<tr><td><code id="convert_to">convert_to</code></td>
 <td>
 <p>is the time unit the input date will be converted (&quot;s&quot;, &quot;n&quot;, &quot;h&quot;, &quot;d&quot;, &quot;m&quot;, &quot;y&quot;)</p>
 </td></tr>
-<tr><td><code id="converter_date_:_frmt">frmt</code></td>
+<tr><td><code id="frmt">frmt</code></td>
 <td>
 <p>is the format of the input date</p>
 </td></tr>
-<tr><td><code id="converter_date_:_sep_">sep_</code></td>
+<tr><td><code id="sep_">sep_</code></td>
 <td>
 <p>is the separator of the input date. For example this input date &quot;12-07-2012&quot; has &quot;-&quot; as a separator</p>
 </td></tr>
@@ -1070,6 +1079,7 @@ print(converter_date(inpt_date="2024", sep_="-", frmt="y", convert_to="s"))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -1087,11 +1097,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>converter_format</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='converter_format'>converter_format</h2>
+<h2>converter_format</h2>
 
 <h3>Description</h3>
 
@@ -1108,23 +1118,23 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="converter_format_:_inpt_val">inpt_val</code></td>
+<tr><td><code id="inpt_val">inpt_val</code></td>
 <td>
 <p>is the input value that is linked to the format</p>
 </td></tr>
-<tr><td><code id="converter_format_:_sep_">sep_</code></td>
+<tr><td><code id="sep_">sep_</code></td>
 <td>
 <p>is the separator of the value in inpt_val</p>
 </td></tr>
-<tr><td><code id="converter_format_:_inpt_frmt">inpt_frmt</code></td>
+<tr><td><code id="inpt_frmt">inpt_frmt</code></td>
 <td>
 <p>is the format of the input value</p>
 </td></tr>
-<tr><td><code id="converter_format_:_frmt">frmt</code></td>
+<tr><td><code id="frmt">frmt</code></td>
 <td>
 <p>is the format you want to convert to</p>
 </td></tr>
-<tr><td><code id="converter_format_:_default_val">default_val</code></td>
+<tr><td><code id="default_val">default_val</code></td>
 <td>
 <p>is the default value given to the units that are not present in the input format</p>
 </td></tr>
@@ -1146,6 +1156,7 @@ print(converter_format(inpt_val="23-12-05-1567", sep_="-",
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -1163,11 +1174,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>cost_and_taxes</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='cost_and_taxes'>cost_and_taxes</h2>
+<h2>cost_and_taxes</h2>
 
 <h3>Description</h3>
 
@@ -1197,51 +1208,51 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="cost_and_taxes_:_qte">qte</code></td>
+<tr><td><code id="qte">qte</code></td>
 <td>
 <p>is the quantity of elements</p>
 </td></tr>
-<tr><td><code id="cost_and_taxes_:_pu">pu</code></td>
+<tr><td><code id="pu">pu</code></td>
 <td>
 <p>is the price of a single elements without taxes</p>
 </td></tr>
-<tr><td><code id="cost_and_taxes_:_prix_ht">prix_ht</code></td>
+<tr><td><code id="prix_ht">prix_ht</code></td>
 <td>
 <p>is the duty-free price of the whole set of elements</p>
 </td></tr>
-<tr><td><code id="cost_and_taxes_:_tva">tva</code></td>
+<tr><td><code id="tva">tva</code></td>
 <td>
 <p>is the percentage of all taxes</p>
 </td></tr>
-<tr><td><code id="cost_and_taxes_:_prix_ttc">prix_ttc</code></td>
+<tr><td><code id="prix_ttc">prix_ttc</code></td>
 <td>
 <p>is the price of all the elements with taxes</p>
 </td></tr>
-<tr><td><code id="cost_and_taxes_:_prix_tva">prix_tva</code></td>
+<tr><td><code id="prix_tva">prix_tva</code></td>
 <td>
 <p>is the cost of all the taxes</p>
 </td></tr>
-<tr><td><code id="cost_and_taxes_:_pu_ttc">pu_ttc</code></td>
+<tr><td><code id="pu_ttc">pu_ttc</code></td>
 <td>
 <p>is the price of a single element taxes included</p>
 </td></tr>
-<tr><td><code id="cost_and_taxes_:_adjust">adjust</code></td>
+<tr><td><code id="adjust">adjust</code></td>
 <td>
 <p>is the discount percentage</p>
 </td></tr>
-<tr><td><code id="cost_and_taxes_:_prix_d_ht">prix_d_ht</code></td>
+<tr><td><code id="prix_d_ht">prix_d_ht</code></td>
 <td>
 <p>is the free-duty price of an element after discount</p>
 </td></tr>
-<tr><td><code id="cost_and_taxes_:_prix_d_ttc">prix_d_ttc</code></td>
+<tr><td><code id="prix_d_ttc">prix_d_ttc</code></td>
 <td>
 <p>is the price with taxes of an element after discount</p>
 </td></tr>
-<tr><td><code id="cost_and_taxes_:_pu_d">pu_d</code></td>
+<tr><td><code id="pu_d">pu_d</code></td>
 <td>
 <p>is the price of a single element after discount and without taxes</p>
 </td></tr>
-<tr><td><code id="cost_and_taxes_:_pu_d_ttc">pu_d_ttc</code></td>
+<tr><td><code id="pu_d_ttc">pu_d_ttc</code></td>
 <td>
 <p>is the free-duty price of a single element after discount</p>
 </td></tr>
@@ -1258,6 +1269,7 @@ print(cost_and_taxes(pu=45, prix_ttc=2111, qte=23))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -1275,11 +1287,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>cutr_v</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='cutr_v'>cutr_v</h2>
+<h2>cutr_v</h2>
 
 <h3>Description</h3>
 
@@ -1296,11 +1308,11 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="cutr_v_:_inpt_v">inpt_v</code></td>
+<tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the input vector</p>
 </td></tr>
-<tr><td><code id="cutr_v_:_untl">untl</code></td>
+<tr><td><code id="untl">untl</code></td>
 <td>
 <p>is the maximum size of nchar authorized by an element, defaults to &quot;min&quot;, it means the shortest element in the list</p>
 </td></tr>
@@ -1322,6 +1334,7 @@ print(cutr_v(inpt_v=test_v, untl=3))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -1339,11 +1352,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>cut_v</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='cut_v'>v_to_datf</h2>
+<h2>v_to_datf</h2>
 
 <h3>Description</h3>
 
@@ -1360,11 +1373,11 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="cut_v_:_inpt_v">inpt_v</code></td>
+<tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the input vector</p>
 </td></tr>
-<tr><td><code id="cut_v_:_sep_">sep_</code></td>
+<tr><td><code id="sep_">sep_</code></td>
 <td>
 <p>is the separator of the elements in inpt_v, defaults to &quot;&quot;</p>
 </td></tr>
@@ -1392,6 +1405,7 @@ print(cut_v(inpt_v=c("ou-i", "n-on", "ou-i", "n-on"), sep_="-"))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -1409,11 +1423,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>data_gen</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='data_gen'>data_gen</h2>
+<h2>data_gen</h2>
 
 <h3>Description</h3>
 
@@ -1441,39 +1455,39 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="data_gen_:_type_">type_</code></td>
+<tr><td><code id="type_">type_</code></td>
 <td>
 <p>is a vector. Its arguments designates a column, a column can be made of numbers (&quot;number&quot;), string (&quot;string&quot;) or both (&quot;mixed&quot;)</p>
 </td></tr>
-<tr><td><code id="data_gen_:_strt_l">strt_l</code></td>
+<tr><td><code id="strt_l">strt_l</code></td>
 <td>
 <p>is a vector containing for each column the row from which the data will begin to be generated</p>
 </td></tr>
-<tr><td><code id="data_gen_:_nb_r">nb_r</code></td>
+<tr><td><code id="nb_r">nb_r</code></td>
 <td>
 <p>is a vector containing for each column, the number of row full from generated data</p>
 </td></tr>
-<tr><td><code id="data_gen_:_output">output</code></td>
+<tr><td><code id="output">output</code></td>
 <td>
 <p>is the name of the output csv file, defaults to NA so no csv will be outputed by default</p>
 </td></tr>
-<tr><td><code id="data_gen_:_properties">properties</code></td>
+<tr><td><code id="properties">properties</code></td>
 <td>
 <p>is linked to type_distri because it is the parameters (&quot;min_val-max_val&quot;) for &quot;random type&quot;, (&quot;u-x&quot;) for the poisson distribution, (&quot;u-d&quot;) for gaussian distribution</p>
 </td></tr>
-<tr><td><code id="data_gen_:_type_distri">type_distri</code></td>
+<tr><td><code id="type_distri">type_distri</code></td>
 <td>
 <p>is a vector which, for each column, associate a type of distribution (&quot;random&quot;, &quot;poisson&quot;, &quot;gaussian&quot;), it meas that non only the number but also the length of the string will be randomly generated according to these distribution laws</p>
 </td></tr>
-<tr><td><code id="data_gen_:_str_source">str_source</code></td>
+<tr><td><code id="str_source">str_source</code></td>
 <td>
 <p>is the source (vector) from which the character creating random string are (default set to the occidental alphabet)</p>
 </td></tr>
-<tr><td><code id="data_gen_:_round_l">round_l</code></td>
+<tr><td><code id="round_l">round_l</code></td>
 <td>
 <p>is a vector which, for each column containing number, associate a round value, if the type of the value is numeric</p>
 </td></tr>
-<tr><td><code id="data_gen_:_sep_">sep_</code></td>
+<tr><td><code id="sep_">sep_</code></td>
 <td>
 <p>is the separator used to write data in the csv</p>
 </td></tr>
@@ -1553,6 +1567,7 @@ print(data_gen(strt_l=c(0, 0, 0), nb_r=c(5, 5, 5)))
 #5  3     a abcd
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -1570,11 +1585,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>data_meshup</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='data_meshup'>data_meshup</h2>
+<h2>data_meshup</h2>
 
 <h3>Description</h3>
 
@@ -1599,23 +1614,23 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="data_meshup_:_data">data</code></td>
+<tr><td><code id="data">data</code></td>
 <td>
 <p>is the data provided (vector) each column is separated by a unic separator and each dataset from the same column is separated by another unic separator (ex: c(&quot;<em>&quot;, c(&quot;d&quot;, &quot;-&quot;, &quot;e&quot;, &quot;-&quot;, &quot;f&quot;), &quot;</em>&quot;, c(&quot;a&quot;, &quot;a1&quot;, &quot;-&quot;, &quot;b&quot;, &quot;-&quot;, &quot;c&quot;, &quot;c1&quot;), &quot;_&quot;)</p>
 </td></tr>
-<tr><td><code id="data_meshup_:_cols">cols</code></td>
+<tr><td><code id="cols">cols</code></td>
 <td>
 <p>are the colnames of the data generated in a csv</p>
 </td></tr>
-<tr><td><code id="data_meshup_:_file_">file_</code></td>
+<tr><td><code id="file_">file_</code></td>
 <td>
 <p>is the file to which the data will be outputed, defaults to NA which means that the functio will return the dataframe generated and won't write it to a csv file</p>
 </td></tr>
-<tr><td><code id="data_meshup_:_sep_">sep_</code></td>
+<tr><td><code id="sep_">sep_</code></td>
 <td>
 <p>is the separator of the csv outputed</p>
 </td></tr>
-<tr><td><code id="data_meshup_:_organisation">organisation</code></td>
+<tr><td><code id="organisation">organisation</code></td>
 <td>
 <p>is the way variables include themselves, for instance ,resuming precedent example, if organisation=c(1, 0) so the data output will be:
 d, a
@@ -1624,11 +1639,11 @@ e, c
 f, c
 f, c1</p>
 </td></tr>
-<tr><td><code id="data_meshup_:_unic_sep1">unic_sep1</code></td>
+<tr><td><code id="unic_sep1">unic_sep1</code></td>
 <td>
 <p>is the unic separator between variables (default is &quot;_&quot;)</p>
 </td></tr>
-<tr><td><code id="data_meshup_:_unic_sep2">unic_sep2</code></td>
+<tr><td><code id="unic_sep2">unic_sep2</code></td>
 <td>
 <p>is the unic separator between datasets (default is &quot;-&quot;)</p>
 </td></tr>
@@ -1652,6 +1667,7 @@ print(data_meshup(data=c("_", c("-", "d", "-", "e", "-", "f"), "_",
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -1669,11 +1685,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>date_addr</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='date_addr'>date_addr</h2>
+<h2>date_addr</h2>
 
 <h3>Description</h3>
 
@@ -1698,31 +1714,31 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="date_addr_:_date1">date1</code></td>
+<tr><td><code id="date1">date1</code></td>
 <td>
 <p>is the date from which the second date will be added or substracted</p>
 </td></tr>
-<tr><td><code id="date_addr_:_date2">date2</code></td>
+<tr><td><code id="date2">date2</code></td>
 <td>
 <p>is the date that will be added or will substract date1</p>
 </td></tr>
-<tr><td><code id="date_addr_:_add">add</code></td>
+<tr><td><code id="add">add</code></td>
 <td>
 <p>equals to FALSE if you want date1 - date2 and TRUE if you want date1 + date2</p>
 </td></tr>
-<tr><td><code id="date_addr_:_frmt1">frmt1</code></td>
+<tr><td><code id="frmt1">frmt1</code></td>
 <td>
 <p>is the format of date1 (snhdmy) (second, minute, hour, day, monthn year)</p>
 </td></tr>
-<tr><td><code id="date_addr_:_frmt2">frmt2</code></td>
+<tr><td><code id="frmt2">frmt2</code></td>
 <td>
 <p>is the format of date2 (snhdmy)</p>
 </td></tr>
-<tr><td><code id="date_addr_:_sep_">sep_</code></td>
+<tr><td><code id="sep_">sep_</code></td>
 <td>
 <p>is the separator of date1 and date2</p>
 </td></tr>
-<tr><td><code id="date_addr_:_convert_to">convert_to</code></td>
+<tr><td><code id="convert_to">convert_to</code></td>
 <td>
 <p>is the format of the outputed date</p>
 </td></tr>
@@ -1764,6 +1780,7 @@ print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy", frmt2="dm", sep_=
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -1781,11 +1798,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>date_converter_reverse</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='date_converter_reverse'>date_converter_reverse</h2>
+<h2>date_converter_reverse</h2>
 
 <h3>Description</h3>
 
@@ -1802,19 +1819,19 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="date_converter_reverse_:_inpt_date">inpt_date</code></td>
+<tr><td><code id="inpt_date">inpt_date</code></td>
 <td>
 <p>is the input date</p>
 </td></tr>
-<tr><td><code id="date_converter_reverse_:_convert_to">convert_to</code></td>
+<tr><td><code id="convert_to">convert_to</code></td>
 <td>
 <p>is the date format the input date will be converted</p>
 </td></tr>
-<tr><td><code id="date_converter_reverse_:_frmt">frmt</code></td>
+<tr><td><code id="frmt">frmt</code></td>
 <td>
 <p>is the time unit of the input date</p>
 </td></tr>
-<tr><td><code id="date_converter_reverse_:_sep_">sep_</code></td>
+<tr><td><code id="sep_">sep_</code></td>
 <td>
 <p>is the separator of the outputed date</p>
 </td></tr>
@@ -1842,6 +1859,7 @@ print(date_converter_reverse(inpt_date="2024.929", convert_to="dhym", frmt="y", 
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -1859,11 +1877,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>dcr_untl</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='dcr_untl'>dcr_untl</h2>
+<h2>dcr_untl</h2>
 
 <h3>Description</h3>
 
@@ -1880,15 +1898,15 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="dcr_untl_:_strt_val">strt_val</code></td>
+<tr><td><code id="strt_val">strt_val</code></td>
 <td>
 <p>is the start value</p>
 </td></tr>
-<tr><td><code id="dcr_untl_:_cr_val">cr_val</code></td>
+<tr><td><code id="cr_val">cr_val</code></td>
 <td>
 <p>is the incremental (or decremental value)</p>
 </td></tr>
-<tr><td><code id="dcr_untl_:_stop_val">stop_val</code></td>
+<tr><td><code id="stop_val">stop_val</code></td>
 <td>
 <p>is the value where the loop has to stop</p>
 </td></tr>
@@ -1908,6 +1926,7 @@ print(dcr_untl(strt_val=50, cr_val=5, stop_val=450))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -1925,11 +1944,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>dcr_val</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='dcr_val'>dcr_val</h2>
+<h2>dcr_val</h2>
 
 <h3>Description</h3>
 
@@ -1946,15 +1965,15 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="dcr_val_:_strt_val">strt_val</code></td>
+<tr><td><code id="strt_val">strt_val</code></td>
 <td>
 <p>is the start value</p>
 </td></tr>
-<tr><td><code id="dcr_val_:_cr_val">cr_val</code></td>
+<tr><td><code id="cr_val">cr_val</code></td>
 <td>
 <p>is the incremental or decremental value</p>
 </td></tr>
-<tr><td><code id="dcr_val_:_stop_val">stop_val</code></td>
+<tr><td><code id="stop_val">stop_val</code></td>
 <td>
 <p>is the value the loop has to stop</p>
 </td></tr>
@@ -1982,6 +2001,7 @@ print(dcr_val(strt_val=53, cr_val=5, stop_val=450))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -1999,11 +2019,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>diff_datf</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='diff_datf'>diff_datf</h2>
+<h2>diff_datf</h2>
 
 <h3>Description</h3>
 
@@ -2020,11 +2040,11 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="diff_datf_:_datf1">datf1</code></td>
+<tr><td><code id="datf1">datf1</code></td>
 <td>
 <p>is an an input dataframe</p>
 </td></tr>
-<tr><td><code id="diff_datf_:_datf2">datf2</code></td>
+<tr><td><code id="datf2">datf2</code></td>
 <td>
 <p>is an an input dataframe</p>
 </td></tr>
@@ -2044,6 +2064,7 @@ print(diff_datf(datf1=datf1, datf2=datf2))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -2061,11 +2082,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>equalizer_v</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='equalizer_v'>equalizer_v</h2>
+<h2>equalizer_v</h2>
 
 <h3>Description</h3>
 
@@ -2082,15 +2103,15 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="equalizer_v_:_inpt_v">inpt_v</code></td>
+<tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the input vector containing all the characters</p>
 </td></tr>
-<tr><td><code id="equalizer_v_:_depth">depth</code></td>
+<tr><td><code id="depth">depth</code></td>
 <td>
 <p>is the depth parameter, defaults to &quot;max&quot; which means that it is equal to the character number of the element(s) in inpt_v that has the most</p>
 </td></tr>
-<tr><td><code id="equalizer_v_:_default_val">default_val</code></td>
+<tr><td><code id="default_val">default_val</code></td>
 <td>
 <p>is the default value that will be added to the output characters if those has an inferior length (characters) than the value of depth</p>
 </td></tr>
@@ -2110,6 +2131,7 @@ function processMathHTML() {
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -2127,11 +2149,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>extrt_only_v</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='extrt_only_v'>extrt_only_v</h2>
+<h2>extrt_only_v</h2>
 
 <h3>Description</h3>
 
@@ -2148,11 +2170,11 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="extrt_only_v_:_inpt_v">inpt_v</code></td>
+<tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the input vector</p>
 </td></tr>
-<tr><td><code id="extrt_only_v_:_pttrn_v">pttrn_v</code></td>
+<tr><td><code id="pttrn_v">pttrn_v</code></td>
 <td>
 <p>is the vector contining all the elements that can be in inpt_v</p>
 </td></tr>
@@ -2169,6 +2191,7 @@ print(extrt_only_v(inpt_v=c("oui", "non", "peut", "oo", "ll", "oui", "non", "oui
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -2186,11 +2209,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>fillr</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='fillr'>fillr</h2>
+<h2>fillr</h2>
 
 <h3>Description</h3>
 
@@ -2200,18 +2223,18 @@ function processMathHTML() {
 
 <h3>Usage</h3>
 
-<pre><code class='language-R'>fillr(inpt_v, ptrn_fill = "...\\d")
+<pre><code class='language-R'>fillr(inpt_v, ptrn_fill = "\\.\\.\\.\\d")
 </code></pre>
 
 
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="fillr_:_inpt_v">inpt_v</code></td>
+<tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the input vector</p>
 </td></tr>
-<tr><td><code id="fillr_:_ptrn_fill">ptrn_fill</code></td>
+<tr><td><code id="ptrn_fill">ptrn_fill</code></td>
 <td>
 <p>is the pattern used to detect where the function has to fill the vector by the last element n times. It defaults to &quot;...\d&quot; where &quot;\d&quot; is the regex for an int value. So this paramater has to have &quot;\d&quot; which designates n.</p>
 </td></tr>
@@ -2227,6 +2250,7 @@ print(fillr(c("a", "b", "...3", "c")))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -2244,11 +2268,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>fixer_nest_v</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='fixer_nest_v'>fixer_nest_v</h2>
+<h2>fixer_nest_v</h2>
 
 <h3>Description</h3>
 
@@ -2265,15 +2289,15 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="fixer_nest_v_:_cur_v">cur_v</code></td>
+<tr><td><code id="cur_v">cur_v</code></td>
 <td>
 <p>is the input vector</p>
 </td></tr>
-<tr><td><code id="fixer_nest_v_:_pttrn_v">pttrn_v</code></td>
+<tr><td><code id="pttrn_v">pttrn_v</code></td>
 <td>
 <p>is the vector containing all the patterns that may be contained in cur_v</p>
 </td></tr>
-<tr><td><code id="fixer_nest_v_:_wrk_v">wrk_v</code></td>
+<tr><td><code id="wrk_v">wrk_v</code></td>
 <td>
 <p>is a vector containing all the indexes of cur_v taken in count in the function</p>
 </td></tr>
@@ -2297,6 +2321,7 @@ print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "non", "peut-etre")
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -2314,11 +2339,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>fold_rec2</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='fold_rec2'>fold_rec2</h2>
+<h2>fold_rec2</h2>
 
 <h3>Description</h3>
 
@@ -2335,20 +2360,21 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="fold_rec2_:_xmax">xmax</code></td>
+<tr><td><code id="xmax">xmax</code></td>
 <td>
 <p>is the depth value</p>
 </td></tr>
-<tr><td><code id="fold_rec2_:_xmin">xmin</code></td>
+<tr><td><code id="xmin">xmin</code></td>
 <td>
 <p>is the minimum value of depth</p>
 </td></tr>
-<tr><td><code id="fold_rec2_:_pathc">pathc</code></td>
+<tr><td><code id="pathc">pathc</code></td>
 <td>
 <p>is the reference path, from which depth value is equal to 1</p>
 </td></tr>
 </table>
 
+</main>
 
 </div>
 </body></html>
@@ -2366,11 +2392,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>fold_rec</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='fold_rec'>fold_rec</h2>
+<h2>fold_rec</h2>
 
 <h3>Description</h3>
 
@@ -2387,20 +2413,21 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="fold_rec_:_xmax">xmax</code></td>
+<tr><td><code id="xmax">xmax</code></td>
 <td>
 <p>is the end depth value</p>
 </td></tr>
-<tr><td><code id="fold_rec_:_xmin">xmin</code></td>
+<tr><td><code id="xmin">xmin</code></td>
 <td>
 <p>is the start depth value</p>
 </td></tr>
-<tr><td><code id="fold_rec_:_pathc">pathc</code></td>
+<tr><td><code id="pathc">pathc</code></td>
 <td>
 <p>is the reference path</p>
 </td></tr>
 </table>
 
+</main>
 
 </div>
 </body></html>
@@ -2418,11 +2445,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>format_date</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='format_date'>format_date</h2>
+<h2>format_date</h2>
 
 <h3>Description</h3>
 
@@ -2439,19 +2466,19 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="format_date_:_f_dialect">f_dialect</code></td>
+<tr><td><code id="f_dialect">f_dialect</code></td>
 <td>
 <p>are the months from the language of which the month come</p>
 </td></tr>
-<tr><td><code id="format_date_:_sentc">sentc</code></td>
+<tr><td><code id="sentc">sentc</code></td>
 <td>
 <p>is the date to convert</p>
 </td></tr>
-<tr><td><code id="format_date_:_sep_in">sep_in</code></td>
+<tr><td><code id="sep_in">sep_in</code></td>
 <td>
 <p>is the separator of the dat input (default is &quot;-&quot;)</p>
 </td></tr>
-<tr><td><code id="format_date_:_sep_out">sep_out</code></td>
+<tr><td><code id="sep_out">sep_out</code></td>
 <td>
 <p>is the separator of the converted date (default is &quot;-&quot;)</p>
 </td></tr>
@@ -2468,6 +2495,7 @@ print(format_date(f_dialect=c("janvier", "février", "mars", "avril", "mai", "ju
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -2485,11 +2513,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>geo_min</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='geo_min'>geo_min</h2>
+<h2>geo_min</h2>
 
 <h3>Description</h3>
 
@@ -2506,11 +2534,11 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="geo_min_:_inpt_datf">inpt_datf</code></td>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
 <td>
 <p>is the input dataframe of the set of geographical points to be classified, its firts column is for latitude, the second for the longitude and the third, if exists, is for the altitude. Each point is one row.</p>
 </td></tr>
-<tr><td><code id="geo_min_:_established_datf">established_datf</code></td>
+<tr><td><code id="established_datf">established_datf</code></td>
 <td>
 <p>is the dataframe containing the coordiantes of the established geographical points</p>
 </td></tr>
@@ -2544,6 +2572,7 @@ print(geo_min(inpt_datf=in_, established_datf=in2_))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -2561,11 +2590,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>get_rec</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='get_rec'>get_rec</h2>
+<h2>get_rec</h2>
 
 <h3>Description</h3>
 
@@ -2582,13 +2611,14 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="get_rec_:_pathc">pathc</code></td>
+<tr><td><code id="pathc">pathc</code></td>
 <td>
 <p>is the reference path
 example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3</p>
 </td></tr>
 </table>
 
+</main>
 
 </div>
 </body></html>
@@ -2606,11 +2636,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>globe</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='globe'>globe</h2>
+<h2>globe</h2>
 
 <h3>Description</h3>
 
@@ -2627,27 +2657,27 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="globe_:_lat_f">lat_f</code></td>
+<tr><td><code id="lat_f">lat_f</code></td>
 <td>
 <p>is the latitude of the established geographical point</p>
 </td></tr>
-<tr><td><code id="globe_:_long_f">long_f</code></td>
+<tr><td><code id="long_f">long_f</code></td>
 <td>
 <p>is the longitude of the established geographical point</p>
 </td></tr>
-<tr><td><code id="globe_:_alt_f">alt_f</code></td>
+<tr><td><code id="alt_f">alt_f</code></td>
 <td>
 <p>is the altitude of the established geographical point, defaults to NA</p>
 </td></tr>
-<tr><td><code id="globe_:_lat_n">lat_n</code></td>
+<tr><td><code id="lat_n">lat_n</code></td>
 <td>
 <p>is a vector containing the latitude of the set of points</p>
 </td></tr>
-<tr><td><code id="globe_:_long_n">long_n</code></td>
+<tr><td><code id="long_n">long_n</code></td>
 <td>
 <p>is a vector containing the longitude of the set of points</p>
 </td></tr>
-<tr><td><code id="globe_:_alt_n">alt_n</code></td>
+<tr><td><code id="alt_n">alt_n</code></td>
 <td>
 <p>is a vector containing the altitude of the set of points, defaults to NA</p>
 </td></tr>
@@ -2667,6 +2697,7 @@ print(globe(lat_f=23, long_f=112, alt_f=8, lat_n=c(2, 82), long_n=c(165, -55), a
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -2684,11 +2715,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>groupr_datf</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='groupr_datf'>groupr_datf</h2>
+<h2>groupr_datf</h2>
 
 <h3>Description</h3>
 
@@ -2711,23 +2742,23 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="groupr_datf_:_inpt_datf">inpt_datf</code></td>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
 <td>
 <p>is the input dataframe</p>
 </td></tr>
-<tr><td><code id="groupr_datf_:_condition_lst">condition_lst</code></td>
+<tr><td><code id="condition_lst">condition_lst</code></td>
 <td>
 <p>is a list containing all the condition as a vector for each group</p>
 </td></tr>
-<tr><td><code id="groupr_datf_:_val_lst">val_lst</code></td>
+<tr><td><code id="val_lst">val_lst</code></td>
 <td>
 <p>is a list containing all the values associated with condition_lst as a vector for each group</p>
 </td></tr>
-<tr><td><code id="groupr_datf_:_conjunction_lst">conjunction_lst</code></td>
+<tr><td><code id="conjunction_lst">conjunction_lst</code></td>
 <td>
 <p>is a list containing all the conjunctions associated with condition_lst and val_lst as a vector for each group</p>
 </td></tr>
-<tr><td><code id="groupr_datf_:_rtn_val_pos">rtn_val_pos</code></td>
+<tr><td><code id="rtn_val_pos">rtn_val_pos</code></td>
 <td>
 <p>is a vector containing all the group flag value like this ex: c(&quot;flag1&quot;, &quot;flag2&quot;, &quot;flag3&quot;)</p>
 </td></tr>
@@ -2758,6 +2789,7 @@ conjunction_lst=conjunction_lst, rtn_val_pos=rtn_val_pos))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -2775,11 +2807,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>id_keepr</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='id_keepr'>id_keepr_datf</h2>
+<h2>id_keepr_datf</h2>
 
 <h3>Description</h3>
 
@@ -2796,19 +2828,19 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="id_keepr_:_inpt_datf">inpt_datf</code></td>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
 <td>
 <p>is the input dataframe</p>
 </td></tr>
-<tr><td><code id="id_keepr_:_col_v">col_v</code></td>
+<tr><td><code id="col_v">col_v</code></td>
 <td>
 <p>is the vector containing the column numbers or names to be compared to their respective elements in &quot;el_v&quot;</p>
 </td></tr>
-<tr><td><code id="id_keepr_:_el_v">el_v</code></td>
+<tr><td><code id="el_v">el_v</code></td>
 <td>
 <p>is a vector containing the elements that may be contained in their respective column described in &quot;col_v&quot;</p>
 </td></tr>
-<tr><td><code id="id_keepr_:_rstr_l">rstr_l</code></td>
+<tr><td><code id="rstr_l">rstr_l</code></td>
 <td>
 <p>is a list containing the vector composed of the indexes of the elements chosen for each comparison. If the length of the list is inferior to the lenght of comparisons, so the last vector of rstr_l will be the same as the last one to fill make rstr_l equal in term of length to col_v and el_v</p>
 </td></tr>
@@ -2841,6 +2873,7 @@ print(id_keepr(inpt_datf=datf1, col_v=c(1, 2), el_v=c("oui", "op"), rstr_l=list(
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -2858,11 +2891,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>incr_fillr</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='incr_fillr'>incr_fillr</h2>
+<h2>incr_fillr</h2>
 
 <h3>Description</h3>
 
@@ -2879,19 +2912,19 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="incr_fillr_:_inpt_v">inpt_v</code></td>
+<tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the asending double only composed vector</p>
 </td></tr>
-<tr><td><code id="incr_fillr_:_wrk_v">wrk_v</code></td>
+<tr><td><code id="wrk_v">wrk_v</code></td>
 <td>
 <p>is the other vector (size equal to inpt_v), defaults to NA</p>
 </td></tr>
-<tr><td><code id="incr_fillr_:_default_val">default_val</code></td>
+<tr><td><code id="default_val">default_val</code></td>
 <td>
 <p>is the default value put when the difference between two following elements of inpt_v is greater than step, defaults to NA</p>
 </td></tr>
-<tr><td><code id="incr_fillr_:_step">step</code></td>
+<tr><td><code id="step">step</code></td>
 <td>
 <p>is the allowed difference between two elements of inpt_v</p>
 </td></tr>
@@ -2921,6 +2954,7 @@ print(incr_fillr(inpt_v=c(1, 2, 4, 5, 9, 10),
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -2938,11 +2972,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>insert_datf</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='insert_datf'>edm1
+<h2>edm1
 insert_datf</h2>
 
 <h3>Description</h3>
@@ -2960,15 +2994,15 @@ insert_datf</h2>
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="insert_datf_:_datf_in">datf_in</code></td>
+<tr><td><code id="datf_in">datf_in</code></td>
 <td>
 <p>is the dataframe that will be inserted</p>
 </td></tr>
-<tr><td><code id="insert_datf_:_datf_ins">datf_ins</code></td>
+<tr><td><code id="datf_ins">datf_ins</code></td>
 <td>
 <p>is the dataset to be inserted</p>
 </td></tr>
-<tr><td><code id="insert_datf_:_ins_loc">ins_loc</code></td>
+<tr><td><code id="ins_loc">ins_loc</code></td>
 <td>
 <p>is a vector containg two parameters (row, column) of the begining for the insertion</p>
 </td></tr>
@@ -3008,6 +3042,7 @@ print(insert_datf(datf_in=datf2, datf_ins=datf1, ins_loc=c(2, 2)))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -3025,11 +3060,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>inter_max</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='inter_max'>inter_max</h2>
+<h2>inter_max</h2>
 
 <h3>Description</h3>
 
@@ -3046,15 +3081,15 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="inter_max_:_inpt_l">inpt_l</code></td>
+<tr><td><code id="inpt_l">inpt_l</code></td>
 <td>
 <p>is the input list</p>
 </td></tr>
-<tr><td><code id="inter_max_:_max_">max_</code></td>
+<tr><td><code id="max_">max_</code></td>
 <td>
 <p>is a value you are sure is the minimum step value of all the sub-lists</p>
 </td></tr>
-<tr><td><code id="inter_max_:_get_lst">get_lst</code></td>
+<tr><td><code id="get_lst">get_lst</code></td>
 <td>
 <p>is the parameter that, if set to True, will keep the last values of vectors in the return value if the last step exceeds the end value of the vector.</p>
 </td></tr>
@@ -3088,6 +3123,7 @@ print(inter_max(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3)), get_lst=FALSE))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -3105,11 +3141,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>inter_min</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='inter_min'>inter_min</h2>
+<h2>inter_min</h2>
 
 <h3>Description</h3>
 
@@ -3133,27 +3169,27 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="inter_min_:_inpt_l">inpt_l</code></td>
+<tr><td><code id="inpt_l">inpt_l</code></td>
 <td>
 <p>is the input list containing all the intervals</p>
 </td></tr>
-<tr><td><code id="inter_min_:_min_">min_</code></td>
+<tr><td><code id="min_">min_</code></td>
 <td>
 <p>is a value you are sure is superior to the maximum step value in all the intervals</p>
 </td></tr>
-<tr><td><code id="inter_min_:_sensi">sensi</code></td>
+<tr><td><code id="sensi">sensi</code></td>
 <td>
 <p>is the decimal accuracy of how the difference between each value n to n+1 in an interval is calculated</p>
 </td></tr>
-<tr><td><code id="inter_min_:_sensi2">sensi2</code></td>
+<tr><td><code id="sensi2">sensi2</code></td>
 <td>
 <p>is the decimal accuracy of how the value with the common step is calculated in all the intervals</p>
 </td></tr>
-<tr><td><code id="inter_min_:_how_to_op">how_to_op</code></td>
+<tr><td><code id="how_to_op">how_to_op</code></td>
 <td>
 <p>is a vector containing the operations to perform to the pre-common step value, defaults to only &quot;divide&quot;. The operations can be &quot;divide&quot;, &quot;substract&quot;, &quot;multiply&quot; or &quot;add&quot;. All type of operations can be in this parameter.</p>
 </td></tr>
-<tr><td><code id="inter_min_:_how_to_val">how_to_val</code></td>
+<tr><td><code id="how_to_val">how_to_val</code></td>
 <td>
 <p>is a vector containing the value relatives to the operations in <code>hot_to_op</code>, defaults to 3
 output from ex:</p>
@@ -3181,6 +3217,7 @@ print(inter_min(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3))))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -3198,11 +3235,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>intersect_mod</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='intersect_mod'>intersect_mod</h2>
+<h2>intersect_mod</h2>
 
 <h3>Description</h3>
 
@@ -3219,23 +3256,23 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="intersect_mod_:_datf">datf</code></td>
+<tr><td><code id="datf">datf</code></td>
 <td>
 <p>is the input dataframe</p>
 </td></tr>
-<tr><td><code id="intersect_mod_:_inter_col">inter_col</code></td>
+<tr><td><code id="inter_col">inter_col</code></td>
 <td>
 <p>is the column name or the column number of the values that may be commun betwee the different mods</p>
 </td></tr>
-<tr><td><code id="intersect_mod_:_mod_col">mod_col</code></td>
+<tr><td><code id="mod_col">mod_col</code></td>
 <td>
 <p>is the column name or the column number of the mods in the dataframe</p>
 </td></tr>
-<tr><td><code id="intersect_mod_:_n_min">n_min</code></td>
+<tr><td><code id="n_min">n_min</code></td>
 <td>
 <p>is the minimum elements in common a mod should have to be taken in count</p>
 </td></tr>
-<tr><td><code id="intersect_mod_:_ordered_descendly">ordered_descendly</code></td>
+<tr><td><code id="ordered_descendly">ordered_descendly</code></td>
 <td>
 <p>in case that the elements in commun are numeric, this option can be enabled by giving a value of TRUE or FALSE see examples</p>
 </td></tr>
@@ -3295,6 +3332,7 @@ print(intersect_mod(datf=datf, inter_col=2, mod_col=1, n_min=3))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -3312,11 +3350,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>is_divisible</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='is_divisible'>is_divisible</h2>
+<h2>is_divisible</h2>
 
 <h3>Description</h3>
 
@@ -3333,11 +3371,11 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="is_divisible_:_inpt_v">inpt_v</code></td>
+<tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the input vector</p>
 </td></tr>
-<tr><td><code id="is_divisible_:_divisible_v">divisible_v</code></td>
+<tr><td><code id="divisible_v">divisible_v</code></td>
 <td>
 <p>is the vector containing all the numbers that will try to divide those contained in inpt_v</p>
 </td></tr>
@@ -3353,6 +3391,7 @@ function processMathHTML() {
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -3370,11 +3409,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>isnt_divisible</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='isnt_divisible'>isnt_divisible</h2>
+<h2>isnt_divisible</h2>
 
 <h3>Description</h3>
 
@@ -3391,11 +3430,11 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="isnt_divisible_:_inpt_v">inpt_v</code></td>
+<tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the input vector</p>
 </td></tr>
-<tr><td><code id="isnt_divisible_:_divisible_v">divisible_v</code></td>
+<tr><td><code id="divisible_v">divisible_v</code></td>
 <td>
 <p>is the vector containing all the numbers that will try to divide those contained in inpt_v</p>
 </td></tr>
@@ -3413,6 +3452,7 @@ function processMathHTML() {
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -3430,11 +3470,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>leap_yr</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='leap_yr'>bsx_year</h2>
+<h2>bsx_year</h2>
 
 <h3>Description</h3>
 
@@ -3451,7 +3491,7 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="leap_yr_:_year">year</code></td>
+<tr><td><code id="year">year</code></td>
 <td>
 <p>is the input year</p>
 </td></tr>
@@ -3467,6 +3507,7 @@ print(leap_yr(year=2024))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -3484,11 +3525,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>letter_to_nb</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='letter_to_nb'>letter_to_nb</h2>
+<h2>letter_to_nb</h2>
 
 <h3>Description</h3>
 
@@ -3505,7 +3546,7 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="letter_to_nb_:_letter">letter</code></td>
+<tr><td><code id="letter">letter</code></td>
 <td>
 <p>is the letter (name of the column)</p>
 </td></tr>
@@ -3521,6 +3562,7 @@ print(letter_to_nb("rty"))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -3538,11 +3580,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>list_files</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='list_files'>list_files</h2>
+<h2>list_files</h2>
 
 <h3>Description</h3>
 
@@ -3559,16 +3601,17 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="list_files_:_patternc">patternc</code></td>
+<tr><td><code id="patternc">patternc</code></td>
 <td>
 <p>is a vector containing all the exensions you want</p>
 </td></tr>
-<tr><td><code id="list_files_:_pathc">pathc</code></td>
+<tr><td><code id="pathc">pathc</code></td>
 <td>
 <p>is the path, can be a vector of multiple path because list.files() supports it.</p>
 </td></tr>
 </table>
 
+</main>
 
 </div>
 </body></html>
@@ -3586,11 +3629,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>lst_flatnr</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='lst_flatnr'>lst_flatnr</h2>
+<h2>lst_flatnr</h2>
 
 <h3>Description</h3>
 
@@ -3607,7 +3650,7 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="lst_flatnr_:_inpt_l">inpt_l</code></td>
+<tr><td><code id="inpt_l">inpt_l</code></td>
 <td>
 <p>is the input list</p>
 </td></tr>
@@ -3623,6 +3666,7 @@ print(lst_flatnr(inpt_l=list(c(1, 2), c(5, 3), c(7, 2, 7))))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -3640,11 +3684,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>multitud</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='multitud'>multitud</h2>
+<h2>multitud</h2>
 
 <h3>Description</h3>
 
@@ -3661,11 +3705,11 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="multitud_:_l">l</code></td>
+<tr><td><code id="l">l</code></td>
 <td>
 <p>is the list</p>
 </td></tr>
-<tr><td><code id="multitud_:_sep_">sep_</code></td>
+<tr><td><code id="sep_">sep_</code></td>
 <td>
 <p>is the separator between elements (default is set to &quot;&quot; as you see in the example)</p>
 </td></tr>
@@ -3684,6 +3728,7 @@ print(multitud(l=list(c("a", "b"), c("1", "2"), c("A", "Z", "E"), c("Q", "F")), 
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -3701,11 +3746,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>nb_to_letter</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='nb_to_letter'>nb_to_letter</h2>
+<h2>nb_to_letter</h2>
 
 <h3>Description</h3>
 
@@ -3722,7 +3767,7 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="nb_to_letter_:_x">x</code></td>
+<tr><td><code id="x">x</code></td>
 <td>
 <p>is the number of the column</p>
 </td></tr>
@@ -3738,6 +3783,7 @@ print(nb_to_letter(12713))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -3755,11 +3801,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>nestr_datf1</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='nestr_datf1'>nestr_datf1</h2>
+<h2>nestr_datf1</h2>
 
 <h3>Description</h3>
 
@@ -3782,23 +3828,23 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="nestr_datf1_:_inptf_datf">inptf_datf</code></td>
+<tr><td><code id="inptf_datf">inptf_datf</code></td>
 <td>
 <p>is the input dataframe (1b)</p>
 </td></tr>
-<tr><td><code id="nestr_datf1_:_inptt_pos_datf">inptt_pos_datf</code></td>
+<tr><td><code id="inptt_pos_datf">inptt_pos_datf</code></td>
 <td>
 <p>is the dataframe (2b) that corresponds to the (1a) values</p>
 </td></tr>
-<tr><td><code id="nestr_datf1_:_nestr_datf">nestr_datf</code></td>
+<tr><td><code id="nestr_datf">nestr_datf</code></td>
 <td>
 <p>is the dataframe (2b) that has the special value (2a)</p>
 </td></tr>
-<tr><td><code id="nestr_datf1_:_yes_val">yes_val</code></td>
+<tr><td><code id="yes_val">yes_val</code></td>
 <td>
 <p>is the special value (2a)</p>
 </td></tr>
-<tr><td><code id="nestr_datf1_:_inptt_neg_datf">inptt_neg_datf</code></td>
+<tr><td><code id="inptt_neg_datf">inptt_neg_datf</code></td>
 <td>
 <p>is the dataframe (4b) that has the (3a) values, defaults to NA</p>
 </td></tr>
@@ -3830,6 +3876,7 @@ nestr_datf=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE)), yes_val=TRUE
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -3847,11 +3894,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>nestr_datf2</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='nestr_datf2'>nestr_datf2</h2>
+<h2>nestr_datf2</h2>
 
 <h3>Description</h3>
 
@@ -3868,23 +3915,23 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="nestr_datf2_:_inptf_datf">inptf_datf</code></td>
+<tr><td><code id="inptf_datf">inptf_datf</code></td>
 <td>
 <p>is the input dataframe (1b)</p>
 </td></tr>
-<tr><td><code id="nestr_datf2_:_rtn_pos">rtn_pos</code></td>
+<tr><td><code id="rtn_pos">rtn_pos</code></td>
 <td>
 <p>is the special value (1a)</p>
 </td></tr>
-<tr><td><code id="nestr_datf2_:_rtn_neg">rtn_neg</code></td>
+<tr><td><code id="rtn_neg">rtn_neg</code></td>
 <td>
 <p>is the special value (3a)</p>
 </td></tr>
-<tr><td><code id="nestr_datf2_:_nestr_datf">nestr_datf</code></td>
+<tr><td><code id="nestr_datf">nestr_datf</code></td>
 <td>
 <p>is the dataframe (2b)</p>
 </td></tr>
-<tr><td><code id="nestr_datf2_:_yes_val">yes_val</code></td>
+<tr><td><code id="yes_val">yes_val</code></td>
 <td>
 <p>is the special value (2a)</p>
 </td></tr>
@@ -3904,6 +3951,7 @@ rtn_neg="no", nestr_datf=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -3921,11 +3969,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>nest_v</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='nest_v'>nest_v</h2>
+<h2>nest_v</h2>
 
 <h3>Description</h3>
 
@@ -3942,19 +3990,19 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="nest_v_:_f_v">f_v</code></td>
+<tr><td><code id="f_v">f_v</code></td>
 <td>
 <p>is the vector that will welcome the nested vector t_v</p>
 </td></tr>
-<tr><td><code id="nest_v_:_t_v">t_v</code></td>
+<tr><td><code id="t_v">t_v</code></td>
 <td>
 <p>is the imbriquator vector</p>
 </td></tr>
-<tr><td><code id="nest_v_:_step">step</code></td>
+<tr><td><code id="step">step</code></td>
 <td>
 <p>defines after how many elements of f_v the next element of t_v can be put in the output</p>
 </td></tr>
-<tr><td><code id="nest_v_:_after">after</code></td>
+<tr><td><code id="after">after</code></td>
 <td>
 <p>defines after how many elements of f_v, the begining of t_v can be put</p>
 </td></tr>
@@ -3971,6 +4019,7 @@ print(nest_v(f_v=c(1, 2, 3, 4, 5, 6), t_v=c("oui", "oui2", "oui3", "oui4", "oui5
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -3988,11 +4037,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>new_ordered</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='new_ordered'>new_ordered</h2>
+<h2>new_ordered</h2>
 
 <h3>Description</h3>
 
@@ -4009,15 +4058,15 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="new_ordered_:_f_v">f_v</code></td>
+<tr><td><code id="f_v">f_v</code></td>
 <td>
 <p>is the input vector</p>
 </td></tr>
-<tr><td><code id="new_ordered_:_w_v">w_v</code></td>
+<tr><td><code id="w_v">w_v</code></td>
 <td>
 <p>is the vector containing the elements that can be in f_v</p>
 </td></tr>
-<tr><td><code id="new_ordered_:_nvr_here">nvr_here</code></td>
+<tr><td><code id="nvr_here">nvr_here</code></td>
 <td>
 <p>is a value you are sure is not present in f_v</p>
 </td></tr>
@@ -4033,6 +4082,7 @@ print(new_ordered(f_v=c("non", "non", "non", "oui"), w_v=c("oui", "non", "non"))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -4050,11 +4100,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>non_unique</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='non_unique'>non_unique</h2>
+<h2>non_unique</h2>
 
 <h3>Description</h3>
 
@@ -4071,11 +4121,11 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="non_unique_:_inpt_v">inpt_v</code></td>
+<tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the input vector containing the elements</p>
 </td></tr>
-<tr><td><code id="non_unique_:_occu">occu</code></td>
+<tr><td><code id="occu">occu</code></td>
 <td>
 <p>is a parameter that specifies the occurence of the elements that must be returned, defaults to &quot;&gt;-1-&quot; it means that the function will return all the elements that are present more than one time in inpt_v. The synthax is the following &quot;comparaison_type-actual_value-&quot;. The comparaison type may be &quot;==&quot; or &quot;&gt;&quot;. Occu can also be a vector containing all the occurence that must have the elements to be returned.</p>
 </td></tr>
@@ -4103,6 +4153,7 @@ print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), o
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -4120,11 +4171,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>occu</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='occu'>occu</h2>
+<h2>occu</h2>
 
 <h3>Description</h3>
 
@@ -4141,7 +4192,7 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="occu_:_inpt_v">inpt_v</code></td>
+<tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>the input dataframe</p>
 </td></tr>
@@ -4160,6 +4211,74 @@ print(occu(inpt_v=c("oui", "peut", "peut", "non", "oui")))
 
 </code></pre>
 
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: pairs_findr</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>pairs_findr</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>pairs_findr</h2>
+
+<h3>Description</h3>
+
+<p>Takes a character as input and detect the pairs of pattern, like the parenthesis pais if the pattern is &quot;(&quot; and then &quot;)&quot;
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>pairs_findr(inpt, ptrn1 = "(", ptrn2 = ")")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt">inpt</code></td>
+<td>
+<p>is the input character</p>
+</td></tr>
+<tr><td><code id="ptrn1">ptrn1</code></td>
+<td>
+<p>is the first pattern ecountered in the pair</p>
+</td></tr>
+<tr><td><code id="ptrn2">ptrn2</code></td>
+<td>
+<p>is the second pattern in the pair</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(pairs_findr(inpt="ze+(yu*45/(jk+zz)*(o()p))-(re*(rt+qs)-fg)"))
+
+[[1]]
+ [1] 4 1 1 3 2 2 3 4 6 5 5 6
+
+[[2]]
+ [1]  4 11 17 19 21 22 24 25 27 31 37 41
+
+</code></pre>
+
+</main>
 
 </div>
 </body></html>
@@ -4177,11 +4296,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>paste_datf</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='paste_datf'>paste_datf</h2>
+<h2>paste_datf</h2>
 
 <h3>Description</h3>
 
@@ -4198,11 +4317,11 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="paste_datf_:_inpt_datf">inpt_datf</code></td>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
 <td>
 <p>is the input dataframe</p>
 </td></tr>
-<tr><td><code id="paste_datf_:_sep">sep</code></td>
+<tr><td><code id="sep">sep</code></td>
 <td>
 <p>is the separator between pasted elements, defaults to &quot;&quot;</p>
 </td></tr>
@@ -4218,6 +4337,7 @@ print(paste_datf(inpt_datf=data.frame(c(1, 2, 1), c(33, 22, 55))))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -4235,11 +4355,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>pattern_generator</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='pattern_generator'>pattern_generator</h2>
+<h2>pattern_generator</h2>
 
 <h3>Description</h3>
 
@@ -4256,27 +4376,27 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="pattern_generator_:_base_">base_</code></td>
+<tr><td><code id="base_">base_</code></td>
 <td>
 <p>is the pattern that will be kept</p>
 </td></tr>
-<tr><td><code id="pattern_generator_:_from_">from_</code></td>
+<tr><td><code id="from_">from_</code></td>
 <td>
 <p>is the vector from which the elements of the random part will be generated</p>
 </td></tr>
-<tr><td><code id="pattern_generator_:_nb">nb</code></td>
+<tr><td><code id="nb">nb</code></td>
 <td>
 <p>is the number of random pattern chosen for the varying part</p>
 </td></tr>
-<tr><td><code id="pattern_generator_:_hmn">hmn</code></td>
+<tr><td><code id="hmn">hmn</code></td>
 <td>
 <p>is how many of varying pattern from the same base will be created</p>
 </td></tr>
-<tr><td><code id="pattern_generator_:_after">after</code></td>
+<tr><td><code id="after">after</code></td>
 <td>
 <p>is set to 1 by default, it means that the varying part will be after the fixed part, set to 0 if you want the varying part to be before</p>
 </td></tr>
-<tr><td><code id="pattern_generator_:_sep">sep</code></td>
+<tr><td><code id="sep">sep</code></td>
 <td>
 <p>is the separator between all patterns in the returned value</p>
 </td></tr>
@@ -4296,6 +4416,7 @@ print(pattern_generator(base_="oui", from_=c("er", "re", "ere"), nb=2, hmn=3, af
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -4313,11 +4434,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>pattern_gettr</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='pattern_gettr'>pattern_gettr</h2>
+<h2>pattern_gettr</h2>
 
 <h3>Description</h3>
 
@@ -4343,31 +4464,31 @@ Second case: It is the opposite to the first case, it means that if the pattern 
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="pattern_gettr_:_word_">word_</code></td>
+<tr><td><code id="word_">word_</code></td>
 <td>
 <p>is the vector containing the patterns</p>
 </td></tr>
-<tr><td><code id="pattern_gettr_:_vct">vct</code></td>
+<tr><td><code id="vct">vct</code></td>
 <td>
 <p>is the vector being searched for patterns</p>
 </td></tr>
-<tr><td><code id="pattern_gettr_:_occ">occ</code></td>
+<tr><td><code id="occ">occ</code></td>
 <td>
 <p>a vector containing the occurence of the pattern in word_ to be matched in the vector being searched, if the occurence is 2 for the nth pattern in word_ and only one occurence is found in vct so no pattern will be matched, put &quot;forever&quot; to no longer depend on the occurence for the associated pattern</p>
 </td></tr>
-<tr><td><code id="pattern_gettr_:_strict">strict</code></td>
+<tr><td><code id="strict">strict</code></td>
 <td>
 <p>a vector containing the &quot;strict&quot; condition for each nth vector in word_ (&quot;strict&quot; is the string to activate this option)</p>
 </td></tr>
-<tr><td><code id="pattern_gettr_:_btwn">btwn</code></td>
+<tr><td><code id="btwn">btwn</code></td>
 <td>
 <p>is a vector containing the condition (&quot;yes&quot; to activate this option) meaning that if &quot;yes&quot;, all elements between two matched patern in vct will be returned , so the patterns you enter in word_ have to be in the order you think it will appear in vct</p>
 </td></tr>
-<tr><td><code id="pattern_gettr_:_all_in_word">all_in_word</code></td>
+<tr><td><code id="all_in_word">all_in_word</code></td>
 <td>
 <p>is a value (default set to &quot;yes&quot;, &quot;no&quot; to activate this option) that, if activated, won't authorized a previous matched pattern to be matched again</p>
 </td></tr>
-<tr><td><code id="pattern_gettr_:_notatall">notatall</code></td>
+<tr><td><code id="notatall">notatall</code></td>
 <td>
 <p>is a string that you are sure is not present in vct</p>
 </td></tr>
@@ -4389,6 +4510,7 @@ print(pattern_gettr(word_=c("oui", "non", "erer"), vct=c("oui", "oui", "non", "o
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -4406,11 +4528,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>pattern_tuning</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='pattern_tuning'>pattern_tuning</h2>
+<h2>pattern_tuning</h2>
 
 <h3>Description</h3>
 
@@ -4434,27 +4556,27 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="pattern_tuning_:_pattrn">pattrn</code></td>
+<tr><td><code id="pattrn">pattrn</code></td>
 <td>
 <p>is the character that will be tuned</p>
 </td></tr>
-<tr><td><code id="pattern_tuning_:_spe_nb">spe_nb</code></td>
+<tr><td><code id="spe_nb">spe_nb</code></td>
 <td>
 <p>is the number of new character that will be replaced</p>
 </td></tr>
-<tr><td><code id="pattern_tuning_:_spe_l">spe_l</code></td>
+<tr><td><code id="spe_l">spe_l</code></td>
 <td>
 <p>is the source vector from which the new characters will replace old ones</p>
 </td></tr>
-<tr><td><code id="pattern_tuning_:_exclude_type">exclude_type</code></td>
+<tr><td><code id="exclude_type">exclude_type</code></td>
 <td>
 <p>is character that won't be replaced</p>
 </td></tr>
-<tr><td><code id="pattern_tuning_:_hmn">hmn</code></td>
+<tr><td><code id="hmn">hmn</code></td>
 <td>
 <p>is how many output the function will return</p>
 </td></tr>
-<tr><td><code id="pattern_tuning_:_rg">rg</code></td>
+<tr><td><code id="rg">rg</code></td>
 <td>
 <p>is a vector with two parameters (index of the first letter that will be replaced, index of the last letter that will be replaced) default is set to all the letters from the source pattern</p>
 </td></tr>
@@ -4470,6 +4592,7 @@ print(pattern_tuning(pattrn="oui", spe_nb=2, spe_l=c("e", "r", "T", "O"), exclud
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -4487,11 +4610,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>ptrn_switchr</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='ptrn_switchr'>ptrn_switchr</h2>
+<h2>ptrn_switchr</h2>
 
 <h3>Description</h3>
 
@@ -4508,23 +4631,23 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="ptrn_switchr_:_inpt_l">inpt_l</code></td>
+<tr><td><code id="inpt_l">inpt_l</code></td>
 <td>
 <p>is the input vector</p>
 </td></tr>
-<tr><td><code id="ptrn_switchr_:_f_idx_l">f_idx_l</code></td>
+<tr><td><code id="f_idx_l">f_idx_l</code></td>
 <td>
 <p>is a vector containing the indexes of the pattern you want to be altered.</p>
 </td></tr>
-<tr><td><code id="ptrn_switchr_:_t_idx_l">t_idx_l</code></td>
+<tr><td><code id="t_idx_l">t_idx_l</code></td>
 <td>
 <p>is a vector containing the indexes to which the indexes in f_idx_l are related.</p>
 </td></tr>
-<tr><td><code id="ptrn_switchr_:_sep">sep</code></td>
+<tr><td><code id="sep">sep</code></td>
 <td>
 <p>is the separator, defaults to &quot;-&quot;</p>
 </td></tr>
-<tr><td><code id="ptrn_switchr_:_default_val">default_val</code></td>
+<tr><td><code id="default_val">default_val</code></td>
 <td>
 <p>is the default value , if not set to NA, of the pattern at the indexes in f_idx_l. If it is not set to NA, you do not need to fill t_idx_l because this is the vector containing the indexes of the patterns that will be set as new values relatively to the indexes in f_idx_l. Defaults to NA.</p>
 </td></tr>
@@ -4546,6 +4669,7 @@ print(ptrn_switchr(inpt_l=c("2022-01-11", "2022-01-14", "2022-01-21",
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -4563,11 +4687,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>ptrn_twkr</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='ptrn_twkr'>ptrn_twkr</h2>
+<h2>ptrn_twkr</h2>
 
 <h3>Description</h3>
 
@@ -4591,27 +4715,27 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="ptrn_twkr_:_inpt_l">inpt_l</code></td>
+<tr><td><code id="inpt_l">inpt_l</code></td>
 <td>
 <p>is the input vector</p>
 </td></tr>
-<tr><td><code id="ptrn_twkr_:_depth">depth</code></td>
+<tr><td><code id="depth">depth</code></td>
 <td>
 <p>is the number (numeric) of separator it will keep as a result. To keep the number of separator of the element that has the minimum amount of separator do depth=&quot;min&quot; and depth=&quot;max&quot; (character) for the opposite. This value defaults to &quot;max&quot;.</p>
 </td></tr>
-<tr><td><code id="ptrn_twkr_:_sep">sep</code></td>
+<tr><td><code id="sep">sep</code></td>
 <td>
 <p>is the separator of the pattern, defaults to &quot;-&quot;</p>
 </td></tr>
-<tr><td><code id="ptrn_twkr_:_default_val">default_val</code></td>
+<tr><td><code id="default_val">default_val</code></td>
 <td>
 <p>is the default val that will be placed between the separator, defaults to &quot;00&quot;</p>
 </td></tr>
-<tr><td><code id="ptrn_twkr_:_add_sep">add_sep</code></td>
+<tr><td><code id="add_sep">add_sep</code></td>
 <td>
 <p>defaults to TRUE. If set to FALSE, it will remove the separator for the patterns that are included in the interval between the depth amount of separator and the actual number of separator of the element.</p>
 </td></tr>
-<tr><td><code id="ptrn_twkr_:_end_">end_</code></td>
+<tr><td><code id="end_">end_</code></td>
 <td>
 <p>is if the default_val will be added at the end or at the beginning of each element that lacks length compared to depth</p>
 </td></tr>
@@ -4637,6 +4761,7 @@ ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=TRUE, end_=F
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -4654,11 +4779,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>rearangr_v</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='rearangr_v'>rearangr_v</h2>
+<h2>rearangr_v</h2>
 
 <h3>Description</h3>
 
@@ -4675,15 +4800,15 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="rearangr_v_:_inpt_v">inpt_v</code></td>
+<tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the vector that contains the sequance of number</p>
 </td></tr>
-<tr><td><code id="rearangr_v_:_w_v">w_v</code></td>
+<tr><td><code id="w_v">w_v</code></td>
 <td>
 <p>is the vector containing the elements related to inpt_v</p>
 </td></tr>
-<tr><td><code id="rearangr_v_:_how">how</code></td>
+<tr><td><code id="how">how</code></td>
 <td>
 <p>is the way the elements of w_v will be outputed according to if inpt_v will be sorted ascendigly or descendingly</p>
 </td></tr>
@@ -4699,6 +4824,74 @@ print(rearangr_v(inpt_v=c(23, 21, 56), w_v=c("oui", "peut", "non"), how="decreas
 
 </code></pre>
 
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: regex_spe_detect</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>regex_spe_detect</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>regex_spe_detect</h2>
+
+<h3>Description</h3>
+
+<p>Takes a character as input and returns its regex-friendly character for R.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>regex_spe_detect(inpt)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt">inpt</code></td>
+<td>
+<p>the input character</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(regex_spe_detect("o"))
+
+[1] "o"
+
+print(regex_spe_detect("("))
+
+[1] "\\("
+
+print(regex_spe_detect("tr(o)m"))
+
+[1] "tr\\(o\\)m"
+
+print(regex_spe_detect(inpt="fggfg[fggf]fgfg(vg?fgfgf.gf)"))
+
+[1] "fggfg\\[fggf\\]fgfg\\(vg\\?fgfgf\\.gf\\)"
+
+</code></pre>
+
+</main>
 
 </div>
 </body></html>
@@ -4716,11 +4909,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>regroupr</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='regroupr'>regroupr</h2>
+<h2>regroupr</h2>
 
 <h3>Description</h3>
 
@@ -4742,19 +4935,19 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="regroupr_:_inpt_v">inpt_v</code></td>
+<tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the input vector containing all the data you want to sort in a specific way. All the sub-elements should be separated by a unique separator such as &quot;-&quot; or &quot;/&quot;</p>
 </td></tr>
-<tr><td><code id="regroupr_:_sep_">sep_</code></td>
+<tr><td><code id="sep_">sep_</code></td>
 <td>
 <p>is the unique separator separating the sub-elements in each elements of inpt_v</p>
 </td></tr>
-<tr><td><code id="regroupr_:_order">order</code></td>
+<tr><td><code id="order">order</code></td>
 <td>
 <p>is a vector describing the way the elements should be sorted. For example if you want this dataset  &quot;c(X1/Y1/Z1, X2/Y1/Z2, ...)&quot; to be sorted by the last element you should have order=c(3:1), for example, and it should returns something like this c(X1/Y1/Z1, X2/Y1/Z1, X1/Y2/Z1, ...) assuming you have only two values for X.</p>
 </td></tr>
-<tr><td><code id="regroupr_:_l_order">l_order</code></td>
+<tr><td><code id="l_order">l_order</code></td>
 <td>
 <p>is a list containing the vectors of values you want to order first for each sub-elements</p>
 </td></tr>
@@ -4798,6 +4991,7 @@ print(regroupr(inpt_v=vec, sep_="/", order=c(4:1)))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -4815,11 +5009,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>r_print</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='r_print'>r_print</h2>
+<h2>r_print</h2>
 
 <h3>Description</h3>
 
@@ -4836,19 +5030,19 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="r_print_:_inpt_v">inpt_v</code></td>
+<tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the input vector</p>
 </td></tr>
-<tr><td><code id="r_print_:_sep_">sep_</code></td>
+<tr><td><code id="sep_">sep_</code></td>
 <td>
 <p>is the separator between each elements</p>
 </td></tr>
-<tr><td><code id="r_print_:_begn">begn</code></td>
+<tr><td><code id="begn">begn</code></td>
 <td>
 <p>is the character put at the beginning of the print</p>
 </td></tr>
-<tr><td><code id="r_print_:_end">end</code></td>
+<tr><td><code id="end">end</code></td>
 <td>
 <p>is the character put at the end of the print</p>
 </td></tr>
@@ -4866,6 +5060,7 @@ print(r_print(inpt_v=c(1:33)))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -4883,11 +5078,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>save_untl</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='save_untl'>save_untl</h2>
+<h2>save_untl</h2>
 
 <h3>Description</h3>
 
@@ -4904,11 +5099,11 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="save_untl_:_inpt_l">inpt_l</code></td>
+<tr><td><code id="inpt_l">inpt_l</code></td>
 <td>
 <p>is the input list containing all the vectors</p>
 </td></tr>
-<tr><td><code id="save_untl_:_val_to_stop_v">val_to_stop_v</code></td>
+<tr><td><code id="val_to_stop_v">val_to_stop_v</code></td>
 <td>
 <p>is a vector containing the values that marks the end of the vectors returned in the returned list, see the examples</p>
 </td></tr>
@@ -4942,6 +5137,7 @@ print(save_untl(inpt_l=list(c(1:4), c(1, 1, 3, 4), c(1, 2, 4, 3)), val_to_stop_v
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -4959,11 +5155,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>see_datf</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='see_datf'>see_datf</h2>
+<h2>see_datf</h2>
 
 <h3>Description</h3>
 
@@ -4987,27 +5183,27 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="see_datf_:_datf">datf</code></td>
+<tr><td><code id="datf">datf</code></td>
 <td>
 <p>is the input dataframe</p>
 </td></tr>
-<tr><td><code id="see_datf_:_condition_l">condition_l</code></td>
+<tr><td><code id="condition_l">condition_l</code></td>
 <td>
 <p>is the vector of the possible conditions (&quot;==&quot;, &quot;&gt;&quot;, &quot;&lt;&quot;, &quot;!=&quot;, &quot;%%&quot;, &quot;reg&quot;, &quot;not_reg&quot;, &quot;sup_nchar&quot;, &quot;inf_nchar&quot;, &quot;nchar&quot;) (equal to some elements in a vector, greater than, lower than, not equal to, is divisible by, the regex condition returns TRUE, the regex condition returns FALSE, the length of the elements is strictly superior to X, the length of the element is strictly inferior to X, the length of the element is equal to one element in a vector), you can put the same condition n times.</p>
 </td></tr>
-<tr><td><code id="see_datf_:_val_l">val_l</code></td>
+<tr><td><code id="val_l">val_l</code></td>
 <td>
 <p>is the list of vectors containing the values or vector of values related to condition_l (so the vector of values has to be placed in the same order)</p>
 </td></tr>
-<tr><td><code id="see_datf_:_conjunction_l">conjunction_l</code></td>
+<tr><td><code id="conjunction_l">conjunction_l</code></td>
 <td>
 <p>contains the and or conjunctions, so if the length of condition_l is equal to 3, there will be 2 conjunctions. If the length of conjunction_l is inferior to the length of condition_l minus 1, conjunction_l will match its goal length value with its last argument as the last arguments. For example, c(&quot;&amp;&quot;, &quot;|&quot;, &quot;&amp;&quot;) with a goal length value of 5 &ndash;&gt; c(&quot;&amp;&quot;, &quot;|&quot;, &quot;&amp;&quot;, &quot;&amp;&quot;, &quot;&amp;&quot;)</p>
 </td></tr>
-<tr><td><code id="see_datf_:_rt_val">rt_val</code></td>
+<tr><td><code id="rt_val">rt_val</code></td>
 <td>
 <p>is a special value cell returned when the conditions are respected</p>
 </td></tr>
-<tr><td><code id="see_datf_:_f_val">f_val</code></td>
+<tr><td><code id="f_val">f_val</code></td>
 <td>
 <p>is a special value cell returned when the conditions are not respected</p>
 </td></tr>
@@ -5056,6 +5252,7 @@ print(see_datf(datf=datf1, condition_l=c("not_reg"), val_l=list("[a-z]")))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -5073,11 +5270,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>see_file</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='see_file'>see_file</h2>
+<h2>see_file</h2>
 
 <h3>Description</h3>
 
@@ -5094,15 +5291,15 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="see_file_:_string_">string_</code></td>
+<tr><td><code id="string_">string_</code></td>
 <td>
 <p>is the input string</p>
 </td></tr>
-<tr><td><code id="see_file_:_index_ext">index_ext</code></td>
+<tr><td><code id="index_ext">index_ext</code></td>
 <td>
 <p>is the occurence of the dot that separates the filename and its extension</p>
 </td></tr>
-<tr><td><code id="see_file_:_ext">ext</code></td>
+<tr><td><code id="ext">ext</code></td>
 <td>
 <p>is a boolean that if set to TRUE, will return the file extension and if set to FALSE, will return filename</p>
 </td></tr>
@@ -5126,6 +5323,7 @@ print(see_file(string_="file.abc.xyz", index_ext=2))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -5143,11 +5341,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>see_idx</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='see_idx'>see_idx</h2>
+<h2>see_idx</h2>
 
 <h3>Description</h3>
 
@@ -5164,11 +5362,11 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="see_idx_:_v1">v1</code></td>
+<tr><td><code id="v1">v1</code></td>
 <td>
 <p>is the first vector</p>
 </td></tr>
-<tr><td><code id="see_idx_:_v2">v2</code></td>
+<tr><td><code id="v2">v2</code></td>
 <td>
 <p>is the second vector</p>
 </td></tr>
@@ -5184,6 +5382,7 @@ print(see_idx(v1=c("oui", "non", "peut", "oo"), v2=c("oui", "peut", "oui")))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -5201,11 +5400,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>see_inside</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='see_inside'>see_inside</h2>
+<h2>see_inside</h2>
 
 <h3>Description</h3>
 
@@ -5228,29 +5427,30 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="see_inside_:_pattern_">pattern_</code></td>
+<tr><td><code id="pattern_">pattern_</code></td>
 <td>
 <p>is a vector containin the file extension of the spreadsheets (&quot;xlsx&quot;, &quot;csv&quot;...)</p>
 </td></tr>
-<tr><td><code id="see_inside_:_path_">path_</code></td>
+<tr><td><code id="path_">path_</code></td>
 <td>
 <p>is the path where are located the files</p>
 </td></tr>
-<tr><td><code id="see_inside_:_sep_">sep_</code></td>
+<tr><td><code id="sep_">sep_</code></td>
 <td>
 <p>is a vector containing the separator for each csv type file in order following the operating system file order, if the vector does not match the number of the csv files found, it will assume the separator for the rest of the files is the same as the last csv file found. It means that if you know the separator is the same for all the csv type files, you just have to put the separator once in the vector.</p>
 </td></tr>
-<tr><td><code id="see_inside_:_unique_sep">unique_sep</code></td>
+<tr><td><code id="unique_sep">unique_sep</code></td>
 <td>
 <p>is a pattern that you know will never be in your input files</p>
 </td></tr>
-<tr><td><code id="see_inside_:_rec">rec</code></td>
+<tr><td><code id="rec">rec</code></td>
 <td>
 <p>is a boolean allows to get files recursively if set to TRUE, defaults to TRUE
 If x is the return value, to see all the files name, position of the columns and possible sheet name associanted with, do the following:</p>
 </td></tr>
 </table>
 
+</main>
 
 </div>
 </body></html>
@@ -5268,11 +5468,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>str_remove_untl</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='str_remove_untl'>str_remove_untl</h2>
+<h2>str_remove_untl</h2>
 
 <h3>Description</h3>
 
@@ -5294,19 +5494,19 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="str_remove_untl_:_inpt_v">inpt_v</code></td>
+<tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the input vector</p>
 </td></tr>
-<tr><td><code id="str_remove_untl_:_ptrn_rm_v">ptrn_rm_v</code></td>
+<tr><td><code id="ptrn_rm_v">ptrn_rm_v</code></td>
 <td>
 <p>is a vector containing the patterns to remove</p>
 </td></tr>
-<tr><td><code id="str_remove_untl_:_untl">untl</code></td>
+<tr><td><code id="untl">untl</code></td>
 <td>
 <p>is a list containing the occurence(s) of each pattern to remove in the elements.</p>
 </td></tr>
-<tr><td><code id="str_remove_untl_:_nvr_following_ptrn">nvr_following_ptrn</code></td>
+<tr><td><code id="nvr_following_ptrn">nvr_following_ptrn</code></td>
 <td>
 <p>is a sequel of characters that you are sure is not present in any of the elements in inpt_v</p>
 </td></tr>
@@ -5332,6 +5532,7 @@ print(str_remove_untl(inpt_v=vec[1], ptrn_rm_v=c("-", "/"), untl=c("max")))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -5349,11 +5550,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>swipr</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='swipr'>swipr</h2>
+<h2>swipr</h2>
 
 <h3>Description</h3>
 
@@ -5370,19 +5571,19 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="swipr_:_inpt_datf">inpt_datf</code></td>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
 <td>
 <p>is the input dataframe</p>
 </td></tr>
-<tr><td><code id="swipr_:_how_to">how_to</code></td>
+<tr><td><code id="how_to">how_to</code></td>
 <td>
 <p>is a vector containing the elements in the order wanted</p>
 </td></tr>
-<tr><td><code id="swipr_:_id_w">id_w</code></td>
+<tr><td><code id="id_w">id_w</code></td>
 <td>
 <p>is the column number or the column name of the elements</p>
 </td></tr>
-<tr><td><code id="swipr_:_id_ids">id_ids</code></td>
+<tr><td><code id="id_ids">id_ids</code></td>
 <td>
 <p>is the column number or the column name of the ids</p>
 </td></tr>
@@ -5428,6 +5629,7 @@ print(swipr(inpt_datf=datf, how_to=c("G", "S", "B"), id_w="col2", id_ids="col1")
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -5445,11 +5647,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>unique_datf</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='unique_datf'>unique_datf</h2>
+<h2>unique_datf</h2>
 
 <h3>Description</h3>
 
@@ -5466,11 +5668,11 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="unique_datf_:_inpt_datf">inpt_datf</code></td>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
 <td>
 <p>is the input dataframe</p>
 </td></tr>
-<tr><td><code id="unique_datf_:_col">col</code></td>
+<tr><td><code id="col">col</code></td>
 <td>
 <p>is a parameter that specifies if the dataframe returned should have unique columns or rows, defaults to F, so the dataframe returned by default has unique rows</p>
 </td></tr>
@@ -5501,6 +5703,7 @@ print(unique_datf(inpt_datf=datf1, col=TRUE))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -5518,11 +5721,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>unique_ltr_from_v</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='unique_ltr_from_v'>unique_ltr_from_v</h2>
+<h2>unique_ltr_from_v</h2>
 
 <h3>Description</h3>
 
@@ -5539,11 +5742,11 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="unique_ltr_from_v_:_inpt_v">inpt_v</code></td>
+<tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the input vector containing all the elements</p>
 </td></tr>
-<tr><td><code id="unique_ltr_from_v_:_keep_v">keep_v</code></td>
+<tr><td><code id="keep_v">keep_v</code></td>
 <td>
 <p>is the vector containing all the characters that the elements in inpt_v may contain</p>
 </td></tr>
@@ -5559,6 +5762,7 @@ print(unique_ltr_from_v(inpt_v=c("bonjour", "lpoerc", "nonnour", "bonnour", "non
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -5576,11 +5780,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>unique_pos</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='unique_pos'>unique_pos</h2>
+<h2>unique_pos</h2>
 
 <h3>Description</h3>
 
@@ -5597,7 +5801,7 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="unique_pos_:_vec">vec</code></td>
+<tr><td><code id="vec">vec</code></td>
 <td>
 <p>is the input vector</p>
 </td></tr>
@@ -5613,6 +5817,7 @@ print(unique_pos(vec=c(3, 4, 3, 5, 6)))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -5630,11 +5835,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>until_stnl</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='until_stnl'>until_stnl</h2>
+<h2>until_stnl</h2>
 
 <h3>Description</h3>
 
@@ -5651,11 +5856,11 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="until_stnl_:_vec1">vec1</code></td>
+<tr><td><code id="vec1">vec1</code></td>
 <td>
 <p>is the input vector</p>
 </td></tr>
-<tr><td><code id="until_stnl_:_goal">goal</code></td>
+<tr><td><code id="goal">goal</code></td>
 <td>
 <p>is the length to reach</p>
 </td></tr>
@@ -5672,6 +5877,7 @@ print(until_stnl(vec1=c(1, 3, 2), goal=56))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -5689,11 +5895,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>val_replacer</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='val_replacer'>val_replacer</h2>
+<h2>val_replacer</h2>
 
 <h3>Description</h3>
 
@@ -5710,15 +5916,15 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="val_replacer_:_datf">datf</code></td>
+<tr><td><code id="datf">datf</code></td>
 <td>
 <p>is the input dataframe</p>
 </td></tr>
-<tr><td><code id="val_replacer_:_val_replaced">val_replaced</code></td>
+<tr><td><code id="val_replaced">val_replaced</code></td>
 <td>
 <p>is a vector of the value(s) to be replaced</p>
 </td></tr>
-<tr><td><code id="val_replacer_:_val_replacor">val_replacor</code></td>
+<tr><td><code id="val_replacor">val_replacor</code></td>
 <td>
 <p>is the value that will replace val_replaced</p>
 </td></tr>
@@ -5739,6 +5945,7 @@ print(val_replacer(datf=data.frame(c(1, "oo4", TRUE, FALSE), c(TRUE, FALSE, TRUE
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -5756,11 +5963,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>vec_in_datf</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='vec_in_datf'>vec_in_datf</h2>
+<h2>vec_in_datf</h2>
 
 <h3>Description</h3>
 
@@ -5783,23 +5990,23 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="vec_in_datf_:_inpt_datf">inpt_datf</code></td>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
 <td>
 <p>is the input dataframe</p>
 </td></tr>
-<tr><td><code id="vec_in_datf_:_inpt_vec">inpt_vec</code></td>
+<tr><td><code id="inpt_vec">inpt_vec</code></td>
 <td>
 <p>is the vector that may be in the input dataframe</p>
 </td></tr>
-<tr><td><code id="vec_in_datf_:_coeff">coeff</code></td>
+<tr><td><code id="coeff">coeff</code></td>
 <td>
 <p>is the &quot;slope coefficient&quot; of inpt_vec</p>
 </td></tr>
-<tr><td><code id="vec_in_datf_:_stop_untl">stop_untl</code></td>
+<tr><td><code id="stop_untl">stop_untl</code></td>
 <td>
 <p>is the maximum number of the input vector the function returns, if in the dataframe</p>
 </td></tr>
-<tr><td><code id="vec_in_datf_:_conventional">conventional</code></td>
+<tr><td><code id="conventional">conventional</code></td>
 <td>
 <p>is if a positive slope coefficient means that the vector goes upward or downward</p>
 </td></tr>
@@ -5852,6 +6059,7 @@ print(vec_in_datf(inpt_datf=datf1, inpt_vec=c(1, "z"), coeff=-1, conventional=TR
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -5869,11 +6077,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>vector_replacor</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='vector_replacor'>vector_replacor</h2>
+<h2>vector_replacor</h2>
 
 <h3>Description</h3>
 
@@ -5890,19 +6098,19 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="vector_replacor_:_inpt_v">inpt_v</code></td>
+<tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the input vector</p>
 </td></tr>
-<tr><td><code id="vector_replacor_:_sus_val">sus_val</code></td>
+<tr><td><code id="sus_val">sus_val</code></td>
 <td>
 <p>is a vector containing all the values that will be replaced</p>
 </td></tr>
-<tr><td><code id="vector_replacor_:_rpl_val">rpl_val</code></td>
+<tr><td><code id="rpl_val">rpl_val</code></td>
 <td>
 <p>is a vector containing the value of the elements to be replaced (sus_val), so sus_val and rpl_val should be the same size</p>
 </td></tr>
-<tr><td><code id="vector_replacor_:_grep_">grep_</code></td>
+<tr><td><code id="grep_">grep_</code></td>
 <td>
 <p>is if the elements in sus_val should be equal to the elements to replace in inpt_v or if they just should found in the elements</p>
 </td></tr>
@@ -5926,6 +6134,7 @@ sus_val=c("pp", "as", "re"), rpl_val=c("oui", "non", "zz"), grep_=TRUE))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -5943,11 +6152,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>vlookup_datf</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='vlookup_datf'>vlookup_datf</h2>
+<h2>vlookup_datf</h2>
 
 <h3>Description</h3>
 
@@ -5964,19 +6173,19 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="vlookup_datf_:_datf">datf</code></td>
+<tr><td><code id="datf">datf</code></td>
 <td>
 <p>is the input dataframe</p>
 </td></tr>
-<tr><td><code id="vlookup_datf_:_v_id">v_id</code></td>
+<tr><td><code id="v_id">v_id</code></td>
 <td>
 <p>is a vector containing the ids</p>
 </td></tr>
-<tr><td><code id="vlookup_datf_:_col_id">col_id</code></td>
+<tr><td><code id="col_id">col_id</code></td>
 <td>
 <p>is the column that contains the ids (default is equal to 1)</p>
 </td></tr>
-<tr><td><code id="vlookup_datf_:_included_col_id">included_col_id</code></td>
+<tr><td><code id="included_col_id">included_col_id</code></td>
 <td>
 <p>is if the result should return the col_id (default set to yes)</p>
 </td></tr>
@@ -5998,6 +6207,7 @@ print(vlookup_datf(datf=datf1, v_id=c("az1", "az2", "az3", "az4")))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>
@@ -6015,11 +6225,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>wider_datf</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='wider_datf'>wider_datf</h2>
+<h2>wider_datf</h2>
 
 <h3>Description</h3>
 
@@ -6036,15 +6246,15 @@ function processMathHTML() {
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code id="wider_datf_:_inpt_datf">inpt_datf</code></td>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
 <td>
 <p>is the input dataframe</p>
 </td></tr>
-<tr><td><code id="wider_datf_:_col_to_splt">col_to_splt</code></td>
+<tr><td><code id="col_to_splt">col_to_splt</code></td>
 <td>
 <p>is a vector containing the number or the colnames of the columns to split according to a separator</p>
 </td></tr>
-<tr><td><code id="wider_datf_:_sep_">sep_</code></td>
+<tr><td><code id="sep_">sep_</code></td>
 <td>
 <p>is the separator of the elements to split to new columns in the input dataframe</p>
 </td></tr>
@@ -6078,6 +6288,7 @@ print(wider_datf(inpt_datf=datf2, col_to_splt=c("col2"), sep_="-"))
 
 </code></pre>
 
+</main>
 
 </div>
 </body></html>

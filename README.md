@@ -18,7 +18,6 @@ R > install()
 
 all_stat
 
-
 ## Description
 
 Allow to see all the main statistics indicators (mean, median, variance, standard deviation, sum, max, min, quantile) of variables in a dataframe by the modality of a variable in a column of the input datarame. In addition to that, you can get the occurence of other qualitative variables by your chosen qualitative variable, you have just to precise it in the vector "stat_var" where all the statistics indicators are given with "occu-var_you_want/".
@@ -1476,7 +1475,7 @@ Allow to fill a vector by the last element n times
 ## Usage
 
 ```r
-fillr(inpt_v, ptrn_fill = "...\\d")
+fillr(inpt_v, ptrn_fill = "\\.\\.\\.\\d")
 ```
 
 
@@ -2677,6 +2676,45 @@ print(occu(inpt_v=c("oui", "peut", "peut", "non", "oui")))
 ```
 
 
+# `pairs_findr`
+
+pairs_findr
+
+
+## Description
+
+Takes a character as input and detect the pairs of pattern, like the parenthesis pais if the pattern is "(" and then ")"
+
+
+## Usage
+
+```r
+pairs_findr(inpt, ptrn1 = "(", ptrn2 = ")")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt`     |     is the input character
+`ptrn1`     |     is the first pattern ecountered in the pair
+`ptrn2`     |     is the second pattern in the pair
+
+
+## Examples
+
+```r
+print(pairs_findr(inpt="ze+(yu*45/(jk+zz)*(o()p))-(re*(rt+qs)-fg)"))
+
+[[1]]
+[1] 4 1 1 3 2 2 3 4 6 5 5 6
+
+[[2]]
+[1]  4 11 17 19 21 22 24 25 27 31 37 41
+```
+
+
 # `paste_datf`
 
 paste_datf
@@ -3020,6 +3058,51 @@ Argument      |Description
 print(rearangr_v(inpt_v=c(23, 21, 56), w_v=c("oui", "peut", "non"), how="decreasing"))
 
 #[1] "non"  "oui"  "peut"
+```
+
+
+# `regex_spe_detect`
+
+regex_spe_detect
+
+
+## Description
+
+Takes a character as input and returns its regex-friendly character for R.
+
+
+## Usage
+
+```r
+regex_spe_detect(inpt)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt`     |     the input character
+
+
+## Examples
+
+```r
+print(regex_spe_detect("o"))
+
+[1] "o"
+
+print(regex_spe_detect("("))
+
+[1] "\\("
+
+print(regex_spe_detect("tr(o)m"))
+
+[1] "tr\\(o\\)m"
+
+print(regex_spe_detect(inpt="fggfg[fggf]fgfg(vg?fgfgf.gf)"))
+
+[1] "fggfg\\[fggf\\]fgfg\\(vg\\?fgfgf\\.gf\\)"
 ```
 
 

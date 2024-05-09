@@ -9624,4 +9624,344 @@ intersect_mod <- function(datf, inter_col, mod_col, n_min, descendly_ordered=NA)
 
 }
 
+#' regex_spe_detect
+#'
+#' Takes a character as input and returns its regex-friendly character for R. 
+#' 
+#' @param inpt the input character
+#'
+#' @examples 
+#'
+#' print(regex_spe_detect("o"))
+#' 
+#' [1] "o"
+#'
+#' print(regex_spe_detect("("))
+#' 
+#' [1] "\\("
+#' 
+#' print(regex_spe_detect("tr(o)m"))
+#'
+#' [1] "tr\\(o\\)m"
+#'
+#' print(regex_spe_detect(inpt="fggfg[fggf]fgfg(vg?fgfgf.gf)"))
+#' 
+#' [1] "fggfg\\[fggf\\]fgfg\\(vg\\?fgfgf\\.gf\\)"
+#'
+#' @export
+
+regex_spe_detect <- function(inpt){
+
+        fillr <- function(inpt_v, ptrn_fill="\\.\\.\\.\\d"){
+          
+          ptrn <- grep(ptrn_fill, inpt_v)
+
+          while (length(ptrn) > 0){
+           
+            ptrn <- grep(ptrn_fill, inpt_v)
+
+            idx <- ptrn[1] 
+            
+            untl <- as.numeric(c(unlist(strsplit(inpt_v[idx], split="\\.")))[4]) - 1
+           
+            pre_val <- inpt_v[(idx - 1)]
+
+            inpt_v[idx] <- pre_val
+
+            if (untl > 0){
+            
+              for (i in 1:untl){
+                
+                inpt_v <- append(inpt_v, pre_val, idx)
+                
+              }
+              
+            }
+
+          ptrn <- grep(ptrn_fill, inpt_v)
+            
+          }
+          
+          return(inpt_v)
+          
+        }
+
+        inpt <- unlist(strsplit(x=inpt, split=""))
+
+        may_be_v <- c("[", "]", "{", "}", "-", "_", ".", "(", ")", "/", "%", "*", "^", "?", "$")
+
+        pre_idx <- unique(match(x=inpt, table=may_be_v))
+
+        pre_idx <- pre_idx[!(is.na(pre_idx))]
+
+        for (el in may_be_v[pre_idx]){
+
+                for (i in grep(pattern=paste("\\", el, sep=""), x=inpt)){
+
+                        inpt <- append(x=inpt, values="\\", after=(i-1))
+
+                }
+
+        }
+
+        
+  return(paste(inpt, collapse=""))
+
+}
+
+#' pairs_findr
+#'
+#' Takes a character as input and detect the pairs of pattern, like the parenthesis pais if the pattern is "(" and then ")"
+#'
+#' @param inpt is the input character
+#' @param ptrn1 is the first pattern ecountered in the pair
+#' @param ptrn2 is the second pattern in the pair
+#' @examples
+#' 
+#' print(pairs_findr(inpt="ze+(yu*45/(jk+zz)*(o()p))-(re*(rt+qs)-fg)"))
+#' 
+#' [[1]]
+#'  [1] 4 1 1 3 2 2 3 4 6 5 5 6
+#' 
+#' [[2]]
+#'  [1]  4 11 17 19 21 22 24 25 27 31 37 41
+#'
+#' @export
+
+pairs_findr <- function(inpt, ptrn1="(", ptrn2=")"){
+
+        regex_spe_detect <- function(inpt){
+
+                fillr <- function(inpt_v, ptrn_fill="\\.\\.\\.\\d"){
+                  
+                  ptrn <- grep(ptrn_fill, inpt_v)
+
+                  while (length(ptrn) > 0){
+                   
+                    ptrn <- grep(ptrn_fill, inpt_v)
+
+                    idx <- ptrn[1] 
+                    
+                    untl <- as.numeric(c(unlist(strsplit(inpt_v[idx], split="\\.")))[4]) - 1
+                   
+                    pre_val <- inpt_v[(idx - 1)]
+
+                    inpt_v[idx] <- pre_val
+
+                    if (untl > 0){
+                    
+                      for (i in 1:untl){
+                        
+                        inpt_v <- append(inpt_v, pre_val, idx)
+                        
+                      }
+                      
+                    }
+
+                  ptrn <- grep(ptrn_fill, inpt_v)
+                    
+                  }
+                  
+                  return(inpt_v)
+                  
+                }
+
+           inpt <- unlist(strsplit(x=inpt, split=""))
+
+           may_be_v <- c("[", "]", "{", "}", "-", "_", ".", "(", ")", "/", "%", "*", "^", "?", "$")
+
+           pre_idx <- unique(match(x=inpt, table=may_be_v))
+
+           pre_idx <- pre_idx[!(is.na(pre_idx))]
+
+           for (el in may_be_v[pre_idx]){
+
+                   for (i in grep(pattern=paste("\\", el, sep=""), x=inpt)){
+
+                           inpt <- append(x=inpt, values="\\", after=(i-1))
+
+                   }
+
+           }
+
+        
+           return(paste(inpt, collapse=""))
+
+        }
+
+        lst <- unlist(strsplit(x=inpt, split=""))
+
+        lst_par <- c()
+
+        lst_par_calc <- c()
+
+        lst_pos <- c()
+
+        paires = 1
+
+        pre_paires = 1
+
+        pre_paires2 = 1
+
+        if ((length(grep(x=lst, pattern=regex_spe_detect(inpt=ptrn1))) * 2) > 0){
+
+                for (i in 1:(length(grep(x=lst, pattern=regex_spe_detect(inpt=ptrn1))) * 2)){ 
+
+                        lst_par <- c(lst_par, 0)
+
+                        lst_par_calc <- c(lst_par_calc, 0)
+
+                        lst_pos <- c(lst_pos, 0)
+
+
+                }
+
+        }
+
+        vec_ret <- c()
+
+        par_ = 1
+
+        lvl_par = 0
+
+        for (el in 1:length(lst)){
+
+           if (lst[el] == ptrn1){
+
+                   if (!(is.null(vec_ret))){
+
+                           lst_par_calc[pre_paires2:pre_paires][-vec_ret] <- lst_par_calc[pre_paires2:pre_paires][-vec_ret] + 1
+
+                   }else{
+
+                           lst_par_calc[pre_paires2:pre_paires] <- lst_par_calc[pre_paires2:pre_paires] + 1
+
+                   }
+
+                   pre_paires = pre_paires + 1
+
+                   pre_cls <- TRUE
+
+                   lst_pos[par_] <- el
+
+                   par_ = par_ + 1
+
+                   lvl_par = lvl_par + 1
+
+           }
+
+           if (lst[el] == ptrn2){
+
+                   lvl_par = lvl_par - 1
+
+                   if (!(is.null(vec_ret))){
+
+                        lst_par_calc[c(pre_paires2:pre_paires)][-vec_ret] <- lst_par_calc[pre_paires2:pre_paires][-vec_ret] - 1
+
+                        pre_val <- lst_par_calc[pre_paires2:pre_paires][vec_ret]
+
+                        lst_par_calc[pre_paires2:pre_paires][vec_ret] <- (-2)
+                   
+                   }else{
+
+                        lst_par_calc[c(pre_paires2:pre_paires)] <- lst_par_calc[pre_paires2:pre_paires] - 1
+
+                   }
+
+                   if (!(is.null(vec_ret))){ 
+
+                           pre_mtch <- match(x=c(0, -1), table=lst_par_calc[pre_paires2:pre_paires][-vec_ret])
+
+                           lst_par_calc[pre_paires2:pre_paires][vec_ret] <- pre_val 
+
+                   }else{
+
+                           pre_mtch <- match(x=c(0, -1), table=lst_par_calc[pre_paires2:pre_paires])
+
+                   }
+
+                   cnt_par = 1
+
+                   cnt2 = 0
+
+                   if (!(is.null(vec_ret))){
+
+                           vec_ret <- sort(vec_ret)
+
+                           if (pre_mtch[1] >= min(vec_ret)){
+
+                                cnt2 = 2
+
+                                while (pre_mtch[1] > cnt_par & cnt2 <= length(vec_ret)){
+
+                                        if ((vec_ret[cnt2] - vec_ret[(cnt2 - 1)]) > 1){
+
+                                                cnt_par = cnt_par + (vec_ret[cnt2] - vec_ret[(cnt2 - 1)]) - 1
+
+                                        }
+
+                                        cnt2 = cnt2 + 1
+
+                                }
+
+                                if (pre_mtch[1] > cnt_par){
+
+                                        cnt_par = length(vec_ret) / 2 + 1
+
+                                }
+
+                                cnt2 = cnt2 - 1
+
+                           }
+
+                   }
+
+                   lst_par[pre_mtch[1] + (pre_paires2 - 1) + ifelse(cnt2 %% 2 == 0, cnt2, (cnt2 - 1))] <- paires 
+
+                   lst_par[pre_mtch[2] + (pre_paires2 - 1) + length(vec_ret)] <- paires 
+
+                   if ((pre_mtch[1] + (pre_paires2 - 1)) == 1){
+
+                        pre_paires2 = pre_mtch[2] + (pre_paires2 - 1) + length(vec_ret) + 1
+
+                        vec_ret <- c()
+
+                        cnt_par = 0
+
+                   } else if (lst_par_calc[(pre_mtch[1] + (pre_paires2 - 1) - 1)] == -1 & ifelse(is.null(vec_ret), TRUE, 
+                                is.na(match(x=-1, table=lst_par_calc[pre_paires2:pre_paires][-vec_ret])))){
+
+                        pre_paires2 = pre_mtch[2] + (pre_paires2 - 1) + length(vec_ret) + 1
+
+                        vec_ret <- c()
+
+                        cnt_par = 0
+
+                   } else{
+
+                        vec_ret <- c(vec_ret, (pre_mtch[1]) + ifelse(cnt2 %% 2 == 0, cnt2, (cnt2 - 1)), 
+                                     (pre_mtch[2] + length(vec_ret)))
+
+                   }
+
+                   paires = paires + 1
+
+                   pre_paires = pre_paires + 1
+
+                   pre_cls <- FALSE
+
+                   lst_pos[par_] <- el
+
+                   par_ = par_ + 1
+
+           }
+
+        }
+
+        return(list(lst_par, lst_pos))
+
+}
+
+
+
 
