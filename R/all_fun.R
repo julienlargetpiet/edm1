@@ -1,4 +1,4 @@
-#' @import stringr openxlsx stringi stats utils
+#' @import stringr openxlsx stringi stats utils dplyr
 #' @title edm1
 
 #' insert_datf
@@ -9976,17 +9976,113 @@ pairs_findr <- function(inpt, ptrn1="(", ptrn2=")"){
 #' @export
 
 intersect_all <- function(...){
-
         rtn_v <- unlist(list(...)[1])
 
         if (length(rtn_v) > 1){
-                for (el in list(...)){
+                for (el in list(...)[2:length(list(...))]){
                        rtn_v <- intersect(rtn_v, el) 
                 }
         }
 
   return(rtn_v)
-
 }
 
+#' left_all
+#'
+#' Allow to apply left join on n dataframes, datatables, tibble
+#'
+#' @param ... are all the dataframes etc
+#' @param keep_val is if you want to keep the id column
+#' @param id_v is the common id of all the dataframes etc
+#' @examples
+#'
+#' datf1 <- data.frame(
+#'         "id1"=c(1:5),
+#'         "var1"=c("oui", "oui", "oui", "non", "non")
+#' )
+#' 
+#' datf2 <- data.frame(
+#'         "id1"=c(1, 2, 3, 7, 9),
+#'         "var1"=c("oui2", "oui2", "oui2", "non2", "non2")
+#' )
+#' 
+#' print(left_all(datf1, datf2, datf2, datf2, keep_val=FALSE, id_v="id1"))
+#' 
+#'   id1 var1.x var1.y var1.x.x var1.y.y
+#' 1   1    oui   oui2     oui2     oui2
+#' 2   2    oui   oui2     oui2     oui2
+#' 3   3    oui   oui2     oui2     oui2
+#' 4   4    non   <NA>     <NA>     <NA>
+#' 5   5    non   <NA>     <NA>     <NA>#'
+#' print(left_all(datf1, datf2, datf2, keep_val=FALSE, id_v="id1"))
+#' 
+#'   id1 var1.x var1.y var1
+#' 1   1    oui   oui2 oui2
+#' 2   2    oui   oui2 oui2
+#' 3   3    oui   oui2 oui2
+#' 4   4    non   <NA> <NA>
+#' 5   5    non   <NA> <NA>
+#' 
+#' @export
+
+left_all <- function(..., keep_val=FALSE, id_v){
+        cur_lst <- list(...)
+        rtn_dt <- as.data.frame(cur_lst[1])
+        if (length(list(...)) > 1){
+                for (el in 2:length(cur_lst)){
+                  rtn_dt <- left_join(
+                                x = rtn_dt,
+                                y = as.data.frame(cur_lst[el]),
+                                by = id_v,
+                                keep = keep_val
+                  )
+                }
+        }
+  return(rtn_dt)
+}
+
+#' inner_all
+#'
+#' Allow to apply inner join on n dataframes, datatables, tibble
+#'
+#' @param ... are all the dataframes etc
+#' @param keep_val is if you want to keep the id column
+#' @param id_v is the common id of all the dataframes etc
+#' @examples
+#'
+#' datf1 <- data.frame(
+#'         "id1"=c(1:5),
+#'         "var1"=c("oui", "oui", "oui", "non", "non")
+#' )
+#' 
+#' datf2 <- data.frame(
+#'         "id1"=c(1, 2, 3, 7, 9),
+#'         "var1"=c("oui2", "oui2", "oui2", "non2", "non2")
+#' )
+#' 
+#' print(inner_all(datf1, datf2, keep_val=FALSE, id_v="id1"))
+#' 
+#' id1 var1.x var1.y
+#' 1   1    oui   oui2
+#' 2   2    oui   oui2
+#' 3   3    oui   oui2
+#'
+#' @export
+
+inner_all <- function(..., keep_val=FALSE, id_v){
+        cur_lst <- list(...)
+        rtn_dt <- as.data.frame(cur_lst[1])
+        if (length(list(...)) > 1){
+                for (el in 2:length(cur_lst)){
+                        print(c(id_v[(el-1)], id_v[el]))
+                  rtn_dt <- inner_join(
+                                x = rtn_dt,
+                                y = as.data.frame(cur_lst[el]),
+                                by = id_v,
+                                keep = keep_val
+                  )
+                }
+        }
+  return(rtn_dt)
+}
 

@@ -1909,6 +1909,54 @@ default_val="NAN"))
 ```
 
 
+# `inner_all`
+
+inner_all
+
+
+## Description
+
+Allow to apply inner join on n dataframes, datatables, tibble
+
+
+## Usage
+
+```r
+inner_all(..., keep_val = FALSE, id_v)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`...`     |     are all the dataframes etc
+`keep_val`     |     is if you want to keep the id column
+`id_v`     |     is the common id of all the dataframes etc
+
+
+## Examples
+
+```r
+datf1 <- data.frame(
+"id1"=c(1:5),
+"var1"=c("oui", "oui", "oui", "non", "non")
+)
+
+datf2 <- data.frame(
+"id1"=c(1, 2, 3, 7, 9),
+"var1"=c("oui2", "oui2", "oui2", "non2", "non2")
+)
+
+print(inner_all(datf1, datf2, keep_val=FALSE, id_v="id1"))
+
+id1 var1.x var1.y
+1   1    oui   oui2
+2   2    oui   oui2
+3   3    oui   oui2
+```
+
+
 # `insert_datf`
 
 edm1
@@ -2292,6 +2340,64 @@ Argument      |Description
 print(leap_yr(year=2024))
 
 #[1] TRUE
+```
+
+
+# `left_all`
+
+left_all
+
+
+## Description
+
+Allow to apply left join on n dataframes, datatables, tibble
+
+
+## Usage
+
+```r
+left_all(..., keep_val = FALSE, id_v)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`...`     |     are all the dataframes etc
+`keep_val`     |     is if you want to keep the id column
+`id_v`     |     is the common id of all the dataframes etc
+
+
+## Examples
+
+```r
+datf1 <- data.frame(
+"id1"=c(1:5),
+"var1"=c("oui", "oui", "oui", "non", "non")
+)
+
+datf2 <- data.frame(
+"id1"=c(1, 2, 3, 7, 9),
+"var1"=c("oui2", "oui2", "oui2", "non2", "non2")
+)
+
+print(left_all(datf1, datf2, datf2, datf2, keep_val=FALSE, id_v="id1"))
+
+id1 var1.x var1.y var1.x.x var1.y.y
+1   1    oui   oui2     oui2     oui2
+2   2    oui   oui2     oui2     oui2
+3   3    oui   oui2     oui2     oui2
+4   4    non   <NA>     <NA>     <NA>
+5   5    non   <NA>     <NA>     <NA>#'
+print(left_all(datf1, datf2, datf2, keep_val=FALSE, id_v="id1"))
+
+id1 var1.x var1.y var1
+1   1    oui   oui2 oui2
+2   2    oui   oui2 oui2
+3   3    oui   oui2 oui2
+4   4    non   <NA> <NA>
+5   5    non   <NA> <NA>
 ```
 
 
