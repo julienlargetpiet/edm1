@@ -4,7 +4,7 @@
 \alias{fillr}
 \title{fillr}
 \usage{
-fillr(inpt_v, ptrn_fill = "...\\\\d")
+fillr(inpt_v, ptrn_fill = "\\\\.\\\\.\\\\.\\\\d")
 }
 \arguments{
 \item{inpt_v}{is the input vector}

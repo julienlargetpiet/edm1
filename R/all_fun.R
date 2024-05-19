@@ -9962,6 +9962,31 @@ pairs_findr <- function(inpt, ptrn1="(", ptrn2=")"){
 
 }
 
+#' intersect_all
+#' 
+#' Allows to calculate the intersection between n vectors
+#'
+#' @param ... is all the vector you want to calculate the intersection from 
+#' @examples
+#'
+#' print(intersect_all(c(1:5), c(1, 2, 3, 6), c(1:4)))
+#' 
+#' [1] 1 2 3
+#'
+#' @export
 
+intersect_all <- function(...){
+
+        rtn_v <- unlist(list(...)[1])
+
+        if (length(rtn_v) > 1){
+                for (el in list(...)){
+                       rtn_v <- intersect(rtn_v, el) 
+                }
+        }
+
+  return(rtn_v)
+
+}
 
 

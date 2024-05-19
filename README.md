@@ -18,6 +18,7 @@ R > install()
 
 all_stat
 
+
 ## Description
 
 Allow to see all the main statistics indicators (mean, median, variance, standard deviation, sum, max, min, quantile) of variables in a dataframe by the modality of a variable in a column of the input datarame. In addition to that, you can get the occurence of other qualitative variables by your chosen qualitative variable, you have just to precise it in the vector "stat_var" where all the statistics indicators are given with "occu-var_you_want/".
@@ -2074,6 +2075,39 @@ print(inter_min(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3))))
 #
 #[[3]]
 # [1] 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3
+```
+
+
+# `intersect_all`
+
+intersect_all
+
+
+## Description
+
+Allows to calculate the intersection between n vectors
+
+
+## Usage
+
+```r
+intersect_all(...)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`...`     |     is all the vector you want to calculate the intersection from
+
+
+## Examples
+
+```r
+print(intersect_all(c(1:5), c(1, 2, 3, 6), c(1:4)))
+
+[1] 1 2 3
 ```
 
 
