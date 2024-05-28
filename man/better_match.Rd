@@ -28,4 +28,12 @@ print(better_match(inpt_v=c(1:12, 3, 4, 33, 3), ptrn=3, untl=5))
  
 #[1]  3 13 16
 
+print(better_match(inpt_v=c(1:12, 3, 4, 33, 3), ptrn=c(3, 4), untl=5))
+ 
+[1]  3 13 16  4 14
+
+print(better_match(inpt_v=c(1:12, 3, 4, 33, 3), ptrn=c(3, 4), untl=c(1, 5)))
+
+[1]  3  4 14
+
 }

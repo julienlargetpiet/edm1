@@ -294,6 +294,14 @@ print(better_match(inpt_v=c(1:12, 3, 4, 33, 3), ptrn=3, untl=1))
 print(better_match(inpt_v=c(1:12, 3, 4, 33, 3), ptrn=3, untl=5))
 
 #[1]  3 13 16
+
+print(better_match(inpt_v=c(1:12, 3, 4, 33, 3), ptrn=c(3, 4), untl=5))
+
+[1]  3 13 16  4 14
+
+print(better_match(inpt_v=c(1:12, 3, 4, 33, 3), ptrn=c(3, 4), untl=c(1, 5)))
+
+[1]  3  4 14
 ```
 
 
@@ -2307,6 +2315,79 @@ print(isnt_divisible(inpt_v=c(1:111), divisible_v=c(2, 4, 5)))
 # [1]   1   3   7   9  11  13  17  19  21  23  27  29  31  33  37  39  41  43  47
 #[20]  49  51  53  57  59  61  63  67  69  71  73  77  79  81  83  87  89  91  93
 #[39]  97  99 101 103 107 109 111
+```
+
+
+# `join_n_lvl`
+
+join_n_lvl
+
+
+## Description
+
+Allow to see the progress of the multi-level joins of the different variables modalities. Here, multi-level joins is a type of join that usually needs a concatenation of two or more variables to make a key. See examples.
+
+
+## Usage
+
+```r
+join_n_lvl(frst_datf, scd_datf, join_type = c(), lst_pair = list())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`frst_datf`     |     is the first data.frame (table)
+`scd_datf`     |     is the second data.frame (table)
+`join_type`     |     is a vector containing all the join type ("left", "inner", "right") for each variable
+`lst_pair`     |     is a lis of vectors. The vectors refers to a multi-level join. Each vector should have a length of 1. Each vector should have a name. Its name refers to the column name of multi-level variable and its value refers to the column name of the join variable.
+
+
+## Examples
+
+```r
+datf1 <- data.frame("vil"=c("one", "one", "two", "two"),
+"charac"=c(1, 2, 2, 1),
+"rev"=c(1250, 1430, 970, 1630))
+datf2 <- data.frame("vil"=c("one", "one", "two", "two", "three"),
+"charac"=c(1, 3, 2, 1, 1),
+"rev"=c(1.250, 1430, 970, 1630, 593))
+datf3 <- data.frame("vil"=c("one", "one", "one", "two", "two", "two"),
+"charac"=c(1, 2, 2, 1, 2, 2),
+"rev"=c(1250, 1430, 970, 1630, 2231, 1875),
+"vil2" = c("one", "one", "one", "two", "two", "two"),
+"idl2" = c(1:6))
+datf4 <- data.frame("vil"=c("one", "one", "one", "two", "two", "three"),
+"charac"=c(1, 2, 2, 1, 1, 2),
+"rev"=c(1.250, 1430, 970, 1630, 593, 456),
+"vil2" = c("one", "one", "one", "two", "two", "two"),
+"idl2" = c(2, 3, 1, 5, 5, 5))
+
+print(join_n_lvl(frst_datf=datf2, scd_datf=datf1, lst_pair=list(c("charac" = "vil")),
+join_type=c("inner")))
+
+|===| 100%
+main_id.x vil.x charac.x   rev.x main_id.y vil.y charac.y rev.y
+1      1one   one        1    1.25      1one   one        1  1250
+2      1two   two        1 1630.00      1two   two        1  1630
+3      2two   two        2  970.00      2two   two        2   970
+
+print(join_n_lvl(frst_datf=datf3, scd_datf=datf4, lst_pair=list(c("charac" = "vil"), c("vil2" = "idl2")),
+join_type=c("inner", "left")))
+|==| 100%
+|==| 100%
+main_id.x vil.x charac.x rev.x vil2.x idl2.x main_id.y vil.y charac.y rev.y
+1  1oneone1   one        1  1250    one      1      <NA>  <NA>       NA    NA
+2  2oneone2   one        2  1430    one      2      <NA>  <NA>       NA    NA
+3  2oneone3   one        2   970    one      3  2oneone3   one        2  1430
+4  1twotwo4   two        1  1630    two      4      <NA>  <NA>       NA    NA
+vil2.y idl2.y
+1   <NA>     NA
+2   <NA>     NA
+3    one      3
+4   <NA>     NA
 ```
 
 
