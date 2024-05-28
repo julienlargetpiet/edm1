@@ -16,7 +16,7 @@ join_n_lvl(frst_datf, scd_datf, join_type = c(), lst_pair = list())
 \item{lst_pair}{is a lis of vectors. The vectors refers to a multi-level join. Each vector should have a length of 1. Each vector should have a name. Its name refers to the column name of multi-level variable and its value refers to the column name of the join variable.}
 }
 \description{
-Allow to see the progress of the multi-level joins of the different variables modalities. Here, multi-level joins is a type of join that usually needs a concatenation of two or more variables to make a key. See examples.
+Allow to see the progress of the multi-level joins of the different variables modalities. Here, multi-level joins is a type of join that usually needs a concatenation of two or more variables to make a key. But here, there is no need to proceed to a concatenation. See examples.
 }
 \examples{
 
