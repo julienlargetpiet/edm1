@@ -10095,6 +10095,8 @@ inner_all <- function(..., keep_val=FALSE, id_v){
   return(rtn_dt)
 }
 
+library("dplyr")
+
 #' join_n_lvl
 #'
 #' Allow to see the progress of the multi-level joins of the different variables modalities. Here, multi-level joins is a type of join that usually needs a concatenation of two or more variables to make a key. But here, there is no need to proceed to a concatenation. See examples. 
@@ -10105,12 +10107,6 @@ inner_all <- function(..., keep_val=FALSE, id_v){
 #' @param join_type is a vector containing all the join type ("left", "inner", "right") for each variable
 #' @examples
 #' 
-#' datf1 <- data.frame("vil"=c("one", "one", "two", "two"),
-#'                      "charac"=c(1, 2, 2, 1),
-#'                      "rev"=c(1250, 1430, 970, 1630))
-#' datf2 <- data.frame("vil"=c("one", "one", "two", "two", "three"),
-#'                     "charac"=c(1, 3, 2, 1, 1),
-#'                      "rev"=c(1.250, 1430, 970, 1630, 593))
 #' datf3 <- data.frame("vil"=c("one", "one", "one", "two", "two", "two"),
 #'                      "charac"=c(1, 2, 2, 1, 2, 2),
 #'                      "rev"=c(1250, 1430, 970, 1630, 2231, 1875),
@@ -10122,19 +10118,22 @@ inner_all <- function(..., keep_val=FALSE, id_v){
 #'                      "vil2" = c("one", "one", "one", "two", "two", "two"),
 #'                      "idl2" = c(2, 3, 1, 5, 5, 5))
 #' 
-#' print(join_n_lvl(frst_datf=datf2, scd_datf=datf1, lst_pair=list(c("charac" = "vil")), 
-#'                  join_type=c("inner")))
-#' 
-#' |===| 100%
-#'   main_id.x vil.x charac.x   rev.x main_id.y vil.y charac.y rev.y
-#' 1      1one   one        1    1.25      1one   one        1  1250
-#' 2      1two   two        1 1630.00      1two   two        1  1630
-#' 3      2two   two        2  970.00      2two   two        2   970
-#' 
 #' print(join_n_lvl(frst_datf=datf3, scd_datf=datf4, lst_pair=list(c("charac" = "vil"), c("vil2" = "idl2")), 
 #'                  join_type=c("inner", "left")))
+#'
+#' [1] "pair: charac vil"
+#' |  |   0%
+#' 1 
+#' |= |  50%
+#' 2 
 #' |==| 100%
+#' [1] "pair: vil2 idl2"
+#' |  |   0%
+#' one 
+#' |= |  50%
+#' two 
 #' |==| 100%
+#' 
 #'   main_id.x vil.x charac.x rev.x vil2.x idl2.x main_id.y vil.y charac.y rev.y
 #' 1  1oneone1   one        1  1250    one      1      <NA>  <NA>       NA    NA
 #' 2  2oneone2   one        2  1430    one      2      <NA>  <NA>       NA    NA
@@ -10145,6 +10144,7 @@ inner_all <- function(..., keep_val=FALSE, id_v){
 #' 2   <NA>     NA
 #' 3    one      3
 #' 4   <NA>     NA
+#' 
 #' @export
 
 join_n_lvl <- function(frst_datf, scd_datf, join_type=c(),
@@ -10189,6 +10189,7 @@ join_n_lvl <- function(frst_datf, scd_datf, join_type=c(),
       frst_datf2 <- data.frame(matrix(data=NA, nrow=0, 
                       ncol=(ncol(scd_datf)+ncol(frst_datf))))
       cur_by <- unlist(lst_pair[cl])
+      print(paste("pair:", names(cur_by), cur_by[1]))
       cur_col <- match(x=paste0(names(cur_by), ".x"), table=stay_col)
       cur_coly <- match(x=paste0(names(cur_by), ".y"), table=colnames(scd_datf))
       if (!(is.null(cur_datf))){
@@ -10213,6 +10214,7 @@ join_n_lvl <- function(frst_datf, scd_datf, join_type=c(),
                      style = 3,
                      width = length(uncf), 
                      char = "=")
+        cat("\n")
         for (rws in 1:length(uncf)){
           cur_datf <- left_join(
             x = frst_datf[frst_datf[, cur_col] == uncf[rws], ], 
@@ -10221,10 +10223,11 @@ join_n_lvl <- function(frst_datf, scd_datf, join_type=c(),
             by = c("main_id.x" = "main_id.y"),
             multiple = "first"
           )
+          cat(uncf[rws], "\n")
           setTxtProgressBar(pb, rws)
+          cat("\n")
           frst_datf2 <- rbind(frst_datf2, cur_datf)
         }
-        cat("\n")
         frst_datf <- frst_datf2
       }else if (join_type[cl] == "inner"){
         keep_r <- better_match(ptrn = unique(frst_datf[, cur_col]), 
@@ -10236,6 +10239,7 @@ join_n_lvl <- function(frst_datf, scd_datf, join_type=c(),
                      style = 3,
                      width = length(uncf), 
                      char = "=")
+        cat("\n")
         for (rws in 1:length(uncf)){
           cur_datf <- inner_join(
             x = frst_datf[frst_datf[, cur_col] == uncf[rws], ], 
@@ -10244,10 +10248,11 @@ join_n_lvl <- function(frst_datf, scd_datf, join_type=c(),
             by = c("main_id.x" = "main_id.y"),
             multiple = "first"
           )
+          cat(uncf[rws], "\n")
           setTxtProgressBar(pb, rws)
+          cat("\n")
           frst_datf2 <- rbind(frst_datf2, cur_datf)
         }
-        cat("\n")
         frst_datf <- frst_datf2
       }else if (join_type[cl] == "right"){
         keep_r <- better_match(ptrn = unique(scd_datf[, cur_coly]), 
@@ -10259,6 +10264,7 @@ join_n_lvl <- function(frst_datf, scd_datf, join_type=c(),
                      style = 3,
                      width = length(uncf), 
                      char = "=")
+        cat("\n")
         for (rws in 1:length(uncf)){
           cur_datf <- right_join(
             x = frst_datf[frst_datf[, cur_col] == uncf[rws], ], 
@@ -10267,15 +10273,17 @@ join_n_lvl <- function(frst_datf, scd_datf, join_type=c(),
             by = c("main_id.x" = "main_id.y"),
             multiple = "first"
           )
+          cat(uncf[rws], "\n")
           setTxtProgressBar(pb, rws)
+          cat("\n")
           frst_datf2 <- rbind(frst_datf2, cur_datf)
         }
-        cat("\n")
         frst_datf <- frst_datf2
       }else {
         return(NULL)
       }
     }
+    close(pb)
     return(frst_datf2)
   }else{
     return(NULL)

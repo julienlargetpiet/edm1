@@ -2348,12 +2348,6 @@ Argument      |Description
 ## Examples
 
 ```r
-datf1 <- data.frame("vil"=c("one", "one", "two", "two"),
-"charac"=c(1, 2, 2, 1),
-"rev"=c(1250, 1430, 970, 1630))
-datf2 <- data.frame("vil"=c("one", "one", "two", "two", "three"),
-"charac"=c(1, 3, 2, 1, 1),
-"rev"=c(1.250, 1430, 970, 1630, 593))
 datf3 <- data.frame("vil"=c("one", "one", "one", "two", "two", "two"),
 "charac"=c(1, 2, 2, 1, 2, 2),
 "rev"=c(1250, 1430, 970, 1630, 2231, 1875),
@@ -2365,19 +2359,22 @@ datf4 <- data.frame("vil"=c("one", "one", "one", "two", "two", "three"),
 "vil2" = c("one", "one", "one", "two", "two", "two"),
 "idl2" = c(2, 3, 1, 5, 5, 5))
 
-print(join_n_lvl(frst_datf=datf2, scd_datf=datf1, lst_pair=list(c("charac" = "vil")),
-join_type=c("inner")))
-
-|===| 100%
-main_id.x vil.x charac.x   rev.x main_id.y vil.y charac.y rev.y
-1      1one   one        1    1.25      1one   one        1  1250
-2      1two   two        1 1630.00      1two   two        1  1630
-3      2two   two        2  970.00      2two   two        2   970
-
 print(join_n_lvl(frst_datf=datf3, scd_datf=datf4, lst_pair=list(c("charac" = "vil"), c("vil2" = "idl2")),
 join_type=c("inner", "left")))
+
+[1] "pair: charac vil"
+|  |   0%
+1
+|= |  50%
+2
 |==| 100%
+[1] "pair: vil2 idl2"
+|  |   0%
+one
+|= |  50%
+two
 |==| 100%
+
 main_id.x vil.x charac.x rev.x vil2.x idl2.x main_id.y vil.y charac.y rev.y
 1  1oneone1   one        1  1250    one      1      <NA>  <NA>       NA    NA
 2  2oneone2   one        2  1430    one      2      <NA>  <NA>       NA    NA
