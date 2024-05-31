@@ -1359,6 +1359,39 @@ print(dcr_val(strt_val=53, cr_val=5, stop_val=450))
 ```
 
 
+# `depth_pairs_findr`
+
+depth_pairs_findr
+
+
+## Description
+
+Takes the pair vector as an input and associate to each pair a level of depth, see examples
+
+
+## Usage
+
+```r
+depth_pairs_findr(inpt)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt`     |     is the pair vector
+
+
+## Examples
+
+```r
+print(depth_pairs_findr(c(1, 1, 2, 3, 3, 4, 4, 2, 5, 6, 7, 7, 6, 5)))
+
+[1] 1 1 1 2 2 2 2 1 1 2 3 3 2 1
+```
+
+
 # `diff_datf`
 
 diff_datf
@@ -2607,6 +2640,46 @@ print(multitud(l=list(c("a", "b"), c("1", "2"), c("A", "Z", "E"), c("Q", "F")), 
 ```
 
 
+# `nb_follow`
+
+nb_follow
+
+
+## Description
+
+Allow to get the number of certains patterns that may be after an index of a vector, see examples
+
+
+## Usage
+
+```r
+nb_follow(inpt_v, inpt_idx, inpt_follow_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`inpt_idx`     |     is the index
+`inpt_follow_v`     |     is a vector containing all the potential patterns that may follow the element in the vector at the index inpt_idx
+
+
+## Examples
+
+```r
+print(nb_follow(inpt_v = c(1:13), inpt_idx = 6, inpt_follow_v = c(5:9)))
+
+[1] 3
+
+print(nb_follow(inpt_v = c("ou", "nn", "pp", "zz", "zz", "ee", "pp"), inpt_idx = 2,
+inpt_follow_v = c("pp", "zz")))
+
+[1] 3
+```
+
+
 # `nb_to_letter`
 
 nb_to_letter
@@ -2637,6 +2710,45 @@ Argument      |Description
 print(nb_to_letter(12713))
 
 #[1] "rty"
+```
+
+
+# `nb2_follow`
+
+nb2_follow
+
+
+## Description
+
+Allows to get the number and pattern of potential continuous pattern after an index of a vector, see examples
+
+
+## Usage
+
+```r
+nb2_follow(inpt_v, inpt_idx, inpt_follow_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`inpt_idx`     |     is the index
+`inpt_follow_v`     |     is a vector containing the patterns that are potentially just after inpt_nb
+
+
+## Examples
+
+```r
+print(nb2_follow(inpt_v = c(1:12), inpt_idx = 4, inpt_follow_v = c(5)))
+
+[1] 1 5
+
+print(nb2_follow(inpt_v = c(1, "non", "oui", "oui", "oui", "nop", 5), inpt_idx = 2, inpt_follow_v = c("5", "oui")))
+
+[1] "3"   "oui"
 ```
 
 
@@ -2891,6 +3003,81 @@ print(occu(inpt_v=c("oui", "peut", "peut", "non", "oui")))
 #1  oui         2
 #2 peut         2
 #3  non         1
+```
+
+
+# `pairs_findr_merger`
+
+pairs_findr_merger
+
+
+## Description
+
+Takes two different outputs from pairs_findr and merge them. Can be usefull when the pairs consists in different patterns, for example one output from the pairs_findr function with ptrn1 = "(" and ptrn2 = ")", and a second output from the pairs_findr function with ptrn1 = " [" and ptrn2 = "](#"_and_ptrn2_=_") ".
+
+
+## Usage
+
+```r
+pairs_findr_merger(lst1 = list(), lst2 = list())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`lst1`     |     is the first ouput from pairs findr function
+`lst2`     |     is the second ouput from pairs findr function
+
+
+## Examples
+
+```r
+print(pairs_findr_merger(lst1=list(c(1, 2, 3, 3, 2, 1), c(3, 4, 5, 7, 8, 9)),
+lst2=list(c(1, 1), c(1, 2))))
+
+[[1]]
+[1] 1 1 2 3 4 4 3 2
+
+[[2]]
+[1] 1 2 3 4 5 7 8 9
+
+print(pairs_findr_merger(lst1=list(c(1, 2, 3, 3, 2, 1), c(3, 4, 5, 7, 8, 9)),
+lst2=list(c(1, 1), c(1, 11))))
+
+[[1]]
+[1] 1 2 3 4 4 3 2 1
+
+[[2]]
+[1]  1  3  4  5  7  8  9 11
+
+print(pairs_findr_merger(lst1=list(c(1, 2, 3, 3, 2, 1), c(3, 4, 5, 8, 10, 11)),
+lst2=list(c(4, 4), c(6, 7))))
+
+[[1]]
+[1] 1 2 3 4 4 3 2 1
+
+[[2]]
+[1]  3  4  5  6  7  8 10 11
+
+print(pairs_findr_merger(lst1=list(c(1, 2, 3, 3, 2, 1), c(3, 4, 5, 7, 10, 11)),
+lst2=list(c(4, 4), c(8, 9))))
+
+[[1]]
+[1] 1 2 3 3 4 4 2 1
+
+[[2]]
+[1]  3  4  5  7  8  9 10 11
+
+print(pairs_findr_merger(lst1=list(c(1, 2, 3, 3, 2, 1), c(3, 4, 5, 7, 10, 11)),
+lst2=list(c(4, 4), c(18, 19))))
+
+[[1]]
+[1] 1 2 3 3 2 1 4 4
+
+[[2]]
+[1]  3  4  5  7 10 11 18 19
 ```
 
 

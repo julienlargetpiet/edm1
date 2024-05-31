@@ -10289,3 +10289,267 @@ join_n_lvl <- function(frst_datf, scd_datf, join_type=c(),
     return(NULL)
   }
 }
+
+#' pairs_findr_merger
+#'
+#' Takes two different outputs from pairs_findr and merge them. Can be usefull when the pairs consists in different patterns, for example one output from the pairs_findr function with ptrn1 = "(" and ptrn2 = ")", and a second output from the pairs_findr function with ptrn1 = "[" and ptrn2 = "]".
+#'
+#' @param lst1 is the first ouput from pairs findr function
+#' @param lst2 is the second ouput from pairs findr function
+#' @examples
+#'
+#' print(pairs_findr_merger(lst1=list(c(1, 2, 3, 3, 2, 1), c(3, 4, 5, 7, 8, 9)), 
+#'                          lst2=list(c(1, 1), c(1, 2))))
+#' 
+#' [[1]]
+#' [1] 1 1 2 3 4 4 3 2
+#' 
+#' [[2]]
+#' [1] 1 2 3 4 5 7 8 9
+#' 
+#' print(pairs_findr_merger(lst1=list(c(1, 2, 3, 3, 2, 1), c(3, 4, 5, 7, 8, 9)), 
+#'                          lst2=list(c(1, 1), c(1, 11))))
+#' 
+#' [[1]]
+#' [1] 1 2 3 4 4 3 2 1
+#' 
+#' [[2]]
+#' [1]  1  3  4  5  7  8  9 11
+#' 
+#' print(pairs_findr_merger(lst1=list(c(1, 2, 3, 3, 2, 1), c(3, 4, 5, 8, 10, 11)), 
+#'                          lst2=list(c(4, 4), c(6, 7))))
+#'
+#' [[1]]
+#' [1] 1 2 3 4 4 3 2 1
+#' 
+#' [[2]]
+#' [1]  3  4  5  6  7  8 10 11
+#' 
+#' print(pairs_findr_merger(lst1=list(c(1, 2, 3, 3, 2, 1), c(3, 4, 5, 7, 10, 11)), 
+#'                          lst2=list(c(4, 4), c(8, 9))))
+#' 
+#' [[1]]
+#' [1] 1 2 3 3 4 4 2 1
+#' 
+#' [[2]]
+#' [1]  3  4  5  7  8  9 10 11
+#' 
+#' print(pairs_findr_merger(lst1=list(c(1, 2, 3, 3, 2, 1), c(3, 4, 5, 7, 10, 11)), 
+#'                          lst2=list(c(4, 4), c(18, 19))))
+#'
+#' [[1]]
+#' [1] 1 2 3 3 2 1 4 4
+#' 
+#' [[2]]
+#' [1]  3  4  5  7 10 11 18 19
+#'
+#' @export
+
+pairs_findr_merger <- function(lst1=list(), lst2=list()){
+  better_match <- function(inpt_v=c(), ptrn, untl=1, nvr_here=NA){
+    Rtn_v <- c()
+    if (length(untl) < length(ptrn)){
+      val_add <- untl[length(untl)]
+      while (length(untl) < length(ptrn)){
+        untl <- c(untl, val_add)
+      }
+    }
+    for (cur_ptrn in 1:length(ptrn)){
+      rtn_v <- c()
+      cnt = 1
+      stop <- FALSE
+      while (length(rtn_v) < untl[cur_ptrn] & cnt < (length(inpt_v) + 1) & !(stop)){
+              pre_match <- match(x=ptrn[cur_ptrn], table=inpt_v)
+              if (!(is.na(pre_match))){
+                inpt_v[pre_match] <- nvr_here
+                rtn_v <- c(rtn_v, pre_match)
+              }else{
+                stop <- TRUE
+              }
+              cnt = cnt + 1
+      }
+      Rtn_v <- c(Rtn_v, rtn_v)
+    }
+    return(Rtn_v)
+  }
+  pair1 <- unlist(lst1[1])
+  pos1 <- unlist(lst1[2])
+  pair2 <- unlist(lst2[1])
+  pos2 <- unlist(lst2[2])
+  stop <- FALSE
+  cnt = 1
+  while (!(stop)){
+    mtch1 <- match(x = cnt, table = pair1)
+    mtch2 <- match(x = cnt, table = pair2)
+    if (all(!(is.na(mtch1)), !(is.na(mtch2)))){
+      if (pos1[mtch1] < pos2[mtch2]){
+        poses <- better_match(inpt_v = pair2, ptrn = c(cnt:max(pair2)), untl = 2)
+        pair2[poses] <- pair2[poses] + 1
+      }else{
+        poses <- better_match(inpt_v = pair1, ptrn = c(cnt:max(pair1)), untl = 2)
+        pair1[poses] <- pair1[poses] + 1
+      }
+    }else{
+      stop <- TRUE
+    }
+    cnt = cnt + 1
+  }
+  if (length(pair1) > length(pair2)){
+    rtn_pos <- pos1
+    rtn_pair <- pair1
+    add_pos <- pos2
+    add_pair <- pair2
+  }else{
+    rtn_pos <- pos2
+    rtn_pair <- pair2
+    add_pos <- pos1
+    add_pair <- pair1
+  }
+  cnt = 1
+  stop <- FALSE
+  pre_lngth <- length(rtn_pos)
+  while (cnt <= (pre_lngth / 2 + length(add_pair) / 2) & !(stop)){
+    if (is.na(match(x = cnt, table = rtn_pair))){
+        cur_add_pos_id <- grep(x = add_pair, pattern = cnt)
+        if (cnt < max(rtn_pair)){
+          cur_grep <- grep(x = rtn_pair, pattern = (cnt + 1))
+          if (rtn_pos[cur_grep[2]] < add_pos[cur_add_pos_id[2]] & 
+              rtn_pos[cur_grep[1]] > add_pos[cur_add_pos_id[1]]){
+            rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_grep[1] - 1))
+            rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_grep[2] + 1))
+            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[1]], after = (cur_grep[1] - 1))
+            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[2]], after = (cur_grep[2] + 1))
+          }else{
+            rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_grep[1] - 1))
+            rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_grep[1] - 1))
+            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[1]], after = (cur_grep[1] - 1))
+            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[2]], after = (cur_grep[1] - 1))
+          }
+        }else{
+          cur_grep <- grep(x = rtn_pair, pattern = (cnt - 1))
+          if (rtn_pos[cur_grep[2]] < add_pos[cur_add_pos_id[1]]){
+            cur_vec <- abs(rtn_pos - add_pos[cur_add_pos_id[1]])
+            cur_pos <- which.min(cur_vec)
+            rtn_pair <- append(x = rtn_pair, value = cnt, after = cur_pos)
+            rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_pos + 1))
+            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[1]], after = cur_pos)
+            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[2]], after = (cur_pos + 1))
+          }else{
+            rtn_pair <- append(x = rtn_pair, value = cnt, after = cur_grep[1])
+            rtn_pair <- append(x = rtn_pair, value = cnt, after = cur_grep[1])
+            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[1]], after = cur_grep[1])
+            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[2]], after = cur_grep[1])
+          }
+        }
+    }
+    cnt = cnt + 1
+  }
+  return(list(rtn_pair, sort(c(rtn_pos, add_pos))))
+}
+
+#' nb_follow
+#'
+#' Allow to get the number of certains patterns that may be after an index of a vector, see examples
+#'
+#' @param inpt_v is the input vector
+#' @param inpt_idx is the index
+#' @param inpt_follow_v is a vector containing all the potential patterns that may follow the element in the vector at the index inpt_idx
+#' @examples
+#'
+#' print(nb_follow(inpt_v = c(1:13), inpt_idx = 6, inpt_follow_v = c(5:9)))
+#' 
+#' [1] 3
+#'
+#' print(nb_follow(inpt_v = c("ou", "nn", "pp", "zz", "zz", "ee", "pp"), inpt_idx = 2, 
+#'                 inpt_follow_v = c("pp", "zz")))
+#'
+#' [1] 3
+#' 
+#' @export
+
+nb_follow <- function(inpt_v, inpt_idx, inpt_follow_v = c()){
+  rtn <- 0
+  pattern_v <- c()
+  inpt_idx = inpt_idx + 1
+  while (inpt_v[inpt_idx] %in% inpt_follow_v){
+    inpt_idx = inpt_idx + 1
+    rtn = rtn  + 1
+  }
+  return(rtn)
+}
+
+#' nb2_follow
+#'
+#' Allows to get the number and pattern of potential continuous pattern after an index of a vector, see examples
+#' 
+#' @param inpt_v is the input vector
+#' @param inpt_idx is the index
+#' @param inpt_follow_v is a vector containing the patterns that are potentially just after inpt_nb
+#' @examples
+#'
+#' print(nb2_follow(inpt_v = c(1:12), inpt_idx = 4, inpt_follow_v = c(5)))
+#' 
+#' [1] 1 5
+#' 
+#' print(nb2_follow(inpt_v = c(1, "non", "oui", "oui", "oui", "nop", 5), inpt_idx = 2, inpt_follow_v = c("5", "oui")))
+#'
+#' [1] "3"   "oui"
+#'
+#' @export
+
+nb2_follow <- function(inpt_v, inpt_idx, inpt_follow_v = c()){
+  rtn <- 0
+  pattern_ = NA
+  inpt_idx = inpt_idx + 1
+  for (ptrn in inpt_follow_v){
+     cnt = 0
+     while (ptrn == inpt_v[inpt_idx]){
+       inpt_idx = inpt_idx + 1
+       cnt = cnt + 1
+     }
+     if (cnt > 0){
+       rtn = rtn + cnt
+       pattern_ <- ptrn
+     }
+  }
+  return(c(rtn, pattern_))
+}
+
+#' depth_pairs_findr
+#'
+#' Takes the pair vector as an input and associate to each pair a level of depth, see examples
+#'
+#' @param inpt is the pair vector
+#' @examples 
+#'
+#' print(depth_pairs_findr(c(1, 1, 2, 3, 3, 4, 4, 2, 5, 6, 7, 7, 6, 5)))
+#'
+#'  [1] 1 1 1 2 2 2 2 1 1 2 3 3 2 1
+#'
+#' @export
+
+depth_pairs_findr <- function(inpt){
+  rtn_v <- c(matrix(data = 0, nrow = length(inpt), ncol = 1))
+  all_pair <- c(matrix(data = 0, nrow = length(unique(inpt)), ncol = 1))
+  alrd_here <- c()
+  cnt = 1
+  cnt2 = 1
+  while (cnt2 < length(rtn_v)){
+    if (inpt[cnt2]  == inpt[(cnt2 + 1)]){
+      rtn_v[grep(x = inpt, pattern = inpt[cnt2])] <- cnt
+      cnt2 = cnt2 + 2
+    }else if (!(is.na(match(x = inpt[cnt2], table = alrd_here)))){
+      cnt = cnt - 1
+      rtn_v[grep(x = inpt, pattern = inpt[cnt2])] <- cnt
+      cnt2 = cnt2 + 1
+    }else{
+      cnt = cnt + 1
+      alrd_here <- c(alrd_here, inpt[cnt2])
+      cnt2 = cnt2 + 1
+    }
+  }
+  if (rtn_v[length(rtn_v)] == 0){
+    rtn_v[grep(x = rtn_v, pattern = 0)] <- 1
+  }
+  return(rtn_v)
+}
