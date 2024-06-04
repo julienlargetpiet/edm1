@@ -13,7 +13,6 @@ R > library("devtools")
 R > build()
 
 R > install()
-
 # `all_stat`
 
 all_stat

@@ -10410,6 +10410,7 @@ pairs_findr_merger <- function(lst1=list(), lst2=list()){
   pre_lngth <- length(rtn_pos)
   while (cnt <= (pre_lngth / 2 + length(add_pair) / 2) & !(stop)){
     if (is.na(match(x = cnt, table = rtn_pair))){
+            print("here")
         cur_add_pos_id <- grep(x = add_pair, pattern = cnt)
         if (cnt < max(rtn_pair)){
           cur_grep <- grep(x = rtn_pair, pattern = (cnt + 1))
@@ -10417,14 +10418,12 @@ pairs_findr_merger <- function(lst1=list(), lst2=list()){
               rtn_pos[cur_grep[1]] > add_pos[cur_add_pos_id[1]]){
             rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_grep[1] - 1))
             rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_grep[2] + 1))
-            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[1]], after = (cur_grep[1] - 1))
-            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[2]], after = (cur_grep[2] + 1))
           }else{
+                  print("ici")
             rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_grep[1] - 1))
             rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_grep[1] - 1))
-            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[1]], after = (cur_grep[1] - 1))
-            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[2]], after = (cur_grep[1] - 1))
           }
+          print(rtn_pos)
         }else{
           cur_grep <- grep(x = rtn_pair, pattern = (cnt - 1))
           if (rtn_pos[cur_grep[2]] < add_pos[cur_add_pos_id[1]]){
@@ -10432,13 +10431,9 @@ pairs_findr_merger <- function(lst1=list(), lst2=list()){
             cur_pos <- which.min(cur_vec)
             rtn_pair <- append(x = rtn_pair, value = cnt, after = cur_pos)
             rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_pos + 1))
-            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[1]], after = cur_pos)
-            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[2]], after = (cur_pos + 1))
           }else{
             rtn_pair <- append(x = rtn_pair, value = cnt, after = cur_grep[1])
             rtn_pair <- append(x = rtn_pair, value = cnt, after = cur_grep[1])
-            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[1]], after = cur_grep[1])
-            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[2]], after = cur_grep[1])
           }
         }
     }
