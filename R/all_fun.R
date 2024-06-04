@@ -10343,6 +10343,15 @@ join_n_lvl <- function(frst_datf, scd_datf, join_type=c(),
 #' [[2]]
 #' [1]  3  4  5  7 10 11 18 19
 #'
+#' print(pairs_findr_merger(lst1 = list(c(1, 1, 2, 2, 3, 3), c(1, 25, 26, 32, 33, 38)), 
+#'                         lst2 = list(c(1, 1, 2, 2, 3, 3), c(7, 11, 13, 17, 19, 24))))
+#'
+#' [[1]]
+#'  [1] 1 2 2 3 3 4 4 1 5 5 6 6
+#' 
+#' [[2]]
+#'  [1]  1  7 11 13 17 19 24 25 26 32 33 38
+#'
 #' @export
 
 pairs_findr_merger <- function(lst1=list(), lst2=list()){
@@ -10410,20 +10419,23 @@ pairs_findr_merger <- function(lst1=list(), lst2=list()){
   pre_lngth <- length(rtn_pos)
   while (cnt <= (pre_lngth / 2 + length(add_pair) / 2) & !(stop)){
     if (is.na(match(x = cnt, table = rtn_pair))){
-            print("here")
         cur_add_pos_id <- grep(x = add_pair, pattern = cnt)
         if (cnt < max(rtn_pair)){
           cur_grep <- grep(x = rtn_pair, pattern = (cnt + 1))
           if (rtn_pos[cur_grep[2]] < add_pos[cur_add_pos_id[2]] & 
               rtn_pos[cur_grep[1]] > add_pos[cur_add_pos_id[1]]){
             rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_grep[1] - 1))
-            rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_grep[2] + 1))
+            cur_vec <- abs(rtn_pos - add_pos[cur_add_pos_id[2]])
+            cur_pos <- which.min(cur_vec)
+            rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_pos + 1))
+            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[1]], after = (cur_grep[1] - 1))
+            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[2]], after = (cur_pos + 1))
           }else{
-                  print("ici")
             rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_grep[1] - 1))
             rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_grep[1] - 1))
+            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[1]], after = (cur_grep[1] - 1))
+            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[2]], after = (cur_grep[1] - 1))
           }
-          print(rtn_pos)
         }else{
           cur_grep <- grep(x = rtn_pair, pattern = (cnt - 1))
           if (rtn_pos[cur_grep[2]] < add_pos[cur_add_pos_id[1]]){
@@ -10431,16 +10443,21 @@ pairs_findr_merger <- function(lst1=list(), lst2=list()){
             cur_pos <- which.min(cur_vec)
             rtn_pair <- append(x = rtn_pair, value = cnt, after = cur_pos)
             rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_pos + 1))
+            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[1]], after = cur_pos)
+            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[2]], after = (cur_pos + 1))
           }else{
             rtn_pair <- append(x = rtn_pair, value = cnt, after = cur_grep[1])
             rtn_pair <- append(x = rtn_pair, value = cnt, after = cur_grep[1])
+            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[1]], after = cur_grep[1])
+            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[2]], after = cur_grep[1])
           }
         }
     }
     cnt = cnt + 1
   }
-  return(list(rtn_pair, sort(c(rtn_pos, add_pos))))
+  return(list(rtn_pair, sort(rtn_pos)))
 }
+
 
 #' nb_follow
 #'
