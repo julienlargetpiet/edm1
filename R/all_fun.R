@@ -10352,112 +10352,156 @@ join_n_lvl <- function(frst_datf, scd_datf, join_type=c(),
 #' [[2]]
 #'  [1]  1  7 11 13 17 19 24 25 26 32 33 38
 #'
+#' print(pairs_findr_merger(lst1 = list(c(1, 1, 2, 2, 3, 3), c(2, 7, 9, 10, 11, 15)), 
+#'                          lst2 = list(c(3, 2, 1, 1, 2, 3, 4, 4), c(1, 17, 18, 22, 23, 29, 35, 40))))
+#'
+#' [[1]]
+#'  [1] 6 5 1 1 2 2 3 3 4 4 5 6 7 7
+#' 
+#' [[2]]
+#'  [1]  1  2  7  9 10 11 15 17 18 22 23 29 35 40
+#'
+#' print(pairs_findr_merger(lst1 = list(c(1, 1), c(22, 23)), 
+#'                          lst2 = list(c(1, 1, 2, 2), c(3, 21, 27, 32))))
+#'
+#' [[1]]
+#' [1] 1 1 2 2 3 3
+#' 
+#' [[2]]
+#' [1]  3 21 22 23 27 32
+#'
 #' @export
 
 pairs_findr_merger <- function(lst1=list(), lst2=list()){
-  better_match <- function(inpt_v=c(), ptrn, untl=1, nvr_here=NA){
-    Rtn_v <- c()
-    if (length(untl) < length(ptrn)){
-      val_add <- untl[length(untl)]
-      while (length(untl) < length(ptrn)){
-        untl <- c(untl, val_add)
-      }
-    }
-    for (cur_ptrn in 1:length(ptrn)){
-      rtn_v <- c()
-      cnt = 1
-      stop <- FALSE
-      while (length(rtn_v) < untl[cur_ptrn] & cnt < (length(inpt_v) + 1) & !(stop)){
-              pre_match <- match(x=ptrn[cur_ptrn], table=inpt_v)
-              if (!(is.na(pre_match))){
-                inpt_v[pre_match] <- nvr_here
-                rtn_v <- c(rtn_v, pre_match)
-              }else{
-                stop <- TRUE
-              }
-              cnt = cnt + 1
-      }
-      Rtn_v <- c(Rtn_v, rtn_v)
-    }
-    return(Rtn_v)
-  }
-  pair1 <- unlist(lst1[1])
-  pos1 <- unlist(lst1[2])
-  pair2 <- unlist(lst2[1])
-  pos2 <- unlist(lst2[2])
-  stop <- FALSE
-  cnt = 1
-  while (!(stop)){
-    mtch1 <- match(x = cnt, table = pair1)
-    mtch2 <- match(x = cnt, table = pair2)
-    if (all(!(is.na(mtch1)), !(is.na(mtch2)))){
-      if (pos1[mtch1] < pos2[mtch2]){
-        poses <- better_match(inpt_v = pair2, ptrn = c(cnt:max(pair2)), untl = 2)
-        pair2[poses] <- pair2[poses] + 1
-      }else{
-        poses <- better_match(inpt_v = pair1, ptrn = c(cnt:max(pair1)), untl = 2)
-        pair1[poses] <- pair1[poses] + 1
-      }
-    }else{
-      stop <- TRUE
-    }
-    cnt = cnt + 1
-  }
-  if (length(pair1) > length(pair2)){
-    rtn_pos <- pos1
-    rtn_pair <- pair1
-    add_pos <- pos2
-    add_pair <- pair2
-  }else{
-    rtn_pos <- pos2
-    rtn_pair <- pair2
-    add_pos <- pos1
-    add_pair <- pair1
-  }
-  cnt = 1
-  stop <- FALSE
-  pre_lngth <- length(rtn_pos)
-  while (cnt <= (pre_lngth / 2 + length(add_pair) / 2) & !(stop)){
-    if (is.na(match(x = cnt, table = rtn_pair))){
-        cur_add_pos_id <- grep(x = add_pair, pattern = cnt)
-        if (cnt < max(rtn_pair)){
-          cur_grep <- grep(x = rtn_pair, pattern = (cnt + 1))
-          if (rtn_pos[cur_grep[2]] < add_pos[cur_add_pos_id[2]] & 
-              rtn_pos[cur_grep[1]] > add_pos[cur_add_pos_id[1]]){
-            rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_grep[1] - 1))
-            cur_vec <- abs(rtn_pos - add_pos[cur_add_pos_id[2]])
-            cur_pos <- which.min(cur_vec)
-            rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_pos + 1))
-            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[1]], after = (cur_grep[1] - 1))
-            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[2]], after = (cur_pos + 1))
-          }else{
-            rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_grep[1] - 1))
-            rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_grep[1] - 1))
-            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[1]], after = (cur_grep[1] - 1))
-            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[2]], after = (cur_grep[1] - 1))
-          }
-        }else{
-          cur_grep <- grep(x = rtn_pair, pattern = (cnt - 1))
-          if (rtn_pos[cur_grep[2]] < add_pos[cur_add_pos_id[1]]){
-            cur_vec <- abs(rtn_pos - add_pos[cur_add_pos_id[1]])
-            cur_pos <- which.min(cur_vec)
-            rtn_pair <- append(x = rtn_pair, value = cnt, after = cur_pos)
-            rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_pos + 1))
-            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[1]], after = cur_pos)
-            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[2]], after = (cur_pos + 1))
-          }else{
-            rtn_pair <- append(x = rtn_pair, value = cnt, after = cur_grep[1])
-            rtn_pair <- append(x = rtn_pair, value = cnt, after = cur_grep[1])
-            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[1]], after = cur_grep[1])
-            rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[2]], after = cur_grep[1])
-          }
+    better_match <- function(inpt_v=c(), ptrn, untl=1, nvr_here=NA){
+      Rtn_v <- c()
+      if (length(untl) < length(ptrn)){
+        val_add <- untl[length(untl)]
+        while (length(untl) < length(ptrn)){
+          untl <- c(untl, val_add)
         }
+      }
+      for (cur_ptrn in 1:length(ptrn)){
+        rtn_v <- c()
+        cnt = 1
+        stop <- FALSE
+        while (length(rtn_v) < untl[cur_ptrn] & cnt < (length(inpt_v) + 1) & !(stop)){
+                pre_match <- match(x=ptrn[cur_ptrn], table=inpt_v)
+                if (!(is.na(pre_match))){
+                  inpt_v[pre_match] <- nvr_here
+                  rtn_v <- c(rtn_v, pre_match)
+                }else{
+                  stop <- TRUE
+                }
+                cnt = cnt + 1
+        }
+        Rtn_v <- c(Rtn_v, rtn_v)
+      }
+      return(Rtn_v)
     }
-    cnt = cnt + 1
-  }
-  return(list(rtn_pair, sort(rtn_pos)))
+    pair1 <- unlist(lst1[1])
+    pos1 <- unlist(lst1[2])
+    pair2 <- unlist(lst2[1])
+    pos2 <- unlist(lst2[2])
+    stop <- FALSE
+    cnt = 1
+    while (!(stop)){
+      mtch1 <- match(x = cnt, table = pair1)
+      mtch2 <- match(x = cnt, table = pair2)
+      if (all(!(is.na(mtch1)), !(is.na(mtch2)))){
+        if (pos1[mtch1] < pos2[mtch2]){
+          poses <- better_match(inpt_v = pair2, ptrn = c(cnt:max(pair2)), untl = 2)
+          pair2[poses] <- pair2[poses] + 1
+        }else{
+          poses <- better_match(inpt_v = pair1, ptrn = c(cnt:max(pair1)), untl = 2)
+          pair1[poses] <- pair1[poses] + 1
+        }
+      }else{
+        stop <- TRUE
+      }
+      cnt = cnt + 1
+    }
+    if (length(pair1) > length(pair2)){
+      rtn_pos <- pos1
+      rtn_pair <- pair1
+      add_pos <- pos2
+      add_pair <- pair2
+    }else{
+      rtn_pos <- pos2
+      rtn_pair <- pair2
+      add_pos <- pos1
+      add_pair <- pair1
+    }
+    cnt = 1
+    stop <- FALSE
+    pre_lngth <- length(rtn_pos)
+    while (cnt <= (pre_lngth / 2 + length(add_pair) / 2) & !(stop)){
+      if (is.na(match(x = cnt, table = rtn_pair))){
+          cur_add_pos_id <- grep(x = add_pair, pattern = cnt)
+          if (cnt < max(rtn_pair)){
+            incr = 1
+            cur_grep <- grep(x = rtn_pair, pattern = (cnt + incr))
+            while (identical(integer(0), cur_grep)){
+                incr = incr + 1
+                cur_grep <- grep(x = rtn_pair, pattern = (cnt + incr))
+            }
+            if (rtn_pos[cur_grep[2]] < add_pos[cur_add_pos_id[2]] & 
+                rtn_pos[cur_grep[1]] > add_pos[cur_add_pos_id[1]]){
+              rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_grep[1] - 1))
+              cur_vec <- abs(rtn_pos - add_pos[cur_add_pos_id[2]])
+              cur_pos <- which.min(cur_vec)
+              rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_pos + 1))
+              rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[1]], after = (cur_grep[1] - 1))
+              rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[2]], after = (cur_pos + 1))
+            }else{
+              if (!(is.na(match(x = (cnt - 1), table = rtn_pair)))){
+                    cur_grep2 <- grep(x = rtn_pair, pattern = (cnt - 1))
+                    if (rtn_pos[cur_grep2[2]] > add_pos[cur_add_pos_id[2]]){
+                      rtn_pair <- append(x = rtn_pair, value = cnt, after = cur_grep2[1])
+                      rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_grep2[1] + 1))
+                      rtn_pos <- append(x = rtn_pos, 
+                                        value = add_pos[cur_add_pos_id[1]], after = cur_grep2[1])
+                      rtn_pos <- append(x = rtn_pos, 
+                                        value = add_pos[cur_add_pos_id[2]], after = (cur_grep2[1] + 1))
+                    }else{
+                      rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_grep[1] - 1))
+                      rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_grep[1] - 1))
+                      rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[1]], after = (cur_grep[1] - 1))
+                      rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[2]], after = (cur_grep[1] - 1))
+                    }
+              }else{
+                rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_grep[1] - 1))
+                rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_grep[1] - 1))
+                rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[1]], after = (cur_grep[1] - 1))
+                rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[2]], after = (cur_grep[1] - 1))
+              }
+            }
+          }else{
+            incr = 1
+            cur_grep <- grep(x = rtn_pair, pattern = (cnt - incr))
+            while (identical(integer(0), cur_grep)){
+              incr = incr + 1
+              cur_grep <- grep(x = rtn_pair, pattern = (cnt - incr))
+            }
+            if (rtn_pos[cur_grep[2]] < add_pos[cur_add_pos_id[1]]){
+              cur_vec <- abs(rtn_pos - add_pos[cur_add_pos_id[1]])
+              cur_pos <- which.min(cur_vec)
+              rtn_pair <- append(x = rtn_pair, value = cnt, after = cur_pos)
+              rtn_pair <- append(x = rtn_pair, value = cnt, after = (cur_pos + 1))
+              rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[1]], after = cur_pos)
+              rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[2]], after = (cur_pos + 1))
+            }else{
+              rtn_pair <- append(x = rtn_pair, value = cnt, after = cur_grep[1])
+              rtn_pair <- append(x = rtn_pair, value = cnt, after = cur_grep[1])
+              rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[1]], after = cur_grep[1])
+              rtn_pos <- append(x = rtn_pos, value = add_pos[cur_add_pos_id[2]], after = cur_grep[1])
+            }
+          }
+      }
+      cnt = cnt + 1
+    }
+    return(list(rtn_pair, sort(rtn_pos)))
 }
-
 
 #' nb_follow
 #'
@@ -10565,3 +10609,62 @@ depth_pairs_findr <- function(inpt){
   }
   return(rtn_v)
 }
+
+#' better_split
+#'
+#' Allows to split a string by multiple split, returns a vector and not a list.
+#' @param inpt is the input character
+#' @param split_v is the vector containing the splits
+#' @examples
+#'
+#' print(better_split(inpt = "o-u_i", split_v = c("-")))
+#' 
+#' [1] "o"   "u_i"
+#'
+#' print(better_split(inpt = "o-u_i", split_v = c("-", "_")))
+#'
+#' [1] "o" "u" "i"
+#'
+#' @export
+
+better_split <- function(inpt, split_v = c()){
+  for (split in split_v){
+    pre_inpt <- inpt
+    inpt <- c()
+    for (el in pre_inpt){
+      inpt <- c(inpt, unlist(strsplit(x = el, split = split)))
+    }
+  }
+  return(inpt)
+}
+
+#' pre_to_post_idx
+#'
+#' Allow to convert indexes from a pre-vector to post-indexes based on a current vector, see examples
+#'
+#' @param inpt_idx is the vector containing the pre-indexes 
+#' @param inpt_v is the new vector
+#' @examples
+#'
+#' print(pre_to_post_idx(inpt_v = c("oui", "no", "eee"), inpt_idx = c(1:8)))
+#' 
+#' [1] 1 1 1 2 2 3 3 3
+#'
+#' As if the first vector was c("o", "u", "i", "n", "o", "e", "e", "e")
+#'
+#' @export
+
+pre_to_post_idx <- function(inpt_v = c(), inpt_idx = c(1:length(inppt_v))){
+  rtn_v <- c()
+  cur_step = nchar(inpt_v[1])
+  cnt = 1
+  for (idx in 1:length(inpt_idx)){
+    if (inpt_idx[idx] > cur_step){
+      cnt = cnt + 1
+      cur_step = cur_step + nchar(inpt_v[cnt])
+    }
+    rtn_v <- c(rtn_v, cnt)
+  }
+  return(rtn_v)
+}
+

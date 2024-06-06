@@ -305,6 +305,44 @@ print(better_match(inpt_v=c(1:12, 3, 4, 33, 3), ptrn=c(3, 4), untl=c(1, 5)))
 ```
 
 
+# `better_split`
+
+better_split
+
+
+## Description
+
+Allows to split a string by multiple split, returns a vector and not a list.
+
+
+## Usage
+
+```r
+better_split(inpt, split_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt`     |     is the input character
+`split_v`     |     is the vector containing the splits
+
+
+## Examples
+
+```r
+print(better_split(inpt = "o-u_i", split_v = c("-")))
+
+[1] "o"   "u_i"
+
+print(better_split(inpt = "o-u_i", split_v = c("-", "_")))
+
+[1] "o" "u" "i"
+```
+
+
 # `can_be_num`
 
 can_be_num
@@ -3087,6 +3125,24 @@ lst2 = list(c(1, 1, 2, 2, 3, 3), c(7, 11, 13, 17, 19, 24))))
 
 [[2]]
 [1]  1  7 11 13 17 19 24 25 26 32 33 38
+
+print(pairs_findr_merger(lst1 = list(c(1, 1, 2, 2, 3, 3), c(2, 7, 9, 10, 11, 15)),
+lst2 = list(c(3, 2, 1, 1, 2, 3, 4, 4), c(1, 17, 18, 22, 23, 29, 35, 40))))
+
+[[1]]
+[1] 6 5 1 1 2 2 3 3 4 4 5 6 7 7
+
+[[2]]
+[1]  1  2  7  9 10 11 15 17 18 22 23 29 35 40
+
+print(pairs_findr_merger(lst1 = list(c(1, 1), c(22, 23)),
+lst2 = list(c(1, 1, 2, 2), c(3, 21, 27, 32))))
+
+[[1]]
+[1] 1 1 2 2 3 3
+
+[[2]]
+[1]  3 21 22 23 27 32
 ```
 
 
@@ -3301,6 +3357,42 @@ Argument      |Description
 print(pattern_tuning(pattrn="oui", spe_nb=2, spe_l=c("e", "r", "T", "O"), exclude_type="o", hmn=3))
 
 #[1] "orT" "oTr" "oOi"
+```
+
+
+# `pre_to_post_idx`
+
+pre_to_post_idx
+
+
+## Description
+
+Allow to convert indexes from a pre-vector to post-indexes based on a current vector, see examples
+
+
+## Usage
+
+```r
+pre_to_post_idx(inpt_v = c(), inpt_idx = c(1:length(inppt_v)))
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the new vector
+`inpt_idx`     |     is the vector containing the pre-indexes
+
+
+## Examples
+
+```r
+print(pre_to_post_idx(inpt_v = c("oui", "no", "eee"), inpt_idx = c(1:8)))
+
+[1] 1 1 1 2 2 3 3 3
+
+As if the first vector was c("o", "u", "i", "n", "o", "e", "e", "e")
 ```
 
 
