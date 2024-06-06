@@ -4988,6 +4988,210 @@ print(pairs_findr(inpt="ze+(yu*45/(jk+zz)*(o()p))-(re*(rt+qs)-fg)"))
 
 </div>
 </body></html>
+<!DOCTYPE html><html><head><title>R: pairs_insertr2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>pairs_insertr2</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>pairs_insertr2</h2>
+
+<h3>Description</h3>
+
+<p>Takes a character representing an arbitrary condition (like ReGeX for example) or an information (to a parser for example), vectors containing all the pair of pattern that potentially surrounds condition (flagged_pair_v and corr_v), and a vector containing all the conjuntion character, as input and returns the character with all or some of the condition surrounded by the pair characters. See examples. All the pair characters are inserted according to the closest pair they found priotizing those found next to the condition and on the same depth-level and , if not found, the pair found at the n+1 depth-level.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>pairs_insertr2(
+  inpt,
+  algo_used = c(1:3),
+  flagged_pair_v = c(")", "]"),
+  corr_v = c("(", "["),
+  flagged_conj_v = c("&amp;", "|"),
+  method = c("(", ")")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt">inpt</code></td>
+<td>
+<p>is the input character representing an arbitrary condition, like ReGex for example, or information to a parser for example</p>
+</td></tr>
+<tr><td><code id="algo_used">algo_used</code></td>
+<td>
+<p>is a vector containing one or more of the 3 algorythms used. The first algorythm will simply put the pair of parenthesis at the condition surrounded and/or after a character flagged (in flagged_conj_v) as a conjunction. The second algorythm will put parenthesis at the condition that are located after other conditions that are surrounded by a pair. The third algorythm will put a pair at all the condition, it is very powerfull but takes a longer time. See examples and make experience to see which combination of algorythm(s) is the most efficient for your use case.</p>
+</td></tr>
+<tr><td><code id="flagged_pair_v">flagged_pair_v</code></td>
+<td>
+<p>is a vector containing all the first character of the pairs</p>
+</td></tr>
+<tr><td><code id="corr_v">corr_v</code></td>
+<td>
+<p>is a vector containing all the last character of the pairs</p>
+</td></tr>
+<tr><td><code id="flagged_conj_v">flagged_conj_v</code></td>
+<td>
+<p>is a vector containing all the conjunction character</p>
+</td></tr>
+<tr><td><code id="method">method</code></td>
+<td>
+<p>is length 2 vector containing as a first index, the first character of the pair inserted, and at the last index, the second and last character of the pair</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(pairs_insertr2(inpt = "([one]|two|twob)three(four)", algo_used = c(1), method = c("(", ")")))
+
+[1] "([one]|(two)|(twob))three(four)"
+
+print(pairs_insertr2(inpt = "([one]|two|twob)three(four)", algo_used = c(1), method = c("[", "]")))
+
+[1] "([one]|[two]|[twob])three(four)"
+
+print(pairs_insertr2(inpt = "(oneA|[one]|two|twob)three(four)", algo_used = c(1, 2)))
+
+[1] "(oneA|[one]|(two)|(twob))(three)(four)"
+
+print(pairs_insertr2(inpt = "(oneA|[one]|two|twob)three(four)", algo_used = c(1, 2), method = c("-", "#"),
+                     flagged_pair_v = c(")", "]", "#"), corr_v = c("(", "[", "-")))
+
+[1] "(oneA|[one]|-two#|-twob#)-three#(four)"
+
+print(pairs_insertr2(inpt = "(oneA|[one]|two|twob)three(four)", algo_used = c(1, 2, 3)))
+
+[1] "((oneA)|[one]|(two)|(twob))(three)(four)"
+
+print(pairs_insertr2(inpt = "(oneA|[one]|two|twob)three(four)", algo_used = c(3), method = c("[", "]")))
+
+[1] "([oneA]|[one]|[two]|[twob])[three](four)"
+
+print(pairs_insertr2(inpt = "(oneA|[one]|two|twob)three((four))", algo_used = c(3)))
+
+[1] "((oneA)|[one]|(two)|(twob))(three)((four))"
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: pairs_insertr</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>pairs_insertr</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>pairs_insertr</h2>
+
+<h3>Description</h3>
+
+<p>Takes a character representing an arbitrary condition (like ReGeX for example) or an information (to a parser for example), vectors containing all the pair of pattern that potentially surrounds condition (flagged_pair_v and corr_v), and a vector containing all the conjuntion character, as input and returns the character with all or some of the condition surrounded by the pair characters. See examples. All the pair characters are inserted according to the closest pair they found priotizing those found next to the condition and on the same depth-level and , if not found, the pair found at the n+1 depth-level.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>pairs_insertr(
+  inpt,
+  algo_used = c(1:3),
+  flagged_pair_v = c(")", "]"),
+  corr_v = c("(", "["),
+  flagged_conj_v = c("&amp;", "|")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt">inpt</code></td>
+<td>
+<p>is the input character representing an arbitrary condition, like ReGex for example, or information to a parser for example</p>
+</td></tr>
+<tr><td><code id="algo_used">algo_used</code></td>
+<td>
+<p>is a vector containing one or more of the 3 algorythms used. The first algorythm will simply put the pair of parenthesis at the condition surrounded and/or after a character flagged (in flagged_conj_v) as a conjunction. The second algorythm will put parenthesis at the condition that are located after other conditions that are surrounded by a pair. The third algorythm will put a pair at all the condition, it is very powerfull but takes a longer time. See examples and make experience to see which combination of algorythm(s) is the most efficient for your use case.</p>
+</td></tr>
+<tr><td><code id="flagged_pair_v">flagged_pair_v</code></td>
+<td>
+<p>is a vector containing all the first character of the pairs</p>
+</td></tr>
+<tr><td><code id="corr_v">corr_v</code></td>
+<td>
+<p>is a vector containing all the last character of the pairs</p>
+</td></tr>
+<tr><td><code id="flagged_conj_v">flagged_conj_v</code></td>
+<td>
+<p>is a vector containing all the conjunction character</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(pairs_insertr(inpt = "([one]|two|twob)three(four)", algo_used = c(1)))
+
+[1] "([one]|[two]|[twob])three(four)"
+
+print(pairs_insertr(inpt = "(one|[two]|twob)three(four)", algo_used = c(2)))
+
+[1] "(one|[two]|[twob])(three)(four)"
+
+print(pairs_insertr(inpt = "(oneA|[one]|two|twob)three(four)", algo_used = c(1, 2)))
+
+[1] "(oneA|[one]|[two]|[twob])(three)(four)"
+
+print(pairs_insertr(inpt = "(oneA|[one]|two|twob)three(four)", algo_used = c(1, 2, 3)))
+
+[1] "([oneA]|[one]|[two]|[twob])(three)(four)"
+
+print(pairs_insertr(inpt = "(oneA|[one]|two|twob)three(four)", algo_used = c(3)))
+
+[1] "([oneA]|[one]|(two)|(twob))(three)(four)"
+
+print(pairs_insertr(inpt = "(oneA|[one]|two|twob)three((four))", algo_used = c(3)))
+
+[1] "([oneA]|[(one)]|(two)|(twob))(three)((four))"
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
 <!DOCTYPE html><html><head><title>R: paste_datf</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
