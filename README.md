@@ -2641,6 +2641,52 @@ print(lst_flatnr(inpt_l=list(c(1, 2), c(5, 3), c(7, 2, 7))))
 ```
 
 
+# `match_by`
+
+match_by
+
+
+## Description
+
+Allow to match elements by ids, see examples.
+
+
+## Usage
+
+```r
+match_by(to_match_v = c(), inpt_v = c(), inpt_ids = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`to_match_v`     |     is the vector containing all the elements to match
+`inpt_v`     |     is the input vector containong all the elements that could contains the elements to match. Each elements is linked to an element from inpt_ids at any given index, see examples. So inpt_v and inpt_ids must be the same size
+`inpt_ids`     |     is the vector containing all the ids for the elements in inpt_v. An element is linked to the id x is both are at the same index. So inpt_v and inpt_ids must be the same size
+
+
+## Examples
+
+```r
+print(match_by(to_match_v = c("a"), inpt_v = c("a", "z", "a", "p", "p", "e", "e", "a"),
+inpt_ids = c(1, 1, 1, 2, 2, 3, 3, 3)))
+
+[1] 1 8
+
+print(match_by(to_match_v = c("a"), inpt_v = c("a", "z", "a", "a", "p", "e", "e", "a"),
+inpt_ids = c(1, 1, 1, 2, 2, 3, 3, 3)))
+
+[1] 1 4 8
+
+print(match_by(to_match_v = c("a", "e"), inpt_v = c("a", "z", "a", "a", "p", "e", "e", "a"),
+inpt_ids = c(1, 1, 1, 2, 2, 3, 3, 3)))
+
+[1] 1 4 8 6
+```
+
+
 # `multitud`
 
 multitud
@@ -3493,6 +3539,39 @@ print(pattern_tuning(pattrn="oui", spe_nb=2, spe_l=c("e", "r", "T", "O"), exclud
 ```
 
 
+# `power_to_char`
+
+power_to_char
+
+
+## Description
+
+Convert a scientific number to a string representing normally the number.
+
+
+## Usage
+
+```r
+power_to_char(inpt_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector containing scientific number, but also other elements that won't be taken in count
+
+
+## Examples
+
+```r
+print(power_to_char(inpt_v = c(22 * 10000000, 12, 9 * 0.0000002)))
+
+[1] "2200000000" "12"         "000000.18"
+```
+
+
 # `pre_to_post_idx`
 
 pre_to_post_idx
@@ -4284,6 +4363,43 @@ Argument      |Description
 print(unique_pos(vec=c(3, 4, 3, 5, 6)))
 
 #[1] 1 2 4 5
+```
+
+
+# `unique_total`
+
+unique_total
+
+
+## Description
+
+Returns a vector with the total amount of occurences for each element in the input vector. The occurences of each element follow the same order as the unique function does, see examples
+
+
+## Usage
+
+```r
+unique_total(inpt_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector containing all the elements
+
+
+## Examples
+
+```r
+print(unique_total(inpt_v = c(1:12, 1)))
+
+[1] 2 1 1 1 1 1 1 1 1 1 1 1
+
+print(unique_total(inpt_v = c(1:12, 1, 11, 11)))
+
+[1] 2 1 1 1 1 1 1 1 1 1 3 1
 ```
 
 

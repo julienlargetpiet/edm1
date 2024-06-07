@@ -11522,4 +11522,126 @@ pairs_insertr2 <- function(inpt, algo_used = c(1:3), flagged_pair_v = c(")", "]"
   return(paste(inpt, collapse = ""))
 }
 
+#' power_to_char
+#'
+#' Convert a scientific number to a string representing normally the number.
+#'
+#' @param inpt_v is the input vector containing scientific number, but also other elements that won't be taken in count
+#' @examples 
+#'
+#' print(power_to_char(inpt_v = c(22 * 10000000, 12, 9 * 0.0000002)))
+#'
+#' [1] "2200000000" "12"         "000000.18" 
+#'
+#' @export
+
+power_to_char <- function(inpt_v = c()){
+  fillr <- function(inpt_v, ptrn_fill="\\.\\.\\.\\d"){
+     ptrn <- grep(ptrn_fill, inpt_v)
+     while (length(ptrn) > 0){
+       ptrn <- grep(ptrn_fill, inpt_v)
+       idx <- ptrn[1] 
+       untl <- as.numeric(c(unlist(strsplit(inpt_v[idx], split="\\.")))[4]) - 1
+       pre_val <- inpt_v[(idx - 1)]
+       inpt_v[idx] <- pre_val
+       if (untl > 0){
+         for (i in 1:untl){
+           inpt_v <- append(inpt_v, pre_val, idx)
+         }
+       }
+     ptrn <- grep(ptrn_fill, inpt_v)
+     }
+     return(inpt_v)
+  }
+  inpt_v <- as.character(inpt_v)
+  better_split <- function(inpt, split_v = c()){
+    for (split in split_v){
+      pre_inpt <- inpt
+      inpt <- c()
+      for (el in pre_inpt){
+        inpt <- c(inpt, unlist(strsplit(x = el, split = split)))
+      }
+    }
+    return(inpt)
+  }
+  for (el in 1:length(inpt_v)){
+    if (grepl(pattern = "^(((\\d{1,}\\.)\\d{1,})|\\d{1,})e\\+\\d{1,}$", x = inpt_v[el])){
+      idx <- el
+      el <- better_split(inpt = inpt_v[el], split_v = c("\\+", "e", "\\."))
+      inpt_v[idx] <- paste0(paste(el[1:(length(el) - 1)], collapse = ""), 
+                           paste(fillr(inpt_v = c("0", paste0("...", (as.numeric(el[length(el)]) - 1)))), collapse = "")) 
+    }else if (grepl(pattern = "^(((\\d{1,}\\.)\\d{1,})|\\d{1,})e-\\d{1,}$", x = inpt_v[el])){
+      idx <- el
+      el <- better_split(inpt = inpt_v[el], split_v = c("\\-", "e", "\\."))
+      inpt_v[idx] <- paste0(paste(fillr(inpt_v = c("0", paste0("...", (as.numeric(el[length(el)]) - 1)))), collapse = ""),
+                            ".", paste(el[1:(length(el) - 1)], collapse = ""))
+    }
+  }
+  return(inpt_v)  
+}
+
+
+#' unique_total
+#'
+#' Returns a vector with the total amount of occurences for each element in the input vector. The occurences of each element follow the same order as the unique function does, see examples
+#'
+#' @param inpt_v is the input vector containing all the elements
+#' @examples
+#'
+#' print(unique_total(inpt_v = c(1:12, 1)))
+#' 
+#'  [1] 2 1 1 1 1 1 1 1 1 1 1 1
+#' 
+#' print(unique_total(inpt_v = c(1:12, 1, 11, 11)))
+#'
+#'  [1] 2 1 1 1 1 1 1 1 1 1 3 1
+#'
+#' @export
+
+unique_total <- function(inpt_v = c()){
+  rtn_v <- c()
+  for (el in unique(inpt_v)){
+    rtn_v <- c(rtn_v, length(grep(pattern = paste0("^", el, "$"), x = inpt_v)))
+  }
+  return(rtn_v)
+}
+
+#' match_by
+#'
+#' Allow to match elements by ids, see examples.  
+#'
+#' @param to_match_v is the vector containing all the elements to match
+#' @param inpt_v is the input vector containong all the elements that could contains the elements to match. Each elements is linked to an element from inpt_ids at any given index, see examples. So inpt_v and inpt_ids must be the same size
+#' @param inpt_ids is the vector containing all the ids for the elements in inpt_v. An element is linked to the id x is both are at the same index. So inpt_v and inpt_ids must be the same size 
+#' @examples
+#'
+#' print(match_by(to_match_v = c("a"), inpt_v = c("a", "z", "a", "p", "p", "e", "e", "a"), 
+#'                inpt_ids = c(1, 1, 1, 2, 2, 3, 3, 3)))
+#' 
+#' [1] 1 8
+#'
+#' print(match_by(to_match_v = c("a"), inpt_v = c("a", "z", "a", "a", "p", "e", "e", "a"), 
+#'                inpt_ids = c(1, 1, 1, 2, 2, 3, 3, 3)))
+#'
+#' [1] 1 4 8
+#'
+#' print(match_by(to_match_v = c("a", "e"), inpt_v = c("a", "z", "a", "a", "p", "e", "e", "a"), 
+#'                inpt_ids = c(1, 1, 1, 2, 2, 3, 3, 3)))
+#' 
+#' [1] 1 4 8 6
+#'
+#' @export
+
+match_by <- function(to_match_v = c(), inpt_v = c(), inpt_ids = c()){
+  rtn_v <- c()
+  for (el in to_match_v){
+    for (id in unique(inpt_ids)){
+      if (!(is.na(match(x = el, table = inpt_v[grep(pattern = id, x = inpt_ids)])))){
+        rtn_v <- c(rtn_v, (match(x = id, table = inpt_ids) +
+                  match(x = el, table = inpt_v[grep(pattern = id, x = inpt_ids)]) - 1))
+      }
+    }
+  }
+  return(rtn_v)
+}
 
