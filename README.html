@@ -6356,6 +6356,65 @@ print(see_datf(datf=datf1, condition_l=c("not_reg"), val_l=list("[a-z]")))
 
 </div>
 </body></html>
+<!DOCTYPE html><html><head><title>R: see_diff</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>see_diff</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>see_diff</h2>
+
+<h3>Description</h3>
+
+<p>Output the opposite of intersect(a, b). Already seen at: https://stackoverflow.com/questions/19797954/function-to-find-symmetric-difference-opposite-of-intersection-in-r
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>see_diff(vec1 = c(), vec2 = c())
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="vec1">vec1</code></td>
+<td>
+<p>is the first vector</p>
+</td></tr>
+<tr><td><code id="vec2">vec2</code></td>
+<td>
+<p>is the second vector</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(see_diff(c(1:7), c(4:12)))
+
+[1] 1 2 3 8 9 10 11 12
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
 <!DOCTYPE html><html><head><title>R: see_file</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
@@ -6549,6 +6608,65 @@ function processMathHTML() {
 If x is the return value, to see all the files name, position of the columns and possible sheet name associanted with, do the following:</p>
 </td></tr>
 </table>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: see_mode</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>see_mode</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>see_mode</h2>
+
+<h3>Description</h3>
+
+<p>Allow to get the mode of a vector, see examples.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>see_mode(inpt_v = c())
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_v">inpt_v</code></td>
+<td>
+<p>is the input vector</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(see_mode(inpt_v = c(1, 1, 2, 2, 2, 3, 1, 2)))
+
+[1] 2
+
+print(see_mode(inpt_v = c(1, 1, 2, 2, 2, 3, 1)))
+
+[1] 1
+
+</code></pre>
 
 </main>
 

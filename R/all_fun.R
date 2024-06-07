@@ -11645,3 +11645,48 @@ match_by <- function(to_match_v = c(), inpt_v = c(), inpt_ids = c()){
   return(rtn_v)
 }
 
+#' see_diff
+#'
+#' Output the opposite of intersect(a, b). Already seen at: https://stackoverflow.com/questions/19797954/function-to-find-symmetric-difference-opposite-of-intersection-in-r  
+#'
+#' @param vec1 is the first vector
+#' @param vec2 is the second vector
+#' @examples
+#'
+#' print(see_diff(c(1:7), c(4:12)))
+#'
+#' [1] 1 2 3 8 9 10 11 12
+#'
+#' @export
+
+see_diff <- function(vec1 = c(), vec2 = c()){
+  return(setdiff(union(vec1, vec2), intersect(vec1, vec2)))
+}
+
+#' see_mode
+#'
+#' Allow to get the mode of a vector, see examples.
+#'
+#' @param inpt_v is the input vector
+#' @examples
+#'
+#' print(see_mode(inpt_v = c(1, 1, 2, 2, 2, 3, 1, 2)))
+#'
+#' [1] 2
+#'
+#' print(see_mode(inpt_v = c(1, 1, 2, 2, 2, 3, 1)))
+#'
+#' [1] 1
+#' 
+#' @export
+
+see_mode <- function(inpt_v = c()){
+  unique_total <- function(inpt_v = c()){
+    rtn_v <- c()
+    for (el in unique(inpt_v)){
+      rtn_v <- c(rtn_v, length(grep(pattern = paste0("^", el, "$"), x = inpt_v)))
+    }
+    return(rtn_v)
+  }
+  return(unique(inpt_v)[which.max(unique_total(inpt_v))])
+}

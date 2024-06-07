@@ -4022,6 +4022,40 @@ print(see_datf(datf=datf1, condition_l=c("not_reg"), val_l=list("[a-z]")))
 ```
 
 
+# `see_diff`
+
+see_diff
+
+
+## Description
+
+Output the opposite of intersect(a, b). Already seen at: https://stackoverflow.com/questions/19797954/function-to-find-symmetric-difference-opposite-of-intersection-in-r
+
+
+## Usage
+
+```r
+see_diff(vec1 = c(), vec2 = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`vec1`     |     is the first vector
+`vec2`     |     is the second vector
+
+
+## Examples
+
+```r
+print(see_diff(c(1:7), c(4:12)))
+
+[1] 1 2 3 8 9 10 11 12
+```
+
+
 # `see_file`
 
 see_file
@@ -4131,6 +4165,43 @@ Argument      |Description
 `sep_`     |     is a vector containing the separator for each csv type file in order following the operating system file order, if the vector does not match the number of the csv files found, it will assume the separator for the rest of the files is the same as the last csv file found. It means that if you know the separator is the same for all the csv type files, you just have to put the separator once in the vector.
 `unique_sep`     |     is a pattern that you know will never be in your input files
 `rec`     |     is a boolean allows to get files recursively if set to TRUE, defaults to TRUE If x is the return value, to see all the files name, position of the columns and possible sheet name associanted with, do the following:
+
+
+# `see_mode`
+
+see_mode
+
+
+## Description
+
+Allow to get the mode of a vector, see examples.
+
+
+## Usage
+
+```r
+see_mode(inpt_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+
+
+## Examples
+
+```r
+print(see_mode(inpt_v = c(1, 1, 2, 2, 2, 3, 1, 2)))
+
+[1] 2
+
+print(see_mode(inpt_v = c(1, 1, 2, 2, 2, 3, 1)))
+
+[1] 1
+```
 
 
 # `str_remove_untl`
