@@ -4022,6 +4022,47 @@ print(see_datf(datf=datf1, condition_l=c("not_reg"), val_l=list("[a-z]")))
 ```
 
 
+# `see_diff_all`
+
+see_diff_all
+
+
+## Description
+
+Allow to perform the opposite of intersect function to n vectors.
+
+
+## Usage
+
+```r
+see_diff_all(...)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`...`     |     are all the input vectors
+
+
+## Examples
+
+```r
+vec1 <- c(3:6)
+vec2 <- c(1:8)
+vec3 <- c(12:16)
+
+print(see_diff_all(vec1, vec2))
+
+[1] 1 2 7 8
+
+print(see_diff_all(vec1, vec2, vec3))
+
+[1]  3  4  5  6  1  2  7  8 12 13 14 15 16
+```
+
+
 # `see_diff`
 
 see_diff
@@ -4318,6 +4359,43 @@ print(swipr(inpt_datf=datf, how_to=c("G", "S", "B"), id_w="col2", id_ids="col1")
 #7  Arg    B
 #8  Arm    G
 #9  Arm    B
+```
+
+
+# `union_all`
+
+union_all
+
+
+## Description
+
+Allow to perform a union function to n vectors.
+
+
+## Usage
+
+```r
+union_all(...)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`...`     |     are all the input vectors
+
+
+## Examples
+
+```r
+print(union_all(c(1, 2), c(3, 4), c(1:8)))
+
+[1] 1 2 3 4 5 6 7 8
+
+print(union_all(c(1, 2), c(3, 4), c(7:8)))
+
+[1] 1 2 3 4 7 8
 ```
 
 

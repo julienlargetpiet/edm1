@@ -10095,8 +10095,6 @@ inner_all <- function(..., keep_val=FALSE, id_v){
   return(rtn_dt)
 }
 
-library("dplyr")
-
 #' join_n_lvl
 #'
 #' Allow to see the progress of the multi-level joins of the different variables modalities. Here, multi-level joins is a type of join that usually needs a concatenation of two or more variables to make a key. But here, there is no need to proceed to a concatenation. See examples. 
@@ -11690,3 +11688,74 @@ see_mode <- function(inpt_v = c()){
   }
   return(unique(inpt_v)[which.max(unique_total(inpt_v))])
 }
+
+#' union_all
+#'
+#'  Allow to perform a union function to n vectors.
+#'
+#' @param ... are all the input vectors 
+#' @examples
+#'
+#' print(union_all(c(1, 2), c(3, 4), c(1:8)))
+#' 
+#' [1] 1 2 3 4 5 6 7 8
+#'
+#' print(union_all(c(1, 2), c(3, 4), c(7:8)))
+#'
+#' [1] 1 2 3 4 7 8
+#' 
+#' @export
+
+union_all <- function(...){
+  cur_lst <- list(...)
+  rtn_v <- c(unlist(cur_lst[1]))
+  if (length(cur_lst) > 1){
+    cur_lst <- cur_lst[2:length(cur_lst)]
+    for (lst in cur_lst){
+      rtn_v <- union(rtn_v, lst) 
+    }
+  return(rtn_v)
+  }else{
+    return(NULL)
+  }
+}
+
+#' see_diff_all
+#'
+#' Allow to perform the opposite of intersect function to n vectors.
+#'
+#' @param ... are all the input vectors 
+#' @examples
+#'
+#' vec1 <- c(3:6)
+#' vec2 <- c(1:8)
+#' vec3 <- c(12:16)
+#' 
+#' print(see_diff_all(vec1, vec2))
+#' 
+#' [1] 1 2 7 8
+#'
+#' print(see_diff_all(vec1, vec2, vec3))
+#'
+#' [1]  3  4  5  6  1  2  7  8 12 13 14 15 16
+#' 
+#' @export
+
+see_diff_all <- function(...){
+  cur_lst <- list(...)
+  if (length(cur_lst) > 1){
+    intersect_v <- intersect(unlist(cur_lst[1]), unlist(cur_lst[2]))
+    union_v <- union(unlist(cur_lst[1]), unlist(cur_lst[2]))
+    if (length(cur_lst) > 2){
+      cur_lst <- cur_lst[3:length(cur_lst)]
+      for (lst in cur_lst){
+        intersect_v <- intersect(intersect_v, lst)    
+        union_v <- union(union_v, lst)
+      }
+    }
+    return(setdiff(union_v, intersect_v))
+  }else{
+    return(NULL)
+  }
+}
+
