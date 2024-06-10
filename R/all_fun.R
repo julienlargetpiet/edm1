@@ -11759,3 +11759,39 @@ see_diff_all <- function(...){
   }
 }
 
+#' grep_all 
+#'
+#' Allow to perform a grep function on multiple input elements
+#'
+#' @param inpt_v is the input vectors to grep elements from
+#' @param pattern_v is a vector contaning the patterns to grep
+#' @examples
+#'
+#' print(grep_all(inpt_v = c(1:14, "z", 1:7, "z", "a", "z"), 
+#'                pattern_v = c("z", "4")))
+#'
+#' [1] 15 23 25  4 14 19
+#'
+#' print(grep_all(inpt_v = c(1:14, "z", 1:7, "z", "a", "z"), 
+#'                pattern_v = c("z", "^4$")))
+#'
+#' [1] 15 23 25  4 19
+#'
+#' print(grep_all(inpt_v = c(1:14, "z", 1:7, "z", "a", "z"), 
+#'                pattern_v = c("z")))
+#' 
+#' [1] 15 23 25
+#'
+#' @export
+
+grep_all <- function(inpt_v, pattern_v){
+  rtn_v <- c(grep(pattern = pattern_v[1], x = inpt_v))
+  if (length(pattern_v) > 1){
+    pattern_v <- pattern_v[2:length(pattern_v)]
+    for (ptrn in pattern_v){
+      rtn_v <- c(rtn_v, grep(pattern = ptrn, x = inpt_v))
+    }
+  }
+  return(rtn_v)
+}
+

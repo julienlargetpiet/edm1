@@ -1826,6 +1826,51 @@ print(globe(lat_f=23, long_f=112, alt_f=8, lat_n=c(2, 82), long_n=c(165, -55), a
 ```
 
 
+# `grep_all`
+
+grep_all
+
+
+## Description
+
+Allow to perform a grep function on multiple input elements
+
+
+## Usage
+
+```r
+grep_all(inpt_v, pattern_v)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vectors to grep elements from
+`pattern_v`     |     is a vector contaning the patterns to grep
+
+
+## Examples
+
+```r
+print(grep_all(inpt_v = c(1:14, "z", 1:7, "z", "a", "z"),
+pattern_v = c("z", "4")))
+
+[1] 15 23 25  4 14 19
+
+print(grep_all(inpt_v = c(1:14, "z", 1:7, "z", "a", "z"),
+pattern_v = c("z", "^4$")))
+
+[1] 15 23 25  4 19
+
+print(grep_all(inpt_v = c(1:14, "z", 1:7, "z", "a", "z"),
+pattern_v = c("z")))
+
+[1] 15 23 25
+```
+
+
 # `groupr_datf`
 
 groupr_datf
