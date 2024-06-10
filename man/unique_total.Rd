@@ -22,4 +22,11 @@ print(unique_total(inpt_v = c(1:12, 1, 11, 11)))
 
  [1] 2 1 1 1 1 1 1 1 1 1 3 1
 
+vec <- c(1:12, 1, 11, 11)
+names(vec) <- c(1:15)
+print(unique_total(inpt_v = vec))
+
+ 1  2  3  4  5  6  7  8  9 10 11 12 
+ 2  1  1  1  1  1  1  1  1  1  3  1 
+
 }
