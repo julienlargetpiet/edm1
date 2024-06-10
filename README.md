@@ -343,6 +343,102 @@ print(better_split(inpt = "o-u_i", split_v = c("-", "_")))
 ```
 
 
+# `better_sub_mult`
+
+better_sub_mult
+
+
+## Description
+
+Allow to perform a sub_mult operation to a given number of matched patterns, see examples
+
+
+## Usage
+
+```r
+better_sub_mult(
+  inpt_v = c(),
+  pattern_v = c(),
+  replacement_v = c(),
+  untl_v = c()
+)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is a vector containing all the elements that contains expressions to be substituted
+`pattern_v`     |     is a vector containing all the patterns to be substituted in any elements of inpt_v
+`replacement_v`     |     is a vector containing the expression that are going to substituate those provided by pattern_v
+`untl_v`     |     is a vector containing, for each element of inpt_v, the number of pattern that will be substituted
+
+
+## Examples
+
+```r
+print(better_sub_mult(inpt_v = c("yes NAME, i will call NAME and NAME2",
+"yes NAME, i will call NAME and NAME2, especially NAME2"),
+pattern_v = c("NAME", "NAME2"),
+replacement_v = c("Kevin", "Paul"),
+untl = c(1, 3)))
+
+[1] "yes Kevin, i will call NAME and Paul"
+[2] "yes Kevin, i will call NAME and Paul, especially Paul"
+```
+
+
+# `better_sub`
+
+better_sub
+
+
+## Description
+
+Allow to perform a sub operation to a given number of matched patterns, see examples
+
+
+## Usage
+
+```r
+better_sub(inpt_v = c(), pattern, replacement, untl_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is a vector containing all the elements that contains expressions to be substituted
+`pattern`     |     is the expression that will be substituted
+`replacement`     |     is the expression that will substituate pattern
+`untl_v`     |     is a vector containing, for each element of inpt_v, the number of pattern that will be substituted
+
+
+## Examples
+
+```r
+print(better_sub(inpt_v = c("yes NAME, i will call NAME and NAME",
+"yes NAME, i will call NAME and NAME"),
+pattern = "NAME",
+replacement = "Kevin",
+untl = c(2)))
+
+[1] "yes Kevin, i will call Kevin and NAME"
+[2] "yes Kevin, i will call Kevin and NAME"
+
+print(better_sub(inpt_v = c("yes NAME, i will call NAME and NAME",
+"yes NAME, i will call NAME and NAME"),
+pattern = "NAME",
+replacement = "Kevin",
+untl = c(2, 3)))
+
+[1] "yes Kevin, i will call Kevin and NAME"
+[2] "yes Kevin, i will call Kevin and Kevin"
+```
+
+
 # `can_be_num`
 
 can_be_num
@@ -1927,6 +2023,43 @@ conjunction_lst=conjunction_lst, rtn_val_pos=rtn_val_pos))
 #1 <NA>   + +++
 #2   ++  ++ +++
 #3 <NA> +++   +
+```
+
+
+# `gsub_mult`
+
+gsub_mult
+
+
+## Description
+
+Performs a gsub operation with n patterns and replacements.
+
+
+## Usage
+
+```r
+gsub_mult(inpt_v, pattern_v = c(), replacement_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is a vector containing all the elements that contains expressions to be substituted
+`pattern_v`     |     is a vector containing all the patterns to be substituted in any elements of inpt_v
+`replacement_v`     |     is a vector containing the expression that are going to substituate those provided by pattern_v
+
+
+## Examples
+
+```r
+print(gsub_mult(inpt_v = c("X and Y programming languages are great", "More X, more X!"),
+pattern_v = c("X", "Y", "Z"),
+replacement_v = c("C", "R", "GO")))
+[1] "C and R programming languages are great"
+[2] "More C, more C!"
 ```
 
 
@@ -4338,6 +4471,44 @@ print(str_remove_untl(inpt_v=vec, ptrn_rm_v=c("-", "/"), untl=list(c("max"), c(1
 print(str_remove_untl(inpt_v=vec[1], ptrn_rm_v=c("-", "/"), untl=c("max")))
 
 #[1] "455698mm" "455698mm" "455698mm"
+```
+
+
+# `sub_mult`
+
+sub_mult
+
+
+## Description
+
+Performs a sub operation with n patterns and replacements.
+
+
+## Usage
+
+```r
+sub_mult(inpt_v, pattern_v = c(), replacement_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is a vector containing all the elements that contains expressions to be substituted
+`pattern_v`     |     is a vector containing all the patterns to be substituted in any elements of inpt_v
+`replacement_v`     |     is a vector containing the expression that are going to substituate those provided by pattern_v
+
+
+## Examples
+
+```r
+print(sub_mult(inpt_v = c("X and Y programming languages are great", "More X, more X!"),
+pattern_v = c("X", "Y", "Z"),
+replacement_v = c("C", "R", "GO")))
+
+[1] "C and R programming languages are great"
+[2] "More C, more X!"
 ```
 
 

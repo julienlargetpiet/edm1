@@ -11803,3 +11803,149 @@ grep_all <- function(inpt_v, pattern_v){
   return(rtn_v)
 }
 
+#' sub_mult
+#'
+#' Performs a sub operation with n patterns and replacements.
+#'
+#' @param inpt_v is a vector containing all the elements that contains expressions to be substituted
+#' @param pattern_v is a vector containing all the patterns to be substituted in any elements of inpt_v
+#' @param replacement_v is a vector containing the expression that are going to substituate those provided by pattern_v
+#' @examples
+#'
+#' print(sub_mult(inpt_v = c("X and Y programming languages are great", "More X, more X!"), 
+#'                pattern_v = c("X", "Y", "Z"), 
+#'                replacement_v = c("C", "R", "GO")))
+#'
+#' [1] "C and R programming languages are great"
+#' [2] "More C, more X!"
+#'
+#' @export
+
+sub_mult <- function(inpt_v, pattern_v = c(), replacement_v = c()){
+  for (i in 1:length(inpt_v)){
+    cur_char <- inpt_v[i]
+    for (i2 in 1:length(pattern_v)){
+      cur_char <- sub(pattern = pattern_v[i2], replacement = replacement_v[i2], x = cur_char)
+    }
+    inpt_v[i] <- cur_char
+  }
+  return(inpt_v)
+}
+
+#' gsub_mult
+#'
+#' Performs a gsub operation with n patterns and replacements.
+#'
+#' @param inpt_v is a vector containing all the elements that contains expressions to be substituted
+#' @param pattern_v is a vector containing all the patterns to be substituted in any elements of inpt_v
+#' @param replacement_v is a vector containing the expression that are going to substituate those provided by pattern_v
+#' @examples
+#'
+#' print(gsub_mult(inpt_v = c("X and Y programming languages are great", "More X, more X!"), 
+#'                pattern_v = c("X", "Y", "Z"), 
+#'                replacement_v = c("C", "R", "GO")))
+#' [1] "C and R programming languages are great"
+#' [2] "More C, more C!"                        
+#'
+#' @export
+
+gsub_mult <- function(inpt_v, pattern_v = c(), replacement_v = c()){
+  for (i in 1:length(inpt_v)){
+    cur_char <- inpt_v[i]
+    for (i2 in 1:length(pattern_v)){
+      cur_char <- gsub(pattern = pattern_v[i2], replacement = replacement_v[i2], x = cur_char)
+    }
+    inpt_v[i] <- cur_char
+  }
+  return(inpt_v)
+}
+
+#' better_sub
+#'
+#' Allow to perform a sub operation to a given number of matched patterns, see examples
+#'
+#'
+#' @param inpt_v is a vector containing all the elements that contains expressions to be substituted
+#' @param pattern is the expression that will be substituted
+#' @param replacement is the expression that will substituate pattern
+#' @param untl_v is a vector containing, for each element of inpt_v, the number of pattern that will be substituted
+#' @examples
+#'
+#' print(better_sub(inpt_v = c("yes NAME, i will call NAME and NAME", 
+#'                             "yes NAME, i will call NAME and NAME"),
+#'                  pattern = "NAME",
+#'                  replacement = "Kevin",
+#'                  untl = c(2)))
+#' 
+#' [1] "yes Kevin, i will call Kevin and NAME"
+#' [2] "yes Kevin, i will call Kevin and NAME"
+#'
+#' print(better_sub(inpt_v = c("yes NAME, i will call NAME and NAME", 
+#'                             "yes NAME, i will call NAME and NAME"),
+#'                  pattern = "NAME",
+#'                  replacement = "Kevin",
+#'                  untl = c(2, 3)))
+#' 
+#' [1] "yes Kevin, i will call Kevin and NAME" 
+#' [2] "yes Kevin, i will call Kevin and Kevin"
+#'
+#' @export
+
+better_sub <- function(inpt_v = c(), pattern, replacement, untl_v = c()){
+  if (length(untl_v) < length(inpt_v)){
+    val_add <- untl_v[length(untl_v)]
+    while (length(untl_v) < length(inpt_v)){
+      untl_v <- c(untl_v, val_add)
+    }
+  }
+  for (el in 1:length(inpt_v)){
+    cur_char <- inpt_v[el]
+    for (i in 1:untl_v[el]){
+      cur_char <- sub(x = cur_char, pattern = pattern, replacement = replacement)
+    }
+    inpt_v[el] <- cur_char
+  }
+  return(inpt_v)
+}
+
+#' better_sub_mult
+#'
+#' Allow to perform a sub_mult operation to a given number of matched patterns, see examples
+#'
+#'
+#' @param inpt_v is a vector containing all the elements that contains expressions to be substituted
+#' @param pattern_v is a vector containing all the patterns to be substituted in any elements of inpt_v
+#' @param replacement_v is a vector containing the expression that are going to substituate those provided by pattern_v
+#' @param untl_v is a vector containing, for each element of inpt_v, the number of pattern that will be substituted
+#' @examples
+#'
+#' print(better_sub_mult(inpt_v = c("yes NAME, i will call NAME and NAME2", 
+#'                              "yes NAME, i will call NAME and NAME2, especially NAME2"),
+#'                   pattern_v = c("NAME", "NAME2"),
+#'                   replacement_v = c("Kevin", "Paul"),
+#'                   untl = c(1, 3)))
+#'
+#' [1] "yes Kevin, i will call NAME and Paul"                 
+#' [2] "yes Kevin, i will call NAME and Paul, especially Paul"
+#'
+#' @export
+
+better_sub_mult <- function(inpt_v = c(), pattern_v = c(), 
+                            replacement_v = c(), untl_v = c()){
+  if (length(untl_v) < length(inpt_v)){
+    val_add <- untl_v[length(untl_v)]
+    while (length(untl_v) < length(inpt_v)){
+      untl_v <- c(untl_v, val_add)
+    }
+  }
+  for (el in 1:length(inpt_v)){
+    cur_char <- inpt_v[el]
+    for (i2 in 1:length(pattern_v)){
+      for (i in 1:untl_v[i2]){
+        cur_char <- sub(x = cur_char, pattern = pattern_v[i2], replacement = replacement_v[i2])
+      }
+    }
+    inpt_v[el] <- cur_char
+  }
+  return(inpt_v)
+}
