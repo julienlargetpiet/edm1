@@ -38,4 +38,13 @@ print(better_sub(inpt_v = c("yes NAME, i will call NAME and NAME",
 [1] "yes Kevin, i will call Kevin and NAME" 
 [2] "yes Kevin, i will call Kevin and Kevin"
 
+print(better_sub(inpt_v = c("yes NAME, i will call NAME and NAME", 
+                             "yes NAME, i will call NAME and NAME"),
+                  pattern = "NAME",
+                  replacement = "Kevin",
+                  untl = c("max", 3)))
+
+[1] "yes Kevin, i will call Kevin and Kevin"
+[2] "yes Kevin, i will call Kevin and Kevin"
+
 }

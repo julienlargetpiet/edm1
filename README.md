@@ -386,6 +386,15 @@ untl = c(1, 3)))
 
 [1] "yes Kevin, i will call NAME and Paul"
 [2] "yes Kevin, i will call NAME and Paul, especially Paul"
+
+print(better_sub_mult(inpt_v = c("yes NAME, i will call NAME and NAME2",
+"yes NAME, i will call NAME and NAME2, especially NAME2"),
+pattern_v = c("NAME", "NAME2"),
+replacement_v = c("Kevin", "Paul"),
+untl = c("max", 3)))
+
+[1] "yes Kevin, i will call Kevin and Kevin2"
+[2] "yes Kevin, i will call Kevin and Kevin2, especially Kevin2"
 ```
 
 
@@ -435,6 +444,15 @@ replacement = "Kevin",
 untl = c(2, 3)))
 
 [1] "yes Kevin, i will call Kevin and NAME"
+[2] "yes Kevin, i will call Kevin and Kevin"
+
+print(better_sub(inpt_v = c("yes NAME, i will call NAME and NAME",
+"yes NAME, i will call NAME and NAME"),
+pattern = "NAME",
+replacement = "Kevin",
+untl = c("max", 3)))
+
+[1] "yes Kevin, i will call Kevin and Kevin"
 [2] "yes Kevin, i will call Kevin and Kevin"
 ```
 

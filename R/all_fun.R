@@ -11889,6 +11889,15 @@ gsub_mult <- function(inpt_v, pattern_v = c(), replacement_v = c()){
 #' [1] "yes Kevin, i will call Kevin and NAME" 
 #' [2] "yes Kevin, i will call Kevin and Kevin"
 #'
+#' print(better_sub(inpt_v = c("yes NAME, i will call NAME and NAME", 
+#'                              "yes NAME, i will call NAME and NAME"),
+#'                   pattern = "NAME",
+#'                   replacement = "Kevin",
+#'                   untl = c("max", 3)))
+#' 
+#' [1] "yes Kevin, i will call Kevin and Kevin"
+#' [2] "yes Kevin, i will call Kevin and Kevin"
+#'
 #' @export
 
 better_sub <- function(inpt_v = c(), pattern, replacement, untl_v = c()){
@@ -11900,8 +11909,12 @@ better_sub <- function(inpt_v = c(), pattern, replacement, untl_v = c()){
   }
   for (el in 1:length(inpt_v)){
     cur_char <- inpt_v[el]
-    for (i in 1:untl_v[el]){
-      cur_char <- sub(x = cur_char, pattern = pattern, replacement = replacement)
+    if (untl_v[el] == "max"){
+        cur_char <- gsub(x = cur_char, pattern = pattern, replacement = replacement)
+    }else{
+      for (i in 1:untl_v[el]){
+        cur_char <- sub(x = cur_char, pattern = pattern, replacement = replacement)
+      }
     }
     inpt_v[el] <- cur_char
   }
@@ -11928,6 +11941,15 @@ better_sub <- function(inpt_v = c(), pattern, replacement, untl_v = c()){
 #' [1] "yes Kevin, i will call NAME and Paul"                 
 #' [2] "yes Kevin, i will call NAME and Paul, especially Paul"
 #'
+#' print(better_sub_mult(inpt_v = c("yes NAME, i will call NAME and NAME2", 
+#'                               "yes NAME, i will call NAME and NAME2, especially NAME2"),
+#'                    pattern_v = c("NAME", "NAME2"),
+#'                    replacement_v = c("Kevin", "Paul"),
+#'                    untl = c("max", 3)))
+#' 
+#' [1] "yes Kevin, i will call Kevin and Kevin2"                   
+#' [2] "yes Kevin, i will call Kevin and Kevin2, especially Kevin2"
+#'
 #' @export
 
 better_sub_mult <- function(inpt_v = c(), pattern_v = c(), 
@@ -11941,11 +11963,17 @@ better_sub_mult <- function(inpt_v = c(), pattern_v = c(),
   for (el in 1:length(inpt_v)){
     cur_char <- inpt_v[el]
     for (i2 in 1:length(pattern_v)){
-      for (i in 1:untl_v[i2]){
-        cur_char <- sub(x = cur_char, pattern = pattern_v[i2], replacement = replacement_v[i2])
+      if (untl_v[i2] == "max"){
+          cur_char <- gsub(x = cur_char, pattern = pattern_v[i2], replacement = replacement_v[i2])
+      }else{
+        for (i in 1:untl_v[i2]){
+          cur_char <- sub(x = cur_char, pattern = pattern_v[i2], replacement = replacement_v[i2])
+        }
       }
     }
     inpt_v[el] <- cur_char
   }
   return(inpt_v)
 }
+
+
