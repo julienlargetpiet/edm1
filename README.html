@@ -7046,6 +7046,98 @@ print(see_mode(inpt_v = c(1, 1, 2, 2, 2, 3, 1)))
 
 </div>
 </body></html>
+<!DOCTYPE html><html><head><title>R: sort_date</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>sort_date</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>sort_date</h2>
+
+<h3>Description</h3>
+
+<p>Allow to sort any vector containing a date, from any kind of format (my, hdmy, ymd ...), see examples.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>sort_date(inpt_v, frmt, sep_ = "-", ascending = FALSE, give = "value")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_v">inpt_v</code></td>
+<td>
+<p>is the input vector containing all the dates</p>
+</td></tr>
+<tr><td><code id="frmt">frmt</code></td>
+<td>
+<p>is the format  of the dates, (any combinaison of letters &quot;s&quot; for second, &quot;n&quot;, for minute, &quot;h&quot; for hour, &quot;d&quot; for day, &quot;m&quot; for month and &quot;y&quot; for year)</p>
+</td></tr>
+<tr><td><code id="sep_">sep_</code></td>
+<td>
+<p>is the separator used for the dates</p>
+</td></tr>
+<tr><td><code id="ascending">ascending</code></td>
+<td>
+<p>is the used to sort the dates</p>
+</td></tr>
+<tr><td><code id="give">give</code></td>
+<td>
+<p>takes only two values &quot;index&quot; or &quot;value&quot;, if give == &quot;index&quot;, the function will output the index of sorted dates from inpt_v, if give == &quot;value&quot;, the function will output the value, it means directly the sorted dates in inpt_v, see examples</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(sort_date(inpt_v = c("01-11-2025", "08-08-1922", "12-04-1966")
+                , frmt = "dmy", sep_ = "-", ascending = TRUE, give = "value"))
+
+[1] "08-08-1922" "12-04-1966" "01-11-2025"
+
+print(sort_date(inpt_v = c("01-11-2025", "08-08-1922", "12-04-1966")
+                , frmt = "dmy", sep_ = "-", ascending = FALSE, give = "value"))
+
+[1] "01-11-2025" "12-04-1966" "08-08-1922"
+
+print(sort_date(inpt_v = c("01-11-2025", "08-08-1922", "12-04-1966")
+                , frmt = "dmy", sep_ = "-", ascending = TRUE, give = "index"))
+
+[1] 2 3 1
+
+print(sort_date(inpt_v = c("22-01-11-2025", "11-12-04-1966", "12-12-04-1966")
+                , frmt = "hdmy", sep_ = "-", ascending = FALSE, give = "value"))
+
+[1] "22-01-11-2025" "12-12-04-1966" "11-12-04-1966"
+
+print(sort_date(inpt_v = c("03-22-01-11-2025", "56-11-12-04-1966", "23-12-12-04-1966")
+                , frmt = "nhdmy", sep_ = "-", ascending = FALSE, give = "value"))
+
+[1] "03-22-01-11-2025" "23-12-12-04-1966" "56-11-12-04-1966"
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
 <!DOCTYPE html><html><head><title>R: str_remove_untl</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
@@ -7284,6 +7376,65 @@ print(swipr(inpt_datf=datf, how_to=c("G", "S", "B"), id_w="col2", id_ids="col1")
 #7  Arg    B
 #8  Arm    G
 #9  Arm    B
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: same_order</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>test_order</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>same_order</h2>
+
+<h3>Description</h3>
+
+<p>Allow to get if two vectors have their commun elements in the same order, see examples
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>test_order(inpt_v_from, inpt_v_test)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="is">is</code></td>
+<td>
+<p>the vector we want to test if its commun element with inpt_v_from are in the same order</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(test_order(inpt_v_from = c(1:8), inpt_v_test = c(1, 4)))
+
+[1] TRUE
+
+print(test_order(inpt_v_from = c(1:8), inpt_v_test = c(1, 4, 2)))
+
+[1] FALSE
 
 </code></pre>
 

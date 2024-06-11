@@ -11976,4 +11976,134 @@ better_sub_mult <- function(inpt_v = c(), pattern_v = c(),
   return(inpt_v)
 }
 
+#' same_order
+#'
+#' Allow to get if two vectors have their commun elements in the same order, see examples
+#'
+#' @param is the vector that gives the elements order
+#' @param is the vector we want to test if its commun element with inpt_v_from are in the same order
+#' @examples
+#'
+#' print(test_order(inpt_v_from = c(1:8), inpt_v_test = c(1, 4)))
+#' 
+#' [1] TRUE
+#'
+#' print(test_order(inpt_v_from = c(1:8), inpt_v_test = c(1, 4, 2)))
+#' 
+#' [1] FALSE
+#'
+#' @export
+
+test_order <- function(inpt_v_from, inpt_v_test){
+  lst_idx <- match(x = inpt_v_test[1], table = inpt_v_from)
+  if (length(inpt_v_test) > 1){
+    for (i in inpt_v_test){
+      tst_idx <- match(x = i, table = inpt_v_from)
+      if (tst_idx < lst_idx){
+        return(FALSE)
+      }
+      lst_idx <- tst_idx
+    }
+  }
+  return(TRUE)
+}
+
+#' sort_date
+#'
+#' Allow to sort any vector containing a date, from any kind of format (my, hdmy, ymd ...), see examples.
+#'
+#' @param inpt_v is the input vector containing all the dates
+#' @param frmt is the format  of the dates, (any combinaison of letters "s" for second, "n", for minute, "h" for hour, "d" for day, "m" for month and "y" for year)
+#' @param sep_ is the separator used for the dates
+#' @param ascending is the used to sort the dates
+#' @param give takes only two values "index" or "value", if give == "index", the function will output the index of sorted dates from inpt_v, if give == "value", the function will output the value, it means directly the sorted dates in inpt_v, see examples
+#' @examples
+#'
+#' print(sort_date(inpt_v = c("01-11-2025", "08-08-1922", "12-04-1966")
+#'                 , frmt = "dmy", sep_ = "-", ascending = TRUE, give = "value"))
+#' 
+#' [1] "08-08-1922" "12-04-1966" "01-11-2025"
+#'
+#' print(sort_date(inpt_v = c("01-11-2025", "08-08-1922", "12-04-1966")
+#'                 , frmt = "dmy", sep_ = "-", ascending = FALSE, give = "value"))
+#' 
+#' [1] "01-11-2025" "12-04-1966" "08-08-1922"
+#'
+#' print(sort_date(inpt_v = c("01-11-2025", "08-08-1922", "12-04-1966")
+#'                 , frmt = "dmy", sep_ = "-", ascending = TRUE, give = "index"))
+#'
+#' [1] 2 3 1
+#'
+#' print(sort_date(inpt_v = c("22-01-11-2025", "11-12-04-1966", "12-12-04-1966")
+#'                 , frmt = "hdmy", sep_ = "-", ascending = FALSE, give = "value"))
+#'
+#' [1] "22-01-11-2025" "12-12-04-1966" "11-12-04-1966"
+#'
+#' print(sort_date(inpt_v = c("03-22-01-11-2025", "56-11-12-04-1966", "23-12-12-04-1966")
+#'                 , frmt = "nhdmy", sep_ = "-", ascending = FALSE, give = "value"))
+#'
+#' [1] "03-22-01-11-2025" "23-12-12-04-1966" "56-11-12-04-1966"
+#'
+#' @export
+
+sort_date <- function(inpt_v, frmt, sep_ = "-", ascending = FALSE, give = "value"){
+  test_order <- function(inpt_v_from, inpt_v_test){
+    lst_idx <- match(x = inpt_v_test[1], table = inpt_v_from)
+    if (length(inpt_v_test) > 1){
+      for (i in inpt_v_test){
+        tst_idx <- match(x = i, table = inpt_v_from)
+        if (tst_idx < lst_idx){
+          return(FALSE)
+        }
+        lst_idx <- tst_idx
+      }
+    }
+    return(TRUE)
+  }
+  converter_format <- function(inpt_val, sep_="-", inpt_frmt, 
+                         frmt, default_val="00"){
+    frmt <- unlist(strsplit(x=frmt, split=""))
+    inpt_frmt <- unlist(strsplit(x=inpt_frmt, split=""))
+    inpt_val <- unlist(strsplit(x=inpt_val, split=sep_))
+    val_v <- c()
+    for (i in 1:length(frmt)){
+            val_v <- c(val_v, default_val)
+    }
+    for (el in 1:length(inpt_val)){
+            pre_grep <- grep(x=frmt, pattern=inpt_frmt[el])
+            if (!identical(pre_grep, integer(0))){
+                    val_v[pre_grep] <- inpt_val[el]
+            }
+    }
+    return(paste(val_v, collapse=sep_))
+  }
+  func <- function(){
+    return(gsub(x = converter_format(inpt_val = inpt_val, sep_ = sep_, 
+                inpt_frmt = inpt_frmt, frmt = frmt), 
+                pattern = sep_, replacement = ""))
+  }
+  frmt_frm <- c("y", "m", "d", "h", "n", "s")
+  if (!(test_order(inpt_v_from = frmt_frm, 
+                   inpt_v_test = unlist(strsplit(x = frmt, split = ""))))){
+    frmt_to <- frmt_frm[sort(match(x = unlist(strsplit(x = frmt, split = "")), table = frmt_frm))]
+    new_v <- as.numeric(mapply(function(x) return(gsub(x = converter_format(inpt_val = x, 
+                                                                sep_ = sep_, 
+                                                                inpt_frmt = frmt, 
+                                                                frmt = frmt_to), 
+                                          replacement = "",
+                                          pattern = sep_)), 
+                   inpt_v))
+  }else if (sep_ != ""){
+    new_v <- as.numeric(mapply(function(x) return(gsub(x = x, pattern = sep_, replacement = "")), inpt_v))
+  }else{
+    new_v <- as.numeric(inpt_v)
+  }
+  if (give == "index"){
+    return(match(x = sort(x = new_v, decreasing = !(ascending)), table = new_v))
+  }else if (give == "value"){
+    return(inpt_v[match(x = sort(x = new_v, decreasing = !(ascending)), table = new_v)])
+  }else{
+    return(NULL)
+  }
+}
 

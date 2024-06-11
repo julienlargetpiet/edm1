@@ -4441,6 +4441,64 @@ print(see_mode(inpt_v = c(1, 1, 2, 2, 2, 3, 1)))
 ```
 
 
+# `sort_date`
+
+sort_date
+
+
+## Description
+
+Allow to sort any vector containing a date, from any kind of format (my, hdmy, ymd ...), see examples.
+
+
+## Usage
+
+```r
+sort_date(inpt_v, frmt, sep_ = "-", ascending = FALSE, give = "value")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector containing all the dates
+`frmt`     |     is the format  of the dates, (any combinaison of letters "s" for second, "n", for minute, "h" for hour, "d" for day, "m" for month and "y" for year)
+`sep_`     |     is the separator used for the dates
+`ascending`     |     is the used to sort the dates
+`give`     |     takes only two values "index" or "value", if give == "index", the function will output the index of sorted dates from inpt_v, if give == "value", the function will output the value, it means directly the sorted dates in inpt_v, see examples
+
+
+## Examples
+
+```r
+print(sort_date(inpt_v = c("01-11-2025", "08-08-1922", "12-04-1966")
+, frmt = "dmy", sep_ = "-", ascending = TRUE, give = "value"))
+
+[1] "08-08-1922" "12-04-1966" "01-11-2025"
+
+print(sort_date(inpt_v = c("01-11-2025", "08-08-1922", "12-04-1966")
+, frmt = "dmy", sep_ = "-", ascending = FALSE, give = "value"))
+
+[1] "01-11-2025" "12-04-1966" "08-08-1922"
+
+print(sort_date(inpt_v = c("01-11-2025", "08-08-1922", "12-04-1966")
+, frmt = "dmy", sep_ = "-", ascending = TRUE, give = "index"))
+
+[1] 2 3 1
+
+print(sort_date(inpt_v = c("22-01-11-2025", "11-12-04-1966", "12-12-04-1966")
+, frmt = "hdmy", sep_ = "-", ascending = FALSE, give = "value"))
+
+[1] "22-01-11-2025" "12-12-04-1966" "11-12-04-1966"
+
+print(sort_date(inpt_v = c("03-22-01-11-2025", "56-11-12-04-1966", "23-12-12-04-1966")
+, frmt = "nhdmy", sep_ = "-", ascending = FALSE, give = "value"))
+
+[1] "03-22-01-11-2025" "23-12-12-04-1966" "56-11-12-04-1966"
+```
+
+
 # `str_remove_untl`
 
 str_remove_untl
@@ -4593,6 +4651,43 @@ print(swipr(inpt_datf=datf, how_to=c("G", "S", "B"), id_w="col2", id_ids="col1")
 #7  Arg    B
 #8  Arm    G
 #9  Arm    B
+```
+
+
+# `test_order`
+
+same_order
+
+
+## Description
+
+Allow to get if two vectors have their commun elements in the same order, see examples
+
+
+## Usage
+
+```r
+test_order(inpt_v_from, inpt_v_test)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`is`     |     the vector we want to test if its commun element with inpt_v_from are in the same order
+
+
+## Examples
+
+```r
+print(test_order(inpt_v_from = c(1:8), inpt_v_test = c(1, 4)))
+
+[1] TRUE
+
+print(test_order(inpt_v_from = c(1:8), inpt_v_test = c(1, 4, 2)))
+
+[1] FALSE
 ```
 
 
