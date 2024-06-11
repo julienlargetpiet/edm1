@@ -12107,3 +12107,41 @@ sort_date <- function(inpt_v, frmt, sep_ = "-", ascending = FALSE, give = "value
   }
 }
 
+#' grep_all2
+#'
+#' Performs the grep_all function with another algorythm, potentially faster
+#'
+#' @param inpt_v is the input vectors to grep elements from
+#' @param pattern_v is a vector contaning the patterns to grep
+#' @examples
+#'
+#' print(grep_all2(inpt_v = c(1:14, "z", 1:7, "z", "a", "z"), 
+#'                pattern_v = c("z", "4")))
+#'
+#' [1] 15 23 25  4 14 19
+#'
+#' print(grep_all2(inpt_v = c(1:14, "z", 1:7, "z", "a", "z"), 
+#'                pattern_v = c("z", "^4$")))
+#'
+#' [1] 15 23 25  4 19
+#'
+#' print(grep_all2(inpt_v = c(1:14, "z", 1:7, "z", "a", "z"), 
+#'                pattern_v = c("z")))
+#' 
+#' [1] 15 23 25
+#'
+#' @export
+
+grep_all2 <- function(inpt_v, pattern_v){
+  rtn_v <- c(grep(pattern = pattern_v[1], x = inpt_v))
+  if (length(pattern_v) > 1){
+    pattern_v <- pattern_v[2:length(pattern_v)]
+    for (ptrn in pattern_v){
+      cur_grp <- grep(pattern = ptrn, x = inpt_v)
+      rtn_v <- c(rtn_v, cur_grp)
+      inpt_v <- inpt_v[-cur_grp]
+    }
+  }
+  return(rtn_v)
+}
+
