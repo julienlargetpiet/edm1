@@ -2126,6 +2126,150 @@ replacement_v = c("C", "R", "GO")))
 ```
 
 
+# `how_normal`
+
+how_normal
+
+
+## Description
+
+Allow to get how precisely a sequence of numbers fit a normal distribution with chosen parameters, see examples
+
+
+## Usage
+
+```r
+how_normal(inpt_datf, normalised = TRUE, mean = 0, sd = 1)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_datf`     |     is the input dataframe containing all the values in the first column and their frequency (normalised or no), in the second column
+`normalised`     |     is a boolean, takes TRUE if the frequency for each value is divided by n, FALSE if not
+`mean`     |     is the mean of the normal distribution that the dataset tries to fit
+`sd`     |     is the standard deviation of the normal distribution the dataset tries to fit
+
+
+## Examples
+
+```r
+sample_val <- round(rnorm(n = 12000, mean = 6, sd = 1.25), 1)
+sample_freq <- unique_total(sample_val)
+datf_test <- data.frame(unique(sample_val), sample_freq)
+
+print(datf_test)
+
+unique.sample_val. sample_freq
+1                 5.4         344
+2                 4.7         224
+3                 7.5         183
+4                 6.7         329
+5                 4.9         277
+6                 6.3         371
+7                 6.2         401
+8                 6.4         339
+9                 5.2         329
+10                8.3          78
+11                7.4         197
+12                7.9         121
+13                5.8         392
+14                6.1         413
+15                8.0          88
+16                6.0         369
+17                5.9         367
+18                7.3         215
+19                7.7         149
+20                7.2         246
+21                5.3         315
+22                7.0         270
+23                8.5          50
+24                4.5         188
+25                5.0         277
+26                7.6         171
+27                6.9         286
+28                4.4         173
+29                7.1         246
+30                3.7          64
+31                5.7         342
+32                4.8         251
+33                7.8         124
+34                8.1          96
+35                5.5         365
+36                4.3         154
+37                4.1         112
+38                6.5         379
+39                8.7          32
+40                5.1         297
+41                6.8         301
+42                4.0         108
+43                5.6         352
+44                3.4          51
+45                3.6          58
+46                8.8          33
+47                6.6         358
+48                3.9         100
+49                4.6         192
+50                3.2          38
+51                3.3          48
+52                4.2         149
+53                9.0          17
+54                2.4           9
+55                3.5          50
+56                9.3          13
+57                9.1          18
+58                8.9          31
+59                8.4          46
+60                8.6          45
+61                2.8          20
+62                8.2          87
+63                9.2          14
+64                2.7           9
+65                2.9          18
+66                3.8          84
+67                9.4           9
+68                3.1          25
+69                2.2           4
+70               10.3           1
+71                2.6           9
+72                1.9           5
+73                3.0          19
+74                2.1           5
+75                2.5           8
+76                9.6           7
+77                9.5           6
+78                9.7           4
+79               10.9           1
+80                2.3           7
+81                9.9           3
+82                9.8           2
+83                2.0           2
+84                1.8           1
+85               10.4           1
+86               10.1           3
+87               10.2           1
+88               10.0           2
+89                1.6           1
+90                1.2           1
+
+print(how_normal(inpt_datf = datf_test,
+normalised = FALSE,
+mean = 6,
+sd = 1))
+
+[1] 2.540311
+
+print(how_normal(inpt_datf = datf_test,
+normalised = FALSE,
+mean = 5,
+sd = 1))
+
+[1] 2.747056
+```
+
+
 # `id_keepr`
 
 id_keepr_datf
@@ -3328,6 +3472,39 @@ print(occu(inpt_v=c("oui", "peut", "peut", "non", "oui")))
 #1  oui         2
 #2 peut         2
 #3  non         1
+```
+
+
+# `old_to_new_idx`
+
+old_to_new_idx
+
+
+## Description
+
+Allow to convert index of elements in a vector `inpt_v` to index of an vector type 1:sum(nchar(inpt_v)), see examples
+
+
+## Usage
+
+```r
+old_to_new_idx(inpt_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+
+
+## Examples
+
+```r
+print(old_to_new_idx(inpt_v = c("oui", "no", "eeee")))
+
+[1] 1 1 1 2 2 3 3 3 3
 ```
 
 
@@ -4630,6 +4807,43 @@ replacement_v = c("C", "R", "GO")))
 
 [1] "C and R programming languages are great"
 [2] "More C, more X!"
+```
+
+
+# `successive_diff`
+
+successive_diff
+
+
+## Description
+
+Allow to see the difference beteen the suxxessive elements of an numeric vector
+
+
+## Usage
+
+```r
+successive_diff(inpt_v)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input numeric vector
+
+
+## Examples
+
+```r
+print(successive_diff(c(1:10)))
+
+[1] 1 1 1 1 1
+
+print(successive_diff(c(1:11, 13, 19)))
+
+[1] 1 1 1 1 1 2 6
 ```
 
 
