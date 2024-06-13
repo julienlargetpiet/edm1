@@ -1,18 +1,3 @@
-![](logo.png)
-
-# Install
-
--> git clone https://github.com/julienlargetpiet/edm1
-
--> cd edm1
-
-edm1 > R
-
-R > library("devtools")
-
-R > build()
-
-R > install()
 
 # `all_stat`
 
@@ -2159,114 +2144,111 @@ Argument      |Description
 sample_val <- round(rnorm(n = 12000, mean = 6, sd = 1.25), 1)
 sample_freq <- unique_total(sample_val)
 datf_test <- data.frame(unique(sample_val), sample_freq)
-
 print(datf_test)
 
 unique.sample_val. sample_freq
-1                 5.4         344
-2                 4.7         224
-3                 7.5         183
-4                 6.7         329
-5                 4.9         277
-6                 6.3         371
-7                 6.2         401
-8                 6.4         339
-9                 5.2         329
-10                8.3          78
-11                7.4         197
-12                7.9         121
-13                5.8         392
-14                6.1         413
-15                8.0          88
-16                6.0         369
-17                5.9         367
-18                7.3         215
-19                7.7         149
-20                7.2         246
-21                5.3         315
-22                7.0         270
-23                8.5          50
-24                4.5         188
-25                5.0         277
-26                7.6         171
-27                6.9         286
-28                4.4         173
-29                7.1         246
-30                3.7          64
-31                5.7         342
-32                4.8         251
-33                7.8         124
-34                8.1          96
-35                5.5         365
-36                4.3         154
-37                4.1         112
-38                6.5         379
-39                8.7          32
-40                5.1         297
-41                6.8         301
-42                4.0         108
-43                5.6         352
-44                3.4          51
-45                3.6          58
-46                8.8          33
-47                6.6         358
-48                3.9         100
-49                4.6         192
-50                3.2          38
-51                3.3          48
-52                4.2         149
-53                9.0          17
-54                2.4           9
-55                3.5          50
-56                9.3          13
-57                9.1          18
-58                8.9          31
-59                8.4          46
-60                8.6          45
-61                2.8          20
-62                8.2          87
-63                9.2          14
-64                2.7           9
-65                2.9          18
-66                3.8          84
-67                9.4           9
-68                3.1          25
-69                2.2           4
-70               10.3           1
-71                2.6           9
-72                1.9           5
-73                3.0          19
-74                2.1           5
-75                2.5           8
-76                9.6           7
-77                9.5           6
-78                9.7           4
-79               10.9           1
-80                2.3           7
-81                9.9           3
-82                9.8           2
-83                2.0           2
-84                1.8           1
-85               10.4           1
-86               10.1           3
-87               10.2           1
-88               10.0           2
-89                1.6           1
-90                1.2           1
+1                 5.2         315
+2                 4.6         208
+3                 5.5         359
+4                 6.8         307
+5                 5.6         406
+6                 7.2         240
+7                 5.3         327
+8                 6.0         364
+9                 8.7          45
+10                6.5         337
+11                5.4         311
+12                6.2         383
+13                7.7         171
+14                6.1         382
+15                5.7         393
+16                7.5         200
+17                3.8          88
+18                5.0         277
+19                7.9          91
+20                6.4         380
+21                4.0          95
+22                7.0         247
+23                6.9         284
+24                7.3         242
+25                5.8         376
+26                6.6         349
+27                3.6          64
+28                4.5         181
+29                8.0          99
+30                7.4         192
+31                6.3         382
+32                4.3         174
+33                5.1         306
+34                9.3          12
+35               10.0           2
+36                4.4         189
+37                5.9         395
+38                8.1          81
+39                4.9         248
+40                8.2          85
+41                4.7         231
+42                4.8         232
+43                4.2         112
+44                6.7         321
+45                3.2          38
+46                7.1         277
+47                4.1         108
+48                8.4          66
+49                8.9          17
+50                8.5          53
+51                2.3           5
+52                2.5           6
+53                3.3          38
+54                3.4          40
+55                2.6           8
+56                3.5          52
+57                7.6         178
+58                3.7          58
+59                2.9          17
+60                8.6          52
+61                8.3          74
+62                3.9          93
+63                7.8         135
+64               10.4           1
+65                3.0          20
+66               10.1           3
+67                8.8          26
+68                9.7           4
+69                3.1          18
+70                9.1          18
+71                2.4           9
+72                1.3           2
+73                9.0          21
+74                2.1           3
+75                2.7          13
+76                9.4           8
+77                9.2           9
+78                2.8          15
+79                9.8           3
+80                9.9           3
+81                9.6          12
+82                2.2           3
+83                2.0           3
+84               10.2           1
+85                1.7           1
+86                9.5           3
+87                1.9           2
+88               11.1           1
 
 print(how_normal(inpt_datf = datf_test,
 normalised = FALSE,
 mean = 6,
 sd = 1))
 
-[1] 2.540311
+[1] 9.002572
 
 print(how_normal(inpt_datf = datf_test,
 normalised = FALSE,
 mean = 5,
 sd = 1))
 
-[1] 2.747056
+[1] 9.098959
 ```
 
 
@@ -2283,7 +2265,7 @@ Allow to see how much a sequence of numbers fit a uniform distribution, see exam
 ## Usage
 
 ```r
-how_unif(inpt_datf, normalised = TRUE)
+how_unif(inpt_v, normalised = TRUE)
 ```
 
 
@@ -2291,8 +2273,8 @@ how_unif(inpt_datf, normalised = TRUE)
 
 Argument      |Description
 ------------- |----------------
-`inpt_datf`     |     is the input dataframe containing all the values in the first column and their frequencyu at the second column
 `normalised`     |     is a boolean, takes TRUE if the frequency for each value is divided by n, FALSE if not
+`inpt_datf`     |     is the input dataframe containing all the values in the first column and their frequencyu at the second column
 
 
 ## Examples

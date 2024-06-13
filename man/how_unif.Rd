@@ -4,12 +4,12 @@
 \alias{how_unif}
 \title{how_unif}
 \usage{
-how_unif(inpt_datf, normalised = TRUE)
+how_unif(inpt_v, normalised = TRUE)
 }
 \arguments{
-\item{inpt_datf}{is the input dataframe containing all the values in the first column and their frequencyu at the second column}
-
 \item{normalised}{is a boolean, takes TRUE if the frequency for each value is divided by n, FALSE if not}
+
+\item{inpt_datf}{is the input dataframe containing all the values in the first column and their frequencyu at the second column}
 }
 \description{
 Allow to see how much a sequence of numbers fit a uniform distribution, see examples
