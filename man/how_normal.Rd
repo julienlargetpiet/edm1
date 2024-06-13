@@ -16,7 +16,7 @@ how_normal(inpt_datf, normalised = TRUE, mean = 0, sd = 1)
 \item{sd}{is the standard deviation of the normal distribution the dataset tries to fit}
 }
 \description{
-Allow to get how precisely a sequence of numbers fit a normal distribution with chosen parameters, see examples
+Allow to get how much a sequence of numbers fit a normal distribution with chosen parameters, see examples
 }
 \examples{
 

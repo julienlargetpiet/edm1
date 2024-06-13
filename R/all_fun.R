@@ -12174,7 +12174,7 @@ old_to_new_idx <- function(inpt_v = c()){
 
 #' how_normal
 #'
-#' Allow to get how precisely a sequence of numbers fit a normal distribution with chosen parameters, see examples
+#' Allow to get how much a sequence of numbers fit a normal distribution with chosen parameters, see examples
 #'
 #' @param inpt_datf is the input dataframe containing all the values in the first column and their frequency (normalised or no), in the second column
 #' @param normalised is a boolean, takes TRUE if the frequency for each value is divided by n, FALSE if not
@@ -12310,6 +12310,83 @@ how_normal <- function(inpt_datf, normalised = TRUE, mean = 0, sd = 1){
     for (i in 1:nrow(inpt_datf)){
       X <- inpt_datf[i, 2]
       diff_add = diff_add + abs((X / n) - (1/(sd * sqrt(2 * pi)) * exp(-((X - mean) ** 2/(2 * sd ** 2)))))
+    }
+  }
+  return(diff_add)
+}
+
+#' how_unif
+#'
+#' Allow to see how much a sequence of numbers fit a uniform distribution, see examples
+#'
+#' @param inpt_datf is the input dataframe containing all the values in the first column and their frequencyu at the second column
+#' @param normalised is a boolean, takes TRUE if the frequency for each value is divided by n, FALSE if not
+#' @examples
+#'
+#' sample_val <- round(runif(n = 12000, min = 24, max = 27), 1)
+#' sample_freq <- unique_total(sample_val)
+#' datf_test <- data.frame(unique(sample_val), sample_freq)
+#' 
+#' print(datf_test)
+#' 
+#'   unique.sample_val. sample_freq
+#' 1                24.4         400
+#' 2                24.8         379
+#' 3                25.5         414
+#' 4                26.0         366
+#' 5                26.6         400
+#' 6                25.7         419
+#' 7                24.3         389
+#' 8                24.1         423
+#' 9                26.1         404
+#' 10               26.5         406
+#' 11               26.2         356
+#' 12               26.8         407
+#' 13               24.6         388
+#' 14               25.3         402
+#' 15               26.3         388
+#' 16               25.4         422
+#' 17               25.0         436
+#' 18               25.9         373
+#' 19               25.2         423
+#' 20               25.6         388
+#' 21               27.0         202
+#' 22               24.2         380
+#' 23               24.9         404
+#' 24               25.1         417
+#' 25               26.4         401
+#' 26               26.7         431
+#' 27               24.5         392
+#' 28               24.0         218
+#' 29               26.9         407
+#' 30               25.8         371
+#' 31               24.7         394
+#'
+#' print(how_unif(inpt_datf = datf_test, normalised = FALSE))
+#' 
+#' [1] 0.0752957
+#'
+#' sample_val <- round(rnorm(n = 12000, mean = 24, sd = 7), 1)
+#' sample_freq <- unique_total(sample_val)
+#' datf_test <- data.frame(unique(sample_val), sample_freq)
+#' 
+#' print(how_unif(inpt_datf = datf_test, normalised = FALSE))
+#'
+#' [1] 0.7797352
+#'
+#' @export
+
+how_unif <- function(inpt_datf, normalised = TRUE){
+  diff_add = 0
+  val_base <- 1 / nrow(inpt_datf)
+  if (normalised){
+    for (i in 1:nrow(inpt_datf)){
+      diff_add = diff_add + abs(val_base - inpt_datf[i, 2])
+    }
+  }else{
+    hmn_ind <- sum(inpt_datf[, 2])
+    for (i in 1:nrow(inpt_datf)){
+      diff_add = diff_add + abs(val_base - (inpt_datf[i, 2] / hmn_ind))
     }
   }
   return(diff_add)
