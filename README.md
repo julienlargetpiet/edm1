@@ -4886,6 +4886,372 @@ print(sort_date(inpt_v = c("03-22-01-11-2025", "56-11-12-04-1966", "23-12-12-04-
 ```
 
 
+# `sort_normal_qual`
+
+sort_normal_qual
+
+
+## Description
+
+Sort qualitative modalities that have their frequency normally distributed from an unordered dataset, see examples. This function uses an another algorythm than choose_normal_qual2 which may be faster.
+
+
+## Usage
+
+```r
+sort_normal_qual(inpt_datf)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_datf`     |     is the input dataframe, containing the values in the first column and their frequency in the second
+
+
+## Examples
+
+```r
+sample_val <- round(rnorm(n = 2000, mean = 12, sd = 2), 1)
+sample_freq <- unique_total(sample_val)
+sample_qual <- infinite_char_seq(n = length(sample_freq))
+datf_test <- data.frame(sample_qual, sample_freq)
+datf_test[, 2] <- datf_test[, 2] / sum(datf_test[, 2]) # optional
+
+print(datf_test)
+
+sample_qual sample_freq
+1             a      0.0185
+2             b      0.0245
+3             c      0.0150
+4             d      0.0040
+5             e      0.0065
+6             f      0.0100
+7             g      0.0055
+8             h      0.0115
+9             i      0.0155
+10            j      0.0145
+11            k      0.0145
+12            l      0.0040
+13            m      0.0125
+14            n      0.0175
+15            o      0.0180
+16            p      0.0160
+17            q      0.0120
+18            r      0.0160
+19            s      0.0090
+20            t      0.0160
+21            u      0.0215
+22            v      0.0180
+23            w      0.0060
+24            x      0.0120
+25            y      0.0115
+26            z      0.0205
+27           aa      0.0140
+28           ab      0.0200
+29           ac      0.0220
+30           ad      0.0010
+31           ae      0.0175
+32           af      0.0130
+33           ag      0.0170
+34           ah      0.0165
+35           ai      0.0090
+36           aj      0.0195
+37           ak      0.0175
+38           al      0.0185
+39           am      0.0175
+40           an      0.0130
+41           ao      0.0170
+42           ap      0.0070
+43           aq      0.0140
+44           ar      0.0040
+45           as      0.0185
+46           at      0.0080
+47           au      0.0105
+48           av      0.0145
+49           aw      0.0045
+50           ax      0.0165
+51           ay      0.0010
+52           az      0.0100
+53           ba      0.0050
+54           bb      0.0035
+55           bc      0.0195
+56           bd      0.0240
+57           be      0.0120
+58           bf      0.0050
+59           bg      0.0130
+60           bh      0.0225
+61           bi      0.0170
+62           bj      0.0095
+63           bk      0.0050
+64           bl      0.0025
+65           bm      0.0160
+66           bn      0.0005
+67           bo      0.0040
+68           bp      0.0085
+69           bq      0.0070
+70           br      0.0210
+71           bs      0.0090
+72           bt      0.0005
+73           bu      0.0060
+74           bv      0.0070
+75           bw      0.0010
+76           bx      0.0080
+77           by      0.0005
+78           bz      0.0030
+79           ca      0.0035
+80           cb      0.0020
+81           cc      0.0020
+82           cd      0.0055
+83           ce      0.0035
+84           cf      0.0010
+85           cg      0.0120
+86           ch      0.0010
+87           ci      0.0040
+88           cj      0.0015
+89           ck      0.0055
+90           cl      0.0035
+91           cm      0.0045
+92           cn      0.0015
+93           co      0.0030
+94           cp      0.0025
+95           cq      0.0015
+96           cr      0.0015
+97           cs      0.0010
+98           ct      0.0005
+99           cu      0.0005
+100          cv      0.0010
+101          cw      0.0020
+102          cx      0.0020
+103          cy      0.0015
+104          cz      0.0010
+105          da      0.0010
+106          db      0.0005
+107          dc      0.0005
+108          dd      0.0005
+109          de      0.0005
+110          df      0.0005
+111          dg      0.0005
+112          dh      0.0015
+113          di      0.0010
+114          dj      0.0005
+115          dk      0.0005
+116          dl      0.0005
+117          dm      0.0005
+
+print(sort_normal_qual(inpt_datf = datf_test,
+mean = 12,
+sd = 2
+))
+
+5e-04  5e-04  5e-04  5e-04  5e-04  5e-04  5e-04  0.001  0.001  0.001  0.001
+"bt"   "ct"   "db"   "dd"   "df"   "dj"   "dl"   "ad"   "bw"   "ch"   "cv"
+0.001 0.0015 0.0015 0.0015  0.002  0.002 0.0025  0.003 0.0035 0.0035  0.004
+"da"   "cj"   "cq"   "cy"   "cb"   "cw"   "bl"   "bz"   "bb"   "ce"    "d"
+0.004  0.004 0.0045  0.005 0.0055 0.0055  0.006  0.007  0.007  0.008  0.009
+"ar"   "ci"   "cm"   "bf"    "g"   "ck"   "bu"   "ap"   "bv"   "bx"    "s"
+0.009   0.01 0.0105 0.0115  0.012  0.012  0.013  0.013  0.014 0.0145  0.015
+"bs"    "f"   "au"    "y"    "x"   "cg"   "af"   "bg"   "aq"    "k"    "c"
+0.016  0.016 0.0165  0.017  0.017 0.0175 0.0175  0.018 0.0185 0.0195   0.02
+"p"    "t"   "ah"   "ag"   "bi"   "ae"   "am"    "v"   "al"   "aj"   "ab"
+0.021  0.022  0.024 0.0225 0.0215 0.0205 0.0195 0.0185 0.0185  0.018 0.0175
+"br"   "ac"   "bd"   "bh"    "u"    "z"   "bc"   "as"    "a"    "o"   "ak"
+0.0175  0.017 0.0165  0.016  0.016 0.0155 0.0145 0.0145  0.014  0.013 0.0125
+"n"   "ao"   "ax"   "bm"    "r"    "i"   "av"    "j"   "aa"   "an"    "m"
+0.012  0.012 0.0115   0.01 0.0095  0.009 0.0085  0.008  0.007 0.0065  0.006
+"be"    "q"    "h"   "az"   "bj"   "ai"   "bp"   "at"   "bq"    "e"    "w"
+0.0055  0.005  0.005 0.0045  0.004  0.004 0.0035 0.0035  0.003 0.0025  0.002
+"cd"   "bk"   "ba"   "aw"   "bo"    "l"   "cl"   "ca"   "co"   "cp"   "cx"
+0.002 0.0015 0.0015 0.0015  0.001  0.001  0.001  0.001  0.001  5e-04  5e-04
+"cc"   "dh"   "cr"   "cn"   "di"   "cz"   "cs"   "cf"   "ay"   "dm"   "dk"
+5e-04  5e-04  5e-04  5e-04  5e-04  5e-04
+"dg"   "de"   "dc"   "cu"   "by"   "bn"
+```
+
+
+# `sort_normal_qual2`
+
+sort_normal_qual2
+
+
+## Description
+
+Sort qualitative modalities that have their frequency normally distributed from an unordered dataset, see examples. This function uses an another algorythm than choose_normal_qual which may be faster.
+
+
+## Usage
+
+```r
+sort_normal_qual2(inpt_datf)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_datf`     |     is the input dataframe, containing the values in the first column and their frequency in the second
+
+
+## Examples
+
+```r
+sample_val <- round(rnorm(n = 2000, mean = 12, sd = 2), 1)
+sample_freq <- unique_total(sample_val)
+sample_qual <- infinite_char_seq(n = length(sample_freq))
+datf_test <- data.frame(sample_qual, sample_freq)
+datf_test[, 2] <- datf_test[, 2] / sum(datf_test[, 2])
+
+print(datf_test)
+
+sample_qual sample_freq
+1             a      0.0185
+2             b      0.0125
+3             c      0.0210
+4             d      0.0185
+5             e      0.0120
+6             f      0.0165
+7             g      0.0065
+8             h      0.0235
+9             i      0.0145
+10            j      0.0045
+11            k      0.0060
+12            l      0.0055
+13            m      0.0140
+14            n      0.0095
+15            o      0.0195
+16            p      0.0020
+17            q      0.0115
+18            r      0.0190
+19            s      0.0165
+20            t      0.0200
+21            u      0.0170
+22            v      0.0200
+23            w      0.0180
+24            x      0.0045
+25            y      0.0165
+26            z      0.0025
+27           aa      0.0185
+28           ab      0.0015
+29           ac      0.0140
+30           ad      0.0025
+31           ae      0.0130
+32           af      0.0105
+33           ag      0.0240
+34           ah      0.0005
+35           ai      0.0130
+36           aj      0.0100
+37           ak      0.0230
+38           al      0.0140
+39           am      0.0135
+40           an      0.0135
+41           ao      0.0035
+42           ap      0.0105
+43           aq      0.0105
+44           ar      0.0240
+45           as      0.0030
+46           at      0.0205
+47           au      0.0130
+48           av      0.0130
+49           aw      0.0215
+50           ax      0.0125
+51           ay      0.0145
+52           az      0.0075
+53           ba      0.0110
+54           bb      0.0155
+55           bc      0.0170
+56           bd      0.0145
+57           be      0.0075
+58           bf      0.0075
+59           bg      0.0165
+60           bh      0.0185
+61           bi      0.0110
+62           bj      0.0095
+63           bk      0.0160
+64           bl      0.0045
+65           bm      0.0135
+66           bn      0.0105
+67           bo      0.0080
+68           bp      0.0070
+69           bq      0.0075
+70           br      0.0040
+71           bs      0.0085
+72           bt      0.0045
+73           bu      0.0015
+74           bv      0.0005
+75           bw      0.0100
+76           bx      0.0005
+77           by      0.0050
+78           bz      0.0035
+79           ca      0.0095
+80           cb      0.0165
+81           cc      0.0030
+82           cd      0.0005
+83           ce      0.0025
+84           cf      0.0010
+85           cg      0.0020
+86           ch      0.0040
+87           ci      0.0055
+88           cj      0.0025
+89           ck      0.0010
+90           cl      0.0010
+91           cm      0.0005
+92           cn      0.0015
+93           co      0.0005
+94           cp      0.0075
+95           cq      0.0040
+96           cr      0.0020
+97           cs      0.0005
+98           ct      0.0025
+99           cu      0.0030
+100          cv      0.0010
+101          cw      0.0050
+102          cx      0.0005
+103          cy      0.0005
+104          cz      0.0015
+105          da      0.0005
+106          db      0.0040
+107          dc      0.0010
+108          dd      0.0005
+109          de      0.0025
+110          df      0.0005
+111          dg      0.0005
+112          dh      0.0005
+113          di      0.0005
+114          dj      0.0005
+115          dk      0.0005
+
+print(sort_normal_qual(inpt_datf = datf_test,
+mean = 12,
+sd = 2
+))
+
+5e-04  5e-04  5e-04  5e-04  5e-04  5e-04  5e-04  5e-04  0.001  0.001  0.001
+"bv"   "cd"   "co"   "cx"   "da"   "df"   "dh"   "dj"   "cf"   "cl"   "dc"
+0.0015 0.0015  0.002 0.0025 0.0025 0.0025  0.003  0.003 0.0035  0.004  0.004
+"bu"   "cz"   "cg"    "z"   "ce"   "ct"   "as"   "cu"   "bz"   "ch"   "db"
+0.0045 0.0045  0.005 0.0055 0.0065 0.0075 0.0075 0.0075 0.0085 0.0095   0.01
+"x"   "bt"   "cw"   "ci"    "g"   "az"   "bf"   "cp"   "bs"   "bj"   "aj"
+0.0105 0.0105  0.011 0.0115 0.0125  0.013  0.013 0.0135 0.0135  0.014 0.0145
+"af"   "aq"   "ba"    "q"    "b"   "ae"   "au"   "am"   "bm"   "ac"    "i"
+0.0145  0.016 0.0165 0.0165  0.017  0.018 0.0185 0.0185 0.0195   0.02  0.021
+"bd"   "bk"    "s"   "bg"    "u"    "w"    "d"   "bh"    "o"    "v"    "c"
+0.023  0.024 0.0235 0.0215 0.0205   0.02  0.019 0.0185 0.0185  0.017 0.0165
+"ak"   "ag"    "h"   "aw"   "at"    "t"    "r"   "aa"    "a"   "bc"   "cb"
+0.0165 0.0165 0.0155 0.0145  0.014  0.014 0.0135  0.013  0.013 0.0125  0.012
+"y"    "f"   "bb"   "ay"   "al"    "m"   "an"   "av"   "ai"   "ax"    "e"
+0.011 0.0105 0.0105   0.01 0.0095 0.0095  0.008 0.0075 0.0075  0.007  0.006
+"bi"   "bn"   "ap"   "bw"   "ca"    "n"   "bo"   "bq"   "be"   "bp"    "k"
+0.0055  0.005 0.0045 0.0045  0.004  0.004 0.0035  0.003 0.0025 0.0025 0.0025
+"l"   "by"   "bl"    "j"   "cq"   "br"   "ao"   "cc"   "de"   "cj"   "ad"
+0.002  0.002 0.0015 0.0015  0.001  0.001  5e-04  5e-04  5e-04  5e-04  5e-04
+"cr"    "p"   "cn"   "ab"   "cv"   "ck"   "dk"   "di"   "dg"   "dd"   "cy"
+5e-04  5e-04  5e-04  5e-04
+"cs"   "cm"   "bx"   "ah"
+```
+
+
 # `str_remove_untl`
 
 str_remove_untl
