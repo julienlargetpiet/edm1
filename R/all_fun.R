@@ -861,64 +861,84 @@ letter_to_nb <- function(letter){
 #' nb_to_letter
 #'
 #' Allow to get the letter of a spreadsheet based column by the number ex: 703 = AAA
+#' 
 #' @param x is the number of the column 
 #' @examples
 #'
-#' print(nb_to_letter(12713))
+#' print(nb_to_letter(5))
 #'
-#' #[1] "rty"
+#' [1] "e"
+#'
+#' print(nb_to_letter(27))
+#'
+#' [1] "aa"
+#' 
+#' print(nb_to_letter(51))
+#'
+#' [1] "ay"
+#'
+#' print(nb_to_letter(52))
+#'
+#' [1] "az"
+#' 
+#' print(nb_to_letter(53))
+#'
+#' [1] "ba"
+#'
+#' print(nb_to_letter(675))
+#'
+#' [1] "yy"
+#'
+#' print(nb_to_letter(676))
+#'
+#' [1] "yz"
+#'
+#' print(nb_to_letter(677))
+#'
+#' [1] "za"
+#'
+#' print(nb_to_letter(702))
+#'
+#' [1] "zz"
+#'
+#' print(nb_to_letter(703))
+#'
+#' [1] "aaa"
+#'
+#' print(nb_to_letter(18211))
+#'
+#' [1] "zxk"
+#'
+#' print(nb_to_letter(18277))
+#'
+#' [1] "zzy"
+#'
+#' print(nb_to_letter(18278))
+#'
+#' [1] "zzz"
+#'
+#' print(nb_to_letter(18279))
+#'
+#' [1] "aaaa"
 #'
 #' @export
 
 nb_to_letter <- function(x){
-  
-  l <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
-         "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z")
-  
-  rtnl  <- c()
-  
-  x_l <- c()
-  
-  r_l <- c()
-  
-  abc_l <- c()
-  
-  t = 1
-  
-  add_ <- 1
-  
-  reste <- 0
-  
-  while (x %/% add_ > 0){
-    
-    r_l <- append(r_l, reste)
-    
-    x_l <- append(x_l, add_)
-    
-    add_ <- 26 ** t
-    
-    reste <- x %% add_
-    
-    t = t + 1
-    
+  rtn_v <- c()
+  cnt = 0
+  while (26 ** cnt <= x){
+    cnt = cnt + 1
+    reste <- x %% (26 ** cnt)
+    if (reste != 0){
+      if (reste >= 26){ reste2 <- reste / (26 ** (cnt - 1)) }else{ reste2 <- reste }
+      rtn_v <- c(rtn_v, letters[reste2])
+    }else{
+      reste <- 26 ** cnt
+      rtn_v <- c(rtn_v, letters[26])
+    }
+    x = x - reste
   }
-  
-  for (i in 1:length(x_l)){
-    
-    idx <- length(x_l) - (i - 1)
-    
-    add_ <- x %/% x_l[idx]
-    
-    rtnl <- append(rtnl, l[add_])
-    
-    x <- r_l[idx]
-    
-  }
-  
-  rtnl <- paste(rtnl, collapse="")
-  
-  return(rtnl)
-  
+  return(paste(rtn_v[length(rtn_v):1], collapse = ""))
 }
 
 #' cost_and_taxes
@@ -12414,6 +12434,44 @@ successive_diff <- function(inpt_v){
     }
   }
   return(NULL)
+}
+
+#' infinite_char_seq 
+#'
+#' Allow to generate an infinite sequence of unique letters
+#'
+#' @param n is how many sequence of numbers will be generated
+#' @param base_char is the vector containing the elements from which the sequence is generated
+#' @examples
+#'
+#' print(infinite_char_seq(28))
+#'
+#'  [1] "a"  "b"  "c"  "d"  "e"  "f"  "g"  "h"  "i"  "j"  "k"  "l"  "m"  "n"  "o" 
+#' [16] "p"  "q"  "r"  "s"  "t"  "u"  "v"  "w"  "x"  "y"  "a"  "aa" "ab"
+#'
+#' @export
+
+infinite_char_seq <- function(n, base_char = letters){
+  Rtnl <- c()
+  for (I in 1:n){
+    n <- I
+    rtn_v <- c()
+    cnt = 0
+    while (26 ** cnt <= n){
+      cnt = cnt + 1
+      reste <- n %% (26 ** cnt)
+      if (reste != 0){
+        if (reste >= 26){ reste2 <- reste / (26 ** (cnt - 1)) }else{ reste2 <- reste }
+        rtn_v <- c(rtn_v, letters[reste2])
+      }else{
+        reste <- 26 ** cnt
+        rtn_v <- c(rtn_v, letters[26])
+      }
+      n = n - reste
+    }
+    Rtnl <- c(Rtnl, paste(rtn_v[length(rtn_v):1], collapse = ""))
+  }
+  return(Rtnl)
 }
 
 

@@ -14,8 +14,60 @@ Allow to get the letter of a spreadsheet based column by the number ex: 703 = AA
 }
 \examples{
 
-print(nb_to_letter(12713))
+print(nb_to_letter(5))
 
-#[1] "rty"
+[1] "e"
+
+print(nb_to_letter(27))
+
+[1] "aa"
+
+print(nb_to_letter(51))
+
+[1] "ay"
+
+print(nb_to_letter(52))
+
+[1] "az"
+
+print(nb_to_letter(53))
+
+[1] "ba"
+
+print(nb_to_letter(675))
+
+[1] "yy"
+
+print(nb_to_letter(676))
+
+[1] "yz"
+
+print(nb_to_letter(677))
+
+[1] "za"
+
+print(nb_to_letter(702))
+
+[1] "zz"
+
+print(nb_to_letter(703))
+
+[1] "aaa"
+
+print(nb_to_letter(18211))
+
+[1] "zxk"
+
+print(nb_to_letter(18277))
+
+[1] "zzy"
+
+print(nb_to_letter(18278))
+
+[1] "zzz"
+
+print(nb_to_letter(18279))
+
+[1] "aaaa"
 
 }
