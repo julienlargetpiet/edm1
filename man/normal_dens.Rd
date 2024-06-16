@@ -4,7 +4,7 @@
 \alias{normal_dens}
 \title{normal_dens}
 \usage{
-normal_dens(target_v = c(), mean, sd, step = 0.01)
+normal_dens(target_v = c(), mean, sd)
 }
 \arguments{
 \item{target_v}{is the target value(s) (one or bounded), see examples}
@@ -12,8 +12,6 @@ normal_dens(target_v = c(), mean, sd, step = 0.01)
 \item{mean}{is the mean of the normal distribution}
 
 \item{sd}{is the standard deviation of the normal distribution}
-
-\item{step}{is used for bounded target values for the accuracy of the output, defaults to 1 / 100}
 }
 \description{
 Calculates the normal distribution probality, see examples
