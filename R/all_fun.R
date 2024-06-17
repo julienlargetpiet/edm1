@@ -7434,33 +7434,41 @@ unique_datf <- function(inpt_datf, col=FALSE){
 
 }
 
-#' non_unique
+#' better_unique
 #'
 #' Returns the element that are not unique from the input vector
 #'
 #' @param inpt_v  is the input vector containing the elements
-#' @param occu is a parameter that specifies the occurence of the elements that must be returned, defaults to ">-1-" it means that the function will return all the elements that are present more than one time in inpt_v. The synthax is the following "comparaison_type-actual_value-". The comparaison type may be "==" or ">". Occu can also be a vector containing all the occurence that must have the elements to be returned.
+#' @param occu is a parameter that specifies the occurence of the elements that must be returned, defaults to ">-1-" it means that the function will return all the elements that are present more than one time in inpt_v. The synthax is the following "comparaison_type-actual_value-". The comparaison type may be "==" or ">" or "<". Occu can also be a vector containing all the occurence that must have the elements to be returned.
 #' @examples
 #'
-#' print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non")))
+#' print(better_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non")))
 #'
 #' #[1] "oui" "non"
 #'
-#' print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu="==-2-"))
+#' print(better_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu="==-2-"))
 #'
 #' #[1] "oui"
 #'
-#' print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu=">-2-"))
+#' print(better_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu=">-2-"))
 #'
 #' #[1] "non"
 #' 
-#' print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu=c(1, 3)))
+#' print(better_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu=c(1, 3)))
 #' 
 #' #[1] "non"   "peut"  "peut1"
 #'
+#' print(better_unique(inpt_v = c("a", "b", "c", "c"), occu = "==-1-"))
+#' 
+#' [1] "a" "b"
+#'
+#' print(better_unique(inpt_v = c("a", "b", "c", "c"), occu = "<-2-"))
+#'
+#' [1] "a" "b"
+#'
 #' @export
 
-non_unique <- function(inpt_v, occu=">-1-"){
+better_unique <- function(inpt_v, occu=">-1-"){
 
    rtn_v <- c()
 
@@ -7483,6 +7491,12 @@ non_unique <- function(inpt_v, occu=">-1-"){
            if (comp_ == ">"){
 
                 for (el in unique(inpt_v)){ if (sum(inpt_v == el) > max_val) { rtn_v <- c(rtn_v, el) } }
+
+           }
+
+           if (comp_ == "<"){
+
+                for (el in unique(inpt_v)){ if (sum(inpt_v == el) < max_val) { rtn_v <- c(rtn_v, el) } }
 
            }
 
@@ -9258,6 +9272,10 @@ better_match <- function(inpt_v=c(), ptrn, untl=1, nvr_here=NA){
     while (length(untl) < length(ptrn)){
       untl <- c(untl, val_add)
     }
+  }
+  if (!(is.na(match(x = "max", table = untl)))){
+    untl[untl == "max"] <- length(inpt_v)
+    untl <- as.numeric(untl)
   }
   for (cur_ptrn in 1:length(ptrn)){
     rtn_v <- c()
@@ -13396,5 +13414,179 @@ extract_normal <- function(inpt_datf, mean, sd, accuracy,
   return(rtn_datf)
 }
 
+#' elements_equalifier
+#'
+#' Takes an input vector with elements that have different occurence, and output a vector with all these elements with the same number of occurence, see examples
+#'
+#' @param inpt_v is the input vector
+#' @param untl is how many times each elements will be in the output vector
+#' @examples
+#'
+#' print(elements_equalifier(letters, untl = 2))
+#' 
+#'  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
+#' [20] "t" "u" "v" "w" "x" "y" "z" "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l"
+#' [39] "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
+#'
+#' print(elements_equalifier(c(letters, letters[-1]), untl = 2))
+#' 
+#'  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
+#' [20] "t" "u" "v" "w" "x" "y" "z" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m"
+#' [39] "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z" "a"
+#' 
+#' @export
+
+elements_equalifier <- function(inpt_v, untl = 3){
+  better_unique <- function(inpt_v, occu=">-1-"){
+   rtn_v <- c()
+   if (typeof(occu) == "character"){
+           pre_vec <- str_locate(occu, "-(.*?)-")
+           occu_v <- unlist(strsplit(occu, split=""))
+           max_val <- as.numeric(occu_v[(pre_vec[1]+1):(pre_vec[length(pre_vec)]-1)])
+           comp_ <- paste(occu_v[1:(pre_vec[1] - 1)], collapse="")
+           if (comp_ == "=="){
+                for (el in unique(inpt_v)){ if (sum(inpt_v == el) == max_val) { rtn_v <- c(rtn_v, el) } }
+           }
+           if (comp_ == ">"){
+                for (el in unique(inpt_v)){ if (sum(inpt_v == el) > max_val) { rtn_v <- c(rtn_v, el) } }
+           }
+           if (comp_ == "<"){
+                for (el in unique(inpt_v)){ if (sum(inpt_v == el) < max_val) { rtn_v <- c(rtn_v, el) } }
+           }
+   }else{
+          for (el in unique(inpt_v)){ if (sum(inpt_v == el) %in% occu) { rtn_v <- c(rtn_v, el) } }
+   }
+   return(rtn_v)
+  }
+  occu_val <- paste0("<-", untl, "-")
+  for (el in better_unique(inpt_v = inpt_v, occu = occu_val)){
+    while (length(grep(x = inpt_v, pattern = el)) < untl){
+      inpt_v <- c(inpt_v, el)
+    }
+  }
+  return(inpt_v)
+}
+
+#' to_unique
+#'
+#' Allow to transform a vector containing elements that have more than 1 occurence to a vector with only uniques elements.
+#'
+#' @param inpt_v is the input vectors
+#' @param distinct_type takes two values: suffix or prefix
+#' @param distinct_val takes two values: number (unique sequence of number to differencfiate each value) or letter (unique sequence of letters to differenciate each value)
+#' @examples
+#'
+#' print(to_unique(inpt_v = c("a", "a", "e", "a", "i", "i"), 
+#'                 distinct_type = "suffix", 
+#'                 distinct_val = "number", 
+#'                 sep = "-"))
+#' 
+#' [1] "a-1" "a-2" "e"   "a-3" "i-1" "i-2"
+#'
+#' print(to_unique(inpt_v = c("a", "a", "e", "a", "i", "i"), 
+#'                 distinct_type = "suffix", 
+#'                 distinct_val = "letter", 
+#'                 sep = "-"))
+#' 
+#' [1] "a-a" "a-b" "e"   "a-c" "i-a" "i-b"
+#'
+#' print(to_unique(inpt_v = c("a", "a", "e", "a", "i", "i"), 
+#'                 distinct_type = "prefix", 
+#'                 distinct_val = "number", 
+#'                 sep = "/"))
+#'
+#' [1] "1/a" "2/a" "e"   "3/a" "1/i" "2/i"
+#'
+#' print(to_unique(inpt_v = c("a", "a", "e", "a", "i", "i"), 
+#'                 distinct_type = "prefix", 
+#'                 distinct_val = "letter", 
+#'                 sep = "_"))
+#' 
+#' [1] "a_a" "b_a" "e"   "c_a" "a_i" "b_i" 
+#'
+#' @export
+
+to_unique <- function(inpt_v, distinct_type = "suffix", distinct_val = "number", sep = "-"){
+  nb_to_letter <- function(x){
+    rtn_v <- c()
+    cnt = 0
+    while (26 ** cnt <= x){
+      cnt = cnt + 1
+      reste <- x %% (26 ** cnt)
+      if (reste != 0){
+        if (reste >= 26){ reste2 <- reste / (26 ** (cnt - 1)) }else{ reste2 <- reste }
+        rtn_v <- c(rtn_v, letters[reste2])
+      }else{
+        reste <- 26 ** cnt
+        rtn_v <- c(rtn_v, letters[26])
+      }
+      x = x - reste
+    }
+    return(paste(rtn_v[length(rtn_v):1], collapse = ""))
+  }
+  better_unique <- function(inpt_v, occu=">-1-"){
+    rtn_v <- c()
+    if (typeof(occu) == "character"){
+            pre_vec <- str_locate(occu, "-(.*?)-")
+            occu_v <- unlist(strsplit(occu, split=""))
+            max_val <- as.numeric(occu_v[(pre_vec[1]+1):(pre_vec[length(pre_vec)]-1)])
+            comp_ <- paste(occu_v[1:(pre_vec[1] - 1)], collapse="")
+            if (comp_ == "=="){
+                 for (el in unique(inpt_v)){ if (sum(inpt_v == el) == max_val) { rtn_v <- c(rtn_v, el) } }
+            }
+            if (comp_ == ">"){
+                 for (el in unique(inpt_v)){ if (sum(inpt_v == el) > max_val) { rtn_v <- c(rtn_v, el) } }
+            }
+    }else{
+           for (el in unique(inpt_v)){ if (sum(inpt_v == el) %in% occu) { rtn_v <- c(rtn_v, el) } }
+    }
+    return(rtn_v)
+  }
+  non_unique_v <- better_unique(inpt_v = inpt_v)
+  if (distinct_type == "suffix"){
+    if (distinct_val == "number"){
+      for (el in non_unique_v){
+        cnt = 1
+        for (idx in grep(x = inpt_v, pattern = el)){
+          inpt_v[idx] <- paste0(inpt_v[idx], sep, cnt)  
+          cnt = cnt + 1
+        }
+      }
+    }else if (distinct_val == "letter"){
+      for (el in non_unique_v){
+        cnt = 1
+        for (idx in grep(x = inpt_v, pattern = el)){
+          inpt_v[idx] <- paste0(inpt_v[idx], sep, nb_to_letter(cnt))
+          cnt = cnt + 1
+        }
+      }
+    }else{
+      return("Invalid distinct_val specification")
+    }
+  }else if (distinct_type == "prefix"){
+    if (distinct_val == "number"){
+      for (el in non_unique_v){
+        cnt = 1
+        for (idx in grep(x = inpt_v, pattern = el)){
+          inpt_v[idx] <- paste0(cnt, sep, inpt_v[idx])  
+          cnt = cnt + 1
+        }
+      }
+    }else if (distinct_val == "letter"){
+      for (el in non_unique_v){
+        cnt = 1
+        for (idx in grep(x = inpt_v, pattern = el)){
+          inpt_v[idx] <- paste0(nb_to_letter(cnt), sep, inpt_v[idx])
+          cnt = cnt + 1
+        }
+      }
+    }else{
+      return("Invalid distinct_val specification")
+    }
+  }else{
+    return("Invalid distinct_type specification")
+  }
+  return(inpt_v)
+}
 
 

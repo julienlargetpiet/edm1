@@ -662,6 +662,85 @@ print(better_sub(inpt_v = c("yes NAME, i will call NAME and NAME",
 
 </div>
 </body></html>
+<!DOCTYPE html><html><head><title>R: better_unique</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>better_unique</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>better_unique</h2>
+
+<h3>Description</h3>
+
+<p>Returns the element that are not unique from the input vector
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>better_unique(inpt_v, occu = "&gt;-1-")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_v">inpt_v</code></td>
+<td>
+<p>is the input vector containing the elements</p>
+</td></tr>
+<tr><td><code id="occu">occu</code></td>
+<td>
+<p>is a parameter that specifies the occurence of the elements that must be returned, defaults to &quot;&gt;-1-&quot; it means that the function will return all the elements that are present more than one time in inpt_v. The synthax is the following &quot;comparaison_type-actual_value-&quot;. The comparaison type may be &quot;==&quot; or &quot;&gt;&quot; or &quot;&lt;&quot;. Occu can also be a vector containing all the occurence that must have the elements to be returned.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(better_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non")))
+
+#[1] "oui" "non"
+
+print(better_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu="==-2-"))
+
+#[1] "oui"
+
+print(better_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu="&gt;-2-"))
+
+#[1] "non"
+
+print(better_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu=c(1, 3)))
+
+#[1] "non"   "peut"  "peut1"
+
+print(better_unique(inpt_v = c("a", "b", "c", "c"), occu = "==-1-"))
+
+[1] "a" "b"
+
+print(better_unique(inpt_v = c("a", "b", "c", "c"), occu = "&lt;-2-"))
+
+[1] "a" "b"
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
 <!DOCTYPE html><html><head><title>R: can_be_num</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
@@ -2363,6 +2442,73 @@ datf2 &lt;- data.frame(c(1:7), c("oui", "oui", "oui", "oui", "non", "oui", "zz")
 print(diff_datf(datf1=datf1, datf2=datf2)) 
 
 #[1] 5 1 5 2
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: elements_equalifier</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>elements_equalifier</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>elements_equalifier</h2>
+
+<h3>Description</h3>
+
+<p>Takes an input vector with elements that have different occurence, and output a vector with all these elements with the same number of occurence, see examples
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>elements_equalifier(inpt_v, untl = 3)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_v">inpt_v</code></td>
+<td>
+<p>is the input vector</p>
+</td></tr>
+<tr><td><code id="untl">untl</code></td>
+<td>
+<p>is how many times each elements will be in the output vector</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(elements_equalifier(letters, untl = 2))
+
+ [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
+[20] "t" "u" "v" "w" "x" "y" "z" "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l"
+[39] "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
+
+print(elements_equalifier(c(letters, letters[-1]), untl = 2))
+
+ [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
+[20] "t" "u" "v" "w" "x" "y" "z" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m"
+[39] "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z" "a"
 
 </code></pre>
 
@@ -5910,77 +6056,6 @@ print(new_ordered(f_v=c("non", "non", "non", "oui"), w_v=c("oui", "non", "non"))
 
 </div>
 </body></html>
-<!DOCTYPE html><html><head><title>R: non_unique</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
-<script type="text/javascript">
-const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
-function processMathHTML() {
-    var l = document.getElementsByClassName('reqn');
-    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
-    return;
-}</script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
-    onload="processMathHTML();"></script>
-<link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container"><main>
-
-<table style="width: 100%;"><tr><td>non_unique</td><td style="text-align: right;">R Documentation</td></tr></table>
-
-<h2>non_unique</h2>
-
-<h3>Description</h3>
-
-<p>Returns the element that are not unique from the input vector
-</p>
-
-
-<h3>Usage</h3>
-
-<pre><code class='language-R'>non_unique(inpt_v, occu = "&gt;-1-")
-</code></pre>
-
-
-<h3>Arguments</h3>
-
-<table>
-<tr><td><code id="inpt_v">inpt_v</code></td>
-<td>
-<p>is the input vector containing the elements</p>
-</td></tr>
-<tr><td><code id="occu">occu</code></td>
-<td>
-<p>is a parameter that specifies the occurence of the elements that must be returned, defaults to &quot;&gt;-1-&quot; it means that the function will return all the elements that are present more than one time in inpt_v. The synthax is the following &quot;comparaison_type-actual_value-&quot;. The comparaison type may be &quot;==&quot; or &quot;&gt;&quot;. Occu can also be a vector containing all the occurence that must have the elements to be returned.</p>
-</td></tr>
-</table>
-
-
-<h3>Examples</h3>
-
-<pre><code class='language-R'>
-print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non")))
-
-#[1] "oui" "non"
-
-print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu="==-2-"))
-
-#[1] "oui"
-
-print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu="&gt;-2-"))
-
-#[1] "non"
-
-print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu=c(1, 3)))
-
-#[1] "non"   "peut"  "peut1"
-
-</code></pre>
-
-</main>
-
-</div>
-</body></html>
 <!DOCTYPE html><html><head><title>R: normal_dens</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
@@ -8954,6 +9029,93 @@ print(test_order(inpt_v_from = c(1:8), inpt_v_test = c(1, 4)))
 print(test_order(inpt_v_from = c(1:8), inpt_v_test = c(1, 4, 2)))
 
 [1] FALSE
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: to_unique</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>to_unique</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>to_unique</h2>
+
+<h3>Description</h3>
+
+<p>Allow to transform a vector containing elements that have more than 1 occurence to a vector with only uniques elements.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>to_unique(inpt_v, distinct_type = "suffix", distinct_val = "number", sep = "-")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_v">inpt_v</code></td>
+<td>
+<p>is the input vectors</p>
+</td></tr>
+<tr><td><code id="distinct_type">distinct_type</code></td>
+<td>
+<p>takes two values: suffix or prefix</p>
+</td></tr>
+<tr><td><code id="distinct_val">distinct_val</code></td>
+<td>
+<p>takes two values: number (unique sequence of number to differencfiate each value) or letter (unique sequence of letters to differenciate each value)</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(to_unique(inpt_v = c("a", "a", "e", "a", "i", "i"), 
+                distinct_type = "suffix", 
+                distinct_val = "number", 
+                sep = "-"))
+
+[1] "a-1" "a-2" "e"   "a-3" "i-1" "i-2"
+
+print(to_unique(inpt_v = c("a", "a", "e", "a", "i", "i"), 
+                distinct_type = "suffix", 
+                distinct_val = "letter", 
+                sep = "-"))
+
+[1] "a-a" "a-b" "e"   "a-c" "i-a" "i-b"
+
+print(to_unique(inpt_v = c("a", "a", "e", "a", "i", "i"), 
+                distinct_type = "prefix", 
+                distinct_val = "number", 
+                sep = "/"))
+
+[1] "1/a" "2/a" "e"   "3/a" "1/i" "2/i"
+
+print(to_unique(inpt_v = c("a", "a", "e", "a", "i", "i"), 
+                distinct_type = "prefix", 
+                distinct_val = "letter", 
+                sep = "_"))
+
+[1] "a_a" "b_a" "e"   "c_a" "a_i" "b_i" 
 
 </code></pre>
 

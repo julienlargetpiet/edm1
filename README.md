@@ -457,6 +457,60 @@ untl = c("max", 3)))
 ```
 
 
+# `better_unique`
+
+better_unique
+
+
+## Description
+
+Returns the element that are not unique from the input vector
+
+
+## Usage
+
+```r
+better_unique(inpt_v, occu = ">-1-")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector containing the elements
+`occu`     |     is a parameter that specifies the occurence of the elements that must be returned, defaults to ">-1-" it means that the function will return all the elements that are present more than one time in inpt_v. The synthax is the following "comparaison_type-actual_value-". The comparaison type may be "==" or ">" or "<". Occu can also be a vector containing all the occurence that must have the elements to be returned.
+
+
+## Examples
+
+```r
+print(better_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non")))
+
+#[1] "oui" "non"
+
+print(better_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu="==-2-"))
+
+#[1] "oui"
+
+print(better_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu=">-2-"))
+
+#[1] "non"
+
+print(better_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu=c(1, 3)))
+
+#[1] "non"   "peut"  "peut1"
+
+print(better_unique(inpt_v = c("a", "b", "c", "c"), occu = "==-1-"))
+
+[1] "a" "b"
+
+print(better_unique(inpt_v = c("a", "b", "c", "c"), occu = "<-2-"))
+
+[1] "a" "b"
+```
+
+
 # `can_be_num`
 
 can_be_num
@@ -1579,6 +1633,48 @@ datf2 <- data.frame(c(1:7), c("oui", "oui", "oui", "oui", "non", "oui", "zz"))
 print(diff_datf(datf1=datf1, datf2=datf2))
 
 #[1] 5 1 5 2
+```
+
+
+# `elements_equalifier`
+
+elements_equalifier
+
+
+## Description
+
+Takes an input vector with elements that have different occurence, and output a vector with all these elements with the same number of occurence, see examples
+
+
+## Usage
+
+```r
+elements_equalifier(inpt_v, untl = 3)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`untl`     |     is how many times each elements will be in the output vector
+
+
+## Examples
+
+```r
+print(elements_equalifier(letters, untl = 2))
+
+[1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
+[20] "t" "u" "v" "w" "x" "y" "z" "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l"
+[39] "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
+
+print(elements_equalifier(c(letters, letters[-1]), untl = 2))
+
+[1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
+[20] "t" "u" "v" "w" "x" "y" "z" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m"
+[39] "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z" "a"
 ```
 
 
@@ -3915,52 +4011,6 @@ print(new_ordered(f_v=c("non", "non", "non", "oui"), w_v=c("oui", "non", "non"))
 ```
 
 
-# `non_unique`
-
-non_unique
-
-
-## Description
-
-Returns the element that are not unique from the input vector
-
-
-## Usage
-
-```r
-non_unique(inpt_v, occu = ">-1-")
-```
-
-
-## Arguments
-
-Argument      |Description
-------------- |----------------
-`inpt_v`     |     is the input vector containing the elements
-`occu`     |     is a parameter that specifies the occurence of the elements that must be returned, defaults to ">-1-" it means that the function will return all the elements that are present more than one time in inpt_v. The synthax is the following "comparaison_type-actual_value-". The comparaison type may be "==" or ">". Occu can also be a vector containing all the occurence that must have the elements to be returned.
-
-
-## Examples
-
-```r
-print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non")))
-
-#[1] "oui" "non"
-
-print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu="==-2-"))
-
-#[1] "oui"
-
-print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu=">-2-"))
-
-#[1] "non"
-
-print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non"), occu=c(1, 3)))
-
-#[1] "non"   "peut"  "peut1"
-```
-
-
 # `normal_dens`
 
 normal_dens
@@ -5942,6 +5992,65 @@ print(test_order(inpt_v_from = c(1:8), inpt_v_test = c(1, 4)))
 print(test_order(inpt_v_from = c(1:8), inpt_v_test = c(1, 4, 2)))
 
 [1] FALSE
+```
+
+
+# `to_unique`
+
+to_unique
+
+
+## Description
+
+Allow to transform a vector containing elements that have more than 1 occurence to a vector with only uniques elements.
+
+
+## Usage
+
+```r
+to_unique(inpt_v, distinct_type = "suffix", distinct_val = "number", sep = "-")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vectors
+`distinct_type`     |     takes two values: suffix or prefix
+`distinct_val`     |     takes two values: number (unique sequence of number to differencfiate each value) or letter (unique sequence of letters to differenciate each value)
+
+
+## Examples
+
+```r
+print(to_unique(inpt_v = c("a", "a", "e", "a", "i", "i"),
+distinct_type = "suffix",
+distinct_val = "number",
+sep = "-"))
+
+[1] "a-1" "a-2" "e"   "a-3" "i-1" "i-2"
+
+print(to_unique(inpt_v = c("a", "a", "e", "a", "i", "i"),
+distinct_type = "suffix",
+distinct_val = "letter",
+sep = "-"))
+
+[1] "a-a" "a-b" "e"   "a-c" "i-a" "i-b"
+
+print(to_unique(inpt_v = c("a", "a", "e", "a", "i", "i"),
+distinct_type = "prefix",
+distinct_val = "number",
+sep = "/"))
+
+[1] "1/a" "2/a" "e"   "3/a" "1/i" "2/i"
+
+print(to_unique(inpt_v = c("a", "a", "e", "a", "i", "i"),
+distinct_type = "prefix",
+distinct_val = "letter",
+sep = "_"))
+
+[1] "a_a" "b_a" "e"   "c_a" "a_i" "b_i"
 ```
 
 
