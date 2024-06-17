@@ -11567,7 +11567,7 @@ pairs_insertr2 <- function(inpt, algo_used = c(1:3), flagged_pair_v = c(")", "]"
 #'
 #' print(power_to_char(inpt_v = c(22 * 10000000, 12, 9 * 0.0000002)))
 #'
-#' [1] "2200000000" "12"         "000000.18" 
+#' [1] "2200000000" "12"         "0.0000018" 
 #'
 #' @export
 
@@ -11609,13 +11609,14 @@ power_to_char <- function(inpt_v = c()){
     }else if (grepl(pattern = "^(((\\d{1,}\\.)\\d{1,})|\\d{1,})e-\\d{1,}$", x = inpt_v[el])){
       idx <- el
       el <- better_split(inpt = inpt_v[el], split_v = c("\\-", "e", "\\."))
-      inpt_v[idx] <- paste0(paste(fillr(inpt_v = c("0", paste0("...", (as.numeric(el[length(el)]) - 1)))), collapse = ""),
-                            ".", paste(el[1:(length(el) - 1)], collapse = ""))
+      zeros <- fillr(inpt_v = c("0", paste0("...", as.numeric(el[length(el)]))))
+      zeros[2] <- "."
+      inpt_v[idx] <- paste0(paste(zeros, collapse = ""),
+                            paste(el[1:(length(el) - 1)], collapse = ""))
     }
   }
   return(inpt_v)  
 }
-
 
 #' unique_total
 #'

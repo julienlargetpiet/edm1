@@ -16,6 +16,6 @@ Convert a scientific number to a string representing normally the number.
 
 print(power_to_char(inpt_v = c(22 * 10000000, 12, 9 * 0.0000002)))
 
-[1] "2200000000" "12"         "000000.18" 
+[1] "2200000000" "12"         "0.0000018" 
 
 }
