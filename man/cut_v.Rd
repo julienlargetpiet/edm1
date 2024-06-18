@@ -2,7 +2,7 @@
 % Please edit documentation in R/all_fun.R
 \name{cut_v}
 \alias{cut_v}
-\title{v_to_datf}
+\title{cut_v}
 \usage{
 cut_v(inpt_v, sep_ = "")
 }

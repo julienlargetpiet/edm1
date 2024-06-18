@@ -1103,7 +1103,7 @@ print(cost_and_taxes(pu=45, prix_ttc=2111, qte=23))
 
 # `cut_v`
 
-v_to_datf
+cut_v
 
 
 ## Description

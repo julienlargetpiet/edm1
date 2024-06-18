@@ -7046,7 +7046,7 @@ closer_ptrn <- function(inpt_v, base_v=c("?", letters), excl_v=c(), rtn_v=c(),
 
 }
 
-#' v_to_datf
+#' cut_v
 #'
 #' Allow to convert a vector to a dataframe according to a separator.
 #' 
