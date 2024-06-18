@@ -5944,7 +5944,7 @@ col1 col2
 
 # `test_order`
 
-same_order
+test_order
 
 
 ## Description

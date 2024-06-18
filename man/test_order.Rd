@@ -2,7 +2,7 @@
 % Please edit documentation in R/all_fun.R
 \name{test_order}
 \alias{test_order}
-\title{same_order}
+\title{test_order}
 \usage{
 test_order(inpt_v_from, inpt_v_test)
 }

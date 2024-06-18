@@ -12000,7 +12000,7 @@ better_sub_mult <- function(inpt_v = c(), pattern_v = c(),
   return(inpt_v)
 }
 
-#' same_order
+#' test_order
 #'
 #' Allow to get if two vectors have their commun elements in the same order, see examples
 #'
