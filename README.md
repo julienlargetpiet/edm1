@@ -5899,7 +5899,7 @@ swipr
 
 ## Description
 
-Returns an ordered dataframes according to the elements order given. The input datafram has two columns, one with the ids whoch can be bonded to multiple elements in the other column.
+Returns an ordered dataframes according to the elements order given. The input datafram has two columns, one with the ids which can be bonded to multiple elements in the other column.
 
 
 ## Usage
@@ -5922,39 +5922,23 @@ Argument      |Description
 ## Examples
 
 ```r
-datf <- data.frame("col1"=c("Af", "Al", "Al", "Al", "Arg", "Arg", "Arg", "Arm", "Arm"),
+datf <- data.frame("col1"=c("Af", "Al", "Al", "Al", "Arg", "Arg", "Arg", "Arm", "Arm", "Al"),
 
-"col2"=c("B", "B", "G", "S", "B", "S", "G", "B", "G"))
+"col2"=c("B", "B", "G", "S", "B", "S", "G", "B", "G", "B"))
 
 print(swipr(inpt_datf=datf, how_to=c("G", "S", "B")))
 
-#  col1 col2
-#1   Af    B
-#2   Al    G
-#3   Al    S
-#4   Al    B
-#5  Arg    G
-#6  Arg    S
-#7  Arg    B
-#8  Arm    G
-#9  Arm    B
-
-datf <- data.frame("col1"=c("Af", "Arg", "Al", "Al", "Arg", "Arg", "Arg", "Arm", "Arm"),
-
-"col2"=c("B", "B", "G", "S", "B", "S", "G", "B", "G"))
-
-print(swipr(inpt_datf=datf, how_to=c("G", "S", "B"), id_w="col2", id_ids="col1"))
-
-#   col1 col2
-#1   Af    B
-#2  Arg    G
-#3   Al    G
-#4   Al    S
-#5  Arg    S
-#6  Arg    B
-#7  Arg    B
-#8  Arm    G
-#9  Arm    B
+col1 col2
+1    Af    B
+2    Al    G
+3    Al    S
+4    Al    B
+5   Arg    G
+6   Arg    S
+7   Arg    B
+8   Arm    G
+9   Arm    B
+10   Al    B
 ```
 
 
