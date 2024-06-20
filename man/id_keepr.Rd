@@ -2,7 +2,7 @@
 % Please edit documentation in R/all_fun.R
 \name{id_keepr}
 \alias{id_keepr}
-\title{id_keepr_datf}
+\title{id_keepr}
 \usage{
 id_keepr(inpt_datf, col_v = c(), el_v = c(), rstr_l = NA)
 }

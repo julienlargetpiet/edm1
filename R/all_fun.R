@@ -1,6 +1,3 @@
-#' @import stringr openxlsx stringi stats utils dplyr
-#' @title edm1
-
 #' insert_datf
 #'
 #' @description Allow to insert dataframe into another dataframe according to coordinates (row, column) from the dataframe that will be inserted
@@ -2221,7 +2218,7 @@ see_datf <- function(datf, condition_l, val_l, conjunction_l=c(), rt_val=TRUE, f
 
 }
 
-#' bsx_year 
+#' leap_year 
 #'
 #' Get if the year is leap
 #'
@@ -7274,7 +7271,7 @@ colins_datf <- function(inpt_datf, target_col=list(), target_pos=list()){
 
 }
 
-#' id_keepr_datf
+#' id_keepr
 #'
 #' Allow to get the original indexes after multiple equality comparaison according to the original number of row
 #'

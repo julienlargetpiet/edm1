@@ -1,0 +1,16 @@
+Package: edm1
+Title: Simplify Complex Data Manipulation
+Version: 2.0.0.0
+Authors@R: 
+    person("Julien", "Larget-Piet", , "julien.larget-piet@dreamRs.fr", role = c("aut", "cre"))
+Description: Provides complex sorting algorythms. Provides date manipulation algorythms. In addition to providing handy functions to discretize variables, an SQL joins alternatives, a set of function to work with geographical coordinates, and other functions to work with text mining.
+License: GPL (==3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports: stringr, stringi, openxlsx
+NeedsCompilation: no
+Packaged: 2024-03-25 09:38:57 UTC; kvv
+Author: Julien Larget-Piet [aut, cre]
+Maintainer: Julien Larget-Piet <julien.larget-piet@dreamRs.fr>
+Built: R 4.3.3; ; 2024-03-25 09:39:24 UTC; unix

@@ -2,8 +2,7 @@
 % Please edit documentation in R/all_fun.R
 \name{insert_datf}
 \alias{insert_datf}
-\title{edm1
-insert_datf}
+\title{insert_datf}
 \usage{
 insert_datf(datf_in, datf_ins, ins_loc)
 }

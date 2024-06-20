@@ -1,0 +1,2086 @@
+Hmm ... looks like a package
+Converting parsed Rd's to LaTeX .......
+Creating pdf output from LaTeX ...
+
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-02-20>
+(./Rd2.tex
+(/usr/share/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/share/texmf-dist/tex/latex/base/bk10.clo))
+(/usr/share/texmf/tex/latex/Rd.sty
+(/usr/share/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/share/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/share/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texmf-dist/tex/latex/base/alltt.sty)
+(/usr/share/texmf-dist/tex/latex/tools/verbatim.sty)
+(/usr/share/texmf-dist/tex/latex/url/url.sty)
+(/usr/share/texmf-dist/tex/latex/base/textcomp.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texmf-dist/tex/latex/amsfonts/amsfonts.sty)
+(/usr/share/texmf-dist/tex/latex/amsfonts/amssymb.sty)
+(/usr/share/texmf-dist/tex/latex/jknapltx/mathrsfs.sty)
+(/usr/share/texmf-dist/tex/generic/iftex/iftex.sty)
+(/usr/share/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/share/texmf-dist/tex/latex/psnfss/times.sty)
+(/usr/share/texmf-dist/tex/latex/graphics/color.sty
+(/usr/share/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/share/texmf-dist/tex/latex/graphics-def/pdftex.def)
+(/usr/share/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/share/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/share/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
+(/usr/share/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(/usr/share/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(/usr/share/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/share/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(/usr/share/texmf-dist/tex/generic/infwarerr/infwarerr.sty)))
+(/usr/share/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/share/texmf-dist/tex/latex/auxhook/auxhook.sty)
+(/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/share/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/share/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+(/usr/share/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
+(/usr/share/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(/usr/share/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/share/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/share/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/share/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/share/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(/usr/share/texmf-dist/tex/latex/base/atbegshi-ltx.sty))
+(/usr/share/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/share/texmf-dist/tex/latex/base/atveryend-ltx.sty)
+(/usr/share/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(/usr/share/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty))))
+(/usr/share/texmf-dist/tex/latex/base/makeidx.sty)
+(/usr/share/texmf-dist/tex/latex/base/inputenc.sty)
+Writing index file Rd2.idx
+(/usr/share/texmf-dist/tex/latex/psnfss/t1ptm.fd)
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def)
+No file Rd2.aux.
+(/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/share/texmf-dist/tex/latex/psnfss/t1pcr.fd)
+(/usr/share/texmf-dist/tex/latex/psnfss/t1phv.fd)
+No file Rd2.toc.
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(/usr/share/texmf-dist/tex/latex/jknapltx/ursfs.fd)
+Overfull \hbox (79.98035pt too wide) in paragraph at lines 60--60
+ []\T1/pcr/m/n/9 datf <- data.frame("mod"=c("first", "seco", "seco", "first", "
+first", "third", "first"),[] 
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fon
+ts/enc/dvips/base/8r.enc}]
+Overfull \hbox (69.18036pt too wide) in paragraph at lines 66--66
+ []\T1/pcr/m/n/9 print(all_stat(inpt_v=c("first", "seco"), var_add = c("var1", 
+"var2", "var3", "var4"),[] 
+
+Overfull \hbox (47.58038pt too wide) in paragraph at lines 67--67
+ [] \T1/pcr/m/n/9 stat_var=c("sum", "mean", "median", "sd", "occu-var2/", "occu
+-var4/", "variance",[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 71--71
+ []\T1/pcr/m/n/9 #   modal_v var_vector occu sum mean  med standard_devaition  
+       variance[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 73--73
+ []\T1/pcr/m/n/9 #2                var1       64   16 16.5   6.97614984548545 4
+8.6666666666667[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 76--76
+ []\T1/pcr/m/n/9 #5                var3      178 44.5   45   1.73205080756888  
+              3[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 81--81
+ []\T1/pcr/m/n/9 #10               var1       43 21.5 21.5  0.707106781186548  
+            0.5[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 84--84
+ []\T1/pcr/m/n/9 #13               var3       87 43.5 43.5  0.707106781186548  
+            0.5[] 
+[2]
+Overfull \hbox (63.78036pt too wide) in paragraph at lines 154--154
+ []\T1/pcr/m/n/9 datf2 <- data.frame("val"=c(3, 7, 2, 4, 1, 2), "ids"=c("a", "z
+", "z", "a", "a", "a"),[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 162--162
+ []\T1/pcr/m/n/9 print(any_join_datf(inpt_datf_l=list(datf1, datf2, datf3), joi
+n_type="inner",[] 
+[3]
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 166--166
+ []\T1/pcr/m/n/9 #  ids val ids last second_ids val ids  bool second_ids val id
+s last second_ids[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 167--167
+ []\T1/pcr/m/n/9 #3 z12   2   z  non         12   7   z FALSE         12   2   
+z  non         12[] 
+
+Overfull \hbox (101.58032pt too wide) in paragraph at lines 169--169
+ []\T1/pcr/m/n/9 print(any_join_datf(inpt_datf_l=list(datf1, datf2, datf3), joi
+n_type="inner", id_v=c("ids"),[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 172--172
+ []\T1/pcr/m/n/9 #  ids val ids last second_ids val ids  bool second_ids val id
+s last second_ids[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 173--173
+ []\T1/pcr/m/n/9 #2   a   1   a  oui         11   3   a  TRUE         13   1   
+a  oui         13[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 174--174
+ []\T1/pcr/m/n/9 #3   z   2   z  non         12   7   z FALSE         12   2   
+z  non         12[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 175--175
+ []\T1/pcr/m/n/9 #4   a   4   a  oui          8   4   a FALSE         34   9   
+a  oui         11[] 
+
+Overfull \hbox (85.38034pt too wide) in paragraph at lines 177--177
+ []\T1/pcr/m/n/9 print(any_join_datf(inpt_datf_l=list(datf1, datf2, datf3), joi
+n_type=c(1), id_v=c("ids"),[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 191--191
+ []\T1/pcr/m/n/9 print(any_join_datf(inpt_datf_l=list(datf2, datf1, datf3), joi
+n_type=c(1, 3),[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 195--195
+ []\T1/pcr/m/n/9 #   ids  val  ids  bool second_ids  val  ids last second_ids  
+val  ids last[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 196--196
+ []\T1/pcr/m/n/9 #1  a13    3    a  TRUE         13 <NA> <NA> <NA>       <NA>  
+  1    a  oui[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 197--197
+ []\T1/pcr/m/n/9 #2  z12    7    z FALSE         12    2    z  non         12  
+  2    z  non[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 198--198
+ []\T1/pcr/m/n/9 #3   z8    2    z FALSE          8 <NA> <NA> <NA>       <NA> <
+NA> <NA> <NA>[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 199--199
+ []\T1/pcr/m/n/9 #4  a34    4    a FALSE         34 <NA> <NA> <NA>       <NA> <
+NA> <NA> <NA>[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 200--200
+ []\T1/pcr/m/n/9 #5  a22    1    a  TRUE         22 <NA> <NA> <NA>       <NA> <
+NA> <NA> <NA>[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 201--201
+ []\T1/pcr/m/n/9 #6  a12    2    a  TRUE         12 <NA> <NA> <NA>       <NA> <
+NA> <NA> <NA>[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 202--202
+ []\T1/pcr/m/n/9 #7  a13 <NA> <NA>  <NA>       <NA> <NA> <NA> <NA>       <NA> <
+NA> <NA> <NA>[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 203--203
+ []\T1/pcr/m/n/9 #8  a11 <NA> <NA>  <NA>       <NA>    1    a  oui         11  
+  9    a  oui[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 204--204
+ []\T1/pcr/m/n/9 #9  z12 <NA> <NA>  <NA>       <NA> <NA> <NA> <NA>       <NA> <
+NA> <NA> <NA>[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 205--205
+ []\T1/pcr/m/n/9 #10  a8 <NA> <NA>  <NA>       <NA>    4    a  oui          8  
+  4    a  oui[] 
+
+Underfull \vbox (badness 10000) has occurred while \output is active [4]
+Overfull \hbox (85.38034pt too wide) in paragraph at lines 218--218
+ []\T1/pcr/m/n/9 print(any_join_datf(inpt_datf_l=list(datf1, datf2, datf3), joi
+n_type=c(1), id_v=c("ids"),[] 
+[5] [6] [7]
+Overfull \hbox (112.38031pt too wide) in paragraph at lines 389--389
+ []\T1/pcr/m/n/9 print(closer_ptrn(inpt_v=c("bonjour", "lpoerc", "nonnour", "bo
+nnour", "nonjour", "aurevoir")))[] 
+[8]
+Overfull \hbox (106.98032pt too wide) in paragraph at lines 445--445
+ []\T1/pcr/m/n/9 print(closer_ptrn(inpt_v=c("bonjour", "lpoerc", "nonnour", "bo
+nnour", "nonjour", "aurevoir"),[] 
+[9]
+Overfull \hbox (96.18033pt too wide) in paragraph at lines 524--524
+ []\T1/pcr/m/n/9 print(closer_ptrn_adv(inpt_v=c("aurevoir", "bonnour", "nonnour
+", "fin", "mois", "bonjour"),[] 
+
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 533--533
+ []\T1/pcr/m/n/9 print(closer_ptrn_adv(inpt_v=c("aurevoir", "bonnour", "nonnour
+", "fin", "mois")))[] 
+[10]
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 568--568
+ [] \T1/pcr/m/n/9 print(clusterizer_v(inpt_v=sample.int(20, 26, replace=TRUE), 
+w_v=NA, c_val=0.9)) 
+[11]
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 615--615
+ []\T1/pcr/m/n/9 # [1] "1"  "1"  "-"  "2"  "2"  "-"  "3"  "3"  "-"  "4"  "4"  "
+-"  "5"  "5"  "-"[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 616--616
+ []\T1/pcr/m/n/9 #[16] "6"  "6"  "-"  "7"  "7"  "-"  "8"  "8"  "-"  "9"  "9"  "
+-"  "10" "10" "-"[] 
+
+Overfull \hbox (69.18036pt too wide) in paragraph at lines 619--619
+ []\T1/pcr/m/n/9 print(clusterizer_v(inpt_v=sample.int(40, 26, replace=TRUE), w
+_v=letters, c_val=0.29))[] 
+
+Underfull \vbox (badness 10000) has occurred while \output is active [12]
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 675--675
+ []\T1/pcr/m/n/9 # [1] "13" "13" "-"  "14" "14" "-"  "15" "15" "-"  "16" "16" "
+-"  "17" "17" "-"[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 676--676
+ []\T1/pcr/m/n/9 #[16] "19" "19" "-"  "21" "21" "-"  "22" "22" "-"  "23" "23" "
+-"  "25" "25" "-"[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 677--677
+ []\T1/pcr/m/n/9 #[31] "27" "27" "-"  "29" "29" "-"  "30" "30" "-"  "31" "31" "
+-"  "34" "34" "-"[] 
+
+Overfull \hbox (79.98035pt too wide) in paragraph at lines 710--710
+ []\T1/pcr/m/n/9 print(colins_datf(inpt_datf=datf1, target_col=list(c("oui", "o
+ui", "oui", "non", "non"),[] 
+[13]
+Overfull \hbox (79.98035pt too wide) in paragraph at lines 721--721
+ []\T1/pcr/m/n/9 print(colins_datf(inpt_datf=datf1, target_col=list(c("oui", "o
+ui", "oui", "non", "non"),[] 
+
+Overfull \hbox (0.78088pt too wide) in paragraph at lines 743--743
+ []\T1/pcr/m/n/10 converter_date(inpt_date, convert_to, frmt = "snhdmy", sep_ =
+ "-") 
+
+Overfull \hbox (74.58035pt too wide) in paragraph at lines 762--762
+ []\T1/pcr/m/n/9 print(converter_date(inpt_date="14-04-11-2024", sep_="-", frmt
+="hdmy", convert_to="m"))[] 
+
+Overfull \hbox (74.58035pt too wide) in paragraph at lines 766--766
+ []\T1/pcr/m/n/9 print(converter_date(inpt_date="14-04-11-2024", sep_="-", frmt
+="hdmy", convert_to="y"))[] 
+
+Overfull \hbox (74.58035pt too wide) in paragraph at lines 770--770
+ []\T1/pcr/m/n/9 print(converter_date(inpt_date="14-04-11-2024", sep_="-", frmt
+="hdmy", convert_to="s"))[] 
+
+Overfull \hbox (47.58038pt too wide) in paragraph at lines 774--774
+ []\T1/pcr/m/n/9 print(converter_date(inpt_date="63900626400", sep_="-", frmt="
+s", convert_to="y"))[] 
+[14]
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 778--778
+ []\T1/pcr/m/n/9 print(converter_date(inpt_date="2024", sep_="-", frmt="y", con
+vert_to="s"))[] 
+
+Overfull \hbox (54.78088pt too wide) in paragraph at lines 793--793
+ []\T1/pcr/m/n/10 converter_format(inpt_val, sep_ = "-", inpt_frmt, frmt, defau
+lt_val = "00") 
+
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 815--815
+ []                       \T1/pcr/m/n/9 inpt_frmt="shmy", frmt="snhdmy", defaul
+t_val="00"))[] 
+
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 820--820
+ []                       \T1/pcr/m/n/9 inpt_frmt="shmy", frmt="Pnhdmy", defaul
+t_val="00"))[] 
+[15]
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 885--885
+ []\T1/pcr/m/n/9 #[1]  3.423000e+03  4.500000e+01  4.500000e+01 -9.998637e-01  
+2.100000e+01[] 
+
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 886--886
+ []\T1/pcr/m/n/9 #[6] -1.540140e+05  4.500000e+01            NA            NA  
+          NA[] 
+[16]
+Overfull \hbox (120.78088pt too wide) in paragraph at lines 949--949
+ []  \T1/pcr/m/n/10 str_source = c("a", "b", "c", "d", "e", "f", "g", "h", "i",
+ "j", "k", "l", "m", "n",[] 
+[17] [18] [19]
+Overfull \hbox (85.38034pt too wide) in paragraph at lines 1098--1098
+ []     \T1/pcr/m/n/9 c("-", "a", "a1", "-", "B", "r", "uy", "-", "c", "c1"), "
+_"), organisation=c(1, 0)))[] 
+[20]
+Overfull \hbox (52.98038pt too wide) in paragraph at lines 1153--1153
+ []\T1/pcr/m/n/9 print(date_addr(date1="25-02", date2="58-12-08", frmt1="dm", f
+rmt2="shd", sep_="-",[] 
+
+Overfull \hbox (52.98038pt too wide) in paragraph at lines 1158--1158
+ []\T1/pcr/m/n/9 print(date_addr(date1="25-02", date2="58-12-08", frmt1="dm", f
+rmt2="shd", sep_="-",[] 
+
+Overfull \hbox (58.38037pt too wide) in paragraph at lines 1163--1163
+ []\T1/pcr/m/n/9 print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy",
+ frmt2="dm", sep_="-",[] 
+
+Overfull \hbox (58.38037pt too wide) in paragraph at lines 1168--1168
+ []\T1/pcr/m/n/9 print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy",
+ frmt2="dm", sep_="-",[] 
+
+Overfull \hbox (58.38037pt too wide) in paragraph at lines 1173--1173
+ []\T1/pcr/m/n/9 print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy",
+ frmt2="dm", sep_="-",[] 
+
+Overfull \hbox (58.38037pt too wide) in paragraph at lines 1178--1178
+ []\T1/pcr/m/n/9 print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy",
+ frmt2="dm", sep_="-",[] 
+[21]
+Overfull \hbox (4.0073pt too wide) in paragraph at lines 1189--1190
+[]\T1/ptm/m/n/10 Allow to con-vert sin-gle date value like 2025.36 year to a da
+te like sec-ond/minutehour/day/month/year
+
+Overfull \hbox (66.78088pt too wide) in paragraph at lines 1194--1194
+ []\T1/pcr/m/n/10 date_converter_reverse(inpt_date, convert_to = "dmy", frmt = 
+"y", sep_ = "-") 
+
+Overfull \hbox (85.38034pt too wide) in paragraph at lines 1213--1213
+ []\T1/pcr/m/n/9 print(date_converter_reverse(inpt_date="2024.929", convert_to=
+"hmy", frmt="y", sep_="-"))[] 
+
+Overfull \hbox (85.38034pt too wide) in paragraph at lines 1217--1217
+ []\T1/pcr/m/n/9 print(date_converter_reverse(inpt_date="2024.929", convert_to=
+"dmy", frmt="y", sep_="-"))[] 
+
+Overfull \hbox (90.78033pt too wide) in paragraph at lines 1221--1221
+ []\T1/pcr/m/n/9 print(date_converter_reverse(inpt_date="2024.929", convert_to=
+"hdmy", frmt="y", sep_="-"))[] 
+
+Overfull \hbox (90.78033pt too wide) in paragraph at lines 1225--1225
+ []\T1/pcr/m/n/9 print(date_converter_reverse(inpt_date="2024.929", convert_to=
+"dhym", frmt="y", sep_="-"))[] 
+[22] [23]
+Overfull \hbox (36.7804pt too wide) in paragraph at lines 1335--1335
+ []\T1/pcr/m/n/9 datf1 <- data.frame(c(1:6), c("oui", "oui", "oui", "oui", "oui
+", "oui"), c(6:1))[] 
+
+Overfull \hbox (25.98041pt too wide) in paragraph at lines 1337--1337
+ []\T1/pcr/m/n/9 datf2 <- data.frame(c(1:7), c("oui", "oui", "oui", "oui", "non
+", "oui", "zz"))[] 
+[24]
+Overfull \hbox (90.78033pt too wide) in paragraph at lines 1405--1405
+ []\T1/pcr/m/n/9 print(extrt_only_v(inpt_v=c("oui", "non", "peut", "oo", "ll", 
+"oui", "non", "oui", "oui"),[] 
+[25]
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 1468--1468
+ []\T1/pcr/m/n/9 print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "
+non", "peut-etre"),[] 
+
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 1474--1474
+ []\T1/pcr/m/n/9 print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "
+non", "peut-etre"),[] 
+[26]
+Overfull \hbox (52.98038pt too wide) in paragraph at lines 1554--1554
+ []\T1/pcr/m/n/9 print(format_date(f_dialect=c("janvier", "février", "mars", "a
+vril", "mai", "juin",[] 
+
+Overfull \hbox (117.7803pt too wide) in paragraph at lines 1555--1555
+ []\T1/pcr/m/n/9 "juillet", "aout", "septembre", "octobre", "novembre", "décemb
+re"), sentc="11-septembre-2023"))[] 
+[27]
+Overfull \hbox (1.5473pt too wide) in paragraph at lines 1578--1579
+[]\T1/ptm/m/n/10 is the dataframe con-tain-ing the co-or-diantes of the es-tab-
+lished ge-o-graph-i-cal points 
+[28]
+Overfull \hbox (90.78033pt too wide) in paragraph at lines 1660--1660
+ []\T1/pcr/m/n/9 print(globe(lat_f=23, long_f=112, alt_f=NA, lat_n=c(2, 82), lo
+ng_n=c(165, -55), alt_n=NA))[] 
+
+Overfull \hbox (117.7803pt too wide) in paragraph at lines 1664--1664
+ []\T1/pcr/m/n/9 print(globe(lat_f=23, long_f=112, alt_f=8, lat_n=c(2, 82), lon
+g_n=c(165, -55), alt_n=c(8, -2)))[] 
+[29]
+Overfull \hbox (36.7804pt too wide) in paragraph at lines 1717--1717
+ []\T1/pcr/m/n/9 print(groupr_datf(inpt_datf=datf1, val_lst=val_lst, condition_
+lst=condition_lst,[] 
+[30]
+Overfull \hbox (85.38034pt too wide) in paragraph at lines 1772--1772
+ []\T1/pcr/m/n/9 print(id_keepr(inpt_datf=datf1, col_v=c(1, 2), el_v=c("oui", "
+op"), rstr_l=list(c(1:5))))[] 
+[31] [32] [33]
+Overfull \hbox (25.98041pt too wide) in paragraph at lines 1908--1908
+ []\T1/pcr/m/n/9 print(inter_max(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3))
+, get_lst=TRUE))[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 1919--1919
+ []\T1/pcr/m/n/9 print(inter_max(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3))
+, get_lst=FALSE))[] 
+[34]
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 1975--1975
+ []\T1/pcr/m/n/9 # [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 
+1.4 1.5 1.6 1.7 1.8[] 
+
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 1976--1976
+ []\T1/pcr/m/n/9 #[20] 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.0 3.1 3.2 
+3.3 3.4 3.5 3.6 3.7[] 
+
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 1980--1980
+ []\T1/pcr/m/n/9 # [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 
+1.4 1.5 1.6 1.7 1.8[] 
+
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 1981--1981
+ []\T1/pcr/m/n/9 #[20] 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.0 3.1 3.2 
+3.3 3.4 3.5 3.6 3.7[] 
+[35]
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 2015--2015
+ []\T1/pcr/m/n/9 # [1]   1   3   7   9  11  13  17  19  21  23  27  29  31  33 
+ 37  39  41  43  47[] 
+
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 2016--2016
+ []\T1/pcr/m/n/9 #[20]  49  51  53  57  59  61  63  67  69  71  73  77  79  81 
+ 83  87  89  91  93[] 
+[36] [37] [38]
+Overfull \hbox (90.78033pt too wide) in paragraph at lines 2179--2179
+ []\T1/pcr/m/n/9 print(multitud(l=list(c("a", "b"), c("1", "2"), c("A", "Z", "E
+"), c("Q", "F")), sep_="/"))[] 
+
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 2181--2181
+ []\T1/pcr/m/n/9 #[1] "a/1/A/Q" "b/1/A/Q" "a/2/A/Q" "b/2/A/Q" "a/1/Z/Q" "b/1/Z/
+Q" "a/2/Z/Q"[] 
+
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 2182--2182
+ []\T1/pcr/m/n/9 #[8] "b/2/Z/Q" "a/1/E/Q" "b/1/E/Q" "a/2/E/Q" "b/2/E/Q" "a/1/A/
+F" "b/1/A/F"[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 2183--2183
+ []\T1/pcr/m/n/9 #[15] "a/2/A/F" "b/2/A/F" "a/1/Z/F" "b/1/Z/F" "a/2/Z/F" "b/2/Z
+/F" "a/1/E/F"[] 
+[39]
+Overfull \hbox (47.58038pt too wide) in paragraph at lines 2255--2255
+ []\T1/pcr/m/n/9 nestr_datf=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TR
+UE)), yes_val=TRUE))[] 
+
+Overfull \hbox (47.58038pt too wide) in paragraph at lines 2265--2265
+ []\T1/pcr/m/n/9 nestr_datf=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TR
+UE)), yes_val=TRUE))[] 
+[40]
+Overfull \hbox (30.78088pt too wide) in paragraph at lines 2283--2283
+ []\T1/pcr/m/n/10 nestr_datf2(inptf_datf, rtn_pos, rtn_neg = NA, nestr_datf, ye
+s_val = T) 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 2304--2304
+ []\T1/pcr/m/n/9 print(nestr_datf2(inptf_datf=data.frame(c(1, 2, 1), c(1, 5, 7)
+), rtn_pos="yes",[] 
+
+Overfull \hbox (123.1803pt too wide) in paragraph at lines 2305--2305
+ []\T1/pcr/m/n/9 rtn_neg="no", nestr_datf=data.frame(c(TRUE, FALSE, TRUE), c(FA
+LSE, FALSE, TRUE)), yes_val=TRUE))[] 
+[41]
+Overfull \hbox (96.18033pt too wide) in paragraph at lines 2342--2342
+ []\T1/pcr/m/n/9 print(nest_v(f_v=c(1, 2, 3, 4, 5, 6), t_v=c("oui", "oui2", "ou
+i3", "oui4", "oui5", "oui6"),[] 
+
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 2345--2345
+ []\T1/pcr/m/n/9 #[1] "1"    "2"    "oui"  "3"    "4"    "oui2" "5"    "6"    "
+oui3" "oui4"[] 
+
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 2375--2375
+ []\T1/pcr/m/n/9 print(new_ordered(f_v=c("non", "non", "non", "oui"), w_v=c("ou
+i", "non", "non")))[] 
+[42]
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 2405--2405
+ []\T1/pcr/m/n/9 print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", 
+"peut1", "non")))[] 
+
+Overfull \hbox (106.98032pt too wide) in paragraph at lines 2409--2409
+ []\T1/pcr/m/n/9 print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", 
+"peut1", "non"), occu="==-2-"))[] 
+
+Overfull \hbox (101.58032pt too wide) in paragraph at lines 2413--2413
+ []\T1/pcr/m/n/9 print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", 
+"peut1", "non"), occu=">-2-"))[] 
+
+Overfull \hbox (106.98032pt too wide) in paragraph at lines 2417--2417
+ []\T1/pcr/m/n/9 print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", 
+"peut1", "non"), occu=c(1, 3)))[] 
+[43] [44]
+Overfull \hbox (25.98041pt too wide) in paragraph at lines 2516--2516
+ []\T1/pcr/m/n/9 print(pattern_generator(base_="oui", from_=c("er", "re", "ere"
+), nb=1, hmn=3))[] 
+
+Overfull \hbox (123.1803pt too wide) in paragraph at lines 2520--2520
+ []\T1/pcr/m/n/9 print(pattern_generator(base_="oui", from_=c("er", "re", "ere"
+), nb=2, hmn=3, after=0, sep="-"))[] 
+[45]
+Overfull \hbox (58.38037pt too wide) in paragraph at lines 2569--2569
+ []\T1/pcr/m/n/9 print(pattern_gettr(word_=c("oui", "non", "erer"), vct=c("oui"
+, "oui", "non", "oui",[] 
+[46]
+Overfull \hbox (139.38028pt too wide) in paragraph at lines 2620--2620
+ []\T1/pcr/m/n/9 print(pattern_tuning(pattrn="oui", spe_nb=2, spe_l=c("e", "r",
+ "T", "O"), exclude_type="o", hmn=3))[] 
+
+Overfull \hbox (78.78088pt too wide) in paragraph at lines 2635--2635
+ []\T1/pcr/m/n/10 ptrn_switchr(inpt_l, f_idx_l = c(), t_idx_l = c(), sep = "-",
+ default_val = NA) 
+[47] [48]
+Overfull \hbox (63.78036pt too wide) in paragraph at lines 2717--2717
+ []\T1/pcr/m/n/9 ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", ad
+d_sep=TRUE, end_=FALSE)[] 
+
+Overfull \hbox (69.18036pt too wide) in paragraph at lines 2749--2749
+ []\T1/pcr/m/n/9 print(rearangr_v(inpt_v=c(23, 21, 56), w_v=c("oui", "peut", "n
+on"), how="decreasing"))[] 
+[49]
+Overfull \hbox (18.78088pt too wide) in paragraph at lines 2767--2767
+ []  \T1/pcr/m/n/10 order = c(1:length(unlist(strsplit(x = inpt_v[1], split = s
+ep_)))),[] 
+
+Overfull \hbox (90.78033pt too wide) in paragraph at lines 2788--2788
+ []\T1/pcr/m/n/9 vec <- multitud(l=list(c("a", "b"), c("1", "2"), c("A", "Z", "
+E"), c("Q", "F")), sep_="/")[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 2792--2792
+ []\T1/pcr/m/n/9 # [1] "a/1/A/Q" "b/1/A/Q" "a/2/A/Q" "b/2/A/Q" "a/1/Z/Q" "b/1/Z
+/Q" "a/2/Z/Q"[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 2793--2793
+ []\T1/pcr/m/n/9 # [8] "b/2/Z/Q" "a/1/E/Q" "b/1/E/Q" "a/2/E/Q" "b/2/E/Q" "a/1/A
+/F" "b/1/A/F"[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 2794--2794
+ []\T1/pcr/m/n/9 #[15] "a/2/A/F" "b/2/A/F" "a/1/Z/F" "b/1/Z/F" "a/2/Z/F" "b/2/Z
+/F" "a/1/E/F"[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 2799--2799
+ []\T1/pcr/m/n/9 # [1] "a/1/1/1"   "a/1/2/2"   "a/1/3/3"   "a/1/4/4"   "a/1/5/5
+"   "a/1/6/6"[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2800--2800
+ []\T1/pcr/m/n/9 # [7] "a/2/7/7"   "a/2/8/8"   "a/2/9/9"   "a/2/10/10" "a/2/11/
+11" "a/2/12/12"[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2801--2801
+ []\T1/pcr/m/n/9 #[13] "b/1/13/13" "b/1/14/14" "b/1/15/15" "b/1/16/16" "b/1/17/
+17" "b/1/18/18"[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2802--2802
+ []\T1/pcr/m/n/9 #[19] "b/2/19/19" "b/2/20/20" "b/2/21/21" "b/2/22/22" "b/2/23/
+23" "b/2/24/24"[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 2808--2808
+ []\T1/pcr/m/n/9 # [1] "a/1/1/1"   "a/1/2/2"   "a/1/3/3"   "a/1/4/4"   "a/1/5/5
+"   "a/1/6/6"[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2809--2809
+ []\T1/pcr/m/n/9 # [7] "a/2/7/7"   "a/2/8/8"   "a/2/9/9"   "a/2/10/10" "a/2/11/
+11" "a/2/12/12"[] 
+[50]
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2810--2810
+ []\T1/pcr/m/n/9 #[13] "b/1/13/13" "b/1/14/14" "b/1/15/15" "b/1/16/16" "b/1/17/
+17" "b/2/18/18"[] 
+
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 2815--2815
+ []\T1/pcr/m/n/9 #[1] "1/1/A/Q"   "2/2/A/Q"   "3/3/A/Q"   "4/4/A/Q"   "5/5/Z/Q"
+   "6/6/Z/Q"[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2816--2816
+ []\T1/pcr/m/n/9 # [7] "7/7/Z/Q"   "8/8/Z/Q"   "9/9/E/Q"   "10/10/E/Q" "11/11/E
+/Q" "12/12/E/Q"[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2817--2817
+ []\T1/pcr/m/n/9 #[13] "13/13/A/F" "14/14/A/F" "15/15/A/F" "16/16/A/F" "17/17/Z
+/F" "18/18/Z/F"[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2818--2818
+ []\T1/pcr/m/n/9 #[19] "19/19/Z/F" "20/20/Z/F" "21/21/E/F" "22/22/E/F" "23/23/E
+/F" "24/24/E/F"[] 
+
+Overfull \hbox (101.58032pt too wide) in paragraph at lines 2852--2852
+ []\T1/pcr/m/n/9 #[1] "This is  1 and 2 and 3 and 4 and 5 and 6 and 7 and 8 and
+ 9 and 10 and 11 and 12 and 13[] 
+
+Overfull \hbox (96.18033pt too wide) in paragraph at lines 2853--2853
+ []\T1/pcr/m/n/9 #and 14 and 15 and 16 and 17 and 18 and 19 and 20 and 21 and 2
+2 and 23 and 24 and 25 and 26[] 
+[51]
+Overfull \hbox (90.78033pt too wide) in paragraph at lines 2882--2882
+ []\T1/pcr/m/n/9 print(save_untl(inpt_l=list(c(1:4), c(1, 1, 3, 4), c(1, 2, 4, 
+3)), val_to_stop_v=c(3, 4)))[] 
+
+Overfull \hbox (74.58035pt too wide) in paragraph at lines 2893--2893
+ []\T1/pcr/m/n/9 print(save_untl(inpt_l=list(c(1:4), c(1, 1, 3, 4), c(1, 2, 4, 
+3)), val_to_stop_v=c(3)))[] 
+[52]
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 2973--2973
+ []\T1/pcr/m/n/9 print(see_datf(datf=datf1, condition_l=c("not_reg"), val_l=lis
+t("[a-z]")))[] 
+[53] [54]
+Overfull \hbox (15.18042pt too wide) in paragraph at lines 3046--3046
+ []\T1/pcr/m/n/9 print(see_idx(v1=c("oui", "non", "peut", "oo"), v2=c("oui", "p
+eut", "oui")))[] 
+[55]
+Overfull \hbox (58.38037pt too wide) in paragraph at lines 3120--3120
+ []\T1/pcr/m/n/9 print(str_remove_untl(inpt_v=vec, ptrn_rm_v=c("-", "/"), untl=
+list(c("max"), c(1))))[] 
+
+Overfull \hbox (69.18036pt too wide) in paragraph at lines 3124--3124
+ []\T1/pcr/m/n/9 print(str_remove_untl(inpt_v=vec, ptrn_rm_v=c("-", "/"), untl=
+list(c("max"), c(1:2))))[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 3128--3128
+ []\T1/pcr/m/n/9 print(str_remove_untl(inpt_v=vec[1], ptrn_rm_v=c("-", "/"), un
+tl=c("max")))[] 
+[56]
+Overfull \hbox (3.31761pt too wide) in paragraph at lines 3151--3152
+[]\T1/ptm/m/n/10 is a pa-ram-e-ter that spec-i-fies if the dataframe re-turned 
+should have unique columns
+
+Overfull \hbox (60.78088pt too wide) in paragraph at lines 3188--3188
+ []\T1/pcr/m/n/10 unique_ltr_from_v(inpt_v, keep_v = c("?", "!", ":", "&", ",",
+ ".", letters)) 
+
+Overfull \hbox (144.78027pt too wide) in paragraph at lines 3203--3203
+ []\T1/pcr/m/n/9 print(unique_ltr_from_v(inpt_v=c("bonjour", "lpoerc", "nonnour
+", "bonnour", "nonjour", "aurevoir")))[] 
+[57]
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 3263--3263
+ []\T1/pcr/m/n/9 # [1] 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 
+3 2 1 3 2 1 3 2 1 3[] 
+[58]
+Overfull \hbox (85.38034pt too wide) in paragraph at lines 3294--3294
+ []\T1/pcr/m/n/9 print(val_replacer(datf=data.frame(c(1, "oo4", TRUE, FALSE), c
+(TRUE, FALSE, TRUE, TRUE)),[] 
+
+Overfull \hbox (48.78088pt too wide) in paragraph at lines 3314--3314
+ []\T1/pcr/m/n/10 vector_replacor(inpt_v = c(), sus_val = c(), rpl_val = c(), g
+rep_ = FALSE) 
+[59]
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 3336--3336
+ []\T1/pcr/m/n/9 # [1] "1"   "2"   "oui" "4"   "5"   "non" "7"   "e"   "9"   "1
+0"  "11"  "a"[] 
+
+Overfull \hbox (36.7804pt too wide) in paragraph at lines 3339--3339
+ []\T1/pcr/m/n/9 print(vector_replacor(inpt_v=c("non", "zez", "pp a ftf", "fdat
+fd", "assistance",[] 
+
+Overfull \hbox (6.62772pt too wide) in paragraph at lines 3374--3375
+[]\T1/ptm/m/n/10 is the max-i-mum num-ber of the in-put vec-tor the func-tion r
+e-turns, if in the dataframe 
+[60]
+Overfull \hbox (74.58035pt too wide) in paragraph at lines 3414--3414
+ []\T1/pcr/m/n/9 print(vec_in_datf(inpt_datf=datf1, inpt_vec=c(5, 2, "z"), coef
+f=-1, conventional=TRUE))[] 
+
+Overfull \hbox (128.58029pt too wide) in paragraph at lines 3420--3420
+ []\T1/pcr/m/n/9 print(vec_in_datf(inpt_datf=datf1, inpt_vec=c(1, "z"), coeff=-
+1, conventional=TRUE, stop_untl=4))[] 
+[61]
+Overfull \hbox (36.7804pt too wide) in paragraph at lines 3492--3492
+ []\T1/pcr/m/n/9 datf1 <- data.frame(c(1:5), c("o-y", "hj-yy", "er-y", "k-ll", 
+"ooo-mm"), c(5:1))[] 
+
+Overfull \hbox (69.18036pt too wide) in paragraph at lines 3494--3494
+ []\T1/pcr/m/n/9 datf2 <- data.frame("col1"=c(1:5), "col2"=c("o-y", "hj-yy", "e
+r-y", "k-ll", "ooo-mm"))[] 
+No file Rd2.ind.
+[62] (/tmp/Rtmp0zeCVe/Rd2pdf1fac710f671dc/Rd2.aux)
+
+Package rerunfilecheck Warning: File `Rd2.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )
+(see the transcript file for additional information)</usr/share/texmf-dist/font
+s/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/
+uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/
+texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/
+urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Rd2.pdf (62 pages, 164886 bytes).
+Transcript written on Rd2.log.
+This is makeindex, version 2.17 [TeX Live 2024] (kpathsea + Thai support).
+Scanning input file Rd2.idx....done (74 entries accepted, 0 rejected).
+Sorting entries....done (410 comparisons).
+Generating output file Rd2.ind....done (129 lines written, 0 warnings).
+Output written in Rd2.ind.
+Transcript written in Rd2.ilg.
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-02-20>
+(./Rd2.tex
+(/usr/share/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/share/texmf-dist/tex/latex/base/bk10.clo))
+(/usr/share/texmf/tex/latex/Rd.sty
+(/usr/share/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/share/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/share/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texmf-dist/tex/latex/base/alltt.sty)
+(/usr/share/texmf-dist/tex/latex/tools/verbatim.sty)
+(/usr/share/texmf-dist/tex/latex/url/url.sty)
+(/usr/share/texmf-dist/tex/latex/base/textcomp.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texmf-dist/tex/latex/amsfonts/amsfonts.sty)
+(/usr/share/texmf-dist/tex/latex/amsfonts/amssymb.sty)
+(/usr/share/texmf-dist/tex/latex/jknapltx/mathrsfs.sty)
+(/usr/share/texmf-dist/tex/generic/iftex/iftex.sty)
+(/usr/share/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/share/texmf-dist/tex/latex/psnfss/times.sty)
+(/usr/share/texmf-dist/tex/latex/graphics/color.sty
+(/usr/share/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/share/texmf-dist/tex/latex/graphics-def/pdftex.def)
+(/usr/share/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/share/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/share/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
+(/usr/share/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(/usr/share/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(/usr/share/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/share/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(/usr/share/texmf-dist/tex/generic/infwarerr/infwarerr.sty)))
+(/usr/share/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/share/texmf-dist/tex/latex/auxhook/auxhook.sty)
+(/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/share/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/share/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+(/usr/share/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
+(/usr/share/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(/usr/share/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/share/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/share/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/share/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/share/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(/usr/share/texmf-dist/tex/latex/base/atbegshi-ltx.sty))
+(/usr/share/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/share/texmf-dist/tex/latex/base/atveryend-ltx.sty)
+(/usr/share/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(/usr/share/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty))))
+(/usr/share/texmf-dist/tex/latex/base/makeidx.sty)
+(/usr/share/texmf-dist/tex/latex/base/inputenc.sty)
+Writing index file Rd2.idx
+(/usr/share/texmf-dist/tex/latex/psnfss/t1ptm.fd)
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def)
+(/tmp/Rtmp0zeCVe/Rd2pdf1fac710f671dc/Rd2.aux)
+(/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/tmp/Rtmp0zeCVe/Rd2pdf1fac710f671dc/Rd2.out)
+(/tmp/Rtmp0zeCVe/Rd2pdf1fac710f671dc/Rd2.out)
+(/usr/share/texmf-dist/tex/latex/psnfss/t1pcr.fd)
+(/usr/share/texmf-dist/tex/latex/psnfss/t1phv.fd)
+(/tmp/Rtmp0zeCVe/Rd2pdf1fac710f671dc/Rd2.toc
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(/usr/share/texmf-dist/tex/latex/jknapltx/ursfs.fd) [1{/var/lib/texmf/fonts/map
+/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}]
+[2])
+Overfull \hbox (79.98035pt too wide) in paragraph at lines 60--60
+ []\T1/pcr/m/n/9 datf <- data.frame("mod"=c("first", "seco", "seco", "first", "
+first", "third", "first"),[] 
+
+Overfull \hbox (69.18036pt too wide) in paragraph at lines 66--66
+ []\T1/pcr/m/n/9 print(all_stat(inpt_v=c("first", "seco"), var_add = c("var1", 
+"var2", "var3", "var4"),[] 
+
+Overfull \hbox (47.58038pt too wide) in paragraph at lines 67--67
+ [] \T1/pcr/m/n/9 stat_var=c("sum", "mean", "median", "sd", "occu-var2/", "occu
+-var4/", "variance",[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 71--71
+ []\T1/pcr/m/n/9 #   modal_v var_vector occu sum mean  med standard_devaition  
+       variance[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 73--73
+ []\T1/pcr/m/n/9 #2                var1       64   16 16.5   6.97614984548545 4
+8.6666666666667[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 76--76
+ []\T1/pcr/m/n/9 #5                var3      178 44.5   45   1.73205080756888  
+              3[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 81--81
+ []\T1/pcr/m/n/9 #10               var1       43 21.5 21.5  0.707106781186548  
+            0.5[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 84--84
+ []\T1/pcr/m/n/9 #13               var3       87 43.5 43.5  0.707106781186548  
+            0.5[] 
+[3] [4]
+Overfull \hbox (63.78036pt too wide) in paragraph at lines 154--154
+ []\T1/pcr/m/n/9 datf2 <- data.frame("val"=c(3, 7, 2, 4, 1, 2), "ids"=c("a", "z
+", "z", "a", "a", "a"),[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 162--162
+ []\T1/pcr/m/n/9 print(any_join_datf(inpt_datf_l=list(datf1, datf2, datf3), joi
+n_type="inner",[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 166--166
+ []\T1/pcr/m/n/9 #  ids val ids last second_ids val ids  bool second_ids val id
+s last second_ids[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 167--167
+ []\T1/pcr/m/n/9 #3 z12   2   z  non         12   7   z FALSE         12   2   
+z  non         12[] 
+
+Overfull \hbox (101.58032pt too wide) in paragraph at lines 169--169
+ []\T1/pcr/m/n/9 print(any_join_datf(inpt_datf_l=list(datf1, datf2, datf3), joi
+n_type="inner", id_v=c("ids"),[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 172--172
+ []\T1/pcr/m/n/9 #  ids val ids last second_ids val ids  bool second_ids val id
+s last second_ids[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 173--173
+ []\T1/pcr/m/n/9 #2   a   1   a  oui         11   3   a  TRUE         13   1   
+a  oui         13[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 174--174
+ []\T1/pcr/m/n/9 #3   z   2   z  non         12   7   z FALSE         12   2   
+z  non         12[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 175--175
+ []\T1/pcr/m/n/9 #4   a   4   a  oui          8   4   a FALSE         34   9   
+a  oui         11[] 
+
+Overfull \hbox (85.38034pt too wide) in paragraph at lines 177--177
+ []\T1/pcr/m/n/9 print(any_join_datf(inpt_datf_l=list(datf1, datf2, datf3), joi
+n_type=c(1), id_v=c("ids"),[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 191--191
+ []\T1/pcr/m/n/9 print(any_join_datf(inpt_datf_l=list(datf2, datf1, datf3), joi
+n_type=c(1, 3),[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 195--195
+ []\T1/pcr/m/n/9 #   ids  val  ids  bool second_ids  val  ids last second_ids  
+val  ids last[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 196--196
+ []\T1/pcr/m/n/9 #1  a13    3    a  TRUE         13 <NA> <NA> <NA>       <NA>  
+  1    a  oui[] 
+[5]
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 197--197
+ []\T1/pcr/m/n/9 #2  z12    7    z FALSE         12    2    z  non         12  
+  2    z  non[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 198--198
+ []\T1/pcr/m/n/9 #3   z8    2    z FALSE          8 <NA> <NA> <NA>       <NA> <
+NA> <NA> <NA>[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 199--199
+ []\T1/pcr/m/n/9 #4  a34    4    a FALSE         34 <NA> <NA> <NA>       <NA> <
+NA> <NA> <NA>[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 200--200
+ []\T1/pcr/m/n/9 #5  a22    1    a  TRUE         22 <NA> <NA> <NA>       <NA> <
+NA> <NA> <NA>[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 201--201
+ []\T1/pcr/m/n/9 #6  a12    2    a  TRUE         12 <NA> <NA> <NA>       <NA> <
+NA> <NA> <NA>[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 202--202
+ []\T1/pcr/m/n/9 #7  a13 <NA> <NA>  <NA>       <NA> <NA> <NA> <NA>       <NA> <
+NA> <NA> <NA>[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 203--203
+ []\T1/pcr/m/n/9 #8  a11 <NA> <NA>  <NA>       <NA>    1    a  oui         11  
+  9    a  oui[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 204--204
+ []\T1/pcr/m/n/9 #9  z12 <NA> <NA>  <NA>       <NA> <NA> <NA> <NA>       <NA> <
+NA> <NA> <NA>[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 205--205
+ []\T1/pcr/m/n/9 #10  a8 <NA> <NA>  <NA>       <NA>    4    a  oui          8  
+  4    a  oui[] 
+
+Overfull \hbox (85.38034pt too wide) in paragraph at lines 218--218
+ []\T1/pcr/m/n/9 print(any_join_datf(inpt_datf_l=list(datf1, datf2, datf3), joi
+n_type=c(1), id_v=c("ids"),[] 
+[6] [7] [8]
+Overfull \hbox (112.38031pt too wide) in paragraph at lines 389--389
+ []\T1/pcr/m/n/9 print(closer_ptrn(inpt_v=c("bonjour", "lpoerc", "nonnour", "bo
+nnour", "nonjour", "aurevoir")))[] 
+[9]
+Overfull \hbox (106.98032pt too wide) in paragraph at lines 445--445
+ []\T1/pcr/m/n/9 print(closer_ptrn(inpt_v=c("bonjour", "lpoerc", "nonnour", "bo
+nnour", "nonjour", "aurevoir"),[] 
+
+Underfull \vbox (badness 10000) has occurred while \output is active [10]
+Overfull \hbox (96.18033pt too wide) in paragraph at lines 524--524
+ []\T1/pcr/m/n/9 print(closer_ptrn_adv(inpt_v=c("aurevoir", "bonnour", "nonnour
+", "fin", "mois", "bonjour"),[] 
+
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 533--533
+ []\T1/pcr/m/n/9 print(closer_ptrn_adv(inpt_v=c("aurevoir", "bonnour", "nonnour
+", "fin", "mois")))[] 
+[11]
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 568--568
+ [] \T1/pcr/m/n/9 print(clusterizer_v(inpt_v=sample.int(20, 26, replace=TRUE), 
+w_v=NA, c_val=0.9)) 
+[12]
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 615--615
+ []\T1/pcr/m/n/9 # [1] "1"  "1"  "-"  "2"  "2"  "-"  "3"  "3"  "-"  "4"  "4"  "
+-"  "5"  "5"  "-"[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 616--616
+ []\T1/pcr/m/n/9 #[16] "6"  "6"  "-"  "7"  "7"  "-"  "8"  "8"  "-"  "9"  "9"  "
+-"  "10" "10" "-"[] 
+
+Overfull \hbox (69.18036pt too wide) in paragraph at lines 619--619
+ []\T1/pcr/m/n/9 print(clusterizer_v(inpt_v=sample.int(40, 26, replace=TRUE), w
+_v=letters, c_val=0.29))[] 
+
+Underfull \vbox (badness 10000) has occurred while \output is active [13]
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 675--675
+ []\T1/pcr/m/n/9 # [1] "13" "13" "-"  "14" "14" "-"  "15" "15" "-"  "16" "16" "
+-"  "17" "17" "-"[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 676--676
+ []\T1/pcr/m/n/9 #[16] "19" "19" "-"  "21" "21" "-"  "22" "22" "-"  "23" "23" "
+-"  "25" "25" "-"[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 677--677
+ []\T1/pcr/m/n/9 #[31] "27" "27" "-"  "29" "29" "-"  "30" "30" "-"  "31" "31" "
+-"  "34" "34" "-"[] 
+[14]
+Overfull \hbox (79.98035pt too wide) in paragraph at lines 710--710
+ []\T1/pcr/m/n/9 print(colins_datf(inpt_datf=datf1, target_col=list(c("oui", "o
+ui", "oui", "non", "non"),[] 
+
+Overfull \hbox (79.98035pt too wide) in paragraph at lines 721--721
+ []\T1/pcr/m/n/9 print(colins_datf(inpt_datf=datf1, target_col=list(c("oui", "o
+ui", "oui", "non", "non"),[] 
+
+Overfull \hbox (0.78088pt too wide) in paragraph at lines 743--743
+ []\T1/pcr/m/n/10 converter_date(inpt_date, convert_to, frmt = "snhdmy", sep_ =
+ "-") 
+
+Overfull \hbox (74.58035pt too wide) in paragraph at lines 762--762
+ []\T1/pcr/m/n/9 print(converter_date(inpt_date="14-04-11-2024", sep_="-", frmt
+="hdmy", convert_to="m"))[] 
+
+Overfull \hbox (74.58035pt too wide) in paragraph at lines 766--766
+ []\T1/pcr/m/n/9 print(converter_date(inpt_date="14-04-11-2024", sep_="-", frmt
+="hdmy", convert_to="y"))[] 
+[15]
+Overfull \hbox (74.58035pt too wide) in paragraph at lines 770--770
+ []\T1/pcr/m/n/9 print(converter_date(inpt_date="14-04-11-2024", sep_="-", frmt
+="hdmy", convert_to="s"))[] 
+
+Overfull \hbox (47.58038pt too wide) in paragraph at lines 774--774
+ []\T1/pcr/m/n/9 print(converter_date(inpt_date="63900626400", sep_="-", frmt="
+s", convert_to="y"))[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 778--778
+ []\T1/pcr/m/n/9 print(converter_date(inpt_date="2024", sep_="-", frmt="y", con
+vert_to="s"))[] 
+
+Overfull \hbox (54.78088pt too wide) in paragraph at lines 793--793
+ []\T1/pcr/m/n/10 converter_format(inpt_val, sep_ = "-", inpt_frmt, frmt, defau
+lt_val = "00") 
+
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 815--815
+ []                       \T1/pcr/m/n/9 inpt_frmt="shmy", frmt="snhdmy", defaul
+t_val="00"))[] 
+
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 820--820
+ []                       \T1/pcr/m/n/9 inpt_frmt="shmy", frmt="Pnhdmy", defaul
+t_val="00"))[] 
+[16]
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 885--885
+ []\T1/pcr/m/n/9 #[1]  3.423000e+03  4.500000e+01  4.500000e+01 -9.998637e-01  
+2.100000e+01[] 
+
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 886--886
+ []\T1/pcr/m/n/9 #[6] -1.540140e+05  4.500000e+01            NA            NA  
+          NA[] 
+[17]
+Overfull \hbox (120.78088pt too wide) in paragraph at lines 949--949
+ []  \T1/pcr/m/n/10 str_source = c("a", "b", "c", "d", "e", "f", "g", "h", "i",
+ "j", "k", "l", "m", "n",[] 
+[18] [19] [20]
+Overfull \hbox (85.38034pt too wide) in paragraph at lines 1098--1098
+ []     \T1/pcr/m/n/9 c("-", "a", "a1", "-", "B", "r", "uy", "-", "c", "c1"), "
+_"), organisation=c(1, 0)))[] 
+[21]
+Overfull \hbox (52.98038pt too wide) in paragraph at lines 1153--1153
+ []\T1/pcr/m/n/9 print(date_addr(date1="25-02", date2="58-12-08", frmt1="dm", f
+rmt2="shd", sep_="-",[] 
+
+Overfull \hbox (52.98038pt too wide) in paragraph at lines 1158--1158
+ []\T1/pcr/m/n/9 print(date_addr(date1="25-02", date2="58-12-08", frmt1="dm", f
+rmt2="shd", sep_="-",[] 
+
+Overfull \hbox (58.38037pt too wide) in paragraph at lines 1163--1163
+ []\T1/pcr/m/n/9 print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy",
+ frmt2="dm", sep_="-",[] 
+
+Overfull \hbox (58.38037pt too wide) in paragraph at lines 1168--1168
+ []\T1/pcr/m/n/9 print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy",
+ frmt2="dm", sep_="-",[] 
+
+Overfull \hbox (58.38037pt too wide) in paragraph at lines 1173--1173
+ []\T1/pcr/m/n/9 print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy",
+ frmt2="dm", sep_="-",[] 
+
+Overfull \hbox (58.38037pt too wide) in paragraph at lines 1178--1178
+ []\T1/pcr/m/n/9 print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy",
+ frmt2="dm", sep_="-",[] 
+[22]
+Overfull \hbox (4.0073pt too wide) in paragraph at lines 1189--1190
+[]\T1/ptm/m/n/10 Allow to con-vert sin-gle date value like 2025.36 year to a da
+te like sec-ond/minutehour/day/month/year
+
+Overfull \hbox (66.78088pt too wide) in paragraph at lines 1194--1194
+ []\T1/pcr/m/n/10 date_converter_reverse(inpt_date, convert_to = "dmy", frmt = 
+"y", sep_ = "-") 
+
+Overfull \hbox (85.38034pt too wide) in paragraph at lines 1213--1213
+ []\T1/pcr/m/n/9 print(date_converter_reverse(inpt_date="2024.929", convert_to=
+"hmy", frmt="y", sep_="-"))[] 
+
+Overfull \hbox (85.38034pt too wide) in paragraph at lines 1217--1217
+ []\T1/pcr/m/n/9 print(date_converter_reverse(inpt_date="2024.929", convert_to=
+"dmy", frmt="y", sep_="-"))[] 
+
+Overfull \hbox (90.78033pt too wide) in paragraph at lines 1221--1221
+ []\T1/pcr/m/n/9 print(date_converter_reverse(inpt_date="2024.929", convert_to=
+"hdmy", frmt="y", sep_="-"))[] 
+
+Overfull \hbox (90.78033pt too wide) in paragraph at lines 1225--1225
+ []\T1/pcr/m/n/9 print(date_converter_reverse(inpt_date="2024.929", convert_to=
+"dhym", frmt="y", sep_="-"))[] 
+[23] [24]
+Overfull \hbox (36.7804pt too wide) in paragraph at lines 1335--1335
+ []\T1/pcr/m/n/9 datf1 <- data.frame(c(1:6), c("oui", "oui", "oui", "oui", "oui
+", "oui"), c(6:1))[] 
+
+Overfull \hbox (25.98041pt too wide) in paragraph at lines 1337--1337
+ []\T1/pcr/m/n/9 datf2 <- data.frame(c(1:7), c("oui", "oui", "oui", "oui", "non
+", "oui", "zz"))[] 
+[25]
+Overfull \hbox (90.78033pt too wide) in paragraph at lines 1405--1405
+ []\T1/pcr/m/n/9 print(extrt_only_v(inpt_v=c("oui", "non", "peut", "oo", "ll", 
+"oui", "non", "oui", "oui"),[] 
+[26]
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 1468--1468
+ []\T1/pcr/m/n/9 print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "
+non", "peut-etre"),[] 
+
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 1474--1474
+ []\T1/pcr/m/n/9 print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "
+non", "peut-etre"),[] 
+[27]
+Overfull \hbox (52.98038pt too wide) in paragraph at lines 1554--1554
+ []\T1/pcr/m/n/9 print(format_date(f_dialect=c("janvier", "février", "mars", "a
+vril", "mai", "juin",[] 
+
+Overfull \hbox (117.7803pt too wide) in paragraph at lines 1555--1555
+ []\T1/pcr/m/n/9 "juillet", "aout", "septembre", "octobre", "novembre", "décemb
+re"), sentc="11-septembre-2023"))[] 
+[28]
+Overfull \hbox (1.5473pt too wide) in paragraph at lines 1578--1579
+[]\T1/ptm/m/n/10 is the dataframe con-tain-ing the co-or-diantes of the es-tab-
+lished ge-o-graph-i-cal points 
+[29]
+Overfull \hbox (90.78033pt too wide) in paragraph at lines 1660--1660
+ []\T1/pcr/m/n/9 print(globe(lat_f=23, long_f=112, alt_f=NA, lat_n=c(2, 82), lo
+ng_n=c(165, -55), alt_n=NA))[] 
+
+Overfull \hbox (117.7803pt too wide) in paragraph at lines 1664--1664
+ []\T1/pcr/m/n/9 print(globe(lat_f=23, long_f=112, alt_f=8, lat_n=c(2, 82), lon
+g_n=c(165, -55), alt_n=c(8, -2)))[] 
+[30]
+Overfull \hbox (36.7804pt too wide) in paragraph at lines 1717--1717
+ []\T1/pcr/m/n/9 print(groupr_datf(inpt_datf=datf1, val_lst=val_lst, condition_
+lst=condition_lst,[] 
+[31]
+Overfull \hbox (85.38034pt too wide) in paragraph at lines 1772--1772
+ []\T1/pcr/m/n/9 print(id_keepr(inpt_datf=datf1, col_v=c(1, 2), el_v=c("oui", "
+op"), rstr_l=list(c(1:5))))[] 
+[32] [33] [34]
+Overfull \hbox (25.98041pt too wide) in paragraph at lines 1908--1908
+ []\T1/pcr/m/n/9 print(inter_max(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3))
+, get_lst=TRUE))[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 1919--1919
+ []\T1/pcr/m/n/9 print(inter_max(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3))
+, get_lst=FALSE))[] 
+[35]
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 1975--1975
+ []\T1/pcr/m/n/9 # [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 
+1.4 1.5 1.6 1.7 1.8[] 
+
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 1976--1976
+ []\T1/pcr/m/n/9 #[20] 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.0 3.1 3.2 
+3.3 3.4 3.5 3.6 3.7[] 
+
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 1980--1980
+ []\T1/pcr/m/n/9 # [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 
+1.4 1.5 1.6 1.7 1.8[] 
+
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 1981--1981
+ []\T1/pcr/m/n/9 #[20] 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.0 3.1 3.2 
+3.3 3.4 3.5 3.6 3.7[] 
+[36]
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 2015--2015
+ []\T1/pcr/m/n/9 # [1]   1   3   7   9  11  13  17  19  21  23  27  29  31  33 
+ 37  39  41  43  47[] 
+
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 2016--2016
+ []\T1/pcr/m/n/9 #[20]  49  51  53  57  59  61  63  67  69  71  73  77  79  81 
+ 83  87  89  91  93[] 
+[37] [38] [39]
+Overfull \hbox (90.78033pt too wide) in paragraph at lines 2179--2179
+ []\T1/pcr/m/n/9 print(multitud(l=list(c("a", "b"), c("1", "2"), c("A", "Z", "E
+"), c("Q", "F")), sep_="/"))[] 
+
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 2181--2181
+ []\T1/pcr/m/n/9 #[1] "a/1/A/Q" "b/1/A/Q" "a/2/A/Q" "b/2/A/Q" "a/1/Z/Q" "b/1/Z/
+Q" "a/2/Z/Q"[] 
+
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 2182--2182
+ []\T1/pcr/m/n/9 #[8] "b/2/Z/Q" "a/1/E/Q" "b/1/E/Q" "a/2/E/Q" "b/2/E/Q" "a/1/A/
+F" "b/1/A/F"[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 2183--2183
+ []\T1/pcr/m/n/9 #[15] "a/2/A/F" "b/2/A/F" "a/1/Z/F" "b/1/Z/F" "a/2/Z/F" "b/2/Z
+/F" "a/1/E/F"[] 
+[40]
+Overfull \hbox (47.58038pt too wide) in paragraph at lines 2255--2255
+ []\T1/pcr/m/n/9 nestr_datf=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TR
+UE)), yes_val=TRUE))[] 
+
+Overfull \hbox (47.58038pt too wide) in paragraph at lines 2265--2265
+ []\T1/pcr/m/n/9 nestr_datf=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TR
+UE)), yes_val=TRUE))[] 
+[41]
+Overfull \hbox (30.78088pt too wide) in paragraph at lines 2283--2283
+ []\T1/pcr/m/n/10 nestr_datf2(inptf_datf, rtn_pos, rtn_neg = NA, nestr_datf, ye
+s_val = T) 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 2304--2304
+ []\T1/pcr/m/n/9 print(nestr_datf2(inptf_datf=data.frame(c(1, 2, 1), c(1, 5, 7)
+), rtn_pos="yes",[] 
+
+Overfull \hbox (123.1803pt too wide) in paragraph at lines 2305--2305
+ []\T1/pcr/m/n/9 rtn_neg="no", nestr_datf=data.frame(c(TRUE, FALSE, TRUE), c(FA
+LSE, FALSE, TRUE)), yes_val=TRUE))[] 
+[42]
+Overfull \hbox (96.18033pt too wide) in paragraph at lines 2342--2342
+ []\T1/pcr/m/n/9 print(nest_v(f_v=c(1, 2, 3, 4, 5, 6), t_v=c("oui", "oui2", "ou
+i3", "oui4", "oui5", "oui6"),[] 
+
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 2345--2345
+ []\T1/pcr/m/n/9 #[1] "1"    "2"    "oui"  "3"    "4"    "oui2" "5"    "6"    "
+oui3" "oui4"[] 
+
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 2375--2375
+ []\T1/pcr/m/n/9 print(new_ordered(f_v=c("non", "non", "non", "oui"), w_v=c("ou
+i", "non", "non")))[] 
+[43]
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 2405--2405
+ []\T1/pcr/m/n/9 print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", 
+"peut1", "non")))[] 
+
+Overfull \hbox (106.98032pt too wide) in paragraph at lines 2409--2409
+ []\T1/pcr/m/n/9 print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", 
+"peut1", "non"), occu="==-2-"))[] 
+
+Overfull \hbox (101.58032pt too wide) in paragraph at lines 2413--2413
+ []\T1/pcr/m/n/9 print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", 
+"peut1", "non"), occu=">-2-"))[] 
+
+Overfull \hbox (106.98032pt too wide) in paragraph at lines 2417--2417
+ []\T1/pcr/m/n/9 print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", 
+"peut1", "non"), occu=c(1, 3)))[] 
+[44] [45]
+Overfull \hbox (25.98041pt too wide) in paragraph at lines 2516--2516
+ []\T1/pcr/m/n/9 print(pattern_generator(base_="oui", from_=c("er", "re", "ere"
+), nb=1, hmn=3))[] 
+
+Overfull \hbox (123.1803pt too wide) in paragraph at lines 2520--2520
+ []\T1/pcr/m/n/9 print(pattern_generator(base_="oui", from_=c("er", "re", "ere"
+), nb=2, hmn=3, after=0, sep="-"))[] 
+[46]
+Overfull \hbox (58.38037pt too wide) in paragraph at lines 2569--2569
+ []\T1/pcr/m/n/9 print(pattern_gettr(word_=c("oui", "non", "erer"), vct=c("oui"
+, "oui", "non", "oui",[] 
+[47]
+Overfull \hbox (139.38028pt too wide) in paragraph at lines 2620--2620
+ []\T1/pcr/m/n/9 print(pattern_tuning(pattrn="oui", spe_nb=2, spe_l=c("e", "r",
+ "T", "O"), exclude_type="o", hmn=3))[] 
+
+Overfull \hbox (78.78088pt too wide) in paragraph at lines 2635--2635
+ []\T1/pcr/m/n/10 ptrn_switchr(inpt_l, f_idx_l = c(), t_idx_l = c(), sep = "-",
+ default_val = NA) 
+[48] [49]
+Overfull \hbox (63.78036pt too wide) in paragraph at lines 2717--2717
+ []\T1/pcr/m/n/9 ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", ad
+d_sep=TRUE, end_=FALSE)[] 
+
+Overfull \hbox (69.18036pt too wide) in paragraph at lines 2749--2749
+ []\T1/pcr/m/n/9 print(rearangr_v(inpt_v=c(23, 21, 56), w_v=c("oui", "peut", "n
+on"), how="decreasing"))[] 
+[50]
+Overfull \hbox (18.78088pt too wide) in paragraph at lines 2767--2767
+ []  \T1/pcr/m/n/10 order = c(1:length(unlist(strsplit(x = inpt_v[1], split = s
+ep_)))),[] 
+
+Overfull \hbox (90.78033pt too wide) in paragraph at lines 2788--2788
+ []\T1/pcr/m/n/9 vec <- multitud(l=list(c("a", "b"), c("1", "2"), c("A", "Z", "
+E"), c("Q", "F")), sep_="/")[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 2792--2792
+ []\T1/pcr/m/n/9 # [1] "a/1/A/Q" "b/1/A/Q" "a/2/A/Q" "b/2/A/Q" "a/1/Z/Q" "b/1/Z
+/Q" "a/2/Z/Q"[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 2793--2793
+ []\T1/pcr/m/n/9 # [8] "b/2/Z/Q" "a/1/E/Q" "b/1/E/Q" "a/2/E/Q" "b/2/E/Q" "a/1/A
+/F" "b/1/A/F"[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 2794--2794
+ []\T1/pcr/m/n/9 #[15] "a/2/A/F" "b/2/A/F" "a/1/Z/F" "b/1/Z/F" "a/2/Z/F" "b/2/Z
+/F" "a/1/E/F"[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 2799--2799
+ []\T1/pcr/m/n/9 # [1] "a/1/1/1"   "a/1/2/2"   "a/1/3/3"   "a/1/4/4"   "a/1/5/5
+"   "a/1/6/6"[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2800--2800
+ []\T1/pcr/m/n/9 # [7] "a/2/7/7"   "a/2/8/8"   "a/2/9/9"   "a/2/10/10" "a/2/11/
+11" "a/2/12/12"[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2801--2801
+ []\T1/pcr/m/n/9 #[13] "b/1/13/13" "b/1/14/14" "b/1/15/15" "b/1/16/16" "b/1/17/
+17" "b/1/18/18"[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2802--2802
+ []\T1/pcr/m/n/9 #[19] "b/2/19/19" "b/2/20/20" "b/2/21/21" "b/2/22/22" "b/2/23/
+23" "b/2/24/24"[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 2808--2808
+ []\T1/pcr/m/n/9 # [1] "a/1/1/1"   "a/1/2/2"   "a/1/3/3"   "a/1/4/4"   "a/1/5/5
+"   "a/1/6/6"[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2809--2809
+ []\T1/pcr/m/n/9 # [7] "a/2/7/7"   "a/2/8/8"   "a/2/9/9"   "a/2/10/10" "a/2/11/
+11" "a/2/12/12"[] 
+[51]
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2810--2810
+ []\T1/pcr/m/n/9 #[13] "b/1/13/13" "b/1/14/14" "b/1/15/15" "b/1/16/16" "b/1/17/
+17" "b/2/18/18"[] 
+
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 2815--2815
+ []\T1/pcr/m/n/9 #[1] "1/1/A/Q"   "2/2/A/Q"   "3/3/A/Q"   "4/4/A/Q"   "5/5/Z/Q"
+   "6/6/Z/Q"[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2816--2816
+ []\T1/pcr/m/n/9 # [7] "7/7/Z/Q"   "8/8/Z/Q"   "9/9/E/Q"   "10/10/E/Q" "11/11/E
+/Q" "12/12/E/Q"[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2817--2817
+ []\T1/pcr/m/n/9 #[13] "13/13/A/F" "14/14/A/F" "15/15/A/F" "16/16/A/F" "17/17/Z
+/F" "18/18/Z/F"[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2818--2818
+ []\T1/pcr/m/n/9 #[19] "19/19/Z/F" "20/20/Z/F" "21/21/E/F" "22/22/E/F" "23/23/E
+/F" "24/24/E/F"[] 
+
+Overfull \hbox (101.58032pt too wide) in paragraph at lines 2852--2852
+ []\T1/pcr/m/n/9 #[1] "This is  1 and 2 and 3 and 4 and 5 and 6 and 7 and 8 and
+ 9 and 10 and 11 and 12 and 13[] 
+
+Overfull \hbox (96.18033pt too wide) in paragraph at lines 2853--2853
+ []\T1/pcr/m/n/9 #and 14 and 15 and 16 and 17 and 18 and 19 and 20 and 21 and 2
+2 and 23 and 24 and 25 and 26[] 
+[52]
+Overfull \hbox (90.78033pt too wide) in paragraph at lines 2882--2882
+ []\T1/pcr/m/n/9 print(save_untl(inpt_l=list(c(1:4), c(1, 1, 3, 4), c(1, 2, 4, 
+3)), val_to_stop_v=c(3, 4)))[] 
+
+Overfull \hbox (74.58035pt too wide) in paragraph at lines 2893--2893
+ []\T1/pcr/m/n/9 print(save_untl(inpt_l=list(c(1:4), c(1, 1, 3, 4), c(1, 2, 4, 
+3)), val_to_stop_v=c(3)))[] 
+[53]
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 2973--2973
+ []\T1/pcr/m/n/9 print(see_datf(datf=datf1, condition_l=c("not_reg"), val_l=lis
+t("[a-z]")))[] 
+[54] [55]
+Overfull \hbox (15.18042pt too wide) in paragraph at lines 3046--3046
+ []\T1/pcr/m/n/9 print(see_idx(v1=c("oui", "non", "peut", "oo"), v2=c("oui", "p
+eut", "oui")))[] 
+[56]
+Overfull \hbox (58.38037pt too wide) in paragraph at lines 3120--3120
+ []\T1/pcr/m/n/9 print(str_remove_untl(inpt_v=vec, ptrn_rm_v=c("-", "/"), untl=
+list(c("max"), c(1))))[] 
+
+Overfull \hbox (69.18036pt too wide) in paragraph at lines 3124--3124
+ []\T1/pcr/m/n/9 print(str_remove_untl(inpt_v=vec, ptrn_rm_v=c("-", "/"), untl=
+list(c("max"), c(1:2))))[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 3128--3128
+ []\T1/pcr/m/n/9 print(str_remove_untl(inpt_v=vec[1], ptrn_rm_v=c("-", "/"), un
+tl=c("max")))[] 
+[57]
+Overfull \hbox (3.31761pt too wide) in paragraph at lines 3151--3152
+[]\T1/ptm/m/n/10 is a pa-ram-e-ter that spec-i-fies if the dataframe re-turned 
+should have unique columns
+
+Overfull \hbox (60.78088pt too wide) in paragraph at lines 3188--3188
+ []\T1/pcr/m/n/10 unique_ltr_from_v(inpt_v, keep_v = c("?", "!", ":", "&", ",",
+ ".", letters)) 
+
+Overfull \hbox (144.78027pt too wide) in paragraph at lines 3203--3203
+ []\T1/pcr/m/n/9 print(unique_ltr_from_v(inpt_v=c("bonjour", "lpoerc", "nonnour
+", "bonnour", "nonjour", "aurevoir")))[] 
+[58]
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 3263--3263
+ []\T1/pcr/m/n/9 # [1] 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 
+3 2 1 3 2 1 3 2 1 3[] 
+[59]
+Overfull \hbox (85.38034pt too wide) in paragraph at lines 3294--3294
+ []\T1/pcr/m/n/9 print(val_replacer(datf=data.frame(c(1, "oo4", TRUE, FALSE), c
+(TRUE, FALSE, TRUE, TRUE)),[] 
+
+Overfull \hbox (48.78088pt too wide) in paragraph at lines 3314--3314
+ []\T1/pcr/m/n/10 vector_replacor(inpt_v = c(), sus_val = c(), rpl_val = c(), g
+rep_ = FALSE) 
+[60]
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 3336--3336
+ []\T1/pcr/m/n/9 # [1] "1"   "2"   "oui" "4"   "5"   "non" "7"   "e"   "9"   "1
+0"  "11"  "a"[] 
+
+Overfull \hbox (36.7804pt too wide) in paragraph at lines 3339--3339
+ []\T1/pcr/m/n/9 print(vector_replacor(inpt_v=c("non", "zez", "pp a ftf", "fdat
+fd", "assistance",[] 
+
+Overfull \hbox (6.62772pt too wide) in paragraph at lines 3374--3375
+[]\T1/ptm/m/n/10 is the max-i-mum num-ber of the in-put vec-tor the func-tion r
+e-turns, if in the dataframe 
+[61]
+Overfull \hbox (74.58035pt too wide) in paragraph at lines 3414--3414
+ []\T1/pcr/m/n/9 print(vec_in_datf(inpt_datf=datf1, inpt_vec=c(5, 2, "z"), coef
+f=-1, conventional=TRUE))[] 
+
+Overfull \hbox (128.58029pt too wide) in paragraph at lines 3420--3420
+ []\T1/pcr/m/n/9 print(vec_in_datf(inpt_datf=datf1, inpt_vec=c(1, "z"), coeff=-
+1, conventional=TRUE, stop_untl=4))[] 
+[62]
+Overfull \hbox (36.7804pt too wide) in paragraph at lines 3492--3492
+ []\T1/pcr/m/n/9 datf1 <- data.frame(c(1:5), c("o-y", "hj-yy", "er-y", "k-ll", 
+"ooo-mm"), c(5:1))[] 
+
+Overfull \hbox (69.18036pt too wide) in paragraph at lines 3494--3494
+ []\T1/pcr/m/n/9 datf2 <- data.frame("col1"=c(1:5), "col2"=c("o-y", "hj-yy", "e
+r-y", "k-ll", "ooo-mm"))[] 
+(/tmp/Rtmp0zeCVe/Rd2pdf1fac710f671dc/Rd2.ind [63] [64])
+(/tmp/Rtmp0zeCVe/Rd2pdf1fac710f671dc/Rd2.aux)
+
+Package rerunfilecheck Warning: File `Rd2.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )
+(see the transcript file for additional information)</usr/share/texmf-dist/font
+s/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/
+uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/
+texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/
+urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Rd2.pdf (64 pages, 176777 bytes).
+Transcript written on Rd2.log.
+This is makeindex, version 2.17 [TeX Live 2024] (kpathsea + Thai support).
+Scanning input file Rd2.idx....done (74 entries accepted, 0 rejected).
+Sorting entries....done (410 comparisons).
+Generating output file Rd2.ind....done (129 lines written, 0 warnings).
+Output written in Rd2.ind.
+Transcript written in Rd2.ilg.
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-02-20>
+(./Rd2.tex
+(/usr/share/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/share/texmf-dist/tex/latex/base/bk10.clo))
+(/usr/share/texmf/tex/latex/Rd.sty
+(/usr/share/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/share/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/share/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texmf-dist/tex/latex/base/alltt.sty)
+(/usr/share/texmf-dist/tex/latex/tools/verbatim.sty)
+(/usr/share/texmf-dist/tex/latex/url/url.sty)
+(/usr/share/texmf-dist/tex/latex/base/textcomp.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texmf-dist/tex/latex/amsfonts/amsfonts.sty)
+(/usr/share/texmf-dist/tex/latex/amsfonts/amssymb.sty)
+(/usr/share/texmf-dist/tex/latex/jknapltx/mathrsfs.sty)
+(/usr/share/texmf-dist/tex/generic/iftex/iftex.sty)
+(/usr/share/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/share/texmf-dist/tex/latex/psnfss/times.sty)
+(/usr/share/texmf-dist/tex/latex/graphics/color.sty
+(/usr/share/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/share/texmf-dist/tex/latex/graphics-def/pdftex.def)
+(/usr/share/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/share/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/share/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
+(/usr/share/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(/usr/share/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(/usr/share/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/share/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(/usr/share/texmf-dist/tex/generic/infwarerr/infwarerr.sty)))
+(/usr/share/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/share/texmf-dist/tex/latex/auxhook/auxhook.sty)
+(/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/share/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/share/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+(/usr/share/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
+(/usr/share/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(/usr/share/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/share/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/share/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/share/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/share/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(/usr/share/texmf-dist/tex/latex/base/atbegshi-ltx.sty))
+(/usr/share/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/share/texmf-dist/tex/latex/base/atveryend-ltx.sty)
+(/usr/share/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(/usr/share/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty))))
+(/usr/share/texmf-dist/tex/latex/base/makeidx.sty)
+(/usr/share/texmf-dist/tex/latex/base/inputenc.sty)
+Writing index file Rd2.idx
+(/usr/share/texmf-dist/tex/latex/psnfss/t1ptm.fd)
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def)
+(/tmp/Rtmp0zeCVe/Rd2pdf1fac710f671dc/Rd2.aux)
+(/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/tmp/Rtmp0zeCVe/Rd2pdf1fac710f671dc/Rd2.out)
+(/tmp/Rtmp0zeCVe/Rd2pdf1fac710f671dc/Rd2.out)
+(/usr/share/texmf-dist/tex/latex/psnfss/t1pcr.fd)
+(/usr/share/texmf-dist/tex/latex/psnfss/t1phv.fd)
+(/tmp/Rtmp0zeCVe/Rd2pdf1fac710f671dc/Rd2.toc
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(/usr/share/texmf-dist/tex/latex/jknapltx/ursfs.fd) [1{/var/lib/texmf/fonts/map
+/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}]
+[2])
+Overfull \hbox (79.98035pt too wide) in paragraph at lines 60--60
+ []\T1/pcr/m/n/9 datf <- data.frame("mod"=c("first", "seco", "seco", "first", "
+first", "third", "first"),[] 
+
+Overfull \hbox (69.18036pt too wide) in paragraph at lines 66--66
+ []\T1/pcr/m/n/9 print(all_stat(inpt_v=c("first", "seco"), var_add = c("var1", 
+"var2", "var3", "var4"),[] 
+
+Overfull \hbox (47.58038pt too wide) in paragraph at lines 67--67
+ [] \T1/pcr/m/n/9 stat_var=c("sum", "mean", "median", "sd", "occu-var2/", "occu
+-var4/", "variance",[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 71--71
+ []\T1/pcr/m/n/9 #   modal_v var_vector occu sum mean  med standard_devaition  
+       variance[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 73--73
+ []\T1/pcr/m/n/9 #2                var1       64   16 16.5   6.97614984548545 4
+8.6666666666667[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 76--76
+ []\T1/pcr/m/n/9 #5                var3      178 44.5   45   1.73205080756888  
+              3[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 81--81
+ []\T1/pcr/m/n/9 #10               var1       43 21.5 21.5  0.707106781186548  
+            0.5[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 84--84
+ []\T1/pcr/m/n/9 #13               var3       87 43.5 43.5  0.707106781186548  
+            0.5[] 
+[3] [4]
+Overfull \hbox (63.78036pt too wide) in paragraph at lines 154--154
+ []\T1/pcr/m/n/9 datf2 <- data.frame("val"=c(3, 7, 2, 4, 1, 2), "ids"=c("a", "z
+", "z", "a", "a", "a"),[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 162--162
+ []\T1/pcr/m/n/9 print(any_join_datf(inpt_datf_l=list(datf1, datf2, datf3), joi
+n_type="inner",[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 166--166
+ []\T1/pcr/m/n/9 #  ids val ids last second_ids val ids  bool second_ids val id
+s last second_ids[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 167--167
+ []\T1/pcr/m/n/9 #3 z12   2   z  non         12   7   z FALSE         12   2   
+z  non         12[] 
+
+Overfull \hbox (101.58032pt too wide) in paragraph at lines 169--169
+ []\T1/pcr/m/n/9 print(any_join_datf(inpt_datf_l=list(datf1, datf2, datf3), joi
+n_type="inner", id_v=c("ids"),[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 172--172
+ []\T1/pcr/m/n/9 #  ids val ids last second_ids val ids  bool second_ids val id
+s last second_ids[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 173--173
+ []\T1/pcr/m/n/9 #2   a   1   a  oui         11   3   a  TRUE         13   1   
+a  oui         13[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 174--174
+ []\T1/pcr/m/n/9 #3   z   2   z  non         12   7   z FALSE         12   2   
+z  non         12[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 175--175
+ []\T1/pcr/m/n/9 #4   a   4   a  oui          8   4   a FALSE         34   9   
+a  oui         11[] 
+
+Overfull \hbox (85.38034pt too wide) in paragraph at lines 177--177
+ []\T1/pcr/m/n/9 print(any_join_datf(inpt_datf_l=list(datf1, datf2, datf3), joi
+n_type=c(1), id_v=c("ids"),[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 191--191
+ []\T1/pcr/m/n/9 print(any_join_datf(inpt_datf_l=list(datf2, datf1, datf3), joi
+n_type=c(1, 3),[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 195--195
+ []\T1/pcr/m/n/9 #   ids  val  ids  bool second_ids  val  ids last second_ids  
+val  ids last[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 196--196
+ []\T1/pcr/m/n/9 #1  a13    3    a  TRUE         13 <NA> <NA> <NA>       <NA>  
+  1    a  oui[] 
+[5]
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 197--197
+ []\T1/pcr/m/n/9 #2  z12    7    z FALSE         12    2    z  non         12  
+  2    z  non[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 198--198
+ []\T1/pcr/m/n/9 #3   z8    2    z FALSE          8 <NA> <NA> <NA>       <NA> <
+NA> <NA> <NA>[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 199--199
+ []\T1/pcr/m/n/9 #4  a34    4    a FALSE         34 <NA> <NA> <NA>       <NA> <
+NA> <NA> <NA>[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 200--200
+ []\T1/pcr/m/n/9 #5  a22    1    a  TRUE         22 <NA> <NA> <NA>       <NA> <
+NA> <NA> <NA>[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 201--201
+ []\T1/pcr/m/n/9 #6  a12    2    a  TRUE         12 <NA> <NA> <NA>       <NA> <
+NA> <NA> <NA>[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 202--202
+ []\T1/pcr/m/n/9 #7  a13 <NA> <NA>  <NA>       <NA> <NA> <NA> <NA>       <NA> <
+NA> <NA> <NA>[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 203--203
+ []\T1/pcr/m/n/9 #8  a11 <NA> <NA>  <NA>       <NA>    1    a  oui         11  
+  9    a  oui[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 204--204
+ []\T1/pcr/m/n/9 #9  z12 <NA> <NA>  <NA>       <NA> <NA> <NA> <NA>       <NA> <
+NA> <NA> <NA>[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 205--205
+ []\T1/pcr/m/n/9 #10  a8 <NA> <NA>  <NA>       <NA>    4    a  oui          8  
+  4    a  oui[] 
+
+Overfull \hbox (85.38034pt too wide) in paragraph at lines 218--218
+ []\T1/pcr/m/n/9 print(any_join_datf(inpt_datf_l=list(datf1, datf2, datf3), joi
+n_type=c(1), id_v=c("ids"),[] 
+[6] [7] [8]
+Overfull \hbox (112.38031pt too wide) in paragraph at lines 389--389
+ []\T1/pcr/m/n/9 print(closer_ptrn(inpt_v=c("bonjour", "lpoerc", "nonnour", "bo
+nnour", "nonjour", "aurevoir")))[] 
+[9]
+Overfull \hbox (106.98032pt too wide) in paragraph at lines 445--445
+ []\T1/pcr/m/n/9 print(closer_ptrn(inpt_v=c("bonjour", "lpoerc", "nonnour", "bo
+nnour", "nonjour", "aurevoir"),[] 
+
+Underfull \vbox (badness 10000) has occurred while \output is active [10]
+Overfull \hbox (96.18033pt too wide) in paragraph at lines 524--524
+ []\T1/pcr/m/n/9 print(closer_ptrn_adv(inpt_v=c("aurevoir", "bonnour", "nonnour
+", "fin", "mois", "bonjour"),[] 
+
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 533--533
+ []\T1/pcr/m/n/9 print(closer_ptrn_adv(inpt_v=c("aurevoir", "bonnour", "nonnour
+", "fin", "mois")))[] 
+[11]
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 568--568
+ [] \T1/pcr/m/n/9 print(clusterizer_v(inpt_v=sample.int(20, 26, replace=TRUE), 
+w_v=NA, c_val=0.9)) 
+[12]
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 615--615
+ []\T1/pcr/m/n/9 # [1] "1"  "1"  "-"  "2"  "2"  "-"  "3"  "3"  "-"  "4"  "4"  "
+-"  "5"  "5"  "-"[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 616--616
+ []\T1/pcr/m/n/9 #[16] "6"  "6"  "-"  "7"  "7"  "-"  "8"  "8"  "-"  "9"  "9"  "
+-"  "10" "10" "-"[] 
+
+Overfull \hbox (69.18036pt too wide) in paragraph at lines 619--619
+ []\T1/pcr/m/n/9 print(clusterizer_v(inpt_v=sample.int(40, 26, replace=TRUE), w
+_v=letters, c_val=0.29))[] 
+
+Underfull \vbox (badness 10000) has occurred while \output is active [13]
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 675--675
+ []\T1/pcr/m/n/9 # [1] "13" "13" "-"  "14" "14" "-"  "15" "15" "-"  "16" "16" "
+-"  "17" "17" "-"[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 676--676
+ []\T1/pcr/m/n/9 #[16] "19" "19" "-"  "21" "21" "-"  "22" "22" "-"  "23" "23" "
+-"  "25" "25" "-"[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 677--677
+ []\T1/pcr/m/n/9 #[31] "27" "27" "-"  "29" "29" "-"  "30" "30" "-"  "31" "31" "
+-"  "34" "34" "-"[] 
+[14]
+Overfull \hbox (79.98035pt too wide) in paragraph at lines 710--710
+ []\T1/pcr/m/n/9 print(colins_datf(inpt_datf=datf1, target_col=list(c("oui", "o
+ui", "oui", "non", "non"),[] 
+
+Overfull \hbox (79.98035pt too wide) in paragraph at lines 721--721
+ []\T1/pcr/m/n/9 print(colins_datf(inpt_datf=datf1, target_col=list(c("oui", "o
+ui", "oui", "non", "non"),[] 
+
+Overfull \hbox (0.78088pt too wide) in paragraph at lines 743--743
+ []\T1/pcr/m/n/10 converter_date(inpt_date, convert_to, frmt = "snhdmy", sep_ =
+ "-") 
+
+Overfull \hbox (74.58035pt too wide) in paragraph at lines 762--762
+ []\T1/pcr/m/n/9 print(converter_date(inpt_date="14-04-11-2024", sep_="-", frmt
+="hdmy", convert_to="m"))[] 
+
+Overfull \hbox (74.58035pt too wide) in paragraph at lines 766--766
+ []\T1/pcr/m/n/9 print(converter_date(inpt_date="14-04-11-2024", sep_="-", frmt
+="hdmy", convert_to="y"))[] 
+[15]
+Overfull \hbox (74.58035pt too wide) in paragraph at lines 770--770
+ []\T1/pcr/m/n/9 print(converter_date(inpt_date="14-04-11-2024", sep_="-", frmt
+="hdmy", convert_to="s"))[] 
+
+Overfull \hbox (47.58038pt too wide) in paragraph at lines 774--774
+ []\T1/pcr/m/n/9 print(converter_date(inpt_date="63900626400", sep_="-", frmt="
+s", convert_to="y"))[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 778--778
+ []\T1/pcr/m/n/9 print(converter_date(inpt_date="2024", sep_="-", frmt="y", con
+vert_to="s"))[] 
+
+Overfull \hbox (54.78088pt too wide) in paragraph at lines 793--793
+ []\T1/pcr/m/n/10 converter_format(inpt_val, sep_ = "-", inpt_frmt, frmt, defau
+lt_val = "00") 
+
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 815--815
+ []                       \T1/pcr/m/n/9 inpt_frmt="shmy", frmt="snhdmy", defaul
+t_val="00"))[] 
+
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 820--820
+ []                       \T1/pcr/m/n/9 inpt_frmt="shmy", frmt="Pnhdmy", defaul
+t_val="00"))[] 
+[16]
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 885--885
+ []\T1/pcr/m/n/9 #[1]  3.423000e+03  4.500000e+01  4.500000e+01 -9.998637e-01  
+2.100000e+01[] 
+
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 886--886
+ []\T1/pcr/m/n/9 #[6] -1.540140e+05  4.500000e+01            NA            NA  
+          NA[] 
+[17]
+Overfull \hbox (120.78088pt too wide) in paragraph at lines 949--949
+ []  \T1/pcr/m/n/10 str_source = c("a", "b", "c", "d", "e", "f", "g", "h", "i",
+ "j", "k", "l", "m", "n",[] 
+[18] [19] [20]
+Overfull \hbox (85.38034pt too wide) in paragraph at lines 1098--1098
+ []     \T1/pcr/m/n/9 c("-", "a", "a1", "-", "B", "r", "uy", "-", "c", "c1"), "
+_"), organisation=c(1, 0)))[] 
+[21]
+Overfull \hbox (52.98038pt too wide) in paragraph at lines 1153--1153
+ []\T1/pcr/m/n/9 print(date_addr(date1="25-02", date2="58-12-08", frmt1="dm", f
+rmt2="shd", sep_="-",[] 
+
+Overfull \hbox (52.98038pt too wide) in paragraph at lines 1158--1158
+ []\T1/pcr/m/n/9 print(date_addr(date1="25-02", date2="58-12-08", frmt1="dm", f
+rmt2="shd", sep_="-",[] 
+
+Overfull \hbox (58.38037pt too wide) in paragraph at lines 1163--1163
+ []\T1/pcr/m/n/9 print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy",
+ frmt2="dm", sep_="-",[] 
+
+Overfull \hbox (58.38037pt too wide) in paragraph at lines 1168--1168
+ []\T1/pcr/m/n/9 print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy",
+ frmt2="dm", sep_="-",[] 
+
+Overfull \hbox (58.38037pt too wide) in paragraph at lines 1173--1173
+ []\T1/pcr/m/n/9 print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy",
+ frmt2="dm", sep_="-",[] 
+
+Overfull \hbox (58.38037pt too wide) in paragraph at lines 1178--1178
+ []\T1/pcr/m/n/9 print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy",
+ frmt2="dm", sep_="-",[] 
+[22]
+Overfull \hbox (4.0073pt too wide) in paragraph at lines 1189--1190
+[]\T1/ptm/m/n/10 Allow to con-vert sin-gle date value like 2025.36 year to a da
+te like sec-ond/minutehour/day/month/year
+
+Overfull \hbox (66.78088pt too wide) in paragraph at lines 1194--1194
+ []\T1/pcr/m/n/10 date_converter_reverse(inpt_date, convert_to = "dmy", frmt = 
+"y", sep_ = "-") 
+
+Overfull \hbox (85.38034pt too wide) in paragraph at lines 1213--1213
+ []\T1/pcr/m/n/9 print(date_converter_reverse(inpt_date="2024.929", convert_to=
+"hmy", frmt="y", sep_="-"))[] 
+
+Overfull \hbox (85.38034pt too wide) in paragraph at lines 1217--1217
+ []\T1/pcr/m/n/9 print(date_converter_reverse(inpt_date="2024.929", convert_to=
+"dmy", frmt="y", sep_="-"))[] 
+
+Overfull \hbox (90.78033pt too wide) in paragraph at lines 1221--1221
+ []\T1/pcr/m/n/9 print(date_converter_reverse(inpt_date="2024.929", convert_to=
+"hdmy", frmt="y", sep_="-"))[] 
+
+Overfull \hbox (90.78033pt too wide) in paragraph at lines 1225--1225
+ []\T1/pcr/m/n/9 print(date_converter_reverse(inpt_date="2024.929", convert_to=
+"dhym", frmt="y", sep_="-"))[] 
+[23] [24]
+Overfull \hbox (36.7804pt too wide) in paragraph at lines 1335--1335
+ []\T1/pcr/m/n/9 datf1 <- data.frame(c(1:6), c("oui", "oui", "oui", "oui", "oui
+", "oui"), c(6:1))[] 
+
+Overfull \hbox (25.98041pt too wide) in paragraph at lines 1337--1337
+ []\T1/pcr/m/n/9 datf2 <- data.frame(c(1:7), c("oui", "oui", "oui", "oui", "non
+", "oui", "zz"))[] 
+[25]
+Overfull \hbox (90.78033pt too wide) in paragraph at lines 1405--1405
+ []\T1/pcr/m/n/9 print(extrt_only_v(inpt_v=c("oui", "non", "peut", "oo", "ll", 
+"oui", "non", "oui", "oui"),[] 
+[26]
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 1468--1468
+ []\T1/pcr/m/n/9 print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "
+non", "peut-etre"),[] 
+
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 1474--1474
+ []\T1/pcr/m/n/9 print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "
+non", "peut-etre"),[] 
+[27]
+Overfull \hbox (52.98038pt too wide) in paragraph at lines 1554--1554
+ []\T1/pcr/m/n/9 print(format_date(f_dialect=c("janvier", "février", "mars", "a
+vril", "mai", "juin",[] 
+
+Overfull \hbox (117.7803pt too wide) in paragraph at lines 1555--1555
+ []\T1/pcr/m/n/9 "juillet", "aout", "septembre", "octobre", "novembre", "décemb
+re"), sentc="11-septembre-2023"))[] 
+[28]
+Overfull \hbox (1.5473pt too wide) in paragraph at lines 1578--1579
+[]\T1/ptm/m/n/10 is the dataframe con-tain-ing the co-or-diantes of the es-tab-
+lished ge-o-graph-i-cal points 
+[29]
+Overfull \hbox (90.78033pt too wide) in paragraph at lines 1660--1660
+ []\T1/pcr/m/n/9 print(globe(lat_f=23, long_f=112, alt_f=NA, lat_n=c(2, 82), lo
+ng_n=c(165, -55), alt_n=NA))[] 
+
+Overfull \hbox (117.7803pt too wide) in paragraph at lines 1664--1664
+ []\T1/pcr/m/n/9 print(globe(lat_f=23, long_f=112, alt_f=8, lat_n=c(2, 82), lon
+g_n=c(165, -55), alt_n=c(8, -2)))[] 
+[30]
+Overfull \hbox (36.7804pt too wide) in paragraph at lines 1717--1717
+ []\T1/pcr/m/n/9 print(groupr_datf(inpt_datf=datf1, val_lst=val_lst, condition_
+lst=condition_lst,[] 
+[31]
+Overfull \hbox (85.38034pt too wide) in paragraph at lines 1772--1772
+ []\T1/pcr/m/n/9 print(id_keepr(inpt_datf=datf1, col_v=c(1, 2), el_v=c("oui", "
+op"), rstr_l=list(c(1:5))))[] 
+[32] [33] [34]
+Overfull \hbox (25.98041pt too wide) in paragraph at lines 1908--1908
+ []\T1/pcr/m/n/9 print(inter_max(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3))
+, get_lst=TRUE))[] 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 1919--1919
+ []\T1/pcr/m/n/9 print(inter_max(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3))
+, get_lst=FALSE))[] 
+[35]
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 1975--1975
+ []\T1/pcr/m/n/9 # [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 
+1.4 1.5 1.6 1.7 1.8[] 
+
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 1976--1976
+ []\T1/pcr/m/n/9 #[20] 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.0 3.1 3.2 
+3.3 3.4 3.5 3.6 3.7[] 
+
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 1980--1980
+ []\T1/pcr/m/n/9 # [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 
+1.4 1.5 1.6 1.7 1.8[] 
+
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 1981--1981
+ []\T1/pcr/m/n/9 #[20] 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.0 3.1 3.2 
+3.3 3.4 3.5 3.6 3.7[] 
+[36]
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 2015--2015
+ []\T1/pcr/m/n/9 # [1]   1   3   7   9  11  13  17  19  21  23  27  29  31  33 
+ 37  39  41  43  47[] 
+
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 2016--2016
+ []\T1/pcr/m/n/9 #[20]  49  51  53  57  59  61  63  67  69  71  73  77  79  81 
+ 83  87  89  91  93[] 
+[37] [38] [39]
+Overfull \hbox (90.78033pt too wide) in paragraph at lines 2179--2179
+ []\T1/pcr/m/n/9 print(multitud(l=list(c("a", "b"), c("1", "2"), c("A", "Z", "E
+"), c("Q", "F")), sep_="/"))[] 
+
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 2181--2181
+ []\T1/pcr/m/n/9 #[1] "a/1/A/Q" "b/1/A/Q" "a/2/A/Q" "b/2/A/Q" "a/1/Z/Q" "b/1/Z/
+Q" "a/2/Z/Q"[] 
+
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 2182--2182
+ []\T1/pcr/m/n/9 #[8] "b/2/Z/Q" "a/1/E/Q" "b/1/E/Q" "a/2/E/Q" "b/2/E/Q" "a/1/A/
+F" "b/1/A/F"[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 2183--2183
+ []\T1/pcr/m/n/9 #[15] "a/2/A/F" "b/2/A/F" "a/1/Z/F" "b/1/Z/F" "a/2/Z/F" "b/2/Z
+/F" "a/1/E/F"[] 
+[40]
+Overfull \hbox (47.58038pt too wide) in paragraph at lines 2255--2255
+ []\T1/pcr/m/n/9 nestr_datf=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TR
+UE)), yes_val=TRUE))[] 
+
+Overfull \hbox (47.58038pt too wide) in paragraph at lines 2265--2265
+ []\T1/pcr/m/n/9 nestr_datf=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TR
+UE)), yes_val=TRUE))[] 
+[41]
+Overfull \hbox (30.78088pt too wide) in paragraph at lines 2283--2283
+ []\T1/pcr/m/n/10 nestr_datf2(inptf_datf, rtn_pos, rtn_neg = NA, nestr_datf, ye
+s_val = T) 
+
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 2304--2304
+ []\T1/pcr/m/n/9 print(nestr_datf2(inptf_datf=data.frame(c(1, 2, 1), c(1, 5, 7)
+), rtn_pos="yes",[] 
+
+Overfull \hbox (123.1803pt too wide) in paragraph at lines 2305--2305
+ []\T1/pcr/m/n/9 rtn_neg="no", nestr_datf=data.frame(c(TRUE, FALSE, TRUE), c(FA
+LSE, FALSE, TRUE)), yes_val=TRUE))[] 
+[42]
+Overfull \hbox (96.18033pt too wide) in paragraph at lines 2342--2342
+ []\T1/pcr/m/n/9 print(nest_v(f_v=c(1, 2, 3, 4, 5, 6), t_v=c("oui", "oui2", "ou
+i3", "oui4", "oui5", "oui6"),[] 
+
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 2345--2345
+ []\T1/pcr/m/n/9 #[1] "1"    "2"    "oui"  "3"    "4"    "oui2" "5"    "6"    "
+oui3" "oui4"[] 
+
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 2375--2375
+ []\T1/pcr/m/n/9 print(new_ordered(f_v=c("non", "non", "non", "oui"), w_v=c("ou
+i", "non", "non")))[] 
+[43]
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 2405--2405
+ []\T1/pcr/m/n/9 print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", 
+"peut1", "non")))[] 
+
+Overfull \hbox (106.98032pt too wide) in paragraph at lines 2409--2409
+ []\T1/pcr/m/n/9 print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", 
+"peut1", "non"), occu="==-2-"))[] 
+
+Overfull \hbox (101.58032pt too wide) in paragraph at lines 2413--2413
+ []\T1/pcr/m/n/9 print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", 
+"peut1", "non"), occu=">-2-"))[] 
+
+Overfull \hbox (106.98032pt too wide) in paragraph at lines 2417--2417
+ []\T1/pcr/m/n/9 print(non_unique(inpt_v=c("oui", "oui", "non", "non", "peut", 
+"peut1", "non"), occu=c(1, 3)))[] 
+[44] [45]
+Overfull \hbox (25.98041pt too wide) in paragraph at lines 2516--2516
+ []\T1/pcr/m/n/9 print(pattern_generator(base_="oui", from_=c("er", "re", "ere"
+), nb=1, hmn=3))[] 
+
+Overfull \hbox (123.1803pt too wide) in paragraph at lines 2520--2520
+ []\T1/pcr/m/n/9 print(pattern_generator(base_="oui", from_=c("er", "re", "ere"
+), nb=2, hmn=3, after=0, sep="-"))[] 
+[46]
+Overfull \hbox (58.38037pt too wide) in paragraph at lines 2569--2569
+ []\T1/pcr/m/n/9 print(pattern_gettr(word_=c("oui", "non", "erer"), vct=c("oui"
+, "oui", "non", "oui",[] 
+[47]
+Overfull \hbox (139.38028pt too wide) in paragraph at lines 2620--2620
+ []\T1/pcr/m/n/9 print(pattern_tuning(pattrn="oui", spe_nb=2, spe_l=c("e", "r",
+ "T", "O"), exclude_type="o", hmn=3))[] 
+
+Overfull \hbox (78.78088pt too wide) in paragraph at lines 2635--2635
+ []\T1/pcr/m/n/10 ptrn_switchr(inpt_l, f_idx_l = c(), t_idx_l = c(), sep = "-",
+ default_val = NA) 
+[48] [49]
+Overfull \hbox (63.78036pt too wide) in paragraph at lines 2717--2717
+ []\T1/pcr/m/n/9 ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", ad
+d_sep=TRUE, end_=FALSE)[] 
+
+Overfull \hbox (69.18036pt too wide) in paragraph at lines 2749--2749
+ []\T1/pcr/m/n/9 print(rearangr_v(inpt_v=c(23, 21, 56), w_v=c("oui", "peut", "n
+on"), how="decreasing"))[] 
+[50]
+Overfull \hbox (18.78088pt too wide) in paragraph at lines 2767--2767
+ []  \T1/pcr/m/n/10 order = c(1:length(unlist(strsplit(x = inpt_v[1], split = s
+ep_)))),[] 
+
+Overfull \hbox (90.78033pt too wide) in paragraph at lines 2788--2788
+ []\T1/pcr/m/n/9 vec <- multitud(l=list(c("a", "b"), c("1", "2"), c("A", "Z", "
+E"), c("Q", "F")), sep_="/")[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 2792--2792
+ []\T1/pcr/m/n/9 # [1] "a/1/A/Q" "b/1/A/Q" "a/2/A/Q" "b/2/A/Q" "a/1/Z/Q" "b/1/Z
+/Q" "a/2/Z/Q"[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 2793--2793
+ []\T1/pcr/m/n/9 # [8] "b/2/Z/Q" "a/1/E/Q" "b/1/E/Q" "a/2/E/Q" "b/2/E/Q" "a/1/A
+/F" "b/1/A/F"[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 2794--2794
+ []\T1/pcr/m/n/9 #[15] "a/2/A/F" "b/2/A/F" "a/1/Z/F" "b/1/Z/F" "a/2/Z/F" "b/2/Z
+/F" "a/1/E/F"[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 2799--2799
+ []\T1/pcr/m/n/9 # [1] "a/1/1/1"   "a/1/2/2"   "a/1/3/3"   "a/1/4/4"   "a/1/5/5
+"   "a/1/6/6"[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2800--2800
+ []\T1/pcr/m/n/9 # [7] "a/2/7/7"   "a/2/8/8"   "a/2/9/9"   "a/2/10/10" "a/2/11/
+11" "a/2/12/12"[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2801--2801
+ []\T1/pcr/m/n/9 #[13] "b/1/13/13" "b/1/14/14" "b/1/15/15" "b/1/16/16" "b/1/17/
+17" "b/1/18/18"[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2802--2802
+ []\T1/pcr/m/n/9 #[19] "b/2/19/19" "b/2/20/20" "b/2/21/21" "b/2/22/22" "b/2/23/
+23" "b/2/24/24"[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 2808--2808
+ []\T1/pcr/m/n/9 # [1] "a/1/1/1"   "a/1/2/2"   "a/1/3/3"   "a/1/4/4"   "a/1/5/5
+"   "a/1/6/6"[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2809--2809
+ []\T1/pcr/m/n/9 # [7] "a/2/7/7"   "a/2/8/8"   "a/2/9/9"   "a/2/10/10" "a/2/11/
+11" "a/2/12/12"[] 
+[51]
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2810--2810
+ []\T1/pcr/m/n/9 #[13] "b/1/13/13" "b/1/14/14" "b/1/15/15" "b/1/16/16" "b/1/17/
+17" "b/2/18/18"[] 
+
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 2815--2815
+ []\T1/pcr/m/n/9 #[1] "1/1/A/Q"   "2/2/A/Q"   "3/3/A/Q"   "4/4/A/Q"   "5/5/Z/Q"
+   "6/6/Z/Q"[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2816--2816
+ []\T1/pcr/m/n/9 # [7] "7/7/Z/Q"   "8/8/Z/Q"   "9/9/E/Q"   "10/10/E/Q" "11/11/E
+/Q" "12/12/E/Q"[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2817--2817
+ []\T1/pcr/m/n/9 #[13] "13/13/A/F" "14/14/A/F" "15/15/A/F" "16/16/A/F" "17/17/Z
+/F" "18/18/Z/F"[] 
+
+Overfull \hbox (20.58041pt too wide) in paragraph at lines 2818--2818
+ []\T1/pcr/m/n/9 #[19] "19/19/Z/F" "20/20/Z/F" "21/21/E/F" "22/22/E/F" "23/23/E
+/F" "24/24/E/F"[] 
+
+Overfull \hbox (101.58032pt too wide) in paragraph at lines 2852--2852
+ []\T1/pcr/m/n/9 #[1] "This is  1 and 2 and 3 and 4 and 5 and 6 and 7 and 8 and
+ 9 and 10 and 11 and 12 and 13[] 
+
+Overfull \hbox (96.18033pt too wide) in paragraph at lines 2853--2853
+ []\T1/pcr/m/n/9 #and 14 and 15 and 16 and 17 and 18 and 19 and 20 and 21 and 2
+2 and 23 and 24 and 25 and 26[] 
+[52]
+Overfull \hbox (90.78033pt too wide) in paragraph at lines 2882--2882
+ []\T1/pcr/m/n/9 print(save_untl(inpt_l=list(c(1:4), c(1, 1, 3, 4), c(1, 2, 4, 
+3)), val_to_stop_v=c(3, 4)))[] 
+
+Overfull \hbox (74.58035pt too wide) in paragraph at lines 2893--2893
+ []\T1/pcr/m/n/9 print(save_untl(inpt_l=list(c(1:4), c(1, 1, 3, 4), c(1, 2, 4, 
+3)), val_to_stop_v=c(3)))[] 
+[53]
+Overfull \hbox (4.38043pt too wide) in paragraph at lines 2973--2973
+ []\T1/pcr/m/n/9 print(see_datf(datf=datf1, condition_l=c("not_reg"), val_l=lis
+t("[a-z]")))[] 
+[54] [55]
+Overfull \hbox (15.18042pt too wide) in paragraph at lines 3046--3046
+ []\T1/pcr/m/n/9 print(see_idx(v1=c("oui", "non", "peut", "oo"), v2=c("oui", "p
+eut", "oui")))[] 
+[56]
+Overfull \hbox (58.38037pt too wide) in paragraph at lines 3120--3120
+ []\T1/pcr/m/n/9 print(str_remove_untl(inpt_v=vec, ptrn_rm_v=c("-", "/"), untl=
+list(c("max"), c(1))))[] 
+
+Overfull \hbox (69.18036pt too wide) in paragraph at lines 3124--3124
+ []\T1/pcr/m/n/9 print(str_remove_untl(inpt_v=vec, ptrn_rm_v=c("-", "/"), untl=
+list(c("max"), c(1:2))))[] 
+
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 3128--3128
+ []\T1/pcr/m/n/9 print(str_remove_untl(inpt_v=vec[1], ptrn_rm_v=c("-", "/"), un
+tl=c("max")))[] 
+[57]
+Overfull \hbox (3.31761pt too wide) in paragraph at lines 3151--3152
+[]\T1/ptm/m/n/10 is a pa-ram-e-ter that spec-i-fies if the dataframe re-turned 
+should have unique columns
+
+Overfull \hbox (60.78088pt too wide) in paragraph at lines 3188--3188
+ []\T1/pcr/m/n/10 unique_ltr_from_v(inpt_v, keep_v = c("?", "!", ":", "&", ",",
+ ".", letters)) 
+
+Overfull \hbox (144.78027pt too wide) in paragraph at lines 3203--3203
+ []\T1/pcr/m/n/9 print(unique_ltr_from_v(inpt_v=c("bonjour", "lpoerc", "nonnour
+", "bonnour", "nonjour", "aurevoir")))[] 
+[58]
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 3263--3263
+ []\T1/pcr/m/n/9 # [1] 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 
+3 2 1 3 2 1 3 2 1 3[] 
+[59]
+Overfull \hbox (85.38034pt too wide) in paragraph at lines 3294--3294
+ []\T1/pcr/m/n/9 print(val_replacer(datf=data.frame(c(1, "oo4", TRUE, FALSE), c
+(TRUE, FALSE, TRUE, TRUE)),[] 
+
+Overfull \hbox (48.78088pt too wide) in paragraph at lines 3314--3314
+ []\T1/pcr/m/n/10 vector_replacor(inpt_v = c(), sus_val = c(), rpl_val = c(), g
+rep_ = FALSE) 
+[60]
+Overfull \hbox (9.78043pt too wide) in paragraph at lines 3336--3336
+ []\T1/pcr/m/n/9 # [1] "1"   "2"   "oui" "4"   "5"   "non" "7"   "e"   "9"   "1
+0"  "11"  "a"[] 
+
+Overfull \hbox (36.7804pt too wide) in paragraph at lines 3339--3339
+ []\T1/pcr/m/n/9 print(vector_replacor(inpt_v=c("non", "zez", "pp a ftf", "fdat
+fd", "assistance",[] 
+
+Overfull \hbox (6.62772pt too wide) in paragraph at lines 3374--3375
+[]\T1/ptm/m/n/10 is the max-i-mum num-ber of the in-put vec-tor the func-tion r
+e-turns, if in the dataframe 
+[61]
+Overfull \hbox (74.58035pt too wide) in paragraph at lines 3414--3414
+ []\T1/pcr/m/n/9 print(vec_in_datf(inpt_datf=datf1, inpt_vec=c(5, 2, "z"), coef
+f=-1, conventional=TRUE))[] 
+
+Overfull \hbox (128.58029pt too wide) in paragraph at lines 3420--3420
+ []\T1/pcr/m/n/9 print(vec_in_datf(inpt_datf=datf1, inpt_vec=c(1, "z"), coeff=-
+1, conventional=TRUE, stop_untl=4))[] 
+[62]
+Overfull \hbox (36.7804pt too wide) in paragraph at lines 3492--3492
+ []\T1/pcr/m/n/9 datf1 <- data.frame(c(1:5), c("o-y", "hj-yy", "er-y", "k-ll", 
+"ooo-mm"), c(5:1))[] 
+
+Overfull \hbox (69.18036pt too wide) in paragraph at lines 3494--3494
+ []\T1/pcr/m/n/9 datf2 <- data.frame("col1"=c(1:5), "col2"=c("o-y", "hj-yy", "e
+r-y", "k-ll", "ooo-mm"))[] 
+(/tmp/Rtmp0zeCVe/Rd2pdf1fac710f671dc/Rd2.ind [63] [64])
+(/tmp/Rtmp0zeCVe/Rd2pdf1fac710f671dc/Rd2.aux) )
+(see the transcript file for additional information)</usr/share/texmf-dist/font
+s/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/
+uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/
+texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/
+urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Rd2.pdf (64 pages, 177611 bytes).
+Transcript written on Rd2.log.
+Saving output to â€˜edm1-manual.pdfâ€™ ...
+Done
+You may want to clean up by 'rm -Rf /tmp/Rtmp0zeCVe/Rd2pdf1fac710f671dc'

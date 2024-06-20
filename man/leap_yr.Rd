@@ -2,7 +2,7 @@
 % Please edit documentation in R/all_fun.R
 \name{leap_yr}
 \alias{leap_yr}
-\title{bsx_year}
+\title{leap_year}
 \usage{
 leap_yr(year)
 }
