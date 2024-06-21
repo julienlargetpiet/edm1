@@ -5277,6 +5277,40 @@ print(see_mode(inpt_v = c(1, 1, 2, 2, 2, 3, 1)))
 ```
 
 
+# `selected_char`
+
+selected_char
+
+
+## Description
+
+Allow to generate a char based on a conbinaison on characters from a vector and a number
+
+
+## Usage
+
+```r
+selected_char(n, base_char = letters)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`n`     |     is how many sequence of numbers will be generated
+`base_char`     |     is the vector containing the elements from which the character is generated
+
+
+## Examples
+
+```r
+print(selected_char(1222))
+
+[1] "zta"
+```
+
+
 # `sort_date`
 
 sort_date
