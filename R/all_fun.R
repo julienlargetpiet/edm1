@@ -12465,10 +12465,10 @@ infinite_char_seq <- function(n, base_char = letters){
       reste <- n %% (26 ** cnt)
       if (reste != 0){
         if (reste >= 26){ reste2 <- reste / (26 ** (cnt - 1)) }else{ reste2 <- reste }
-        rtn_v <- c(rtn_v, letters[reste2])
+        rtn_v <- c(rtn_v, base_char[reste2])
       }else{
         reste <- 26 ** cnt
-        rtn_v <- c(rtn_v, letters[26])
+        rtn_v <- c(rtn_v, base_char[26])
       }
       n = n - reste
     }
