@@ -1101,6 +1101,102 @@ print(cost_and_taxes(pu=45, prix_ttc=2111, qte=23))
 ```
 
 
+# `cumulated_rows_na`
+
+intersected_rows_na
+
+
+## Description
+
+Output a vector of size that equals to the rows number of the input dataframe, with TRUE value at the indices corresponding to the row where at least a cell of any column is equal to NA.
+
+
+## Usage
+
+```r
+cumulated_rows_na(inpt_datf)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_datf`     |     is the input data.frame
+
+
+## Examples
+
+```r
+datf_teste <- data.frame(c(1, 2, 3, 4, 5, NA, 7), c(10, 9, 8, NA, 7, 6, NA))
+
+print(datf_teste)
+
+c.1..2..3..4..5..NA..7. c.10..9..8..NA..7..6..NA.
+1                       1                        10
+2                       2                         9
+3                       3                         8
+4                       4                        NA
+5                       5                         7
+6                      NA                         6
+7                       7                        NA
+
+print(cumulated_rows_na(inpt_datf = datf_teste))
+
+[1] FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE
+```
+
+
+# `cumulated_rows`
+
+intersected_rows
+
+
+## Description
+
+Output a vector of size that equals to the rows number of the input dataframe, with TRUE value at the indices corresponding to the row where at least a cell of any column is equal to one of the values inputed in `values_v`
+
+
+## Usage
+
+```r
+cumulated_rows(inpt_datf, values_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_datf`     |     is the input data.frame
+`values_v`     |     is a vector containing all the values that a cell has to equal to return a TRUE value in the output vector at the index corresponding to the row of the cell
+
+
+## Examples
+
+```r
+datf_teste <- data.frame(c(1:10), c(10:1))
+
+print(datf_teste)
+
+c.1.10. c.10.1.
+1        1      10
+2        2       9
+3        3       8
+4        4       7
+5        5       6
+6        6       5
+7        7       4
+8        8       3
+9        9       2
+10      10       1
+
+print(cumulated_rows(inpt_datf = datf_teste, values_v = c(2, 3)))
+
+[1]   FALSE TRUE TRUE   FALSE   FALSE   FALSE   FALSE TRUE TRUE   FALSE
+```
+
+
 # `cut_v`
 
 cut_v
