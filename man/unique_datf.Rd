@@ -18,6 +18,14 @@ Returns the input dataframe with the unique columns or rows.
 
 datf1 <- data.frame(c(1, 2, 1, 3), c("a", "z", "a", "p"))
 
+print(datf1)
+
+  c.1..2..1..3. c..a....z....a....p.. c.1..2..1..3..1
+1             1                     a               1
+2             2                     z               2
+3             1                     a               1
+4             3                     p               3
+
 print(unique_datf(inpt_datf=datf1))
 
 #   c.1..2..1..3. c..a....z....a....p..
@@ -26,6 +34,14 @@ print(unique_datf(inpt_datf=datf1))
 #4             3                     p
 
 datf1 <- data.frame(c(1, 2, 1, 3), c("a", "z", "a", "p"), c(1, 2, 1, 3))
+
+print(datf1)
+
+  c.1..2..1..3. c..a....z....a....p..
+1             1                     a
+2             2                     z
+3             1                     a
+4             3                     p
 
 print(unique_datf(inpt_datf=datf1, col=TRUE))
 

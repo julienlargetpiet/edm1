@@ -7364,73 +7364,6 @@ id_keepr <- function(inpt_datf, col_v=c(), el_v=c(), rstr_l=NA){
 
 }
 
-#' unique_datf
-#' 
-#' Returns the input dataframe with the unique columns or rows.
-#'
-#' @param inpt_datf is the input dataframe
-#' @param col is a parameter that specifies if the dataframe returned should have unique columns or rows, defaults to F, so the dataframe returned by default has unique rows
-#' @examples
-#'
-#' datf1 <- data.frame(c(1, 2, 1, 3), c("a", "z", "a", "p"))
-#' 
-#' print(unique_datf(inpt_datf=datf1))
-#' 
-#' #   c.1..2..1..3. c..a....z....a....p..
-#' #1             1                     a
-#' #2             2                     z
-#' #4             3                     p
-#' 
-#' datf1 <- data.frame(c(1, 2, 1, 3), c("a", "z", "a", "p"), c(1, 2, 1, 3))
-#' 
-#' print(unique_datf(inpt_datf=datf1, col=TRUE))
-#' 
-#' #  cur_v cur_v
-#' #1     1     a
-#' #2     2     z
-#' #3     1     a
-#' #4     3     p
-#' 
-#' @export
-
-unique_datf <- function(inpt_datf, col=FALSE){
-
-        comp_l <- list()
-
-        if (col){
-
-                rtn_datf <- data.frame(matrix(data=NA, nrow=nrow(inpt_datf), ncol=0))
-
-                for (col in 1:ncol(inpt_datf)){
-
-                        cur_v <- inpt_datf[, col]
-
-                        if ((list(cur_v) %in% comp_l) == FALSE){ rtn_datf <- cbind(rtn_datf, cur_v) }
-
-                        comp_l <- append(x=comp_l, values=list(cur_v))
-
-                }
-
-        }else{
-
-                rtn_datf <- data.frame(matrix(data=NA, nrow=0, ncol=ncol(inpt_datf)))
-
-                for (row in 1:nrow(inpt_datf)){
-
-                        cur_v <- inpt_datf[row, ]
-
-                        if ((list(cur_v) %in% comp_l) == FALSE){ rtn_datf <- rbind(rtn_datf, cur_v) }
-
-                        comp_l <- append(x=comp_l, values=list(cur_v))
-
-                }
-
-        }
-
-    return(rtn_datf)
-
-}
-
 #' better_unique
 #'
 #' Returns the element that are not unique from the input vector
@@ -13691,5 +13624,72 @@ cumulated_rows_na <- function(inpt_datf){
   }
   return(rtn_v)
 }
+
+#' unique_datf
+#' 
+#' Returns the input dataframe with the unique columns or rows.
+#'
+#' @param inpt_datf is the input dataframe
+#' @param col is a parameter that specifies if the dataframe returned should have unique columns or rows, defaults to F, so the dataframe returned by default has unique rows
+#' @examples
+#'
+#' datf1 <- data.frame(c(1, 2, 1, 3), c("a", "z", "a", "p"))
+#'
+#' print(datf1)
+#' 
+#'   c.1..2..1..3. c..a....z....a....p.. c.1..2..1..3..1
+#' 1             1                     a               1
+#' 2             2                     z               2
+#' 3             1                     a               1
+#' 4             3                     p               3
+#'
+#' print(unique_datf(inpt_datf=datf1))
+#' 
+#' #   c.1..2..1..3. c..a....z....a....p..
+#' #1             1                     a
+#' #2             2                     z
+#' #4             3                     p
+#' 
+#' datf1 <- data.frame(c(1, 2, 1, 3), c("a", "z", "a", "p"), c(1, 2, 1, 3))
+#' 
+#' print(datf1)
+#' 
+#'   c.1..2..1..3. c..a....z....a....p..
+#' 1             1                     a
+#' 2             2                     z
+#' 3             1                     a
+#' 4             3                     p
+#'
+#' print(unique_datf(inpt_datf=datf1, col=TRUE))
+#' 
+#' #  cur_v cur_v
+#' #1     1     a
+#' #2     2     z
+#' #3     1     a
+#' #4     3     p
+#' 
+#' @export
+
+unique_datf <- function(inpt_datf, col = FALSE){
+        comp_l <- c()
+        if (col){
+                rtn_datf <- data.frame(matrix(data=NA, nrow=nrow(inpt_datf), ncol=0))
+                for (col in 1:ncol(inpt_datf)){
+                        cur_v <- inpt_datf[, col]
+                        if ((paste(cur_v, collapse = "") %in% comp_l) == FALSE){ rtn_datf <- cbind(rtn_datf, cur_v) }
+                        comp_l <- append(x=comp_l, values=paste(cur_v, collapse = ""))
+                }
+        }else{
+                rtn_datf <- data.frame(matrix(data=NA, nrow=0, ncol=ncol(inpt_datf)))
+                for (row in 1:nrow(inpt_datf)){
+                        cur_v <- inpt_datf[row, ]
+                        if ((paste(cur_v, collapse = "") %in% comp_l) == FALSE){ rtn_datf <- rbind(rtn_datf, cur_v) }
+                        comp_l <- append(x=comp_l, values=paste(cur_v, collapse = ""))
+                }
+        }
+    return(rtn_datf)
+}
+
+
 
 
