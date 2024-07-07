@@ -13537,7 +13537,7 @@ selected_char <- function(n, base_char = letters){
   return(paste(rtn_v, collapse = ""))
 }
 
-#' intersected_rows
+#' cumulated_rows
 #'
 #' Output a vector of size that equals to the rows number of the input dataframe, with TRUE value at the indices corresponding to the row where at least a cell of any column is equal to one of the values inputed in `values_v`
 #'
@@ -13585,7 +13585,7 @@ cumulated_rows <- function(inpt_datf, values_v = c()){
   return(rtn_v)
 }
 
-#' intersected_rows_na
+#' cumulated_rows_na
 #'
 #' Output a vector of size that equals to the rows number of the input dataframe, with TRUE value at the indices corresponding to the row where at least a cell of any column is equal to NA.
 #'

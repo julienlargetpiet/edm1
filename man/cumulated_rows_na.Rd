@@ -2,7 +2,7 @@
 % Please edit documentation in R/all_fun.R
 \name{cumulated_rows_na}
 \alias{cumulated_rows_na}
-\title{intersected_rows_na}
+\title{cumulated_rows_na}
 \usage{
 cumulated_rows_na(inpt_datf)
 }

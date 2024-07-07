@@ -18,6 +18,7 @@ R > install()
 
 all_stat
 
+
 ## Description
 
 Allow to see all the main statistics indicators (mean, median, variance, standard deviation, sum, max, min, quantile) of variables in a dataframe by the modality of a variable in a column of the input datarame. In addition to that, you can get the occurence of other qualitative variables by your chosen qualitative variable, you have just to precise it in the vector "stat_var" where all the statistics indicators are given with "occu-var_you_want/".
@@ -1102,7 +1103,7 @@ print(cost_and_taxes(pu=45, prix_ttc=2111, qte=23))
 
 # `cumulated_rows_na`
 
-intersected_rows_na
+cumulated_rows_na
 
 
 ## Description
@@ -1148,7 +1149,7 @@ print(cumulated_rows_na(inpt_datf = datf_teste))
 
 # `cumulated_rows`
 
-intersected_rows
+cumulated_rows
 
 
 ## Description
