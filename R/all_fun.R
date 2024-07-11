@@ -13809,7 +13809,7 @@ better_split_any <- function(inpt, split_v = c()){
 #' @export
 
 old_to_new_idx_nested <- function(from_v_val = c(), from_v_ids = c(), val = 1){
-  for (I in 1:(length(from_v_idx) - 1)){
+  for (I in 1:(length(from_v_ids) - 1)){
     if (nchar(from_v_val[I]) > val){
       for (i in 1:(nchar(from_v_val[I]) - val)){
         from_v_ids[(I + 1):length(from_v_ids)] = from_v_ids[(I + 1):length(from_v_ids)] + 1
