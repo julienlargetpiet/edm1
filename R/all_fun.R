@@ -13714,12 +13714,41 @@ unique_datf <- function(inpt_datf, col = FALSE){
 #' @export
 
 better_split_any <- function(inpt, split_v = c()){
+  regex_spe_detect <- function(inpt){
+          fillr <- function(inpt_v, ptrn_fill="\\.\\.\\.\\d"){
+            ptrn <- grep(ptrn_fill, inpt_v)
+            while (length(ptrn) > 0){
+              ptrn <- grep(ptrn_fill, inpt_v)
+              idx <- ptrn[1] 
+              untl <- as.numeric(c(unlist(strsplit(inpt_v[idx], split="\\.")))[4]) - 1
+              pre_val <- inpt_v[(idx - 1)]
+              inpt_v[idx] <- pre_val
+              if (untl > 0){
+                for (i in 1:untl){
+                  inpt_v <- append(inpt_v, pre_val, idx)
+                }
+              }
+            ptrn <- grep(ptrn_fill, inpt_v)
+            }
+            return(inpt_v)
+          }
+          inpt <- unlist(strsplit(x=inpt, split=""))
+          may_be_v <- c("[", "]", "{", "}", "-", "_", ".", "(", ")", "/", "%", "*", "^", "?", "$")
+          pre_idx <- unique(match(x=inpt, table=may_be_v))
+          pre_idx <- pre_idx[!(is.na(pre_idx))]
+          for (el in may_be_v[pre_idx]){
+                  for (i in grep(pattern=paste("\\", el, sep=""), x=inpt)){
+                          inpt <- append(x=inpt, values="\\", after=(i-1))
+                  }
+          }
+    return(paste(inpt, collapse=""))
+  }
   for (split in split_v){
     pre_inpt <- inpt
     inpt <- c()
     lst_splt <- FALSE
     for (el in pre_inpt){
-      cur_splt <- unlist(strsplit(x = el, split = split))
+      cur_splt <- unlist(strsplit(x = el, split = regex_spe_detect(split)))
       cur_splt[cur_splt == ""] <- split
       cnt = 1
       while (cnt < length(cur_splt)){
