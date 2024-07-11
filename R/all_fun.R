@@ -13782,7 +13782,43 @@ better_split_any <- function(inpt, split_v = c()){
   return(inpt)
 }
 
+#' old_to_new_idx_nested
+#'
+#' Allow to convert the indices of vector ('from_v_ids') which are related to the elements of 'from_v_val' vector, to fir the newly established maximum character of elements in 'from_v_val', see examples.
+#'
+#' @param from_v_val is the input vector of elements
+#' @param from_v_ids is the input vector of indices
+#' @param val is the value - 1 from which the number of character of an element is too high, so the indices in 'from_v_ids' will be modified
+#'
+#' @examples
+#'
+#' print(old_to_new_idx_nested(from_v_val = c("oui", "no", "oui"), from_v_ids = c(1, 2, 3, 5), val = 1))
+#'
+#' [1] 1 4 6 10
+#' 
+#' # the new 'from_v_ids' is theorically c('o', 'u', 'i', 'n', 'o', 'o', 'u', 'i')
+#' # here the indices five does not technically correspond to any element in the original 'from_v_val', 
+#' # but corresponds to the 'o' of 'no' if the maximum number of character of from_v_val is one
+#' # However, the old five index now corresponds to the 10nth elements of the new from_v_val which is 
+#' # outside from the new 'from_v_val' by 2 indices, 5 for the old 'from_v_val'
+#'
+#' print(old_to_new_idx_nested(from_v_val = c("oui", "no", "oui"), from_v_ids = c(1, 2, 3, 5), val = 2))
+#'
+#' [1] 1 3 4 7
+#'
+#' @export
 
-
+old_to_new_idx_nested <- function(from_v_val = c(), from_v_ids = c(), val = 1){
+  print(val)
+  for (I in 1:length(from_v_val)){
+    if (nchar(from_v_val[I]) > val){
+      print(paste("passe", nchar(from_v_val[I])), val)
+      for (i in 1:(nchar(from_v_val[I]) - val)){
+        from_v_ids[(I + 1):length(from_v_ids)] = from_v_ids[(I + 1):length(from_v_ids)] + 1
+      }
+    }
+  }
+  return(from_v_ids)
+}
 
 
