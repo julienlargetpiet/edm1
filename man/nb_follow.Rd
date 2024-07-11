@@ -14,7 +14,7 @@ nb_follow(inpt_v, inpt_idx, inpt_follow_v = c())
 \item{inpt_follow_v}{is a vector containing all the potential patterns that may follow the element in the vector at the index inpt_idx}
 }
 \description{
-Allow to get the number of certains patterns that may be after an index of a vector, see examples
+Allow to get the number of certains patterns that may be after an index of a vector continuously, see examples
 }
 \examples{
 

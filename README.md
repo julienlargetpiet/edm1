@@ -3821,7 +3821,7 @@ nb_follow
 
 ## Description
 
-Allow to get the number of certains patterns that may be after an index of a vector, see examples
+Allow to get the number of certains patterns that may be after an index of a vector continuously, see examples
 
 
 ## Usage
@@ -3971,10 +3971,17 @@ Argument      |Description
 print(nb2_follow(inpt_v = c(1:12), inpt_idx = 4, inpt_follow_v = c(5)))
 
 [1] 1 5
+# we have 1 times the pattern 5 just after the 4nth index of inpt_v
 
 print(nb2_follow(inpt_v = c(1, "non", "oui", "oui", "oui", "nop", 5), inpt_idx = 2, inpt_follow_v = c("5", "oui")))
 
 [1] "3"   "oui"
+
+# we have 3 times continuously the pattern 'oui' and 0 times the pattern 5 just after the 2nd index of inpt_v
+
+print(nb2_follow(inpt_v = c(1, "non", "5", "5", "5", "nop", 5), inpt_idx = 2, inpt_follow_v = c("5", "oui")))
+
+[1] "3" "5"
 ```
 
 
