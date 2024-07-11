@@ -423,6 +423,75 @@ print(better_match(inpt_v=c(1:12, 3, 4, 33, 3), ptrn=c(3, 4), untl=c(1, 5)))
 
 </div>
 </body></html>
+<!DOCTYPE html><html><head><title>R: better_split_any</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>better_split_any</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>better_split_any</h2>
+
+<h3>Description</h3>
+
+<p>Allows to split a string by multiple split regardless of their length, returns a vector and not a list. Contrary to better_split, this functions keep the delimiters in the output.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>better_split_any(inpt, split_v = c())
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt">inpt</code></td>
+<td>
+<p>is the input character</p>
+</td></tr>
+<tr><td><code id="split_v">split_v</code></td>
+<td>
+<p>is the vector containing the splits</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(better_split_any(inpt = "o-u_i", split_v = c("-")))
+
+[1] "o"  "-" "u_i"
+
+print(better_split_any(inpt = "o-u_i", split_v = c("-", "_")))
+
+[1] "o" "-" "u"  "_" "i"
+
+print(better_split_any(inpt = "--o--_/m/m/__-opo-/m/-u_i-_--", split_v = c("--", "_", "/")))
+
+ [1] "--"    "o"     "--"    "_"     "/"     "m"     "/"     "m"     "/"    
+[10] "_"     "_"     "-opo-" "/"     "m"     "/"     "-u"    "_"     "i-"   
+[19] "_"     "--"   
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
 <!DOCTYPE html><html><head><title>R: better_split</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />

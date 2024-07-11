@@ -305,6 +305,50 @@ print(better_match(inpt_v=c(1:12, 3, 4, 33, 3), ptrn=c(3, 4), untl=c(1, 5)))
 ```
 
 
+# `better_split_any`
+
+better_split_any
+
+
+## Description
+
+Allows to split a string by multiple split regardless of their length, returns a vector and not a list. Contrary to better_split, this functions keep the delimiters in the output.
+
+
+## Usage
+
+```r
+better_split_any(inpt, split_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt`     |     is the input character
+`split_v`     |     is the vector containing the splits
+
+
+## Examples
+
+```r
+print(better_split_any(inpt = "o-u_i", split_v = c("-")))
+
+[1] "o"  "-" "u_i"
+
+print(better_split_any(inpt = "o-u_i", split_v = c("-", "_")))
+
+[1] "o" "-" "u"  "_" "i"
+
+print(better_split_any(inpt = "--o--_/m/m/__-opo-/m/-u_i-_--", split_v = c("--", "_", "/")))
+
+[1] "--"    "o"     "--"    "_"     "/"     "m"     "/"     "m"     "/"
+[10] "_"     "_"     "-opo-" "/"     "m"     "/"     "-u"    "_"     "i-"
+[19] "_"     "--"
+```
+
+
 # `better_split`
 
 better_split

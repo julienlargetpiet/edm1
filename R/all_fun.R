@@ -13690,6 +13690,63 @@ unique_datf <- function(inpt_datf, col = FALSE){
     return(rtn_datf)
 }
 
+#' better_split_any
+#'
+#' Allows to split a string by multiple split regardless of their length, returns a vector and not a list. Contrary to better_split, this functions keep the delimiters in the output.
+#' @param inpt is the input character
+#' @param split_v is the vector containing the splits
+#' @examples
+#'
+#' print(better_split_any(inpt = "o-u_i", split_v = c("-")))
+#' 
+#' [1] "o"  "-" "u_i"
+#'
+#' print(better_split_any(inpt = "o-u_i", split_v = c("-", "_")))
+#'
+#' [1] "o" "-" "u"  "_" "i"
+#'
+#' print(better_split_any(inpt = "--o--_/m/m/__-opo-/m/-u_i-_--", split_v = c("--", "_", "/")))
+#'
+#'  [1] "--"    "o"     "--"    "_"     "/"     "m"     "/"     "m"     "/"    
+#' [10] "_"     "_"     "-opo-" "/"     "m"     "/"     "-u"    "_"     "i-"   
+#' [19] "_"     "--"   
+#'
+#' @export
+
+better_split_any <- function(inpt, split_v = c()){
+  for (split in split_v){
+    pre_inpt <- inpt
+    inpt <- c()
+    lst_splt <- FALSE
+    for (el in pre_inpt){
+      cur_splt <- unlist(strsplit(x = el, split = split))
+      cur_splt[cur_splt == ""] <- split
+      cnt = 1
+      while (cnt < length(cur_splt)){
+        if (cur_splt[cnt] %in% split_v){
+          if (lst_splt & cur_splt[cnt] != split){
+            cur_splt <- append(x = cur_splt, values = split, after = cnt)
+            cnt = cnt + 2 
+          }
+          lst_splt <- TRUE
+          cnt = cnt + 1
+        }else{
+          cur_splt <- append(x = cur_splt, values = split, after = cnt)
+          lst_splt <- FALSE
+          cnt = cnt + 2
+        }
+      }
+      last_verif <- unlist(strsplit(x = el, split = ""))
+      if (paste(last_verif[(length(last_verif) - (nchar(split) - 1)):length(last_verif)], collapse = "") == split){
+        cur_splt <- c(cur_splt, split)
+      }
+      inpt <- c(inpt, cur_splt)
+    }
+  }
+  return(inpt)
+}
+
+
 
 
 
