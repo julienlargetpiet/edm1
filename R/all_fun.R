@@ -13784,7 +13784,7 @@ better_split_any <- function(inpt, split_v = c()){
 
 #' wide_to_narow_idx
 #'
-#' Allow to convert the indices of vector ('from_v_ids') which are related to the elements of a vector, to fit the newly established maximum character of the vector, see examples.
+#' Allow to convert the indices of vector ('from_v_ids') which are related to each characters of a vector, to fit the newly established maximum character of the vector, see examples.
 #'
 #' @param from_v_val is the input vector of elements, or just the total number of characters of the elementsq in the vector
 #' @param from_v_ids is the input vector of indices
@@ -13840,6 +13840,82 @@ wide_to_narrow_idx <- function(from_v_val = c(), from_v_ids = c(), val = 1){
   return(from_v_ids2)
 }
 
+#' dynamic_idx_convertr 
+#'
+#' Allow to convert the indices of vector ('from_v_ids') which are related to the each characters of a vector (from_v_val), to fit the newly established characters of the vector from_v_val, see examples.
+#' 
+#' @param from_v_val is the input vector of elements, or just the total number of characters of the elementsq in the vector
+#' @param from_v_ids is the input vector of indices
+#' @examples
+#'
+#' print(dynamic_idx_convertr(from_v_ids = c(1, 5), from_v_val = c("oui", "no", "ouI")))
+#'
+#' [1] 1 2 
+#'
+#' print(dynamic_idx_convertr(from_v_ids = c(1, 6), from_v_val = c("oui", "no", "ouI")))
+#'
+#' [1] 1 3
+#'
+#' @export
 
+dynamic_idx_convertr <- function(from_v_ids, from_v_val){
+  lngth <- length(from_v_ids)
+  i = 1
+  no_stop <- TRUE
+  I = 1
+  lst_nchar = 0
+  while (I <= length(from_v_val) & no_stop){
+    while ((nchar(from_v_val[I]) + lst_nchar) >= from_v_ids[i] & no_stop){
+      from_v_ids[i] <- I
+      if (i == length(from_v_ids)){ no_stop <- FALSE }else{ i = i + 1 }
+    }
+    lst_nchar = lst_nchar + nchar(from_v_val[I])
+    I = I + 1
+  }
+  return(from_v_ids)
+}
+
+#' split_by_step
+#'
+#' Allow to split a string or a vector of strings by a step, see examples. 
+#'
+#' @param inpt_v is the input character or vector of characters
+#' @param by is the step
+#' @examples
+#'
+#' print(split_by_step(inpt_v = c("o", "u", "i", "n", "o", "o", "u", "i", "o", "Z"), by = 2))
+#'
+#' [1] "ou" "in" "oo" "ui" "oZ"
+#'
+#' print(split_by_step(inpt_v = c("o", "u", "i", "n", "o", "o", "u", "i", "o", "Z"), by = 3))
+#'
+#' [1] "oui" "noo" "uio" "Z"  
+#'
+#' print(split_by_step(inpt_v = c("o", "u", "i", "n", "o", "o", "u", "i", "o", "Z"), by = 4))
+#'
+#' [1] "ouin" "ooui" "oZ"  
+#'
+#' print(split_by_step(inpt_v = 'ouinoouioz', by = 4))
+#' 
+#' [1] "ouin" "ooui" "oZ"   
+#'
+#' @export
+
+split_by_step <- function(inpt_v, by){
+  if (length(inpt_v) == 1){
+    inpt_v <- unlist(strsplit(x = inpt_v, split = ""))
+  }
+  cnt = 1
+  by = by - 1
+  rtn_v <- c()
+  while ((cnt + by) <= length(inpt_v)){
+    rtn_v <- c(rtn_v, paste(inpt_v[cnt:(cnt + by)], collapse = ""))
+    cnt = cnt + by + 1
+  }
+  if (((cnt + by) - length(inpt_v)) < (by + 1)){
+    rtn_v <- c(rtn_v, paste(inpt_v[cnt:length(inpt_v)], collapse = ""))
+  }
+  return(rtn_v)
+}
 
 

@@ -1776,6 +1776,44 @@ print(diff_datf(datf1=datf1, datf2=datf2))
 ```
 
 
+# `dynamic_idx_convertr`
+
+dynamic_idx_convertr
+
+
+## Description
+
+Allow to convert the indices of vector ('from_v_ids') which are related to the each characters of a vector (from_v_val), to fit the newly established characters of the vector from_v_val, see examples.
+
+
+## Usage
+
+```r
+dynamic_idx_convertr(from_v_ids, from_v_val)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`from_v_ids`     |     is the input vector of indices
+`from_v_val`     |     is the input vector of elements, or just the total number of characters of the elementsq in the vector
+
+
+## Examples
+
+```r
+print(dynamic_idx_convertr(from_v_ids = c(1, 5), from_v_val = c("oui", "no", "ouI")))
+
+[1] 1 2
+
+print(dynamic_idx_convertr(from_v_ids = c(1, 6), from_v_val = c("oui", "no", "ouI")))
+
+[1] 1 3
+```
+
+
 # `elements_equalifier`
 
 elements_equalifier
@@ -5946,6 +5984,52 @@ print(sort_normal_qual2(inpt_datf = datf_test))
 ```
 
 
+# `split_by_step`
+
+split_by_step
+
+
+## Description
+
+Allow to split a string or a vector of strings by a step, see examples.
+
+
+## Usage
+
+```r
+split_by_step(inpt_v, by)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input character or vector of characters
+`by`     |     is the step
+
+
+## Examples
+
+```r
+print(split_by_step(inpt_v = c("o", "u", "i", "n", "o", "o", "u", "i", "o", "Z"), by = 2))
+
+[1] "ou" "in" "oo" "ui" "oZ"
+
+print(split_by_step(inpt_v = c("o", "u", "i", "n", "o", "o", "u", "i", "o", "Z"), by = 3))
+
+[1] "oui" "noo" "uio" "Z"
+
+print(split_by_step(inpt_v = c("o", "u", "i", "n", "o", "o", "u", "i", "o", "Z"), by = 4))
+
+[1] "ouin" "ooui" "oZ"
+
+print(split_by_step(inpt_v = 'ouinoouioz', by = 4))
+
+[1] "ouin" "ooui" "oZ"
+```
+
+
 # `str_remove_untl`
 
 str_remove_untl
@@ -6716,7 +6800,7 @@ wide_to_narow_idx
 
 ## Description
 
-Allow to convert the indices of vector ('from_v_ids') which are related to the elements of a vector, to fit the newly established maximum character of the vector, see examples.
+Allow to convert the indices of vector ('from_v_ids') which are related to each characters of a vector, to fit the newly established maximum character of the vector, see examples.
 
 
 ## Usage

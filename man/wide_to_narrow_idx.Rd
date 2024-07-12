@@ -14,7 +14,7 @@ wide_to_narrow_idx(from_v_val = c(), from_v_ids = c(), val = 1)
 \item{val}{is the value - 1 from which the number of character of an element is too high, so the indices in 'from_v_ids' will be modified}
 }
 \description{
-Allow to convert the indices of vector ('from_v_ids') which are related to the elements of a vector, to fit the newly established maximum character of the vector, see examples.
+Allow to convert the indices of vector ('from_v_ids') which are related to each characters of a vector, to fit the newly established maximum character of the vector, see examples.
 }
 \examples{
 
