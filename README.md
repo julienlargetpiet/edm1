@@ -4236,51 +4236,6 @@ print(occu(inpt_v=c("oui", "peut", "peut", "non", "oui")))
 ```
 
 
-# `old_to_new_idx_nested`
-
-old_to_new_idx_nested
-
-
-## Description
-
-Allow to convert the indices of vector ('from_v_ids') which are related to the elements of 'from_v_val' vector, to fir the newly established maximum character of elements in 'from_v_val', see examples.
-
-
-## Usage
-
-```r
-old_to_new_idx_nested(from_v_val = c(), from_v_ids = c(), val = 1)
-```
-
-
-## Arguments
-
-Argument      |Description
-------------- |----------------
-`from_v_val`     |     is the input vector of elements
-`from_v_ids`     |     is the input vector of indices
-`val`     |     is the value - 1 from which the number of character of an element is too high, so the indices in 'from_v_ids' will be modified
-
-
-## Examples
-
-```r
-print(old_to_new_idx_nested(from_v_val = c("oui", "no", "oui"), from_v_ids = c(1, 2, 3, 5), val = 1))
-
-[1] 1 4 6 10
-
-# the new 'from_v_ids' is theorically c('o', 'u', 'i', 'n', 'o', 'o', 'u', 'i')
-# here the indices five does not technically correspond to any element in the original 'from_v_val',
-# but corresponds to the 'o' of 'no' if the maximum number of character of from_v_val is one
-# However, the old five index now corresponds to the 10nth elements of the new from_v_val which is
-# outside from the new 'from_v_val' by 2 indices, 5 for the old 'from_v_val'
-
-print(old_to_new_idx_nested(from_v_val = c("oui", "no", "oui"), from_v_ids = c(1, 2, 3, 5), val = 2))
-
-[1] 1 3 4 7
-```
-
-
 # `old_to_new_idx`
 
 old_to_new_idx
@@ -6751,6 +6706,49 @@ print(vlookup_datf(datf=datf1, v_id=c("az1", "az2", "az3", "az4")))
 #4                            az2      4      1
 #21                           az3      2      3
 #3                            az4      3      2
+```
+
+
+# `wide_to_narrow_idx`
+
+wide_to_narow_idx
+
+
+## Description
+
+Allow to convert the indices of vector ('from_v_ids') which are related to the elements of a vector, to fit the newly established maximum character of the vector, see examples.
+
+
+## Usage
+
+```r
+wide_to_narrow_idx(from_v_val = c(), from_v_ids = c(), val = 1)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`from_v_val`     |     is the input vector of elements, or just the total number of characters of the elementsq in the vector
+`from_v_ids`     |     is the input vector of indices
+`val`     |     is the value - 1 from which the number of character of an element is too high, so the indices in 'from_v_ids' will be modified
+
+
+## Examples
+
+```r
+print(wide_to_narrow_idx(from_v_val = c("oui", "no", "oui"), from_v_ids = c(4, 6, 9), val = 2))
+
+[1] 2 4 5
+
+print(wide_to_narrow_idx(from_v_val = c("oui", "no", "oui"), from_v_ids = c(4, 6, 9), val = 3))
+
+[1] 2 2 3
+
+print(wide_to_narrow_idx(from_v_val = c("oui", "no", "oui"), from_v_ids = c(4, 6, 9), val = 1))
+
+[1] 4 6 9
 ```
 
 
