@@ -30,4 +30,10 @@ print(better_split_any(inpt = "--o--_/m/m/__-opo-/m/-u_i-_--", split_v = c("--",
 [10] "_"     "_"     "-opo-" "/"     "m"     "/"     "-u"    "_"     "i-"   
 [19] "_"     "--"   
 
+
+print(better_split_any(inpt = "(ok(ee:56))(ok2(oui)(ee:4))", split_v = c("(", ")", ":")))
+
+ [1] "("   "ok"  "("   "ee"  ":"   "56"  ")"   ")"   "("   "ok2" "("   "oui"
+ [13] ")"   "("   "ee"  ":"   "4"   ")"   ")"  
+
 }

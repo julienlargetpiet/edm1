@@ -486,6 +486,12 @@ print(better_split_any(inpt = "--o--_/m/m/__-opo-/m/-u_i-_--", split_v = c("--",
 [10] "_"     "_"     "-opo-" "/"     "m"     "/"     "-u"    "_"     "i-"   
 [19] "_"     "--"   
 
+
+print(better_split_any(inpt = "(ok(ee:56))(ok2(oui)(ee:4))", split_v = c("(", ")", ":")))
+
+ [1] "("   "ok"  "("   "ee"  ":"   "56"  ")"   ")"   "("   "ok2" "("   "oui"
+ [13] ")"   "("   "ee"  ":"   "4"   ")"   ")"  
+
 </code></pre>
 
 </main>
@@ -3815,6 +3821,76 @@ print(globe(lat_f=23, long_f=112, alt_f=NA, lat_n=c(2, 82), long_n=c(165, -55), 
 print(globe(lat_f=23, long_f=112, alt_f=8, lat_n=c(2, 82), long_n=c(165, -55), alt_n=c(8, -2)))
 
 #[1] 6342.844 7059.087
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: glue_groupr_v</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>glue_groupr_v</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>glue_groupr_v</h2>
+
+<h3>Description</h3>
+
+<p>Takes an input vector and returns the same vector unlike that certain elements will be glued as an unique element according to thoses designated in a special vector, see examples.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>glue_groupr_v(inpt_v, group_v = c(), untl)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_v">inpt_v</code></td>
+<td>
+<p>is the input vector</p>
+</td></tr>
+<tr><td><code id="is">is</code></td>
+<td>
+<p>a vector containing all the elements that will be glued in the output vector</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(glue_groupr_v(inpt_v = c("o", "-", "-", "u", "i", "-", "n", 
+ "o", "-", "-", "-", "zz", "/", "/"), group_v = c("-", "/")))
+
+[1] "o"   "--"  "u"   "i"   "-"   "n"   "o"   "---" "zz"  "//" 
+
+print(glue_groupr_v(inpt_v = c("o", "-", "-", "u", "i", "-", "n", 
+ "o", "-", "-", "-", "-", "zz", "/", "/"), group_v = c("-", "/"), untl = 3))
+
+[1] "o"   "--"  "u"   "i"   "-"   "n"   "o"   "---" "-"   "zz"  "//"  
+
+print(glue_groupr_v(inpt_v = c("o", "-", "-", "u", "i", "-", "n", 
+"o", "-", "-", "-", "-", "zz", "/", "/"), group_v = c("-", "/"), untl = 2))
+
+[1] "o"  "--" "u"  "i"  "-"  "n"  "o"  "--" "--" "zz" "//" 
 
 </code></pre>
 
@@ -7641,6 +7717,10 @@ print(regex_spe_detect("tr(o)m"))
 print(regex_spe_detect(inpt="fggfg[fggf]fgfg(vg?fgfgf.gf)"))
 
 [1] "fggfg\\[fggf\\]fgfg\\(vg\\?fgfgf\\.gf\\)"
+
+print(regex_spe_detect(inpt = "---"))
+
+[1] "\\-\\-\\-" 
 
 </code></pre>
 

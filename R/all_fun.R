@@ -244,64 +244,38 @@ pattern_tuning <- function(pattrn, spe_nb, spe_l, exclude_type, hmn=1, rg=c(1, n
 
 can_be_num <- function(x){
 
-        regex_spe_detect <- function(inpt){
-
-                fillr <- function(inpt_v, ptrn_fill="\\.\\.\\.\\d"){
-                  
-                  ptrn <- grep(ptrn_fill, inpt_v)
-
-                  while (length(ptrn) > 0){
-                   
-                    ptrn <- grep(ptrn_fill, inpt_v)
-
-                    idx <- ptrn[1] 
-                    
-                    untl <- as.numeric(c(unlist(strsplit(inpt_v[idx], split="\\.")))[4]) - 1
-                   
-                    pre_val <- inpt_v[(idx - 1)]
-
-                    inpt_v[idx] <- pre_val
-
-                    if (untl > 0){
-                    
-                      for (i in 1:untl){
-                        
-                        inpt_v <- append(inpt_v, pre_val, idx)
-                        
-                      }
-                      
-                    }
-
-                  ptrn <- grep(ptrn_fill, inpt_v)
-                    
-                  }
-                  
-                  return(inpt_v)
-                  
+    regex_spe_detect <- function(inpt){
+        fillr <- function(inpt_v, ptrn_fill="\\.\\.\\.\\d"){
+          ptrn <- grep(ptrn_fill, inpt_v)
+          while (length(ptrn) > 0){
+            ptrn <- grep(ptrn_fill, inpt_v)
+            idx <- ptrn[1] 
+            untl <- as.numeric(c(unlist(strsplit(inpt_v[idx], split="\\.")))[4]) - 1
+            pre_val <- inpt_v[(idx - 1)]
+            inpt_v[idx] <- pre_val
+            if (untl > 0){
+              for (i in 1:untl){
+                inpt_v <- append(inpt_v, pre_val, idx)
+              }
+            }
+          ptrn <- grep(ptrn_fill, inpt_v)
+          }
+          return(inpt_v)
+        }
+        inpt <- unlist(strsplit(x=inpt, split=""))
+        may_be_v <- c("[", "]", "{", "}", "-", "_", ".", "(", ")", "/", "%", "*", "^", "?", "$")
+        pre_idx <- unique(match(x=inpt, table=may_be_v))
+        pre_idx <- pre_idx[!(is.na(pre_idx))]
+        for (el in may_be_v[pre_idx]){
+                cnt = 0
+                for (i in grep(pattern=paste("\\", el, sep=""), x=inpt)){
+                        inpt <- append(x=inpt, values="\\", after=(i - 1 + cnt))
+                        cnt = cnt + 1
                 }
+        }
+          return(paste(inpt, collapse=""))
+     }
 
-           inpt <- unlist(strsplit(x=inpt, split=""))
-
-           may_be_v <- c("[", "]", "{", "}", "-", "_", ".", "(", ")", "/", "%", "*", "^", "?", "$")
-
-           pre_idx <- unique(match(x=inpt, table=may_be_v))
-
-           pre_idx <- pre_idx[!(is.na(pre_idx))]
-
-           for (el in may_be_v[pre_idx]){
-
-                   for (i in grep(pattern=paste("\\", el, sep=""), x=inpt)){
-
-                           inpt <- append(x=inpt, values="\\", after=(i-1))
-
-                   }
-
-           }
-
-        
-           return(paste(inpt, collapse=""))
-
-    }
     
     if (typeof(x) == "double"){
 
@@ -9610,65 +9584,42 @@ intersect_mod <- function(datf, inter_col, mod_col, n_min, descendly_ordered=NA)
 #' 
 #' [1] "fggfg\\[fggf\\]fgfg\\(vg\\?fgfgf\\.gf\\)"
 #'
+#' print(regex_spe_detect(inpt = "---"))
+#'
+#' [1] "\\-\\-\\-" 
+#'
 #' @export
 
 regex_spe_detect <- function(inpt){
-
         fillr <- function(inpt_v, ptrn_fill="\\.\\.\\.\\d"){
-          
           ptrn <- grep(ptrn_fill, inpt_v)
-
           while (length(ptrn) > 0){
-           
             ptrn <- grep(ptrn_fill, inpt_v)
-
             idx <- ptrn[1] 
-            
             untl <- as.numeric(c(unlist(strsplit(inpt_v[idx], split="\\.")))[4]) - 1
-           
             pre_val <- inpt_v[(idx - 1)]
-
             inpt_v[idx] <- pre_val
-
             if (untl > 0){
-            
               for (i in 1:untl){
-                
                 inpt_v <- append(inpt_v, pre_val, idx)
-                
               }
-              
             }
-
           ptrn <- grep(ptrn_fill, inpt_v)
-            
           }
-          
           return(inpt_v)
-          
         }
-
         inpt <- unlist(strsplit(x=inpt, split=""))
-
         may_be_v <- c("[", "]", "{", "}", "-", "_", ".", "(", ")", "/", "%", "*", "^", "?", "$")
-
         pre_idx <- unique(match(x=inpt, table=may_be_v))
-
         pre_idx <- pre_idx[!(is.na(pre_idx))]
-
         for (el in may_be_v[pre_idx]){
-
+                cnt = 0
                 for (i in grep(pattern=paste("\\", el, sep=""), x=inpt)){
-
-                        inpt <- append(x=inpt, values="\\", after=(i-1))
-
+                        inpt <- append(x=inpt, values="\\", after=(i - 1 + cnt))
+                        cnt = cnt + 1
                 }
-
         }
-
-        
   return(paste(inpt, collapse=""))
-
 }
 
 #' pairs_findr
@@ -9691,66 +9642,38 @@ regex_spe_detect <- function(inpt){
 #' @export
 
 pairs_findr <- function(inpt, ptrn1="(", ptrn2=")"){
-
         regex_spe_detect <- function(inpt){
-
-                fillr <- function(inpt_v, ptrn_fill="\\.\\.\\.\\d"){
-                  
-                  ptrn <- grep(ptrn_fill, inpt_v)
-
-                  while (length(ptrn) > 0){
-                   
-                    ptrn <- grep(ptrn_fill, inpt_v)
-
-                    idx <- ptrn[1] 
-                    
-                    untl <- as.numeric(c(unlist(strsplit(inpt_v[idx], split="\\.")))[4]) - 1
-                   
-                    pre_val <- inpt_v[(idx - 1)]
-
-                    inpt_v[idx] <- pre_val
-
-                    if (untl > 0){
-                    
-                      for (i in 1:untl){
-                        
-                        inpt_v <- append(inpt_v, pre_val, idx)
-                        
-                      }
-                      
-                    }
-
-                  ptrn <- grep(ptrn_fill, inpt_v)
-                    
-                  }
-                  
-                  return(inpt_v)
-                  
+          fillr <- function(inpt_v, ptrn_fill="\\.\\.\\.\\d"){
+            ptrn <- grep(ptrn_fill, inpt_v)
+            while (length(ptrn) > 0){
+              ptrn <- grep(ptrn_fill, inpt_v)
+              idx <- ptrn[1] 
+              untl <- as.numeric(c(unlist(strsplit(inpt_v[idx], split="\\.")))[4]) - 1
+              pre_val <- inpt_v[(idx - 1)]
+              inpt_v[idx] <- pre_val
+              if (untl > 0){
+                for (i in 1:untl){
+                  inpt_v <- append(inpt_v, pre_val, idx)
                 }
-
-           inpt <- unlist(strsplit(x=inpt, split=""))
-
-           may_be_v <- c("[", "]", "{", "}", "-", "_", ".", "(", ")", "/", "%", "*", "^", "?", "$")
-
-           pre_idx <- unique(match(x=inpt, table=may_be_v))
-
-           pre_idx <- pre_idx[!(is.na(pre_idx))]
-
-           for (el in may_be_v[pre_idx]){
-
-                   for (i in grep(pattern=paste("\\", el, sep=""), x=inpt)){
-
-                           inpt <- append(x=inpt, values="\\", after=(i-1))
-
-                   }
-
-           }
-
-        
-           return(paste(inpt, collapse=""))
-
+              }
+            ptrn <- grep(ptrn_fill, inpt_v)
+            }
+            return(inpt_v)
+          }
+          inpt <- unlist(strsplit(x=inpt, split=""))
+          may_be_v <- c("[", "]", "{", "}", "-", "_", ".", "(", ")", "/", "%", "*", "^", "?", "$")
+          pre_idx <- unique(match(x=inpt, table=may_be_v))
+          pre_idx <- pre_idx[!(is.na(pre_idx))]
+          for (el in may_be_v[pre_idx]){
+                  cnt = 0
+                  for (i in grep(pattern=paste("\\", el, sep=""), x=inpt)){
+                          inpt <- append(x=inpt, values="\\", after=(i - 1 + cnt))
+                          cnt = cnt + 1
+                  }
+          }
+          return(paste(inpt, collapse=""))
         }
-
+        
         lst <- unlist(strsplit(x=inpt, split=""))
 
         lst_par <- c()
@@ -10745,33 +10668,35 @@ pairs_insertr <- function(inpt, algo_used = c(1:3), flagged_pair_v = c(")", "]")
       }
     pairs_findr <- function(inpt, ptrn1="(", ptrn2=")"){
       regex_spe_detect <- function(inpt){
-              fillr <- function(inpt_v, ptrn_fill="\\.\\.\\.\\d"){
-                ptrn <- grep(ptrn_fill, inpt_v)
-                while (length(ptrn) > 0){
-                  ptrn <- grep(ptrn_fill, inpt_v)
-                  idx <- ptrn[1] 
-                  untl <- as.numeric(c(unlist(strsplit(inpt_v[idx], split="\\.")))[4]) - 1
-                  pre_val <- inpt_v[(idx - 1)]
-                  inpt_v[idx] <- pre_val
-                  if (untl > 0){
-                    for (i in 1:untl){
-                      inpt_v <- append(inpt_v, pre_val, idx)
-                    }
-                  }
-                ptrn <- grep(ptrn_fill, inpt_v)
+          fillr <- function(inpt_v, ptrn_fill="\\.\\.\\.\\d"){
+            ptrn <- grep(ptrn_fill, inpt_v)
+            while (length(ptrn) > 0){
+              ptrn <- grep(ptrn_fill, inpt_v)
+              idx <- ptrn[1] 
+              untl <- as.numeric(c(unlist(strsplit(inpt_v[idx], split="\\.")))[4]) - 1
+              pre_val <- inpt_v[(idx - 1)]
+              inpt_v[idx] <- pre_val
+              if (untl > 0){
+                for (i in 1:untl){
+                  inpt_v <- append(inpt_v, pre_val, idx)
                 }
-                return(inpt_v)
               }
-         inpt <- unlist(strsplit(x=inpt, split=""))
-         may_be_v <- c("[", "]", "{", "}", "-", "_", ".", "(", ")", "/", "%", "*", "^", "?", "$")
-         pre_idx <- unique(match(x=inpt, table=may_be_v))
-         pre_idx <- pre_idx[!(is.na(pre_idx))]
-         for (el in may_be_v[pre_idx]){
-                 for (i in grep(pattern=paste("\\", el, sep=""), x=inpt)){
-                         inpt <- append(x=inpt, values="\\", after=(i-1))
-                 }
-         }
-         return(paste(inpt, collapse=""))
+            ptrn <- grep(ptrn_fill, inpt_v)
+            }
+            return(inpt_v)
+          }
+          inpt <- unlist(strsplit(x=inpt, split=""))
+          may_be_v <- c("[", "]", "{", "}", "-", "_", ".", "(", ")", "/", "%", "*", "^", "?", "$")
+          pre_idx <- unique(match(x=inpt, table=may_be_v))
+          pre_idx <- pre_idx[!(is.na(pre_idx))]
+          for (el in may_be_v[pre_idx]){
+                  cnt = 0
+                  for (i in grep(pattern=paste("\\", el, sep=""), x=inpt)){
+                          inpt <- append(x=inpt, values="\\", after=(i - 1 + cnt))
+                          cnt = cnt + 1
+                  }
+          }
+          return(paste(inpt, collapse=""))
       }
       lst <- unlist(strsplit(x=inpt, split=""))
       lst_par <- c()
@@ -11181,33 +11106,35 @@ pairs_insertr2 <- function(inpt, algo_used = c(1:3), flagged_pair_v = c(")", "]"
       }
     pairs_findr <- function(inpt, ptrn1="(", ptrn2=")"){
       regex_spe_detect <- function(inpt){
-              fillr <- function(inpt_v, ptrn_fill="\\.\\.\\.\\d"){
-                ptrn <- grep(ptrn_fill, inpt_v)
-                while (length(ptrn) > 0){
-                  ptrn <- grep(ptrn_fill, inpt_v)
-                  idx <- ptrn[1] 
-                  untl <- as.numeric(c(unlist(strsplit(inpt_v[idx], split="\\.")))[4]) - 1
-                  pre_val <- inpt_v[(idx - 1)]
-                  inpt_v[idx] <- pre_val
-                  if (untl > 0){
-                    for (i in 1:untl){
-                      inpt_v <- append(inpt_v, pre_val, idx)
-                    }
-                  }
-                ptrn <- grep(ptrn_fill, inpt_v)
+          fillr <- function(inpt_v, ptrn_fill="\\.\\.\\.\\d"){
+            ptrn <- grep(ptrn_fill, inpt_v)
+            while (length(ptrn) > 0){
+              ptrn <- grep(ptrn_fill, inpt_v)
+              idx <- ptrn[1] 
+              untl <- as.numeric(c(unlist(strsplit(inpt_v[idx], split="\\.")))[4]) - 1
+              pre_val <- inpt_v[(idx - 1)]
+              inpt_v[idx] <- pre_val
+              if (untl > 0){
+                for (i in 1:untl){
+                  inpt_v <- append(inpt_v, pre_val, idx)
                 }
-                return(inpt_v)
               }
-         inpt <- unlist(strsplit(x=inpt, split=""))
-         may_be_v <- c("[", "]", "{", "}", "-", "_", ".", "(", ")", "/", "%", "*", "^", "?", "$")
-         pre_idx <- unique(match(x=inpt, table=may_be_v))
-         pre_idx <- pre_idx[!(is.na(pre_idx))]
-         for (el in may_be_v[pre_idx]){
-                 for (i in grep(pattern=paste("\\", el, sep=""), x=inpt)){
-                         inpt <- append(x=inpt, values="\\", after=(i-1))
-                 }
-         }
-         return(paste(inpt, collapse=""))
+            ptrn <- grep(ptrn_fill, inpt_v)
+            }
+            return(inpt_v)
+          }
+          inpt <- unlist(strsplit(x=inpt, split=""))
+          may_be_v <- c("[", "]", "{", "}", "-", "_", ".", "(", ")", "/", "%", "*", "^", "?", "$")
+          pre_idx <- unique(match(x=inpt, table=may_be_v))
+          pre_idx <- pre_idx[!(is.na(pre_idx))]
+          for (el in may_be_v[pre_idx]){
+                  cnt = 0
+                  for (i in grep(pattern=paste("\\", el, sep=""), x=inpt)){
+                          inpt <- append(x=inpt, values="\\", after=(i - 1 + cnt))
+                          cnt = cnt + 1
+                  }
+          }
+          return(paste(inpt, collapse=""))
       }
       lst <- unlist(strsplit(x=inpt, split=""))
       lst_par <- c()
@@ -13718,37 +13645,76 @@ unique_datf <- function(inpt_datf, col = FALSE){
 #' [10] "_"     "_"     "-opo-" "/"     "m"     "/"     "-u"    "_"     "i-"   
 #' [19] "_"     "--"   
 #'
+#'
+#' print(better_split_any(inpt = "(ok(ee:56))(ok2(oui)(ee:4))", split_v = c("(", ")", ":")))
+#'
+#'  [1] "("   "ok"  "("   "ee"  ":"   "56"  ")"   ")"   "("   "ok2" "("   "oui"
+#'  [13] ")"   "("   "ee"  ":"   "4"   ")"   ")"  
+#'
 #' @export
 
 better_split_any <- function(inpt, split_v = c()){
+  glue_groupr_v <- function(inpt_v, group_v = c(), untl){
+    rtn_v <- c()
+    cur_v <- c()
+    grp_status <- FALSE
+    cnt_untl = 0
+    for (el in inpt_v) {
+      if (el %in% group_v & cnt_untl < untl){
+        grp_status <- TRUE
+        cur_v <- c(cur_v, el)
+        cnt_untl = cnt_untl + 1
+      }else if (grp_status){
+        grp_status <- FALSE
+        rtn_v <- c(rtn_v, paste(cur_v, collapse = ""))
+        cur_v <- c()
+        if (el %in% group_v){
+          cnt_untl = 1
+          cur_v <- c(el)
+          grp_status <- TRUE
+        }else{
+          cnt_untl = 0
+          rtn_v <- c(rtn_v, el)
+        }
+      }else{
+        rtn_v <- c(rtn_v, el)
+      }
+    }
+    if (length(cur_v) > 0){
+      rtn_v <- c(rtn_v, paste(cur_v, collapse = ""))
+    }
+    return(rtn_v)
+  }
   regex_spe_detect <- function(inpt){
-          fillr <- function(inpt_v, ptrn_fill="\\.\\.\\.\\d"){
+        fillr <- function(inpt_v, ptrn_fill="\\.\\.\\.\\d"){
+          ptrn <- grep(ptrn_fill, inpt_v)
+          while (length(ptrn) > 0){
             ptrn <- grep(ptrn_fill, inpt_v)
-            while (length(ptrn) > 0){
-              ptrn <- grep(ptrn_fill, inpt_v)
-              idx <- ptrn[1] 
-              untl <- as.numeric(c(unlist(strsplit(inpt_v[idx], split="\\.")))[4]) - 1
-              pre_val <- inpt_v[(idx - 1)]
-              inpt_v[idx] <- pre_val
-              if (untl > 0){
-                for (i in 1:untl){
-                  inpt_v <- append(inpt_v, pre_val, idx)
-                }
+            idx <- ptrn[1] 
+            untl <- as.numeric(c(unlist(strsplit(inpt_v[idx], split="\\.")))[4]) - 1
+            pre_val <- inpt_v[(idx - 1)]
+            inpt_v[idx] <- pre_val
+            if (untl > 0){
+              for (i in 1:untl){
+                inpt_v <- append(inpt_v, pre_val, idx)
               }
-            ptrn <- grep(ptrn_fill, inpt_v)
             }
-            return(inpt_v)
+          ptrn <- grep(ptrn_fill, inpt_v)
           }
-          inpt <- unlist(strsplit(x=inpt, split=""))
-          may_be_v <- c("[", "]", "{", "}", "-", "_", ".", "(", ")", "/", "%", "*", "^", "?", "$")
-          pre_idx <- unique(match(x=inpt, table=may_be_v))
-          pre_idx <- pre_idx[!(is.na(pre_idx))]
-          for (el in may_be_v[pre_idx]){
-                  for (i in grep(pattern=paste("\\", el, sep=""), x=inpt)){
-                          inpt <- append(x=inpt, values="\\", after=(i-1))
-                  }
-          }
-    return(paste(inpt, collapse=""))
+          return(inpt_v)
+        }
+        inpt <- unlist(strsplit(x=inpt, split=""))
+        may_be_v <- c("[", "]", "{", "}", "-", "_", ".", "(", ")", "/", "%", "*", "^", "?", "$")
+        pre_idx <- unique(match(x=inpt, table=may_be_v))
+        pre_idx <- pre_idx[!(is.na(pre_idx))]
+        for (el in may_be_v[pre_idx]){
+                cnt = 0
+                for (i in grep(pattern=paste("\\", el, sep=""), x=inpt)){
+                        inpt <- append(x=inpt, values="\\", after=(i - 1 + cnt))
+                        cnt = cnt + 1
+                }
+        }
+          return(paste(inpt, collapse=""))
   }
   for (split in split_v){
     pre_inpt <- inpt
@@ -13772,8 +13738,11 @@ better_split_any <- function(inpt, split_v = c()){
           cnt = cnt + 2
         }
       }
-      last_verif <- unlist(strsplit(x = el, split = ""))
-      if (paste(last_verif[(length(last_verif) - (nchar(split) - 1)):length(last_verif)], collapse = "") == split){
+      cur_grp <- c()
+      split_decomp <- unlist(strsplit(x = split, split = ""))
+      for (el2 in split_decomp){ cur_grp <- c(cur_grp, el2) }
+      last_verif <- glue_groupr_v(unlist(strsplit(x = el, split = "")), group_v = cur_grp, untl = nchar(split))
+      if (sum(grepl(x = last_verif, pattern = regex_spe_detect(split))) == (sum(grepl(x = cur_splt, pattern = regex_spe_detect(split))) + 1)){
         cur_splt <- c(cur_splt, split)
       }
       inpt <- c(inpt, cur_splt)
@@ -13914,6 +13883,64 @@ split_by_step <- function(inpt_v, by){
   }
   if (((cnt + by) - length(inpt_v)) < (by + 1)){
     rtn_v <- c(rtn_v, paste(inpt_v[cnt:length(inpt_v)], collapse = ""))
+  }
+  return(rtn_v)
+}
+
+#' glue_groupr_v 
+#'
+#' Takes an input vector and returns the same vector unlike that certain elements will be glued as an unique element according to thoses designated in a special vector, see examples.
+#'
+#' @param inpt_v is the input vector
+#' @param is a vector containing all the elements that will be glued in the output vector
+#'
+#' @examples
+#'
+#' print(glue_groupr_v(inpt_v = c("o", "-", "-", "u", "i", "-", "n", 
+#'  "o", "-", "-", "-", "zz", "/", "/"), group_v = c("-", "/")))
+#'
+#' [1] "o"   "--"  "u"   "i"   "-"   "n"   "o"   "---" "zz"  "//" 
+#' 
+#' print(glue_groupr_v(inpt_v = c("o", "-", "-", "u", "i", "-", "n", 
+#'  "o", "-", "-", "-", "-", "zz", "/", "/"), group_v = c("-", "/"), untl = 3))
+#'
+#' [1] "o"   "--"  "u"   "i"   "-"   "n"   "o"   "---" "-"   "zz"  "//"  
+#'
+#' print(glue_groupr_v(inpt_v = c("o", "-", "-", "u", "i", "-", "n", 
+#' "o", "-", "-", "-", "-", "zz", "/", "/"), group_v = c("-", "/"), untl = 2))
+#'
+#' [1] "o"  "--" "u"  "i"  "-"  "n"  "o"  "--" "--" "zz" "//" 
+#'
+#' @export
+
+glue_groupr_v <- function(inpt_v, group_v = c(), untl){
+  rtn_v <- c()
+  cur_v <- c()
+  grp_status <- FALSE
+  cnt_untl = 0
+  for (el in inpt_v) {
+    if (el %in% group_v & cnt_untl < untl){
+      grp_status <- TRUE
+      cur_v <- c(cur_v, el)
+      cnt_untl = cnt_untl + 1
+    }else if (grp_status){
+      grp_status <- FALSE
+      rtn_v <- c(rtn_v, paste(cur_v, collapse = ""))
+      cur_v <- c()
+      if (el %in% group_v){
+        cnt_untl = 1
+        cur_v <- c(el)
+        grp_status <- TRUE
+      }else{
+        cnt_untl = 0
+        rtn_v <- c(rtn_v, el)
+      }
+    }else{
+      rtn_v <- c(rtn_v, el)
+    }
+  }
+  if (length(cur_v) > 0){
+    rtn_v <- c(rtn_v, paste(cur_v, collapse = ""))
   }
   return(rtn_v)
 }

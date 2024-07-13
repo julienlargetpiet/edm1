@@ -30,4 +30,8 @@ print(regex_spe_detect(inpt="fggfg[fggf]fgfg(vg?fgfgf.gf)"))
 
 [1] "fggfg\\\\[fggf\\\\]fgfg\\\\(vg\\\\?fgfgf\\\\.gf\\\\)"
 
+print(regex_spe_detect(inpt = "---"))
+
+[1] "\\\\-\\\\-\\\\-" 
+
 }

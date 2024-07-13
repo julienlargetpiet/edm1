@@ -346,6 +346,12 @@ print(better_split_any(inpt = "--o--_/m/m/__-opo-/m/-u_i-_--", split_v = c("--",
 [1] "--"    "o"     "--"    "_"     "/"     "m"     "/"     "m"     "/"
 [10] "_"     "_"     "-opo-" "/"     "m"     "/"     "-u"    "_"     "i-"
 [19] "_"     "--"
+
+
+print(better_split_any(inpt = "(ok(ee:56))(ok2(oui)(ee:4))", split_v = c("(", ")", ":")))
+
+[1] "("   "ok"  "("   "ee"  ":"   "56"  ")"   ")"   "("   "ok2" "("   "oui"
+[13] ")"   "("   "ee"  ":"   "4"   ")"   ")"
 ```
 
 
@@ -2566,6 +2572,51 @@ print(globe(lat_f=23, long_f=112, alt_f=NA, lat_n=c(2, 82), long_n=c(165, -55), 
 print(globe(lat_f=23, long_f=112, alt_f=8, lat_n=c(2, 82), long_n=c(165, -55), alt_n=c(8, -2)))
 
 #[1] 6342.844 7059.087
+```
+
+
+# `glue_groupr_v`
+
+glue_groupr_v
+
+
+## Description
+
+Takes an input vector and returns the same vector unlike that certain elements will be glued as an unique element according to thoses designated in a special vector, see examples.
+
+
+## Usage
+
+```r
+glue_groupr_v(inpt_v, group_v = c(), untl)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`is`     |     a vector containing all the elements that will be glued in the output vector
+
+
+## Examples
+
+```r
+print(glue_groupr_v(inpt_v = c("o", "-", "-", "u", "i", "-", "n",
+"o", "-", "-", "-", "zz", "/", "/"), group_v = c("-", "/")))
+
+[1] "o"   "--"  "u"   "i"   "-"   "n"   "o"   "---" "zz"  "//"
+
+print(glue_groupr_v(inpt_v = c("o", "-", "-", "u", "i", "-", "n",
+"o", "-", "-", "-", "-", "zz", "/", "/"), group_v = c("-", "/"), untl = 3))
+
+[1] "o"   "--"  "u"   "i"   "-"   "n"   "o"   "---" "-"   "zz"  "//"
+
+print(glue_groupr_v(inpt_v = c("o", "-", "-", "u", "i", "-", "n",
+"o", "-", "-", "-", "-", "zz", "/", "/"), group_v = c("-", "/"), untl = 2))
+
+[1] "o"  "--" "u"  "i"  "-"  "n"  "o"  "--" "--" "zz" "//"
 ```
 
 
@@ -5038,6 +5089,10 @@ print(regex_spe_detect("tr(o)m"))
 print(regex_spe_detect(inpt="fggfg[fggf]fgfg(vg?fgfgf.gf)"))
 
 [1] "fggfg\\[fggf\\]fgfg\\(vg\\?fgfgf\\.gf\\)"
+
+print(regex_spe_detect(inpt = "---"))
+
+[1] "\\-\\-\\-"
 ```
 
 
