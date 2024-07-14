@@ -10596,3 +10596,73 @@ print(wide_to_narrow_idx(from_v_val = c("oui", "no", "oui"), from_v_ids = c(4, 6
 
 </div>
 </body></html>
+<!DOCTYPE html><html><head><title>R: write_edm_parser</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>write_edm_parser</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>write_edm_parser</h2>
+
+<h3>Description</h3>
+
+<p>Allow to write data to edm parsed dataset, see examples
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>write_edm_parser(inpt, to_write_v, write_data)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt">inpt</code></td>
+<td>
+<p>is the input dataset</p>
+</td></tr>
+<tr><td><code id="to_write_v">to_write_v</code></td>
+<td>
+<p>is the vector containing the path to write the data, see examples</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(write_edm_parser("(ok(ee:56))(ok(oui(rr((rr2:6)(rr:5))))(oui(bb(rr2:1)))(ee1:4))", 
+to_write_v = c("ok", "ee"), write_data = c("ii", "olm")))
+
+[1] "(ok(ee:56)(ii:olm))(ok(oui(rr((rr2:6)(rr:5))))(oui(bb(rr2:1)))(ee1:4))"
+
+print(write_edm_parser("(ok(ee:56))(ok(oui(rr((rr2:6)(rr:5))))(oui(bb(rr2:1)))(ee1:4))", 
+to_write_v = c("ok", "oui"), write_data = c("ii", "olm")))
+
+[1] "(ok(ee:56))(ok(oui(rr((rr2:6)(rr:5))))(ii:olm)(oui(bb(rr2:1)))(ee1:4))"
+
+print(write_edm_parser("(ok(ee:56))(ok(oui(rr((rr2:6)(rr:5))))(oui(bb(rr2:1)))(ee1:4))", 
+to_write_v = c("ok", "oui", "oui"), write_data = c("ii", "olm")))
+
+[1] "(ok(ee:56))(ok(oui(rr((rr2:6)(rr:5))))(oui(bb(rr2:1)))(ii:olm)(ee1:4))"
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
