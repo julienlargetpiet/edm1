@@ -7594,6 +7594,74 @@ ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=TRUE, end_=F
 
 </div>
 </body></html>
+<!DOCTYPE html><html><head><title>R: read_edm_parser</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>read_edm_parser</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>read_edm_parser</h2>
+
+<h3>Description</h3>
+
+<p>Allow to read data from edm parsed dataset, see examples
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>read_edm_parser(inpt, to_find_v = c())
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt">inpt</code></td>
+<td>
+<p>is the input dataset</p>
+</td></tr>
+<tr><td><code id="to_find_v">to_find_v</code></td>
+<td>
+<p>is the vector containing the path to find the data, see examples</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(read_edm_parser("(ok(ee:56))(ok(oui(rr((rr2:6)(rr:5))))(oui(bb(rr2:1)))(ee1:4))", 
+to_find_v = c("ok", "oui", "rr", "rr2")))
+
+[1] "6"
+
+print(read_edm_parser("(ok(ee:56))(ok(oui(rr((rr2:6)(rr:5))))(oui(bb(rr2:1)))(ee1:4))", to_find_v = c("ok", "ee")))
+
+[1] "56"
+
+print(read_edm_parser("(ok(ee:56))(ok(oui(rr((rr2:6)(rr:5))))(oui(bb(rr2:1)))(ee1:4))", to_find_v = c("ee")))
+
+[1] "56"
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
 <!DOCTYPE html><html><head><title>R: rearangr_v</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />

@@ -16,7 +16,6 @@ R > install()
 
 **This is the main edm1 repo (grouping all edm1.* repos), the most up to date. If a bug is found in one of the functions, this repo will be updated first and then the edm1.something repo where the function to update is also present.**
 
-
 # `all_stat`
 
 all_stat
@@ -5012,6 +5011,49 @@ print(r_print(inpt_v=c(1:33)))
 #[1] "This is  1 and 2 and 3 and 4 and 5 and 6 and 7 and 8 and 9 and 10 and 11 and 12 and 13
 #and 14 and 15 and 16 and 17 and 18 and 19 and 20 and 21 and 22 and 23 and 24 and 25 and 26
 #and 27 and 28 and 29 and 30 and 31 and 32 and 33 and , voila!"
+```
+
+
+# `read_edm_parser`
+
+read_edm_parser
+
+
+## Description
+
+Allow to read data from edm parsed dataset, see examples
+
+
+## Usage
+
+```r
+read_edm_parser(inpt, to_find_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt`     |     is the input dataset
+`to_find_v`     |     is the vector containing the path to find the data, see examples
+
+
+## Examples
+
+```r
+print(read_edm_parser("(ok(ee:56))(ok(oui(rr((rr2:6)(rr:5))))(oui(bb(rr2:1)))(ee1:4))",
+to_find_v = c("ok", "oui", "rr", "rr2")))
+
+[1] "6"
+
+print(read_edm_parser("(ok(ee:56))(ok(oui(rr((rr2:6)(rr:5))))(oui(bb(rr2:1)))(ee1:4))", to_find_v = c("ok", "ee")))
+
+[1] "56"
+
+print(read_edm_parser("(ok(ee:56))(ok(oui(rr((rr2:6)(rr:5))))(oui(bb(rr2:1)))(ee1:4))", to_find_v = c("ee")))
+
+[1] "56"
 ```
 
 
