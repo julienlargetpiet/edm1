@@ -7031,6 +7031,11 @@ print(write_edm_parser("(ok(ee:56))(ok(oui(rr((rr2:6)(rr:5))))(oui(bb(rr2:1)))(e
 to_write_v = c("ok", "oui", "oui"), write_data = c("ii", "olm")))
 
 [1] "(ok(ee:56))(ok(oui(rr((rr2:6)(rr:5))))(oui(bb(rr2:1)))(ii:olm)(ee1:4))"
+
+print(write_edm_parser("",
+to_write_v = c(), write_data = c("ii", "olm")))
+
+[1] "(ii:olm)"
 ```
 
 

@@ -14377,9 +14377,15 @@ read_edm_parser <- function(inpt, to_find_v = c()){
 #'
 #' [1] "(ok(ee:56))(ok(oui(rr((rr2:6)(rr:5))))(oui(bb(rr2:1)))(ii:olm)(ee1:4))"
 #'
+#' print(write_edm_parser("", 
+#' to_write_v = c(), write_data = c("ii", "olm")))
+#'
+#' [1] "(ii:olm)"
+#'
 #' @export
 
 write_edm_parser <- function(inpt, to_write_v, write_data){
+  if (inpt == ""){ return(paste(c("(", write_data[1], ":", write_data[2], ")"), collapse = "")) }
   dynamic_idx_convertr <- function(from_v_ids, from_v_val){
     lngth <- length(from_v_ids)
     i = 1
@@ -14700,7 +14706,6 @@ write_edm_parser <- function(inpt, to_write_v, write_data){
     return(inpt)
   }
   untl <- c(matrix(nrow = length(to_write_v), ncol = 1, data = 1))
-  #to_write_v <- c(to_write_v, to_write_v[length(to_write_v)])
   pairs_idx <- pairs_findr(inpt = inpt, ptrn1 = "(", ptrn2 = ")")
   pairs_pairs <- unlist(pairs_idx[1])
   inpt <- better_split_any(inpt = inpt, split = c("(", ")", ":"))
