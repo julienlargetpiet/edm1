@@ -1401,6 +1401,65 @@ print(colins_datf(inpt_datf=datf1, target_col=list(c("oui", "oui", "oui", "non",
 
 </div>
 </body></html>
+<!DOCTYPE html><html><head><title>R: col_to_row</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>col_to_row</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>col_to_row</h2>
+
+<h3>Description</h3>
+
+<p>Allow to reverse a dataframe (cols become rows and rows become cols)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>col_to_row(inpt_datf)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
+<td>
+<p>is the inout dataframe</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+datf_test &lt;- data.frame(c(1:11), c(11:1))
+
+print(col_to_row(inpt_datf = datf_test))
+
+  X1 X2 X3 X4 X5 X6 X7 X8 X9 X10 X11
+1  1  2  3  4  5  6  7  8  9  10  11
+2 11 10  9  8  7  6  5  4  3   2   1
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
 <!DOCTYPE html><html><head><title>R: converter_date</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
@@ -5429,6 +5488,263 @@ two
 
 </div>
 </body></html>
+<!DOCTYPE html><html><head><title>R: just_chr2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>just_chr2</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>just_chr2</h2>
+
+<h3>Description</h3>
+
+<p>Extract only the letters from all elements of a vector, see examples
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>just_chr2(inpt_v, track_ = TRUE, symbol_ = "-")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_v">inpt_v</code></td>
+<td>
+<p>is the input vector</p>
+</td></tr>
+<tr><td><code id="symbol_">symbol_</code></td>
+<td>
+<p>is the chosen symbol to replace numbers</p>
+</td></tr>
+<tr><td><code id="track_len">track_len</code></td>
+<td>
+<p>is a boolean, if set to TRUE, the chosen symbol will equal the len of the missing numbers, see examples</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(just_chr2(inpt_v = c("oui222jj44", "oui122jj"), 
+   track_ = TRUE, symbol_ = "-"))
+
+[1] "oui---jj--" "oui---jj"  
+
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: just_chr</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>just_chr</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>just_chr</h2>
+
+<h3>Description</h3>
+
+<p>Extract only the letters from all elements of a vector, see examples
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>just_chr(inpt_v, track_ = TRUE, symbol_ = "-")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_v">inpt_v</code></td>
+<td>
+<p>is the input vector</p>
+</td></tr>
+<tr><td><code id="track_">track_</code></td>
+<td>
+<p>is a boolean, if set to TRUE, the missing numbers are replaced by a symbol chosen</p>
+</td></tr>
+<tr><td><code id="symbol_">symbol_</code></td>
+<td>
+<p>is the chosen symbol to replace numbers</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(just_chr(inpt_v = c("oui222jj644", "oui122jj"), 
+    track_ = TRUE, symbol_ = "-"))
+
+[1] "oui-jj-" "oui-jj" 
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: just_nb2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>just_nb2</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>just_nb2</h2>
+
+<h3>Description</h3>
+
+<p>Extract only the letters from all elements of a vector, see examples
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>just_nb2(inpt_v, track_ = TRUE, symbol_ = "-")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_v">inpt_v</code></td>
+<td>
+<p>is the input vector</p>
+</td></tr>
+<tr><td><code id="symbol_">symbol_</code></td>
+<td>
+<p>is the chosen symbol to replace numbers</p>
+</td></tr>
+<tr><td><code id="track_len">track_len</code></td>
+<td>
+<p>is a boolean, if set to TRUE, the chosen symbol will equal the len of the missing numbers, see examples</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(just_nb2(inpt_v = c("oui222jj44", "oui122jj"), 
+   track_ = TRUE, symbol_ = "-"))
+
+[1] "---222--44" "---122--"  
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: just_nb</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>just_nb</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>just_nb</h2>
+
+<h3>Description</h3>
+
+<p>Extract only the letters from all elements of a vector, see examples
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>just_nb(inpt_v, track_ = TRUE, symbol_ = "-")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_v">inpt_v</code></td>
+<td>
+<p>is the input vector</p>
+</td></tr>
+<tr><td><code id="track_">track_</code></td>
+<td>
+<p>is a boolean, if set to TRUE, the missing numbers are replaced by a symbol chosen</p>
+</td></tr>
+<tr><td><code id="symbol_">symbol_</code></td>
+<td>
+<p>is the chosen symbol to replace numbers</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(just_nb(inpt_v = c("oui222jj644", "oui122jj"), 
+    track_ = TRUE, symbol_ = "-"))
+
+[1] "-222-44" "-122-"  
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
 <!DOCTYPE html><html><head><title>R: leap_year</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
@@ -7889,6 +8205,73 @@ print(regroupr(inpt_v=vec, sep_="/", order=c(4:1)))
 # [7] "7/7/Z/Q"   "8/8/Z/Q"   "9/9/E/Q"   "10/10/E/Q" "11/11/E/Q" "12/12/E/Q"
 #[13] "13/13/A/F" "14/14/A/F" "15/15/A/F" "16/16/A/F" "17/17/Z/F" "18/18/Z/F"
 #[19] "19/19/Z/F" "20/20/Z/F" "21/21/E/F" "22/22/E/F" "23/23/E/F" "24/24/E/F"
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: row_to_col</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>row_to_col</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>row_to_col</h2>
+
+<h3>Description</h3>
+
+<p>Allow to reverse a dataframe (rows become cols and cols become rows)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>row_to_col(inpt_datf)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
+<td>
+<p>is the inout dataframe</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+datf_test &lt;- data.frame(c(1, 11), c(2, 10), c(3, 9), c(4, 8))
+
+print(datf_test)
+
+  c.1..11. c.2..10. c.3..9. c.4..8.
+1        1        2       3       4
+2       11       10       9       8
+
+print(row_to_col(inpt_datf = datf_test))
+
+  1  2
+1 1 11
+2 2 10
+3 3  9
+4 4  8
 
 </code></pre>
 

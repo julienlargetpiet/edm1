@@ -945,6 +945,43 @@ print(clusterizer_v(inpt_v=sample.int(40, 26, replace=TRUE), w_v=letters, c_val=
 ```
 
 
+# `col_to_row`
+
+col_to_row
+
+
+## Description
+
+Allow to reverse a dataframe (cols become rows and rows become cols)
+
+
+## Usage
+
+```r
+col_to_row(inpt_datf)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_datf`     |     is the inout dataframe
+
+
+## Examples
+
+```r
+datf_test <- data.frame(c(1:11), c(11:1))
+
+print(col_to_row(inpt_datf = datf_test))
+
+X1 X2 X3 X4 X5 X6 X7 X8 X9 X10 X11
+1  1  2  3  4  5  6  7  8  9  10  11
+2 11 10  9  8  7  6  5  4  3   2   1
+```
+
+
 # `colins_datf`
 
 colins_datf
@@ -3640,6 +3677,150 @@ vil2.y idl2.y
 ```
 
 
+# `just_chr`
+
+just_chr
+
+
+## Description
+
+Extract only the letters from all elements of a vector, see examples
+
+
+## Usage
+
+```r
+just_chr(inpt_v, track_ = TRUE, symbol_ = "-")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`track_`     |     is a boolean, if set to TRUE, the missing numbers are replaced by a symbol chosen
+`symbol_`     |     is the chosen symbol to replace numbers
+
+
+## Examples
+
+```r
+print(just_chr(inpt_v = c("oui222jj644", "oui122jj"),
+track_ = TRUE, symbol_ = "-"))
+
+[1] "oui-jj-" "oui-jj"
+```
+
+
+# `just_chr2`
+
+just_chr2
+
+
+## Description
+
+Extract only the letters from all elements of a vector, see examples
+
+
+## Usage
+
+```r
+just_chr2(inpt_v, track_ = TRUE, symbol_ = "-")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`symbol_`     |     is the chosen symbol to replace numbers
+`track_len`     |     is a boolean, if set to TRUE, the chosen symbol will equal the len of the missing numbers, see examples
+
+
+## Examples
+
+```r
+print(just_chr2(inpt_v = c("oui222jj44", "oui122jj"),
+track_ = TRUE, symbol_ = "-"))
+
+[1] "oui---jj--" "oui---jj"
+```
+
+
+# `just_nb`
+
+just_nb
+
+
+## Description
+
+Extract only the letters from all elements of a vector, see examples
+
+
+## Usage
+
+```r
+just_nb(inpt_v, track_ = TRUE, symbol_ = "-")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`track_`     |     is a boolean, if set to TRUE, the missing numbers are replaced by a symbol chosen
+`symbol_`     |     is the chosen symbol to replace numbers
+
+
+## Examples
+
+```r
+print(just_nb(inpt_v = c("oui222jj644", "oui122jj"),
+track_ = TRUE, symbol_ = "-"))
+
+[1] "-222-44" "-122-"
+```
+
+
+# `just_nb2`
+
+just_nb2
+
+
+## Description
+
+Extract only the letters from all elements of a vector, see examples
+
+
+## Usage
+
+```r
+just_nb2(inpt_v, track_ = TRUE, symbol_ = "-")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`symbol_`     |     is the chosen symbol to replace numbers
+`track_len`     |     is a boolean, if set to TRUE, the chosen symbol will equal the len of the missing numbers, see examples
+
+
+## Examples
+
+```r
+print(just_nb2(inpt_v = c("oui222jj44", "oui122jj"),
+track_ = TRUE, symbol_ = "-"))
+
+[1] "---222--44" "---122--"
+```
+
+
 # `leap_yr`
 
 leap_year
@@ -5207,6 +5388,51 @@ print(regroupr(inpt_v=vec, sep_="/", order=c(4:1)))
 # [7] "7/7/Z/Q"   "8/8/Z/Q"   "9/9/E/Q"   "10/10/E/Q" "11/11/E/Q" "12/12/E/Q"
 #[13] "13/13/A/F" "14/14/A/F" "15/15/A/F" "16/16/A/F" "17/17/Z/F" "18/18/Z/F"
 #[19] "19/19/Z/F" "20/20/Z/F" "21/21/E/F" "22/22/E/F" "23/23/E/F" "24/24/E/F"
+```
+
+
+# `row_to_col`
+
+row_to_col
+
+
+## Description
+
+Allow to reverse a dataframe (rows become cols and cols become rows)
+
+
+## Usage
+
+```r
+row_to_col(inpt_datf)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_datf`     |     is the inout dataframe
+
+
+## Examples
+
+```r
+datf_test <- data.frame(c(1, 11), c(2, 10), c(3, 9), c(4, 8))
+
+print(datf_test)
+
+c.1..11. c.2..10. c.3..9. c.4..8.
+1        1        2       3       4
+2       11       10       9       8
+
+print(row_to_col(inpt_datf = datf_test))
+
+1  2
+1 1 11
+2 2 10
+3 3  9
+4 4  8
 ```
 
 
