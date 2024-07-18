@@ -5516,7 +5516,7 @@ function processMathHTML() {
 
 <h3>Usage</h3>
 
-<pre><code class='language-R'>just_chr2(inpt_v, track_len = TRUE, symbol_ = "-")
+<pre><code class='language-R'>just_chr2(inpt_v, symbol_ = "-")
 </code></pre>
 
 
@@ -5526,10 +5526,6 @@ function processMathHTML() {
 <tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the input vector</p>
-</td></tr>
-<tr><td><code id="track_len">track_len</code></td>
-<td>
-<p>is a boolean, if set to TRUE, the chosen symbol will equal the len of the missing numbers, see examples</p>
 </td></tr>
 <tr><td><code id="symbol_">symbol_</code></td>
 <td>
@@ -5546,8 +5542,58 @@ print(just_chr2(inpt_v = c("oui222jj44", "oui122jj"),
 
 [1] "oui---jj--" "oui---jj"  
 
-print(just_chr2(inpt_v = c("oui222jj44", "oui122jj"), 
-  track_ = FALSE, symbol_ = "-"))
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: just_chr3</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>just_chr3</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>just_chr3</h2>
+
+<h3>Description</h3>
+
+<p>Extract only the letters from all elements of a vector, see examples
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>just_chr3(inpt_v)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_v">inpt_v</code></td>
+<td>
+<p>is the input vector</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(just_chr3(inpt_v = c("oui222jj644", "oui122jj")))
 
 [1] "ouijj" "ouijj"
 
@@ -5585,7 +5631,7 @@ function processMathHTML() {
 
 <h3>Usage</h3>
 
-<pre><code class='language-R'>just_chr(inpt_v, track_ = TRUE, symbol_ = "-")
+<pre><code class='language-R'>just_chr(inpt_v, symbol_ = "-")
 </code></pre>
 
 
@@ -5595,10 +5641,6 @@ function processMathHTML() {
 <tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the input vector</p>
-</td></tr>
-<tr><td><code id="track_">track_</code></td>
-<td>
-<p>is a boolean, if set to TRUE, the missing numbers are replaced by a symbol chosen</p>
 </td></tr>
 <tr><td><code id="symbol_">symbol_</code></td>
 <td>
@@ -5614,11 +5656,6 @@ print(just_chr(inpt_v = c("oui222jj644", "oui122jj"),
     track_ = TRUE, symbol_ = "-"))
 
 [1] "oui-jj-" "oui-jj" 
-
-print(just_chr(inpt_v = c("oui222jj644", "oui122jj"), 
-   track_ = FALSE, symbol_ = "-"))
-
-[1] "ouijj" "ouijj"
 
 </code></pre>
 
@@ -5654,7 +5691,7 @@ function processMathHTML() {
 
 <h3>Usage</h3>
 
-<pre><code class='language-R'>just_nb2(inpt_v, track_len = TRUE, symbol_ = "-")
+<pre><code class='language-R'>just_nb2(inpt_v, symbol_ = "-")
 </code></pre>
 
 
@@ -5664,10 +5701,6 @@ function processMathHTML() {
 <tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the input vector</p>
-</td></tr>
-<tr><td><code id="track_len">track_len</code></td>
-<td>
-<p>is a boolean, if set to TRUE, the chosen symbol will equal the len of the missing numbers, see examples</p>
 </td></tr>
 <tr><td><code id="symbol_">symbol_</code></td>
 <td>
@@ -5684,10 +5717,60 @@ print(just_nb2(inpt_v = c("oui222jj44", "oui122jj"),
 
 [1] "---222--44" "---122--"  
 
-print(just_nb2(inpt_v = c("oui222jj44", "oui122jj"), 
- track_ = FALSE, symbol_ = "-"))
+</code></pre>
 
-[1] "22244" "122"
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: just_nb3</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>just_nb3</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>just_nb3</h2>
+
+<h3>Description</h3>
+
+<p>Extract only the letters from all elements of a vector, see examples
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>just_nb3(inpt_v)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_v">inpt_v</code></td>
+<td>
+<p>is the input vector</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(just_nb3(inpt_v = c("oui222jj644", "oui122jj")))
+
+[1] 222644 122
 
 </code></pre>
 
@@ -5723,7 +5806,7 @@ function processMathHTML() {
 
 <h3>Usage</h3>
 
-<pre><code class='language-R'>just_nb(inpt_v, track_ = TRUE, symbol_ = "-")
+<pre><code class='language-R'>just_nb(inpt_v, symbol_ = "-")
 </code></pre>
 
 
@@ -5733,10 +5816,6 @@ function processMathHTML() {
 <tr><td><code id="inpt_v">inpt_v</code></td>
 <td>
 <p>is the input vector</p>
-</td></tr>
-<tr><td><code id="track_">track_</code></td>
-<td>
-<p>is a boolean, if set to TRUE, the missing numbers are replaced by a symbol chosen</p>
 </td></tr>
 <tr><td><code id="symbol_">symbol_</code></td>
 <td>
@@ -5752,11 +5831,6 @@ print(just_nb(inpt_v = c("oui222jj644", "oui122jj"),
     track_ = TRUE, symbol_ = "-"))
 
 [1] "-222-44" "-122-"  
-
-print(just_nb(inpt_v = c("oui222jj644", "oui122jj"), 
-track_ = FALSE, symbol_ = "-"))
-
-[1] "222644" "122"
 
 </code></pre>
 

@@ -3690,7 +3690,7 @@ Extract only the letters from all elements of a vector, see examples
 ## Usage
 
 ```r
-just_chr(inpt_v, track_ = TRUE, symbol_ = "-")
+just_chr(inpt_v, symbol_ = "-")
 ```
 
 
@@ -3699,7 +3699,6 @@ just_chr(inpt_v, track_ = TRUE, symbol_ = "-")
 Argument      |Description
 ------------- |----------------
 `inpt_v`     |     is the input vector
-`track_`     |     is a boolean, if set to TRUE, the missing numbers are replaced by a symbol chosen
 `symbol_`     |     is the chosen symbol to replace numbers
 
 
@@ -3710,11 +3709,6 @@ print(just_chr(inpt_v = c("oui222jj644", "oui122jj"),
 track_ = TRUE, symbol_ = "-"))
 
 [1] "oui-jj-" "oui-jj"
-
-print(just_chr(inpt_v = c("oui222jj644", "oui122jj"),
-track_ = FALSE, symbol_ = "-"))
-
-[1] "ouijj" "ouijj"
 ```
 
 
@@ -3731,7 +3725,7 @@ Extract only the letters from all elements of a vector, see examples
 ## Usage
 
 ```r
-just_chr2(inpt_v, track_len = TRUE, symbol_ = "-")
+just_chr2(inpt_v, symbol_ = "-")
 ```
 
 
@@ -3740,7 +3734,6 @@ just_chr2(inpt_v, track_len = TRUE, symbol_ = "-")
 Argument      |Description
 ------------- |----------------
 `inpt_v`     |     is the input vector
-`track_len`     |     is a boolean, if set to TRUE, the chosen symbol will equal the len of the missing numbers, see examples
 `symbol_`     |     is the chosen symbol to replace numbers
 
 
@@ -3751,9 +3744,37 @@ print(just_chr2(inpt_v = c("oui222jj44", "oui122jj"),
 track_ = TRUE, symbol_ = "-"))
 
 [1] "oui---jj--" "oui---jj"
+```
 
-print(just_chr2(inpt_v = c("oui222jj44", "oui122jj"),
-track_ = FALSE, symbol_ = "-"))
+
+# `just_chr3`
+
+just_chr3
+
+
+## Description
+
+Extract only the letters from all elements of a vector, see examples
+
+
+## Usage
+
+```r
+just_chr3(inpt_v)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+
+
+## Examples
+
+```r
+print(just_chr3(inpt_v = c("oui222jj644", "oui122jj")))
 
 [1] "ouijj" "ouijj"
 ```
@@ -3772,7 +3793,7 @@ Extract only the letters from all elements of a vector, see examples
 ## Usage
 
 ```r
-just_nb(inpt_v, track_ = TRUE, symbol_ = "-")
+just_nb(inpt_v, symbol_ = "-")
 ```
 
 
@@ -3781,7 +3802,6 @@ just_nb(inpt_v, track_ = TRUE, symbol_ = "-")
 Argument      |Description
 ------------- |----------------
 `inpt_v`     |     is the input vector
-`track_`     |     is a boolean, if set to TRUE, the missing numbers are replaced by a symbol chosen
 `symbol_`     |     is the chosen symbol to replace numbers
 
 
@@ -3792,11 +3812,6 @@ print(just_nb(inpt_v = c("oui222jj644", "oui122jj"),
 track_ = TRUE, symbol_ = "-"))
 
 [1] "-222-44" "-122-"
-
-print(just_nb(inpt_v = c("oui222jj644", "oui122jj"),
-track_ = FALSE, symbol_ = "-"))
-
-[1] "222644" "122"
 ```
 
 
@@ -3813,7 +3828,7 @@ Extract only the letters from all elements of a vector, see examples
 ## Usage
 
 ```r
-just_nb2(inpt_v, track_len = TRUE, symbol_ = "-")
+just_nb2(inpt_v, symbol_ = "-")
 ```
 
 
@@ -3822,7 +3837,6 @@ just_nb2(inpt_v, track_len = TRUE, symbol_ = "-")
 Argument      |Description
 ------------- |----------------
 `inpt_v`     |     is the input vector
-`track_len`     |     is a boolean, if set to TRUE, the chosen symbol will equal the len of the missing numbers, see examples
 `symbol_`     |     is the chosen symbol to replace numbers
 
 
@@ -3833,11 +3847,39 @@ print(just_nb2(inpt_v = c("oui222jj44", "oui122jj"),
 track_ = TRUE, symbol_ = "-"))
 
 [1] "---222--44" "---122--"
+```
 
-print(just_nb2(inpt_v = c("oui222jj44", "oui122jj"),
-track_ = FALSE, symbol_ = "-"))
 
-[1] "22244" "122"
+# `just_nb3`
+
+just_nb3
+
+
+## Description
+
+Extract only the letters from all elements of a vector, see examples
+
+
+## Usage
+
+```r
+just_nb3(inpt_v)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+
+
+## Examples
+
+```r
+print(just_nb3(inpt_v = c("oui222jj644", "oui122jj")))
+
+[1] 222644 122
 ```
 
 

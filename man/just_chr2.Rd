@@ -4,12 +4,10 @@
 \alias{just_chr2}
 \title{just_chr2}
 \usage{
-just_chr2(inpt_v, track_len = TRUE, symbol_ = "-")
+just_chr2(inpt_v, symbol_ = "-")
 }
 \arguments{
 \item{inpt_v}{is the input vector}
-
-\item{track_len}{is a boolean, if set to TRUE, the chosen symbol will equal the len of the missing numbers, see examples}
 
 \item{symbol_}{is the chosen symbol to replace numbers}
 }
@@ -22,10 +20,5 @@ print(just_chr2(inpt_v = c("oui222jj44", "oui122jj"),
    track_ = TRUE, symbol_ = "-"))
 
 [1] "oui---jj--" "oui---jj"  
-
-print(just_chr2(inpt_v = c("oui222jj44", "oui122jj"), 
-  track_ = FALSE, symbol_ = "-"))
-
-[1] "ouijj" "ouijj"
 
 }
