@@ -14779,10 +14779,10 @@ write_edm_parser <- function(inpt, to_write_v, write_data){
 just_chr <- function(inpt_v, symbol_ = "-"){
   rtn_v <- c()
   nb_v <- c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
-  for (el1 in strsplit(x = inpt_v, split = "")){
+  for (el1 in inpt_v){
     cur_v <- c()
     alrd <- FALSE
-    for (el2 in el1){
+    for (el2 in unlist(strsplit(x = el1, split = ""))){
       if (!(el2 %in% nb_v)){
         cur_v <- c(cur_v, el2)
         alrd <- FALSE
@@ -14817,9 +14817,9 @@ just_chr <- function(inpt_v, symbol_ = "-"){
 just_chr3 <- function(inpt_v){
   rtn_v <- c()
   nb_v <- c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
-  for (el1 in strsplit(x = inpt_v, split = "")){
+  for (el1 in inpt_v){
     cur_v <- c()
-    for (el2 in el1){
+    for (el2 in unlist(strsplit(x = el1, split = ""))){
       if (!(el2 %in% nb_v)){
         cur_v <- c(cur_v, el2)
       }
@@ -14852,9 +14852,9 @@ just_chr3 <- function(inpt_v){
 just_chr2 <- function(inpt_v, symbol_ = "-"){
   rtn_v <- c()
   nb_v <- c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
-  for (el1 in strsplit(x = inpt_v, split = "")){
+  for (el1 in inpt_v){
     cur_v <- c()
-    for (el2 in el1){
+    for (el2 in unlist(strsplit(x = el1, split = ""))){
       if (!(el2 %in% nb_v)){
         cur_v <- c(cur_v, el2)
       }else{
@@ -14889,10 +14889,10 @@ just_chr2 <- function(inpt_v, symbol_ = "-"){
 just_nb <- function(inpt_v, symbol_ = "-"){
   rtn_v <- c()
   nb_v <- c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
-  for (el1 in strsplit(x = inpt_v, split = "")){
+  for (el1 in inpt_v){
     cur_v <- c()
     alrd <- FALSE
-    for (el2 in el1){
+    for (el2 in unlist(strsplit(x = el1, split = ""))){
       if (el2 %in% nb_v){
         cur_v <- c(cur_v, el2)
         alrd <- FALSE
@@ -14927,9 +14927,9 @@ just_nb <- function(inpt_v, symbol_ = "-"){
 just_nb3 <- function(inpt_v){
   rtn_v <- c()
   nb_v <- c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
-  for (el1 in strsplit(x = inpt_v, split = "")){
+  for (el1 in inpt_v){
     cur_v <- c()
-    for (el2 in el1){
+    for (el2 in unlist(strsplit(x = el1, split = ""))){
       if (el2 %in% nb_v){
         cur_v <- c(cur_v, el2)
       }
@@ -14962,9 +14962,9 @@ just_nb3 <- function(inpt_v){
 just_nb2 <- function(inpt_v, symbol_ = "-"){
   rtn_v <- c()
   nb_v <- c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
-  for (el1 in strsplit(x = inpt_v, split = "")){
+  for (el1 in inpt_v){
     cur_v <- c()
-    for (el2 in el1){
+    for (el2 in unlist(strsplit(x = el1, split = ""))){
       if (el2 %in% ltrs_v){
         cur_v <- c(cur_v, el2)
       }else{
