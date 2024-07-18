@@ -5516,7 +5516,7 @@ function processMathHTML() {
 
 <h3>Usage</h3>
 
-<pre><code class='language-R'>just_chr2(inpt_v, track_ = TRUE, symbol_ = "-")
+<pre><code class='language-R'>just_chr2(inpt_v, track_len = TRUE, symbol_ = "-")
 </code></pre>
 
 
@@ -5527,13 +5527,13 @@ function processMathHTML() {
 <td>
 <p>is the input vector</p>
 </td></tr>
-<tr><td><code id="symbol_">symbol_</code></td>
-<td>
-<p>is the chosen symbol to replace numbers</p>
-</td></tr>
 <tr><td><code id="track_len">track_len</code></td>
 <td>
 <p>is a boolean, if set to TRUE, the chosen symbol will equal the len of the missing numbers, see examples</p>
+</td></tr>
+<tr><td><code id="symbol_">symbol_</code></td>
+<td>
+<p>is the chosen symbol to replace numbers</p>
 </td></tr>
 </table>
 
@@ -5546,6 +5546,10 @@ print(just_chr2(inpt_v = c("oui222jj44", "oui122jj"),
 
 [1] "oui---jj--" "oui---jj"  
 
+print(just_chr2(inpt_v = c("oui222jj44", "oui122jj"), 
+  track_ = FALSE, symbol_ = "-"))
+
+[1] "ouijj" "ouijj"
 
 </code></pre>
 
@@ -5611,6 +5615,11 @@ print(just_chr(inpt_v = c("oui222jj644", "oui122jj"),
 
 [1] "oui-jj-" "oui-jj" 
 
+print(just_chr(inpt_v = c("oui222jj644", "oui122jj"), 
+   track_ = FALSE, symbol_ = "-"))
+
+[1] "ouijj" "ouijj"
+
 </code></pre>
 
 </main>
@@ -5645,7 +5654,7 @@ function processMathHTML() {
 
 <h3>Usage</h3>
 
-<pre><code class='language-R'>just_nb2(inpt_v, track_ = TRUE, symbol_ = "-")
+<pre><code class='language-R'>just_nb2(inpt_v, track_len = TRUE, symbol_ = "-")
 </code></pre>
 
 
@@ -5656,13 +5665,13 @@ function processMathHTML() {
 <td>
 <p>is the input vector</p>
 </td></tr>
-<tr><td><code id="symbol_">symbol_</code></td>
-<td>
-<p>is the chosen symbol to replace numbers</p>
-</td></tr>
 <tr><td><code id="track_len">track_len</code></td>
 <td>
 <p>is a boolean, if set to TRUE, the chosen symbol will equal the len of the missing numbers, see examples</p>
+</td></tr>
+<tr><td><code id="symbol_">symbol_</code></td>
+<td>
+<p>is the chosen symbol to replace numbers</p>
 </td></tr>
 </table>
 
@@ -5674,6 +5683,11 @@ print(just_nb2(inpt_v = c("oui222jj44", "oui122jj"),
    track_ = TRUE, symbol_ = "-"))
 
 [1] "---222--44" "---122--"  
+
+print(just_nb2(inpt_v = c("oui222jj44", "oui122jj"), 
+ track_ = FALSE, symbol_ = "-"))
+
+[1] "22244" "122"
 
 </code></pre>
 
@@ -5738,6 +5752,11 @@ print(just_nb(inpt_v = c("oui222jj644", "oui122jj"),
     track_ = TRUE, symbol_ = "-"))
 
 [1] "-222-44" "-122-"  
+
+print(just_nb(inpt_v = c("oui222jj644", "oui122jj"), 
+track_ = FALSE, symbol_ = "-"))
+
+[1] "222644" "122"
 
 </code></pre>
 

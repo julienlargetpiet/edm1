@@ -3710,6 +3710,11 @@ print(just_chr(inpt_v = c("oui222jj644", "oui122jj"),
 track_ = TRUE, symbol_ = "-"))
 
 [1] "oui-jj-" "oui-jj"
+
+print(just_chr(inpt_v = c("oui222jj644", "oui122jj"),
+track_ = FALSE, symbol_ = "-"))
+
+[1] "ouijj" "ouijj"
 ```
 
 
@@ -3726,7 +3731,7 @@ Extract only the letters from all elements of a vector, see examples
 ## Usage
 
 ```r
-just_chr2(inpt_v, track_ = TRUE, symbol_ = "-")
+just_chr2(inpt_v, track_len = TRUE, symbol_ = "-")
 ```
 
 
@@ -3735,8 +3740,8 @@ just_chr2(inpt_v, track_ = TRUE, symbol_ = "-")
 Argument      |Description
 ------------- |----------------
 `inpt_v`     |     is the input vector
-`symbol_`     |     is the chosen symbol to replace numbers
 `track_len`     |     is a boolean, if set to TRUE, the chosen symbol will equal the len of the missing numbers, see examples
+`symbol_`     |     is the chosen symbol to replace numbers
 
 
 ## Examples
@@ -3746,6 +3751,11 @@ print(just_chr2(inpt_v = c("oui222jj44", "oui122jj"),
 track_ = TRUE, symbol_ = "-"))
 
 [1] "oui---jj--" "oui---jj"
+
+print(just_chr2(inpt_v = c("oui222jj44", "oui122jj"),
+track_ = FALSE, symbol_ = "-"))
+
+[1] "ouijj" "ouijj"
 ```
 
 
@@ -3782,6 +3792,11 @@ print(just_nb(inpt_v = c("oui222jj644", "oui122jj"),
 track_ = TRUE, symbol_ = "-"))
 
 [1] "-222-44" "-122-"
+
+print(just_nb(inpt_v = c("oui222jj644", "oui122jj"),
+track_ = FALSE, symbol_ = "-"))
+
+[1] "222644" "122"
 ```
 
 
@@ -3798,7 +3813,7 @@ Extract only the letters from all elements of a vector, see examples
 ## Usage
 
 ```r
-just_nb2(inpt_v, track_ = TRUE, symbol_ = "-")
+just_nb2(inpt_v, track_len = TRUE, symbol_ = "-")
 ```
 
 
@@ -3807,8 +3822,8 @@ just_nb2(inpt_v, track_ = TRUE, symbol_ = "-")
 Argument      |Description
 ------------- |----------------
 `inpt_v`     |     is the input vector
-`symbol_`     |     is the chosen symbol to replace numbers
 `track_len`     |     is a boolean, if set to TRUE, the chosen symbol will equal the len of the missing numbers, see examples
+`symbol_`     |     is the chosen symbol to replace numbers
 
 
 ## Examples
@@ -3818,6 +3833,11 @@ print(just_nb2(inpt_v = c("oui222jj44", "oui122jj"),
 track_ = TRUE, symbol_ = "-"))
 
 [1] "---222--44" "---122--"
+
+print(just_nb2(inpt_v = c("oui222jj44", "oui122jj"),
+track_ = FALSE, symbol_ = "-"))
+
+[1] "22244" "122"
 ```
 
 

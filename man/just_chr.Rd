@@ -23,4 +23,9 @@ print(just_chr(inpt_v = c("oui222jj644", "oui122jj"),
 
 [1] "oui-jj-" "oui-jj" 
 
+print(just_chr(inpt_v = c("oui222jj644", "oui122jj"), 
+   track_ = FALSE, symbol_ = "-"))
+
+[1] "ouijj" "ouijj"
+
 }

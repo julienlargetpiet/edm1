@@ -23,4 +23,9 @@ print(just_nb(inpt_v = c("oui222jj644", "oui122jj"),
 
 [1] "-222-44" "-122-"  
 
+print(just_nb(inpt_v = c("oui222jj644", "oui122jj"), 
+track_ = FALSE, symbol_ = "-"))
+
+[1] "222644" "122"
+
 }

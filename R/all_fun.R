@@ -14775,27 +14775,48 @@ write_edm_parser <- function(inpt, to_write_v, write_data){
 #'
 #' [1] "oui-jj-" "oui-jj" 
 #'
+#' print(just_chr(inpt_v = c("oui222jj644", "oui122jj"), 
+#'    track_ = FALSE, symbol_ = "-"))
+#' 
+#' [1] "ouijj" "ouijj"
+#'
 #' @export
 
 just_chr <- function(inpt_v, track_ = TRUE, symbol_ = "-"){
   rtn_v <- c()
   nb_v <- c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
-  for (el1 in strsplit(x = inpt_v, split = "")){
-    cur_v <- c()
-    alrd <- FALSE
-    for (el2 in el1){
-      if (!(el2 %in% nb_v)){
-        cur_v <- c(cur_v, el2)
-        alrd <- FALSE
-      }else if (!(alrd)){
-        cur_v <- c(cur_v, symbol_) 
-        alrd <- TRUE
+  if (track_){
+    for (el1 in strsplit(x = inpt_v, split = "")){
+      cur_v <- c()
+      alrd <- FALSE
+      for (el2 in el1){
+        if (!(el2 %in% nb_v)){
+          cur_v <- c(cur_v, el2)
+          alrd <- FALSE
+        }else if (!(alrd)){
+          cur_v <- c(cur_v, symbol_) 
+          alrd <- TRUE
+        }
+      }
+      if (length(cur_v) > 0){
+        rtn_v <- c(rtn_v, paste(cur_v, collapse = ""))
+      }else{
+        rtn_v <- c(rtn_v, "full_of_number")
       }
     }
-    if (length(cur_v) > 0){
-      rtn_v <- c(rtn_v, paste(cur_v, collapse = ""))
-    }else{
-      rtn_v <- c(rtn_v, "full_of_number")
+  }else{
+    for (el1 in strsplit(x = inpt_v, split = "")){
+      cur_v <- c()
+      for (el2 in el1){
+        if (!(el2 %in% nb_v)){
+          cur_v <- c(cur_v, el2)
+        }
+      }
+      if (length(cur_v) > 0){
+        rtn_v <- c(rtn_v, paste(cur_v, collapse = ""))
+      }else{
+        rtn_v <- c(rtn_v, "full_of_number")
+      }
     }
   }
   return(rtn_v)
@@ -14816,25 +14837,45 @@ just_chr <- function(inpt_v, track_ = TRUE, symbol_ = "-"){
 #'
 #' [1] "oui---jj--" "oui---jj"  
 #'
+#' print(just_chr2(inpt_v = c("oui222jj44", "oui122jj"), 
+#'   track_ = FALSE, symbol_ = "-"))
+#'
+#' [1] "ouijj" "ouijj"
 #'
 #' @export
 
-just_chr2 <- function(inpt_v, track_ = TRUE, symbol_ = "-"){
+just_chr2 <- function(inpt_v, track_len = TRUE, symbol_ = "-"){
   rtn_v <- c()
   nb_v <- c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
-  for (el1 in strsplit(x = inpt_v, split = "")){
-    cur_v <- c()
-    for (el2 in el1){
-      if (!(el2 %in% nb_v)){
-        cur_v <- c(cur_v, el2)
+  if (track_len){
+    for (el1 in strsplit(x = inpt_v, split = "")){
+      cur_v <- c()
+      for (el2 in el1){
+        if (!(el2 %in% nb_v)){
+          cur_v <- c(cur_v, el2)
+        }else{
+          cur_v <- c(cur_v, symbol_)
+        }
+      }
+      if (length(cur_v) > 0){
+        rtn_v <- c(rtn_v, paste(cur_v, collapse = ""))
       }else{
-        cur_v <- c(cur_v, symbol_)
+        rtn_v <- c(rtn_v, "full_of_number")
       }
     }
-    if (length(cur_v) > 0){
-      rtn_v <- c(rtn_v, paste(cur_v, collapse = ""))
-    }else{
-      rtn_v <- c(rtn_v, "full_of_number")
+  }else{
+    for (el1 in strsplit(x = inpt_v, split = "")){
+      cur_v <- c()
+      for (el2 in el1){
+        if (!(el2 %in% nb_v)){
+          cur_v <- c(cur_v, el2)
+        }
+      }
+      if (length(cur_v) > 0){
+        rtn_v <- c(rtn_v, paste(cur_v, collapse = ""))
+      }else{
+        rtn_v <- c(rtn_v, "full_of_number")
+      }
     }
   }
   return(rtn_v)
@@ -14855,27 +14896,48 @@ just_chr2 <- function(inpt_v, track_ = TRUE, symbol_ = "-"){
 #'
 #' [1] "-222-44" "-122-"  
 #'
+#' print(just_nb(inpt_v = c("oui222jj644", "oui122jj"), 
+#' track_ = FALSE, symbol_ = "-"))
+#'
+#' [1] "222644" "122"
+#'
 #' @export
 
 just_nb <- function(inpt_v, track_ = TRUE, symbol_ = "-"){
   rtn_v <- c()
   ltrs_v <- letters
-  for (el1 in strsplit(x = inpt_v, split = "")){
-    cur_v <- c()
-    alrd <- FALSE
-    for (el2 in el1){
-      if (!(el2 %in% ltrs_v)){
-        cur_v <- c(cur_v, el2)
-        alrd <- FALSE
-      }else if (!(alrd)){
-        cur_v <- c(cur_v, symbol_) 
-        alrd <- TRUE
+  if (track_){
+    for (el1 in strsplit(x = inpt_v, split = "")){
+      cur_v <- c()
+      alrd <- FALSE
+      for (el2 in el1){
+        if (!(el2 %in% ltrs_v)){
+          cur_v <- c(cur_v, el2)
+          alrd <- FALSE
+        }else if (!(alrd)){
+          cur_v <- c(cur_v, symbol_) 
+          alrd <- TRUE
+        }
+      }
+      if (length(cur_v) > 0){
+        rtn_v <- c(rtn_v, paste(cur_v, collapse = ""))
+      }else{
+        rtn_v <- c(rtn_v, "full_of_number")
       }
     }
-    if (length(cur_v) > 0){
-      rtn_v <- c(rtn_v, paste(cur_v, collapse = ""))
-    }else{
-      rtn_v <- c(rtn_v, "full_of_number")
+  }else{
+    for (el1 in strsplit(x = inpt_v, split = "")){
+      cur_v <- c()
+      for (el2 in el1){
+        if (!(el2 %in% ltrs_v)){
+          cur_v <- c(cur_v, el2)
+        }
+      }
+      if (length(cur_v) > 0){
+        rtn_v <- c(rtn_v, paste(cur_v, collapse = ""))
+      }else{
+        rtn_v <- c(rtn_v, "full_of_number")
+      }
     }
   }
   return(rtn_v)
@@ -14896,24 +14958,45 @@ just_nb <- function(inpt_v, track_ = TRUE, symbol_ = "-"){
 #'
 #' [1] "---222--44" "---122--"  
 #'
+#' print(just_nb2(inpt_v = c("oui222jj44", "oui122jj"), 
+#'  track_ = FALSE, symbol_ = "-"))
+#'
+#' [1] "22244" "122"
+#'
 #' @export
 
-just_nb2 <- function(inpt_v, track_ = TRUE, symbol_ = "-"){
+just_nb2 <- function(inpt_v, track_len = TRUE, symbol_ = "-"){
   rtn_v <- c()
   ltrs_v <- letters
-  for (el1 in strsplit(x = inpt_v, split = "")){
-    cur_v <- c()
-    for (el2 in el1){
-      if (!(el2 %in% ltrs_v)){
-        cur_v <- c(cur_v, el2)
+  if (track_len){
+    for (el1 in strsplit(x = inpt_v, split = "")){
+      cur_v <- c()
+      for (el2 in el1){
+        if (!(el2 %in% ltrs_v)){
+          cur_v <- c(cur_v, el2)
+        }else{
+          cur_v <- c(cur_v, symbol_)
+        }
+      }
+      if (length(cur_v) > 0){
+        rtn_v <- c(rtn_v, paste(cur_v, collapse = ""))
       }else{
-        cur_v <- c(cur_v, symbol_)
+        rtn_v <- c(rtn_v, "full_of_number")
       }
     }
-    if (length(cur_v) > 0){
-      rtn_v <- c(rtn_v, paste(cur_v, collapse = ""))
-    }else{
-      rtn_v <- c(rtn_v, "full_of_number")
+  }else{
+    for (el1 in strsplit(x = inpt_v, split = "")){
+      cur_v <- c()
+      for (el2 in el1){
+        if (!(el2 %in% ltrs_v)){
+          cur_v <- c(cur_v, el2)
+        }
+      }
+      if (length(cur_v) > 0){
+        rtn_v <- c(rtn_v, paste(cur_v, collapse = ""))
+      }else{
+        rtn_v <- c(rtn_v, "full_of_number")
+      }
     }
   }
   return(rtn_v)

@@ -4,14 +4,14 @@
 \alias{just_nb2}
 \title{just_nb2}
 \usage{
-just_nb2(inpt_v, track_ = TRUE, symbol_ = "-")
+just_nb2(inpt_v, track_len = TRUE, symbol_ = "-")
 }
 \arguments{
 \item{inpt_v}{is the input vector}
 
-\item{symbol_}{is the chosen symbol to replace numbers}
-
 \item{track_len}{is a boolean, if set to TRUE, the chosen symbol will equal the len of the missing numbers, see examples}
+
+\item{symbol_}{is the chosen symbol to replace numbers}
 }
 \description{
 Extract only the letters from all elements of a vector, see examples
@@ -22,5 +22,10 @@ print(just_nb2(inpt_v = c("oui222jj44", "oui122jj"),
    track_ = TRUE, symbol_ = "-"))
 
 [1] "---222--44" "---122--"  
+
+print(just_nb2(inpt_v = c("oui222jj44", "oui122jj"), 
+ track_ = FALSE, symbol_ = "-"))
+
+[1] "22244" "122"
 
 }
