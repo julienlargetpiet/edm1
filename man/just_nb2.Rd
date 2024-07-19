@@ -17,7 +17,7 @@ Extract only the letters from all elements of a vector, see examples
 \examples{
 
 print(just_nb2(inpt_v = c("oui222jj44", "oui122jj"), 
-   track_ = TRUE, symbol_ = "-"))
+   symbol_ = "-"))
 
 [1] "---222--44" "---122--"  
 

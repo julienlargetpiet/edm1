@@ -3677,6 +3677,110 @@ vil2.y idl2.y
 ```
 
 
+# `just_anything`
+
+just_anything
+
+
+## Description
+
+Extract only the letters from all elements of a vector, see examples
+
+
+## Usage
+
+```r
+just_anything(inpt_v, symbol_ = "-", anything_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`symbol_`     |     is the chosen symbol to replace numbers
+
+
+## Examples
+
+```r
+print(just_anything(inpt_v = c("oui222jj644", "oui122jj"),
+symbol_ = "-", anything_v = letters))
+
+[1] "oui-jj-" "oui-jj"
+```
+
+
+# `just_anything2`
+
+just_anything2
+
+
+## Description
+
+Extract only the letters from all elements of a vector, see examples
+
+
+## Usage
+
+```r
+just_anything2(inpt_v, symbol_ = "-", anything_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`symbol_`     |     is the chosen symbol to replace numbers
+
+
+## Examples
+
+```r
+print(just_anything2(inpt_v = c("oui222jj44", "oui122jj"),
+symbol_ = "-", anything_v = letters))
+
+[1] "oui---jj--" "oui---jj"
+```
+
+
+# `just_anything3`
+
+just_anything3
+
+
+## Description
+
+Extract only the letters from all elements of a vector, see examples
+
+
+## Usage
+
+```r
+just_anything3(inpt_v, anything_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+
+
+## Examples
+
+```r
+print(just_anything3(inpt_v = c("oui222jj644", "oui122jj"),
+anything_v = letters))
+
+[1] "ouijj" "ouijj"
+```
+
+
 # `just_chr`
 
 just_chr
@@ -3706,7 +3810,7 @@ Argument      |Description
 
 ```r
 print(just_chr(inpt_v = c("oui222jj644", "oui122jj"),
-track_ = TRUE, symbol_ = "-"))
+symbol_ = "-"))
 
 [1] "oui-jj-" "oui-jj"
 ```
@@ -3741,7 +3845,7 @@ Argument      |Description
 
 ```r
 print(just_chr2(inpt_v = c("oui222jj44", "oui122jj"),
-track_ = TRUE, symbol_ = "-"))
+symbol_ = "-"))
 
 [1] "oui---jj--" "oui---jj"
 ```
@@ -3809,7 +3913,7 @@ Argument      |Description
 
 ```r
 print(just_nb(inpt_v = c("oui222jj644", "oui122jj"),
-track_ = TRUE, symbol_ = "-"))
+symbol_ = "-"))
 
 [1] "-222-44" "-122-"
 ```
@@ -3844,7 +3948,7 @@ Argument      |Description
 
 ```r
 print(just_nb2(inpt_v = c("oui222jj44", "oui122jj"),
-track_ = TRUE, symbol_ = "-"))
+symbol_ = "-"))
 
 [1] "---222--44" "---122--"
 ```
@@ -3880,6 +3984,110 @@ Argument      |Description
 print(just_nb3(inpt_v = c("oui222jj644", "oui122jj")))
 
 [1] 222644 122
+```
+
+
+# `just_not_anything`
+
+just_not_anything
+
+
+## Description
+
+Extract only the letters from all elements of a vector, see examples
+
+
+## Usage
+
+```r
+just_not_anything(inpt_v, symbol_ = "-", anything_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`symbol_`     |     is the chosen symbol to replace numbers
+
+
+## Examples
+
+```r
+print(just_not_anything(inpt_v = c("oui222jj644", "oui122jj"),
+symbol_ = "-", anything_v = letters))
+
+[1] "-222-644" "-122-"
+```
+
+
+# `just_not_anything2`
+
+just_not_anything2
+
+
+## Description
+
+Extract only the letters from all elements of a vector, see examples
+
+
+## Usage
+
+```r
+just_not_anything2(inpt_v, symbol_ = "-", anything_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`symbol_`     |     is the chosen symbol to replace numbers
+
+
+## Examples
+
+```r
+print(just_not_anything2(inpt_v = c("oui222jj44", "oui122jj"),
+symbol_ = "-", anything_v = letters))
+
+[1] "---222-44" "---122--"
+```
+
+
+# `just_not_anything3`
+
+just_not_anything3
+
+
+## Description
+
+Extract only the letters from all elements of a vector, see examples
+
+
+## Usage
+
+```r
+just_not_anything3(inpt_v, anything_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+
+
+## Examples
+
+```r
+print(just_not_anything3(inpt_v = c("oui222jj644", "oui122jj"),
+anything_v = letters))
+
+[1] "222644" "122"
 ```
 
 
