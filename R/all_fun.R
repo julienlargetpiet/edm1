@@ -15261,6 +15261,140 @@ just_not_anything3 <- function(inpt_v, anything_v = c()){
   return(rtn_v)
 }
 
+library("stringr")
+
+#' see_in_l
+#'
+#' Allow to get the patterns that are present in the elements of a vector, see examples
+#'
+#' @param from_v is the vector that may contains elements that contains the same patterns that those in in_v, see examples
+#' @param in_v is a vector that contains the patterns to find
+#'
+#' @examples
+#'
+#' print(see_in_l(from_v = c("oui", "non", "peut"), 
+#'   in_v = c("ou", "pe", "plm")))
+#' 
+#'    ou    pe   plm 
+#'   TRUE  TRUE FALSE  
+#'
+#' @export
+
+see_in_l <- function(from_v = c(), in_v = c()){
+  rtn_v <- c()
+  rtn_v <- mapply(
+          function(x){
+            rtn_v <- c(rtn_v, any(str_detect(pattern = x, 
+                                  string = from_v)))
+          },
+    in_v
+  )
+  return(rtn_v)
+}
+
+#' see_in_grep
+#' 
+#' Allow to get the indices of the elements of a vector that contains certyain patterns.
+#' The type of the output may change in function of the input vectors, see examples
+#'
+#' @param from_v is the vector that may contains elements that contains the same patterns that those in in_v, see examples
+#' @param in_v is a vector that contains the patterns to find
+#'
+#' @examples
+#'
+#' print(see_in_grep(from_v = c("oui", "non", "peut"), 
+#'                   in_v = c("ou", "eu", "plm")))
+#' 
+#'            ou            eu           plm 
+#'            1             3            -1 
+#'
+#'  print(see_in_grep(from_v = c("oui", "non", "peut", "oui"), 
+#'       in_v = c("ou", "eu", "plm")))
+#' 
+#' $ou
+#' [1] 1 4
+#' 
+#' $eu
+#' [1] 3
+#' 
+#' $plm
+#' [1] -1
+#'
+#' @export
+
+see_in_grep <- function(from_v = c(), in_v = c()){
+  rtn_v <- c()
+  rtn_v <- mapply(
+          function(x){
+            pre_val <- str_detect(pattern = x, 
+                                  string = from_v) 
+            if (any(pre_val)){
+              rtn_v <- c(rtn_v, grep(pattern = TRUE, x = pre_val))
+            }else{
+              rtn_v <- c(rtn_v, -1)
+            }
+          },
+    in_v
+  )
+  return(rtn_v)
+}
+
+#' datf_appendr
+#' 
+#' Allow to append all columns of a dataframe in a vector.
+#'
+#' @param inpt_datf is the input dataframe
+#'
+#' @examples
+#'
+#' datf_teste <- data.frame("col1" = c(1:5), "col2" = c(5:1))
+#' 
+#' print(datf_appendr(inpt_datf = datf_teste))
+#' 
+#' [1] 1 2 3 4 5 5 4 3 2 1
+#'
+#' @export
+
+datf_appendr <- function(inpt_datf){
+  rtn_v <- c()
+  for (col in inpt_datf){
+    rtn_v <- c(rtn_v, col)
+  }
+  return(rtn_v)
+}
+
+#' datf_appendr2
+#'
+#' Allow to append all columns of a dataframe in a vector, 
+#' specifying the column types ("integer" or "character"), see examples
+#'
+#' @param inpt_datf is the inout dataframe
+#'
+#' @examples
+#'
+#' datf_teste <- data.frame("col1" = c(1:5), "col2" = c(5:1), 
+#'   "col3" = c("oui", "oui", "oui", "non", "non"))
+#' 
+#' print(datf_appendr2(inpt_datf = datf_teste, chs_type = "integer"))
+#'
+#' [1] 1 2 3 4 5 5 4 3 2 1
+#'
+#' print(datf_appendr2(inpt_datf = datf_teste, chs_type = "character"))
+#'
+#' [1] "oui" "oui" "oui" "non" "non"
+#' 
+#' @export
+
+datf_appendr2 <- function(inpt_datf, chs_type = "integer"){
+  rtn_v <- c()
+  for (col in inpt_datf){
+    if (typeof(col) == chs_type){
+      rtn_v <- c(rtn_v, col)
+    }
+  }
+  return(rtn_v)
+}
+
 
 
 

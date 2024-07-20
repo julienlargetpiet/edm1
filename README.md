@@ -1664,6 +1664,82 @@ print(date_converter_reverse(inpt_date="2024.929", convert_to="dhym", frmt="y", 
 ```
 
 
+# `datf_appendr`
+
+datf_appendr
+
+
+## Description
+
+Allow to append all columns of a dataframe in a vector.
+
+
+## Usage
+
+```r
+datf_appendr(inpt_datf)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_datf`     |     is the input dataframe
+
+
+## Examples
+
+```r
+datf_teste <- data.frame("col1" = c(1:5), "col2" = c(5:1))
+
+print(datf_appendr(inpt_datf = datf_teste))
+
+[1] 1 2 3 4 5 5 4 3 2 1
+```
+
+
+# `datf_appendr2`
+
+datf_appendr2
+
+
+## Description
+
+Allow to append all columns of a dataframe in a vector,
+ specifying the column types ("integer" or "character"), see examples
+
+
+## Usage
+
+```r
+datf_appendr2(inpt_datf, chs_type = "integer")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_datf`     |     is the inout dataframe
+
+
+## Examples
+
+```r
+datf_teste <- data.frame("col1" = c(1:5), "col2" = c(5:1),
+"col3" = c("oui", "oui", "oui", "non", "non"))
+
+print(datf_appendr2(inpt_datf = datf_teste, chs_type = "integer"))
+
+[1] 1 2 3 4 5 5 4 3 2 1
+
+print(datf_appendr2(inpt_datf = datf_teste, chs_type = "character"))
+
+[1] "oui" "oui" "oui" "non" "non"
+```
+
+
 # `dcr_untl`
 
 dcr_untl
@@ -5984,6 +6060,91 @@ Argument      |Description
 print(see_idx(v1=c("oui", "non", "peut", "oo"), v2=c("oui", "peut", "oui")))
 
 #[1]  TRUE FALSE  TRUE  FALSE
+```
+
+
+# `see_in_grep`
+
+see_in_grep
+
+
+## Description
+
+Allow to get the indices of the elements of a vector that contains certyain patterns.
+ The type of the output may change in function of the input vectors, see examples
+
+
+## Usage
+
+```r
+see_in_grep(from_v = c(), in_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`from_v`     |     is the vector that may contains elements that contains the same patterns that those in in_v, see examples
+`in_v`     |     is a vector that contains the patterns to find
+
+
+## Examples
+
+```r
+print(see_in_grep(from_v = c("oui", "non", "peut"),
+in_v = c("ou", "eu", "plm")))
+
+ou            eu           plm
+1             3            -1
+
+print(see_in_grep(from_v = c("oui", "non", "peut", "oui"),
+in_v = c("ou", "eu", "plm")))
+
+$ou
+[1] 1 4
+
+$eu
+[1] 3
+
+$plm
+[1] -1
+```
+
+
+# `see_in_l`
+
+see_in_l
+
+
+## Description
+
+Allow to get the patterns that are present in the elements of a vector, see examples
+
+
+## Usage
+
+```r
+see_in_l(from_v = c(), in_v = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`from_v`     |     is the vector that may contains elements that contains the same patterns that those in in_v, see examples
+`in_v`     |     is a vector that contains the patterns to find
+
+
+## Examples
+
+```r
+print(see_in_l(from_v = c("oui", "non", "peut"),
+in_v = c("ou", "pe", "plm")))
+
+ou    pe   plm
+TRUE  TRUE FALSE
 ```
 
 
