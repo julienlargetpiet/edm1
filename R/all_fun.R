@@ -15395,6 +15395,65 @@ datf_appendr2 <- function(inpt_datf, chs_type = "integer"){
   return(rtn_v)
 }
 
+#' datf_row_appendr
+#' 
+#' Allow to append all rows of a dataframe in a vector.
+#'
+#' @param inpt_datf is the input dataframe
+#'
+#' @examples
+#'
+#' datf_teste <- data.frame("col1" = c(1:5), "col2" = c(5:1))
+#' 
+#' print(datf_appendr(inpt_datf = datf_teste))
+#' 
+#' col1 col2 col1 col2 col1 col2 col1 col2 col1 col2 
+#'    1    5    2    4    3    3    4    2    5    1 
+#'
+#' @export
+
+datf_row_appendr <- function(inpt_datf){
+  rtn_v <- c()
+  for (i in 1:nrow(inpt_datf)){
+    rtn_v <- c(rtn_v, unlist(inpt_datf[i, ]))
+  }
+  return(rtn_v)
+}
+
+#' datf_row_appendr2
+#'
+#' Allow to append all rows of a dataframe in a vector, 
+#' specifying the column types ("integer" or "character"), see examples
+#'
+#' @param inpt_datf is the inout dataframe
+#'
+#' @examples
+#'
+#' datf_teste <- data.frame("col1" = c(1:5), "col2" = c(5:1), 
+#'   "col3" = c("oui", "oui", "oui", "non", "non"))
+#' 
+#' print(datf_row_appendr2(inpt_datf = datf_teste, chs_type = "integer"))
+#'
+#' NULL
+#'
+#' print(datf_row_appendr2(inpt_datf = datf_teste, chs_type = "character"))
+#'
+#'  col1  col2  col3  col1  col2  col3  col1  col2  col3  col1  col2  col3  col1 
+#'   "1"   "5" "oui"   "2"   "4" "oui"   "3"   "3" "oui"   "4"   "2" "non"   "5" 
+#'  col2  col3 
+#'   "1" "non" 
+#'
+#' @export
+
+datf_row_appendr2 <- function(inpt_datf, chs_type = "integer"){
+  rtn_v <- c()
+  for (i in 1:nrow(inpt_datf)){
+    if (typeof(unlist(inpt_datf[i, ])) == chs_type){
+      rtn_v <- c(rtn_v, unlist(inpt_datf[i, ]))
+    }
+  }
+  return(rtn_v)
+}
 
 
 

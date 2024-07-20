@@ -2586,6 +2586,130 @@ print(datf_appendr(inpt_datf = datf_teste))
 
 </div>
 </body></html>
+<!DOCTYPE html><html><head><title>R: datf_row_appendr2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>datf_row_appendr2</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>datf_row_appendr2</h2>
+
+<h3>Description</h3>
+
+<p>Allow to append all rows of a dataframe in a vector,
+specifying the column types (&quot;integer&quot; or &quot;character&quot;), see examples
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>datf_row_appendr2(inpt_datf, chs_type = "integer")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
+<td>
+<p>is the inout dataframe</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+datf_teste &lt;- data.frame("col1" = c(1:5), "col2" = c(5:1), 
+  "col3" = c("oui", "oui", "oui", "non", "non"))
+
+print(datf_row_appendr2(inpt_datf = datf_teste, chs_type = "integer"))
+
+NULL
+
+print(datf_row_appendr2(inpt_datf = datf_teste, chs_type = "character"))
+
+ col1  col2  col3  col1  col2  col3  col1  col2  col3  col1  col2  col3  col1 
+  "1"   "5" "oui"   "2"   "4" "oui"   "3"   "3" "oui"   "4"   "2" "non"   "5" 
+ col2  col3 
+  "1" "non" 
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: datf_row_appendr</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>datf_row_appendr</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>datf_row_appendr</h2>
+
+<h3>Description</h3>
+
+<p>Allow to append all rows of a dataframe in a vector.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>datf_row_appendr(inpt_datf)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
+<td>
+<p>is the input dataframe</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+datf_teste &lt;- data.frame("col1" = c(1:5), "col2" = c(5:1))
+
+print(datf_appendr(inpt_datf = datf_teste))
+
+col1 col2 col1 col2 col1 col2 col1 col2 col1 col2 
+   1    5    2    4    3    3    4    2    5    1 
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
 <!DOCTYPE html><html><head><title>R: dcr_untl</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
