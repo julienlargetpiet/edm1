@@ -259,6 +259,80 @@ print(appndr(inpt_v=c(1:3), val="oui", hmn=5, strt=1))
 ```
 
 
+# `arroundr_mean`
+
+arroundr_mean
+
+
+## Description
+
+Takes an ascendly int ordered vector as input and assigns each elements that are close enough to the same value accrdng to a step value (step_value), see examples.
+
+
+## Usage
+
+```r
+arroundr_mean(inpt_v = c(), step_val)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`step_val`     |     is the step_value
+
+
+## Examples
+
+```r
+x <- arroundr_mean(inpt_v = c(-11:25), step_val = 5)
+print(x)
+print(length(x))
+
+[1] -9.0 -9.0 -9.0 -9.0 -9.0 -4.0 -4.0 -4.0 -4.0 -4.0  1.0  1.0  1.0  1.0  1.0
+[16]  6.0  6.0  6.0  6.0  6.0 11.0 11.0 11.0 11.0 11.0 16.0 16.0 16.0 16.0 16.0
+[31] 21.0 21.0 21.0 21.0 21.0 23.8 23.8
+[1] 37
+```
+
+
+# `arroundr_min`
+
+arroundr_min
+
+
+## Description
+
+Takes an ascendly int ordered vector as input and assigns each elements that are close enough to the same value accrdng to a step value (step_value), see examples.
+
+
+## Usage
+
+```r
+arroundr_min(inpt_v = c(), step_val)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector
+`step_val`     |     is the step value
+
+
+## Examples
+
+```r
+print(arroundr_min(inpt_v = c(-11:25), step_val = 5))
+
+[1] -11 -11 -11 -11 -11 -11  -6  -6  -6  -6  -6  -1  -1  -1  -1  -1   4   4   4
+[20]   4   4   9   9   9   9   9  14  14  14  14  14  19  19  19  19  19  24
+```
+
+
 # `better_match`
 
 better_match

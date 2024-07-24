@@ -15455,6 +15455,79 @@ datf_row_appendr2 <- function(inpt_datf, chs_type = "integer"){
   return(rtn_v)
 }
 
+#' arroundr_min
+#'
+#' Takes an ascendly int ordered vector as input and assigns each elements that are close enough to the same value accrdng to a step value (step_value), see examples.
+#'
+#' @param inpt_v is the input vector
+#' @param step_val is the step value
+#'
+#' @examples 
+#'
+#' print(arroundr_min(inpt_v = c(-11:25), step_val = 5))
+#'
+#'  [1] -11 -11 -11 -11 -11 -11  -6  -6  -6  -6  -6  -1  -1  -1  -1  -1   4   4   4
+#' [20]   4   4   9   9   9   9   9  14  14  14  14  14  19  19  19  19  19  24
+#'
+#' @export
+
+arroundr_min <- function(inpt_v = c(), step_val){
+  cur_step = inpt_v[1] 
+  for (i in 2:length(inpt_v)){
+    if (abs(inpt_v[i] - inpt_v[(i - 1)]) > step_val){
+      cur_step = cur_step + step_val
+    }
+    inpt_v[i] <- cur_step
+  }
+  
+  return(inpt_v)
+}
+
+#' arroundr_mean
+#'
+#' Takes an ascendly int ordered vector as input and assigns each elements that are close enough to the same value accrdng to a step value (step_value), see examples.
+#'
+#' @param inpt_v is the input vector
+#' @param step_val is the step_value
+#'
+#' @examples 
+#'
+#' x <- arroundr_mean(inpt_v = c(-11:25), step_val = 5)
+#' print(x)
+#' print(length(x))
+#'
+#' [1] -9.0 -9.0 -9.0 -9.0 -9.0 -4.0 -4.0 -4.0 -4.0 -4.0  1.0  1.0  1.0  1.0  1.0
+#' [16]  6.0  6.0  6.0  6.0  6.0 11.0 11.0 11.0 11.0 11.0 16.0 16.0 16.0 16.0 16.0
+#' [31] 21.0 21.0 21.0 21.0 21.0 23.8 23.8
+#' [1] 37
+#'
+
+#' @export
+
+arroundr_mean <- function(inpt_v = c(), step_val){
+  cur_step = inpt_v[1] 
+  rtn_v <- c()
+  cnt = 0
+  inpt_v2 <- inpt_v
+  sty_val = 1
+  for (i in 2:length(inpt_v)){
+    if (abs(inpt_v[i] - inpt_v[(i - 1)]) > step_val){
+      rtn_v <- c(rtn_v, rep(x = (sum(inpt_v2[sty_val:(sty_val + cnt - 1)]) / cnt), times = cnt))
+      sty_val = sty_val + cnt
+      cur_step = cur_step + step_val
+      cnt = 0
+    }
+    inpt_v[i] <- cur_step
+    cnt = cnt + 1
+  }
+  if (length(rtn_v) < length(inpt_v)){
+    cur_diff <- (length(inpt_v) - length(rtn_v))
+    cur_val <- sum(inpt_v[length(inpt_v):(length(inpt_v) - step_val)]) / step_val
+    rtn_v <- c(rtn_v, rep(x = cur_val, times = cur_diff))
+  }
+  return(rtn_v) 
+}
+
 
 
 

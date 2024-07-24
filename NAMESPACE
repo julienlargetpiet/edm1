@@ -3,6 +3,8 @@
 export(all_stat)
 export(any_join_datf)
 export(appndr)
+export(arroundr_mean)
+export(arroundr_min)
 export(better_match)
 export(better_split)
 export(better_split_any)
