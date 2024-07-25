@@ -15654,4 +15654,62 @@ paste_datf2 <- function(inpt_datf, sep = ""){
   return(rtn_v)
 }
 
+#' datf_insertr
+#'
+#' Insert rows after certain indexes, see examples
+#'
+#' @param inpt_datf is the input dataframe
+#' @param ids_vec is the ids where the rows has to be inserted after
+#' @param val_l is a list containing all the rows (vector) to be inserted, linked to eevery index within ids_vec
+#'
+#' @examples
+#'
+#' datf <- data.frame(c(1:4), c(4:1))
+#' print(datf)
+#'
+#'   c.1.4. c.4.1.
+#' 1      1      4
+#' 2      2      3
+#' 3      3      2
+#' 4      4      1
+#'
+#' print(datf_insertr(inpt_datf = datf, ids_vec = c(1, 3), val_l = list(c("non", "non"), c("oui", "oui"))))
+#'
+#'   c.1.4. c.4.1.
+#' 1       1      4
+#' 2     non    non
+#' 21      2      3
+#' 3       3      2
+#' 5     oui    oui
+#' 4       4      1
+#'
+#' print(datf_insertr(inpt_datf = datf, ids_vec = c(1, 3), val_l = list(c("non", "non"))))
+#'
+#'   c.1.4. c.4.1.
+#' 1       1      4
+#' 2     non    non
+#' 21      2      3
+#' 3       3      2
+#' 5     non    non
+#' 4       4      1
+#'
+#' @export
 
+datf_insertr <- function(inpt_datf, ids_vec, val_l){
+  if (length(ids_vec) > length(val_l)){
+    cur_val <- unlist(val_l[length(val_l)])
+    while (length(ids_vec) > length(val_l)){
+      val_l <- append(x = val_l, values = list(cur_val)) 
+    }
+  }
+  alrd = 0
+  for (i in 1:length(ids_vec)){
+    inpt_datf <- rbind(
+                   inpt_datf[1:(ids_vec[i] + alrd), ], 
+                   unlist(val_l[i]), 
+                   inpt_datf[(ids_vec[i] + alrd + 1):nrow(inpt_datf), ]
+                 )
+    alrd = alrd + 1
+  }
+  return(inpt_datf)
+}

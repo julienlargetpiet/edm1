@@ -1918,6 +1918,66 @@ print(datf_appendr2(inpt_datf = datf_teste, chs_type = "character"))
 ```
 
 
+# `datf_insertr`
+
+datf_insertr
+
+
+## Description
+
+Insert rows after certain indexes, see examples
+
+
+## Usage
+
+```r
+datf_insertr(inpt_datf, ids_vec, val_l)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_datf`     |     is the input dataframe
+`ids_vec`     |     is the ids where the rows has to be inserted after
+`val_l`     |     is a list containing all the rows (vector) to be inserted, linked to eevery index within ids_vec
+
+
+## Examples
+
+```r
+datf <- data.frame(c(1:4), c(4:1))
+print(datf)
+
+c.1.4. c.4.1.
+1      1      4
+2      2      3
+3      3      2
+4      4      1
+
+print(datf_insertr(inpt_datf = datf, ids_vec = c(1, 3), val_l = list(c("non", "non"), c("oui", "oui"))))
+
+c.1.4. c.4.1.
+1       1      4
+2     non    non
+21      2      3
+3       3      2
+5     oui    oui
+4       4      1
+
+print(datf_insertr(inpt_datf = datf, ids_vec = c(1, 3), val_l = list(c("non", "non"))))
+
+c.1.4. c.4.1.
+1       1      4
+2     non    non
+21      2      3
+3       3      2
+5     non    non
+4       4      1
+```
+
+
 # `datf_row_appendr`
 
 datf_row_appendr
