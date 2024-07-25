@@ -637,6 +637,110 @@ print(better_unique(inpt_v = c("a", "b", "c", "c"), occu = "<-2-"))
 ```
 
 
+# `bind_cols`
+
+bind_cols
+
+
+## Description
+
+Allow to find the cols of a dataframe in an other dataframe, see examples
+
+
+## Usage
+
+```r
+bind_cols(from_datf, in_datf)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`from_datf`     |     is the dataframe that contains the cols to find among other cols
+`in_datf`     |     is the dataframe that only contans the cols to find in from_datf
+
+
+## Examples
+
+```r
+iris[, 5] <- as.character(iris[, 5])
+iris <- cbind(iris, iris[, 4])
+from_datf <- iris
+in_datf <- iris[, c(1, 2, 2, 2, 4)]
+bind_cols(from_datf = from_datf,
+in_datf = in_datf)
+
+[[1]]
+[1] 1
+
+[[2]]
+[1] 2
+
+[[3]]
+[1] 2
+
+[[4]]
+[1] 2
+
+[[5]]
+[1] 4 6
+```
+
+
+# `bind_rows`
+
+bind_rows
+
+
+## Description
+
+Allow to find the rows of a dataframe in an other dataframe, see examples
+
+
+## Usage
+
+```r
+bind_rows(from_datf, in_datf)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`from_datf`     |     is the dataframe that contains the rows to find among other rows
+`in_datf`     |     is the dataframe that only contans the rows to find in from_datf
+
+
+## Examples
+
+```r
+iris[, 5] <- as.character(iris[, 5])
+from_datf <- iris
+in_datf <- iris[c(4, 2, 23, 21, 11), ]
+
+bind_rows(from_datf = from_datf,
+in_datf = in_datf)
+
+[[1]]
+[1] 4
+
+[[2]]
+[1] 2
+
+[[3]]
+[1] 23
+
+[[4]]
+[1] 21
+
+[[5]]
+[1] 11
+```
+
+
 # `can_be_num`
 
 can_be_num
@@ -5346,6 +5450,40 @@ Argument      |Description
 print(paste_datf(inpt_datf=data.frame(c(1, 2, 1), c(33, 22, 55))))
 
 #[1] "133" "222" "155"
+```
+
+
+# `paste_datf2`
+
+paste_datf2
+
+
+## Description
+
+Return a vector composed of pasted elements from the input dataframe at the same column.
+
+
+## Usage
+
+```r
+paste_datf2(inpt_datf, sep = "")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_datf`     |     is the input dataframe
+`sep`     |     is the separator between pasted elements, defaults to ""
+
+
+## Examples
+
+```r
+print(paste_datf2(inpt_datf=data.frame(c(1, 2, 1), c(33, 22, 55))))
+
+#[1] "121" "332255"
 ```
 
 

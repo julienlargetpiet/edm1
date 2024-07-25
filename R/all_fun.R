@@ -15528,6 +15528,130 @@ arroundr_mean <- function(inpt_v = c(), step_val){
   return(rtn_v) 
 }
 
+#' bind_rows
+#'
+#' Allow to find the rows of a dataframe in an other dataframe, see examples
+#'
+#' @param from_datf is the dataframe that contains the rows to find among other rows
+#' @param in_datf is the dataframe that only contans the rows to find in from_datf
+#'
+#' @examples
+#'
+#' iris[, 5] <- as.character(iris[, 5])
+#' from_datf <- iris
+#' in_datf <- iris[c(4, 2, 23, 21, 11), ]
+#' 
+#' bind_rows(from_datf = from_datf,
+#'           in_datf = in_datf)
+#' 
+#' [[1]]
+#' [1] 4
+#' 
+#' [[2]]
+#' [1] 2
+#' 
+#' [[3]]
+#' [1] 23
+#' 
+#' [[4]]
+#' [1] 21
+#' 
+#' [[5]]
+#' [1] 11
+#'
+#' @export
 
+bind_rows <- function(from_datf, in_datf){
+  paste_datf <- function(inpt_datf, sep=""){
+      if (ncol(as.data.frame(inpt_datf)) == 1){ 
+          return(inpt_datf) 
+      }else {
+          rtn_datf <- inpt_datf[,1]
+          for (i in 2:ncol(inpt_datf)){
+              rtn_datf <- paste(rtn_datf, inpt_datf[,i], sep=sep)
+          }
+          return(rtn_datf)
+      }
+  }
+  rtn_l <- list()
+  from_datf <- paste_datf(from_datf) 
+  for (I in 1:nrow(in_datf)){
+    rtn_l <- append(x = rtn_l, 
+                     values = list(grep(pattern = paste(in_datf[I, ], collapse = ""), x = from_datf)))
+  }
+  return(rtn_l)
+}
+
+#' bind_cols
+#'
+#' Allow to find the cols of a dataframe in an other dataframe, see examples
+#'
+#' @param from_datf is the dataframe that contains the cols to find among other cols
+#' @param in_datf is the dataframe that only contans the cols to find in from_datf
+#'
+#' @examples
+#'
+#' iris[, 5] <- as.character(iris[, 5])
+#' iris <- cbind(iris, iris[, 4])
+#' from_datf <- iris
+#' in_datf <- iris[, c(1, 2, 2, 2, 4)]
+#' bind_cols(from_datf = from_datf,
+#'           in_datf = in_datf)
+#' 
+#' [[1]]
+#' [1] 1
+#' 
+#' [[2]]
+#' [1] 2
+#' 
+#' [[3]]
+#' [1] 2
+#' 
+#' [[4]]
+#' [1] 2
+#' 
+#' [[5]]
+#' [1] 4 6
+#'
+#' @export
+
+bind_cols <- function(from_datf, in_datf){
+  paste_datf2 <- function(inpt_datf, sep = ""){
+    rtn_v <- c()
+    for (i in 1:ncol(inpt_datf)){
+        rtn_v <- c(rtn_v, paste(inpt_datf[, i], collapse = sep))
+    }
+    return(rtn_v)
+  }
+  rtn_l <- list()
+  from_datf <- paste_datf2(from_datf) 
+  for (I in 1:ncol(in_datf)){
+    rtn_l <- append(x = rtn_l, 
+                     values = list(grep(pattern = paste(in_datf[, I], collapse = ""), x = from_datf)))
+  }
+  return(rtn_l)
+}
+
+#' paste_datf2
+#' 
+#' Return a vector composed of pasted elements from the input dataframe at the same column.
+#'
+#' @param inpt_datf is the input dataframe
+#' @param sep is the separator between pasted elements, defaults to ""
+#' @examples
+#' 
+#' print(paste_datf2(inpt_datf=data.frame(c(1, 2, 1), c(33, 22, 55))))
+#'
+#' #[1] "121" "332255"
+#'
+#' @export
+
+paste_datf2 <- function(inpt_datf, sep = ""){
+  rtn_v <- c()
+  for (i in 1:ncol(inpt_datf)){
+      rtn_v <- c(rtn_v, paste(inpt_datf[, i], collapse = sep))
+  }
+  return(rtn_v)
+}
 
 

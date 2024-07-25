@@ -940,6 +940,160 @@ print(better_unique(inpt_v = c("a", "b", "c", "c"), occu = "&lt;-2-"))
 
 </div>
 </body></html>
+<!DOCTYPE html><html><head><title>R: bind_cols</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>bind_cols</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>bind_cols</h2>
+
+<h3>Description</h3>
+
+<p>Allow to find the cols of a dataframe in an other dataframe, see examples
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>bind_cols(from_datf, in_datf)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="from_datf">from_datf</code></td>
+<td>
+<p>is the dataframe that contains the cols to find among other cols</p>
+</td></tr>
+<tr><td><code id="in_datf">in_datf</code></td>
+<td>
+<p>is the dataframe that only contans the cols to find in from_datf</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+iris[, 5] &lt;- as.character(iris[, 5])
+iris &lt;- cbind(iris, iris[, 4])
+from_datf &lt;- iris
+in_datf &lt;- iris[, c(1, 2, 2, 2, 4)]
+bind_cols(from_datf = from_datf,
+          in_datf = in_datf)
+
+[[1]]
+[1] 1
+
+[[2]]
+[1] 2
+
+[[3]]
+[1] 2
+
+[[4]]
+[1] 2
+
+[[5]]
+[1] 4 6
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: bind_rows</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>bind_rows</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>bind_rows</h2>
+
+<h3>Description</h3>
+
+<p>Allow to find the rows of a dataframe in an other dataframe, see examples
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>bind_rows(from_datf, in_datf)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="from_datf">from_datf</code></td>
+<td>
+<p>is the dataframe that contains the rows to find among other rows</p>
+</td></tr>
+<tr><td><code id="in_datf">in_datf</code></td>
+<td>
+<p>is the dataframe that only contans the rows to find in from_datf</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+iris[, 5] &lt;- as.character(iris[, 5])
+from_datf &lt;- iris
+in_datf &lt;- iris[c(4, 2, 23, 21, 11), ]
+
+bind_rows(from_datf = from_datf,
+          in_datf = in_datf)
+
+[[1]]
+[1] 4
+
+[[2]]
+[1] 2
+
+[[3]]
+[1] 23
+
+[[4]]
+[1] 21
+
+[[5]]
+[1] 11
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
 <!DOCTYPE html><html><head><title>R: can_be_num</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
@@ -8117,6 +8271,65 @@ print(pairs_insertr(inpt = "(oneA|[one]|two|twob)three(four)", algo_used = c(3))
 print(pairs_insertr(inpt = "(oneA|[one]|two|twob)three((four))", algo_used = c(3)))
 
 [1] "([oneA]|[(one)]|(two)|(twob))(three)((four))"
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: paste_datf2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>paste_datf2</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>paste_datf2</h2>
+
+<h3>Description</h3>
+
+<p>Return a vector composed of pasted elements from the input dataframe at the same column.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>paste_datf2(inpt_datf, sep = "")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
+<td>
+<p>is the input dataframe</p>
+</td></tr>
+<tr><td><code id="sep">sep</code></td>
+<td>
+<p>is the separator between pasted elements, defaults to &quot;&quot;</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(paste_datf2(inpt_datf=data.frame(c(1, 2, 1), c(33, 22, 55))))
+
+#[1] "121" "332255"
 
 </code></pre>
 
