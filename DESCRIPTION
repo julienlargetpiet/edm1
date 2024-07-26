@@ -12,4 +12,5 @@ Imports:
     stringr,
     stringi,
     dplyr,
+    data.table,
     openxlsx

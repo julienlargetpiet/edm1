@@ -5138,30 +5138,20 @@ incr_fillr <- function(inpt_v, wrk_v=NA, default_val=NA, step=1){
 #' 
 #' print(paste_datf(inpt_datf=data.frame(c(1, 2, 1), c(33, 22, 55))))
 #'
-#' #[1] "133" "222" "155"
+#' [1] "133" "222" "155"
 #'
 #' @export
 
 paste_datf <- function(inpt_datf, sep=""){
-
     if (ncol(as.data.frame(inpt_datf)) == 1){ 
-
         return(inpt_datf) 
-
     }else {
-
         rtn_datf <- inpt_datf[,1]
-
         for (i in 2:ncol(inpt_datf)){
-
             rtn_datf <- paste(rtn_datf, inpt_datf[,i], sep=sep)
-
         }
-
         return(rtn_datf)
-
     }
-
 }
 
 #' nest_v
@@ -15826,5 +15816,86 @@ historic_sequence <- function(inpt_datf, bf_ = 1){
   }
   return(rtn_datf)
 }
+
+#' rm_rows
+#'
+#' Allow to remove certain rows that contains certains characters, see examples.
+#'
+#' @param inpt_datf is the input dataframe
+#' @param flagged_vals is a vector containing the characters that will drop any rows that contains it
+#'
+#' @examples
+#'
+#' datf <- data.frame(c(1, 2, NA, 4), c(1:4))
+#' print(datf)
+#'
+#'   c.1..2..NA..4. c.1.4.
+#' 1              1      1
+#' 2              2      2
+#' 3             NA      3
+#' 4              4      4
+#'
+#' print(rm_rows(inpt_datf = datf, flagged_vals = c(1, 4)))
+#' 
+#'   c.1..2..NA..4. c.1.4.
+#' 2              2      2
+#' 3             NA      3
+#' 
+#' @export
+
+rm_rows <- function(inpt_datf, flagged_vals = c()){
+  rm_ids <- c()
+  for (i in 1:nrow(inpt_datf)){
+    no_stop <- TRUE
+    cnt = 1
+    while (no_stop & cnt <= length(flagged_vals)){
+      if (as.character(flagged_vals[cnt]) %chin% as.character(inpt_datf[i, ])){
+        rm_ids <- c(rm_ids, i)
+        no_stop <- FALSE
+      }
+      cnt = cnt + 1
+    }
+  }
+  return(inpt_datf[-rm_ids, ])
+}
+
+#' rm_na_rows
+#'
+#' Allow to remove certain rows that contains NA, see examples.
+#'
+#' @param inpt_datf is the input dataframe
+#' @param flagged_vals is a vector containing the characters that will drop any rows that contains it
+#'
+#' @examples
+#'
+#' datf <- data.frame(c(1, 2, NA, 4), c(1:4))
+#' print(datf)
+#' 
+#'   c.1..2..NA..4. c.1.4.
+#' 1              1      1
+#' 2              2      2
+#' 3             NA      3
+#' 4              4      4
+#'
+#' print(rm_na_rows(inpt_datf = datf))
+#' 
+#'   c.1..2..NA..4. c.1.4.
+#' 1              1      1
+#' 2              2      2
+#' 4              4      4
+#' 
+#' @export
+
+rm_na_rows <- function(inpt_datf, flagged_vals = c()){
+  rm_ids <- c()
+  for (i in 1:nrow(inpt_datf)){
+    if (any(is.na(inpt_datf[i, ]))){
+      rm_ids <- c(rm_ids, i)
+    }
+  }
+  return(inpt_datf[-rm_ids, ])
+}
+
+
 
 
