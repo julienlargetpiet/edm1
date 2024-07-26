@@ -18,6 +18,6 @@ Return a vector composed of pasted elements from the input dataframe at the same
 
 print(paste_datf(inpt_datf=data.frame(c(1, 2, 1), c(33, 22, 55))))
 
-#[1] "133" "222" "155"
+[1] "133" "222" "155"
 
 }
