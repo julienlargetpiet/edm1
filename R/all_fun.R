@@ -15789,8 +15789,8 @@ historic_sequence <- function(inpt_datf, bf_ = 1){
     ids_v <- c(ids_v, rep(x = cur_ids[i], times = length(indivs)))
     cur_datf2 <- as.data.frame(matrix(nrow = length(indivs), ncol = 0))
     for (i2 in 1:bf_){
-      cur_inpt_datf <- inpt_datf[inpt_datf[, 1] == (cur_ids[i] - i2), (I + 2)]
-      cur_indivs <- match(x = indivs, table = inpt_datf[inpt_datf[, 1] == (cur_ids[i] - i2), 2])   
+      cur_inpt_datf <- inpt_datf[inpt_datf[, 1] == cur_ids[(i + i2)], (I + 2)]
+      cur_indivs <- match(x = indivs, table = inpt_datf[inpt_datf[, 1] == cur_ids[(i + i2)], 2])   
       cur_inpt_datf <- cur_inpt_datf[cur_indivs[!(is.na(cur_indivs))]]
       for (e in grep(pattern = TRUE, x = is.na(cur_indivs))){
         cur_inpt_datf <- append(x = cur_inpt_datf, values = NA, after = (e - 1))
@@ -15803,27 +15803,28 @@ historic_sequence <- function(inpt_datf, bf_ = 1){
   rtn_datf[, 1] <- ids_v
   rtn_datf <- cbind(rtn_datf, cur_datf)
   colnames(rtn_datf)[3:(2 + bf_)] <- paste(colnames(inpt_datf)[3], c(1:bf_), sep = "-") 
-  for (I in 2:(ncol(inpt_datf) - 2)){
-    cur_datf <- as.data.frame(matrix(nrow = 0, ncol = bf_))
-    for (i in 1:(length(cur_ids) - bf_)){
-      indivs <- inpt_datf[inpt_datf[, 1] == cur_ids[i], 2] 
-      cur_datf2 <- as.data.frame(matrix(nrow = length(indivs), ncol = 0))
-      for (i2 in 1:bf_){
-        cur_inpt_datf <- inpt_datf[inpt_datf[, 1] == (cur_ids[i] - i2), (I + 2)]
-        cur_indivs <- match(x = indivs, table = inpt_datf[inpt_datf[, 1] == (cur_ids[i] - i2), 2])   
-        cur_inpt_datf <- cur_inpt_datf[cur_indivs[!(is.na(cur_indivs))]]
-        for (e in grep(pattern = TRUE, x = is.na(cur_indivs))){
-          cur_inpt_datf <- append(x = cur_inpt_datf, values = NA, after = (e - 1))
+  if (nb_vars > 1){
+    for (I in 2:nb_vars){
+      cur_datf <- as.data.frame(matrix(nrow = 0, ncol = bf_))
+      for (i in 1:(length(cur_ids) - bf_)){
+        indivs <- inpt_datf[inpt_datf[, 1] == cur_ids[i], 2] 
+        cur_datf2 <- as.data.frame(matrix(nrow = length(indivs), ncol = 0))
+        for (i2 in 1:bf_){
+          cur_inpt_datf <- inpt_datf[(inpt_datf[, 1] == cur_ids[(i + i2)]), (I + 2)]
+          cur_indivs <- match(x = indivs, table = inpt_datf[inpt_datf[, 1] == cur_ids[(i + i2)], 2])   
+          cur_inpt_datf <- cur_inpt_datf[cur_indivs[!(is.na(cur_indivs))]]
+          for (e in grep(pattern = TRUE, x = is.na(cur_indivs))){
+            cur_inpt_datf <- append(x = cur_inpt_datf, values = NA, after = (e - 1))
+          }
+          cur_datf2 <- cbind(cur_datf2, cur_inpt_datf)
         }
-        cur_datf2 <- cbind(cur_datf2, cur_inpt_datf)
+        cur_datf <- rbind(cur_datf, cur_datf2)
       }
-      cur_datf <- rbind(cur_datf, cur_datf2)
+      rtn_datf <- cbind(rtn_datf, cur_datf)
+      colnames(rtn_datf)[((I - 1) * bf_ + 3):(I * bf_ + 2)] <- paste(colnames(inpt_datf)[(I + 2)], c(1:bf_), sep = "-")
     }
-    rtn_datf <- cbind(rtn_datf, cur_datf)
-    colnames(rtn_datf)[((I - 1) * bf_ + 3):(I * bf_ + 2)] <- paste(colnames(inpt_datf)[(I + 2)], c(1:bf_), sep = "-")
   }
   return(rtn_datf)
 }
-
 
 
