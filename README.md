@@ -1,39 +1,26 @@
-::: container
-::: {role="main"}
-  ---------- -----------------
-  all_stat     R Documentation
-  ---------- -----------------
 
-## all_stat
+# all_stat
 
-### Description
+## Description
 
-Allow to see all the main statistics indicators (mean, median, variance,
-standard deviation, sum, max, min, quantile) of variables in a dataframe
-by the modality of a variable in a column of the input datarame. In
-addition to that, you can get the occurence of other qualitative
-variables by your chosen qualitative variable, you have just to precise
-it in the vector \"stat_var\" where all the statistics indicators are
-given with \"occu-var_you_want/\".
+Allow to see all the main statistics indicators (mean, median, variance, standard deviation, sum, max, min, quantile) of variables in a dataframe by the modality of a variable in a column of the input datarame. In addition to that, you can get the occurence of other qualitative variables by your chosen qualitative variable, you have just to precise it in the vector "stat_var" where all the statistics indicators are given with "occu-var_you_want/".
 
-### Usage
+## Usage
 
-``` R
+```r
 all_stat(inpt_v, var_add = c(), stat_var = c(), inpt_datf)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- -------------------------------------------------
-  `inpt_v`{#inpt_v}         is the modalities of the variables
-  `var_add`{#var_add}       is the variables you want to get the stats from
-  `stat_var`{#stat_var}     is the stats indicators you want
-  `inpt_datf`{#inpt_datf}   is the input dataframe
-  ------------------------- -------------------------------------------------
+* `inpt_v`: is the modalities of the variables
+* `var_add`: is the variables you want to get the stats from
+* `stat_var`: is the stats indicators you want
+* `inpt_datf`: is the input dataframe
 
-### Examples
+## Examples
 
-``` R
+```r
 datf <- data.frame("mod"=c("first", "seco", "seco", "first", "first", "third", "first"), 
                 "var1"=c(11, 22, 21, 22, 22, 11, 9), 
                "var2"=c("d", "d", "z", "z", "z", "d", "z"), 
@@ -78,26 +65,18 @@ print(all_stat(inpt_v=c("first", "seco"), var_add = c("var1", "var2", "var3", "v
 #13         43.75
 #14              
 #15              
-#16              
+#16
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  --------------- -----------------
-  any_join_datf     R Documentation
-  --------------- -----------------
+# any_join_datf
 
-## any_join_datf
-
-### Description
+## Description
 
 Allow to perform SQL joints with more features
 
-### Usage
+## Usage
 
-``` R
+```r
 any_join_datf(
   inpt_datf_l,
   join_type = "inner",
@@ -109,21 +88,19 @@ any_join_datf(
 )
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `inpt_datf_l`{#inpt_datf_l}   is a list containing all the dataframe
-  `join_type`{#join_type}       is the joint type. Defaults to inner but can be changed to a vector containing all the dataframes you want to take their ids to don external joints.
-  `join_spe`{#join_spe}         can be equal to a vector to do an external joints on all the dataframes. In this case, join_type should not be equal to \"inner\"
-  `id_v`{#id_v}                 is a vector containing all the ids name of the dataframes. The ids names can be changed to number of their columns taking in count their position in inpt_datf_l. It means that if my id is in the third column of the second dataframe and the first dataframe have 5 columns, the column number of the ids is 5 + 3 = 8
-  `excl_col`{#excl_col}         is a vector containing the column names to exclude, if this vector is filled so \"rtn_col\" should not be filled. You can also put the column number in the manner indicated for \"id_v\". Defaults to c()
-  `rtn_col`{#rtn_col}           is a vector containing the column names to retain, if this vector is filled so \"excl_col\" should not be filled. You can also put the column number in the manner indicated for \"id_v\". Defaults to c()
-  `d_val`{#d_val}               is the default val when here is no match
-  ----------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `inpt_datf_l`: is a list containing all the dataframe
+* `join_type`: is the joint type. Defaults to inner but can be changed to a vector containing all the dataframes you want to take their ids to don external joints.
+* `join_spe`: can be equal to a vector to do an external joints on all the dataframes. In this case, join_type should not be equal to "inner"
+* `id_v`: is a vector containing all the ids name of the dataframes. The ids names can be changed to number of their columns taking in count their position in inpt_datf_l. It means that if my id is in the third column of the second dataframe and the first dataframe have 5 columns, the column number of the ids is 5 + 3 = 8
+* `excl_col`: is a vector containing the column names to exclude, if this vector is filled so "rtn_col" should not be filled. You can also put the column number in the manner indicated for "id_v". Defaults to c()
+* `rtn_col`: is a vector containing the column names to retain, if this vector is filled so "excl_col" should not be filled. You can also put the column number in the manner indicated for "id_v". Defaults to c()
+* `d_val`: is the default val when here is no match
 
-### Examples
+## Examples
 
-``` R
+```r
 datf1 <- data.frame("val"=c(1, 1, 2, 4), "ids"=c("e", "a", "z", "a"), 
 "last"=c("oui", "oui", "non", "oui"),
 "second_ids"=c(13, 11, 12, 8), "third_col"=c(4:1))
@@ -206,81 +183,58 @@ print(any_join_datf(inpt_datf_l=list(datf1, datf2, datf3), join_type=c(1), id_v=
 #3         12
 #4         11
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  -------- -----------------
-  appndr     R Documentation
-  -------- -----------------
+# appndr
 
-## appndr
+## Description
 
-### Description
+Append to a vector "inpt_v" a special value "val" n times "mmn". The appending begins at "strt" index.
 
-Append to a vector \"inpt_v\" a special value \"val\" n times \"mmn\".
-The appending begins at \"strt\" index.
+## Usage
 
-### Usage
-
-``` R
+```r
 appndr(inpt_v, val = NA, hmn, strt = "max")
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- ---------------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}   is the input vector
-  `val`{#val}         is the special value
-  `hmn`{#hmn}         is the number of special value element added
-  `strt`{#strt}       is the index from which appending begins, defaults to max which means the end of \"inpt_v\"
-  ------------------- ---------------------------------------------------------------------------------------------
+* `inpt_v`: is the input vector
+* `val`: is the special value
+* `hmn`: is the number of special value element added
+* `strt`: is the index from which appending begins, defaults to max which means the end of "inpt_v"
 
-### Examples
+## Examples
 
-``` R
+```r
 print(appndr(inpt_v=c(1:3), val="oui", hmn=5))
 
 #[1] "1"   "2"   "3"   "oui" "oui" "oui" "oui" "oui"
 
 print(appndr(inpt_v=c(1:3), val="oui", hmn=5, strt=1))
 
-#[1] "1"   "oui" "oui" "oui" "oui" "oui" "2"   "3" 
+#[1] "1"   "oui" "oui" "oui" "oui" "oui" "2"   "3"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  --------------- -----------------
-  arroundr_mean     R Documentation
-  --------------- -----------------
+# arroundr_mean
 
-## arroundr_mean
+## Description
 
-### Description
+Takes an ascendly int ordered vector as input and assigns each elements that are close enough to the same value accrdng to a step value (step_value), see examples.
 
-Takes an ascendly int ordered vector as input and assigns each elements
-that are close enough to the same value accrdng to a step value
-(step_value), see examples.
+## Usage
 
-### Usage
-
-``` R
+```r
 arroundr_mean(inpt_v = c(), step_val)
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------- ---------------------
-  `inpt_v`{#inpt_v}       is the input vector
-  `step_val`{#step_val}   is the step_value
-  ----------------------- ---------------------
+* `inpt_v`: is the input vector
+* `step_val`: is the step_value
 
-### Examples
+## Examples
 
-``` R
+```r
 x <- arroundr_mean(inpt_v = c(-11:25), step_val = 5)
 print(x)
 print(length(x))
@@ -290,77 +244,55 @@ print(length(x))
 [31] 21.0 21.0 21.0 21.0 21.0 23.8 23.8
 [1] 37
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  -------------- -----------------
-  arroundr_min     R Documentation
-  -------------- -----------------
+# arroundr_min
 
-## arroundr_min
+## Description
 
-### Description
+Takes an ascendly int ordered vector as input and assigns each elements that are close enough to the same value accrdng to a step value (step_value), see examples.
 
-Takes an ascendly int ordered vector as input and assigns each elements
-that are close enough to the same value accrdng to a step value
-(step_value), see examples.
+## Usage
 
-### Usage
-
-``` R
+```r
 arroundr_min(inpt_v = c(), step_val)
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------- ---------------------
-  `inpt_v`{#inpt_v}       is the input vector
-  `step_val`{#step_val}   is the step value
-  ----------------------- ---------------------
+* `inpt_v`: is the input vector
+* `step_val`: is the step value
 
-### Examples
+## Examples
 
-``` R
+```r
 print(arroundr_min(inpt_v = c(-11:25), step_val = 5))
 
  [1] -11 -11 -11 -11 -11 -11  -6  -6  -6  -6  -6  -1  -1  -1  -1  -1   4   4   4
 [20]   4   4   9   9   9   9   9  14  14  14  14  14  19  19  19  19  19  24
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  -------------- -----------------
-  better_match     R Documentation
-  -------------- -----------------
+# better_match
 
-## better_match
-
-### Description
+## Description
 
 Allow to get the nth element matched in a vector
 
-### Usage
+## Usage
 
-``` R
+```r
 better_match(inpt_v = c(), ptrn, untl = 1, nvr_here = NA)
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------- ---------------------------------------------------
-  `inpt_v`{#inpt_v}       is the input vector
-  `ptrn`{#ptrn}           is the pattern to be matched
-  `untl`{#untl}           is the maximum number of matched pattern outputed
-  `nvr_here`{#nvr_here}   is a value you are sure is not present in inpt_v
-  ----------------------- ---------------------------------------------------
+* `inpt_v`: is the input vector
+* `ptrn`: is the pattern to be matched
+* `untl`: is the maximum number of matched pattern outputed
+* `nvr_here`: is a value you are sure is not present in inpt_v
 
-### Examples
+## Examples
 
-``` R
+```r
 print(better_match(inpt_v=c(1:12, 3, 4, 33, 3), ptrn=3, untl=1))
 
 #[1] 3
@@ -377,39 +309,27 @@ print(better_match(inpt_v=c(1:12, 3, 4, 33, 3), ptrn=c(3, 4), untl=c(1, 5)))
 
 [1]  3  4 14
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------------ -----------------
-  better_split_any     R Documentation
-  ------------------ -----------------
+# better_split_any
 
-## better_split_any
+## Description
 
-### Description
+Allows to split a string by multiple split regardless of their length, returns a vector and not a list. Contrary to better_split, this functions keep the delimiters in the output.
 
-Allows to split a string by multiple split regardless of their length,
-returns a vector and not a list. Contrary to better_split, this
-functions keep the delimiters in the output.
+## Usage
 
-### Usage
-
-``` R
+```r
 better_split_any(inpt, split_v = c())
 ```
 
-### Arguments
+## Arguments
 
-  --------------------- -------------------------------------
-  `inpt`{#inpt}         is the input character
-  `split_v`{#split_v}   is the vector containing the splits
-  --------------------- -------------------------------------
+* `inpt`: is the input character
+* `split_v`: is the vector containing the splits
 
-### Examples
+## Examples
 
-``` R
+```r
 print(better_split_any(inpt = "o-u_i", split_v = c("-")))
 
 [1] "o"  "-" "u_i"
@@ -428,40 +348,29 @@ print(better_split_any(inpt = "--o--_/m/m/__-opo-/m/-u_i-_--", split_v = c("--",
 print(better_split_any(inpt = "(ok(ee:56))(ok2(oui)(ee:4))", split_v = c("(", ")", ":")))
 
  [1] "("   "ok"  "("   "ee"  ":"   "56"  ")"   ")"   "("   "ok2" "("   "oui"
- [13] ")"   "("   "ee"  ":"   "4"   ")"   ")"  
+ [13] ")"   "("   "ee"  ":"   "4"   ")"   ")"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  -------------- -----------------
-  better_split     R Documentation
-  -------------- -----------------
+# better_split
 
-## better_split
+## Description
 
-### Description
+Allows to split a string by multiple split, returns a vector and not a list.
 
-Allows to split a string by multiple split, returns a vector and not a
-list.
+## Usage
 
-### Usage
-
-``` R
+```r
 better_split(inpt, split_v = c())
 ```
 
-### Arguments
+## Arguments
 
-  --------------------- -------------------------------------
-  `inpt`{#inpt}         is the input character
-  `split_v`{#split_v}   is the vector containing the splits
-  --------------------- -------------------------------------
+* `inpt`: is the input character
+* `split_v`: is the vector containing the splits
 
-### Examples
+## Examples
 
-``` R
+```r
 print(better_split(inpt = "o-u_i", split_v = c("-")))
 
 [1] "o"   "u_i"
@@ -470,25 +379,16 @@ print(better_split(inpt = "o-u_i", split_v = c("-", "_")))
 
 [1] "o" "u" "i"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ----------------- -----------------
-  better_sub_mult     R Documentation
-  ----------------- -----------------
+# better_sub_mult
 
-## better_sub_mult
+## Description
 
-### Description
+Allow to perform a sub_mult operation to a given number of matched patterns, see examples
 
-Allow to perform a sub_mult operation to a given number of matched
-patterns, see examples
+## Usage
 
-### Usage
-
-``` R
+```r
 better_sub_mult(
   inpt_v = c(),
   pattern_v = c(),
@@ -497,18 +397,16 @@ better_sub_mult(
 )
 ```
 
-### Arguments
+## Arguments
 
-  --------------------------------- ----------------------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}                 is a vector containing all the elements that contains expressions to be substituted
-  `pattern_v`{#pattern_v}           is a vector containing all the patterns to be substituted in any elements of inpt_v
-  `replacement_v`{#replacement_v}   is a vector containing the expression that are going to substituate those provided by pattern_v
-  `untl_v`{#untl_v}                 is a vector containing, for each element of inpt_v, the number of pattern that will be substituted
-  --------------------------------- ----------------------------------------------------------------------------------------------------
+* `inpt_v`: is a vector containing all the elements that contains expressions to be substituted
+* `pattern_v`: is a vector containing all the patterns to be substituted in any elements of inpt_v
+* `replacement_v`: is a vector containing the expression that are going to substituate those provided by pattern_v
+* `untl_v`: is a vector containing, for each element of inpt_v, the number of pattern that will be substituted
 
-### Examples
+## Examples
 
-``` R
+```r
 print(better_sub_mult(inpt_v = c("yes NAME, i will call NAME and NAME2", 
                              "yes NAME, i will call NAME and NAME2, especially NAME2"),
                   pattern_v = c("NAME", "NAME2"),
@@ -527,40 +425,29 @@ print(better_sub_mult(inpt_v = c("yes NAME, i will call NAME and NAME2",
 [1] "yes Kevin, i will call Kevin and Kevin2"                   
 [2] "yes Kevin, i will call Kevin and Kevin2, especially Kevin2"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------ -----------------
-  better_sub     R Documentation
-  ------------ -----------------
+# better_sub
 
-## better_sub
+## Description
 
-### Description
+Allow to perform a sub operation to a given number of matched patterns, see examples
 
-Allow to perform a sub operation to a given number of matched patterns,
-see examples
+## Usage
 
-### Usage
-
-``` R
+```r
 better_sub(inpt_v = c(), pattern, replacement, untl_v = c())
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------------- ----------------------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}             is a vector containing all the elements that contains expressions to be substituted
-  `pattern`{#pattern}           is the expression that will be substituted
-  `replacement`{#replacement}   is the expression that will substituate pattern
-  `untl_v`{#untl_v}             is a vector containing, for each element of inpt_v, the number of pattern that will be substituted
-  ----------------------------- ----------------------------------------------------------------------------------------------------
+* `inpt_v`: is a vector containing all the elements that contains expressions to be substituted
+* `pattern`: is the expression that will be substituted
+* `replacement`: is the expression that will substituate pattern
+* `untl_v`: is a vector containing, for each element of inpt_v, the number of pattern that will be substituted
 
-### Examples
+## Examples
 
-``` R
+```r
 print(better_sub(inpt_v = c("yes NAME, i will call NAME and NAME", 
                             "yes NAME, i will call NAME and NAME"),
                  pattern = "NAME",
@@ -588,37 +475,27 @@ print(better_sub(inpt_v = c("yes NAME, i will call NAME and NAME",
 [1] "yes Kevin, i will call Kevin and Kevin"
 [2] "yes Kevin, i will call Kevin and Kevin"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  --------------- -----------------
-  better_unique     R Documentation
-  --------------- -----------------
+# better_unique
 
-## better_unique
-
-### Description
+## Description
 
 Returns the element that are not unique from the input vector
 
-### Usage
+## Usage
 
-``` R
+```r
 better_unique(inpt_v, occu = ">-1-")
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}   is the input vector containing the elements
-  `occu`{#occu}       is a parameter that specifies the occurence of the elements that must be returned, defaults to \"\>-1-\" it means that the function will return all the elements that are present more than one time in inpt_v. The synthax is the following \"comparaison_type-actual_value-\". The comparaison type may be \"==\" or \"\>\" or \"\<\". Occu can also be a vector containing all the occurence that must have the elements to be returned.
-  ------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `inpt_v`: is the input vector containing the elements
+* `occu`: is a parameter that specifies the occurence of the elements that must be returned, defaults to ">-1-" it means that the function will return all the elements that are present more than one time in inpt_v. The synthax is the following "comparaison_type-actual_value-". The comparaison type may be "==" or ">" or "<". Occu can also be a vector containing all the occurence that must have the elements to be returned.
 
-### Examples
+## Examples
 
-``` R
+```r
 print(better_unique(inpt_v=c("oui", "oui", "non", "non", "peut", "peut1", "non")))
 
 #[1] "oui" "non"
@@ -643,38 +520,27 @@ print(better_unique(inpt_v = c("a", "b", "c", "c"), occu = "<-2-"))
 
 [1] "a" "b"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ----------- -----------------
-  bind_cols     R Documentation
-  ----------- -----------------
+# bind_cols
 
-## bind_cols
+## Description
 
-### Description
+Allow to find the cols of a dataframe in an other dataframe, see examples
 
-Allow to find the cols of a dataframe in an other dataframe, see
-examples
+## Usage
 
-### Usage
-
-``` R
+```r
 bind_cols(from_datf, in_datf)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- ------------------------------------------------------------------
-  `from_datf`{#from_datf}   is the dataframe that contains the cols to find among other cols
-  `in_datf`{#in_datf}       is the dataframe that only contans the cols to find in from_datf
-  ------------------------- ------------------------------------------------------------------
+* `from_datf`: is the dataframe that contains the cols to find among other cols
+* `in_datf`: is the dataframe that only contans the cols to find in from_datf
 
-### Examples
+## Examples
 
-``` R
+```r
 iris[, 5] <- as.character(iris[, 5])
 iris <- cbind(iris, iris[, 4])
 from_datf <- iris
@@ -697,38 +563,27 @@ bind_cols(from_datf = from_datf,
 [[5]]
 [1] 4 6
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ----------- -----------------
-  bind_rows     R Documentation
-  ----------- -----------------
+# bind_rows
 
-## bind_rows
+## Description
 
-### Description
+Allow to find the rows of a dataframe in an other dataframe, see examples
 
-Allow to find the rows of a dataframe in an other dataframe, see
-examples
+## Usage
 
-### Usage
-
-``` R
+```r
 bind_rows(from_datf, in_datf)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- ------------------------------------------------------------------
-  `from_datf`{#from_datf}   is the dataframe that contains the rows to find among other rows
-  `in_datf`{#in_datf}       is the dataframe that only contans the rows to find in from_datf
-  ------------------------- ------------------------------------------------------------------
+* `from_datf`: is the dataframe that contains the rows to find among other rows
+* `in_datf`: is the dataframe that only contans the rows to find in from_datf
 
-### Examples
+## Examples
 
-``` R
+```r
 iris[, 5] <- as.character(iris[, 5])
 from_datf <- iris
 in_datf <- iris[c(4, 2, 23, 21, 11), ]
@@ -751,37 +606,26 @@ bind_rows(from_datf = from_datf,
 [[5]]
 [1] 11
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------ -----------------
-  can_be_num     R Documentation
-  ------------ -----------------
+# can_be_num
 
-## can_be_num
+## Description
 
-### Description
+Return TRUE if a variable can be converted to a number and FALSE if not (supports float)
 
-Return TRUE if a variable can be converted to a number and FALSE if not
-(supports float)
+## Usage
 
-### Usage
-
-``` R
+```r
 can_be_num(x)
 ```
 
-### Arguments
+## Arguments
 
-  --------- --------------------
-  `x`{#x}   is the input value
-  --------- --------------------
+* `x`: is the input value
 
-### Examples
+## Examples
 
-``` R
+```r
 print(can_be_num("34.677"))
 
 #[1] TRUE
@@ -798,27 +642,16 @@ print(can_be_num(34))
 
 #[1] TRUE
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ----------------- -----------------
-  closer_ptrn_adv     R Documentation
-  ----------------- -----------------
+# closer_ptrn_adv
 
-## closer_ptrn_adv
+## Description
 
-### Description
+Allow to find how patterns are far or near between each other relatively to a vector containing characters at each index ("base_v"). The function gets the sum of the indexes of each pattern letter relatively to the characters in base_v. So each pattern can be compared.
 
-Allow to find how patterns are far or near between each other relatively
-to a vector containing characters at each index (\"base_v\"). The
-function gets the sum of the indexes of each pattern letter relatively
-to the characters in base_v. So each pattern can be compared.
+## Usage
 
-### Usage
-
-``` R
+```r
 closer_ptrn_adv(
   inpt_v,
   res = "raw_stat",
@@ -828,19 +661,17 @@ closer_ptrn_adv(
 )
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}             is the input vector containing all the patterns to be analyzed
-  `res`{#res}                   is a parameter controling the result. If set to \"raw_stat\", each word in inpt_v will come with its score (indexes of its letters relatively to base_v). If set to something else, so \"c_word\" parameter must be filled.
-  `default_val`{#default_val}   is the value that will be added to all patterns that do not equal the length of the longest pattern in inpt_v. Those get this value added to make all patterns equal in length so they can be compared, defaults to \"?\"
-  `base_v`{#base_v}             is the vector from which all pattern get its result (letters indexes for each pattern relatively to base_v), defaults to c(\"default_val\", letters). \"default_val\" is another parameter and letters is all the western alphabetic letters in a vector
-  `c_word`{#c_word}             is a pattern from which the nearest to the farest pattern in inpt_v will be compared
-  ----------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `inpt_v`: is the input vector containing all the patterns to be analyzed
+* `res`: is a parameter controling the result. If set to "raw_stat", each word in inpt_v will come with its score (indexes of its letters relatively to base_v). If set to something else, so "c_word" parameter must be filled.
+* `default_val`: is the value that will be added to all patterns that do not equal the length of the longest pattern in inpt_v. Those get this value added to make all patterns equal in length so they can be compared, defaults to "?"
+* `base_v`: is the vector from which all pattern get its result (letters indexes for each pattern relatively to base_v), defaults to c("default_val", letters). "default_val" is another parameter and letters is all the western alphabetic letters in a vector
+* `c_word`: is a pattern from which the nearest to the farest pattern in inpt_v will be compared
 
-### Examples
+## Examples
 
-``` R
+```r
 print(closer_ptrn_adv(inpt_v=c("aurevoir", "bonnour", "nonnour", "fin", "mois", "bonjour"), 
      res="word", c_word="bonjour"))
 
@@ -856,27 +687,18 @@ print(closer_ptrn_adv(inpt_v=c("aurevoir", "bonnour", "nonnour", "fin", "mois"))
 #[1] 117 107 119  37  64
 #
 #[[2]]
-#[1] "aurevoir" "bonnour"  "nonnour"  "fin"      "mois"    
+#[1] "aurevoir" "bonnour"  "nonnour"  "fin"      "mois"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------- -----------------
-  closer_ptrn     R Documentation
-  ------------- -----------------
+# closer_ptrn
 
-## closer_ptrn
+## Description
 
-### Description
+Take a vector of patterns as input and output each chosen word with their closest patterns from chosen patterns.
 
-Take a vector of patterns as input and output each chosen word with
-their closest patterns from chosen patterns.
+## Usage
 
-### Usage
-
-``` R
+```r
 closer_ptrn(
   inpt_v,
   base_v = c("?", letters),
@@ -887,20 +709,18 @@ closer_ptrn(
 )
 ```
 
-### Arguments
+## Arguments
 
-  --------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}           is the input vector containing all the patterns
-  `base_v`{#base_v}           must contain all the characters that the patterns are succeptible to contain, defaults to c(\"?\", letters). \"?\" is necessary because it is internaly the default value added to each element that does not have a suffiient length compared to the longest pattern in inpt_v. If set to NA, the function will find by itself the elements to be filled with but it may takes an extra time
-  `excl_v`{#excl_v}           is the vector containing all the patterns from inpt_v to exclude for comparing them to others patterns. If this parameter is filled, so \"rtn_v\" must be empty.
-  `rtn_v`{#rtn_v}             is the vector containing all the patterns from inpt_v to keep for comparing them to others patterns. If this parameter is filled, so \"rtn_v\" must be empty.
-  `sub_excl_v`{#sub_excl_v}   is the vector containing all the patterns from inpt_v to exclude for using them to compare to another pattern. If this parameter is filled, so \"sub_rtn_v\" must be empty.
-  `sub_rtn_v`{#sub_rtn_v}     is the vector containing all the patterns from inpt_v to retain for using them to compare to another pattern. If this parameter is filled, so \"sub_excl_v\" must be empty.
-  --------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `inpt_v`: is the input vector containing all the patterns
+* `base_v`: must contain all the characters that the patterns are succeptible to contain, defaults to c("?", letters). "?" is necessary because it is internaly the default value added to each element that does not have a suffiient length compared to the longest pattern in inpt_v. If set to NA, the function will find by itself the elements to be filled with but it may takes an extra time
+* `excl_v`: is the vector containing all the patterns from inpt_v to exclude for comparing them to others patterns. If this parameter is filled, so "rtn_v" must be empty.
+* `rtn_v`: is the vector containing all the patterns from inpt_v to keep for comparing them to others patterns. If this parameter is filled, so "rtn_v" must be empty.
+* `sub_excl_v`: is the vector containing all the patterns from inpt_v to exclude for using them to compare to another pattern. If this parameter is filled, so "sub_rtn_v" must be empty.
+* `sub_rtn_v`: is the vector containing all the patterns from inpt_v to retain for using them to compare to another pattern. If this parameter is filled, so "sub_excl_v" must be empty.
 
-### Examples
+## Examples
 
-``` R
+```r
 print(closer_ptrn(inpt_v=c("bonjour", "lpoerc", "nonnour", "bonnour", "nonjour", "aurevoir")))
 
 #[[1]]
@@ -998,46 +818,29 @@ excl_v=c("nonnour", "nonjour"),
 #[[12]]
 #[1] 0 7 8 8
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  --------------- -----------------
-  clusterizer_v     R Documentation
-  --------------- -----------------
+# clusterizer_v
 
-## clusterizer_v
+## Description
 
-### Description
+Allow to output clusters of elements. Takes as input a vector "inpt_v" containing a sequence of number. Can also take another vector "w_v" that has the same size of inpt_v because its elements are related to it. The way the clusters are made is related to an accuracy value which is "c_val". It means that if the difference between the values associated to 2 elements is superior to c_val, these two elements are in distinct clusters. The second element of the outputed list is the begin and end value of each cluster.
 
-Allow to output clusters of elements. Takes as input a vector \"inpt_v\"
-containing a sequence of number. Can also take another vector \"w_v\"
-that has the same size of inpt_v because its elements are related to it.
-The way the clusters are made is related to an accuracy value which is
-\"c_val\". It means that if the difference between the values associated
-to 2 elements is superior to c_val, these two elements are in distinct
-clusters. The second element of the outputed list is the begin and end
-value of each cluster.
+## Usage
 
-### Usage
-
-``` R
+```r
 clusterizer_v(inpt_v, w_v = NA, c_val)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- -------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}   is the vector containing the sequence of number
-  `w_v`{#w_v}         is the vector containing the elements related to inpt_v, defaults to NA
-  `c_val`{#c_val}     is the accuracy of the clusterization
-  ------------------- -------------------------------------------------------------------------
+* `inpt_v`: is the vector containing the sequence of number
+* `w_v`: is the vector containing the elements related to inpt_v, defaults to NA
+* `c_val`: is the accuracy of the clusterization
 
-### Examples
+## Examples
 
-``` R
- print(clusterizer_v(inpt_v=sample.int(20, 26, replace=TRUE), w_v=NA, c_val=0.9))
+```r
+print(clusterizer_v(inpt_v=sample.int(20, 26, replace=TRUE), w_v=NA, c_val=0.9))
 
 # [[1]]
 #[[1]][[1]]
@@ -1149,38 +952,56 @@ print(clusterizer_v(inpt_v=sample.int(40, 26, replace=TRUE), w_v=letters, c_val=
 #[31] "27" "27" "-"  "29" "29" "-"  "30" "30" "-"  "31" "31" "-"  "34" "34" "-" 
 #[46] "35" "35" "-"  "37" "37"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------- -----------------
-  colins_datf     R Documentation
-  ------------- -----------------
+# col_to_row
 
-## colins_datf
+## Description
 
-### Description
+Allow to reverse a dataframe (cols become rows and rows become cols)
+
+## Usage
+
+```r
+col_to_row(inpt_datf)
+```
+
+## Arguments
+
+* `inpt_datf`: is the inout dataframe
+
+## Examples
+
+```r
+datf_test <- data.frame(c(1:11), c(11:1))
+
+print(col_to_row(inpt_datf = datf_test))
+
+  X1 X2 X3 X4 X5 X6 X7 X8 X9 X10 X11
+1  1  2  3  4  5  6  7  8  9  10  11
+2 11 10  9  8  7  6  5  4  3   2   1
+```
+
+# colins_datf
+
+## Description
 
 Allow to insert vectors into a dataframe.
 
-### Usage
+## Usage
 
-``` R
+```r
 colins_datf(inpt_datf, target_col = list(), target_pos = list())
 ```
 
-### Arguments
+## Arguments
 
-  --------------------------- -------------------------------------------------------------------------------------------------------------------------------------------
-  `inpt_datf`{#inpt_datf}     is the dataframe where vectors will be inserted
-  `target_col`{#target_col}   is a list containing all the vectors to be inserted
-  `target_pos`{#target_pos}   is a list containing the vectors made of the columns names or numbers where the associated vectors from target_col will be inserted after
-  --------------------------- -------------------------------------------------------------------------------------------------------------------------------------------
+* `inpt_datf`: is the dataframe where vectors will be inserted
+* `target_col`: is a list containing all the vectors to be inserted
+* `target_pos`: is a list containing the vectors made of the columns names or numbers where the associated vectors from target_col will be inserted after
 
-### Examples
+## Examples
 
-``` R
+```r
 datf1 <- data.frame("frst_col"=c(1:5), "scd_col"=c(5:1))
 
 print(colins_datf(inpt_datf=datf1, target_col=list(c("oui", "oui", "oui", "non", "non"), 
@@ -1205,81 +1026,29 @@ print(colins_datf(inpt_datf=datf1, target_col=list(c("oui", "oui", "oui", "non",
 #4        4     non       2       z     non
 #5        5     non       1       u     non
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------ -----------------
-  col_to_row     R Documentation
-  ------------ -----------------
+# converter_date
 
-## col_to_row
+## Description
 
-### Description
+Allow to convert any date like second/minute/hour/day/month/year to either second, minute...year. The input date should not necessarily have all its time units (second, minute...) but all the time units according to a format. Example: "snhdmy" is for second, hour, minute, day, month, year. And "mdy" is for month, day, year.
 
-Allow to reverse a dataframe (cols become rows and rows become cols)
+## Usage
 
-### Usage
-
-``` R
-col_to_row(inpt_datf)
-```
-
-### Arguments
-
-  ------------------------- ------------------------
-  `inpt_datf`{#inpt_datf}   is the inout dataframe
-  ------------------------- ------------------------
-
-### Examples
-
-``` R
-datf_test <- data.frame(c(1:11), c(11:1))
-
-print(col_to_row(inpt_datf = datf_test))
-
-  X1 X2 X3 X4 X5 X6 X7 X8 X9 X10 X11
-1  1  2  3  4  5  6  7  8  9  10  11
-2 11 10  9  8  7  6  5  4  3   2   1
-```
-:::
-:::
-
-::: container
-::: {role="main"}
-  ---------------- -----------------
-  converter_date     R Documentation
-  ---------------- -----------------
-
-## converter_date
-
-### Description
-
-Allow to convert any date like second/minute/hour/day/month/year to
-either second, minute\...year. The input date should not necessarily
-have all its time units (second, minute\...) but all the time units
-according to a format. Example: \"snhdmy\" is for second, hour, minute,
-day, month, year. And \"mdy\" is for month, day, year.
-
-### Usage
-
-``` R
+```r
 converter_date(inpt_date, convert_to, frmt = "snhdmy", sep_ = "-")
 ```
 
-### Arguments
+## Arguments
 
-  --------------------------- ---------------------------------------------------------------------------------------------------------
-  `inpt_date`{#inpt_date}     is the input date
-  `convert_to`{#convert_to}   is the time unit the input date will be converted (\"s\", \"n\", \"h\", \"d\", \"m\", \"y\")
-  `frmt`{#frmt}               is the format of the input date
-  `sep_`{#sep_}               is the separator of the input date. For example this input date \"12-07-2012\" has \"-\" as a separator
-  --------------------------- ---------------------------------------------------------------------------------------------------------
+* `inpt_date`: is the input date
+* `convert_to`: is the time unit the input date will be converted ("s", "n", "h", "d", "m", "y")
+* `frmt`: is the format of the input date
+* `sep_`: is the separator of the input date. For example this input date "12-07-2012" has "-" as a separator
 
-### Examples
+## Examples
 
-``` R
+```r
 print(converter_date(inpt_date="14-04-11-2024", sep_="-", frmt="hdmy", convert_to="m"))
 
 #[1] 24299.15
@@ -1300,40 +1069,30 @@ print(converter_date(inpt_date="2024", sep_="-", frmt="y", convert_to="s"))
 
 #[1] 63873964800
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------------ -----------------
-  converter_format     R Documentation
-  ------------------ -----------------
+# converter_format
 
-## converter_format
-
-### Description
+## Description
 
 Allow to convert a format to another
 
-### Usage
+## Usage
 
-``` R
+```r
 converter_format(inpt_val, sep_ = "-", inpt_frmt, frmt, default_val = "00")
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------------- ----------------------------------------------------------------------------------
-  `inpt_val`{#inpt_val}         is the input value that is linked to the format
-  `sep_`{#sep_}                 is the separator of the value in inpt_val
-  `inpt_frmt`{#inpt_frmt}       is the format of the input value
-  `frmt`{#frmt}                 is the format you want to convert to
-  `default_val`{#default_val}   is the default value given to the units that are not present in the input format
-  ----------------------------- ----------------------------------------------------------------------------------
+* `inpt_val`: is the input value that is linked to the format
+* `sep_`: is the separator of the value in inpt_val
+* `inpt_frmt`: is the format of the input value
+* `frmt`: is the format you want to convert to
+* `default_val`: is the default value given to the units that are not present in the input format
 
-### Examples
+## Examples
 
-``` R
+```r
 print(converter_format(inpt_val="23-12-05-1567", sep_="-", 
                        inpt_frmt="shmy", frmt="snhdmy", default_val="00"))
 
@@ -1344,26 +1103,16 @@ print(converter_format(inpt_val="23-12-05-1567", sep_="-",
 
 #[1] "00-00-12-00-05-1567"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------------- -----------------
-  cost_and_taxes     R Documentation
-  ---------------- -----------------
+# cost_and_taxes
 
-## cost_and_taxes
+## Description
 
-### Description
+Allow to calculate basic variables related to cost and taxes from a bunch of products (elements). So put every variable you know in the following order:
 
-Allow to calculate basic variables related to cost and taxes from a
-bunch of products (elements). So put every variable you know in the
-following order:
+## Usage
 
-### Usage
-
-``` R
+```r
 cost_and_taxes(
   qte = NA,
   pu = NA,
@@ -1380,63 +1129,49 @@ cost_and_taxes(
 )
 ```
 
-### Arguments
+## Arguments
 
-  --------------------------- -------------------------------------------------------------------
-  `qte`{#qte}                 is the quantity of elements
-  `pu`{#pu}                   is the price of a single elements without taxes
-  `prix_ht`{#prix_ht}         is the duty-free price of the whole set of elements
-  `tva`{#tva}                 is the percentage of all taxes
-  `prix_ttc`{#prix_ttc}       is the price of all the elements with taxes
-  `prix_tva`{#prix_tva}       is the cost of all the taxes
-  `pu_ttc`{#pu_ttc}           is the price of a single element taxes included
-  `adjust`{#adjust}           is the discount percentage
-  `prix_d_ht`{#prix_d_ht}     is the free-duty price of an element after discount
-  `prix_d_ttc`{#prix_d_ttc}   is the price with taxes of an element after discount
-  `pu_d`{#pu_d}               is the price of a single element after discount and without taxes
-  `pu_d_ttc`{#pu_d_ttc}       is the free-duty price of a single element after discount
-  --------------------------- -------------------------------------------------------------------
+* `qte`: is the quantity of elements
+* `pu`: is the price of a single elements without taxes
+* `prix_ht`: is the duty-free price of the whole set of elements
+* `tva`: is the percentage of all taxes
+* `prix_ttc`: is the price of all the elements with taxes
+* `prix_tva`: is the cost of all the taxes
+* `pu_ttc`: is the price of a single element taxes included
+* `adjust`: is the discount percentage
+* `prix_d_ht`: is the free-duty price of an element after discount
+* `prix_d_ttc`: is the price with taxes of an element after discount
+* `pu_d`: is the price of a single element after discount and without taxes
+* `pu_d_ttc`: is the free-duty price of a single element after discount
 
-### Examples
+## Examples
 
-``` R
+```r
 print(cost_and_taxes(pu=45, prix_ttc=2111, qte=23))
 
 # [1]   23.000000   45.000000   45.000000    1.039614 2111.000000 1076.000000
 #[7]   45.000000          NA          NA          NA          NA          NA
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------------- -----------------
-  cumulated_rows_na     R Documentation
-  ------------------- -----------------
+# cumulated_rows_na
 
-## cumulated_rows_na
+## Description
 
-### Description
+Output a vector of size that equals to the rows number of the input dataframe, with TRUE value at the indices corresponding to the row where at least a cell of any column is equal to NA.
 
-Output a vector of size that equals to the rows number of the input
-dataframe, with TRUE value at the indices corresponding to the row where
-at least a cell of any column is equal to NA.
+## Usage
 
-### Usage
-
-``` R
+```r
 cumulated_rows_na(inpt_datf)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- -------------------------
-  `inpt_datf`{#inpt_datf}   is the input data.frame
-  ------------------------- -------------------------
+* `inpt_datf`: is the input data.frame
 
-### Examples
+## Examples
 
-``` R
+```r
 datf_teste <- data.frame(c(1, 2, 3, 4, 5, NA, 7), c(10, 9, 8, NA, 7, 6, NA))
 
 print(datf_teste)
@@ -1454,40 +1189,27 @@ print(cumulated_rows_na(inpt_datf = datf_teste))
 
 [1] FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------------- -----------------
-  cumulated_rows     R Documentation
-  ---------------- -----------------
+# cumulated_rows
 
-## cumulated_rows
+## Description
 
-### Description
+Output a vector of size that equals to the rows number of the input dataframe, with TRUE value at the indices corresponding to the row where at least a cell of any column is equal to one of the values inputed in `values_v`
 
-Output a vector of size that equals to the rows number of the input
-dataframe, with TRUE value at the indices corresponding to the row where
-at least a cell of any column is equal to one of the values inputed in
-`values_v`
+## Usage
 
-### Usage
-
-``` R
+```r
 cumulated_rows(inpt_datf, values_v = c())
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `inpt_datf`{#inpt_datf}   is the input data.frame
-  `values_v`{#values_v}     is a vector containing all the values that a cell has to equal to return a TRUE value in the output vector at the index corresponding to the row of the cell
-  ------------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `inpt_datf`: is the input data.frame
+* `values_v`: is a vector containing all the values that a cell has to equal to return a TRUE value in the output vector at the index corresponding to the row of the cell
 
-### Examples
+## Examples
 
-``` R
+```r
 datf_teste <- data.frame(c(1:10), c(10:1))
 
 print(datf_teste)
@@ -1508,78 +1230,27 @@ print(cumulated_rows(inpt_datf = datf_teste, values_v = c(2, 3)))
 
 [1]   FALSE TRUE TRUE   FALSE   FALSE   FALSE   FALSE TRUE TRUE   FALSE
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  -------- -----------------
-  cutr_v     R Documentation
-  -------- -----------------
+# cut_v
 
-## cutr_v
-
-### Description
-
-Allow to reduce all the elements in a vector to a defined size of nchar
-
-### Usage
-
-``` R
-cutr_v(inpt_v, untl = "min")
-```
-
-### Arguments
-
-  ------------------- -----------------------------------------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}   is the input vector
-  `untl`{#untl}       is the maximum size of nchar authorized by an element, defaults to \"min\", it means the shortest element in the list
-  ------------------- -----------------------------------------------------------------------------------------------------------------------
-
-### Examples
-
-``` R
-test_v <- c("oui", "nonon", "ez", "aa", "a", "dsfsdsds")
-
-print(cutr_v(inpt_v=test_v, untl="min"))
-
-#[1] "o" "n" "e" "a" "a" "d"
-
-print(cutr_v(inpt_v=test_v, untl=3))
-
-#[1] "oui" "non" "ez"  "aa"  "a"   "dsf"
-```
-:::
-:::
-
-::: container
-::: {role="main"}
-  ------- -----------------
-  cut_v     R Documentation
-  ------- -----------------
-
-## cut_v
-
-### Description
+## Description
 
 Allow to convert a vector to a dataframe according to a separator.
 
-### Usage
+## Usage
 
-``` R
+```r
 cut_v(inpt_v, sep_ = "")
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- --------------------------------------------------------------
-  `inpt_v`{#inpt_v}   is the input vector
-  `sep_`{#sep_}       is the separator of the elements in inpt_v, defaults to \"\"
-  ------------------- --------------------------------------------------------------
+* `inpt_v`: is the input vector
+* `sep_`: is the separator of the elements in inpt_v, defaults to ""
 
-### Examples
+## Examples
 
-``` R
+```r
 print(cut_v(inpt_v=c("oui", "non", "oui", "non")))
 
 #    X.o. X.u. X.i.
@@ -1596,25 +1267,47 @@ print(cut_v(inpt_v=c("ou-i", "n-on", "ou-i", "n-on"), sep_="-"))
 #ou-i "ou"  "i" 
 #n-on "n"   "on"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------- -----------------
-  data_gen     R Documentation
-  ---------- -----------------
+# cutr_v
 
-## data_gen
+## Description
 
-### Description
+Allow to reduce all the elements in a vector to a defined size of nchar
 
-Allo to generate in a csv all kind of data you can imagine according to
-what you provide
+## Usage
 
-### Usage
+```r
+cutr_v(inpt_v, untl = "min")
+```
 
-``` R
+## Arguments
+
+* `inpt_v`: is the input vector
+* `untl`: is the maximum size of nchar authorized by an element, defaults to "min", it means the shortest element in the list
+
+## Examples
+
+```r
+test_v <- c("oui", "nonon", "ez", "aa", "a", "dsfsdsds")
+
+print(cutr_v(inpt_v=test_v, untl="min"))
+
+#[1] "o" "n" "e" "a" "a" "d"
+
+print(cutr_v(inpt_v=test_v, untl=3))
+
+#[1] "oui" "non" "ez"  "aa"  "a"   "dsf"
+```
+
+# data_gen
+
+## Description
+
+Allo to generate in a csv all kind of data you can imagine according to what you provide
+
+## Usage
+
+```r
 data_gen(
   type_ = c("number", "mixed", "string"),
   strt_l = c(0, 0, 10),
@@ -1629,27 +1322,25 @@ data_gen(
 )
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `type_`{#type_}               is a vector. Its arguments designates a column, a column can be made of numbers (\"number\"), string (\"string\") or both (\"mixed\")
-  `strt_l`{#strt_l}             is a vector containing for each column the row from which the data will begin to be generated
-  `nb_r`{#nb_r}                 is a vector containing for each column, the number of row full from generated data
-  `output`{#output}             is the name of the output csv file, defaults to NA so no csv will be outputed by default
-  `properties`{#properties}     is linked to type_distri because it is the parameters (\"min_val-max_val\") for \"random type\", (\"u-x\") for the poisson distribution, (\"u-d\") for gaussian distribution
-  `type_distri`{#type_distri}   is a vector which, for each column, associate a type of distribution (\"random\", \"poisson\", \"gaussian\"), it meas that non only the number but also the length of the string will be randomly generated according to these distribution laws
-  `str_source`{#str_source}     is the source (vector) from which the character creating random string are (default set to the occidental alphabet)
-  `round_l`{#round_l}           is a vector which, for each column containing number, associate a round value, if the type of the value is numeric
-  `sep_`{#sep_}                 is the separator used to write data in the csv
-  ----------------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `type_`: is a vector. Its arguments designates a column, a column can be made of numbers ("number"), string ("string") or both ("mixed")
+* `strt_l`: is a vector containing for each column the row from which the data will begin to be generated
+* `nb_r`: is a vector containing for each column, the number of row full from generated data
+* `output`: is the name of the output csv file, defaults to NA so no csv will be outputed by default
+* `properties`: is linked to type_distri because it is the parameters ("min_val-max_val") for "random type", ("u-x") for the poisson distribution, ("u-d") for gaussian distribution
+* `type_distri`: is a vector which, for each column, associate a type of distribution ("random", "poisson", "gaussian"), it meas that non only the number but also the length of the string will be randomly generated according to these distribution laws
+* `str_source`: is the source (vector) from which the character creating random string are (default set to the occidental alphabet)
+* `round_l`: is a vector which, for each column containing number, associate a round value, if the type of the value is numeric
+* `sep_`: is the separator used to write data in the csv
 
-### Value
+## Value
 
 new generated data in addition to saving it in the output
 
-### Examples
+## Examples
 
-``` R
+```r
 print(data_gen())
 
 #  X1   X2    X3
@@ -1713,25 +1404,16 @@ print(data_gen(strt_l=c(0, 0, 0), nb_r=c(5, 5, 5)))
 #4  1     3  abc
 #5  3     a abcd
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------- -----------------
-  data_meshup     R Documentation
-  ------------- -----------------
+# data_meshup
 
-## data_meshup
+## Description
 
-### Description
+Allow to automatically arrange 1 dimensional data according to vector and parameters
 
-Allow to automatically arrange 1 dimensional data according to vector
-and parameters
+## Usage
 
-### Usage
-
-``` R
+```r
 data_meshup(
   data,
   cols = NA,
@@ -1743,21 +1425,24 @@ data_meshup(
 )
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `data`{#data}                   is the data provided (vector) each column is separated by a unic separator and each dataset from the same column is separated by another unic separator (ex: c(\"*\", c(\"d\", \"-\", \"e\", \"-\", \"f\"), \"*\", c(\"a\", \"a1\", \"-\", \"b\", \"-\", \"c\", \"c1\"), \"\_\")
-  `cols`{#cols}                   are the colnames of the data generated in a csv
-  `file_`{#file_}                 is the file to which the data will be outputed, defaults to NA which means that the functio will return the dataframe generated and won\'t write it to a csv file
-  `sep_`{#sep_}                   is the separator of the csv outputed
-  `organisation`{#organisation}   is the way variables include themselves, for instance ,resuming precedent example, if organisation=c(1, 0) so the data output will be: d, a d, a1 e, c f, c f, c1
-  `unic_sep1`{#unic_sep1}         is the unic separator between variables (default is \"\_\")
-  `unic_sep2`{#unic_sep2}         is the unic separator between datasets (default is \"-\")
-  ------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `data`: is the data provided (vector) each column is separated by a unic separator and each dataset from the same column is separated by another unic separator (ex: c("*", c("d", "-", "e", "-", "f"), "*", c("a", "a1", "-", "b", "-", "c", "c1"), "_")
+* `cols`: are the colnames of the data generated in a csv
+* `file_`: is the file to which the data will be outputed, defaults to NA which means that the functio will return the dataframe generated and won't write it to a csv file
+* `sep_`: is the separator of the csv outputed
+* `organisation`: is the way variables include themselves, for instance ,resuming precedent example, if organisation=c(1, 0) so the data output will be:
+d, a
+d, a1
+e, c
+f, c
+f, c1
+* `unic_sep1`: is the unic separator between variables (default is "_")
+* `unic_sep2`: is the unic separator between datasets (default is "-")
 
-### Examples
+## Examples
 
-``` R
+```r
 print(data_meshup(data=c("_", c("-", "d", "-", "e", "-", "f"), "_", 
      c("-", "a", "a1", "-", "B", "r", "uy", "-", "c", "c1"), "_"), organisation=c(1, 0)))
 
@@ -1770,24 +1455,16 @@ print(data_meshup(data=c("_", c("-", "d", "-", "e", "-", "f"), "_",
 #6  f  c
 #7  f c1
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ----------- -----------------
-  date_addr     R Documentation
-  ----------- -----------------
+# date_addr
 
-## date_addr
-
-### Description
+## Description
 
 Allow to add or substract two dates that have the same time unit or not
 
-### Usage
+## Usage
 
-``` R
+```r
 date_addr(
   date1,
   date2,
@@ -1799,21 +1476,19 @@ date_addr(
 )
 ```
 
-### Arguments
+## Arguments
 
-  --------------------------- ------------------------------------------------------------------------------
-  `date1`{#date1}             is the date from which the second date will be added or substracted
-  `date2`{#date2}             is the date that will be added or will substract date1
-  `add`{#add}                 equals to FALSE if you want date1 - date2 and TRUE if you want date1 + date2
-  `frmt1`{#frmt1}             is the format of date1 (snhdmy) (second, minute, hour, day, monthn year)
-  `frmt2`{#frmt2}             is the format of date2 (snhdmy)
-  `sep_`{#sep_}               is the separator of date1 and date2
-  `convert_to`{#convert_to}   is the format of the outputed date
-  --------------------------- ------------------------------------------------------------------------------
+* `date1`: is the date from which the second date will be added or substracted
+* `date2`: is the date that will be added or will substract date1
+* `add`: equals to FALSE if you want date1 - date2 and TRUE if you want date1 + date2
+* `frmt1`: is the format of date1 (snhdmy) (second, minute, hour, day, monthn year)
+* `frmt2`: is the format of date2 (snhdmy)
+* `sep_`: is the separator of date1 and date2
+* `convert_to`: is the format of the outputed date
 
-### Examples
+## Examples
 
-``` R
+```r
 print(date_addr(date1="25-02", date2="58-12-08", frmt1="dm", frmt2="shd", sep_="-", 
                 convert_to="dmy"))
 
@@ -1844,40 +1519,29 @@ print(date_addr(date1="25-02-2024", date2="1-01", frmt1="dmy", frmt2="dm", sep_=
 
 #[1] "63875779200"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------------------ -----------------
-  date_converter_reverse     R Documentation
-  ------------------------ -----------------
+# date_converter_reverse
 
-## date_converter_reverse
+## Description
 
-### Description
+Allow to convert single date value like 2025.36 year to a date like second/minutehour/day/month/year (snhdmy)
 
-Allow to convert single date value like 2025.36 year to a date like
-second/minutehour/day/month/year (snhdmy)
+## Usage
 
-### Usage
-
-``` R
+```r
 date_converter_reverse(inpt_date, convert_to = "dmy", frmt = "y", sep_ = "-")
 ```
 
-### Arguments
+## Arguments
 
-  --------------------------- -----------------------------------------------------
-  `inpt_date`{#inpt_date}     is the input date
-  `convert_to`{#convert_to}   is the date format the input date will be converted
-  `frmt`{#frmt}               is the time unit of the input date
-  `sep_`{#sep_}               is the separator of the outputed date
-  --------------------------- -----------------------------------------------------
+* `inpt_date`: is the input date
+* `convert_to`: is the date format the input date will be converted
+* `frmt`: is the time unit of the input date
+* `sep_`: is the separator of the outputed date
 
-### Examples
+## Examples
 
-``` R
+```r
 print(date_converter_reverse(inpt_date="2024.929", convert_to="hmy", frmt="y", sep_="-"))
 
 #[1] "110-11-2024"
@@ -1894,37 +1558,53 @@ print(date_converter_reverse(inpt_date="2024.929", convert_to="dhym", frmt="y", 
 
 #[1] "4-14-2024-11"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  --------------- -----------------
-  datf_appendr2     R Documentation
-  --------------- -----------------
+# datf_appendr
 
-## datf_appendr2
+## Description
 
-### Description
+Allow to append all columns of a dataframe in a vector.
 
-Allow to append all columns of a dataframe in a vector, specifying the
-column types (\"integer\" or \"character\"), see examples
+## Usage
 
-### Usage
+```r
+datf_appendr(inpt_datf)
+```
 
-``` R
+## Arguments
+
+* `inpt_datf`: is the input dataframe
+
+## Examples
+
+```r
+datf_teste <- data.frame("col1" = c(1:5), "col2" = c(5:1))
+
+print(datf_appendr(inpt_datf = datf_teste))
+
+[1] 1 2 3 4 5 5 4 3 2 1
+```
+
+# datf_appendr2
+
+## Description
+
+Allow to append all columns of a dataframe in a vector,
+specifying the column types ("integer" or "character"), see examples
+
+## Usage
+
+```r
 datf_appendr2(inpt_datf, chs_type = "integer")
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- ------------------------
-  `inpt_datf`{#inpt_datf}   is the inout dataframe
-  ------------------------- ------------------------
+* `inpt_datf`: is the inout dataframe
 
-### Examples
+## Examples
 
-``` R
+```r
 datf_teste <- data.frame("col1" = c(1:5), "col2" = c(5:1), 
   "col3" = c("oui", "oui", "oui", "non", "non"))
 
@@ -1936,74 +1616,28 @@ print(datf_appendr2(inpt_datf = datf_teste, chs_type = "character"))
 
 [1] "oui" "oui" "oui" "non" "non"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  -------------- -----------------
-  datf_appendr     R Documentation
-  -------------- -----------------
+# datf_insertr
 
-## datf_appendr
-
-### Description
-
-Allow to append all columns of a dataframe in a vector.
-
-### Usage
-
-``` R
-datf_appendr(inpt_datf)
-```
-
-### Arguments
-
-  ------------------------- ------------------------
-  `inpt_datf`{#inpt_datf}   is the input dataframe
-  ------------------------- ------------------------
-
-### Examples
-
-``` R
-datf_teste <- data.frame("col1" = c(1:5), "col2" = c(5:1))
-
-print(datf_appendr(inpt_datf = datf_teste))
-
-[1] 1 2 3 4 5 5 4 3 2 1
-```
-:::
-:::
-
-::: container
-::: {role="main"}
-  -------------- -----------------
-  datf_insertr     R Documentation
-  -------------- -----------------
-
-## datf_insertr
-
-### Description
+## Description
 
 Insert rows after certain indexes, see examples
 
-### Usage
+## Usage
 
-``` R
+```r
 datf_insertr(inpt_datf, ids_vec, val_l)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- --------------------------------------------------------------------------------------------------
-  `inpt_datf`{#inpt_datf}   is the input dataframe
-  `ids_vec`{#ids_vec}       is the ids where the rows has to be inserted after
-  `val_l`{#val_l}           is a list containing all the rows (vector) to be inserted, linked to eevery index within ids_vec
-  ------------------------- --------------------------------------------------------------------------------------------------
+* `inpt_datf`: is the input dataframe
+* `ids_vec`: is the ids where the rows has to be inserted after
+* `val_l`: is a list containing all the rows (vector) to be inserted, linked to eevery index within ids_vec
 
-### Examples
+## Examples
 
-``` R
+```r
 datf <- data.frame(c(1:4), c(4:1))
 print(datf)
 
@@ -2033,37 +1667,54 @@ print(datf_insertr(inpt_datf = datf, ids_vec = c(1, 3), val_l = list(c("non", "n
 5     non    non
 4       4      1
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------------- -----------------
-  datf_row_appendr2     R Documentation
-  ------------------- -----------------
+# datf_row_appendr
 
-## datf_row_appendr2
+## Description
 
-### Description
+Allow to append all rows of a dataframe in a vector.
 
-Allow to append all rows of a dataframe in a vector, specifying the
-column types (\"integer\" or \"character\"), see examples
+## Usage
 
-### Usage
+```r
+datf_row_appendr(inpt_datf)
+```
 
-``` R
+## Arguments
+
+* `inpt_datf`: is the input dataframe
+
+## Examples
+
+```r
+datf_teste <- data.frame("col1" = c(1:5), "col2" = c(5:1))
+
+print(datf_appendr(inpt_datf = datf_teste))
+
+col1 col2 col1 col2 col1 col2 col1 col2 col1 col2 
+   1    5    2    4    3    3    4    2    5    1
+```
+
+# datf_row_appendr2
+
+## Description
+
+Allow to append all rows of a dataframe in a vector,
+specifying the column types ("integer" or "character"), see examples
+
+## Usage
+
+```r
 datf_row_appendr2(inpt_datf, chs_type = "integer")
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- ------------------------
-  `inpt_datf`{#inpt_datf}   is the inout dataframe
-  ------------------------- ------------------------
+* `inpt_datf`: is the inout dataframe
 
-### Examples
+## Examples
 
-``` R
+```r
 datf_teste <- data.frame("col1" = c(1:5), "col2" = c(5:1), 
   "col3" = c("oui", "oui", "oui", "non", "non"))
 
@@ -2076,77 +1727,30 @@ print(datf_row_appendr2(inpt_datf = datf_teste, chs_type = "character"))
  col1  col2  col3  col1  col2  col3  col1  col2  col3  col1  col2  col3  col1 
   "1"   "5" "oui"   "2"   "4" "oui"   "3"   "3" "oui"   "4"   "2" "non"   "5" 
  col2  col3 
-  "1" "non" 
-```
-:::
-:::
-
-::: container
-::: {role="main"}
-  ------------------ -----------------
-  datf_row_appendr     R Documentation
-  ------------------ -----------------
-
-## datf_row_appendr
-
-### Description
-
-Allow to append all rows of a dataframe in a vector.
-
-### Usage
-
-``` R
-datf_row_appendr(inpt_datf)
+  "1" "non"
 ```
 
-### Arguments
+# dcr_untl
 
-  ------------------------- ------------------------
-  `inpt_datf`{#inpt_datf}   is the input dataframe
-  ------------------------- ------------------------
-
-### Examples
-
-``` R
-datf_teste <- data.frame("col1" = c(1:5), "col2" = c(5:1))
-
-print(datf_appendr(inpt_datf = datf_teste))
-
-col1 col2 col1 col2 col1 col2 col1 col2 col1 col2 
-   1    5    2    4    3    3    4    2    5    1 
-```
-:::
-:::
-
-::: container
-::: {role="main"}
-  ---------- -----------------
-  dcr_untl     R Documentation
-  ---------- -----------------
-
-## dcr_untl
-
-### Description
+## Description
 
 Allow to get the final value of a incremental or decremental loop.
 
-### Usage
+## Usage
 
-``` R
+```r
 dcr_untl(strt_val, cr_val, stop_val = 0)
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------- -------------------------------------------
-  `strt_val`{#strt_val}   is the start value
-  `cr_val`{#cr_val}       is the incremental (or decremental value)
-  `stop_val`{#stop_val}   is the value where the loop has to stop
-  ----------------------- -------------------------------------------
+* `strt_val`: is the start value
+* `cr_val`: is the incremental (or decremental value)
+* `stop_val`: is the value where the loop has to stop
 
-### Examples
+## Examples
 
-``` R
+```r
 print(dcr_untl(strt_val=50, cr_val=-5, stop_val=5))
 
 #[1] 9
@@ -2155,38 +1759,28 @@ print(dcr_untl(strt_val=50, cr_val=5, stop_val=450))
 
 #[1] 80
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  --------- -----------------
-  dcr_val     R Documentation
-  --------- -----------------
+# dcr_val
 
-## dcr_val
-
-### Description
+## Description
 
 Allow to get the end value after an incremental (or decremental loop)
 
-### Usage
+## Usage
 
-``` R
+```r
 dcr_val(strt_val, cr_val, stop_val = 0)
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------- -----------------------------------------
-  `strt_val`{#strt_val}   is the start value
-  `cr_val`{#cr_val}       is the incremental or decremental value
-  `stop_val`{#stop_val}   is the value the loop has to stop
-  ----------------------- -----------------------------------------
+* `strt_val`: is the start value
+* `cr_val`: is the incremental or decremental value
+* `stop_val`: is the value the loop has to stop
 
-### Examples
+## Examples
 
-``` R
+```r
 print(dcr_val(strt_val=50, cr_val=-5, stop_val=5))
 
 #[1] 5
@@ -2203,73 +1797,51 @@ print(dcr_val(strt_val=53, cr_val=5, stop_val=450))
 
 #[1] 448
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------------- -----------------
-  depth_pairs_findr     R Documentation
-  ------------------- -----------------
+# depth_pairs_findr
 
-## depth_pairs_findr
+## Description
 
-### Description
+Takes the pair vector as an input and associate to each pair a level of depth, see examples
 
-Takes the pair vector as an input and associate to each pair a level of
-depth, see examples
+## Usage
 
-### Usage
-
-``` R
+```r
 depth_pairs_findr(inpt)
 ```
 
-### Arguments
+## Arguments
 
-  --------------- --------------------
-  `inpt`{#inpt}   is the pair vector
-  --------------- --------------------
+* `inpt`: is the pair vector
 
-### Examples
+## Examples
 
-``` R
+```r
 print(depth_pairs_findr(c(1, 1, 2, 3, 3, 4, 4, 2, 5, 6, 7, 7, 6, 5)))
 
  [1] 1 1 1 2 2 2 2 1 1 2 3 3 2 1
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ----------- -----------------
-  diff_datf     R Documentation
-  ----------- -----------------
+# diff_datf
 
-## diff_datf
+## Description
 
-### Description
+Returns a vector with the coordinates of the cell that are not equal between 2 dataframes (row, column).
 
-Returns a vector with the coordinates of the cell that are not equal
-between 2 dataframes (row, column).
+## Usage
 
-### Usage
-
-``` R
+```r
 diff_datf(datf1, datf2)
 ```
 
-### Arguments
+## Arguments
 
-  ----------------- --------------------------
-  `datf1`{#datf1}   is an an input dataframe
-  `datf2`{#datf2}   is an an input dataframe
-  ----------------- --------------------------
+* `datf1`: is an an input dataframe
+* `datf2`: is an an input dataframe
 
-### Examples
+## Examples
 
-``` R
+```r
 datf1 <- data.frame(c(1:6), c("oui", "oui", "oui", "oui", "oui", "oui"), c(6:1))
 
 datf2 <- data.frame(c(1:7), c("oui", "oui", "oui", "oui", "non", "oui", "zz"))
@@ -2278,39 +1850,27 @@ print(diff_datf(datf1=datf1, datf2=datf2))
 
 #[1] 5 1 5 2
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------------------- -----------------
-  dynamic_idx_convertr     R Documentation
-  ---------------------- -----------------
+# dynamic_idx_convertr
 
-## dynamic_idx_convertr
+## Description
 
-### Description
+Allow to convert the indices of vector ('from_v_ids') which are related to the each characters of a vector (from_v_val), to fit the newly established characters of the vector from_v_val, see examples.
 
-Allow to convert the indices of vector (\'from_v_ids\') which are
-related to the each characters of a vector (from_v_val), to fit the
-newly established characters of the vector from_v_val, see examples.
+## Usage
 
-### Usage
-
-``` R
+```r
 dynamic_idx_convertr(from_v_ids, from_v_val)
 ```
 
-### Arguments
+## Arguments
 
-  --------------------------- --------------------------------------------------------------------------------------------------------
-  `from_v_ids`{#from_v_ids}   is the input vector of indices
-  `from_v_val`{#from_v_val}   is the input vector of elements, or just the total number of characters of the elementsq in the vector
-  --------------------------- --------------------------------------------------------------------------------------------------------
+* `from_v_ids`: is the input vector of indices
+* `from_v_val`: is the input vector of elements, or just the total number of characters of the elementsq in the vector
 
-### Examples
+## Examples
 
-``` R
+```r
 print(dynamic_idx_convertr(from_v_ids = c(1, 5), from_v_val = c("oui", "no", "ouI")))
 
 [1] 1 2 
@@ -2319,39 +1879,27 @@ print(dynamic_idx_convertr(from_v_ids = c(1, 6), from_v_val = c("oui", "no", "ou
 
 [1] 1 3
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  --------------------- -----------------
-  elements_equalifier     R Documentation
-  --------------------- -----------------
+# elements_equalifier
 
-## elements_equalifier
+## Description
 
-### Description
+Takes an input vector with elements that have different occurence, and output a vector with all these elements with the same number of occurence, see examples
 
-Takes an input vector with elements that have different occurence, and
-output a vector with all these elements with the same number of
-occurence, see examples
+## Usage
 
-### Usage
-
-``` R
+```r
 elements_equalifier(inpt_v, untl = 3)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- --------------------------------------------------------------
-  `inpt_v`{#inpt_v}   is the input vector
-  `untl`{#untl}       is how many times each elements will be in the output vector
-  ------------------- --------------------------------------------------------------
+* `inpt_v`: is the input vector
+* `untl`: is how many times each elements will be in the output vector
 
-### Examples
+## Examples
 
-``` R
+```r
 print(elements_equalifier(letters, untl = 2))
 
  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
@@ -2364,40 +1912,29 @@ print(elements_equalifier(c(letters, letters[-1]), untl = 2))
 [20] "t" "u" "v" "w" "x" "y" "z" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m"
 [39] "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z" "a"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------- -----------------
-  equalizer_v     R Documentation
-  ------------- -----------------
+# equalizer_v
 
-## equalizer_v
+## Description
 
-### Description
+Takes a vector of character as an input and returns a vector with the elements at the same size. The size can be chosen via depth parameter.
 
-Takes a vector of character as an input and returns a vector with the
-elements at the same size. The size can be chosen via depth parameter.
+## Usage
 
-### Usage
-
-``` R
+```r
 equalizer_v(inpt_v, depth = "max", default_val = "?")
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}             is the input vector containing all the characters
-  `depth`{#depth}               is the depth parameter, defaults to \"max\" which means that it is equal to the character number of the element(s) in inpt_v that has the most
-  `default_val`{#default_val}   is the default value that will be added to the output characters if those has an inferior length (characters) than the value of depth
-  ----------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------
+* `inpt_v`: is the input vector containing all the characters
+* `depth`: is the depth parameter, defaults to "max" which means that it is equal to the character number of the element(s) in inpt_v that has the most
+* `default_val`: is the default value that will be added to the output characters if those has an inferior length (characters) than the value of depth
 
-### Examples
+## Examples
 
-``` R
- print(equalizer_v(inpt_v=c("aa", "zzz", "q"), depth=2))
+```r
+print(equalizer_v(inpt_v=c("aa", "zzz", "q"), depth=2))
 
  #[1] "aa" "zz" "q?"
 
@@ -2405,25 +1942,16 @@ equalizer_v(inpt_v, depth = "max", default_val = "?")
 
  #[1] "aa??????????" "zzz?????????" "q???????????"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------------- -----------------
-  extract_normal     R Documentation
-  ---------------- -----------------
+# extract_normal
 
-## extract_normal
+## Description
 
-### Description
+Allow to extract values that fits a normal distribution from any kind of dataset, see examples and parameters
 
-Allow to extract values that fits a normal distribution from any kind of
-dataset, see examples and parameters
+## Usage
 
-### Usage
-
-``` R
+```r
 extract_normal(
   inpt_datf,
   mean,
@@ -2436,22 +1964,20 @@ extract_normal(
 )
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `inpt_datf`{#inpt_datf}       is the input dataset as a dataframe, values/modalities are in the first column and frequency (not normalised) is in the second column
-  `mean`{#mean}                 is the mean of the target normal distribution
-  `sd`{#sd}                     is the standard deviation of the target normal distribution
-  `accuracy`{#accuracy}         is how much of a difference beetween the points of the targeted normal distribution and the actual points is tolerated
-  `round_value`{#round_value}   is the round value for the normal distribution used under the hood to compare the dataset and extract the best points, defaults to 1
-  `normalised`{#normalised}     is if the input frequency is divided by n, if TRUE the parameter `n` must be filled
-  `n`{#n}                       is the number of points
-  `tries`{#tries}               is how many normal distributions are used under the hood to compare their points to the those in the input dataset, defaults to 3. The higher it is, the higher the number of different points from the input dataset will be in accordance for the normal distribution the function tries to build from the dataset. It does not increase by a lot but can be non-negligible and note that the higher the number of tries is, the higher the execution time of the function will be.
-  ----------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `inpt_datf`: is the input dataset as a dataframe, values/modalities are in the first column and frequency (not normalised) is in the second column
+* `mean`: is the mean of the target normal distribution
+* `sd`: is the standard deviation of the target normal distribution
+* `accuracy`: is how much of a difference beetween the points of the targeted normal distribution and the actual points is tolerated
+* `round_value`: is the round value for the normal distribution used under the hood to compare the dataset and extract the best points, defaults to 1
+* `normalised`: is if the input frequency is divided by n, if TRUE the parameter `n` must be filled
+* `n`: is the number of points
+* `tries`: is how many normal distributions are used under the hood to compare their points to the those in the input dataset, defaults to 3. The higher it is, the higher the number of different points from the input dataset will be in accordance for the normal distribution the function tries to build from the dataset. It does not increase by a lot but can be non-negligible and note that the higher the number of tries is, the higher the execution time of the function will be.
 
-### Examples
+## Examples
 
-``` R
+```r
 sample_val <- round(rnorm(n = 72000, mean = 12, sd = 2), 1)
 sample_freq <- unique_total(sample_val)
 sample_qual <- infinite_char_seq(n = length(sample_freq))
@@ -2762,112 +2288,79 @@ print(teste)
 125     dw 0.0001406866
 126     dw 0.0001406866
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  -------------- -----------------
-  extrt_only_v     R Documentation
-  -------------- -----------------
+# extrt_only_v
 
-## extrt_only_v
+## Description
 
-### Description
+Returns the elements from a vector "inpt_v" that are in another vector "pttrn_v"
 
-Returns the elements from a vector \"inpt_v\" that are in another vector
-\"pttrn_v\"
+## Usage
 
-### Usage
-
-``` R
+```r
 extrt_only_v(inpt_v, pttrn_v)
 ```
 
-### Arguments
+## Arguments
 
-  --------------------- ----------------------------------------------------------------
-  `inpt_v`{#inpt_v}     is the input vector
-  `pttrn_v`{#pttrn_v}   is the vector contining all the elements that can be in inpt_v
-  --------------------- ----------------------------------------------------------------
+* `inpt_v`: is the input vector
+* `pttrn_v`: is the vector contining all the elements that can be in inpt_v
 
-### Examples
+## Examples
 
-``` R
+```r
 print(extrt_only_v(inpt_v=c("oui", "non", "peut", "oo", "ll", "oui", "non", "oui", "oui"), 
      pttrn_v=c("oui")))
 
 #[1] "oui" "oui" "oui" "oui"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------- -----------------
-  fillr     R Documentation
-  ------- -----------------
+# fillr
 
-## fillr
-
-### Description
+## Description
 
 Allow to fill a vector by the last element n times
 
-### Usage
+## Usage
 
-``` R
+```r
 fillr(inpt_v, ptrn_fill = "\\.\\.\\.\\d")
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}         is the input vector
-  `ptrn_fill`{#ptrn_fill}   is the pattern used to detect where the function has to fill the vector by the last element n times. It defaults to \"\...\\d\" where \"\\d\" is the regex for an int value. So this paramater has to have \"\\d\" which designates n.
-  ------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `inpt_v`: is the input vector
+* `ptrn_fill`: is the pattern used to detect where the function has to fill the vector by the last element n times. It defaults to "...\d" where "\d" is the regex for an int value. So this paramater has to have "\d" which designates n.
 
-### Examples
+## Examples
 
-``` R
+```r
 print(fillr(c("a", "b", "...3", "c")))
 
 #[1] "a" "b" "b" "b" "b" "c"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  -------------- -----------------
-  fixer_nest_v     R Documentation
-  -------------- -----------------
+# fixer_nest_v
 
-## fixer_nest_v
+## Description
 
-### Description
+Retur the elements of a vector "wrk_v" (1) that corresponds to the pattern of elements in another vector "cur_v" (2) according to another vector "pttrn_v" (3) that contains the patterof elements.
 
-Retur the elements of a vector \"wrk_v\" (1) that corresponds to the
-pattern of elements in another vector \"cur_v\" (2) according to another
-vector \"pttrn_v\" (3) that contains the patterof elements.
+## Usage
 
-### Usage
-
-``` R
+```r
 fixer_nest_v(cur_v, pttrn_v, wrk_v)
 ```
 
-### Arguments
+## Arguments
 
-  --------------------- --------------------------------------------------------------------------------
-  `cur_v`{#cur_v}       is the input vector
-  `pttrn_v`{#pttrn_v}   is the vector containing all the patterns that may be contained in cur_v
-  `wrk_v`{#wrk_v}       is a vector containing all the indexes of cur_v taken in count in the function
-  --------------------- --------------------------------------------------------------------------------
+* `cur_v`: is the input vector
+* `pttrn_v`: is the vector containing all the patterns that may be contained in cur_v
+* `wrk_v`: is a vector containing all the indexes of cur_v taken in count in the function
 
-### Examples
+## Examples
 
-``` R
+```r
 print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "non", "peut-etre"), 
              pttrn_v=c("oui", "non", "peut-etre"), 
                   wrk_v=c(1, 2, 3, 4, 5, 6)))
@@ -2880,141 +2373,91 @@ print(fixer_nest_v(cur_v=c("oui", "non", "peut-etre", "oui", "non", "peut-etre")
 
 #[1]  1  2 NA  4  5 NA
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ----------- -----------------
-  fold_rec2     R Documentation
-  ----------- -----------------
+# fold_rec
 
-## fold_rec2
+## Description
 
-### Description
+Allow to get all the files recursively from a path according to an end and start depth value. If you want to have an other version of this function that uses a more sophisticated algorythm (which can be faster), check file_rec2. Depth example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
 
-Allow to find the directories and the subdirectories with a specified
-end and start depth value from a path. This function might be more
-powerfull than file_rec because it uses a custom algorythm that does not
-nee to perform a full recursive search before tuning it to only find the
-directories with a good value of depth. Depth example: if i have
-dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
+## Usage
 
-### Usage
-
-``` R
-fold_rec2(xmax, xmin = 1, pathc = ".")
-```
-
-### Arguments
-
-  ----------------- -------------------------------------------------------------
-  `xmax`{#xmax}     is the depth value
-  `xmin`{#xmin}     is the minimum value of depth
-  `pathc`{#pathc}   is the reference path, from which depth value is equal to 1
-  ----------------- -------------------------------------------------------------
-:::
-:::
-
-::: container
-::: {role="main"}
-  ---------- -----------------
-  fold_rec     R Documentation
-  ---------- -----------------
-
-## fold_rec
-
-### Description
-
-Allow to get all the files recursively from a path according to an end
-and start depth value. If you want to have an other version of this
-function that uses a more sophisticated algorythm (which can be faster),
-check file_rec2. Depth example: if i have dir/dir2/dir3,
-dir/dir2b/dir3b, i have a depth equal to 3
-
-### Usage
-
-``` R
+```r
 fold_rec(xmax, xmin = 1, pathc = ".")
 ```
 
-### Arguments
+## Arguments
 
-  ----------------- --------------------------
-  `xmax`{#xmax}     is the end depth value
-  `xmin`{#xmin}     is the start depth value
-  `pathc`{#pathc}   is the reference path
-  ----------------- --------------------------
-:::
-:::
+* `xmax`: is the end depth value
+* `xmin`: is the start depth value
+* `pathc`: is the reference path
 
-::: container
-::: {role="main"}
-  ------------- -----------------
-  format_date     R Documentation
-  ------------- -----------------
+# fold_rec2
 
-## format_date
+## Description
 
-### Description
+Allow to find the directories and the subdirectories with a specified end and start depth value from a path. This function might be more powerfull than file_rec because it uses a custom algorythm that does not nee to perform a full recursive search before tuning it to only find the directories with a good value of depth. Depth example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
+
+## Usage
+
+```r
+fold_rec2(xmax, xmin = 1, pathc = ".")
+```
+
+## Arguments
+
+* `xmax`: is the depth value
+* `xmin`: is the minimum value of depth
+* `pathc`: is the reference path, from which depth value is equal to 1
+
+# format_date
+
+## Description
 
 Allow to convert xx-month-xxxx date type to xx-xx-xxxx
 
-### Usage
+## Usage
 
-``` R
+```r
 format_date(f_dialect, sentc, sep_in = "-", sep_out = "-")
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- -----------------------------------------------------------
-  `f_dialect`{#f_dialect}   are the months from the language of which the month come
-  `sentc`{#sentc}           is the date to convert
-  `sep_in`{#sep_in}         is the separator of the dat input (default is \"-\")
-  `sep_out`{#sep_out}       is the separator of the converted date (default is \"-\")
-  ------------------------- -----------------------------------------------------------
+* `f_dialect`: are the months from the language of which the month come
+* `sentc`: is the date to convert
+* `sep_in`: is the separator of the dat input (default is "-")
+* `sep_out`: is the separator of the converted date (default is "-")
 
-### Examples
+## Examples
 
-``` R
+```r
 print(format_date(f_dialect=c("janvier", "février", "mars", "avril", "mai", "juin",
 "juillet", "aout", "septembre", "octobre", "novembre", "décembre"), sentc="11-septembre-2023"))
 
 #[1] "11-09-2023"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  --------- -----------------
-  geo_min     R Documentation
-  --------- -----------------
+# geo_min
 
-## geo_min
+## Description
 
-### Description
+Return a dataframe containing the nearest geographical points (row) according to established geographical points (column).
 
-Return a dataframe containing the nearest geographical points (row)
-according to established geographical points (column).
+## Usage
 
-### Usage
-
-``` R
+```r
 geo_min(inpt_datf, established_datf)
 ```
 
-### Arguments
+## Arguments
 
-  --------------------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `inpt_datf`{#inpt_datf}                 is the input dataframe of the set of geographical points to be classified, its firts column is for latitude, the second for the longitude and the third, if exists, is for the altitude. Each point is one row.
-  `established_datf`{#established_datf}   is the dataframe containing the coordiantes of the established geographical points
-  --------------------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `inpt_datf`: is the input dataframe of the set of geographical points to be classified, its firts column is for latitude, the second for the longitude and the third, if exists, is for the altitude. Each point is one row.
+* `established_datf`: is the dataframe containing the coordiantes of the established geographical points
 
-### Examples
+## Examples
 
-``` R
+```r
 in_ <- data.frame(c(11, 33, 55), c(113, -143, 167))
 
 in2_ <- data.frame(c(12, 55), c(115, 165))
@@ -3037,69 +2480,48 @@ print(geo_min(inpt_datf=in_, established_datf=in2_))
 #2 26465.63       NA
 #3       NA 5825.517
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  --------- -----------------
-  get_rec     R Documentation
-  --------- -----------------
+# get_rec
 
-## get_rec
-
-### Description
+## Description
 
 Allow to get the value of directorie depth from a path.
 
-### Usage
+## Usage
 
-``` R
+```r
 get_rec(pathc = ".")
 ```
 
-### Arguments
+## Arguments
 
-  ----------------- ----------------------------------------------------------------------------------------------------
-  `pathc`{#pathc}   is the reference path example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
-  ----------------- ----------------------------------------------------------------------------------------------------
-:::
-:::
+* `pathc`: is the reference path
+example: if i have dir/dir2/dir3, dir/dir2b/dir3b, i have a depth equal to 3
 
-::: container
-::: {role="main"}
-  ------- -----------------
-  globe     R Documentation
-  ------- -----------------
+# globe
 
-## globe
+## Description
 
-### Description
+Allow to calculate the distances between a set of geographical points and another established geographical point. If the altitude is not filled, so the result returned won't take in count the altitude.
 
-Allow to calculate the distances between a set of geographical points
-and another established geographical point. If the altitude is not
-filled, so the result returned won\'t take in count the altitude.
+## Usage
 
-### Usage
-
-``` R
+```r
 globe(lat_f, long_f, alt_f = NA, lat_n, long_n, alt_n = NA)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- --------------------------------------------------------------------------
-  `lat_f`{#lat_f}     is the latitude of the established geographical point
-  `long_f`{#long_f}   is the longitude of the established geographical point
-  `alt_f`{#alt_f}     is the altitude of the established geographical point, defaults to NA
-  `lat_n`{#lat_n}     is a vector containing the latitude of the set of points
-  `long_n`{#long_n}   is a vector containing the longitude of the set of points
-  `alt_n`{#alt_n}     is a vector containing the altitude of the set of points, defaults to NA
-  ------------------- --------------------------------------------------------------------------
+* `lat_f`: is the latitude of the established geographical point
+* `long_f`: is the longitude of the established geographical point
+* `alt_f`: is the altitude of the established geographical point, defaults to NA
+* `lat_n`: is a vector containing the latitude of the set of points
+* `long_n`: is a vector containing the longitude of the set of points
+* `alt_n`: is a vector containing the altitude of the set of points, defaults to NA
 
-### Examples
+## Examples
 
-``` R
+```r
 print(globe(lat_f=23, long_f=112, alt_f=NA, lat_n=c(2, 82), long_n=c(165, -55), alt_n=NA)) 
 
 #[1] 6342.844 7059.080
@@ -3108,39 +2530,27 @@ print(globe(lat_f=23, long_f=112, alt_f=8, lat_n=c(2, 82), long_n=c(165, -55), a
 
 #[1] 6342.844 7059.087
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  --------------- -----------------
-  glue_groupr_v     R Documentation
-  --------------- -----------------
+# glue_groupr_v
 
-## glue_groupr_v
+## Description
 
-### Description
+Takes an input vector and returns the same vector unlike that certain elements will be glued as an unique element according to thoses designated in a special vector, see examples.
 
-Takes an input vector and returns the same vector unlike that certain
-elements will be glued as an unique element according to thoses
-designated in a special vector, see examples.
+## Usage
 
-### Usage
-
-``` R
+```r
 glue_groupr_v(inpt_v, group_v = c(), untl)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- ------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}   is the input vector
-  `is`{#is}           a vector containing all the elements that will be glued in the output vector
-  ------------------- ------------------------------------------------------------------------------
+* `inpt_v`: is the input vector
+* `is`: a vector containing all the elements that will be glued in the output vector
 
-### Examples
+## Examples
 
-``` R
+```r
 print(glue_groupr_v(inpt_v = c("o", "-", "-", "u", "i", "-", "n", 
  "o", "-", "-", "-", "zz", "/", "/"), group_v = c("-", "/")))
 
@@ -3154,86 +2564,29 @@ print(glue_groupr_v(inpt_v = c("o", "-", "-", "u", "i", "-", "n",
 print(glue_groupr_v(inpt_v = c("o", "-", "-", "u", "i", "-", "n", 
 "o", "-", "-", "-", "-", "zz", "/", "/"), group_v = c("-", "/"), untl = 2))
 
-[1] "o"  "--" "u"  "i"  "-"  "n"  "o"  "--" "--" "zz" "//" 
-```
-:::
-:::
-
-::: container
-::: {role="main"}
-  ----------- -----------------
-  grep_all2     R Documentation
-  ----------- -----------------
-
-## grep_all2
-
-### Description
-
-Performs the grep_all function with another algorythm, potentially
-faster
-
-### Usage
-
-``` R
-grep_all2(inpt_v, pattern_v)
+[1] "o"  "--" "u"  "i"  "-"  "n"  "o"  "--" "--" "zz" "//"
 ```
 
-### Arguments
+# grep_all
 
-  ------------------------- --------------------------------------------
-  `inpt_v`{#inpt_v}         is the input vectors to grep elements from
-  `pattern_v`{#pattern_v}   is a vector contaning the patterns to grep
-  ------------------------- --------------------------------------------
-
-### Examples
-
-``` R
-print(grep_all2(inpt_v = c(1:14, "z", 1:7, "z", "a", "z"), 
-               pattern_v = c("z", "4")))
-
-[1] 15 23 25  4 14 19
-
-print(grep_all2(inpt_v = c(1:14, "z", 1:7, "z", "a", "z"), 
-               pattern_v = c("z", "^4$")))
-
-[1] 15 23 25  4 19
-
-print(grep_all2(inpt_v = c(1:14, "z", 1:7, "z", "a", "z"), 
-               pattern_v = c("z")))
-
-[1] 15 23 25
-```
-:::
-:::
-
-::: container
-::: {role="main"}
-  ---------- -----------------
-  grep_all     R Documentation
-  ---------- -----------------
-
-## grep_all
-
-### Description
+## Description
 
 Allow to perform a grep function on multiple input elements
 
-### Usage
+## Usage
 
-``` R
+```r
 grep_all(inpt_v, pattern_v)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- --------------------------------------------
-  `inpt_v`{#inpt_v}         is the input vectors to grep elements from
-  `pattern_v`{#pattern_v}   is a vector contaning the patterns to grep
-  ------------------------- --------------------------------------------
+* `inpt_v`: is the input vectors to grep elements from
+* `pattern_v`: is a vector contaning the patterns to grep
 
-### Examples
+## Examples
 
-``` R
+```r
 print(grep_all(inpt_v = c(1:14, "z", 1:7, "z", "a", "z"), 
                pattern_v = c("z", "4")))
 
@@ -3249,27 +2602,52 @@ print(grep_all(inpt_v = c(1:14, "z", 1:7, "z", "a", "z"),
 
 [1] 15 23 25
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------- -----------------
-  groupr_datf     R Documentation
-  ------------- -----------------
+# grep_all2
 
-## groupr_datf
+## Description
 
-### Description
+Performs the grep_all function with another algorythm, potentially faster
 
-Allow to create groups from a dataframe. Indeed, you can create
-conditions that lead to a flag value for each cell of the input
-dataframeaccording to the cell value. This function is based on see_datf
-and nestr_datf2 functions.
+## Usage
 
-### Usage
+```r
+grep_all2(inpt_v, pattern_v)
+```
 
-``` R
+## Arguments
+
+* `inpt_v`: is the input vectors to grep elements from
+* `pattern_v`: is a vector contaning the patterns to grep
+
+## Examples
+
+```r
+print(grep_all2(inpt_v = c(1:14, "z", 1:7, "z", "a", "z"), 
+               pattern_v = c("z", "4")))
+
+[1] 15 23 25  4 14 19
+
+print(grep_all2(inpt_v = c(1:14, "z", 1:7, "z", "a", "z"), 
+               pattern_v = c("z", "^4$")))
+
+[1] 15 23 25  4 19
+
+print(grep_all2(inpt_v = c(1:14, "z", 1:7, "z", "a", "z"), 
+               pattern_v = c("z")))
+
+[1] 15 23 25
+```
+
+# groupr_datf
+
+## Description
+
+Allow to create groups from a dataframe. Indeed, you can create conditions that lead to a flag value for each cell of the input dataframeaccording to the cell value. This function is based on see_datf and nestr_datf2 functions.
+
+## Usage
+
+```r
 groupr_datf(
   inpt_datf,
   condition_lst,
@@ -3279,19 +2657,17 @@ groupr_datf(
 )
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------------------- ----------------------------------------------------------------------------------------------------------------
-  `inpt_datf`{#inpt_datf}               is the input dataframe
-  `condition_lst`{#condition_lst}       is a list containing all the condition as a vector for each group
-  `val_lst`{#val_lst}                   is a list containing all the values associated with condition_lst as a vector for each group
-  `conjunction_lst`{#conjunction_lst}   is a list containing all the conjunctions associated with condition_lst and val_lst as a vector for each group
-  `rtn_val_pos`{#rtn_val_pos}           is a vector containing all the group flag value like this ex: c(\"flag1\", \"flag2\", \"flag3\")
-  ------------------------------------- ----------------------------------------------------------------------------------------------------------------
+* `inpt_datf`: is the input dataframe
+* `condition_lst`: is a list containing all the condition as a vector for each group
+* `val_lst`: is a list containing all the values associated with condition_lst as a vector for each group
+* `conjunction_lst`: is a list containing all the conjunctions associated with condition_lst and val_lst as a vector for each group
+* `rtn_val_pos`: is a vector containing all the group flag value like this ex: c("flag1", "flag2", "flag3")
 
-### Examples
+## Examples
 
-``` R
+```r
 interactive()
 
 datf1 <- data.frame(c(1, 2, 1), c(45, 22, 88), c(44, 88, 33))
@@ -3312,77 +2688,55 @@ conjunction_lst=conjunction_lst, rtn_val_pos=rtn_val_pos))
 #2   ++  ++ +++
 #3 <NA> +++   +
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ----------- -----------------
-  gsub_mult     R Documentation
-  ----------- -----------------
+# gsub_mult
 
-## gsub_mult
-
-### Description
+## Description
 
 Performs a gsub operation with n patterns and replacements.
 
-### Usage
+## Usage
 
-``` R
+```r
 gsub_mult(inpt_v, pattern_v = c(), replacement_v = c())
 ```
 
-### Arguments
+## Arguments
 
-  --------------------------------- -------------------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}                 is a vector containing all the elements that contains expressions to be substituted
-  `pattern_v`{#pattern_v}           is a vector containing all the patterns to be substituted in any elements of inpt_v
-  `replacement_v`{#replacement_v}   is a vector containing the expression that are going to substituate those provided by pattern_v
-  --------------------------------- -------------------------------------------------------------------------------------------------
+* `inpt_v`: is a vector containing all the elements that contains expressions to be substituted
+* `pattern_v`: is a vector containing all the patterns to be substituted in any elements of inpt_v
+* `replacement_v`: is a vector containing the expression that are going to substituate those provided by pattern_v
 
-### Examples
+## Examples
 
-``` R
+```r
 print(gsub_mult(inpt_v = c("X and Y programming languages are great", "More X, more X!"), 
                pattern_v = c("X", "Y", "Z"), 
                replacement_v = c("C", "R", "GO")))
 [1] "C and R programming languages are great"
-[2] "More C, more C!"                        
+[2] "More C, more C!"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------------- -----------------
-  historic_sequence     R Documentation
-  ------------------- -----------------
+# historic_sequence
 
-## historic_sequence
+## Description
 
-### Description
+Allow to perform a pivot wider on a sequencial dataset (here the type is dataframe), each variable will be dupplicated in a column to show the value to this variable at n - 1 for each individual, see examples.
 
-Allow to perform a pivot wider on a sequencial dataset (here the type is
-dataframe), each variable will be dupplicated in a column to show the
-value to this variable at n - 1 for each individual, see examples.
+## Usage
 
-### Usage
-
-``` R
+```r
 historic_sequence(inpt_datf, bf_ = 1)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- ------------------------------------------------------------------------------------
-  `inpt_datf`{#inpt_datf}   is the input dataframe
-  `bf_`{#bf_}               is the number of previous value of the individual it will search for, see examples
-  ------------------------- ------------------------------------------------------------------------------------
+* `inpt_datf`: is the input dataframe
+* `bf_`: is the number of previous value of the individual it will search for, see examples
 
-### Examples
+## Examples
 
-``` R
+```r
 set.seed(123)
 var1 <- round(runif(n = 14, min = 100, max = 122))
 set.seed(123)
@@ -3431,40 +2785,29 @@ historic_sequence(inpt_datf = datf, bf_ = 3)
 3     20      peut1    101    110    115     14     17     18
 4     20      peut2    112    121    113     17     20     17
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------ -----------------
-  how_normal     R Documentation
-  ------------ -----------------
+# how_normal
 
-## how_normal
+## Description
 
-### Description
+Allow to get how much a sequence of numbers fit a normal distribution with chosen parameters, see examples
 
-Allow to get how much a sequence of numbers fit a normal distribution
-with chosen parameters, see examples
+## Usage
 
-### Usage
-
-``` R
+```r
 how_normal(inpt_datf, normalised = TRUE, mean = 0, sd = 1)
 ```
 
-### Arguments
+## Arguments
 
-  --------------------------- -----------------------------------------------------------------------------------------------------------------------------------
-  `inpt_datf`{#inpt_datf}     is the input dataframe containing all the values in the first column and their frequency (normalised or no), in the second column
-  `normalised`{#normalised}   is a boolean, takes TRUE if the frequency for each value is divided by n, FALSE if not
-  `mean`{#mean}               is the mean of the normal distribution that the dataset tries to fit
-  `sd`{#sd}                   is the standard deviation of the normal distribution the dataset tries to fit
-  --------------------------- -----------------------------------------------------------------------------------------------------------------------------------
+* `inpt_datf`: is the input dataframe containing all the values in the first column and their frequency (normalised or no), in the second column
+* `normalised`: is a boolean, takes TRUE if the frequency for each value is divided by n, FALSE if not
+* `mean`: is the mean of the normal distribution that the dataset tries to fit
+* `sd`: is the standard deviation of the normal distribution the dataset tries to fit
 
-### Examples
+## Examples
 
-``` R
+```r
 sample_val <- round(rnorm(n = 12000, mean = 6, sd = 1.25), 1)
 sample_freq <- unique_total(sample_val)
 datf_test <- data.frame(unique(sample_val), sample_freq)
@@ -3576,38 +2919,27 @@ print(how_normal(inpt_datf = datf_test,
 
 [1] 9.098484
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------- -----------------
-  how_unif     R Documentation
-  ---------- -----------------
+# how_unif
 
-## how_unif
+## Description
 
-### Description
+Allow to see how much a sequence of numbers fit a uniform distribution, see examples
 
-Allow to see how much a sequence of numbers fit a uniform distribution,
-see examples
+## Usage
 
-### Usage
-
-``` R
+```r
 how_unif(inpt_v, normalised = TRUE)
 ```
 
-### Arguments
+## Arguments
 
-  --------------------------- ----------------------------------------------------------------------------------------------------------------
-  `normalised`{#normalised}   is a boolean, takes TRUE if the frequency for each value is divided by n, FALSE if not
-  `inpt_datf`{#inpt_datf}     is the input dataframe containing all the values in the first column and their frequencyu at the second column
-  --------------------------- ----------------------------------------------------------------------------------------------------------------
+* `normalised`: is a boolean, takes TRUE if the frequency for each value is divided by n, FALSE if not
+* `inpt_datf`: is the input dataframe containing all the values in the first column and their frequencyu at the second column
 
-### Examples
+## Examples
 
-``` R
+```r
 sample_val <- round(runif(n = 12000, min = 24, max = 27), 1)
 sample_freq <- unique_total(sample_val)
 datf_test <- data.frame(unique(sample_val), sample_freq)
@@ -3659,40 +2991,29 @@ print(how_unif(inpt_datf = datf_test, normalised = FALSE))
 
 [1] 0.7797352
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------- -----------------
-  id_keepr     R Documentation
-  ---------- -----------------
+# id_keepr
 
-## id_keepr
+## Description
 
-### Description
+Allow to get the original indexes after multiple equality comparaison according to the original number of row
 
-Allow to get the original indexes after multiple equality comparaison
-according to the original number of row
+## Usage
 
-### Usage
-
-``` R
+```r
 id_keepr(inpt_datf, col_v = c(), el_v = c(), rstr_l = NA)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `inpt_datf`{#inpt_datf}   is the input dataframe
-  `col_v`{#col_v}           is the vector containing the column numbers or names to be compared to their respective elements in \"el_v\"
-  `el_v`{#el_v}             is a vector containing the elements that may be contained in their respective column described in \"col_v\"
-  `rstr_l`{#rstr_l}         is a list containing the vector composed of the indexes of the elements chosen for each comparison. If the length of the list is inferior to the lenght of comparisons, so the last vector of rstr_l will be the same as the last one to fill make rstr_l equal in term of length to col_v and el_v
-  ------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `inpt_datf`: is the input dataframe
+* `col_v`: is the vector containing the column numbers or names to be compared to their respective elements in "el_v"
+* `el_v`: is a vector containing the elements that may be contained in their respective column described in "col_v"
+* `rstr_l`: is a list containing the vector composed of the indexes of the elements chosen for each comparison. If the length of the list is inferior to the lenght of comparisons, so the last vector of rstr_l will be the same as the last one to fill make rstr_l equal in term of length to col_v and el_v
 
-### Examples
+## Examples
 
-``` R
+```r
 datf1 <- data.frame(c("oui", "oui", "oui", "non", "oui"), 
      c("opui", "op", "op", "zez", "zez"), c(5:1), c(1:5))
 
@@ -3714,43 +3035,29 @@ print(id_keepr(inpt_datf=datf1, col_v=c(1, 2), el_v=c("oui", "op"), rstr_l=list(
 
 #[1] 2 3
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------ -----------------
-  incr_fillr     R Documentation
-  ------------ -----------------
+# incr_fillr
 
-## incr_fillr
+## Description
 
-### Description
+Take a vector uniquely composed by double and sorted ascendingly, a step, another vector of elements whose length is equal to the length of the first vector, and a default value. If an element of the vector is not equal to its predecessor minus a user defined step, so these can be the output according to the parameters (see example):
 
-Take a vector uniquely composed by double and sorted ascendingly, a
-step, another vector of elements whose length is equal to the length of
-the first vector, and a default value. If an element of the vector is
-not equal to its predecessor minus a user defined step, so these can be
-the output according to the parameters (see example):
+## Usage
 
-### Usage
-
-``` R
+```r
 incr_fillr(inpt_v, wrk_v = NA, default_val = NA, step = 1)
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------------- ----------------------------------------------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}             is the asending double only composed vector
-  `wrk_v`{#wrk_v}               is the other vector (size equal to inpt_v), defaults to NA
-  `default_val`{#default_val}   is the default value put when the difference between two following elements of inpt_v is greater than step, defaults to NA
-  `step`{#step}                 is the allowed difference between two elements of inpt_v
-  ----------------------------- ----------------------------------------------------------------------------------------------------------------------------
+* `inpt_v`: is the asending double only composed vector
+* `wrk_v`: is the other vector (size equal to inpt_v), defaults to NA
+* `default_val`: is the default value put when the difference between two following elements of inpt_v is greater than step, defaults to NA
+* `step`: is the allowed difference between two elements of inpt_v
 
-### Examples
+## Examples
 
-``` R
+```r
 print(incr_fillr(inpt_v=c(1, 2, 4, 5, 9, 10), 
                 wrk_v=NA, 
                 default_val="increasing"))
@@ -3767,76 +3074,56 @@ print(incr_fillr(inpt_v=c(1, 2, 4, 5, 9, 10),
                 wrk_v=NA, 
                 default_val="NAN"))
 
-#[1] "1"   "2"   "NAN" "4"   "5"   "NAN" "NAN" "NAN" "9"   "10" 
+#[1] "1"   "2"   "NAN" "4"   "5"   "NAN" "NAN" "NAN" "9"   "10"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------------- -----------------
-  infinite_char_seq     R Documentation
-  ------------------- -----------------
+# infinite_char_seq
 
-## infinite_char_seq
-
-### Description
+## Description
 
 Allow to generate an infinite sequence of unique letters
 
-### Usage
+## Usage
 
-``` R
+```r
 infinite_char_seq(n, base_char = letters)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- ----------------------------------------------------------------------------
-  `n`{#n}                   is how many sequence of numbers will be generated
-  `base_char`{#base_char}   is the vector containing the elements from which the sequence is generated
-  ------------------------- ----------------------------------------------------------------------------
+* `n`: is how many sequence of numbers will be generated
+* `base_char`: is the vector containing the elements from which the sequence is generated
 
-### Examples
+## Examples
 
-``` R
+```r
 print(infinite_char_seq(28))
 
  [1] "a"  "b"  "c"  "d"  "e"  "f"  "g"  "h"  "i"  "j"  "k"  "l"  "m"  "n"  "o" 
 [16] "p"  "q"  "r"  "s"  "t"  "u"  "v"  "w"  "x"  "y"  "a"  "aa" "ab"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ----------- -----------------
-  inner_all     R Documentation
-  ----------- -----------------
+# inner_all
 
-## inner_all
-
-### Description
+## Description
 
 Allow to apply inner join on n dataframes, datatables, tibble
 
-### Usage
+## Usage
 
-``` R
+```r
 inner_all(..., keep_val = FALSE, id_v)
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------- --------------------------------------------
-  `...`{#...}             are all the dataframes etc
-  `keep_val`{#keep_val}   is if you want to keep the id column
-  `id_v`{#id_v}           is the common id of all the dataframes etc
-  ----------------------- --------------------------------------------
+* `...`: are all the dataframes etc
+* `keep_val`: is if you want to keep the id column
+* `id_v`: is the common id of all the dataframes etc
 
-### Examples
+## Examples
 
-``` R
+```r
 datf1 <- data.frame(
         "id1"=c(1:5),
         "var1"=c("oui", "oui", "oui", "non", "non")
@@ -3854,39 +3141,28 @@ id1 var1.x var1.y
 2   2    oui   oui2
 3   3    oui   oui2
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------- -----------------
-  insert_datf     R Documentation
-  ------------- -----------------
+# insert_datf
 
-## insert_datf
+## Description
 
-### Description
+Allow to insert dataframe into another dataframe according to coordinates (row, column) from the dataframe that will be inserted
 
-Allow to insert dataframe into another dataframe according to
-coordinates (row, column) from the dataframe that will be inserted
+## Usage
 
-### Usage
-
-``` R
+```r
 insert_datf(datf_in, datf_ins, ins_loc)
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------- -------------------------------------------------------------------------------------
-  `datf_in`{#datf_in}     is the dataframe that will be inserted
-  `datf_ins`{#datf_ins}   is the dataset to be inserted
-  `ins_loc`{#ins_loc}     is a vector containg two parameters (row, column) of the begining for the insertion
-  ----------------------- -------------------------------------------------------------------------------------
+* `datf_in`: is the dataframe that will be inserted
+* `datf_ins`: is the dataset to be inserted
+* `ins_loc`: is a vector containg two parameters (row, column) of the begining for the insertion
 
-### Examples
+## Examples
 
-``` R
+```r
 datf1 <- data.frame(c(1, 4), c(5, 3))
 
 datf2 <- data.frame(c(1, 3, 5, 6), c(1:4), c(5, 4, 5, "ereer"))
@@ -3915,42 +3191,28 @@ print(insert_datf(datf_in=datf2, datf_ins=datf1, ins_loc=c(2, 2)))
 # 3             5      4                   3
 # 4             6      4               ereer
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ----------- -----------------
-  inter_max     R Documentation
-  ----------- -----------------
+# inter_max
 
-## inter_max
+## Description
 
-### Description
+Takes as input a list of vectors composed of ints or floats ascendly ordered (intervals) that can have a different step to one of another element ex: list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3)). The function will return the list of lists altered according to the maximum step found in the input list.
 
-Takes as input a list of vectors composed of ints or floats ascendly
-ordered (intervals) that can have a different step to one of another
-element ex: list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3)). The function will
-return the list of lists altered according to the maximum step found in
-the input list.
+## Usage
 
-### Usage
-
-``` R
+```r
 inter_max(inpt_l, max_ = -1000, get_lst = TRUE)
 ```
 
-### Arguments
+## Arguments
 
-  --------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------
-  `inpt_l`{#inpt_l}     is the input list
-  `max_`{#max_}         is a value you are sure is the minimum step value of all the sub-lists
-  `get_lst`{#get_lst}   is the parameter that, if set to True, will keep the last values of vectors in the return value if the last step exceeds the end value of the vector.
-  --------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------
+* `inpt_l`: is the input list
+* `max_`: is a value you are sure is the minimum step value of all the sub-lists
+* `get_lst`: is the parameter that, if set to True, will keep the last values of vectors in the return value if the last step exceeds the end value of the vector.
 
-### Examples
+## Examples
 
-``` R
+```r
 print(inter_max(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3)), get_lst=TRUE))
  
 #[[1]]
@@ -3973,30 +3235,16 @@ print(inter_max(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3)), get_lst=FALSE))
 #[[3]]
 #[1] 1
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ----------- -----------------
-  inter_min     R Documentation
-  ----------- -----------------
+# inter_min
 
-## inter_min
+## Description
 
-### Description
+Takes as input a list of vectors composed of ints or floats ascendly ordered (intervals) that can have a different step to one of another element ex: list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3)). This function will return the list of vectors with the same steps preserving the begin and end value of each interval. The way the algorythmn searches the common step of all the sub-lists is also given by the user as a parameter, see `how_to` paramaters.
 
-Takes as input a list of vectors composed of ints or floats ascendly
-ordered (intervals) that can have a different step to one of another
-element ex: list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3)). This function will
-return the list of vectors with the same steps preserving the begin and
-end value of each interval. The way the algorythmn searches the common
-step of all the sub-lists is also given by the user as a parameter, see
-`how_to` paramaters.
+## Usage
 
-### Usage
-
-``` R
+```r
 inter_min(
   inpt_l,
   min_ = 1000,
@@ -4007,20 +3255,19 @@ inter_min(
 )
 ```
 
-### Arguments
+## Arguments
 
-  --------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `inpt_l`{#inpt_l}           is the input list containing all the intervals
-  `min_`{#min_}               is a value you are sure is superior to the maximum step value in all the intervals
-  `sensi`{#sensi}             is the decimal accuracy of how the difference between each value n to n+1 in an interval is calculated
-  `sensi2`{#sensi2}           is the decimal accuracy of how the value with the common step is calculated in all the intervals
-  `how_to_op`{#how_to_op}     is a vector containing the operations to perform to the pre-common step value, defaults to only \"divide\". The operations can be \"divide\", \"substract\", \"multiply\" or \"add\". All type of operations can be in this parameter.
-  `how_to_val`{#how_to_val}   is a vector containing the value relatives to the operations in `hot_to_op`, defaults to 3 output from ex:
-  --------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `inpt_l`: is the input list containing all the intervals
+* `min_`: is a value you are sure is superior to the maximum step value in all the intervals
+* `sensi`: is the decimal accuracy of how the difference between each value n to n+1 in an interval is calculated
+* `sensi2`: is the decimal accuracy of how the value with the common step is calculated in all the intervals
+* `how_to_op`: is a vector containing the operations to perform to the pre-common step value, defaults to only "divide". The operations can be "divide", "substract", "multiply" or "add". All type of operations can be in this parameter.
+* `how_to_val`: is a vector containing the value relatives to the operations in `hot_to_op`, defaults to 3
+output from ex:
 
-### Examples
+## Examples
 
-``` R
+```r
 print(inter_min(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3))))
 
 # [[1]]
@@ -4036,74 +3283,54 @@ print(inter_min(inpt_l=list(c(0, 2, 4), c(0, 4), c(1, 2, 2.3))))
 #[[3]]
 # [1] 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  --------------- -----------------
-  intersect_all     R Documentation
-  --------------- -----------------
+# intersect_all
 
-## intersect_all
-
-### Description
+## Description
 
 Allows to calculate the intersection between n vectors
 
-### Usage
+## Usage
 
-``` R
+```r
 intersect_all(...)
 ```
 
-### Arguments
+## Arguments
 
-  ------------- ---------------------------------------------------------------
-  `...`{#...}   is all the vector you want to calculate the intersection from
-  ------------- ---------------------------------------------------------------
+* `...`: is all the vector you want to calculate the intersection from
 
-### Examples
+## Examples
 
-``` R
+```r
 print(intersect_all(c(1:5), c(1, 2, 3, 6), c(1:4)))
 
 [1] 1 2 3
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  --------------- -----------------
-  intersect_mod     R Documentation
-  --------------- -----------------
+# intersect_mod
 
-## intersect_mod
-
-### Description
+## Description
 
 Returns the mods that have elements in common
 
-### Usage
+## Usage
 
-``` R
+```r
 intersect_mod(datf, inter_col, mod_col, n_min, descendly_ordered = NA)
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------------------------- -----------------------------------------------------------------------------------------------------------------------------
-  `datf`{#datf}                             is the input dataframe
-  `inter_col`{#inter_col}                   is the column name or the column number of the values that may be commun betwee the different mods
-  `mod_col`{#mod_col}                       is the column name or the column number of the mods in the dataframe
-  `n_min`{#n_min}                           is the minimum elements in common a mod should have to be taken in count
-  `ordered_descendly`{#ordered_descendly}   in case that the elements in commun are numeric, this option can be enabled by giving a value of TRUE or FALSE see examples
-  ----------------------------------------- -----------------------------------------------------------------------------------------------------------------------------
+* `datf`: is the input dataframe
+* `inter_col`: is the column name or the column number of the values that may be commun betwee the different mods
+* `mod_col`: is the column name or the column number of the mods in the dataframe
+* `n_min`: is the minimum elements in common a mod should have to be taken in count
+* `ordered_descendly,`: in case that the elements in commun are numeric, this option can be enabled by giving a value of TRUE or FALSE see examples
 
-### Examples
+## Examples
 
-``` R
+```r
 datf <- data.frame("col1"=c("oui", "oui", "oui", "oui", "oui", "oui", 
                      "non", "non", "non", "non", "ee", "ee", "ee"), "col2"=c(1:6, 2:5, 1:3))
 
@@ -4152,116 +3379,81 @@ print(intersect_mod(datf=datf, inter_col=2, mod_col=1, n_min=3))
 4   oui    4
 5   oui    5
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  -------------- -----------------
-  is_divisible     R Documentation
-  -------------- -----------------
+# is_divisible
 
-## is_divisible
+## Description
 
-### Description
+Takes a vector as an input and returns all the elements that are divisible by all choosen numbers from another vector.
 
-Takes a vector as an input and returns all the elements that are
-divisible by all choosen numbers from another vector.
+## Usage
 
-### Usage
-
-``` R
+```r
 is_divisible(inpt_v = c(), divisible_v = c())
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------------- --------------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}             is the input vector
-  `divisible_v`{#divisible_v}   is the vector containing all the numbers that will try to divide those contained in inpt_v
-  ----------------------------- --------------------------------------------------------------------------------------------
+* `inpt_v`: is the input vector
+* `divisible_v`: is the vector containing all the numbers that will try to divide those contained in inpt_v
 
-### Examples
+## Examples
 
-``` R
- print(is_divisible(inpt_v=c(1:111), divisible_v=c(2, 4, 5)))
+```r
+print(is_divisible(inpt_v=c(1:111), divisible_v=c(2, 4, 5)))
 
  #[1]  20  40  60  80 100
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------------- -----------------
-  isnt_divisible     R Documentation
-  ---------------- -----------------
+# isnt_divisible
 
-## isnt_divisible
+## Description
 
-### Description
+Takes a vector as an input and returns all the elements that are not divisible by all choosen numbers from another vector.
 
-Takes a vector as an input and returns all the elements that are not
-divisible by all choosen numbers from another vector.
+## Usage
 
-### Usage
-
-``` R
+```r
 isnt_divisible(inpt_v = c(), divisible_v = c())
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------------- --------------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}             is the input vector
-  `divisible_v`{#divisible_v}   is the vector containing all the numbers that will try to divide those contained in inpt_v
-  ----------------------------- --------------------------------------------------------------------------------------------
+* `inpt_v`: is the input vector
+* `divisible_v`: is the vector containing all the numbers that will try to divide those contained in inpt_v
 
-### Examples
+## Examples
 
-``` R
- print(isnt_divisible(inpt_v=c(1:111), divisible_v=c(2, 4, 5)))
+```r
+print(isnt_divisible(inpt_v=c(1:111), divisible_v=c(2, 4, 5)))
 
 # [1]   1   3   7   9  11  13  17  19  21  23  27  29  31  33  37  39  41  43  47
 #[20]  49  51  53  57  59  61  63  67  69  71  73  77  79  81  83  87  89  91  93
 #[39]  97  99 101 103 107 109 111
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------ -----------------
-  join_n_lvl     R Documentation
-  ------------ -----------------
+# join_n_lvl
 
-## join_n_lvl
+## Description
 
-### Description
+Allow to see the progress of the multi-level joins of the different variables modalities. Here, multi-level joins is a type of join that usually needs a concatenation of two or more variables to make a key. But here, there is no need to proceed to a concatenation. See examples.
 
-Allow to see the progress of the multi-level joins of the different
-variables modalities. Here, multi-level joins is a type of join that
-usually needs a concatenation of two or more variables to make a key.
-But here, there is no need to proceed to a concatenation. See examples.
+## Usage
 
-### Usage
-
-``` R
+```r
 join_n_lvl(frst_datf, scd_datf, join_type = c(), lst_pair = list())
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `frst_datf`{#frst_datf}   is the first data.frame (table)
-  `scd_datf`{#scd_datf}     is the second data.frame (table)
-  `join_type`{#join_type}   is a vector containing all the join type (\"left\", \"inner\", \"right\") for each variable
-  `lst_pair`{#lst_pair}     is a lis of vectors. The vectors refers to a multi-level join. Each vector should have a length of 1. Each vector should have a name. Its name refers to the column name of multi-level variable and its value refers to the column name of the join variable.
-  ------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `frst_datf`: is the first data.frame (table)
+* `scd_datf`: is the second data.frame (table)
+* `join_type`: is a vector containing all the join type ("left", "inner", "right") for each variable
+* `lst_pair`: is a lis of vectors. The vectors refers to a multi-level join. Each vector should have a length of 1. Each vector should have a name. Its name refers to the column name of multi-level variable and its value refers to the column name of the join variable.
 
-### Examples
+## Examples
 
-``` R
+```r
 datf3 <- data.frame("vil"=c("one", "one", "one", "two", "two", "two"),
                      "charac"=c(1, 2, 2, 1, 2, 2),
                      "rev"=c(1250, 1430, 970, 1630, 2231, 1875),
@@ -4300,498 +3492,358 @@ two
 3    one      3
 4   <NA>     NA
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------------- -----------------
-  just_anything2     R Documentation
-  ---------------- -----------------
+# just_anything
 
-## just_anything2
-
-### Description
+## Description
 
 Extract only the letters from all elements of a vector, see examples
 
-### Usage
+## Usage
 
-``` R
+```r
+just_anything(inpt_v, symbol_ = "-", anything_v = c())
+```
+
+## Arguments
+
+* `inpt_v`: is the input vector
+* `symbol_`: is the chosen symbol to replace numbers
+
+## Examples
+
+```r
+print(just_anything(inpt_v = c("oui222jj644", "oui122jj"), 
+symbol_ = "-", anything_v = letters))
+
+[1] "oui-jj-" "oui-jj"
+```
+
+# just_anything2
+
+## Description
+
+Extract only the letters from all elements of a vector, see examples
+
+## Usage
+
+```r
 just_anything2(inpt_v, symbol_ = "-", anything_v = c())
 ```
 
-### Arguments
+## Arguments
 
-  --------------------- -----------------------------------------
-  `inpt_v`{#inpt_v}     is the input vector
-  `symbol_`{#symbol_}   is the chosen symbol to replace numbers
-  --------------------- -----------------------------------------
+* `inpt_v`: is the input vector
+* `symbol_`: is the chosen symbol to replace numbers
 
-### Examples
+## Examples
 
-``` R
+```r
 print(just_anything2(inpt_v = c("oui222jj44", "oui122jj"), 
   symbol_ = "-", anything_v = letters))
 
-[1] "oui---jj--" "oui---jj"  
+[1] "oui---jj--" "oui---jj"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------------- -----------------
-  just_anything3     R Documentation
-  ---------------- -----------------
+# just_anything3
 
-## just_anything3
-
-### Description
+## Description
 
 Extract only the letters from all elements of a vector, see examples
 
-### Usage
+## Usage
 
-``` R
+```r
 just_anything3(inpt_v, anything_v = c())
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- ---------------------
-  `inpt_v`{#inpt_v}   is the input vector
-  ------------------- ---------------------
+* `inpt_v`: is the input vector
 
-### Examples
+## Examples
 
-``` R
+```r
 print(just_anything3(inpt_v = c("oui222jj644", "oui122jj"), 
  anything_v = letters))
 
 [1] "ouijj" "ouijj"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  --------------- -----------------
-  just_anything     R Documentation
-  --------------- -----------------
+# just_chr
 
-## just_anything
-
-### Description
+## Description
 
 Extract only the letters from all elements of a vector, see examples
 
-### Usage
+## Usage
 
-``` R
-just_anything(inpt_v, symbol_ = "-", anything_v = c())
+```r
+just_chr(inpt_v, symbol_ = "-")
 ```
 
-### Arguments
+## Arguments
 
-  --------------------- -----------------------------------------
-  `inpt_v`{#inpt_v}     is the input vector
-  `symbol_`{#symbol_}   is the chosen symbol to replace numbers
-  --------------------- -----------------------------------------
+* `inpt_v`: is the input vector
+* `symbol_`: is the chosen symbol to replace numbers
 
-### Examples
+## Examples
 
-``` R
-print(just_anything(inpt_v = c("oui222jj644", "oui122jj"), 
-symbol_ = "-", anything_v = letters))
+```r
+print(just_chr(inpt_v = c("oui222jj644", "oui122jj"), 
+    symbol_ = "-"))
 
-[1] "oui-jj-" "oui-jj" 
+[1] "oui-jj-" "oui-jj"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ----------- -----------------
-  just_chr2     R Documentation
-  ----------- -----------------
+# just_chr2
 
-## just_chr2
-
-### Description
+## Description
 
 Extract only the letters from all elements of a vector, see examples
 
-### Usage
+## Usage
 
-``` R
+```r
 just_chr2(inpt_v, symbol_ = "-")
 ```
 
-### Arguments
+## Arguments
 
-  --------------------- -----------------------------------------
-  `inpt_v`{#inpt_v}     is the input vector
-  `symbol_`{#symbol_}   is the chosen symbol to replace numbers
-  --------------------- -----------------------------------------
+* `inpt_v`: is the input vector
+* `symbol_`: is the chosen symbol to replace numbers
 
-### Examples
+## Examples
 
-``` R
+```r
 print(just_chr2(inpt_v = c("oui222jj44", "oui122jj"), 
    symbol_ = "-"))
 
-[1] "oui---jj--" "oui---jj"  
+[1] "oui---jj--" "oui---jj"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ----------- -----------------
-  just_chr3     R Documentation
-  ----------- -----------------
+# just_chr3
 
-## just_chr3
-
-### Description
+## Description
 
 Extract only the letters from all elements of a vector, see examples
 
-### Usage
+## Usage
 
-``` R
+```r
 just_chr3(inpt_v)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- ---------------------
-  `inpt_v`{#inpt_v}   is the input vector
-  ------------------- ---------------------
+* `inpt_v`: is the input vector
 
-### Examples
+## Examples
 
-``` R
+```r
 print(just_chr3(inpt_v = c("oui222jj644", "oui122jj")))
 
 [1] "ouijj" "ouijj"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------- -----------------
-  just_chr     R Documentation
-  ---------- -----------------
+# just_nb
 
-## just_chr
-
-### Description
+## Description
 
 Extract only the letters from all elements of a vector, see examples
 
-### Usage
+## Usage
 
-``` R
-just_chr(inpt_v, symbol_ = "-")
+```r
+just_nb(inpt_v, symbol_ = "-")
 ```
 
-### Arguments
+## Arguments
 
-  --------------------- -----------------------------------------
-  `inpt_v`{#inpt_v}     is the input vector
-  `symbol_`{#symbol_}   is the chosen symbol to replace numbers
-  --------------------- -----------------------------------------
+* `inpt_v`: is the input vector
+* `symbol_`: is the chosen symbol to replace numbers
 
-### Examples
+## Examples
 
-``` R
-print(just_chr(inpt_v = c("oui222jj644", "oui122jj"), 
+```r
+print(just_nb(inpt_v = c("oui222jj644", "oui122jj"), 
     symbol_ = "-"))
 
-[1] "oui-jj-" "oui-jj" 
+[1] "-222-44" "-122-"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------- -----------------
-  just_nb2     R Documentation
-  ---------- -----------------
+# just_nb2
 
-## just_nb2
-
-### Description
+## Description
 
 Extract only the letters from all elements of a vector, see examples
 
-### Usage
+## Usage
 
-``` R
+```r
 just_nb2(inpt_v, symbol_ = "-")
 ```
 
-### Arguments
+## Arguments
 
-  --------------------- -----------------------------------------
-  `inpt_v`{#inpt_v}     is the input vector
-  `symbol_`{#symbol_}   is the chosen symbol to replace numbers
-  --------------------- -----------------------------------------
+* `inpt_v`: is the input vector
+* `symbol_`: is the chosen symbol to replace numbers
 
-### Examples
+## Examples
 
-``` R
+```r
 print(just_nb2(inpt_v = c("oui222jj44", "oui122jj"), 
    symbol_ = "-"))
 
-[1] "---222--44" "---122--"  
+[1] "---222--44" "---122--"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------- -----------------
-  just_nb3     R Documentation
-  ---------- -----------------
+# just_nb3
 
-## just_nb3
-
-### Description
+## Description
 
 Extract only the letters from all elements of a vector, see examples
 
-### Usage
+## Usage
 
-``` R
+```r
 just_nb3(inpt_v)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- ---------------------
-  `inpt_v`{#inpt_v}   is the input vector
-  ------------------- ---------------------
+* `inpt_v`: is the input vector
 
-### Examples
+## Examples
 
-``` R
+```r
 print(just_nb3(inpt_v = c("oui222jj644", "oui122jj")))
 
 [1] 222644 122
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  --------- -----------------
-  just_nb     R Documentation
-  --------- -----------------
+# just_not_anything
 
-## just_nb
-
-### Description
+## Description
 
 Extract only the letters from all elements of a vector, see examples
 
-### Usage
+## Usage
 
-``` R
-just_nb(inpt_v, symbol_ = "-")
+```r
+just_not_anything(inpt_v, symbol_ = "-", anything_v = c())
 ```
 
-### Arguments
+## Arguments
 
-  --------------------- -----------------------------------------
-  `inpt_v`{#inpt_v}     is the input vector
-  `symbol_`{#symbol_}   is the chosen symbol to replace numbers
-  --------------------- -----------------------------------------
+* `inpt_v`: is the input vector
+* `symbol_`: is the chosen symbol to replace numbers
 
-### Examples
+## Examples
 
-``` R
-print(just_nb(inpt_v = c("oui222jj644", "oui122jj"), 
-    symbol_ = "-"))
+```r
+print(just_not_anything(inpt_v = c("oui222jj644", "oui122jj"), 
+     symbol_ = "-", anything_v = letters))
 
-[1] "-222-44" "-122-"  
+[1] "-222-644" "-122-"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  -------------------- -----------------
-  just_not_anything2     R Documentation
-  -------------------- -----------------
+# just_not_anything2
 
-## just_not_anything2
-
-### Description
+## Description
 
 Extract only the letters from all elements of a vector, see examples
 
-### Usage
+## Usage
 
-``` R
+```r
 just_not_anything2(inpt_v, symbol_ = "-", anything_v = c())
 ```
 
-### Arguments
+## Arguments
 
-  --------------------- -----------------------------------------
-  `inpt_v`{#inpt_v}     is the input vector
-  `symbol_`{#symbol_}   is the chosen symbol to replace numbers
-  --------------------- -----------------------------------------
+* `inpt_v`: is the input vector
+* `symbol_`: is the chosen symbol to replace numbers
 
-### Examples
+## Examples
 
-``` R
+```r
 print(just_not_anything2(inpt_v = c("oui222jj44", "oui122jj"), 
     symbol_ = "-", anything_v = letters))
 
-[1] "---222-44" "---122--"  
+[1] "---222-44" "---122--"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  -------------------- -----------------
-  just_not_anything3     R Documentation
-  -------------------- -----------------
+# just_not_anything3
 
-## just_not_anything3
-
-### Description
+## Description
 
 Extract only the letters from all elements of a vector, see examples
 
-### Usage
+## Usage
 
-``` R
+```r
 just_not_anything3(inpt_v, anything_v = c())
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- ---------------------
-  `inpt_v`{#inpt_v}   is the input vector
-  ------------------- ---------------------
+* `inpt_v`: is the input vector
 
-### Examples
+## Examples
 
-``` R
+```r
 print(just_not_anything3(inpt_v = c("oui222jj644", "oui122jj"), 
    anything_v = letters))
 
 [1] "222644" "122"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------------- -----------------
-  just_not_anything     R Documentation
-  ------------------- -----------------
+# leap_year
 
-## just_not_anything
-
-### Description
-
-Extract only the letters from all elements of a vector, see examples
-
-### Usage
-
-``` R
-just_not_anything(inpt_v, symbol_ = "-", anything_v = c())
-```
-
-### Arguments
-
-  --------------------- -----------------------------------------
-  `inpt_v`{#inpt_v}     is the input vector
-  `symbol_`{#symbol_}   is the chosen symbol to replace numbers
-  --------------------- -----------------------------------------
-
-### Examples
-
-``` R
-print(just_not_anything(inpt_v = c("oui222jj644", "oui122jj"), 
-     symbol_ = "-", anything_v = letters))
-
-[1] "-222-644" "-122-" 
-```
-:::
-:::
-
-::: container
-::: {role="main"}
-  --------- -----------------
-  leap_yr     R Documentation
-  --------- -----------------
-
-## leap_year
-
-### Description
+## Description
 
 Get if the year is leap
 
-### Usage
+## Usage
 
-``` R
+```r
 leap_yr(year)
 ```
 
-### Arguments
+## Arguments
 
-  --------------- -------------------
-  `year`{#year}   is the input year
-  --------------- -------------------
+* `year`: is the input year
 
-### Examples
+## Examples
 
-``` R
+```r
 print(leap_yr(year=2024))
 
 #[1] TRUE
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------- -----------------
-  left_all     R Documentation
-  ---------- -----------------
+# left_all
 
-## left_all
-
-### Description
+## Description
 
 Allow to apply left join on n dataframes, datatables, tibble
 
-### Usage
+## Usage
 
-``` R
+```r
 left_all(..., keep_val = FALSE, id_v)
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------- --------------------------------------------
-  `...`{#...}             are all the dataframes etc
-  `keep_val`{#keep_val}   is if you want to keep the id column
-  `id_v`{#id_v}           is the common id of all the dataframes etc
-  ----------------------- --------------------------------------------
+* `...`: are all the dataframes etc
+* `keep_val`: is if you want to keep the id column
+* `id_v`: is the common id of all the dataframes etc
 
-### Examples
+## Examples
 
-``` R
+```r
 datf1 <- data.frame(
         "id1"=c(1:5),
         "var1"=c("oui", "oui", "oui", "non", "non")
@@ -4819,135 +3871,93 @@ print(left_all(datf1, datf2, datf2, keep_val=FALSE, id_v="id1"))
 4   4    non   <NA> <NA>
 5   5    non   <NA> <NA>
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  -------------- -----------------
-  letter_to_nb     R Documentation
-  -------------- -----------------
+# letter_to_nb
 
-## letter_to_nb
+## Description
 
-### Description
+Allow to get the number of a spreadsheet based column by the letter ex: AAA = 703
 
-Allow to get the number of a spreadsheet based column by the letter ex:
-AAA = 703
+## Usage
 
-### Usage
-
-``` R
+```r
 letter_to_nb(letter)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- ------------------------------------
-  `letter`{#letter}   is the letter (name of the column)
-  ------------------- ------------------------------------
+* `letter`: is the letter (name of the column)
 
-### Examples
+## Examples
 
-``` R
+```r
 print(letter_to_nb("rty"))
 
 #[1] 12713
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------ -----------------
-  list_files     R Documentation
-  ------------ -----------------
+# list_files
 
-## list_files
+## Description
 
-### Description
+A list.files() based function addressing the need of listing the files with extension a or or extension b ...
 
-A list.files() based function addressing the need of listing the files
-with extension a or or extension b \...
+## Usage
 
-### Usage
-
-``` R
+```r
 list_files(patternc, pathc = ".")
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------- ---------------------------------------------------------------------------------
-  `patternc`{#patternc}   is a vector containing all the exensions you want
-  `pathc`{#pathc}         is the path, can be a vector of multiple path because list.files() supports it.
-  ----------------------- ---------------------------------------------------------------------------------
-:::
-:::
+* `patternc`: is a vector containing all the exensions you want
+* `pathc`: is the path, can be a vector of multiple path because list.files() supports it.
 
-::: container
-::: {role="main"}
-  ------------ -----------------
-  lst_flatnr     R Documentation
-  ------------ -----------------
+# lst_flatnr
 
-## lst_flatnr
-
-### Description
+## Description
 
 Flatten a list to a vector
 
-### Usage
+## Usage
 
-``` R
+```r
 lst_flatnr(inpt_l)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- -------------------
-  `inpt_l`{#inpt_l}   is the input list
-  ------------------- -------------------
+* `inpt_l`: is the input list
 
-### Examples
+## Examples
 
-``` R
+```r
 print(lst_flatnr(inpt_l=list(c(1, 2), c(5, 3), c(7, 2, 7))))
 
 #[1] 1 2 5 3 7 2 7
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------- -----------------
-  match_by     R Documentation
-  ---------- -----------------
+# match_by
 
-## match_by
-
-### Description
+## Description
 
 Allow to match elements by ids, see examples.
 
-### Usage
+## Usage
 
-``` R
+```r
 match_by(to_match_v = c(), inpt_v = c(), inpt_ids = c())
 ```
 
-### Arguments
+## Arguments
 
-  --------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `to_match_v`{#to_match_v}   is the vector containing all the elements to match
-  `inpt_v`{#inpt_v}           is the input vector containong all the elements that could contains the elements to match. Each elements is linked to an element from inpt_ids at any given index, see examples. So inpt_v and inpt_ids must be the same size
-  `inpt_ids`{#inpt_ids}       is the vector containing all the ids for the elements in inpt_v. An element is linked to the id x is both are at the same index. So inpt_v and inpt_ids must be the same size
-  --------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `to_match_v`: is the vector containing all the elements to match
+* `inpt_v`: is the input vector containong all the elements that could contains the elements to match. Each elements is linked to an element from inpt_ids at any given index, see examples. So inpt_v and inpt_ids must be the same size
+* `inpt_ids`: is the vector containing all the ids for the elements in inpt_v. An element is linked to the id x is both are at the same index. So inpt_v and inpt_ids must be the same size
 
-### Examples
+## Examples
 
-``` R
+```r
 print(match_by(to_match_v = c("a"), inpt_v = c("a", "z", "a", "p", "p", "e", "e", "a"), 
                inpt_ids = c(1, 1, 1, 2, 2, 3, 3, 3)))
 
@@ -4963,39 +3973,27 @@ print(match_by(to_match_v = c("a", "e"), inpt_v = c("a", "z", "a", "a", "p", "e"
 
 [1] 1 4 8 6
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------- -----------------
-  multitud     R Documentation
-  ---------- -----------------
+# multitud
 
-## multitud
+## Description
 
-### Description
+From a list containing vectors allow to generate a vector following this rule: list(c("a", "b"), c("1", "2"), c("A", "Z", "E")) --> c("a1A", "b1A", "a2A", "b2A", a1Z, ...)
 
-From a list containing vectors allow to generate a vector following this
-rule: list(c(\"a\", \"b\"), c(\"1\", \"2\"), c(\"A\", \"Z\", \"E\"))
---\> c(\"a1A\", \"b1A\", \"a2A\", \"b2A\", a1Z, \...)
+## Usage
 
-### Usage
-
-``` R
+```r
 multitud(l, sep_ = "")
 ```
 
-### Arguments
+## Arguments
 
-  --------------- --------------------------------------------------------------------------------------
-  `l`{#l}         is the list
-  `sep_`{#sep_}   is the separator between elements (default is set to \"\" as you see in the example)
-  --------------- --------------------------------------------------------------------------------------
+* `l`: is the list
+* `sep_`: is the separator between elements (default is set to "" as you see in the example)
 
-### Examples
+## Examples
 
-``` R
+```r
 print(multitud(l=list(c("a", "b"), c("1", "2"), c("A", "Z", "E"), c("Q", "F")), sep_="/"))
 
 #[1] "a/1/A/Q" "b/1/A/Q" "a/2/A/Q" "b/2/A/Q" "a/1/Z/Q" "b/1/Z/Q" "a/2/Z/Q"
@@ -5003,87 +4001,28 @@ print(multitud(l=list(c("a", "b"), c("1", "2"), c("A", "Z", "E"), c("Q", "F")), 
 #[15] "a/2/A/F" "b/2/A/F" "a/1/Z/F" "b/1/Z/F" "a/2/Z/F" "b/2/Z/F" "a/1/E/F"
 #[22] "b/1/E/F" "a/2/E/F" "b/2/E/F"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------ -----------------
-  nb2_follow     R Documentation
-  ------------ -----------------
+# nb_follow
 
-## nb2_follow
+## Description
 
-### Description
+Allow to get the number of certains patterns that may be after an index of a vector continuously, see examples
 
-Allows to get the number and pattern of potential continuous pattern
-after an index of a vector, see examples
+## Usage
 
-### Usage
-
-``` R
-nb2_follow(inpt_v, inpt_idx, inpt_follow_v = c())
-```
-
-### Arguments
-
-  --------------------------------- -----------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}                 is the input vector
-  `inpt_idx`{#inpt_idx}             is the index
-  `inpt_follow_v`{#inpt_follow_v}   is a vector containing the patterns that are potentially just after inpt_nb
-  --------------------------------- -----------------------------------------------------------------------------
-
-### Examples
-
-``` R
-print(nb2_follow(inpt_v = c(1:12), inpt_idx = 4, inpt_follow_v = c(5)))
-
-[1] 1 5
-# we have 1 times the pattern 5 just after the 4nth index of inpt_v
-
-print(nb2_follow(inpt_v = c(1, "non", "oui", "oui", "oui", "nop", 5), inpt_idx = 2, inpt_follow_v = c("5", "oui")))
-
-[1] "3"   "oui"
-
-# we have 3 times continuously the pattern 'oui' and 0 times the pattern 5 just after the 2nd index of inpt_v
-
-print(nb2_follow(inpt_v = c(1, "non", "5", "5", "5", "nop", 5), inpt_idx = 2, inpt_follow_v = c("5", "oui")))
-
-[1] "3" "5"
-```
-:::
-:::
-
-::: container
-::: {role="main"}
-  ----------- -----------------
-  nb_follow     R Documentation
-  ----------- -----------------
-
-## nb_follow
-
-### Description
-
-Allow to get the number of certains patterns that may be after an index
-of a vector continuously, see examples
-
-### Usage
-
-``` R
+```r
 nb_follow(inpt_v, inpt_idx, inpt_follow_v = c())
 ```
 
-### Arguments
+## Arguments
 
-  --------------------------------- -------------------------------------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}                 is the input vector
-  `inpt_idx`{#inpt_idx}             is the index
-  `inpt_follow_v`{#inpt_follow_v}   is a vector containing all the potential patterns that may follow the element in the vector at the index inpt_idx
-  --------------------------------- -------------------------------------------------------------------------------------------------------------------
+* `inpt_v`: is the input vector
+* `inpt_idx`: is the index
+* `inpt_follow_v`: is a vector containing all the potential patterns that may follow the element in the vector at the index inpt_idx
 
-### Examples
+## Examples
 
-``` R
+```r
 print(nb_follow(inpt_v = c(1:13), inpt_idx = 6, inpt_follow_v = c(5:9)))
 
 [1] 3
@@ -5093,37 +4032,26 @@ print(nb_follow(inpt_v = c("ou", "nn", "pp", "zz", "zz", "ee", "pp"), inpt_idx =
 
 [1] 3
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  -------------- -----------------
-  nb_to_letter     R Documentation
-  -------------- -----------------
+# nb_to_letter
 
-## nb_to_letter
+## Description
 
-### Description
+Allow to get the letter of a spreadsheet based column by the number ex: 703 = AAA
 
-Allow to get the letter of a spreadsheet based column by the number ex:
-703 = AAA
+## Usage
 
-### Usage
-
-``` R
+```r
 nb_to_letter(x)
 ```
 
-### Arguments
+## Arguments
 
-  --------- -----------------------------
-  `x`{#x}   is the number of the column
-  --------- -----------------------------
+* `x`: is the number of the column
 
-### Examples
+## Examples
 
-``` R
+```r
 print(nb_to_letter(5))
 
 [1] "e"
@@ -5180,32 +4108,81 @@ print(nb_to_letter(18279))
 
 [1] "aaaa"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------- -----------------
-  nestr_datf1     R Documentation
-  ------------- -----------------
+# nb2_follow
 
-## nestr_datf1
+## Description
 
-### Description
+Allows to get the number and pattern of potential continuous pattern after an index of a vector, see examples
 
-Allow to write a value (1a) to a dataframe (1b) to its cells that have
-the same coordinates (row and column) than the cells whose value is
-equal to a another special value (2a), from another another dataframe
-(2b). The value (1a) depends of the cell value coordinates of the third
-dataframe (3b). If a cell coordinates (1c) of the first dataframe (1b)
-does not correspond to the coordinates of a good returning cell value
-(2a) from the dataframe (2b), so this cell (1c) can have its value
-changed to the same cell coordinates value (3a) of a third dataframe
-(4b), if (4b) is not set to NA.
+## Usage
 
-### Usage
+```r
+nb2_follow(inpt_v, inpt_idx, inpt_follow_v = c())
+```
 
-``` R
+## Arguments
+
+* `inpt_v`: is the input vector
+* `inpt_idx`: is the index
+* `inpt_follow_v`: is a vector containing the patterns that are potentially just after inpt_nb
+
+## Examples
+
+```r
+print(nb2_follow(inpt_v = c(1:12), inpt_idx = 4, inpt_follow_v = c(5)))
+
+[1] 1 5
+# we have 1 times the pattern 5 just after the 4nth index of inpt_v
+
+print(nb2_follow(inpt_v = c(1, "non", "oui", "oui", "oui", "nop", 5), inpt_idx = 2, inpt_follow_v = c("5", "oui")))
+
+[1] "3"   "oui"
+
+# we have 3 times continuously the pattern 'oui' and 0 times the pattern 5 just after the 2nd index of inpt_v
+
+print(nb2_follow(inpt_v = c(1, "non", "5", "5", "5", "nop", 5), inpt_idx = 2, inpt_follow_v = c("5", "oui")))
+
+[1] "3" "5"
+```
+
+# nest_v
+
+## Description
+
+Nest two vectors according to the following parameters.
+
+## Usage
+
+```r
+nest_v(f_v, t_v, step = 1, after = 1)
+```
+
+## Arguments
+
+* `f_v`: is the vector that will welcome the nested vector t_v
+* `t_v`: is the imbriquator vector
+* `step`: defines after how many elements of f_v the next element of t_v can be put in the output
+* `after`: defines after how many elements of f_v, the begining of t_v can be put
+
+## Examples
+
+```r
+print(nest_v(f_v=c(1, 2, 3, 4, 5, 6), t_v=c("oui", "oui2", "oui3", "oui4", "oui5", "oui6"), 
+     step=2, after=2))
+
+#[1] "1"    "2"    "oui"  "3"    "4"    "oui2" "5"    "6"    "oui3" "oui4"
+```
+
+# nestr_datf1
+
+## Description
+
+Allow to write a value (1a) to a dataframe (1b) to its cells that have the same coordinates (row and column) than the cells whose value is equal to a another special value (2a), from another another dataframe (2b). The value (1a) depends of the cell  value coordinates of the third dataframe (3b). If a cell coordinates (1c) of the first dataframe (1b) does not correspond to the coordinates of a good returning cell value (2a) from the dataframe (2b), so this cell (1c) can have its value changed to the same cell coordinates value (3a) of a third dataframe (4b), if (4b) is not set to NA.
+
+## Usage
+
+```r
 nestr_datf1(
   inptf_datf,
   inptt_pos_datf,
@@ -5215,19 +4192,17 @@ nestr_datf1(
 )
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------------------- ----------------------------------------------------------------
-  `inptf_datf`{#inptf_datf}           is the input dataframe (1b)
-  `inptt_pos_datf`{#inptt_pos_datf}   is the dataframe (2b) that corresponds to the (1a) values
-  `nestr_datf`{#nestr_datf}           is the dataframe (2b) that has the special value (2a)
-  `yes_val`{#yes_val}                 is the special value (2a)
-  `inptt_neg_datf`{#inptt_neg_datf}   is the dataframe (4b) that has the (3a) values, defaults to NA
-  ----------------------------------- ----------------------------------------------------------------
+* `inptf_datf`: is the input dataframe (1b)
+* `inptt_pos_datf`: is the dataframe (2b) that corresponds to the (1a) values
+* `nestr_datf`: is the dataframe (2b) that has the special value (2a)
+* `yes_val`: is the special value (2a)
+* `inptt_neg_datf`: is the dataframe (4b) that has the (3a) values, defaults to NA
 
-### Examples
+## Examples
 
-``` R
+```r
 print(nestr_datf1(inptf_datf=data.frame(c(1, 2, 1), c(1, 5, 7)), 
 inptt_pos_datf=data.frame(c(4, 4, 3), c(2, 1, 2)), 
 inptt_neg_datf=data.frame(c(44, 44, 33), c(12, 12, 12)), 
@@ -5248,44 +4223,30 @@ nestr_datf=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE)), yes_val=TRUE
 #2          2          5
 #3          3          2
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------- -----------------
-  nestr_datf2     R Documentation
-  ------------- -----------------
+# nestr_datf2
 
-## nestr_datf2
+## Description
 
-### Description
+Allow to write a special value (1a) in the cells of a dataframe (1b) that correspond (row and column) to whose of another dataframe (2b) that return another special value (2a). The cells whose coordinates do not match the coordinates of the dataframe (2b), another special value can be written (3a) if not set to NA.
 
-Allow to write a special value (1a) in the cells of a dataframe (1b)
-that correspond (row and column) to whose of another dataframe (2b) that
-return another special value (2a). The cells whose coordinates do not
-match the coordinates of the dataframe (2b), another special value can
-be written (3a) if not set to NA.
+## Usage
 
-### Usage
-
-``` R
+```r
 nestr_datf2(inptf_datf, rtn_pos, rtn_neg = NA, nestr_datf, yes_val = T)
 ```
 
-### Arguments
+## Arguments
 
-  --------------------------- -----------------------------
-  `inptf_datf`{#inptf_datf}   is the input dataframe (1b)
-  `rtn_pos`{#rtn_pos}         is the special value (1a)
-  `rtn_neg`{#rtn_neg}         is the special value (3a)
-  `nestr_datf`{#nestr_datf}   is the dataframe (2b)
-  `yes_val`{#yes_val}         is the special value (2a)
-  --------------------------- -----------------------------
+* `inptf_datf`: is the input dataframe (1b)
+* `rtn_pos`: is the special value (1a)
+* `rtn_neg`: is the special value (3a)
+* `nestr_datf`: is the dataframe (2b)
+* `yes_val`: is the special value (2a)
 
-### Examples
+## Examples
 
-``` R
+```r
 print(nestr_datf2(inptf_datf=data.frame(c(1, 2, 1), c(1, 5, 7)), rtn_pos="yes", 
 rtn_neg="no", nestr_datf=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE)), yes_val=TRUE)) 
 
@@ -5294,113 +4255,54 @@ rtn_neg="no", nestr_datf=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE))
 #2         no         no
 #3        yes        yes
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  -------- -----------------
-  nest_v     R Documentation
-  -------- -----------------
+# new_ordered
 
-## nest_v
+## Description
 
-### Description
+Returns the indexes of elements contained in "w_v" according to "f_v"
 
-Nest two vectors according to the following parameters.
+## Usage
 
-### Usage
-
-``` R
-nest_v(f_v, t_v, step = 1, after = 1)
-```
-
-### Arguments
-
-  ----------------- -----------------------------------------------------------------------------------------
-  `f_v`{#f_v}       is the vector that will welcome the nested vector t_v
-  `t_v`{#t_v}       is the imbriquator vector
-  `step`{#step}     defines after how many elements of f_v the next element of t_v can be put in the output
-  `after`{#after}   defines after how many elements of f_v, the begining of t_v can be put
-  ----------------- -----------------------------------------------------------------------------------------
-
-### Examples
-
-``` R
-print(nest_v(f_v=c(1, 2, 3, 4, 5, 6), t_v=c("oui", "oui2", "oui3", "oui4", "oui5", "oui6"), 
-     step=2, after=2))
-
-#[1] "1"    "2"    "oui"  "3"    "4"    "oui2" "5"    "6"    "oui3" "oui4"
-```
-:::
-:::
-
-::: container
-::: {role="main"}
-  ------------- -----------------
-  new_ordered     R Documentation
-  ------------- -----------------
-
-## new_ordered
-
-### Description
-
-Returns the indexes of elements contained in \"w_v\" according to
-\"f_v\"
-
-### Usage
-
-``` R
+```r
 new_ordered(f_v, w_v, nvr_here = NA)
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------- ----------------------------------------------------------
-  `f_v`{#f_v}             is the input vector
-  `w_v`{#w_v}             is the vector containing the elements that can be in f_v
-  `nvr_here`{#nvr_here}   is a value you are sure is not present in f_v
-  ----------------------- ----------------------------------------------------------
+* `f_v`: is the input vector
+* `w_v`: is the vector containing the elements that can be in f_v
+* `nvr_here`: is a value you are sure is not present in f_v
 
-### Examples
+## Examples
 
-``` R
+```r
 print(new_ordered(f_v=c("non", "non", "non", "oui"), w_v=c("oui", "non", "non")))
 
 #[1] 4 1 2
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------- -----------------
-  normal_dens     R Documentation
-  ------------- -----------------
+# normal_dens
 
-## normal_dens
-
-### Description
+## Description
 
 Calculates the normal distribution probality, see examples
 
-### Usage
+## Usage
 
-``` R
+```r
 normal_dens(target_v = c(), mean, sd)
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------- -------------------------------------------------------
-  `target_v`{#target_v}   is the target value(s) (one or bounded), see examples
-  `mean`{#mean}           is the mean of the normal distribution
-  `sd`{#sd}               is the standard deviation of the normal distribution
-  ----------------------- -------------------------------------------------------
+* `target_v`: is the target value(s) (one or bounded), see examples
+* `mean`: is the mean of the normal distribution
+* `sd`: is the standard deviation of the normal distribution
 
-### Examples
+## Examples
 
-``` R
+```r
 print(normal_dens(target_v = 13, mean = 12, sd = 2))
 
 [1] 0.1760327
@@ -5413,38 +4315,26 @@ print(normal_dens(target_v = c(1, 18), mean = 12, sd = 1.5, step = 0.01))
 
 [1] 0.9999688
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------ -----------------
-  occu     R Documentation
-  ------ -----------------
+# occu
 
-## occu
+## Description
 
-### Description
+Allow to see the occurence of each variable in a vector. Returns a datafame with, as the first column, the all the unique variable of the vector and , in he second column, their occurence respectively.
 
-Allow to see the occurence of each variable in a vector. Returns a
-datafame with, as the first column, the all the unique variable of the
-vector and , in he second column, their occurence respectively.
+## Usage
 
-### Usage
-
-``` R
+```r
 occu(inpt_v)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- ---------------------
-  `inpt_v`{#inpt_v}   the input dataframe
-  ------------------- ---------------------
+* `inpt_v`: the input dataframe
 
-### Examples
+## Examples
 
-``` R
+```r
 print(occu(inpt_v=c("oui", "peut", "peut", "non", "oui")))
 
 #   var occurence
@@ -5452,76 +4342,51 @@ print(occu(inpt_v=c("oui", "peut", "peut", "non", "oui")))
 #2 peut         2
 #3  non         1
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------------- -----------------
-  old_to_new_idx     R Documentation
-  ---------------- -----------------
+# old_to_new_idx
 
-## old_to_new_idx
+## Description
 
-### Description
+Allow to convert index of elements in a vector `inpt_v` to index of an vector type 1:sum(nchar(inpt_v)), see examples
 
-Allow to convert index of elements in a vector `inpt_v` to index of an
-vector type 1:sum(nchar(inpt_v)), see examples
+## Usage
 
-### Usage
-
-``` R
+```r
 old_to_new_idx(inpt_v = c())
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- ---------------------
-  `inpt_v`{#inpt_v}   is the input vector
-  ------------------- ---------------------
+* `inpt_v`: is the input vector
 
-### Examples
+## Examples
 
-``` R
+```r
 print(old_to_new_idx(inpt_v = c("oui", "no", "eeee")))
 
 [1] 1 1 1 2 2 3 3 3 3
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  -------------------- -----------------
-  pairs_findr_merger     R Documentation
-  -------------------- -----------------
+# pairs_findr_merger
 
-## pairs_findr_merger
+## Description
 
-### Description
+Takes two different outputs from pairs_findr and merge them. Can be usefull when the pairs consists in different patterns, for example one output from the pairs_findr function with ptrn1 = "(" and ptrn2 = ")", and a second output from the pairs_findr function with ptrn1 = "[" and ptrn2 = "](%22%20and%20ptrn2%20=%20%22)".
 
-Takes two different outputs from pairs_findr and merge them. Can be
-usefull when the pairs consists in different patterns, for example one
-output from the pairs_findr function with ptrn1 = \"(\" and ptrn2 =
-\")\", and a second output from the pairs_findr function with ptrn1 =
-\"\" and ptrn2 = \"\".
+## Usage
 
-### Usage
-
-``` R
+```r
 pairs_findr_merger(lst1 = list(), lst2 = list())
 ```
 
-### Arguments
+## Arguments
 
-  --------------- -----------------------------------------------
-  `lst1`{#lst1}   is the first ouput from pairs findr function
-  `lst2`{#lst2}   is the second ouput from pairs findr function
-  --------------- -----------------------------------------------
+* `lst1`: is the first ouput from pairs findr function
+* `lst2`: is the second ouput from pairs findr function
 
-### Examples
+## Examples
 
-``` R
+```r
 print(pairs_findr_merger(lst1=list(c(1, 2, 3, 3, 2, 1), c(3, 4, 5, 7, 8, 9)), 
                          lst2=list(c(1, 1), c(1, 2))))
 
@@ -5594,39 +4459,28 @@ print(pairs_findr_merger(lst1 = list(c(1, 1), c(22, 23)),
 [[2]]
 [1]  3 21 22 23 27 32
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------- -----------------
-  pairs_findr     R Documentation
-  ------------- -----------------
+# pairs_findr
 
-## pairs_findr
+## Description
 
-### Description
+Takes a character as input and detect the pairs of pattern, like the parenthesis pais if the pattern is "(" and then ")"
 
-Takes a character as input and detect the pairs of pattern, like the
-parenthesis pais if the pattern is \"(\" and then \")\"
+## Usage
 
-### Usage
-
-``` R
+```r
 pairs_findr(inpt, ptrn1 = "(", ptrn2 = ")")
 ```
 
-### Arguments
+## Arguments
 
-  ----------------- ---------------------------------------------
-  `inpt`{#inpt}     is the input character
-  `ptrn1`{#ptrn1}   is the first pattern ecountered in the pair
-  `ptrn2`{#ptrn2}   is the second pattern in the pair
-  ----------------- ---------------------------------------------
+* `inpt`: is the input character
+* `ptrn1`: is the first pattern ecountered in the pair
+* `ptrn2`: is the second pattern in the pair
 
-### Examples
+## Examples
 
-``` R
+```r
 print(pairs_findr(inpt="ze+(yu*45/(jk+zz)*(o()p))-(re*(rt+qs)-fg)"))
 
 [[1]]
@@ -5635,32 +4489,70 @@ print(pairs_findr(inpt="ze+(yu*45/(jk+zz)*(o()p))-(re*(rt+qs)-fg)"))
 [[2]]
  [1]  4 11 17 19 21 22 24 25 27 31 37 41
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------------- -----------------
-  pairs_insertr2     R Documentation
-  ---------------- -----------------
+# pairs_insertr
 
-## pairs_insertr2
+## Description
 
-### Description
+Takes a character representing an arbitrary condition (like ReGeX for example) or an information (to a parser for example), vectors containing all the pair of pattern that potentially surrounds condition (flagged_pair_v and corr_v), and a vector containing all the conjuntion character, as input and returns the character with all or some of the condition surrounded by the pair characters. See examples. All the pair characters are inserted according to the closest pair they found priotizing those found next to the condition and on the same depth-level and , if not found, the pair found at the n+1 depth-level.
 
-Takes a character representing an arbitrary condition (like ReGeX for
-example) or an information (to a parser for example), vectors containing
-all the pair of pattern that potentially surrounds condition
-(flagged_pair_v and corr_v), and a vector containing all the conjuntion
-character, as input and returns the character with all or some of the
-condition surrounded by the pair characters. See examples. All the pair
-characters are inserted according to the closest pair they found
-priotizing those found next to the condition and on the same depth-level
-and , if not found, the pair found at the n+1 depth-level.
+## Usage
 
-### Usage
+```r
+pairs_insertr(
+  inpt,
+  algo_used = c(1:3),
+  flagged_pair_v = c(")", "]"),
+  corr_v = c("(", "["),
+  flagged_conj_v = c("&", "|")
+)
+```
 
-``` R
+## Arguments
+
+* `inpt`: is the input character representing an arbitrary condition, like ReGex for example, or information to a parser for example
+* `algo_used`: is a vector containing one or more of the 3 algorythms used. The first algorythm will simply put the pair of parenthesis at the condition surrounded and/or after a character flagged (in flagged_conj_v) as a conjunction. The second algorythm will put parenthesis at the condition that are located after other conditions that are surrounded by a pair. The third algorythm will put a pair at all the condition, it is very powerfull but takes a longer time. See examples and make experience to see which combination of algorythm(s) is the most efficient for your use case.
+* `flagged_pair_v`: is a vector containing all the first character of the pairs
+* `corr_v`: is a vector containing all the last character of the pairs
+* `flagged_conj_v`: is a vector containing all the conjunction character
+
+## Examples
+
+```r
+print(pairs_insertr(inpt = "([one]|two|twob)three(four)", algo_used = c(1)))
+
+[1] "([one]|[two]|[twob])three(four)"
+
+print(pairs_insertr(inpt = "(one|[two]|twob)three(four)", algo_used = c(2)))
+
+[1] "(one|[two]|[twob])(three)(four)"
+
+print(pairs_insertr(inpt = "(oneA|[one]|two|twob)three(four)", algo_used = c(1, 2)))
+
+[1] "(oneA|[one]|[two]|[twob])(three)(four)"
+
+print(pairs_insertr(inpt = "(oneA|[one]|two|twob)three(four)", algo_used = c(1, 2, 3)))
+
+[1] "([oneA]|[one]|[two]|[twob])(three)(four)"
+
+print(pairs_insertr(inpt = "(oneA|[one]|two|twob)three(four)", algo_used = c(3)))
+
+[1] "([oneA]|[one]|(two)|(twob))(three)(four)"
+
+print(pairs_insertr(inpt = "(oneA|[one]|two|twob)three((four))", algo_used = c(3)))
+
+[1] "([oneA]|[(one)]|(two)|(twob))(three)((four))"
+```
+
+# pairs_insertr2
+
+## Description
+
+Takes a character representing an arbitrary condition (like ReGeX for example) or an information (to a parser for example), vectors containing all the pair of pattern that potentially surrounds condition (flagged_pair_v and corr_v), and a vector containing all the conjuntion character, as input and returns the character with all or some of the condition surrounded by the pair characters. See examples. All the pair characters are inserted according to the closest pair they found priotizing those found next to the condition and on the same depth-level and , if not found, the pair found at the n+1 depth-level.
+
+## Usage
+
+```r
 pairs_insertr2(
   inpt,
   algo_used = c(1:3),
@@ -5671,20 +4563,18 @@ pairs_insertr2(
 )
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `inpt`{#inpt}                       is the input character representing an arbitrary condition, like ReGex for example, or information to a parser for example
-  `algo_used`{#algo_used}             is a vector containing one or more of the 3 algorythms used. The first algorythm will simply put the pair of parenthesis at the condition surrounded and/or after a character flagged (in flagged_conj_v) as a conjunction. The second algorythm will put parenthesis at the condition that are located after other conditions that are surrounded by a pair. The third algorythm will put a pair at all the condition, it is very powerfull but takes a longer time. See examples and make experience to see which combination of algorythm(s) is the most efficient for your use case.
-  `flagged_pair_v`{#flagged_pair_v}   is a vector containing all the first character of the pairs
-  `corr_v`{#corr_v}                   is a vector containing all the last character of the pairs
-  `flagged_conj_v`{#flagged_conj_v}   is a vector containing all the conjunction character
-  `method`{#method}                   is length 2 vector containing as a first index, the first character of the pair inserted, and at the last index, the second and last character of the pair
-  ----------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `inpt`: is the input character representing an arbitrary condition, like ReGex for example, or information to a parser for example
+* `algo_used`: is a vector containing one or more of the 3 algorythms used. The first algorythm will simply put the pair of parenthesis at the condition surrounded and/or after a character flagged (in flagged_conj_v) as a conjunction. The second algorythm will put parenthesis at the condition that are located after other conditions that are surrounded by a pair. The third algorythm will put a pair at all the condition, it is very powerfull but takes a longer time. See examples and make experience to see which combination of algorythm(s) is the most efficient for your use case.
+* `flagged_pair_v`: is a vector containing all the first character of the pairs
+* `corr_v`: is a vector containing all the last character of the pairs
+* `flagged_conj_v`: is a vector containing all the conjunction character
+* `method`: is length 2 vector containing as a first index, the first character of the pair inserted, and at the last index, the second and last character of the pair
 
-### Examples
+## Examples
 
-``` R
+```r
 print(pairs_insertr2(inpt = "([one]|two|twob)three(four)", algo_used = c(1), method = c("(", ")")))
 
 [1] "([one]|(two)|(twob))three(four)"
@@ -5714,186 +4604,81 @@ print(pairs_insertr2(inpt = "(oneA|[one]|two|twob)three((four))", algo_used = c(
 
 [1] "((oneA)|[one]|(two)|(twob))(three)((four))"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  --------------- -----------------
-  pairs_insertr     R Documentation
-  --------------- -----------------
+# paste_datf
 
-## pairs_insertr
+## Description
 
-### Description
+Return a vector composed of pasted elements from the input dataframe at the same index.
 
-Takes a character representing an arbitrary condition (like ReGeX for
-example) or an information (to a parser for example), vectors containing
-all the pair of pattern that potentially surrounds condition
-(flagged_pair_v and corr_v), and a vector containing all the conjuntion
-character, as input and returns the character with all or some of the
-condition surrounded by the pair characters. See examples. All the pair
-characters are inserted according to the closest pair they found
-priotizing those found next to the condition and on the same depth-level
-and , if not found, the pair found at the n+1 depth-level.
+## Usage
 
-### Usage
-
-``` R
-pairs_insertr(
-  inpt,
-  algo_used = c(1:3),
-  flagged_pair_v = c(")", "]"),
-  corr_v = c("(", "["),
-  flagged_conj_v = c("&", "|")
-)
-```
-
-### Arguments
-
-  ----------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `inpt`{#inpt}                       is the input character representing an arbitrary condition, like ReGex for example, or information to a parser for example
-  `algo_used`{#algo_used}             is a vector containing one or more of the 3 algorythms used. The first algorythm will simply put the pair of parenthesis at the condition surrounded and/or after a character flagged (in flagged_conj_v) as a conjunction. The second algorythm will put parenthesis at the condition that are located after other conditions that are surrounded by a pair. The third algorythm will put a pair at all the condition, it is very powerfull but takes a longer time. See examples and make experience to see which combination of algorythm(s) is the most efficient for your use case.
-  `flagged_pair_v`{#flagged_pair_v}   is a vector containing all the first character of the pairs
-  `corr_v`{#corr_v}                   is a vector containing all the last character of the pairs
-  `flagged_conj_v`{#flagged_conj_v}   is a vector containing all the conjunction character
-  ----------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-### Examples
-
-``` R
-print(pairs_insertr(inpt = "([one]|two|twob)three(four)", algo_used = c(1)))
-
-[1] "([one]|[two]|[twob])three(four)"
-
-print(pairs_insertr(inpt = "(one|[two]|twob)three(four)", algo_used = c(2)))
-
-[1] "(one|[two]|[twob])(three)(four)"
-
-print(pairs_insertr(inpt = "(oneA|[one]|two|twob)three(four)", algo_used = c(1, 2)))
-
-[1] "(oneA|[one]|[two]|[twob])(three)(four)"
-
-print(pairs_insertr(inpt = "(oneA|[one]|two|twob)three(four)", algo_used = c(1, 2, 3)))
-
-[1] "([oneA]|[one]|[two]|[twob])(three)(four)"
-
-print(pairs_insertr(inpt = "(oneA|[one]|two|twob)three(four)", algo_used = c(3)))
-
-[1] "([oneA]|[one]|(two)|(twob))(three)(four)"
-
-print(pairs_insertr(inpt = "(oneA|[one]|two|twob)three((four))", algo_used = c(3)))
-
-[1] "([oneA]|[(one)]|(two)|(twob))(three)((four))"
-```
-:::
-:::
-
-::: container
-::: {role="main"}
-  ------------- -----------------
-  paste_datf2     R Documentation
-  ------------- -----------------
-
-## paste_datf2
-
-### Description
-
-Return a vector composed of pasted elements from the input dataframe at
-the same column.
-
-### Usage
-
-``` R
-paste_datf2(inpt_datf, sep = "")
-```
-
-### Arguments
-
-  ------------------------- ------------------------------------------------------------
-  `inpt_datf`{#inpt_datf}   is the input dataframe
-  `sep`{#sep}               is the separator between pasted elements, defaults to \"\"
-  ------------------------- ------------------------------------------------------------
-
-### Examples
-
-``` R
-print(paste_datf2(inpt_datf=data.frame(c(1, 2, 1), c(33, 22, 55))))
-
-#[1] "121" "332255"
-```
-:::
-:::
-
-::: container
-::: {role="main"}
-  ------------ -----------------
-  paste_datf     R Documentation
-  ------------ -----------------
-
-## paste_datf
-
-### Description
-
-Return a vector composed of pasted elements from the input dataframe at
-the same index.
-
-### Usage
-
-``` R
+```r
 paste_datf(inpt_datf, sep = "")
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- ------------------------------------------------------------
-  `inpt_datf`{#inpt_datf}   is the input dataframe
-  `sep`{#sep}               is the separator between pasted elements, defaults to \"\"
-  ------------------------- ------------------------------------------------------------
+* `inpt_datf`: is the input dataframe
+* `sep`: is the separator between pasted elements, defaults to ""
 
-### Examples
+## Examples
 
-``` R
+```r
 print(paste_datf(inpt_datf=data.frame(c(1, 2, 1), c(33, 22, 55))))
 
 [1] "133" "222" "155"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------------- -----------------
-  pattern_generator     R Documentation
-  ------------------- -----------------
+# paste_datf2
 
-## pattern_generator
+## Description
 
-### Description
+Return a vector composed of pasted elements from the input dataframe at the same column.
 
-Allow to create patterns which have a part that is varying randomly each
-time.
+## Usage
 
-### Usage
+```r
+paste_datf2(inpt_datf, sep = "")
+```
 
-``` R
+## Arguments
+
+* `inpt_datf`: is the input dataframe
+* `sep`: is the separator between pasted elements, defaults to ""
+
+## Examples
+
+```r
+print(paste_datf2(inpt_datf=data.frame(c(1, 2, 1), c(33, 22, 55))))
+
+#[1] "121" "332255"
+```
+
+# pattern_generator
+
+## Description
+
+Allow to create patterns which have a part that is varying randomly each time.
+
+## Usage
+
+```r
 pattern_generator(base_, from_, nb, hmn = 1, after = 1, sep = "")
 ```
 
-### Arguments
+## Arguments
 
-  ----------------- -----------------------------------------------------------------------------------------------------------------------------------------
-  `base_`{#base_}   is the pattern that will be kept
-  `from_`{#from_}   is the vector from which the elements of the random part will be generated
-  `nb`{#nb}         is the number of random pattern chosen for the varying part
-  `hmn`{#hmn}       is how many of varying pattern from the same base will be created
-  `after`{#after}   is set to 1 by default, it means that the varying part will be after the fixed part, set to 0 if you want the varying part to be before
-  `sep`{#sep}       is the separator between all patterns in the returned value
-  ----------------- -----------------------------------------------------------------------------------------------------------------------------------------
+* `base_`: is the pattern that will be kept
+* `from_`: is the vector from which the elements of the random part will be generated
+* `nb`: is the number of random pattern chosen for the varying part
+* `hmn`: is how many of varying pattern from the same base will be created
+* `after`: is set to 1 by default, it means that the varying part will be after the fixed part, set to 0 if you want the varying part to be before
+* `sep`: is the separator between all patterns in the returned value
 
-### Examples
+## Examples
 
-``` R
+```r
 print(pattern_generator(base_="oui", from_=c("er", "re", "ere"), nb=1, hmn=3))
 
 # [1] "ouier" "ouire" "ouier"
@@ -5902,34 +4687,17 @@ print(pattern_generator(base_="oui", from_=c("er", "re", "ere"), nb=2, hmn=3, af
 
 # [1] "er-re-o-u-i"  "ere-re-o-u-i" "ere-er-o-u-i"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  --------------- -----------------
-  pattern_gettr     R Documentation
-  --------------- -----------------
+# pattern_gettr
 
-## pattern_gettr
+## Description
 
-### Description
+Search for pattern(s) contained in a vector in another vector and return a list containing matched one (first index) and their position (second index) according to these rules: First case: Search for patterns strictly, it means that the searched pattern(s) will be matched only if the patterns containded in the vector that is beeing explored by the function are present like this c("pattern_searched", "other", ..., "pattern_searched") and not as c("other_thing pattern_searched other_thing", "other", ..., "pattern_searched other_thing")
+Second case: It is the opposite to the first case, it means that if the pattern is partially present like in the first position and the last, it will be considered like a matched pattern. REGEX can also be used as pattern
 
-Search for pattern(s) contained in a vector in another vector and return
-a list containing matched one (first index) and their position (second
-index) according to these rules: First case: Search for patterns
-strictly, it means that the searched pattern(s) will be matched only if
-the patterns containded in the vector that is beeing explored by the
-function are present like this c(\"pattern_searched\", \"other\", \...,
-\"pattern_searched\") and not as c(\"other_thing pattern_searched
-other_thing\", \"other\", \..., \"pattern_searched other_thing\") Second
-case: It is the opposite to the first case, it means that if the pattern
-is partially present like in the first position and the last, it will be
-considered like a matched pattern. REGEX can also be used as pattern
+## Usage
 
-### Usage
-
-``` R
+```r
 pattern_gettr(
   word_,
   vct,
@@ -5941,21 +4709,19 @@ pattern_gettr(
 )
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `word_`{#word_}               is the vector containing the patterns
-  `vct`{#vct}                   is the vector being searched for patterns
-  `occ`{#occ}                   a vector containing the occurence of the pattern in word\_ to be matched in the vector being searched, if the occurence is 2 for the nth pattern in word\_ and only one occurence is found in vct so no pattern will be matched, put \"forever\" to no longer depend on the occurence for the associated pattern
-  `strict`{#strict}             a vector containing the \"strict\" condition for each nth vector in word\_ (\"strict\" is the string to activate this option)
-  `btwn`{#btwn}                 is a vector containing the condition (\"yes\" to activate this option) meaning that if \"yes\", all elements between two matched patern in vct will be returned , so the patterns you enter in word\_ have to be in the order you think it will appear in vct
-  `all_in_word`{#all_in_word}   is a value (default set to \"yes\", \"no\" to activate this option) that, if activated, won\'t authorized a previous matched pattern to be matched again
-  `notatall`{#notatall}         is a string that you are sure is not present in vct
-  ----------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `word_`: is the vector containing the patterns
+* `vct`: is the vector being searched for patterns
+* `occ`: a vector containing the occurence of the pattern in word_ to be matched in the vector being searched, if the occurence is 2 for the nth pattern in word_ and only one occurence is found in vct so no pattern will be matched, put "forever" to no longer depend on the occurence for the associated pattern
+* `strict`: a vector containing the "strict" condition for each nth vector in word_ ("strict" is the string to activate this option)
+* `btwn`: is a vector containing the condition ("yes" to activate this option) meaning that if "yes", all elements between two matched patern in vct will be returned , so the patterns you enter in word_ have to be in the order you think it will appear in vct
+* `all_in_word`: is a value (default set to "yes", "no" to activate this option) that, if activated, won't authorized a previous matched pattern to be matched again
+* `notatall`: is a string that you are sure is not present in vct
 
-### Examples
+## Examples
 
-``` R
+```r
 print(pattern_gettr(word_=c("oui", "non", "erer"), vct=c("oui", "oui", "non", "oui", 
  "non", "opp", "opp", "erer", "non", "ok"), occ=c(1, 2, 1), 
  btwn=c("no", "yes", "no"), strict=c("no", "no", "ee")))
@@ -5966,25 +4732,16 @@ print(pattern_gettr(word_=c("oui", "non", "erer"), vct=c("oui", "oui", "non", "o
 #[[2]]
 #[1] "oui"  "non"  "opp"  "opp"  "erer"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------------- -----------------
-  pattern_tuning     R Documentation
-  ---------------- -----------------
+# pattern_tuning
 
-## pattern_tuning
+## Description
 
-### Description
+Allow to tune a pattern very precisely and output a vector containing its variations n times.
 
-Allow to tune a pattern very precisely and output a vector containing
-its variations n times.
+## Usage
 
-### Usage
-
-``` R
+```r
 pattern_tuning(
   pattrn,
   spe_nb,
@@ -5995,135 +4752,97 @@ pattern_tuning(
 )
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `pattrn`{#pattrn}               is the character that will be tuned
-  `spe_nb`{#spe_nb}               is the number of new character that will be replaced
-  `spe_l`{#spe_l}                 is the source vector from which the new characters will replace old ones
-  `exclude_type`{#exclude_type}   is character that won\'t be replaced
-  `hmn`{#hmn}                     is how many output the function will return
-  `rg`{#rg}                       is a vector with two parameters (index of the first letter that will be replaced, index of the last letter that will be replaced) default is set to all the letters from the source pattern
-  ------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `pattrn`: is the character that will be tuned
+* `spe_nb`: is the number of new character that will be replaced
+* `spe_l`: is the source vector from which the new characters will replace old ones
+* `exclude_type`: is character that won't be replaced
+* `hmn`: is how many output the function will return
+* `rg`: is a vector with two parameters (index of the first letter that will be replaced, index of the last letter that will be replaced) default is set to all the letters from the source pattern
 
-### Examples
+## Examples
 
-``` R
+```r
 print(pattern_tuning(pattrn="oui", spe_nb=2, spe_l=c("e", "r", "T", "O"), exclude_type="o", hmn=3))
 
 #[1] "orT" "oTr" "oOi"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  --------------- -----------------
-  power_to_char     R Documentation
-  --------------- -----------------
+# power_to_char
 
-## power_to_char
+## Description
 
-### Description
+Convert a scientific number to a string representing normally the number.
 
-Convert a scientific number to a string representing normally the
-number.
+## Usage
 
-### Usage
-
-``` R
+```r
 power_to_char(inpt_v = c())
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- ---------------------------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}   is the input vector containing scientific number, but also other elements that won\'t be taken in count
-  ------------------- ---------------------------------------------------------------------------------------------------------
+* `inpt_v`: is the input vector containing scientific number, but also other elements that won't be taken in count
 
-### Examples
+## Examples
 
-``` R
+```r
 print(power_to_char(inpt_v = c(22 * 10000000, 12, 9 * 0.0000002)))
 
-[1] "2200000000" "12"         "0.0000018" 
+[1] "2200000000" "12"         "0.0000018"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ----------------- -----------------
-  pre_to_post_idx     R Documentation
-  ----------------- -----------------
+# pre_to_post_idx
 
-## pre_to_post_idx
+## Description
 
-### Description
+Allow to convert indexes from a pre-vector to post-indexes based on a current vector, see examples
 
-Allow to convert indexes from a pre-vector to post-indexes based on a
-current vector, see examples
+## Usage
 
-### Usage
-
-``` R
+```r
 pre_to_post_idx(inpt_v = c(), inpt_idx = c(1:length(inppt_v)))
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------- ------------------------------------------
-  `inpt_v`{#inpt_v}       is the new vector
-  `inpt_idx`{#inpt_idx}   is the vector containing the pre-indexes
-  ----------------------- ------------------------------------------
+* `inpt_v`: is the new vector
+* `inpt_idx`: is the vector containing the pre-indexes
 
-### Examples
+## Examples
 
-``` R
+```r
 print(pre_to_post_idx(inpt_v = c("oui", "no", "eee"), inpt_idx = c(1:8)))
 
 [1] 1 1 1 2 2 3 3 3
 
 As if the first vector was c("o", "u", "i", "n", "o", "e", "e", "e")
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  -------------- -----------------
-  ptrn_switchr     R Documentation
-  -------------- -----------------
+# ptrn_switchr
 
-## ptrn_switchr
+## Description
 
-### Description
+Allow to switch, copy pattern for each element in a vector. Here a pattern is the values that are separated by a same separator. Example: "xx-xxx-xx" or "xx/xx/xxxx". The xx like values can be swicthed or copied from whatever index to whatever index. Here, the index is like this 1-2-3 etcetera, it is relative of the separator.
 
-Allow to switch, copy pattern for each element in a vector. Here a
-pattern is the values that are separated by a same separator. Example:
-\"xx-xxx-xx\" or \"xx/xx/xxxx\". The xx like values can be swicthed or
-copied from whatever index to whatever index. Here, the index is like
-this 1-2-3 etcetera, it is relative of the separator.
+## Usage
 
-### Usage
-
-``` R
+```r
 ptrn_switchr(inpt_l, f_idx_l = c(), t_idx_l = c(), sep = "-", default_val = NA)
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `inpt_l`{#inpt_l}             is the input vector
-  `f_idx_l`{#f_idx_l}           is a vector containing the indexes of the pattern you want to be altered.
-  `t_idx_l`{#t_idx_l}           is a vector containing the indexes to which the indexes in f_idx_l are related.
-  `sep`{#sep}                   is the separator, defaults to \"-\"
-  `default_val`{#default_val}   is the default value , if not set to NA, of the pattern at the indexes in f_idx_l. If it is not set to NA, you do not need to fill t_idx_l because this is the vector containing the indexes of the patterns that will be set as new values relatively to the indexes in f_idx_l. Defaults to NA.
-  ----------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `inpt_l`: is the input vector
+* `f_idx_l`: is a vector containing the indexes of the pattern you want to be altered.
+* `t_idx_l`: is a vector containing the indexes to which the indexes in f_idx_l are related.
+* `sep`: is the separator, defaults to "-"
+* `default_val`: is the default value , if not set to NA, of the pattern at the indexes in f_idx_l. If it is not set to NA, you do not need to fill t_idx_l because this is the vector containing the indexes of the patterns that will be set as new values relatively to the indexes in f_idx_l. Defaults to NA.
 
-### Examples
+## Examples
 
-``` R
+```r
 print(ptrn_switchr(inpt_l=c("2022-01-11", "2022-01-14", "2022-01-21", 
 "2022-01-01"), f_idx_l=c(1, 2, 3), t_idx_l=c(3, 2, 1)))
 
@@ -6134,26 +4853,16 @@ print(ptrn_switchr(inpt_l=c("2022-01-11", "2022-01-14", "2022-01-21",
 
 #[1] "ee-01-11" "ee-01-14" "ee-01-21" "ee-01-01"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ----------- -----------------
-  ptrn_twkr     R Documentation
-  ----------- -----------------
+# ptrn_twkr
 
-## ptrn_twkr
+## Description
 
-### Description
+Allow to modify the pattern length of element in a vector according to arguments. What is here defined as a pattern is something like this xx-xx-xx or xx/xx/xxx... So it is defined by the separator
 
-Allow to modify the pattern length of element in a vector according to
-arguments. What is here defined as a pattern is something like this
-xx-xx-xx or xx/xx/xxx\... So it is defined by the separator
+## Usage
 
-### Usage
-
-``` R
+```r
 ptrn_twkr(
   inpt_l,
   depth = "max",
@@ -6164,20 +4873,18 @@ ptrn_twkr(
 )
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `inpt_l`{#inpt_l}             is the input vector
-  `depth`{#depth}               is the number (numeric) of separator it will keep as a result. To keep the number of separator of the element that has the minimum amount of separator do depth=\"min\" and depth=\"max\" (character) for the opposite. This value defaults to \"max\".
-  `sep`{#sep}                   is the separator of the pattern, defaults to \"-\"
-  `default_val`{#default_val}   is the default val that will be placed between the separator, defaults to \"00\"
-  `add_sep`{#add_sep}           defaults to TRUE. If set to FALSE, it will remove the separator for the patterns that are included in the interval between the depth amount of separator and the actual number of separator of the element.
-  `end_`{#end_}                 is if the default_val will be added at the end or at the beginning of each element that lacks length compared to depth
-  ----------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `inpt_l`: is the input vector
+* `depth`: is the number (numeric) of separator it will keep as a result. To keep the number of separator of the element that has the minimum amount of separator do depth="min" and depth="max" (character) for the opposite. This value defaults to "max".
+* `sep`: is the separator of the pattern, defaults to "-"
+* `default_val`: is the default val that will be placed between the separator, defaults to "00"
+* `add_sep`: defaults to TRUE. If set to FALSE, it will remove the separator for the patterns that are included in the interval between the depth amount of separator and the actual number of separator of the element.
+* `end_`: is if the default_val will be added at the end or at the beginning of each element that lacks length compared to depth
 
-### Examples
+## Examples
 
-``` R
+```r
 v <- c("2012-06-22", "2012-06-23", "2022-09-12", "2022")
 
 ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=TRUE)
@@ -6192,37 +4899,56 @@ ptrn_twkr(inpt_l=v, depth="max", sep="-", default_val="00", add_sep=TRUE, end_=F
 
 #[1] "2012-06-22" "2012-06-23" "2022-09-12" "00-00-2022"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ----------------- -----------------
-  read_edm_parser     R Documentation
-  ----------------- -----------------
+# r_print
 
-## read_edm_parser
+## Description
 
-### Description
+Allow to print vector elements in one row.
+
+## Usage
+
+```r
+r_print(inpt_v, sep_ = "and", begn = "This is", end = ", voila!")
+```
+
+## Arguments
+
+* `inpt_v`: is the input vector
+* `sep_`: is the separator between each elements
+* `begn`: is the character put at the beginning of the print
+* `end`: is the character put at the end of the print
+
+## Examples
+
+```r
+print(r_print(inpt_v=c(1:33)))
+
+#[1] "This is  1 and 2 and 3 and 4 and 5 and 6 and 7 and 8 and 9 and 10 and 11 and 12 and 13 
+#and 14 and 15 and 16 and 17 and 18 and 19 and 20 and 21 and 22 and 23 and 24 and 25 and 26 
+#and 27 and 28 and 29 and 30 and 31 and 32 and 33 and , voila!"
+```
+
+# read_edm_parser
+
+## Description
 
 Allow to read data from edm parsed dataset, see examples
 
-### Usage
+## Usage
 
-``` R
+```r
 read_edm_parser(inpt, to_find_v = c())
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- ------------------------------------------------------------------
-  `inpt`{#inpt}             is the input dataset
-  `to_find_v`{#to_find_v}   is the vector containing the path to find the data, see examples
-  ------------------------- ------------------------------------------------------------------
+* `inpt`: is the input dataset
+* `to_find_v`: is the vector containing the path to find the data, see examples
 
-### Examples
+## Examples
 
-``` R
+```r
 print(read_edm_parser("(ok(ee:56))(ok(oui(rr((rr2:6)(rr:5))))(oui(bb(rr2:1)))(ee1:4))", 
 to_find_v = c("ok", "oui", "rr", "rr2")))
 
@@ -6236,77 +4962,52 @@ print(read_edm_parser("(ok(ee:56))(ok(oui(rr((rr2:6)(rr:5))))(oui(bb(rr2:1)))(ee
 
 [1] "56"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------ -----------------
-  rearangr_v     R Documentation
-  ------------ -----------------
+# rearangr_v
 
-## rearangr_v
+## Description
 
-### Description
+Reanranges a vector "w_v" according to another vector "inpt_v". inpt_v contains a sequence of number. inpt_v and w_v have the same size and their indexes are related. The output will be a vector containing all the elements of w_v rearanges in descending or asending order according to inpt_v
 
-Reanranges a vector \"w_v\" according to another vector \"inpt_v\".
-inpt_v contains a sequence of number. inpt_v and w_v have the same size
-and their indexes are related. The output will be a vector containing
-all the elements of w_v rearanges in descending or asending order
-according to inpt_v
+## Usage
 
-### Usage
-
-``` R
+```r
 rearangr_v(inpt_v, w_v, how = "increasing")
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- ------------------------------------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}   is the vector that contains the sequance of number
-  `w_v`{#w_v}         is the vector containing the elements related to inpt_v
-  `how`{#how}         is the way the elements of w_v will be outputed according to if inpt_v will be sorted ascendigly or descendingly
-  ------------------- ------------------------------------------------------------------------------------------------------------------
+* `inpt_v`: is the vector that contains the sequance of number
+* `w_v`: is the vector containing the elements related to inpt_v
+* `how`: is the way the elements of w_v will be outputed according to if inpt_v will be sorted ascendigly or descendingly
 
-### Examples
+## Examples
 
-``` R
+```r
 print(rearangr_v(inpt_v=c(23, 21, 56), w_v=c("oui", "peut", "non"), how="decreasing"))
 
 #[1] "non"  "oui"  "peut"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------------ -----------------
-  regex_spe_detect     R Documentation
-  ------------------ -----------------
+# regex_spe_detect
 
-## regex_spe_detect
+## Description
 
-### Description
+Takes a character as input and returns its regex-friendly character for R.
 
-Takes a character as input and returns its regex-friendly character for
-R.
+## Usage
 
-### Usage
-
-``` R
+```r
 regex_spe_detect(inpt)
 ```
 
-### Arguments
+## Arguments
 
-  --------------- ---------------------
-  `inpt`{#inpt}   the input character
-  --------------- ---------------------
+* `inpt`: the input character
 
-### Examples
+## Examples
 
-``` R
+```r
 print(regex_spe_detect("o"))
 
 [1] "o"
@@ -6325,27 +5026,18 @@ print(regex_spe_detect(inpt="fggfg[fggf]fgfg(vg?fgfgf.gf)"))
 
 print(regex_spe_detect(inpt = "---"))
 
-[1] "\\-\\-\\-" 
+[1] "\\-\\-\\-"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------- -----------------
-  regroupr     R Documentation
-  ---------- -----------------
+# regroupr
 
-## regroupr
+## Description
 
-### Description
+Allow to sort data like "c(X1/Y1/Z1, X2/Y1/Z2, ...)" to what you want. For example it can be to "c(X1/Y1/21, X1/Y1/Z2, ...)"
 
-Allow to sort data like \"c(X1/Y1/Z1, X2/Y1/Z2, \...)\" to what you
-want. For example it can be to \"c(X1/Y1/21, X1/Y1/Z2, \...)\"
+## Usage
 
-### Usage
-
-``` R
+```r
 regroupr(
   inpt_v,
   sep_ = "-",
@@ -6354,18 +5046,16 @@ regroupr(
 )
 ```
 
-### Arguments
+## Arguments
 
-  --------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}     is the input vector containing all the data you want to sort in a specific way. All the sub-elements should be separated by a unique separator such as \"-\" or \"/\"
-  `sep_`{#sep_}         is the unique separator separating the sub-elements in each elements of inpt_v
-  `order`{#order}       is a vector describing the way the elements should be sorted. For example if you want this dataset \"c(X1/Y1/Z1, X2/Y1/Z2, \...)\" to be sorted by the last element you should have order=c(3:1), for example, and it should returns something like this c(X1/Y1/Z1, X2/Y1/Z1, X1/Y2/Z1, \...) assuming you have only two values for X.
-  `l_order`{#l_order}   is a list containing the vectors of values you want to order first for each sub-elements
-  --------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `inpt_v`: is the input vector containing all the data you want to sort in a specific way. All the sub-elements should be separated by a unique separator such as "-" or "/"
+* `sep_`: is the unique separator separating the sub-elements in each elements of inpt_v
+* `order`: is a vector describing the way the elements should be sorted. For example if you want this dataset  "c(X1/Y1/Z1, X2/Y1/Z2, ...)" to be sorted by the last element you should have order=c(3:1), for example, and it should returns something like this c(X1/Y1/Z1, X2/Y1/Z1, X1/Y2/Z1, ...) assuming you have only two values for X.
+* `l_order`: is a list containing the vectors of values you want to order first for each sub-elements
 
-### Examples
+## Examples
 
-``` R
+```r
 vec <- multitud(l=list(c("a", "b"), c("1", "2"), c("A", "Z", "E"), c("Q", "F")), sep_="/")
 
 print(vec)
@@ -6398,37 +5088,27 @@ print(regroupr(inpt_v=vec, sep_="/", order=c(4:1)))
 #[13] "13/13/A/F" "14/14/A/F" "15/15/A/F" "16/16/A/F" "17/17/Z/F" "18/18/Z/F"
 #[19] "19/19/Z/F" "20/20/Z/F" "21/21/E/F" "22/22/E/F" "23/23/E/F" "24/24/E/F"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------ -----------------
-  rm_na_rows     R Documentation
-  ------------ -----------------
+# rm_na_rows
 
-## rm_na_rows
-
-### Description
+## Description
 
 Allow to remove certain rows that contains NA, see examples.
 
-### Usage
+## Usage
 
-``` R
+```r
 rm_na_rows(inpt_datf, flagged_vals = c())
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------------- --------------------------------------------------------------------------------
-  `inpt_datf`{#inpt_datf}         is the input dataframe
-  `flagged_vals`{#flagged_vals}   is a vector containing the characters that will drop any rows that contains it
-  ------------------------------- --------------------------------------------------------------------------------
+* `inpt_datf`: is the input dataframe
+* `flagged_vals`: is a vector containing the characters that will drop any rows that contains it
 
-### Examples
+## Examples
 
-``` R
+```r
 datf <- data.frame(c(1, 2, NA, 4), c(1:4))
 print(datf)
 
@@ -6445,38 +5125,27 @@ print(rm_na_rows(inpt_datf = datf))
 2              2      2
 4              4      4
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  --------- -----------------
-  rm_rows     R Documentation
-  --------- -----------------
+# rm_rows
 
-## rm_rows
+## Description
 
-### Description
+Allow to remove certain rows that contains certains characters, see examples.
 
-Allow to remove certain rows that contains certains characters, see
-examples.
+## Usage
 
-### Usage
-
-``` R
+```r
 rm_rows(inpt_datf, flagged_vals = c())
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------------- --------------------------------------------------------------------------------
-  `inpt_datf`{#inpt_datf}         is the input dataframe
-  `flagged_vals`{#flagged_vals}   is a vector containing the characters that will drop any rows that contains it
-  ------------------------------- --------------------------------------------------------------------------------
+* `inpt_datf`: is the input dataframe
+* `flagged_vals`: is a vector containing the characters that will drop any rows that contains it
 
-### Examples
+## Examples
 
-``` R
+```r
 datf <- data.frame(c(1, 2, NA, 4), c(1:4))
 print(datf)
 
@@ -6492,36 +5161,26 @@ print(rm_rows(inpt_datf = datf, flagged_vals = c(1, 4)))
 2              2      2
 3             NA      3
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------ -----------------
-  row_to_col     R Documentation
-  ------------ -----------------
+# row_to_col
 
-## row_to_col
-
-### Description
+## Description
 
 Allow to reverse a dataframe (rows become cols and cols become rows)
 
-### Usage
+## Usage
 
-``` R
+```r
 row_to_col(inpt_datf)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- ------------------------
-  `inpt_datf`{#inpt_datf}   is the inout dataframe
-  ------------------------- ------------------------
+* `inpt_datf`: is the inout dataframe
 
-### Examples
+## Examples
 
-``` R
+```r
 datf_test <- data.frame(c(1, 11), c(2, 10), c(3, 9), c(4, 8))
 
 print(datf_test)
@@ -6538,77 +5197,27 @@ print(row_to_col(inpt_datf = datf_test))
 3 3  9
 4 4  8
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  --------- -----------------
-  r_print     R Documentation
-  --------- -----------------
+# save_untl
 
-## r_print
+## Description
 
-### Description
+Get the elements in each vector from a list that are located before certain values
 
-Allow to print vector elements in one row.
+## Usage
 
-### Usage
-
-``` R
-r_print(inpt_v, sep_ = "and", begn = "This is", end = ", voila!")
-```
-
-### Arguments
-
-  ------------------- ----------------------------------------------------
-  `inpt_v`{#inpt_v}   is the input vector
-  `sep_`{#sep_}       is the separator between each elements
-  `begn`{#begn}       is the character put at the beginning of the print
-  `end`{#end}         is the character put at the end of the print
-  ------------------- ----------------------------------------------------
-
-### Examples
-
-``` R
-print(r_print(inpt_v=c(1:33)))
-
-#[1] "This is  1 and 2 and 3 and 4 and 5 and 6 and 7 and 8 and 9 and 10 and 11 and 12 and 13 
-#and 14 and 15 and 16 and 17 and 18 and 19 and 20 and 21 and 22 and 23 and 24 and 25 and 26 
-#and 27 and 28 and 29 and 30 and 31 and 32 and 33 and , voila!"
-```
-:::
-:::
-
-::: container
-::: {role="main"}
-  ----------- -----------------
-  save_untl     R Documentation
-  ----------- -----------------
-
-## save_untl
-
-### Description
-
-Get the elements in each vector from a list that are located before
-certain values
-
-### Usage
-
-``` R
+```r
 save_untl(inpt_l = list(), val_to_stop_v = c())
 ```
 
-### Arguments
+## Arguments
 
-  --------------------------------- ---------------------------------------------------------------------------------------------------------------------
-  `inpt_l`{#inpt_l}                 is the input list containing all the vectors
-  `val_to_stop_v`{#val_to_stop_v}   is a vector containing the values that marks the end of the vectors returned in the returned list, see the examples
-  --------------------------------- ---------------------------------------------------------------------------------------------------------------------
+* `inpt_l`: is the input list containing all the vectors
+* `val_to_stop_v`: is a vector containing the values that marks the end of the vectors returned in the returned list, see the examples
 
-### Examples
+## Examples
 
-``` R
+```r
 print(save_untl(inpt_l=list(c(1:4), c(1, 1, 3, 4), c(1, 2, 4, 3)), val_to_stop_v=c(3, 4)))
 
 #[[1]]
@@ -6631,26 +5240,16 @@ print(save_untl(inpt_l=list(c(1:4), c(1, 1, 3, 4), c(1, 2, 4, 3)), val_to_stop_v
 #[[3]]
 #[1] 1 2 4
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------- -----------------
-  see_datf     R Documentation
-  ---------- -----------------
+# see_datf
 
-## see_datf
+## Description
 
-### Description
+Allow to return a dataframe with special value cells (ex: TRUE) where the condition entered are respected and another special value cell (ex: FALSE) where these are not
 
-Allow to return a dataframe with special value cells (ex: TRUE) where
-the condition entered are respected and another special value cell (ex:
-FALSE) where these are not
+## Usage
 
-### Usage
-
-``` R
+```r
 see_datf(
   datf,
   condition_l,
@@ -6661,25 +5260,22 @@ see_datf(
 )
 ```
 
-### Arguments
+## Arguments
 
-  --------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `datf`{#datf}                     is the input dataframe
-  `condition_l`{#condition_l}       is the vector of the possible conditions (\"==\", \"\>\", \"\<\", \"!=\", \"%%\", \"reg\", \"not_reg\", \"sup_nchar\", \"inf_nchar\", \"nchar\") (equal to some elements in a vector, greater than, lower than, not equal to, is divisible by, the regex condition returns TRUE, the regex condition returns FALSE, the length of the elements is strictly superior to X, the length of the element is strictly inferior to X, the length of the element is equal to one element in a vector), you can put the same condition n times.
-  `val_l`{#val_l}                   is the list of vectors containing the values or vector of values related to condition_l (so the vector of values has to be placed in the same order)
-  `conjunction_l`{#conjunction_l}   contains the and or conjunctions, so if the length of condition_l is equal to 3, there will be 2 conjunctions. If the length of conjunction_l is inferior to the length of condition_l minus 1, conjunction_l will match its goal length value with its last argument as the last arguments. For example, c(\"&\", \"\|\", \"&\") with a goal length value of 5 --\> c(\"&\", \"\|\", \"&\", \"&\", \"&\")
-  `rt_val`{#rt_val}                 is a special value cell returned when the conditions are respected
-  `f_val`{#f_val}                   is a special value cell returned when the conditions are not respected
-  --------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `datf`: is the input dataframe
+* `condition_l`: is the vector of the possible conditions ("==", ">", "<", "!=", "%%", "reg", "not_reg", "sup_nchar", "inf_nchar", "nchar") (equal to some elements in a vector, greater than, lower than, not equal to, is divisible by, the regex condition returns TRUE, the regex condition returns FALSE, the length of the elements is strictly superior to X, the length of the element is strictly inferior to X, the length of the element is equal to one element in a vector), you can put the same condition n times.
+* `val_l`: is the list of vectors containing the values or vector of values related to condition_l (so the vector of values has to be placed in the same order)
+* `conjunction_l`: contains the and or conjunctions, so if the length of condition_l is equal to 3, there will be 2 conjunctions. If the length of conjunction_l is inferior to the length of condition_l minus 1, conjunction_l will match its goal length value with its last argument as the last arguments. For example, c("&", "|", "&") with a goal length value of 5 --> c("&", "|", "&", "&", "&")
+* `rt_val`: is a special value cell returned when the conditions are respected
+* `f_val`: is a special value cell returned when the conditions are not respected
 
-### Details
+## Details
 
-This function will return an error if number only comparative conditions
-are given in addition to having character values in the input dataframe.
+This function will return an error if number only comparative conditions are given in addition to having character values in the input dataframe.
 
-### Examples
+## Examples
 
-``` R
+```r
 datf1 <- data.frame(c(1, 2, 4), c("a", "a", "zu"))
 
 print(see_datf(datf=datf1, condition_l=c("nchar"), val_l=list(c(1))))
@@ -6711,36 +5307,26 @@ print(see_datf(datf=datf1, condition_l=c("not_reg"), val_l=list("[a-z]")))
 #2 TRUE FALSE
 #3 TRUE FALSE
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  -------------- -----------------
-  see_diff_all     R Documentation
-  -------------- -----------------
+# see_diff_all
 
-## see_diff_all
-
-### Description
+## Description
 
 Allow to perform the opposite of intersect function to n vectors.
 
-### Usage
+## Usage
 
-``` R
+```r
 see_diff_all(...)
 ```
 
-### Arguments
+## Arguments
 
-  ------------- ---------------------------
-  `...`{#...}   are all the input vectors
-  ------------- ---------------------------
+* `...`: are all the input vectors
 
-### Examples
+## Examples
 
-``` R
+```r
 vec1 <- c(3:6)
 vec2 <- c(1:8)
 vec3 <- c(12:16)
@@ -6753,74 +5339,53 @@ print(see_diff_all(vec1, vec2, vec3))
 
 [1]  3  4  5  6  1  2  7  8 12 13 14 15 16
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------- -----------------
-  see_diff     R Documentation
-  ---------- -----------------
+# see_diff
 
-## see_diff
+## Description
 
-### Description
+Output the opposite of intersect(a, b). Already seen at: https://stackoverflow.com/questions/19797954/function-to-find-symmetric-difference-opposite-of-intersection-in-r
 
-Output the opposite of intersect(a, b). Already seen at:
-https://stackoverflow.com/questions/19797954/function-to-find-symmetric-difference-opposite-of-intersection-in-r
+## Usage
 
-### Usage
-
-``` R
+```r
 see_diff(vec1 = c(), vec2 = c())
 ```
 
-### Arguments
+## Arguments
 
-  --------------- ----------------------
-  `vec1`{#vec1}   is the first vector
-  `vec2`{#vec2}   is the second vector
-  --------------- ----------------------
+* `vec1`: is the first vector
+* `vec2`: is the second vector
 
-### Examples
+## Examples
 
-``` R
+```r
 print(see_diff(c(1:7), c(4:12)))
 
 [1] 1 2 3 8 9 10 11 12
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------- -----------------
-  see_file     R Documentation
-  ---------- -----------------
+# see_file
 
-## see_file
-
-### Description
+## Description
 
 Allow to get the filename or its extension
 
-### Usage
+## Usage
 
-``` R
+```r
 see_file(string_, index_ext = 1, ext = TRUE)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- ------------------------------------------------------------------------------------------------------------
-  `string_`{#string_}       is the input string
-  `index_ext`{#index_ext}   is the occurence of the dot that separates the filename and its extension
-  `ext`{#ext}               is a boolean that if set to TRUE, will return the file extension and if set to FALSE, will return filename
-  ------------------------- ------------------------------------------------------------------------------------------------------------
+* `string_`: is the input string
+* `index_ext`: is the occurence of the dot that separates the filename and its extension
+* `ext`: is a boolean that if set to TRUE, will return the file extension and if set to FALSE, will return filename
 
-### Examples
+## Examples
 
-``` R
+```r
 print(see_file(string_="file.abc.xyz"))
 
 #[1] ".abc.xyz"
@@ -6833,75 +5398,53 @@ print(see_file(string_="file.abc.xyz", index_ext=2))
 
 #[1] ".xyz"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  --------- -----------------
-  see_idx     R Documentation
-  --------- -----------------
+# see_idx
 
-## see_idx
+## Description
 
-### Description
+Returns a boolean vector to see if a set of elements contained in v1 is also contained in another vector (v2)
 
-Returns a boolean vector to see if a set of elements contained in v1 is
-also contained in another vector (v2)
+## Usage
 
-### Usage
-
-``` R
+```r
 see_idx(v1, v2)
 ```
 
-### Arguments
+## Arguments
 
-  ----------- ----------------------
-  `v1`{#v1}   is the first vector
-  `v2`{#v2}   is the second vector
-  ----------- ----------------------
+* `v1`: is the first vector
+* `v2`: is the second vector
 
-### Examples
+## Examples
 
-``` R
+```r
 print(see_idx(v1=c("oui", "non", "peut", "oo"), v2=c("oui", "peut", "oui")))
 
 #[1]  TRUE FALSE  TRUE  FALSE
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------- -----------------
-  see_in_grep     R Documentation
-  ------------- -----------------
+# see_in_grep
 
-## see_in_grep
+## Description
 
-### Description
+Allow to get the indices of the elements of a vector that contains certyain patterns.
+The type of the output may change in function of the input vectors, see examples
 
-Allow to get the indices of the elements of a vector that contains
-certyain patterns. The type of the output may change in function of the
-input vectors, see examples
+## Usage
 
-### Usage
-
-``` R
+```r
 see_in_grep(from_v = c(), in_v = c())
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- -----------------------------------------------------------------------------------------------------------
-  `from_v`{#from_v}   is the vector that may contains elements that contains the same patterns that those in in_v, see examples
-  `in_v`{#in_v}       is a vector that contains the patterns to find
-  ------------------- -----------------------------------------------------------------------------------------------------------
+* `from_v`: is the vector that may contains elements that contains the same patterns that those in in_v, see examples
+* `in_v`: is a vector that contains the patterns to find
 
-### Examples
+## Examples
 
-``` R
+```r
 print(see_in_grep(from_v = c("oui", "non", "peut"), 
                   in_v = c("ou", "eu", "plm")))
 
@@ -6920,68 +5463,43 @@ $eu
 $plm
 [1] -1
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------- -----------------
-  see_in_l     R Documentation
-  ---------- -----------------
+# see_in_l
 
-## see_in_l
+## Description
 
-### Description
+Allow to get the patterns that are present in the elements of a vector, see examples
 
-Allow to get the patterns that are present in the elements of a vector,
-see examples
+## Usage
 
-### Usage
-
-``` R
+```r
 see_in_l(from_v = c(), in_v = c())
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- -----------------------------------------------------------------------------------------------------------
-  `from_v`{#from_v}   is the vector that may contains elements that contains the same patterns that those in in_v, see examples
-  `in_v`{#in_v}       is a vector that contains the patterns to find
-  ------------------- -----------------------------------------------------------------------------------------------------------
+* `from_v`: is the vector that may contains elements that contains the same patterns that those in in_v, see examples
+* `in_v`: is a vector that contains the patterns to find
 
-### Examples
+## Examples
 
-``` R
+```r
 print(see_in_l(from_v = c("oui", "non", "peut"), 
   in_v = c("ou", "pe", "plm")))
 
    ou    pe   plm 
-  TRUE  TRUE FALSE  
+  TRUE  TRUE FALSE
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------ -----------------
-  see_inside     R Documentation
-  ------------ -----------------
+# see_inside
 
-## see_inside
+## Description
 
-### Description
+Return a list containing all the column of the files in the current directory with a chosen file extension and its associated file and sheet if xlsx. For example if i have 2 files "out.csv" with 2 columns and "out.xlsx" with 1 column for its first sheet and 2 for its second one, the return will look like this: c(column_1, column_2, column_3, column_4, column_5, unique_separator, "1-2-out.csv", "3-3-sheet_1-out.xlsx", 4-5-sheet_2-out.xlsx)
 
-Return a list containing all the column of the files in the current
-directory with a chosen file extension and its associated file and sheet
-if xlsx. For example if i have 2 files \"out.csv\" with 2 columns and
-\"out.xlsx\" with 1 column for its first sheet and 2 for its second one,
-the return will look like this: c(column_1, column_2, column_3,
-column_4, column_5, unique_separator, \"1-2-out.csv\",
-\"3-3-sheet_1-out.xlsx\", 4-5-sheet_2-out.xlsx)
+## Usage
 
-### Usage
-
-``` R
+```r
 see_inside(
   pattern_,
   path_ = ".",
@@ -6991,45 +5509,34 @@ see_inside(
 )
 ```
 
-### Arguments
+## Arguments
 
-  --------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `pattern_`{#pattern_}       is a vector containin the file extension of the spreadsheets (\"xlsx\", \"csv\"\...)
-  `path_`{#path_}             is the path where are located the files
-  `sep_`{#sep_}               is a vector containing the separator for each csv type file in order following the operating system file order, if the vector does not match the number of the csv files found, it will assume the separator for the rest of the files is the same as the last csv file found. It means that if you know the separator is the same for all the csv type files, you just have to put the separator once in the vector.
-  `unique_sep`{#unique_sep}   is a pattern that you know will never be in your input files
-  `rec`{#rec}                 is a boolean allows to get files recursively if set to TRUE, defaults to TRUE If x is the return value, to see all the files name, position of the columns and possible sheet name associanted with, do the following:
-  --------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-:::
-:::
+* `pattern_`: is a vector containin the file extension of the spreadsheets ("xlsx", "csv"...)
+* `path_`: is the path where are located the files
+* `sep_`: is a vector containing the separator for each csv type file in order following the operating system file order, if the vector does not match the number of the csv files found, it will assume the separator for the rest of the files is the same as the last csv file found. It means that if you know the separator is the same for all the csv type files, you just have to put the separator once in the vector.
+* `unique_sep`: is a pattern that you know will never be in your input files
+* `rec`: is a boolean allows to get files recursively if set to TRUE, defaults to TRUE
+If x is the return value, to see all the files name, position of the columns and possible sheet name associanted with, do the following:
 
-::: container
-::: {role="main"}
-  ---------- -----------------
-  see_mode     R Documentation
-  ---------- -----------------
+# see_mode
 
-## see_mode
-
-### Description
+## Description
 
 Allow to get the mode of a vector, see examples.
 
-### Usage
+## Usage
 
-``` R
+```r
 see_mode(inpt_v = c())
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- ---------------------
-  `inpt_v`{#inpt_v}   is the input vector
-  ------------------- ---------------------
+* `inpt_v`: is the input vector
 
-### Examples
+## Examples
 
-``` R
+```r
 print(see_mode(inpt_v = c(1, 1, 2, 2, 2, 3, 1, 2)))
 
 [1] 2
@@ -7038,77 +5545,55 @@ print(see_mode(inpt_v = c(1, 1, 2, 2, 2, 3, 1)))
 
 [1] 1
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  --------------- -----------------
-  selected_char     R Documentation
-  --------------- -----------------
+# selected_char
 
-## selected_char
+## Description
 
-### Description
+Allow to generate a char based on a conbinaison on characters from a vector and a number
 
-Allow to generate a char based on a conbinaison on characters from a
-vector and a number
+## Usage
 
-### Usage
-
-``` R
+```r
 selected_char(n, base_char = letters)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- -----------------------------------------------------------------------------
-  `n`{#n}                   is how many sequence of numbers will be generated
-  `base_char`{#base_char}   is the vector containing the elements from which the character is generated
-  ------------------------- -----------------------------------------------------------------------------
+* `n`: is how many sequence of numbers will be generated
+* `base_char`: is the vector containing the elements from which the character is generated
 
-### Examples
+## Examples
 
-``` R
+```r
 print(selected_char(1222))
 
 [1] "zta"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ----------- -----------------
-  sort_date     R Documentation
-  ----------- -----------------
+# sort_date
 
-## sort_date
+## Description
 
-### Description
+Allow to sort any vector containing a date, from any kind of format (my, hdmy, ymd ...), see examples.
 
-Allow to sort any vector containing a date, from any kind of format (my,
-hdmy, ymd \...), see examples.
+## Usage
 
-### Usage
-
-``` R
+```r
 sort_date(inpt_v, frmt, sep_ = "-", ascending = FALSE, give = "value")
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}         is the input vector containing all the dates
-  `frmt`{#frmt}             is the format of the dates, (any combinaison of letters \"s\" for second, \"n\", for minute, \"h\" for hour, \"d\" for day, \"m\" for month and \"y\" for year)
-  `sep_`{#sep_}             is the separator used for the dates
-  `ascending`{#ascending}   is the used to sort the dates
-  `give`{#give}             takes only two values \"index\" or \"value\", if give == \"index\", the function will output the index of sorted dates from inpt_v, if give == \"value\", the function will output the value, it means directly the sorted dates in inpt_v, see examples
-  ------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `inpt_v`: is the input vector containing all the dates
+* `frmt`: is the format  of the dates, (any combinaison of letters "s" for second, "n", for minute, "h" for hour, "d" for day, "m" for month and "y" for year)
+* `sep_`: is the separator used for the dates
+* `ascending`: is the used to sort the dates
+* `give`: takes only two values "index" or "value", if give == "index", the function will output the index of sorted dates from inpt_v, if give == "value", the function will output the value, it means directly the sorted dates in inpt_v, see examples
 
-### Examples
+## Examples
 
-``` R
+```r
 print(sort_date(inpt_v = c("01-11-2025", "08-08-1922", "12-04-1966")
                 , frmt = "dmy", sep_ = "-", ascending = TRUE, give = "value"))
 
@@ -7134,256 +5619,26 @@ print(sort_date(inpt_v = c("03-22-01-11-2025", "56-11-12-04-1966", "23-12-12-04-
 
 [1] "03-22-01-11-2025" "23-12-12-04-1966" "56-11-12-04-1966"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------------- -----------------
-  sort_normal_qual2     R Documentation
-  ------------------- -----------------
+# sort_normal_qual
 
-## sort_normal_qual2
+## Description
 
-### Description
+Sort qualitative modalities that have their frequency normally distributed from an unordered dataset, see examples. This function uses an another algorythm than choose_normal_qual2 which may be faster.
 
-Sort qualitative modalities that have their frequency normally
-distributed from an unordered dataset, see examples. This function uses
-an another algorythm than choose_normal_qual which may be faster.
+## Usage
 
-### Usage
-
-``` R
-sort_normal_qual2(inpt_datf)
-```
-
-### Arguments
-
-  ------------------------- -----------------------------------------------------------------------------------------------------
-  `inpt_datf`{#inpt_datf}   is the input dataframe, containing the values in the first column and their frequency in the second
-  ------------------------- -----------------------------------------------------------------------------------------------------
-
-### Examples
-
-``` R
-sample_val <- round(rnorm(n = 2000, mean = 12, sd = 2), 1)
-sample_freq <- unique_total(sample_val)
-sample_qual <- infinite_char_seq(n = length(sample_freq))
-datf_test <- data.frame(sample_qual, sample_freq)
-datf_test[, 2] <- datf_test[, 2] / sum(datf_test[, 2])
-
-print(datf_test)
-
-   sample_qual sample_freq
-1             a 0.208695652
-2             b 0.234782609
-3             c 0.321739130
-4             d 0.339130435
-5             e 0.330434783
-6             f 0.069565217
-7             g 0.234782609
-8             h 0.400000000
-9             i 0.347826087
-10            j 0.043478261
-11            k 0.278260870
-12            l 0.286956522
-13            m 0.243478261
-14            n 0.147826087
-15            o 0.234782609
-16            p 0.252173913
-17            q 0.417391304
-18            r 0.095652174
-19            s 0.313043478
-20            t 0.008695652
-21            u 0.130434783
-22            v 0.391304348
-23            w 0.113043478
-24            x 0.295652174
-25            y 0.243478261
-26            z 0.382608696
-27           aa 0.008695652
-28           ab 0.347826087
-29           ac 0.330434783
-30           ad 0.321739130
-31           ae 0.347826087
-32           af 0.321739130
-33           ag 0.173913043
-34           ah 0.278260870
-35           ai 0.278260870
-36           aj 0.347826087
-37           ak 0.026086957
-38           al 0.295652174
-39           am 0.226086957
-40           an 0.295652174
-41           ao 0.234782609
-42           ap 0.113043478
-43           aq 0.234782609
-44           ar 0.173913043
-45           as 0.017391304
-46           at 0.252173913
-47           au 0.078260870
-48           av 0.086956522
-49           aw 0.278260870
-50           ax 0.086956522
-51           ay 0.200000000
-52           az 0.295652174
-53           ba 0.052173913
-54           bb 0.165217391
-55           bc 0.408695652
-56           bd 0.269565217
-57           be 0.104347826
-58           bf 0.391304348
-59           bg 0.104347826
-60           bh 0.043478261
-61           bi 0.200000000
-62           bj 0.095652174
-63           bk 0.191304348
-64           bl 0.008695652
-65           bm 0.165217391
-66           bn 0.226086957
-67           bo 0.086956522
-68           bp 0.017391304
-69           bq 0.121739130
-70           br 0.234782609
-71           bs 0.121739130
-72           bt 0.078260870
-73           bu 0.173913043
-74           bv 0.104347826
-75           bw 0.208695652
-76           bx 0.017391304
-77           by 0.243478261
-78           bz 0.034782609
-79           ca 0.017391304
-80           cb 0.008695652
-81           cc 0.173913043
-82           cd 0.147826087
-83           ce 0.060869565
-84           cf 0.017391304
-85           cg 0.060869565
-86           ch 0.008695652
-87           ci 0.208695652
-88           cj 0.043478261
-89           ck 0.052173913
-90           cl 0.017391304
-91           cm 0.017391304
-92           cn 0.095652174
-93           co 0.113043478
-94           cp 0.017391304
-95           cq 0.017391304
-96           cr 0.026086957
-97           cs 0.034782609
-98           ct 0.017391304
-99           cu 0.026086957
-100          cv 0.026086957
-101          cw 0.026086957
-102          cx 0.017391304
-103          cy 0.043478261
-104          cz 0.008695652
-105          da 0.034782609
-106          db 0.017391304
-107          dc 0.060869565
-108          dd 0.008695652
-109          de 0.008695652
-110          df 0.017391304
-111          dg 0.008695652
-112          dh 0.008695652
-113          di 0.017391304
-114          dj 0.008695652
-115          dk 0.008695652
-
-print(sort_normal_qual2(inpt_datf = datf_test))
-
-0.00869565217391304 0.00869565217391304 0.00869565217391304 0.00869565217391304 
-              "aa"                "cb"                "cz"                "de" 
-0.00869565217391304 0.00869565217391304  0.0173913043478261  0.0173913043478261 
-              "dh"                "dk"                "bp"                "ca" 
-0.0173913043478261  0.0173913043478261  0.0173913043478261  0.0173913043478261 
-              "cl"                "cp"                "ct"                "db" 
-0.0173913043478261  0.0260869565217391  0.0260869565217391  0.0347826086956522 
-              "di"                "cr"                "cv"                "bz" 
-0.0347826086956522  0.0434782608695652  0.0434782608695652  0.0521739130434783 
-              "da"                "bh"                "cy"                "ck" 
-0.0608695652173913  0.0695652173913043  0.0782608695652174  0.0869565217391304 
-              "cg"                 "f"                "bt"                "ax" 
-0.0956521739130435  0.0956521739130435   0.104347826086957    0.11304347826087 
-               "r"                "cn"                "bg"                 "w" 
-  0.11304347826087   0.121739130434783   0.147826086956522   0.165217391304348 
-              "co"                "bs"                 "n"                "bb" 
- 0.173913043478261   0.173913043478261   0.191304347826087                 0.2 
-              "ag"                "bu"                "bk"                "bi" 
- 0.208695652173913   0.226086956521739   0.234782608695652   0.234782608695652 
-              "bw"                "am"                 "b"                 "o" 
- 0.234782608695652   0.243478260869565   0.243478260869565   0.252173913043478 
-              "aq"                 "m"                "by"                "at" 
- 0.278260869565217   0.278260869565217    0.28695652173913   0.295652173913043 
-               "k"                "ai"                 "l"                "al" 
- 0.295652173913043   0.321739130434783   0.321739130434783   0.330434782608696 
-              "az"                 "c"                "af"                "ac" 
- 0.347826086956522   0.347826086956522   0.382608695652174   0.391304347826087 
-               "i"                "ae"                 "z"                "bf" 
- 0.408695652173913   0.417391304347826                 0.4   0.391304347826087 
-              "bc"                 "q"                 "h"                 "v" 
- 0.347826086956522   0.347826086956522   0.339130434782609   0.330434782608696 
-              "aj"                "ab"                 "d"                 "e" 
- 0.321739130434783    0.31304347826087   0.295652173913043   0.295652173913043 
-              "ad"                 "s"                "an"                 "x" 
- 0.278260869565217   0.278260869565217   0.269565217391304   0.252173913043478 
-              "aw"                "ah"                "bd"                 "p" 
- 0.243478260869565   0.234782608695652   0.234782608695652   0.234782608695652 
-               "y"                "br"                "ao"                 "g" 
- 0.226086956521739   0.208695652173913   0.208695652173913                 0.2 
-              "bn"                "ci"                 "a"                "ay" 
- 0.173913043478261   0.173913043478261   0.165217391304348   0.147826086956522 
-              "cc"                "ar"                "bm"                "cd" 
- 0.130434782608696   0.121739130434783    0.11304347826087   0.104347826086957 
-               "u"                "bq"                "ap"                "bv" 
- 0.104347826086957  0.0956521739130435  0.0869565217391304  0.0869565217391304 
-              "be"                "bj"                "bo"                "av" 
-0.0782608695652174  0.0608695652173913  0.0608695652173913  0.0521739130434783 
-              "au"                "dc"                "ce"                "ba" 
-0.0434782608695652  0.0434782608695652  0.0347826086956522  0.0260869565217391 
-              "cj"                 "j"                "cs"                "cw" 
-0.0260869565217391  0.0260869565217391  0.0173913043478261  0.0173913043478261 
-              "cu"                "ak"                "df"                "cx" 
-0.0173913043478261  0.0173913043478261  0.0173913043478261  0.0173913043478261 
-              "cq"                "cm"                "cf"                "bx" 
-0.0173913043478261 0.00869565217391304 0.00869565217391304 0.00869565217391304 
-              "as"                "dj"                "dg"                "dd" 
-0.00869565217391304 0.00869565217391304 0.00869565217391304 
-              "ch"                "bl"                 "t" 
-```
-:::
-:::
-
-::: container
-::: {role="main"}
-  ------------------ -----------------
-  sort_normal_qual     R Documentation
-  ------------------ -----------------
-
-## sort_normal_qual
-
-### Description
-
-Sort qualitative modalities that have their frequency normally
-distributed from an unordered dataset, see examples. This function uses
-an another algorythm than choose_normal_qual2 which may be faster.
-
-### Usage
-
-``` R
+```r
 sort_normal_qual(inpt_datf)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- -----------------------------------------------------------------------------------------------------
-  `inpt_datf`{#inpt_datf}   is the input dataframe, containing the values in the first column and their frequency in the second
-  ------------------------- -----------------------------------------------------------------------------------------------------
+* `inpt_datf`: is the input dataframe, containing the values in the first column and their frequency in the second
 
-### Examples
+## Examples
 
-``` R
+```r
 sample_val <- round(rnorm(n = 2000, mean = 12, sd = 2), 1)
 sample_freq <- unique_total(sample_val)
 sample_qual <- infinite_char_seq(n = length(sample_freq))
@@ -7568,39 +5823,235 @@ print(sort_normal_qual(inpt_datf = datf_test))
 0.0173913043478261 0.00869565217391304 0.00869565217391304 0.00869565217391304 
               "as"                "dj"                "dg"                "dd" 
 0.00869565217391304 0.00869565217391304 0.00869565217391304 
-              "ch"                "bl"                 "t" 
+              "ch"                "bl"                 "t"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  --------------- -----------------
-  split_by_step     R Documentation
-  --------------- -----------------
+# sort_normal_qual2
 
-## split_by_step
+## Description
 
-### Description
+Sort qualitative modalities that have their frequency normally distributed from an unordered dataset, see examples. This function uses an another algorythm than choose_normal_qual which may be faster.
+
+## Usage
+
+```r
+sort_normal_qual2(inpt_datf)
+```
+
+## Arguments
+
+* `inpt_datf`: is the input dataframe, containing the values in the first column and their frequency in the second
+
+## Examples
+
+```r
+sample_val <- round(rnorm(n = 2000, mean = 12, sd = 2), 1)
+sample_freq <- unique_total(sample_val)
+sample_qual <- infinite_char_seq(n = length(sample_freq))
+datf_test <- data.frame(sample_qual, sample_freq)
+datf_test[, 2] <- datf_test[, 2] / sum(datf_test[, 2])
+
+print(datf_test)
+
+   sample_qual sample_freq
+1             a 0.208695652
+2             b 0.234782609
+3             c 0.321739130
+4             d 0.339130435
+5             e 0.330434783
+6             f 0.069565217
+7             g 0.234782609
+8             h 0.400000000
+9             i 0.347826087
+10            j 0.043478261
+11            k 0.278260870
+12            l 0.286956522
+13            m 0.243478261
+14            n 0.147826087
+15            o 0.234782609
+16            p 0.252173913
+17            q 0.417391304
+18            r 0.095652174
+19            s 0.313043478
+20            t 0.008695652
+21            u 0.130434783
+22            v 0.391304348
+23            w 0.113043478
+24            x 0.295652174
+25            y 0.243478261
+26            z 0.382608696
+27           aa 0.008695652
+28           ab 0.347826087
+29           ac 0.330434783
+30           ad 0.321739130
+31           ae 0.347826087
+32           af 0.321739130
+33           ag 0.173913043
+34           ah 0.278260870
+35           ai 0.278260870
+36           aj 0.347826087
+37           ak 0.026086957
+38           al 0.295652174
+39           am 0.226086957
+40           an 0.295652174
+41           ao 0.234782609
+42           ap 0.113043478
+43           aq 0.234782609
+44           ar 0.173913043
+45           as 0.017391304
+46           at 0.252173913
+47           au 0.078260870
+48           av 0.086956522
+49           aw 0.278260870
+50           ax 0.086956522
+51           ay 0.200000000
+52           az 0.295652174
+53           ba 0.052173913
+54           bb 0.165217391
+55           bc 0.408695652
+56           bd 0.269565217
+57           be 0.104347826
+58           bf 0.391304348
+59           bg 0.104347826
+60           bh 0.043478261
+61           bi 0.200000000
+62           bj 0.095652174
+63           bk 0.191304348
+64           bl 0.008695652
+65           bm 0.165217391
+66           bn 0.226086957
+67           bo 0.086956522
+68           bp 0.017391304
+69           bq 0.121739130
+70           br 0.234782609
+71           bs 0.121739130
+72           bt 0.078260870
+73           bu 0.173913043
+74           bv 0.104347826
+75           bw 0.208695652
+76           bx 0.017391304
+77           by 0.243478261
+78           bz 0.034782609
+79           ca 0.017391304
+80           cb 0.008695652
+81           cc 0.173913043
+82           cd 0.147826087
+83           ce 0.060869565
+84           cf 0.017391304
+85           cg 0.060869565
+86           ch 0.008695652
+87           ci 0.208695652
+88           cj 0.043478261
+89           ck 0.052173913
+90           cl 0.017391304
+91           cm 0.017391304
+92           cn 0.095652174
+93           co 0.113043478
+94           cp 0.017391304
+95           cq 0.017391304
+96           cr 0.026086957
+97           cs 0.034782609
+98           ct 0.017391304
+99           cu 0.026086957
+100          cv 0.026086957
+101          cw 0.026086957
+102          cx 0.017391304
+103          cy 0.043478261
+104          cz 0.008695652
+105          da 0.034782609
+106          db 0.017391304
+107          dc 0.060869565
+108          dd 0.008695652
+109          de 0.008695652
+110          df 0.017391304
+111          dg 0.008695652
+112          dh 0.008695652
+113          di 0.017391304
+114          dj 0.008695652
+115          dk 0.008695652
+
+print(sort_normal_qual2(inpt_datf = datf_test))
+
+0.00869565217391304 0.00869565217391304 0.00869565217391304 0.00869565217391304 
+              "aa"                "cb"                "cz"                "de" 
+0.00869565217391304 0.00869565217391304  0.0173913043478261  0.0173913043478261 
+              "dh"                "dk"                "bp"                "ca" 
+0.0173913043478261  0.0173913043478261  0.0173913043478261  0.0173913043478261 
+              "cl"                "cp"                "ct"                "db" 
+0.0173913043478261  0.0260869565217391  0.0260869565217391  0.0347826086956522 
+              "di"                "cr"                "cv"                "bz" 
+0.0347826086956522  0.0434782608695652  0.0434782608695652  0.0521739130434783 
+              "da"                "bh"                "cy"                "ck" 
+0.0608695652173913  0.0695652173913043  0.0782608695652174  0.0869565217391304 
+              "cg"                 "f"                "bt"                "ax" 
+0.0956521739130435  0.0956521739130435   0.104347826086957    0.11304347826087 
+               "r"                "cn"                "bg"                 "w" 
+  0.11304347826087   0.121739130434783   0.147826086956522   0.165217391304348 
+              "co"                "bs"                 "n"                "bb" 
+ 0.173913043478261   0.173913043478261   0.191304347826087                 0.2 
+              "ag"                "bu"                "bk"                "bi" 
+ 0.208695652173913   0.226086956521739   0.234782608695652   0.234782608695652 
+              "bw"                "am"                 "b"                 "o" 
+ 0.234782608695652   0.243478260869565   0.243478260869565   0.252173913043478 
+              "aq"                 "m"                "by"                "at" 
+ 0.278260869565217   0.278260869565217    0.28695652173913   0.295652173913043 
+               "k"                "ai"                 "l"                "al" 
+ 0.295652173913043   0.321739130434783   0.321739130434783   0.330434782608696 
+              "az"                 "c"                "af"                "ac" 
+ 0.347826086956522   0.347826086956522   0.382608695652174   0.391304347826087 
+               "i"                "ae"                 "z"                "bf" 
+ 0.408695652173913   0.417391304347826                 0.4   0.391304347826087 
+              "bc"                 "q"                 "h"                 "v" 
+ 0.347826086956522   0.347826086956522   0.339130434782609   0.330434782608696 
+              "aj"                "ab"                 "d"                 "e" 
+ 0.321739130434783    0.31304347826087   0.295652173913043   0.295652173913043 
+              "ad"                 "s"                "an"                 "x" 
+ 0.278260869565217   0.278260869565217   0.269565217391304   0.252173913043478 
+              "aw"                "ah"                "bd"                 "p" 
+ 0.243478260869565   0.234782608695652   0.234782608695652   0.234782608695652 
+               "y"                "br"                "ao"                 "g" 
+ 0.226086956521739   0.208695652173913   0.208695652173913                 0.2 
+              "bn"                "ci"                 "a"                "ay" 
+ 0.173913043478261   0.173913043478261   0.165217391304348   0.147826086956522 
+              "cc"                "ar"                "bm"                "cd" 
+ 0.130434782608696   0.121739130434783    0.11304347826087   0.104347826086957 
+               "u"                "bq"                "ap"                "bv" 
+ 0.104347826086957  0.0956521739130435  0.0869565217391304  0.0869565217391304 
+              "be"                "bj"                "bo"                "av" 
+0.0782608695652174  0.0608695652173913  0.0608695652173913  0.0521739130434783 
+              "au"                "dc"                "ce"                "ba" 
+0.0434782608695652  0.0434782608695652  0.0347826086956522  0.0260869565217391 
+              "cj"                 "j"                "cs"                "cw" 
+0.0260869565217391  0.0260869565217391  0.0173913043478261  0.0173913043478261 
+              "cu"                "ak"                "df"                "cx" 
+0.0173913043478261  0.0173913043478261  0.0173913043478261  0.0173913043478261 
+              "cq"                "cm"                "cf"                "bx" 
+0.0173913043478261 0.00869565217391304 0.00869565217391304 0.00869565217391304 
+              "as"                "dj"                "dg"                "dd" 
+0.00869565217391304 0.00869565217391304 0.00869565217391304 
+              "ch"                "bl"                 "t"
+```
+
+# split_by_step
+
+## Description
 
 Allow to split a string or a vector of strings by a step, see examples.
 
-### Usage
+## Usage
 
-``` R
+```r
 split_by_step(inpt_v, by)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- ------------------------------------------------
-  `inpt_v`{#inpt_v}   is the input character or vector of characters
-  `by`{#by}           is the step
-  ------------------- ------------------------------------------------
+* `inpt_v`: is the input character or vector of characters
+* `by`: is the step
 
-### Examples
+## Examples
 
-``` R
+```r
 print(split_by_step(inpt_v = c("o", "u", "i", "n", "o", "o", "u", "i", "o", "Z"), by = 2))
 
 [1] "ou" "in" "oo" "ui" "oZ"
@@ -7615,27 +6066,18 @@ print(split_by_step(inpt_v = c("o", "u", "i", "n", "o", "o", "u", "i", "o", "Z")
 
 print(split_by_step(inpt_v = 'ouinoouioz', by = 4))
 
-[1] "ouin" "ooui" "oZ"   
+[1] "ouin" "ooui" "oZ"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ----------------- -----------------
-  str_remove_untl     R Documentation
-  ----------------- -----------------
+# str_remove_untl
 
-## str_remove_untl
+## Description
 
-### Description
+Allow to remove pattern within elements from a vector precisely according to their occurence.
 
-Allow to remove pattern within elements from a vector precisely
-according to their occurence.
+## Usage
 
-### Usage
-
-``` R
+```r
 str_remove_untl(
   inpt_v,
   ptrn_rm_v = c(),
@@ -7644,18 +6086,16 @@ str_remove_untl(
 )
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------------------------- ---------------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}                           is the input vector
-  `ptrn_rm_v`{#ptrn_rm_v}                     is a vector containing the patterns to remove
-  `untl`{#untl}                               is a list containing the occurence(s) of each pattern to remove in the elements.
-  `nvr_following_ptrn`{#nvr_following_ptrn}   is a sequel of characters that you are sure is not present in any of the elements in inpt_v
-  ------------------------------------------- ---------------------------------------------------------------------------------------------
+* `inpt_v`: is the input vector
+* `ptrn_rm_v`: is a vector containing the patterns to remove
+* `untl`: is a list containing the occurence(s) of each pattern to remove in the elements.
+* `nvr_following_ptrn`: is a sequel of characters that you are sure is not present in any of the elements in inpt_v
 
-### Examples
+## Examples
 
-``` R
+```r
 vec <- c("45/56-/98mm", "45/56-/98mm", "45/56-/98-mm//")
 
 print(str_remove_untl(inpt_v=vec, ptrn_rm_v=c("-", "/"), untl=list(c("max"), c(1))))
@@ -7670,38 +6110,28 @@ print(str_remove_untl(inpt_v=vec[1], ptrn_rm_v=c("-", "/"), untl=c("max")))
 
 #[1] "455698mm" "455698mm" "455698mm"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ---------- -----------------
-  sub_mult     R Documentation
-  ---------- -----------------
+# sub_mult
 
-## sub_mult
-
-### Description
+## Description
 
 Performs a sub operation with n patterns and replacements.
 
-### Usage
+## Usage
 
-``` R
+```r
 sub_mult(inpt_v, pattern_v = c(), replacement_v = c())
 ```
 
-### Arguments
+## Arguments
 
-  --------------------------------- -------------------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}                 is a vector containing all the elements that contains expressions to be substituted
-  `pattern_v`{#pattern_v}           is a vector containing all the patterns to be substituted in any elements of inpt_v
-  `replacement_v`{#replacement_v}   is a vector containing the expression that are going to substituate those provided by pattern_v
-  --------------------------------- -------------------------------------------------------------------------------------------------
+* `inpt_v`: is a vector containing all the elements that contains expressions to be substituted
+* `pattern_v`: is a vector containing all the patterns to be substituted in any elements of inpt_v
+* `replacement_v`: is a vector containing the expression that are going to substituate those provided by pattern_v
 
-### Examples
+## Examples
 
-``` R
+```r
 print(sub_mult(inpt_v = c("X and Y programming languages are great", "More X, more X!"), 
                pattern_v = c("X", "Y", "Z"), 
                replacement_v = c("C", "R", "GO")))
@@ -7709,37 +6139,26 @@ print(sub_mult(inpt_v = c("X and Y programming languages are great", "More X, mo
 [1] "C and R programming languages are great"
 [2] "More C, more X!"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ----------------- -----------------
-  successive_diff     R Documentation
-  ----------------- -----------------
+# successive_diff
 
-## successive_diff
+## Description
 
-### Description
+Allow to see the difference beteen the suxxessive elements of an numeric vector
 
-Allow to see the difference beteen the suxxessive elements of an numeric
-vector
+## Usage
 
-### Usage
-
-``` R
+```r
 successive_diff(inpt_v)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- -----------------------------
-  `inpt_v`{#inpt_v}   is the input numeric vector
-  ------------------- -----------------------------
+* `inpt_v`: is the input numeric vector
 
-### Examples
+## Examples
 
-``` R
+```r
 print(successive_diff(c(1:10)))
 
 [1] 1 1 1 1 1
@@ -7748,41 +6167,29 @@ print(successive_diff(c(1:11, 13, 19)))
 
 [1] 1 1 1 1 1 2 6
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------- -----------------
-  swipr     R Documentation
-  ------- -----------------
+# swipr
 
-## swipr
+## Description
 
-### Description
+Returns an ordered dataframes according to the elements order given. The input datafram has two columns, one with the ids which can be bonded to multiple elements in the other column.
 
-Returns an ordered dataframes according to the elements order given. The
-input datafram has two columns, one with the ids which can be bonded to
-multiple elements in the other column.
+## Usage
 
-### Usage
-
-``` R
+```r
 swipr(inpt_datf, how_to = c(), id_w = 2, id_ids = 1)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- ---------------------------------------------------------
-  `inpt_datf`{#inpt_datf}   is the input dataframe
-  `how_to`{#how_to}         is a vector containing the elements in the order wanted
-  `id_w`{#id_w}             is the column number or the column name of the elements
-  `id_ids`{#id_ids}         is the column number or the column name of the ids
-  ------------------------- ---------------------------------------------------------
+* `inpt_datf`: is the input dataframe
+* `how_to`: is a vector containing the elements in the order wanted
+* `id_w`: is the column number or the column name of the elements
+* `id_ids`: is the column number or the column name of the ids
 
-### Examples
+## Examples
 
-``` R
+```r
 datf <- data.frame("col1"=c("Af", "Al", "Al", "Al", "Arg", "Arg", "Arg", "Arm", "Arm", "Al"),
 
         "col2"=c("B", "B", "G", "S", "B", "S", "G", "B", "G", "B"))
@@ -7801,37 +6208,26 @@ print(swipr(inpt_datf=datf, how_to=c("G", "S", "B")))
 9   Arm    B
 10   Al    B
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------ -----------------
-  test_order     R Documentation
-  ------------ -----------------
+# test_order
 
-## test_order
+## Description
 
-### Description
+Allow to get if two vectors have their commun elements in the same order, see examples
 
-Allow to get if two vectors have their commun elements in the same
-order, see examples
+## Usage
 
-### Usage
-
-``` R
+```r
 test_order(inpt_v_from, inpt_v_test)
 ```
 
-### Arguments
+## Arguments
 
-  ----------- -----------------------------------------------------------------------------------------
-  `is`{#is}   the vector we want to test if its commun element with inpt_v_from are in the same order
-  ----------- -----------------------------------------------------------------------------------------
+* `is`: the vector we want to test if its commun element with inpt_v_from are in the same order
 
-### Examples
+## Examples
 
-``` R
+```r
 print(test_order(inpt_v_from = c(1:8), inpt_v_test = c(1, 4)))
 
 [1] TRUE
@@ -7840,39 +6236,28 @@ print(test_order(inpt_v_from = c(1:8), inpt_v_test = c(1, 4, 2)))
 
 [1] FALSE
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ----------- -----------------
-  to_unique     R Documentation
-  ----------- -----------------
+# to_unique
 
-## to_unique
+## Description
 
-### Description
+Allow to transform a vector containing elements that have more than 1 occurence to a vector with only uniques elements.
 
-Allow to transform a vector containing elements that have more than 1
-occurence to a vector with only uniques elements.
+## Usage
 
-### Usage
-
-``` R
+```r
 to_unique(inpt_v, distinct_type = "suffix", distinct_val = "number", sep = "-")
 ```
 
-### Arguments
+## Arguments
 
-  --------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}                 is the input vectors
-  `distinct_type`{#distinct_type}   takes two values: suffix or prefix
-  `distinct_val`{#distinct_val}     takes two values: number (unique sequence of number to differencfiate each value) or letter (unique sequence of letters to differenciate each value)
-  --------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------
+* `inpt_v`: is the input vectors
+* `distinct_type`: takes two values: suffix or prefix
+* `distinct_val`: takes two values: number (unique sequence of number to differencfiate each value) or letter (unique sequence of letters to differenciate each value)
 
-### Examples
+## Examples
 
-``` R
+```r
 print(to_unique(inpt_v = c("a", "a", "e", "a", "i", "i"), 
                 distinct_type = "suffix", 
                 distinct_val = "number", 
@@ -7899,38 +6284,28 @@ print(to_unique(inpt_v = c("a", "a", "e", "a", "i", "i"),
                 distinct_val = "letter", 
                 sep = "_"))
 
-[1] "a_a" "b_a" "e"   "c_a" "a_i" "b_i" 
+[1] "a_a" "b_a" "e"   "c_a" "a_i" "b_i"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ----------- -----------------
-  union_all     R Documentation
-  ----------- -----------------
+# union_all
 
-## union_all
-
-### Description
+## Description
 
 Allow to perform a union function to n vectors.
 
-### Usage
+## Usage
 
-``` R
+```r
 union_all(...)
 ```
 
-### Arguments
+## Arguments
 
-  ------------- ---------------------------
-  `...`{#...}   are all the input vectors
-  ------------- ---------------------------
+* `...`: are all the input vectors
 
-### Examples
+## Examples
 
-``` R
+```r
 print(union_all(c(1, 2), c(3, 4), c(1:8)))
 
 [1] 1 2 3 4 5 6 7 8
@@ -7939,76 +6314,55 @@ print(union_all(c(1, 2), c(3, 4), c(7:8)))
 
 [1] 1 2 3 4 7 8
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------ -----------------
-  union_keep     R Documentation
-  ------------ -----------------
+# union_keep
 
-## union_keep
+## Description
 
-### Description
+Performs a union operation keeping the number of elements of all input vectors, see examples
 
-Performs a union operation keeping the number of elements of all input
-vectors, see examples
+## Usage
 
-### Usage
-
-``` R
+```r
 union_keep(...)
 ```
 
-### Arguments
+## Arguments
 
-  ------------- ---------------------------
-  `...`{#...}   are all the input vectors
-  ------------- ---------------------------
+* `...`: are all the input vectors
 
-### Examples
+## Examples
 
-``` R
+```r
 print(union_keep(c("a", "ee", "ee"), c("p", "p", "a", "i"), c("a", "a", "z")))
 
 [1] "a"  "ee" "ee" "p"  "p"  "i"  "z" 
 
 print(union_keep(c("a", "ee", "ee"), c("p", "p", "a", "i")))
 
-[1] "a"  "ee" "ee" "p"  "p"  "i" 
+[1] "a"  "ee" "ee" "p"  "p"  "i"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------- -----------------
-  unique_datf     R Documentation
-  ------------- -----------------
+# unique_datf
 
-## unique_datf
-
-### Description
+## Description
 
 Returns the input dataframe with the unique columns or rows.
 
-### Usage
+## Usage
 
-``` R
+```r
 unique_datf(inpt_datf, col = FALSE)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `inpt_datf`{#inpt_datf}   is the input dataframe
-  `col`{#col}               is a parameter that specifies if the dataframe returned should have unique columns or rows, defaults to F, so the dataframe returned by default has unique rows
-  ------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `inpt_datf`: is the input dataframe
+* `col`: is a parameter that specifies if the dataframe returned should have unique columns or rows, defaults to F, so the dataframe returned by default has unique rows
 
-### Examples
+## Examples
 
-``` R
+```r
 datf1 <- data.frame(c(1, 2, 1, 3), c("a", "z", "a", "p"))
 
 print(datf1)
@@ -8044,108 +6398,75 @@ print(unique_datf(inpt_datf=datf1, col=TRUE))
 #3     1     a
 #4     3     p
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------------- -----------------
-  unique_ltr_from_v     R Documentation
-  ------------------- -----------------
+# unique_ltr_from_v
 
-## unique_ltr_from_v
+## Description
 
-### Description
+Returns the unique characters contained in all the elements from an input vector "inpt_v"
 
-Returns the unique characters contained in all the elements from an
-input vector \"inpt_v\"
+## Usage
 
-### Usage
-
-``` R
+```r
 unique_ltr_from_v(inpt_v, keep_v = c("?", "!", ":", "&", ",", ".", letters))
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- -------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}   is the input vector containing all the elements
-  `keep_v`{#keep_v}   is the vector containing all the characters that the elements in inpt_v may contain
-  ------------------- -------------------------------------------------------------------------------------
+* `inpt_v`: is the input vector containing all the elements
+* `keep_v`: is the vector containing all the characters that the elements in inpt_v may contain
 
-### Examples
+## Examples
 
-``` R
+```r
 print(unique_ltr_from_v(inpt_v=c("bonjour", "lpoerc", "nonnour", "bonnour", "nonjour", "aurevoir")))
 
-#[1] "b" "o" "n" "j" "u" "r" "l" "p" "e" "c" "a" "v" "i" 
+#[1] "b" "o" "n" "j" "u" "r" "l" "p" "e" "c" "a" "v" "i"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------ -----------------
-  unique_pos     R Documentation
-  ------------ -----------------
+# unique_pos
 
-## unique_pos
-
-### Description
+## Description
 
 Allow to find the first index of the unique values from a vector.
 
-### Usage
+## Usage
 
-``` R
+```r
 unique_pos(vec)
 ```
 
-### Arguments
+## Arguments
 
-  ------------- ---------------------
-  `vec`{#vec}   is the input vector
-  ------------- ---------------------
+* `vec`: is the input vector
 
-### Examples
+## Examples
 
-``` R
+```r
 print(unique_pos(vec=c(3, 4, 3, 5, 6)))
 
 #[1] 1 2 4 5
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  -------------- -----------------
-  unique_total     R Documentation
-  -------------- -----------------
+# unique_total
 
-## unique_total
+## Description
 
-### Description
+Returns a vector with the total amount of occurences for each element in the input vector. The occurences of each element follow the same order as the unique function does, see examples
 
-Returns a vector with the total amount of occurences for each element in
-the input vector. The occurences of each element follow the same order
-as the unique function does, see examples
+## Usage
 
-### Usage
-
-``` R
+```r
 unique_total(inpt_v = c())
 ```
 
-### Arguments
+## Arguments
 
-  ------------------- -------------------------------------------------
-  `inpt_v`{#inpt_v}   is the input vector containing all the elements
-  ------------------- -------------------------------------------------
+* `inpt_v`: is the input vector containing all the elements
 
-### Examples
+## Examples
 
-``` R
+```r
 print(unique_total(inpt_v = c(1:12, 1)))
 
  [1] 2 1 1 1 1 1 1 1 1 1 1 1
@@ -8159,77 +6480,56 @@ names(vec) <- c(1:15)
 print(unique_total(inpt_v = vec))
 
  1  2  3  4  5  6  7  8  9 10 11 12 
- 2  1  1  1  1  1  1  1  1  1  3  1 
+ 2  1  1  1  1  1  1  1  1  1  3  1
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------ -----------------
-  until_stnl     R Documentation
-  ------------ -----------------
+# until_stnl
 
-## until_stnl
+## Description
 
-### Description
+Maxes a vector to a chosen length. ex: if i want my vector c(1, 2) to be 5 of length this function will return me: c(1, 2, 1, 2, 1)
 
-Maxes a vector to a chosen length. ex: if i want my vector c(1, 2) to be
-5 of length this function will return me: c(1, 2, 1, 2, 1)
+## Usage
 
-### Usage
-
-``` R
+```r
 until_stnl(vec1, goal)
 ```
 
-### Arguments
+## Arguments
 
-  --------------- ------------------------
-  `vec1`{#vec1}   is the input vector
-  `goal`{#goal}   is the length to reach
-  --------------- ------------------------
+* `vec1`: is the input vector
+* `goal`: is the length to reach
 
-### Examples
+## Examples
 
-``` R
+```r
 print(until_stnl(vec1=c(1, 3, 2), goal=56))
 
 # [1] 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3
 #[39] 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3 2 1 3
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  -------------- -----------------
-  val_replacer     R Documentation
-  -------------- -----------------
+# val_replacer
 
-## val_replacer
-
-### Description
+## Description
 
 Allow to replace value from dataframe to another one.
 
-### Usage
+## Usage
 
-``` R
+```r
 val_replacer(datf, val_replaced, val_replacor = TRUE)
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------------- ---------------------------------------------
-  `datf`{#datf}                   is the input dataframe
-  `val_replaced`{#val_replaced}   is a vector of the value(s) to be replaced
-  `val_replacor`{#val_replacor}   is the value that will replace val_replaced
-  ------------------------------- ---------------------------------------------
+* `datf`: is the input dataframe
+* `val_replaced`: is a vector of the value(s) to be replaced
+* `val_replacor`: is the value that will replace val_replaced
 
-### Examples
+## Examples
 
-``` R
+```r
 print(val_replacer(datf=data.frame(c(1, "oo4", TRUE, FALSE), c(TRUE, FALSE, TRUE, TRUE)), 
      val_replaced=c(TRUE), val_replacor="NA"))
 
@@ -8239,26 +6539,16 @@ print(val_replacer(datf=data.frame(c(1, "oo4", TRUE, FALSE), c(TRUE, FALSE, TRUE
 #3                NA            NA
 #4             FALSE            NA
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------- -----------------
-  vec_in_datf     R Documentation
-  ------------- -----------------
+# vec_in_datf
 
-## vec_in_datf
+## Description
 
-### Description
+Allow to get if a vector is in a dataframe. Returns the row and column of the vector in the dataframe if the vector is contained in the dataframe.
 
-Allow to get if a vector is in a dataframe. Returns the row and column
-of the vector in the dataframe if the vector is contained in the
-dataframe.
+## Usage
 
-### Usage
-
-``` R
+```r
 vec_in_datf(
   inpt_datf,
   inpt_vec = c(),
@@ -8268,19 +6558,17 @@ vec_in_datf(
 )
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------------- -------------------------------------------------------------------------------------
-  `inpt_datf`{#inpt_datf}         is the input dataframe
-  `inpt_vec`{#inpt_vec}           is the vector that may be in the input dataframe
-  `coeff`{#coeff}                 is the \"slope coefficient\" of inpt_vec
-  `stop_untl`{#stop_untl}         is the maximum number of the input vector the function returns, if in the dataframe
-  `conventional`{#conventional}   is if a positive slope coefficient means that the vector goes upward or downward
-  ------------------------------- -------------------------------------------------------------------------------------
+* `inpt_datf`: is the input dataframe
+* `inpt_vec`: is the vector that may be in the input dataframe
+* `coeff`: is the "slope coefficient" of inpt_vec
+* `stop_untl`: is the maximum number of the input vector the function returns, if in the dataframe
+* `conventional`: is if a positive slope coefficient means that the vector goes upward or downward
 
-### Examples
+## Examples
 
-``` R
+```r
 datf1 <- data.frame(c(1:5), c(5:1), c("a", "z", "z", "z", "a"))
 
 print(datf1)
@@ -8322,39 +6610,29 @@ print(vec_in_datf(inpt_datf=datf1, inpt_vec=c(1, "z"), coeff=-1, conventional=TR
 
 #[1] 4 2 5 2
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ----------------- -----------------
-  vector_replacor     R Documentation
-  ----------------- -----------------
+# vector_replacor
 
-## vector_replacor
-
-### Description
+## Description
 
 Allow to replace certain values in a vector.
 
-### Usage
+## Usage
 
-``` R
+```r
 vector_replacor(inpt_v = c(), sus_val = c(), rpl_val = c(), grep_ = FALSE)
 ```
 
-### Arguments
+## Arguments
 
-  --------------------- ---------------------------------------------------------------------------------------------------------------------------------
-  `inpt_v`{#inpt_v}     is the input vector
-  `sus_val`{#sus_val}   is a vector containing all the values that will be replaced
-  `rpl_val`{#rpl_val}   is a vector containing the value of the elements to be replaced (sus_val), so sus_val and rpl_val should be the same size
-  `grep_`{#grep_}       is if the elements in sus_val should be equal to the elements to replace in inpt_v or if they just should found in the elements
-  --------------------- ---------------------------------------------------------------------------------------------------------------------------------
+* `inpt_v`: is the input vector
+* `sus_val`: is a vector containing all the values that will be replaced
+* `rpl_val`: is a vector containing the value of the elements to be replaced (sus_val), so sus_val and rpl_val should be the same size
+* `grep_`: is if the elements in sus_val should be equal to the elements to replace in inpt_v or if they just should found in the elements
 
-### Examples
+## Examples
 
-``` R
+```r
 print(vector_replacor(inpt_v=c(1:15), sus_val=c(3, 6, 8, 12), 
      rpl_val=c("oui", "non", "e", "a")))
 
@@ -8365,41 +6643,31 @@ print(vector_replacor(inpt_v=c("non", "zez", "pp a ftf", "fdatfd", "assistance",
 "ert", "repas", "repos"), 
 sus_val=c("pp", "as", "re"), rpl_val=c("oui", "non", "zz"), grep_=TRUE))
 
-#[1] "non"  "zez"  "oui"  "fdatfd" "non"  "ert"  "non"  "zz"  
+#[1] "non"  "zez"  "oui"  "fdatfd" "non"  "ert"  "non"  "zz"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  -------------- -----------------
-  vlookup_datf     R Documentation
-  -------------- -----------------
+# vlookup_datf
 
-## vlookup_datf
-
-### Description
+## Description
 
 Alow to perform a vlookup on a dataframe
 
-### Usage
+## Usage
 
-``` R
+```r
 vlookup_datf(datf, v_id, col_id = 1, included_col_id = "yes")
 ```
 
-### Arguments
+## Arguments
 
-  ------------------------------------- ----------------------------------------------------------------
-  `datf`{#datf}                         is the input dataframe
-  `v_id`{#v_id}                         is a vector containing the ids
-  `col_id`{#col_id}                     is the column that contains the ids (default is equal to 1)
-  `included_col_id`{#included_col_id}   is if the result should return the col_id (default set to yes)
-  ------------------------------------- ----------------------------------------------------------------
+* `datf`: is the input dataframe
+* `v_id`: is a vector containing the ids
+* `col_id`: is the column that contains the ids (default is equal to 1)
+* `included_col_id`: is if the result should return the col_id (default set to yes)
 
-### Examples
+## Examples
 
-``` R
+```r
 datf1 <- data.frame(c("az1", "az3", "az4", "az2"), c(1:4), c(4:1))
 
 print(vlookup_datf(datf=datf1, v_id=c("az1", "az2", "az3", "az4")))
@@ -8410,39 +6678,62 @@ print(vlookup_datf(datf=datf1, v_id=c("az1", "az2", "az3", "az4")))
 #21                           az3      2      3
 #3                            az4      3      2
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  ------------ -----------------
-  wider_datf     R Documentation
-  ------------ -----------------
+# wide_to_narow_idx
 
-## wider_datf
+## Description
 
-### Description
+Allow to convert the indices of vector ('from_v_ids') which are related to each characters of a vector, to fit the newly established maximum character of the vector, see examples.
 
-Takes a dataframe as an input and the column to split according to a
-seprator.
+## Usage
 
-### Usage
+```r
+wide_to_narrow_idx(from_v_val = c(), from_v_ids = c(), val = 1)
+```
 
-``` R
+## Arguments
+
+* `from_v_val`: is the input vector of elements, or just the total number of characters of the elementsq in the vector
+* `from_v_ids`: is the input vector of indices
+* `val`: is the value - 1 from which the number of character of an element is too high, so the indices in 'from_v_ids' will be modified
+
+## Examples
+
+```r
+print(wide_to_narrow_idx(from_v_val = c("oui", "no", "oui"), from_v_ids = c(4, 6, 9), val = 2))
+
+[1] 2 4 5 
+
+print(wide_to_narrow_idx(from_v_val = c("oui", "no", "oui"), from_v_ids = c(4, 6, 9), val = 3))
+
+[1] 2 2 3 
+
+print(wide_to_narrow_idx(from_v_val = c("oui", "no", "oui"), from_v_ids = c(4, 6, 9), val = 1))
+
+[1] 4 6 9
+```
+
+# wider_datf
+
+## Description
+
+Takes a dataframe as an input and the column to split according to a seprator.
+
+## Usage
+
+```r
 wider_datf(inpt_datf, col_to_splt = c(), sep_ = "-")
 ```
 
-### Arguments
+## Arguments
 
-  ----------------------------- ----------------------------------------------------------------------------------------------------
-  `inpt_datf`{#inpt_datf}       is the input dataframe
-  `col_to_splt`{#col_to_splt}   is a vector containing the number or the colnames of the columns to split according to a separator
-  `sep_`{#sep_}                 is the separator of the elements to split to new columns in the input dataframe
-  ----------------------------- ----------------------------------------------------------------------------------------------------
+* `inpt_datf`: is the input dataframe
+* `col_to_splt`: is a vector containing the number or the colnames of the columns to split according to a separator
+* `sep_`: is the separator of the elements to split to new columns in the input dataframe
 
-### Examples
+## Examples
 
-``` R
+```r
 datf1 <- data.frame(c(1:5), c("o-y", "hj-yy", "er-y", "k-ll", "ooo-mm"), c(5:1))
 
 datf2 <- data.frame("col1"=c(1:5), "col2"=c("o-y", "hj-yy", "er-y", "k-ll", "ooo-mm"))
@@ -8465,83 +6756,27 @@ print(wider_datf(inpt_datf=datf2, col_to_splt=c("col2"), sep_="-"))
 #k-ll   4      "k"   "ll"
 #ooo-mm 5      "ooo" "mm"
 ```
-:::
-:::
 
-::: container
-::: {role="main"}
-  -------------------- -----------------
-  wide_to_narrow_idx     R Documentation
-  -------------------- -----------------
+# write_edm_parser
 
-## wide_to_narow_idx
-
-### Description
-
-Allow to convert the indices of vector (\'from_v_ids\') which are
-related to each characters of a vector, to fit the newly established
-maximum character of the vector, see examples.
-
-### Usage
-
-``` R
-wide_to_narrow_idx(from_v_val = c(), from_v_ids = c(), val = 1)
-```
-
-### Arguments
-
-  --------------------------- ----------------------------------------------------------------------------------------------------------------------------------
-  `from_v_val`{#from_v_val}   is the input vector of elements, or just the total number of characters of the elementsq in the vector
-  `from_v_ids`{#from_v_ids}   is the input vector of indices
-  `val`{#val}                 is the value - 1 from which the number of character of an element is too high, so the indices in \'from_v_ids\' will be modified
-  --------------------------- ----------------------------------------------------------------------------------------------------------------------------------
-
-### Examples
-
-``` R
-print(wide_to_narrow_idx(from_v_val = c("oui", "no", "oui"), from_v_ids = c(4, 6, 9), val = 2))
-
-[1] 2 4 5 
-
-print(wide_to_narrow_idx(from_v_val = c("oui", "no", "oui"), from_v_ids = c(4, 6, 9), val = 3))
-
-[1] 2 2 3 
-
-print(wide_to_narrow_idx(from_v_val = c("oui", "no", "oui"), from_v_ids = c(4, 6, 9), val = 1))
-
-[1] 4 6 9
-```
-:::
-:::
-
-::: container
-::: {role="main"}
-  ------------------ -----------------
-  write_edm_parser     R Documentation
-  ------------------ -----------------
-
-## write_edm_parser
-
-### Description
+## Description
 
 Allow to write data to edm parsed dataset, see examples
 
-### Usage
+## Usage
 
-``` R
+```r
 write_edm_parser(inpt, to_write_v, write_data)
 ```
 
-### Arguments
+## Arguments
 
-  --------------------------- -------------------------------------------------------------------
-  `inpt`{#inpt}               is the input dataset
-  `to_write_v`{#to_write_v}   is the vector containing the path to write the data, see examples
-  --------------------------- -------------------------------------------------------------------
+* `inpt`: is the input dataset
+* `to_write_v`: is the vector containing the path to write the data, see examples
 
-### Examples
+## Examples
 
-``` R
+```r
 print(write_edm_parser("(ok(ee:56))(ok(oui(rr((rr2:6)(rr:5))))(oui(bb(rr2:1)))(ee1:4))", 
 to_write_v = c("ok", "ee"), write_data = c("ii", "olm")))
 
@@ -8562,5 +6797,4 @@ to_write_v = c(), write_data = c("ii", "olm")))
 
 [1] "(ii:olm)"
 ```
-:::
-:::
+
