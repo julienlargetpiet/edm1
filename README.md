@@ -1,3 +1,20 @@
+![](logo.png)
+
+# Install
+
+-> git clone https://github.com/julienlargetpiet/edm1
+
+-> cd edm1
+
+edm1 > R
+
+R > library("devtools")
+
+R > build()
+
+R > install()
+
+**This is the main edm1 repo (grouping all edm1.* repos), the most up to date. If a bug is found in one of the functions, this repo will be updated first and then the edm1.something repo where the function to update is also present.**
 
 # all_stat
 
