@@ -14,3 +14,10 @@ Imports:
     dplyr,
     data.table,
     openxlsx
+Depends:
+    stringr,
+    stringi,
+    dplyr,
+    data.table,
+    openxlsx
+
