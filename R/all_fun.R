@@ -16208,7 +16208,7 @@ historic_sequence2 <- function(inpt_datf, bf_ = 1){
 #'
 #' @export
 
-sequence_na_med2 <- function(inpt_datf, bf_, step = 1){
+sequence_na_med2 <- function(inpt_datf, bf_){
   bf_ = bf_ + 1
   for (I in 1:((ncol(inpt_datf) - 2) / bf_)){
     for (i in 1:bf_){
