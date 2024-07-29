@@ -15953,15 +15953,16 @@ sequence_na_med1 <- function(inpt_datf, bf_){
       while (!(is.na(cur_mtch))){
         cur_vec <- c()
         times_na <- grep(pattern = TRUE, x = is.na(inpt_datf[cur_mtch[1], cur_cols]))
-        pre_rows <- grep(pattern = inpt_datf[cur_mtch[1], 2], inpt_datf[, 2])
+        pre_rows <- grep(pattern = inpt_datf[cur_mtch[1], 2], x = inpt_datf[, 2])
         for (rw in pre_rows){
-          cur_vec <- c(cur_vec, inpt_datf[rw, cur_cols[1]]) 
+          cur_vec <- c(cur_vec, inpt_datf[rw, cur_cols[1]])
         }
         if (bf_ > 1){
-          cur_vec <- c(cur_vec, as.numeric(inpt_datf[pre_rows[length(pre_rows)], cur_cols[2:length(cur_cols)]]))
+          cur_vec <- c(cur_vec, inpt_datf[pre_rows[length(pre_rows)], cur_cols[2:bf_]])
         }
+        cur_vec <- as.numeric(cur_vec[!(is.na(cur_vec) | cur_vec == "NA")])
         if (length(cur_vec) > 0){
-          inpt_datf[cur_mtch[1], cur_cols[times_na]] <- median(cur_vec[!(is.na(cur_vec))])
+          inpt_datf[cur_mtch[1], cur_cols[times_na]] <- med(cur_vec)
         }else{
           inpt_datf[cur_mtch[1], cur_cols[times_na]] <- "NA"
         }
@@ -16016,7 +16017,6 @@ sequence_na_med1 <- function(inpt_datf, bf_){
 #' 5     19        oui    120  110.0     19     17
 #' 6     19      peut1    110  105.5     17     18
 #' 7     19      peut2    121  113.0     20     17 
-
 #'
 #' @export
 
@@ -16029,15 +16029,16 @@ sequence_na_mean1 <- function(inpt_datf, bf_){
       while (!(is.na(cur_mtch))){
         cur_vec <- c()
         times_na <- grep(pattern = TRUE, x = is.na(inpt_datf[cur_mtch[1], cur_cols]))
-        pre_rows <- grep(pattern = inpt_datf[cur_mtch[1], 2], inpt_datf[, 2])
+        pre_rows <- grep(pattern = inpt_datf[cur_mtch[1], 2], x = inpt_datf[, 2])
         for (rw in pre_rows){
-          cur_vec <- c(cur_vec, inpt_datf[rw, cur_cols[1]]) 
+          cur_vec <- c(cur_vec, inpt_datf[rw, cur_cols[1]])
         }
         if (bf_ > 1){
-          cur_vec <- c(cur_vec, as.numeric(inpt_datf[pre_rows[length(pre_rows)], cur_cols[2:length(cur_cols)]]))
+          cur_vec <- c(cur_vec, inpt_datf[pre_rows[length(pre_rows)], cur_cols[2:bf_]])
         }
+        cur_vec <- as.numeric(cur_vec[!(is.na(cur_vec) | cur_vec == "NA")])
         if (length(cur_vec) > 0){
-          inpt_datf[cur_mtch[1], cur_cols[times_na]] <- mean(cur_vec[!(is.na(cur_vec))])
+          inpt_datf[cur_mtch[1], cur_cols[times_na]] <- mean(cur_vec)
         }else{
           inpt_datf[cur_mtch[1], cur_cols[times_na]] <- "NA"
         }
@@ -16218,15 +16219,16 @@ sequence_na_med2 <- function(inpt_datf, bf_){
       while (!(is.na(cur_mtch))){
         cur_vec <- c()
         times_na <- grep(pattern = TRUE, x = is.na(inpt_datf[cur_mtch[1], cur_cols]))
-        pre_rows <- grep(pattern = inpt_datf[cur_mtch[1], 2], inpt_datf[, 2])
+        pre_rows <- grep(pattern = inpt_datf[cur_mtch[1], 2], x = inpt_datf[, 2])
         for (rw in pre_rows){
-          cur_vec <- c(cur_vec, inpt_datf[rw, cur_cols[1]]) 
+          cur_vec <- c(cur_vec, inpt_datf[rw, cur_cols[1]])
         }
         if (bf_ > 1){
-          cur_vec <- c(cur_vec, as.numeric(inpt_datf[pre_rows[length(pre_rows)], cur_cols[2:length(cur_cols)]]))
+          cur_vec <- c(cur_vec, inpt_datf[pre_rows[length(pre_rows)], cur_cols[2:bf_]])
         }
+        cur_vec <- as.numeric(cur_vec[!(is.na(cur_vec) | cur_vec == "NA")])
         if (length(cur_vec) > 0){
-          inpt_datf[cur_mtch[1], cur_cols[times_na]] <- median(cur_vec[!(is.na(cur_vec))])
+          inpt_datf[cur_mtch[1], cur_cols[times_na]] <- med(cur_vec)
         }else{
           inpt_datf[cur_mtch[1], cur_cols[times_na]] <- "NA"
         }
@@ -16295,15 +16297,16 @@ sequence_na_mean2 <- function(inpt_datf, bf_){
       while (!(is.na(cur_mtch))){
         cur_vec <- c()
         times_na <- grep(pattern = TRUE, x = is.na(inpt_datf[cur_mtch[1], cur_cols]))
-        pre_rows <- grep(pattern = inpt_datf[cur_mtch[1], 2], inpt_datf[, 2])
+        pre_rows <- grep(pattern = inpt_datf[cur_mtch[1], 2], x = inpt_datf[, 2])
         for (rw in pre_rows){
-          cur_vec <- c(cur_vec, inpt_datf[rw, cur_cols[1]]) 
+          cur_vec <- c(cur_vec, inpt_datf[rw, cur_cols[1]])
         }
         if (bf_ > 1){
-          cur_vec <- c(cur_vec, as.numeric(inpt_datf[pre_rows[length(pre_rows)], cur_cols[2:length(cur_cols)]]))
+          cur_vec <- c(cur_vec, inpt_datf[pre_rows[length(pre_rows)], cur_cols[2:bf_]])
         }
+        cur_vec <- as.numeric(cur_vec[!(is.na(cur_vec) | cur_vec == "NA")])
         if (length(cur_vec) > 0){
-          inpt_datf[cur_mtch[1], cur_cols[times_na]] <- mean(cur_vec[!(is.na(cur_vec))])
+          inpt_datf[cur_mtch[1], cur_cols[times_na]] <- mean(cur_vec)
         }else{
           inpt_datf[cur_mtch[1], cur_cols[times_na]] <- "NA"
         }
