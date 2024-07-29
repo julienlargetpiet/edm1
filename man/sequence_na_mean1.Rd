@@ -4,7 +4,7 @@
 \alias{sequence_na_mean1}
 \title{sequence_na_mean1}
 \usage{
-sequence_na_mean1(inpt_datf, bf_, step = 1)
+sequence_na_mean1(inpt_datf, bf_)
 }
 \arguments{
 \item{inpt_datf}{is the input dataframe}
