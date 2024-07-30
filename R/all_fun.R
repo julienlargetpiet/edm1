@@ -16317,4 +16317,131 @@ sequence_na_mean2 <- function(inpt_datf, bf_){
   return(inpt_datf)
 }
 
+#' edm_group_by1
+#'
+#' Performs a group by, see examples
+#'
+#' @param inpt_datf is the input dataframe
+#' @param grp_v is the vector containiong the column names or the column numbers to perform the group by, see examples
+#'
+#' @examples
+#'
+#' datf <- data.frame("col1" = c("A", "B", "B", "A", "C", "B"), 
+#'                   "col2" = c("E", "R", "E", "E", "R", "R"), 
+#'                   "col3" = c("P", "P", "O", "O", "P", "O"))
+#'
+#' print(datf)
+#' 
+#'   col1 col2 col3
+#' 1    A    E    P
+#' 2    B    R    P
+#' 3    B    E    O
+#' 4    A    E    O
+#' 5    C    R    P
+#' 6    B    R    O
+#'
+#' print(edm_group_by1(inpt_datf = datf, grp_v = c("col1")))
+#'
+#'   col1 col2 col3
+#' 1    A    E    P
+#' 4    A    E    O
+#' 2    B    R    P
+#' 3    B    E    O
+#' 6    B    R    O
+#' 5    C    R    P
+#'
+#' print(edm_group_by1(inpt_datf = datf, grp_v = c("col1", "col2")))
+#'
+#'   col1 col2 col3
+#' 1    A    E    P
+#' 4    A    E    O
+#' 2    B    R    P
+#' 6    B    R    O
+#' 3    B    E    O
+#' 5    C    R    P
+#'
+#' print(edm_group_by1(inpt_datf = datf, grp_v = c("col2", "col1", "col3")))
+#'
+#'   col2 col1 col3
+#' 1    E    A    P
+#' 4    E    A    O
+#' 3    E    B    O
+#' 2    R    B    P
+#' 6    R    B    O
+#' 5    R    C    P
+#'
+#' print(edm_group_by1(inpt_datf = datf, grp_v = c("col2", "col1", "col3")))
+#' 
+#'   col2 col1 col3
+#' 1    E    A    P
+#' 4    E    A    O
+#' 3    E    B    O
+#' 2    R    B    P
+#' 6    R    B    O
+#' 5    R    C    P
+#' 
+#' @export
+
+edm_group_by1 <- function(inpt_datf, grp_v = c()){
+  if (typeof(grp_v) == "character"){
+    for (i in 1:length(grp_v)){
+      grp_v[i] <- match(x = grp_v[i], colnames(inpt_datf))
+    }
+    grp_v <- as.numeric(grp_v)
+  }
+  id_v <- inpt_datf[, grp_v[1]]
+  id_v_original <- id_v
+  Id_v <- c()
+  id_row <- c()
+  for (el in unique(id_v)){
+    id_row2 <- (id_v == el)
+    Id_v <- c(Id_v, id_v[id_row2])
+    id_row <- c(id_row, grep(pattern = TRUE, x = id_row2))
+  }
+  if (length(grp_v) > 1){
+    for (i in 2:length(grp_v)){
+      id_v_original <- paste0(id_v_original, inpt_datf[, grp_v[i]])
+      Id_v2 <- Id_v
+      Id_v <- c()
+      cur_unique <- unique(Id_v2)
+      for (i2 in 1:length(cur_unique)){
+        cnt = match(x = cur_unique[i2], table = Id_v2)
+        cnt2 = cnt
+        no_stop <- TRUE
+        while (Id_v2[cnt2] == cur_unique[i2] & no_stop){ 
+          if (cnt2 == length(Id_v2)){
+            no_stop <- FALSE 
+          }else{
+            cnt2 = cnt2 + 1
+          }
+        }
+        if (!(no_stop)){
+          cur_row <- id_row[cnt:cnt2]
+          cnt2 = cnt2 + 1
+        }else{
+          cur_row <- id_row[cnt:(cnt2 - 1)]
+        }
+        id_v <- inpt_datf[cur_row, grp_v[i]]
+        cur_row_id <- c()
+        for (el in unique(id_v)){
+          id_row2 <- (id_v == el)
+          Id_v <- c(Id_v, rep(x = paste0(cur_unique[i2], el), times = sum(id_row2)))
+          cur_row_id <- c(cur_row_id, grep(pattern = TRUE, x = id_row2))
+        }
+        id_row[cnt:(cnt2 - 1)] <- cur_row[cur_row_id]
+      }
+    }
+  }
+  rtn_datf <- as.data.frame(matrix(nrow = 0, ncol = ncol(inpt_datf)))
+  col_v <- c(1:ncol(inpt_datf))
+  col_v[sort(x = grp_v, decreasing = FALSE)] <- grp_v
+  for (el in unique(Id_v)){
+    rtn_datf <- rbind(rtn_datf, inpt_datf[(id_v_original == el), col_v]) 
+  }
+  return(rtn_datf)
+}
+
+
+
+
 
