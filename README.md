@@ -2260,7 +2260,7 @@ edm_group_by1
 
 ## Description
 
-Performs a group by, see examples
+Performs a group by (different algorythm than edm_group_by2), see examples
 
 
 ## Usage
@@ -2326,6 +2326,79 @@ col2 col1 col3
 5    R    C    P
 
 print(edm_group_by1(inpt_datf = datf, grp_v = c("col2", "col1", "col3")))
+
+col2 col1 col3
+1    E    A    P
+4    E    A    O
+3    E    B    O
+2    R    B    P
+6    R    B    O
+5    R    C    P
+```
+
+
+# `edm_group_by2`
+
+edm_group_by2
+
+
+## Description
+
+Performs a group by (different algorythm that edm_group_by1), see examples
+
+
+## Usage
+
+```r
+edm_group_by2(inpt_datf, grp_v)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_datf`     |     is the input dataframe
+`grp_v`     |     is the vector containiong the column names or the column numbers to perform the group by, see examples
+
+
+## Examples
+
+```r
+datf <- data.frame("col1" = c("A", "B", "B", "A", "C", "B"),
+"col2" = c("E", "R", "E", "E", "R", "R"),
+"col3" = c("P", "P", "O", "O", "P", "O"))
+print(datf)
+
+col1 col2 col3
+1    A    E    P
+2    B    R    P
+3    B    E    O
+4    A    E    O
+5    C    R    P
+6    B    R    O
+
+print(edm_group_by2(inpt_datf = datf, grp_v = c("col1")))
+
+col1 col2 col3
+1    A    E    P
+4    A    E    O
+2    B    R    P
+3    B    E    O
+6    B    R    O
+5    C    R    P
+
+print(edm_group_by2(inpt_datf = datf, grp_v = c("col1", "col2")))
+
+col1 col2 col3
+1    A    E    P
+4    A    E    O
+3    B    E    O
+2    B    R    P
+6    B    R    O
+5    C    R    P
+
+print(edm_group_by2(inpt_datf = datf, grp_v = c("col2", "col1")))
 
 col2 col1 col3
 1    E    A    P
