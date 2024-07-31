@@ -15856,7 +15856,11 @@ rm_rows <- function(inpt_datf, flagged_vals = c()){
       cnt = cnt + 1
     }
   }
-  return(inpt_datf[-rm_ids, ])
+  if (length(rm_ids) > 0){
+    return(inpt_datf[-rm_ids, ])
+  }else{
+    return(inpt_datf)
+  }
 }
 
 #' rm_na_rows
@@ -15893,7 +15897,11 @@ rm_na_rows <- function(inpt_datf, flagged_vals = c()){
       rm_ids <- c(rm_ids, i)
     }
   }
-  return(inpt_datf[-rm_ids, ])
+  if (length(rm_ids) > 0){
+    return(inpt_datf[-rm_ids, ])
+  }else{
+    return(inpt_datf)
+  }
 }
 
 #' sequence_na_med1
