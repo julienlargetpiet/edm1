@@ -2410,6 +2410,184 @@ col2 col1 col3
 ```
 
 
+# `edm_pivot_wider1`
+
+edm_pivot_wider1
+
+
+## Description
+
+Performs a pivot wider to a dataframe, see examples.
+
+
+## Usage
+
+```r
+edm_pivot_wider1(inpt_datf, col_vars = c(), col_vals = c(), individual_col)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_datf`     |     is the input dataframe
+`col_vars`     |     is a vector containig the column names or column numbers of the variables to pivot
+`col_vals`     |     is a vector containing the column numbers or column names of the values to pivot
+`individual_col`     |     is the column name or column number of the individuals
+
+
+## Examples
+
+```r
+datf2 <- data.frame("individual" = c(1, 1, 1, 2, 3, 3),
+"var1" = c("A", "A", "B", "B", "B", "A"),
+"val1" = c(6, 7, 1, 0, 4, 2),
+"val2" = c(3, 9, 11, 22, 5, 8))
+datf <- data.frame("individual" = c(1, 1, 1, 2, 3, 3),
+"var1" = c("A", "A", "B", "B", "B", "A"),
+"var2" = c("R", "T", "T", "R", "T", "R"),
+"val1" = c(6, 7, 1, 0, 4, 2),
+"val2" = c(3, 9, 11, 22, 5, 8))
+print(datf)
+
+individual var1 var2 val1 val2
+1          1    A    R    6    3
+2          1    A    T    7    9
+3          1    B    T    1   11
+4          2    B    R    0   22
+5          3    B    T    4    5
+6          3    A    R    2    8
+
+print(datf2)
+
+individual var1 val1 val2
+1          1    A    6    3
+2          1    A    7    9
+3          1    B    1   11
+4          2    B    0   22
+5          3    B    4    5
+6          3    A    2    8
+
+print(edm_pivot_wider1(
+inpt_datf = datf,
+col_vars = c(2, 3),
+col_vals = c(4, 5),
+individual_col = 1)
+)
+
+individuals val1-A.R val1-A.T val1-B.R val1-B.T val2-A.R val2-A.T val2-B.R
+1           1        6        7        0        1        3        9        0
+2           2        0        0        0        0        0        0       22
+3           3        2        0        0        4        8        0        0
+val2-B.T
+1       11
+2        0
+3        5
+
+print(edm_pivot_wider1(
+inpt_datf = datf2,
+col_vars = c(2),
+col_vals = c(3, 4),
+individual_col = 1)
+)
+
+individuals val1-A val1-B val2-A val2-B
+1           1      7      1      9     11
+2           2      0      0      0     22
+3           3      2      4      8      5
+```
+
+
+# `edm_pivot_wider2`
+
+edm_pivot_wider2
+
+
+## Description
+
+Performs a pivot wider to a dataframe with a different algorythm than edm_pivot_wider, see examples.
+
+
+## Usage
+
+```r
+edm_pivot_wider2(inpt_datf, col_vars = c(), col_vals = c(), individual_col)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_datf`     |     is the input dataframe
+`col_vars`     |     is a vector containig the column names or column numbers of the variables to pivot
+`col_vals`     |     is a vector containing the column numbers or column names of the values to pivot
+`individual_col`     |     is the column name or column number of the individuals
+
+
+## Examples
+
+```r
+datf2 <- data.frame("individual" = c(1, 1, 1, 2, 3, 3),
+"var1" = c("A", "A", "B", "B", "B", "A"),
+"val1" = c(6, 7, 1, 0, 4, 2),
+"val2" = c(3, 9, 11, 22, 5, 8))
+datf <- data.frame("individual" = c(1, 1, 1, 2, 3, 3),
+"var1" = c("A", "A", "B", "B", "B", "A"),
+"var2" = c("R", "T", "T", "R", "T", "R"),
+"val1" = c(6, 7, 1, 0, 4, 2),
+"val2" = c(3, 9, 11, 22, 5, 8))
+print(datf)
+
+individual var1 var2 val1 val2
+1          1    A    R    6    3
+2          1    A    T    7    9
+3          1    B    T    1   11
+4          2    B    R    0   22
+5          3    B    T    4    5
+6          3    A    R    2    8
+
+print(datf2)
+
+individual var1 val1 val2
+1          1    A    6    3
+2          1    A    7    9
+3          1    B    1   11
+4          2    B    0   22
+5          3    B    4    5
+6          3    A    2    8
+
+print(edm_pivot_wider2(
+inpt_datf = datf,
+col_vars = c(2, 3),
+col_vals = c(4, 5),
+individual_col = 1)
+)
+
+individuals val1-A.R val1-A.T val1-B.R val1-B.T val2-A.R val2-A.T val2-B.R
+1           1        6        7        0        1        3        9        0
+2           2        0        0        0        0        0        0       22
+3           3        2        0        0        4        8        0        0
+val2-B.T
+1       11
+2        0
+3        5
+
+print(edm_pivot_wider2(
+inpt_datf = datf2,
+col_vars = c(2),
+col_vals = c(3, 4),
+individual_col = 1)
+)
+
+individuals val1-A val1-B val2-A val2-B
+1           1      7      1      9     11
+2           2      0      0      0     22
+3           3      2      4      8      5
+```
+
+
 # `elements_equalifier`
 
 elements_equalifier
