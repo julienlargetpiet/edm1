@@ -16544,6 +16544,337 @@ edm_group_by2 <- function(inpt_datf, grp_v){
   return(rtn_datf[, col_v])
 }
 
+#' edm_pivot_wider1
+#'
+#' Performs a pivot wider to a dataframe, see examples.
+#' 
+#' @param inpt_datf is the input dataframe
+#' @param col_vars is a vector containig the column names or column numbers of the variables to pivot
+#' @param col_vals is a vector containing the column numbers or column names of the values to pivot
+#' @param individual_col is the column name or column number of the individuals
+#'
+#' @examples
+#'
+#' datf2 <- data.frame("individual" = c(1, 1, 1, 2, 3, 3),
+#'                    "var1" = c("A", "A", "B", "B", "B", "A"),
+#'                    "val1" = c(6, 7, 1, 0, 4, 2),
+#'                    "val2" = c(3, 9, 11, 22, 5, 8))
+#' datf <- data.frame("individual" = c(1, 1, 1, 2, 3, 3),
+#'                    "var1" = c("A", "A", "B", "B", "B", "A"),
+#'                    "var2" = c("R", "T", "T", "R", "T", "R"),
+#'                    "val1" = c(6, 7, 1, 0, 4, 2),
+#'                    "val2" = c(3, 9, 11, 22, 5, 8))
+#' print(datf)
+#'
+#'   individual var1 var2 val1 val2
+#' 1          1    A    R    6    3
+#' 2          1    A    T    7    9
+#' 3          1    B    T    1   11
+#' 4          2    B    R    0   22
+#' 5          3    B    T    4    5
+#' 6          3    A    R    2    8
+#'
+#' print(datf2)
+#'
+#'   individual var1 val1 val2
+#' 1          1    A    6    3
+#' 2          1    A    7    9
+#' 3          1    B    1   11
+#' 4          2    B    0   22
+#' 5          3    B    4    5
+#' 6          3    A    2    8
+#'
+#' print(edm_pivot_wider1(
+#'                        inpt_datf = datf, 
+#'                        col_vars = c(2, 3), 
+#'                        col_vals = c(4, 5), 
+#'                        individual_col = 1)
+#'     )
+#'
+#'   individuals val1-A.R val1-A.T val1-B.R val1-B.T val2-A.R val2-A.T val2-B.R
+#' 1           1        6        7        0        1        3        9        0
+#' 2           2        0        0        0        0        0        0       22
+#' 3           3        2        0        0        4        8        0        0
+#'   val2-B.T
+#' 1       11
+#' 2        0
+#' 3        5
+#'
+#' print(edm_pivot_wider1(
+#'                        inpt_datf = datf2, 
+#'                        col_vars = c(2), 
+#'                        col_vals = c(3, 4), 
+#'                        individual_col = 1)
+#'     )
+#' 
+#'   individuals val1-A val1-B val2-A val2-B
+#' 1           1      7      1      9     11
+#' 2           2      0      0      0     22
+#' 3           3      2      4      8      5
+#'
+#' @export
+
+edm_pivot_wider1 <- function(inpt_datf, 
+                            col_vars = c(), 
+                            col_vals = c(),
+                            individual_col){
+  if (typeof(col_vars) == "character"){
+    for (i in 1:length(col_vars)){
+      col_vars[i] <- match(x = col_vars[i], colnames(inpt_datf))
+    }
+    col_vars <- as.numeric(col_vars)
+  }
+  if (typeof(col_vars) == "character"){
+    for (i in 1:length(col_vals)){
+      col_vals[i] <- match(x = col_vals[i], colnames(inpt_datf))
+    }
+    col_vals <- as.numeric(col_vals)
+  }
+  if (typeof(individual_col) == "character"){
+    individual_character <- match(x = individual_col, table = colnames(inpt_datf))
+  }
+  mod_l <- list() 
+  pos_v <- c()
+  hmn_mods = 0
+  for (i in col_vars){
+    cur_mods <- unique(inpt_datf[, i])
+    hmn_mods = hmn_mods + length(cur_mods)
+    mod_l <- append(x = mod_l, values = list(cur_mods))
+    pos_v <- c(pos_v, 1)
+  }
+  hmn_col <- hmn_mods * length(col_vals) + 1 
+  rtn_datf <- as.data.frame(matrix(nrow = 0, ncol = hmn_col))
+  col_names <- c()
+  if (length(mod_l) > 1){
+    cur_lngth <- length(mod_l[[1]])
+    for (cur_val in col_vals){
+      while (pos_v[1] <= cur_lngth){
+        cur_col_names <- c()
+        for (i in 1:length(mod_l)){
+          cur_col_names <- c(cur_col_names, mod_l[[i]][pos_v[i]])
+        }
+        col_names <- c(col_names, paste0(colnames(inpt_datf)[cur_val], "-", paste(cur_col_names, collapse = ".")))
+        pos_v[length(pos_v)] <- pos_v[length(pos_v)] + 1
+        cnt = 0
+        if (pos_v[(length(pos_v) - cnt)] > length(mod_l[[(length(mod_l) - cnt)]])){
+          no_stop <- TRUE
+        }else{
+          no_stop <- FALSE
+        }
+        while (no_stop){
+          pos_v[(length(pos_v) - cnt)] <- 1 
+          pos_v[(length(pos_v) - cnt - 1)] <- pos_v[(length(pos_v) - cnt - 1)] + 1
+          cnt = cnt + 1
+          if ((cnt + 1) == length(pos_v)){
+            no_stop <- FALSE
+          }else if (!(pos_v[(length(pos_v) - cnt)] > length(mod_l[[(length(mod_l) - cnt)]]))){
+            no_stop <- FALSE
+          }
+        }
+      }
+      pos_v <- rep.int(x = 1, times = length(pos_v))
+    }
+  }else{
+    cur_lngth <- length(mod_l[[1]])
+    for (cur_val in col_vals){
+      while (pos_v[1] <= cur_lngth){
+        cur_col_names <- c()
+        for (i in 1:length(mod_l)){
+          cur_col_names <- c(cur_col_names, mod_l[[i]][pos_v[i]])
+        }
+        col_names <- c(col_names, paste0(colnames(inpt_datf)[cur_val], "-", paste(cur_col_names, collapse = ".")))
+        pos_v[length(pos_v)] <- pos_v[length(pos_v)] + 1
+      }
+      pos_v <- c(1)
+    }
+  }
+  prev_indv <- inpt_datf[1, individual_col]
+  cur_row <- rep(x = 0, times = hmn_col) 
+  cur_row[1] <- prev_indv
+  for (i in 1:nrow(inpt_datf)){
+    cur_col_names <- c()
+    for (cl in col_vars){
+      cur_col_names <- c(cur_col_names, inpt_datf[i, cl])
+    }
+    if (inpt_datf[i, individual_col] != prev_indv){
+      rtn_datf <- rbind(rtn_datf, cur_row)
+      prev_indv <- inpt_datf[i, individual_col]
+      cur_row <- rep(x = 0, times = hmn_col) 
+      cur_row[1] <- prev_indv
+    }
+    for (vl in 1:length(col_vals)){
+      cur_row[1 + match(x = paste0(colnames(inpt_datf)[col_vals[vl]], "-", paste(cur_col_names, collapse = ".")), table = col_names)] <- inpt_datf[i, col_vals[vl]] 
+    }
+  }
+  rtn_datf <- rbind(rtn_datf, cur_row)
+  colnames(rtn_datf) <- c("individuals", col_names)
+  return(rtn_datf)
+}
+
+#' edm_pivot_wider2
+#'
+#' Performs a pivot wider to a dataframe with a different algorythm than edm_pivot_wider, see examples.
+#' 
+#' @param inpt_datf is the input dataframe
+#' @param col_vars is a vector containig the column names or column numbers of the variables to pivot
+#' @param col_vals is a vector containing the column numbers or column names of the values to pivot
+#' @param individual_col is the column name or column number of the individuals
+#'
+#' @examples
+#'
+#' datf2 <- data.frame("individual" = c(1, 1, 1, 2, 3, 3),
+#'                    "var1" = c("A", "A", "B", "B", "B", "A"),
+#'                    "val1" = c(6, 7, 1, 0, 4, 2),
+#'                    "val2" = c(3, 9, 11, 22, 5, 8))
+#' datf <- data.frame("individual" = c(1, 1, 1, 2, 3, 3),
+#'                    "var1" = c("A", "A", "B", "B", "B", "A"),
+#'                    "var2" = c("R", "T", "T", "R", "T", "R"),
+#'                    "val1" = c(6, 7, 1, 0, 4, 2),
+#'                    "val2" = c(3, 9, 11, 22, 5, 8))
+#' print(datf)
+#'
+#'   individual var1 var2 val1 val2
+#' 1          1    A    R    6    3
+#' 2          1    A    T    7    9
+#' 3          1    B    T    1   11
+#' 4          2    B    R    0   22
+#' 5          3    B    T    4    5
+#' 6          3    A    R    2    8
+#'
+#' print(datf2)
+#'
+#'   individual var1 val1 val2
+#' 1          1    A    6    3
+#' 2          1    A    7    9
+#' 3          1    B    1   11
+#' 4          2    B    0   22
+#' 5          3    B    4    5
+#' 6          3    A    2    8
+#'
+#' print(edm_pivot_wider2(
+#'                        inpt_datf = datf, 
+#'                        col_vars = c(2, 3), 
+#'                        col_vals = c(4, 5), 
+#'                        individual_col = 1)
+#'     )
+#'
+#'   individuals val1-A.R val1-A.T val1-B.R val1-B.T val2-A.R val2-A.T val2-B.R
+#' 1           1        6        7        0        1        3        9        0
+#' 2           2        0        0        0        0        0        0       22
+#' 3           3        2        0        0        4        8        0        0
+#'   val2-B.T
+#' 1       11
+#' 2        0
+#' 3        5
+#'
+#' print(edm_pivot_wider2(
+#'                        inpt_datf = datf2, 
+#'                        col_vars = c(2), 
+#'                        col_vals = c(3, 4), 
+#'                        individual_col = 1)
+#'     )
+#' 
+#'   individuals val1-A val1-B val2-A val2-B
+#' 1           1      7      1      9     11
+#' 2           2      0      0      0     22
+#' 3           3      2      4      8      5
+#'
+#' @export
+
+edm_pivot_wider2 <- function(inpt_datf, 
+                            col_vars = c(), 
+                            col_vals = c(),
+                            individual_col){
+  if (typeof(col_vars) == "character"){
+    for (i in 1:length(col_vars)){
+      col_vars[i] <- match(x = col_vars[i], colnames(inpt_datf))
+    }
+    col_vars <- as.numeric(col_vars)
+  }
+  if (typeof(col_vars) == "character"){
+    for (i in 1:length(col_vals)){
+      col_vals[i] <- match(x = col_vals[i], colnames(inpt_datf))
+    }
+    col_vals <- as.numeric(col_vals)
+  }
+  if (typeof(individual_col) == "character"){
+    individual_character <- match(x = individual_col, table = colnames(inpt_datf))
+  }
+  pos_v <- c()
+  hmn_mods = 0
+  for (i in col_vars){
+    cur_mods <- unique(inpt_datf[, i])
+    hmn_mods = hmn_mods + length(cur_mods)
+    pos_v <- c(pos_v, 1)
+  }
+  hmn_col <- hmn_mods * length(col_vals) + 1 
+  rtn_datf <- as.data.frame(matrix(nrow = 0, ncol = hmn_col))
+  col_names <- c()
+  if (length(pos_v) > 1){
+    cur_lngth <- length(unique(inpt_datf[, col_vars[length(col_vars)]]))
+    for (cur_val in col_vals){
+      while (pos_v[1] <= cur_lngth){
+        cur_col_names <- c()
+        for (i in 1:length(pos_v)){
+          cur_col_names <- c(cur_col_names, unique(inpt_datf[, col_vars[i]])[pos_v[i]])
+        }
+        col_names <- c(col_names, paste0(colnames(inpt_datf)[cur_val], "-", paste(cur_col_names, collapse = ".")))
+        pos_v[length(pos_v)] <- pos_v[length(pos_v)] + 1
+        cnt = 0
+        if (pos_v[(length(pos_v) - cnt)] > length(unique(inpt_datf[, col_vars[length(pos_v) - cnt]]))){
+          no_stop <- TRUE
+        }else{
+          no_stop <- FALSE
+        }
+        while (no_stop){
+          pos_v[(length(pos_v) - cnt)] <- 1 
+          pos_v[(length(pos_v) - cnt - 1)] <- pos_v[(length(pos_v) - cnt - 1)] + 1
+          cnt = cnt + 1
+          if ((cnt + 1) == length(pos_v)){
+            no_stop <- FALSE
+          }else if (!(pos_v[(length(pos_v) - cnt)] > length(unique(inpt_datf[, col_vars[length(pos_v) - cnt]])))){
+            no_stop <- FALSE
+          }
+        }
+      }
+      pos_v <- rep.int(x = 1, times = length(pos_v))
+    }
+  }else{
+    cur_lngth <- length(unique(inpt_datf[, col_vars[length(col_vars)]]))
+    for (cur_val in col_vals){
+      while (pos_v[1] <= cur_lngth){
+        cur_col_names <- c()
+        for (i in 1:length(pos_v)){
+          cur_col_names <- c(cur_col_names, unique(inpt_datf[, col_vars[i]])[pos_v[i]])
+        }
+        col_names <- c(col_names, paste0(colnames(inpt_datf)[cur_val], "-", paste(cur_col_names, collapse = ".")))
+        pos_v[length(pos_v)] <- pos_v[length(pos_v)] + 1
+      }
+      pos_v <- c(1)
+    }
+  }
+  prev_indv <- inpt_datf[1, individual_col]
+  cur_row <- rep(x = 0, times = hmn_col) 
+  cur_row[1] <- prev_indv
+  for (i in 1:nrow(inpt_datf)){
+    cur_col_names <- c()
+    for (cl in col_vars){
+      cur_col_names <- c(cur_col_names, inpt_datf[i, cl])
+    }
+    if (inpt_datf[i, individual_col] != prev_indv){
+      rtn_datf <- rbind(rtn_datf, cur_row)
+      prev_indv <- inpt_datf[i, individual_col]
+      cur_row <- rep(x = 0, times = hmn_col) 
+      cur_row[1] <- prev_indv
+    }
+    for (vl in 1:length(col_vals)){
+      cur_row[1 + match(x = paste0(colnames(inpt_datf)[col_vals[vl]], "-", paste(cur_col_names, collapse = ".")), table = col_names)] <- inpt_datf[i, col_vals[vl]] 
+    }
+  }
+  rtn_datf <- rbind(rtn_datf, cur_row)
+  colnames(rtn_datf) <- c("individuals", col_names)
+  return(rtn_datf)
+}
 
 
 
