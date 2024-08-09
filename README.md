@@ -2410,6 +2410,238 @@ col2 col1 col3
 ```
 
 
+# `edm_pivot_longer1`
+
+edm_pivot_longer1
+
+
+## Description
+
+Performs a pivot longer on dataframe, see examples. The synthax for variables must be value_id-modalitie_var1.modalitie_var2...
+
+
+## Usage
+
+```r
+edm_pivot_longer1(
+  inpt_datf,
+  col_vars = c(),
+  col_vars_to = c(),
+  individual_col,
+  null_value = c(0),
+  nvr_here = "?"
+)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_datf`     |     is the input dataframe
+`col_vars`     |     is a vector containing the column names or column numbers of the variables
+`col_vars_to`     |     is a vector containing the varaiables to which will be assign the modalities, see examples
+`individual_col`     |     is the column name or the column number of the individuals
+
+
+## Examples
+
+```r
+datf <- data.frame("individuals" = c(1, 2, 3),
+c(1, 2, 3),
+c(6, 0, 2),
+c(7, 0, 0),
+c(0, 0, 0),
+c(1, 0, 4),
+c(3, 0, 8),
+c(9, 0 , 0),
+c(11, 0, 5))
+
+colnames(datf)[2:ncol(datf)] <- c("val1-A.R",
+"val1-A.T",
+"val1-B.R",
+"val1-B.T",
+"val2-A.R",
+"val2-A.T",
+"val2-B.R",
+"val2-B.T")
+
+datf2 <- data.frame("individuals" = c(1, 2, 3),
+c(7, 0, 2),
+c(1, 0, 4),
+c(9, 0, 8),
+c(11, 22, 5))
+colnames(datf2)[2:ncol(datf2)] <- c(
+
+"val1-A",
+"val1-B",
+"val2-A",
+"val2-B"
+)
+
+print(datf)
+
+individuals val1-A.R val1-A.T val1-B.R val1-B.T val2-A.R val2-A.T val2-B.R
+1           1        1        6        7        0        1        3        9
+2           2        2        0        0        0        0        0        0
+3           3        3        2        0        0        4        8        0
+val2-B.T
+1       11
+2        0
+3        5
+
+print(edm_pivot_longer1(inpt_datf = datf,
+col_vars = c(2:9),
+individual_col = 1,
+col_vars_to = c("Shape", "Way"),
+null_value = c(0)))
+
+individuals Shape Way val1 val2
+1           1     A   R    1    1
+2           1     A   T    6    3
+3           1     B   R    7    9
+4           1     B   T    0   11
+5           2     A   R    2    0
+6           3     A   R    3    4
+7           3     A   T    2    8
+8           3     B   T    0    5
+
+print(datf2)
+
+individuals val1-A val1-B val2-A val2-B
+1           1      7      1      9     11
+2           2      0      0      0     22
+3           3      2      4      8      5
+
+print(edm_pivot_longer1(inpt_datf = datf2,
+col_vars = c(2:5),
+individual_col = 1,
+col_vars_to = c("Shape"),
+null_value = c(0)))
+
+individuals Shape val1 val2
+1           1     A    7    9
+2           1     B    1   11
+3           2     B    0   22
+4           3     A    2    8
+5           3     B    4    5
+```
+
+
+# `edm_pivot_longer2`
+
+edm_pivot_longer2
+
+
+## Description
+
+Performs a pivot longer on dataframe, see examples. The synthax for variables must be value_id-modalitie_var1.modalitie_var2...
+
+
+## Usage
+
+```r
+edm_pivot_longer2(inpt_datf, col_vars = c(), col_vars_to = c(), individual_col)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_datf`     |     is the input dataframe
+`col_vars`     |     is a vector containing the column names or column numbers of the variables
+`col_vars_to`     |     is a vector containing the varaiables to which will be assign the modalities, see examples
+`individual_col`     |     is the column name or the column number of the individuals
+
+
+## Examples
+
+```r
+datf <- data.frame("individuals" = c(1, 2, 3),
+c(1, 2, 3),
+c(6, 0, 2),
+c(7, 0, 0),
+c(0, 0, 0),
+c(1, 0, 4),
+c(3, 0, 8),
+c(9, 0 , 0),
+c(11, 0, 5))
+
+colnames(datf)[2:ncol(datf)] <- c("val1-A.R",
+"val1-A.T",
+"val1-B.R",
+"val1-B.T",
+"val2-A.R",
+"val2-A.T",
+"val2-B.R",
+"val2-B.T")
+
+datf2 <- data.frame("individuals" = c(1, 2, 3),
+c(7, 0, 2),
+c(1, 0, 4),
+c(9, 0, 8),
+c(11, 22, 5))
+colnames(datf2)[2:ncol(datf2)] <- c(
+
+"val1-A",
+"val1-B",
+"val2-A",
+"val2-B"
+)
+
+print(datf)
+
+individuals val1-A.R val1-A.T val1-B.R val1-B.T val2-A.R val2-A.T val2-B.R
+1           1        1        6        7        0        1        3        9
+2           2        2        0        0        0        0        0        0
+3           3        3        2        0        0        4        8        0
+val2-B.T
+1       11
+2        0
+3        5
+
+print(edm_pivot_longer2(inpt_datf = datf,
+col_vars = c(2:9),
+individual_col = 1,
+col_vars_to = c("Shape", "Way")))
+
+individuals Shape Way val1 val2
+1            1     A   R    1    1
+2            1     A   T    6    3
+3            1     B   R    7    9
+4            1     B   T    0   11
+5            2     A   R    2    0
+6            2     A   T    0    0
+7            2     B   R    0    0
+8            2     B   T    0    0
+9            3     A   R    3    4
+10           3     A   T    2    8
+11           3     B   R    0    0
+12           3     B   T    0    5
+
+print(datf2)
+
+individuals val1-A val1-B val2-A val2-B
+1           1      7      1      9     11
+2           2      0      0      0     22
+3           3      2      4      8      5
+
+print(edm_pivot_longer2(inpt_datf = datf2,
+col_vars = c(2:5),
+individual_col = 1,
+col_vars_to = c("Shape")))
+
+individuals Shape val1 val2
+1           1     A    7    9
+2           1     B    1   11
+3           2     A    0    0
+4           2     B    0   22
+5           3     A    2    8
+6           3     B    4    5
+```
+
+
 # `edm_pivot_wider1`
 
 edm_pivot_wider1
