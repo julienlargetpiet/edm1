@@ -16,7 +16,7 @@ edm_pivot_longer2(inpt_datf, col_vars = c(), col_vars_to = c(), individual_col)
 \item{individual_col}{is the column name or the column number of the individuals}
 }
 \description{
-Performs a pivot longer on dataframe, see examples. The synthax for variables must be value_id-modalitie_var1.modalitie_var2...
+Performs a pivot longer on dataframe keeping the null values, see examples. The synthax for variables must be value_id-modalitie_var1.modalitie_var2...
 }
 \examples{
 

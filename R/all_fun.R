@@ -17040,7 +17040,7 @@ edm_pivot_longer1 <- function(inpt_datf,
 
 #' edm_pivot_longer2
 #'
-#' Performs a pivot longer on dataframe, see examples. The synthax for variables must be value_id-modalitie_var1.modalitie_var2...
+#' Performs a pivot longer on dataframe keeping the null values, see examples. The synthax for variables must be value_id-modalitie_var1.modalitie_var2...
 #'
 #' @param inpt_datf is the input dataframe
 #' @param col_vars is a vector containing the column names or column numbers of the variables
