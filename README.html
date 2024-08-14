@@ -8121,6 +8121,65 @@ print(match_by(to_match_v = c("a", "e"), inpt_v = c("a", "z", "a", "a", "p", "e"
 
 </div>
 </body></html>
+<!DOCTYPE html><html><head><title>R: match_na_omit</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>match_na_omit</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>match_na_omit</h2>
+
+<h3>Description</h3>
+
+<p>Performs a match, but remove the NA values in the output if there is one or many, see examples.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>match_na_omit(x, table)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="x">x</code></td>
+<td>
+<p>is the vector of the patterns to be matched</p>
+</td></tr>
+<tr><td><code id="table">table</code></td>
+<td>
+<p>is the vector that may contain the patterns to be matched</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+match_na_omit(x = c("oui", "non", "2"), table = c("1", "oui", "oui", "ee", "non"))
+
+[1] 2 5
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
 <!DOCTYPE html><html><head><title>R: multitud</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />

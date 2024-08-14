@@ -17194,4 +17194,23 @@ edm_pivot_longer2 <- function(inpt_datf,
   return(rtn_datf)
 }
 
+#' match_na_omit
+#'
+#' Performs a match, but remove the NA values in the output if there is one or many, see examples.
+#'
+#' @param x is the vector of the patterns to be matched
+#' @param table is the vector that may contain the patterns to be matched
+#'
+#' @examples
+#'
+#' match_na_omit(x = c("oui", "non", "2"), table = c("1", "oui", "oui", "ee", "non"))
+#'
+#' [1] 2 5
+#'
+#' @export
+
+match_na_omit <- function(x, table){
+  rtn_v <- match(x = x, table = table)
+  return(rtn_v[!(is.na(rtn_v))])
+}
 
