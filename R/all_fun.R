@@ -17273,6 +17273,37 @@ match_na_omit <- function(x, table){
 #' @export
 
 sum_group1 <- function(inpt_datf, col_grp = c(), col_to_add = c()){
+  regex_spe_detect <- function(inpt){
+            fillr <- function(inpt_v, ptrn_fill="\\.\\.\\.\\d"){
+              ptrn <- grep(ptrn_fill, inpt_v)
+              while (length(ptrn) > 0){
+                ptrn <- grep(ptrn_fill, inpt_v)
+                idx <- ptrn[1] 
+                untl <- as.numeric(c(unlist(strsplit(inpt_v[idx], split="\\.")))[4]) - 1
+                pre_val <- inpt_v[(idx - 1)]
+                inpt_v[idx] <- pre_val
+                if (untl > 0){
+                  for (i in 1:untl){
+                    inpt_v <- append(inpt_v, pre_val, idx)
+                  }
+                }
+              ptrn <- grep(ptrn_fill, inpt_v)
+              }
+              return(inpt_v)
+            }
+            inpt <- unlist(strsplit(x=inpt, split=""))
+            may_be_v <- c("[", "]", "{", "}", "-", "_", ".", "(", ")", "/", "%", "*", "^", "?", "$")
+            pre_idx <- unique(match(x=inpt, table=may_be_v))
+            pre_idx <- pre_idx[!(is.na(pre_idx))]
+            for (el in may_be_v[pre_idx]){
+                    cnt = 0
+                    for (i in grep(pattern=paste("\\", el, sep=""), x=inpt)){
+                            inpt <- append(x=inpt, values="\\", after=(i - 1 + cnt))
+                            cnt = cnt + 1
+                    }
+            }
+      return(paste(inpt, collapse=""))
+  }    
   if (typeof(col_grp) == "character" & typeof(col_to_add) == "character" & length(col_grp) == length(col_to_add)){
     for (i in 1:length(col_grp)){
       col_grp[i] <- match(x = col_grp[i], table = colnames(inpt_datf))
@@ -17301,7 +17332,7 @@ sum_group1 <- function(inpt_datf, col_grp = c(), col_to_add = c()){
    }
   }
   for (el in unique(id_vec)){
-    cur_rows_v <- grep(pattern = el, x = id_vec)
+    cur_rows_v <- grep(pattern = regex_spe_detect(el), x = id_vec)
     for (cl in col_to_add){ 
       inpt_datf[cur_rows_v, cl] <- sum(inpt_datf[cur_rows_v, cl])
     }
@@ -17368,6 +17399,37 @@ sum_group1 <- function(inpt_datf, col_grp = c(), col_to_add = c()){
 #' @export
 
 sum_group2 <- function(inpt_datf, col_grp = c(), col_to_add = c()){
+  regex_spe_detect <- function(inpt){
+              fillr <- function(inpt_v, ptrn_fill="\\.\\.\\.\\d"){
+                ptrn <- grep(ptrn_fill, inpt_v)
+                while (length(ptrn) > 0){
+                  ptrn <- grep(ptrn_fill, inpt_v)
+                  idx <- ptrn[1] 
+                  untl <- as.numeric(c(unlist(strsplit(inpt_v[idx], split="\\.")))[4]) - 1
+                  pre_val <- inpt_v[(idx - 1)]
+                  inpt_v[idx] <- pre_val
+                  if (untl > 0){
+                    for (i in 1:untl){
+                      inpt_v <- append(inpt_v, pre_val, idx)
+                    }
+                  }
+                ptrn <- grep(ptrn_fill, inpt_v)
+                }
+                return(inpt_v)
+              }
+              inpt <- unlist(strsplit(x=inpt, split=""))
+              may_be_v <- c("[", "]", "{", "}", "-", "_", ".", "(", ")", "/", "%", "*", "^", "?", "$")
+              pre_idx <- unique(match(x=inpt, table=may_be_v))
+              pre_idx <- pre_idx[!(is.na(pre_idx))]
+              for (el in may_be_v[pre_idx]){
+                      cnt = 0
+                      for (i in grep(pattern=paste("\\", el, sep=""), x=inpt)){
+                              inpt <- append(x=inpt, values="\\", after=(i - 1 + cnt))
+                              cnt = cnt + 1
+                      }
+              }
+        return(paste(inpt, collapse=""))
+  }    
   rtn_datf <- data.frame(matrix(nrow = 0, ncol = ncol(inpt_datf)))
   if (typeof(col_grp) == "character" & typeof(col_to_add) == "character" & length(col_grp) == length(col_to_add)){
     for (i in 1:length(col_grp)){
@@ -17397,7 +17459,7 @@ sum_group2 <- function(inpt_datf, col_grp = c(), col_to_add = c()){
    }
   }
   for (el in unique(id_vec)){
-    cur_rows_v <- grep(pattern = el, x = id_vec)
+    cur_rows_v <- grep(pattern = regex_spe_detect(el), x = id_vec)
     cur_nb_row <- nrow(rtn_datf) + 1
     rtn_datf <- rbind(rtn_datf, inpt_datf[cur_rows_v, ])
     for (cl in col_to_add){
