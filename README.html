@@ -12581,6 +12581,216 @@ print(successive_diff(c(1:11, 13, 19)))
 
 </div>
 </body></html>
+<!DOCTYPE html><html><head><title>R: sum_group1</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>sum_group1</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>sum_group1</h2>
+
+<h3>Description</h3>
+
+<p>Allow to aggregate variables according to groups, do not visually group the individual unlike sum_group2, see examples
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>sum_group1(inpt_datf, col_grp = c(), col_to_add = c())
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
+<td>
+<p>is the input dataframe</p>
+</td></tr>
+<tr><td><code id="col_grp">col_grp</code></td>
+<td>
+<p>is a vector containing the column names or the column numbers of the groups</p>
+</td></tr>
+<tr><td><code id="col_to_add">col_to_add</code></td>
+<td>
+<p>is a vector containing the column names or the column numbers of the variables to aggregate</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+set.seed(123)
+datf &lt;- data.frame("country" = c("France", "Germany", "France", "Italy", "Italy", "France"),
+                   "year" = c(2012, 2012, 2013, 2011, 2012, 2011),
+                   "comp_arm" = c("higher", "lower", "higher", "higher", "lower", "lower"),
+                   "pop" = runif(n = 6, min = 65000000, max = 69000000),
+                   "random_var" = round(x = runif(n = 6, min = 16, max = 78), digits = 0))
+datf
+
+  country year comp_arm      pop random_var
+1  France 2012   higher 66150310         49
+2 Germany 2012    lower 68153221         71
+3  France 2013   higher 66635908         50
+4   Italy 2011   higher 68532070         44
+5   Italy 2012    lower 68761869         75
+6  France 2011    lower 65182226         44
+
+print(sum_group1(inpt_datf = datf, col_grp = c("country", "year"), col_to_add = c("random_var")))
+
+  country year comp_arm      pop random_var
+1  France 2012   higher 66150310         49
+2 Germany 2012    lower 68153221         71
+3  France 2013   higher 66635908         50
+4   Italy 2011   higher 68532070         44
+5   Italy 2012    lower 68761869         75
+6  France 2011    lower 65182226         44
+
+print(sum_group1(inpt_datf = datf, col_grp = c("year"), col_to_add = c("random_var", "pop")))
+
+  country year comp_arm       pop random_var
+1  France 2012   higher 203065400        195
+2 Germany 2012    lower 203065400        195
+3  France 2013   higher  66635908         50
+4   Italy 2011   higher 133714296         88
+5   Italy 2012    lower 203065400        195
+6  France 2011    lower 133714296         88
+
+print(sum_group1(inpt_datf = datf, col_grp = c("country"), col_to_add = c("random_var", "pop")))
+
+  country year comp_arm       pop random_var
+1  France 2012   higher 197968444        143
+2 Germany 2012    lower  68153221         71
+3  France 2013   higher 197968444        143
+4   Italy 2011   higher 137293939        119
+5   Italy 2012    lower 137293939        119
+6  France 2011    lower 197968444        143
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: sum_group2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>sum_group2</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>sum_group2</h2>
+
+<h3>Description</h3>
+
+<p>Allow to aggregate variables according to groups, see examples
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>sum_group2(inpt_datf, col_grp = c(), col_to_add = c())
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
+<td>
+<p>is the input dataframe</p>
+</td></tr>
+<tr><td><code id="col_grp">col_grp</code></td>
+<td>
+<p>is a vector containing the column names or the column numbers of the groups</p>
+</td></tr>
+<tr><td><code id="col_to_add">col_to_add</code></td>
+<td>
+<p>is a vector containing the column names or the column numbers of the variables to aggregate</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+set.seed(123)
+datf &lt;- data.frame("country" = c("France", "Germany", "France", "Italy", "Italy", "France"),
+                   "year" = c(2012, 2012, 2013, 2011, 2012, 2011),
+                   "comp_arm" = c("higher", "lower", "higher", "higher", "lower", "lower"),
+                   "pop" = runif(n = 6, min = 65000000, max = 69000000),
+                   "random_var" = round(x = runif(n = 6, min = 16, max = 78), digits = 0))
+datf
+
+  country year comp_arm      pop random_var
+1  France 2012   higher 66150310         49
+2 Germany 2012    lower 68153221         71
+3  France 2013   higher 66635908         50
+4   Italy 2011   higher 68532070         44
+5   Italy 2012    lower 68761869         75
+6  France 2011    lower 65182226         44
+
+print(sum_group2(inpt_datf = datf, col_grp = c("country"), col_to_add = c("random_var", "pop")))
+
+  country year comp_arm       pop random_var
+1  France 2012   higher 197968444        143
+3  France 2013   higher 197968444        143
+6  France 2011    lower 197968444        143
+2 Germany 2012    lower  68153221         71
+4   Italy 2011   higher 137293939        119
+5   Italy 2012    lower 137293939        119
+
+print(sum_group2(inpt_datf = datf, col_grp = c("year"), col_to_add = c("random_var", "pop")))
+
+  country year comp_arm       pop random_var
+1  France 2012   higher 203065400        195
+2 Germany 2012    lower 203065400        195
+5   Italy 2012    lower 203065400        195
+3  France 2013   higher  66635908         50
+4   Italy 2011   higher 133714296         88
+6  France 2011    lower 133714296         88
+
+print(sum_group2(inpt_datf = datf, col_grp = c("country", "year"), col_to_add = c("random_var")))
+
+  country year comp_arm      pop random_var
+1  France 2012   higher 66150310         49
+2 Germany 2012    lower 68153221         71
+3  France 2013   higher 66635908         50
+4   Italy 2011   higher 68532070         44
+5   Italy 2012    lower 68761869         75
+6  France 2011    lower 65182226         44
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
 <!DOCTYPE html><html><head><title>R: swipr</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />

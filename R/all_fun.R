@@ -17214,3 +17214,196 @@ match_na_omit <- function(x, table){
   return(rtn_v[!(is.na(rtn_v))])
 }
 
+#' sum_group1
+#'
+#' Allow to aggregate variables according to groups, do not visually group the individual unlike sum_group2, see examples
+#'
+#' @param inpt_datf is the input dataframe
+#' @param col_grp is a vector containing the column names or the column numbers of the groups
+#' @param col_to_add is a vector containing the column names or the column numbers of the variables to aggregate
+#'
+#' @examples
+#'
+#' set.seed(123)
+#' datf <- data.frame("country" = c("France", "Germany", "France", "Italy", "Italy", "France"),
+#'                    "year" = c(2012, 2012, 2013, 2011, 2012, 2011),
+#'                    "comp_arm" = c("higher", "lower", "higher", "higher", "lower", "lower"),
+#'                    "pop" = runif(n = 6, min = 65000000, max = 69000000),
+#'                    "random_var" = round(x = runif(n = 6, min = 16, max = 78), digits = 0))
+#' datf
+#' 
+#'   country year comp_arm      pop random_var
+#' 1  France 2012   higher 66150310         49
+#' 2 Germany 2012    lower 68153221         71
+#' 3  France 2013   higher 66635908         50
+#' 4   Italy 2011   higher 68532070         44
+#' 5   Italy 2012    lower 68761869         75
+#' 6  France 2011    lower 65182226         44
+#' 
+#' print(sum_group1(inpt_datf = datf, col_grp = c("country", "year"), col_to_add = c("random_var")))
+#'
+#'   country year comp_arm      pop random_var
+#' 1  France 2012   higher 66150310         49
+#' 2 Germany 2012    lower 68153221         71
+#' 3  France 2013   higher 66635908         50
+#' 4   Italy 2011   higher 68532070         44
+#' 5   Italy 2012    lower 68761869         75
+#' 6  France 2011    lower 65182226         44
+#' 
+#' print(sum_group1(inpt_datf = datf, col_grp = c("year"), col_to_add = c("random_var", "pop")))
+#'
+#'   country year comp_arm       pop random_var
+#' 1  France 2012   higher 203065400        195
+#' 2 Germany 2012    lower 203065400        195
+#' 3  France 2013   higher  66635908         50
+#' 4   Italy 2011   higher 133714296         88
+#' 5   Italy 2012    lower 203065400        195
+#' 6  France 2011    lower 133714296         88
+#'
+#' print(sum_group1(inpt_datf = datf, col_grp = c("country"), col_to_add = c("random_var", "pop")))
+#' 
+#'   country year comp_arm       pop random_var
+#' 1  France 2012   higher 197968444        143
+#' 2 Germany 2012    lower  68153221         71
+#' 3  France 2013   higher 197968444        143
+#' 4   Italy 2011   higher 137293939        119
+#' 5   Italy 2012    lower 137293939        119
+#' 6  France 2011    lower 197968444        143
+#'
+#' @export
+
+sum_group1 <- function(inpt_datf, col_grp = c(), col_to_add = c()){
+  if (typeof(col_grp) == "character" & typeof(col_to_add) == "character" & length(col_grp) == length(col_to_add)){
+    for (i in 1:length(col_grp)){
+      col_grp[i] <- match(x = col_grp[i], table = colnames(inpt_datf))
+      col_to_add[i] <- match(x = col_to_add[i], table = colnames(inpt_datf))
+    }
+    col_grp <- as.numeric(col_grp)
+    col_to_add <- as.numeric(col_to_add)
+  }else{ 
+    if (typeof(col_grp) == "character"){
+      for (i in 1:length(col_grp)){
+        col_grp[i] <- match(x = col_grp[i], table = colnames(inpt_datf))
+      }
+      col_grp <- as.numeric(col_grp)
+    }
+    if (typeof(col_to_add) == "character"){
+      for (i in 1:length(col_to_add)){
+        col_to_add[i] <- match(x = col_to_add[i], table = colnames(inpt_datf))
+      }
+      col_to_add <- as.numeric(col_to_add)
+    }
+  }
+  id_vec <- inpt_datf[, col_grp[1]]
+  if (length(col_grp) > 1){
+   for (i in 2:length(col_grp)){
+     id_vec <- paste0(id_vec, inpt_datf[, col_grp[i]]) 
+   }
+  }
+  for (el in unique(id_vec)){
+    cur_rows_v <- grep(pattern = el, x = id_vec)
+    for (cl in col_to_add){ 
+      inpt_datf[cur_rows_v, cl] <- sum(inpt_datf[cur_rows_v, cl])
+    }
+  }
+  return(inpt_datf)
+}
+
+#' sum_group2
+#'
+#' Allow to aggregate variables according to groups, see examples
+#'
+#' @param inpt_datf is the input dataframe
+#' @param col_grp is a vector containing the column names or the column numbers of the groups
+#' @param col_to_add is a vector containing the column names or the column numbers of the variables to aggregate
+#'
+#' @examples
+#'
+#' set.seed(123)
+#' datf <- data.frame("country" = c("France", "Germany", "France", "Italy", "Italy", "France"),
+#'                    "year" = c(2012, 2012, 2013, 2011, 2012, 2011),
+#'                    "comp_arm" = c("higher", "lower", "higher", "higher", "lower", "lower"),
+#'                    "pop" = runif(n = 6, min = 65000000, max = 69000000),
+#'                    "random_var" = round(x = runif(n = 6, min = 16, max = 78), digits = 0))
+#' datf
+#'
+#'   country year comp_arm      pop random_var
+#' 1  France 2012   higher 66150310         49
+#' 2 Germany 2012    lower 68153221         71
+#' 3  France 2013   higher 66635908         50
+#' 4   Italy 2011   higher 68532070         44
+#' 5   Italy 2012    lower 68761869         75
+#' 6  France 2011    lower 65182226         44
+#'
+#' print(sum_group2(inpt_datf = datf, col_grp = c("country"), col_to_add = c("random_var", "pop")))
+#' 
+#'   country year comp_arm       pop random_var
+#' 1  France 2012   higher 197968444        143
+#' 3  France 2013   higher 197968444        143
+#' 6  France 2011    lower 197968444        143
+#' 2 Germany 2012    lower  68153221         71
+#' 4   Italy 2011   higher 137293939        119
+#' 5   Italy 2012    lower 137293939        119
+#'
+#' print(sum_group2(inpt_datf = datf, col_grp = c("year"), col_to_add = c("random_var", "pop")))
+#'
+#'   country year comp_arm       pop random_var
+#' 1  France 2012   higher 203065400        195
+#' 2 Germany 2012    lower 203065400        195
+#' 5   Italy 2012    lower 203065400        195
+#' 3  France 2013   higher  66635908         50
+#' 4   Italy 2011   higher 133714296         88
+#' 6  France 2011    lower 133714296         88
+#'
+#' print(sum_group2(inpt_datf = datf, col_grp = c("country", "year"), col_to_add = c("random_var")))
+#' 
+#'   country year comp_arm      pop random_var
+#' 1  France 2012   higher 66150310         49
+#' 2 Germany 2012    lower 68153221         71
+#' 3  France 2013   higher 66635908         50
+#' 4   Italy 2011   higher 68532070         44
+#' 5   Italy 2012    lower 68761869         75
+#' 6  France 2011    lower 65182226         44
+#'
+#' @export
+
+sum_group2 <- function(inpt_datf, col_grp = c(), col_to_add = c()){
+  rtn_datf <- data.frame(matrix(nrow = 0, ncol = ncol(inpt_datf)))
+  if (typeof(col_grp) == "character" & typeof(col_to_add) == "character" & length(col_grp) == length(col_to_add)){
+    for (i in 1:length(col_grp)){
+      col_grp[i] <- match(x = col_grp[i], table = colnames(inpt_datf))
+      col_to_add[i] <- match(x = col_to_add[i], table = colnames(inpt_datf))
+    }
+    col_grp <- as.numeric(col_grp)
+    col_to_add <- as.numeric(col_to_add)
+  }else{ 
+    if (typeof(col_grp) == "character"){
+      for (i in 1:length(col_grp)){
+        col_grp[i] <- match(x = col_grp[i], table = colnames(inpt_datf))
+      }
+      col_grp <- as.numeric(col_grp)
+    }
+    if (typeof(col_to_add) == "character"){
+      for (i in 1:length(col_to_add)){
+        col_to_add[i] <- match(x = col_to_add[i], table = colnames(inpt_datf))
+      }
+      col_to_add <- as.numeric(col_to_add)
+    }
+  }
+  id_vec <- inpt_datf[, col_grp[1]]
+  if (length(col_grp) > 1){
+   for (i in 2:length(col_grp)){
+     id_vec <- paste0(id_vec, inpt_datf[, col_grp[i]]) 
+   }
+  }
+  for (el in unique(id_vec)){
+    cur_rows_v <- grep(pattern = el, x = id_vec)
+    cur_nb_row <- nrow(rtn_datf) + 1
+    rtn_datf <- rbind(rtn_datf, inpt_datf[cur_rows_v, ])
+    for (cl in col_to_add){
+      rtn_datf[cur_nb_row:nrow(rtn_datf), cl] <- sum(inpt_datf[cur_rows_v, cl])
+    }
+  }
+  return(rtn_datf)
+}
+
