@@ -64,4 +64,33 @@ print(sum_group1(inpt_datf = datf, col_grp = c("country"), col_to_add = c("rando
 5   Italy 2012    lower 137293939        119
 6  France 2011    lower 197968444        143
 
+set.seed(123)
+pop_v <- runif(n = 6, min = 65000000, max = 69000000)
+pop_v[c(1, 3)] <- NA
+set.seed(123)
+datf <- data.frame("country" = c("France", "Germany", "France", "Italy", "Italy", "France"),
+                   "year" = c(2012, 2012, 2013, 2011, 2012, 2011),
+                   "comp_arm" = c("higher", "lower", "higher", "higher", "lower", "lower"),
+                   "pop" = pop_v,
+                   "random_var" = round(x = runif(n = 6, min = 16, max = 78), digits = 0))
+datf
+
+  country year comp_arm      pop random_var
+1  France 2012   higher       NA         34
+2 Germany 2012    lower 68153221         65
+3  France 2013   higher       NA         41
+4   Italy 2011   higher 68532070         71
+5   Italy 2012    lower 68761869         74
+6  France 2011    lower 65182226         19
+
+print(sum_group1(inpt_datf = datf, col_grp = c("year"), col_to_add = c("random_var", "pop")))
+
+  country year comp_arm       pop random_var
+1  France 2012   higher 136915090        173
+2 Germany 2012    lower 136915090        173
+3  France 2013   higher        NA         41
+4   Italy 2011   higher 133714296         90
+5   Italy 2012    lower 136915090        173
+6  France 2011    lower 133714296         90
+
 }
