@@ -17625,8 +17625,8 @@ edm_arrangr <- function(inpt_datf, col_order, top_n = 10, decreasing = TRUE){
   if (typeof(col_order) == "character"){
     col_order <- match(x = col_order, colnames(inpt_datf))  
   }
-  cur_search <- mapply(function(x) return(regex_spe_detect(as.character(x))), sort(x = unique(inpt_datf[, col_order]), decreasing = decreasing)[1:top_n])
-  return(inpt_datf[grep_all(pattern_v = paste0("^", cur_search, "$"), inpt_v = as.character(inpt_datf[, col_order])), ])
+  cur_search <- mapply(function(x) return(regex_spe_detect(as.character(x))), sort(x = unique(inpt_datf[, col_order]), decreasing = decreasing))
+  return(inpt_datf[grep_all(pattern_v = paste0("^", cur_search, "$"), inpt_v = as.character(inpt_datf[, col_order]))[1:top_n], ])
 }
 
 
