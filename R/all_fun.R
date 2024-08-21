@@ -17720,3 +17720,36 @@ edm_arrangr2 <- function(inpt_datf, col_order, top_n = 10, decreasing = TRUE){
   return(inpt_datf[grep_all(pattern_v = paste0("^", cur_search, "$"), inpt_v = as.character(inpt_datf[, col_order]))[1:top_n], ])
 }
 
+#' all_concat
+#'
+#' Output all the possible concatenations of elements in different vectors, see examples
+#'
+#' @param ... is all the vectors of the elements that will be concatenated, see examples
+#' @param sep is the separator to use between concatenated elements
+#'
+#' @examples
+#'
+#' print(all_concat(c("France", "Germany"), c("2012", "2013"), c(1:2), sep = "_"))
+#' 
+#' [1] "France_2012_1"  "Germany_2012_1" "France_2013_1"  "Germany_2013_1"
+#' [5] "France_2012_2"  "Germany_2012_2" "France_2013_2"  "Germany_2013_2"
+#'
+#' @export
+
+all_concat <- function(..., sep = "_"){
+  rtn_v <- unlist(list(...)[1])
+  if (length(list(...)) > 1){
+    for (vec in list(...)[2:length(list(...))]){
+      cur_rtn_v <- rtn_v
+      rtn_v <- c()
+      for (el in vec){
+        for (el2 in cur_rtn_v){
+          rtn_v <- c(rtn_v, paste(el2, el, sep = sep)) 
+        }
+      }
+    }
+  }
+  return(rtn_v)
+}
+
+

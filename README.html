@@ -1,4 +1,64 @@
 
+<!DOCTYPE html><html><head><title>R: all_concat</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>all_concat</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>all_concat</h2>
+
+<h3>Description</h3>
+
+<p>Output all the possible concatenations of elements in different vectors, see examples
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>all_concat(..., sep = "_")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="...">...</code></td>
+<td>
+<p>is all the vectors of the elements that will be concatenated, see examples</p>
+</td></tr>
+<tr><td><code id="sep">sep</code></td>
+<td>
+<p>is the separator to use between concatenated elements</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(all_concat(c("France", "Germany"), c("2012", "2013"), c(1:2), sep = "_"))
+
+[1] "France_2012_1"  "Germany_2012_1" "France_2013_1"  "Germany_2013_1"
+[5] "France_2012_2"  "Germany_2012_2" "France_2013_2"  "Germany_2013_2"
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
 <!DOCTYPE html><html><head><title>R: all_stat</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />

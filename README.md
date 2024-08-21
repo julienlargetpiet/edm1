@@ -16,6 +16,41 @@ R > install()
 
 **This is the main edm1 repo (grouping all edm1. repos), the most up to date. If a bug is found in one of the functions, this repo will be updated first and then the edm1.something repo where the function to update is also present.**
 
+# `all_concat`
+
+all_concat
+
+
+## Description
+
+Output all the possible concatenations of elements in different vectors, see examples
+
+
+## Usage
+
+```r
+all_concat(..., sep = "_")
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`...`     |     is all the vectors of the elements that will be concatenated, see examples
+`sep`     |     is the separator to use between concatenated elements
+
+
+## Examples
+
+```r
+print(all_concat(c("France", "Germany"), c("2012", "2013"), c(1:2), sep = "_"))
+
+[1] "France_2012_1"  "Germany_2012_1" "France_2013_1"  "Germany_2013_1"
+[5] "France_2012_2"  "Germany_2012_2" "France_2013_2"  "Germany_2013_2"
+```
+
+
 # `all_stat`
 
 all_stat
