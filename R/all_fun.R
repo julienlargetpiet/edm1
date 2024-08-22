@@ -16997,7 +16997,7 @@ edm_pivot_longer1 <- function(inpt_datf,
     col_vals <- as.numeric(col_vals)
   }
   if (typeof(individual_col) == "character"){
-    individual_character <- match(x = individual_col, table = colnames(inpt_datf))
+    individual_col <- match(x = individual_col, table = colnames(inpt_datf))
   }
   cur_split <- better_split(inpt = colnames(inpt_datf)[col_vars[1]], split_v = c("\\.", "-"))
   hmn_col = length(cur_split)
@@ -17006,8 +17006,17 @@ edm_pivot_longer1 <- function(inpt_datf,
   rtn_datf <- as.data.frame(matrix(nrow = 0, ncol = hmn_col))
   if (length(col_vars) > 1){
     cnt = 1
-    while (unlist(strsplit(x = colnames(inpt_datf)[col_vars[cnt]], split = "-"))[1] == val_v[1]){
-      cnt = cnt + 1
+    no_stop <- TRUE
+    while (no_stop){
+      if (cnt <= length(col_vars)){
+        if (unlist(strsplit(x = colnames(inpt_datf)[col_vars[cnt]], split = "-"))[1] == val_v[1]){
+          cnt = cnt + 1
+        }else{
+          no_stop <- FALSE
+        }
+      }else{
+        no_stop <- FALSE
+      }
     }
     cnt = cnt - 1
     stay_cnt <- cnt
@@ -17017,7 +17026,7 @@ edm_pivot_longer1 <- function(inpt_datf,
     }
   }
   for (I in 1:nrow(inpt_datf)){
-    pre_grp <- grep(pattern = TRUE, x = !(inpt_datf[I, c((2 + stay_cnt):ncol(inpt_datf))] %in% null_value)) 
+    pre_grp <- grep(pattern = TRUE, x = !(inpt_datf[I, c((1 + stay_cnt):ncol(inpt_datf))] %in% null_value)) 
     pre_grp[(pre_grp == 0)] <- stay_cnt 
     cur_null_vec <- grep(pattern = TRUE, x = (inpt_datf[I, c(2:(stay_cnt + 1))] %in% null_value)) 
     cur_intersct <- intersect(pre_grp, cur_null_vec) + 1
