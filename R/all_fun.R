@@ -17178,8 +17178,17 @@ edm_pivot_longer2 <- function(inpt_datf,
   rtn_datf <- as.data.frame(matrix(nrow = 0, ncol = hmn_col))
   if (length(col_vars) > 1){
     cnt = 1
-    while (unlist(strsplit(x = colnames(inpt_datf)[col_vars[cnt]], split = "-"))[1] == val_v[1]){
-      cnt = cnt + 1
+    no_stop <- TRUE
+    while (no_stop){
+      if (cnt <= length(col_vars)){
+        if (unlist(strsplit(x = colnames(inpt_datf)[col_vars[cnt]], split = "-"))[1] == val_v[1]){
+          cnt = cnt + 1
+        }else{
+          no_stop <- FALSE
+        }
+      }else{
+        no_stop <- FALSE
+      }
     }
     cnt = cnt - 1
     stay_cnt <- cnt
