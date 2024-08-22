@@ -16966,14 +16966,63 @@ edm_pivot_wider2 <- function(inpt_datf,
 #' 4           3     A    2    8
 #' 5           3     B    4    5
 #'
+#'
+#' 
+#' print(cur_data)
+#'
+#'       individual country year twh_cons-biofuel_electricity
+#' 7475 France_1995  France 1995                         1.82
+#' 7503 France_2023  France 2023                         9.50
+#'      twh_cons-coal_electricity twh_cons-gas_electricity
+#' 7475                     24.18                     3.84
+#' 7503                      2.16                    31.43
+#'      twh_cons-hydro_electricity twh_cons-nuclear_electricity
+#' 7475                      71.33                       377.23
+#' 7503                      53.19                       335.65
+#'      twh_cons-oil_electricity twh_cons-other_renewable_exc_biofuel_electricity
+#' 7475                    10.50                                             0.51
+#' 7503                     9.71                                             0.60
+#'      twh_cons-solar_electricity twh_cons-wind_electricity
+#' 7475                       0.00                      0.00
+#' 7503                      23.26                     48.61
+#' 
+#' print(edm_pivot_longer1(inpt_datf = cur_data,
+#'                         col_vars = c(4:ncol(cur_data)),
+#'                         col_vars_to = "type_energie"))
+#'
+#'     individual country year                            type_energie twh_cons
+#' 1  France_1995  France 1995                     biofuel_electricity     1.82
+#' 2  France_1995  France 1995                        coal_electricity    24.18
+#' 3  France_1995  France 1995                         gas_electricity     3.84
+#' 4  France_1995  France 1995                       hydro_electricity    71.33
+#' 5  France_1995  France 1995                     nuclear_electricity   377.23
+#' 6  France_1995  France 1995                         oil_electricity     10.5
+#' 7  France_1995  France 1995 other_renewable_exc_biofuel_electricity     0.51
+#' 8  France_2023  France 2023                     biofuel_electricity      9.5
+#' 9  France_2023  France 2023                        coal_electricity     2.16
+#' 10 France_2023  France 2023                         gas_electricity    31.43
+#' 11 France_2023  France 2023                       hydro_electricity    53.19
+#' 12 France_2023  France 2023                     nuclear_electricity   335.65
+#' 13 France_2023  France 2023                         oil_electricity     9.71
+#' 14 France_2023  France 2023 other_renewable_exc_biofuel_electricity      0.6
+#' 15 France_2023  France 2023                       solar_electricity    23.26
+#' 16 France_2023  France 2023                        wind_electricity    48.61
+#'
 #' @export
 
 edm_pivot_longer1 <- function(inpt_datf, 
                              col_vars = c(), 
                              col_vars_to = c(), 
-                             individual_col,
                              null_value = c(0),
                              nvr_here= "?"){
+  much_status <- FALSE
+  if ((length(col_vars) + 1) < ncol(inpt_datf)){
+    inpt_datf2 <- inpt_datf[, 
+        c(1:(ncol(inpt_datf) - (length(col_vars) + 1)))]
+    inpt_datf <- inpt_datf[, (ncol(inpt_datf) - length(col_vars)):ncol(inpt_datf)]
+    col_vars <- col_vars - (ncol(inpt_datf) - length(col_vars)) - 1
+    much_status <- TRUE
+  }
   better_split <- function(inpt, split_v = c()){
     for (split in split_v){
       pre_inpt <- inpt
@@ -16995,9 +17044,6 @@ edm_pivot_longer1 <- function(inpt_datf,
       col_vals[i] <- match(x = col_vals[i], colnames(inpt_datf))
     }
     col_vals <- as.numeric(col_vals)
-  }
-  if (typeof(individual_col) == "character"){
-    individual_col <- match(x = individual_col, table = colnames(inpt_datf))
   }
   cur_split <- better_split(inpt = colnames(inpt_datf)[col_vars[1]], split_v = c("\\.", "-"))
   hmn_col = length(cur_split)
@@ -17033,7 +17079,7 @@ edm_pivot_longer1 <- function(inpt_datf,
     null_id <- match(x = inpt_datf[I, cur_intersct], table = null_value)
     inpt_datf[I, cur_intersct] <- nvr_here
     for (i in grep(pattern = TRUE, x = !(inpt_datf[I, c(2:(1 + stay_cnt))] %in% null_value))){
-      cur_row <- c(inpt_datf[I, individual_col])
+      cur_row <- c(inpt_datf[I, 1])
       cur_split <- better_split(inpt = colnames(inpt_datf)[(i + 1)], split_v = c("-", "\\.")) 
       for (el in c(cur_split[2:length(cur_split)], 
                    inpt_datf[I, seq(from = (i + 1), to = ncol(inpt_datf), by = stay_cnt)])){
@@ -17043,8 +17089,24 @@ edm_pivot_longer1 <- function(inpt_datf,
       rtn_datf <- rbind(rtn_datf, cur_row)
     }
   }
-  colnames(rtn_datf) <- c("individuals", col_vars_to, val_v)
-  return(rtn_datf)
+  colnames(rtn_datf) <- c(colnames(inpt_datf)[1], col_vars_to, val_v)
+  if (!(much_status)){
+    return(rtn_datf)
+  }else{
+    print("ici")
+    pre_rtn_datf <- as.data.frame(matrix(nrow = nrow(rtn_datf), ncol = 0))
+    i_col_v <- rtn_datf[, 1]
+    i_col_v2 <- unique(i_col_v)
+    for (I in 1:ncol(inpt_datf2)){
+      cur_bnd <- c()
+      for (i in 1:nrow(inpt_datf2)){
+        cur_bnd <- c(cur_bnd, rep(x = inpt_datf2[i, I], times = sum(grepl(pattern = i_col_v2[i], x = i_col_v))))
+      }
+      pre_rtn_datf <- cbind(pre_rtn_datf, cur_bnd)
+      colnames(pre_rtn_datf)[I] <- colnames(inpt_datf2)[I]
+    }
+    return(cbind(pre_rtn_datf, rtn_datf))
+  }
 }
 
 #' edm_pivot_longer2
@@ -17140,12 +17202,82 @@ edm_pivot_longer1 <- function(inpt_datf,
 #' 5           3     A    2    8
 #' 6           3     B    4    5
 #'
+#'
+#'
+#' print(cur_data)
+#' 
+#'       individual country year twh_cons-biofuel_electricity
+#' 7475 France_1995  France 1995                         1.82
+#' 7503 France_2023  France 2023                         9.50
+#'      twh_cons-coal_electricity twh_cons-gas_electricity
+#' 7475                     24.18                     3.84
+#' 7503                      2.16                    31.43
+#'      twh_cons-hydro_electricity twh_cons-nuclear_electricity
+#' 7475                      71.33                       377.23
+#' 7503                      53.19                       335.65
+#'      twh_cons-oil_electricity twh_cons-other_renewable_exc_biofuel_electricity
+#' 7475                    10.50                                             0.51
+#' 7503                     9.71                                             0.60
+#'      twh_cons-solar_electricity twh_cons-wind_electricity
+#' 7475                       0.00                      0.00
+#' 7503                      23.26                     48.61
+#' 
+#' print(edm_pivot_longer2(inpt_datf = cur_data,
+#'                         col_vars = c(4:ncol(cur_data)),
+#'                         col_vars_to = "type_energie"))
+#'
+#'     individual country                         year
+#' 1  France_1995  France                         1995
+#' 2  France_1995  France                         1995
+#' 3  France_1995  France                         1995
+#' 4  France_1995  France                         1995
+#' 5  France_1995  France                         1995
+#' 6  France_1995  France                         1995
+#' 7  France_1995  France                         1995
+#' 8  France_1995  France                         1995
+#' 9  France_1995  France                         1995
+#' 10 France_2023  France                         2023
+#' 11 France_2023  France                         2023
+#' 12 France_2023  France                         2023
+#' 13 France_2023  France                         2023
+#' 14 France_2023  France                         2023
+#' 15 France_2023  France                         2023
+#' 16 France_2023  France                         2023
+#' 17 France_2023  France                         2023
+#' 18 France_2023  France                         2023
+#'                               type_energie twh_cons
+#' 1                      biofuel_electricity     1.82
+#' 2                         coal_electricity    24.18
+#' 3                          gas_electricity     3.84
+#' 4                        hydro_electricity    71.33
+#' 5                      nuclear_electricity   377.23
+#' 6                          oil_electricity     10.5
+#' 7  other_renewable_exc_biofuel_electricity     0.51
+#' 8                        solar_electricity        0
+#' 9                         wind_electricity        0
+#' 10                     biofuel_electricity      9.5
+#' 11                        coal_electricity     2.16
+#' 12                         gas_electricity    31.43
+#' 13                       hydro_electricity    53.19
+#' 14                     nuclear_electricity   335.65
+#' 15                         oil_electricity     9.71
+#' 16 other_renewable_exc_biofuel_electricity      0.6
+#' 17                       solar_electricity    23.26
+#' 18                        wind_electricity    48.61
+#'
 #' @export
 
 edm_pivot_longer2 <- function(inpt_datf, 
                              col_vars = c(), 
-                             col_vars_to = c(), 
-                             individual_col){
+                             col_vars_to = c()){
+  much_status <- FALSE
+  if ((length(col_vars) + 1) < ncol(inpt_datf)){
+    inpt_datf2 <- inpt_datf[, 
+        c(1:(ncol(inpt_datf) - (length(col_vars) + 1)))]
+    inpt_datf <- inpt_datf[, (ncol(inpt_datf) - length(col_vars)):ncol(inpt_datf)]
+    col_vars <- col_vars - (ncol(inpt_datf) - length(col_vars)) - 1
+    much_status <- TRUE
+  }
   better_split <- function(inpt, split_v = c()){
     for (split in split_v){
       pre_inpt <- inpt
@@ -17162,20 +17294,11 @@ edm_pivot_longer2 <- function(inpt_datf,
     }
     col_vars <- as.numeric(col_vars)
   }
-  if (typeof(col_vars) == "character"){
-    for (i in 1:length(col_vals)){
-      col_vals[i] <- match(x = col_vals[i], colnames(inpt_datf))
-    }
-    col_vals <- as.numeric(col_vals)
-  }
-  if (typeof(individual_col) == "character"){
-    individual_character <- match(x = individual_col, table = colnames(inpt_datf))
-  }
   cur_split <- better_split(inpt = colnames(inpt_datf)[col_vars[1]], split_v = c("\\.", "-"))
   hmn_col = length(cur_split)
   nb_var <- hmn_col - 1
   val_v <- c(cur_split[1])
-  rtn_datf <- as.data.frame(matrix(nrow = 0, ncol = hmn_col))
+  rtn_datf <- as.data.frame(matrix(nrow = 0, ncol = hmn_col+1))
   if (length(col_vars) > 1){
     cnt = 1
     no_stop <- TRUE
@@ -17199,7 +17322,7 @@ edm_pivot_longer2 <- function(inpt_datf,
   }
   for (I in 1:nrow(inpt_datf)){
     for (i in c(2:(1 + stay_cnt))){
-      cur_row <- c(inpt_datf[I, individual_col])
+      cur_row <- c(inpt_datf[I, 1])
       cur_split <- better_split(inpt = colnames(inpt_datf)[i], split_v = c("-", "\\."))
       for (el in c(cur_split[2:length(cur_split)], 
                    inpt_datf[I, seq(from = i, to = ncol(inpt_datf), by = stay_cnt)])){
@@ -17208,8 +17331,23 @@ edm_pivot_longer2 <- function(inpt_datf,
       rtn_datf <- rbind(rtn_datf, cur_row)
     }
   }
-  colnames(rtn_datf) <- c("individuals", col_vars_to, val_v)
-  return(rtn_datf)
+  colnames(rtn_datf) <- c(colnames(inpt_datf)[1], col_vars_to, val_v)
+  if (!(much_status)){
+    return(rtn_datf)
+  }else{
+    pre_rtn_datf <- as.data.frame(matrix(nrow = nrow(rtn_datf), ncol = 0))
+    i_col_v <- rtn_datf[, 1]
+    i_col_v2 <- unique(i_col_v)
+    for (I in 1:ncol(inpt_datf2)){
+      cur_bnd <- c()
+      for (i in 1:nrow(inpt_datf2)){
+        cur_bnd <- c(cur_bnd, rep(x = inpt_datf2[i, I], times = sum(grepl(pattern = i_col_v2[i], x = i_col_v))))
+      }
+      pre_rtn_datf <- cbind(pre_rtn_datf, cur_bnd)
+      colnames(pre_rtn_datf)[I] <- colnames(inpt_datf2)[I]
+    }
+    return(cbind(pre_rtn_datf, rtn_datf))
+  }
 }
 
 #' match_na_omit
