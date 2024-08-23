@@ -12,8 +12,6 @@ edm_pivot_longer2(inpt_datf, col_vars = c(), col_vars_to = c())
 \item{col_vars}{is a vector containing the column names or column numbers of the variables}
 
 \item{col_vars_to}{is a vector containing the varaiables to which will be assign the modalities, see examples}
-
-\item{individual_col}{is the column name or the column number of the individuals}
 }
 \description{
 Performs a pivot longer on dataframe keeping the null values, see examples. The synthax for variables must be value_id-modalitie_var1.modalitie_var2...
@@ -65,7 +63,6 @@ print(datf)
 
 print(edm_pivot_longer2(inpt_datf = datf, 
                           col_vars = c(2:9), 
-                          individual_col = 1, 
                           col_vars_to = c("Shape", "Way")))
 
    individuals Shape Way val1 val2
@@ -91,7 +88,6 @@ print(datf2)
 
 print(edm_pivot_longer2(inpt_datf = datf2, 
                         col_vars = c(2:5), 
-                        individual_col = 1, 
                         col_vars_to = c("Shape")))
 
   individuals Shape val1 val2
