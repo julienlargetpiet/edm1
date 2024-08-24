@@ -2582,7 +2582,7 @@ edm_pert
 
 ## Description
 
-Calculates margins and critical path of tasks baed on PERT algorythm. The first tasks must be at the top of the input dataframe, see examples.
+Calculates margins and critical path of tasks based on PERT algorythm. The first tasks must be at the top of the input dataframe, see examples.
 
 
 ## Usage
