@@ -2575,6 +2575,68 @@ col2 col1 col3
 ```
 
 
+# `edm_pert`
+
+edm_pert
+
+
+## Description
+
+Calculates margins and critical path of tasks baed on PERT algorythm. The first tasks must be at the top of the input dataframe, see examples.
+
+
+## Usage
+
+```r
+edm_pert(inpt_datf)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_datf`     |     is the input dataframe which contains all the tasks, their duration, their finish date at the earliest/latest and their antecedent, so the inpt_datf must contain 5 columns see examples
+
+
+## Examples
+
+```r
+datf <- data.frame("task" = toupper(letters[1:7]),
+"duration" = c(2, 8, 5, 2, 6, 5, 3),
+"antecedent" = c(NA, NA, "A", "B", "B", "E", "A,D"),
+"earliest" = c(2, 8, 19, 10, 14, 19, 19),
+"latest" = c(14, 8, 19, 16, 14, 19, 19))
+
+print(datf)
+
+task duration antecedent earliest latest
+1    A        2       <NA>        2     14
+2    B        8       <NA>        8      8
+3    C        5          A       19     19
+4    D        2          B       10     16
+5    E        6          B       14     14
+6    F        5          E       19     19
+7    G        3        A,D       19     19
+
+
+print(edm_pert(inpt_datf = datf))
+
+[[1]]
+rtn_datf free_margin tot_margin
+1        A           0         12
+2        B           0          0
+3        C          12         12
+4        D           0          6
+5        E           0          0
+6        F           0          0
+7        G           6          6
+
+[[2]]
+[1] "B" "E" "F"
+```
+
+
 # `edm_pivot_longer1`
 
 edm_pivot_longer1

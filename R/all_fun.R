@@ -18036,4 +18036,77 @@ all_concat <- function(..., sep = "_"){
   return(rtn_v)
 }
 
+#' edm_pert
+#'
+#' Calculates margins and critical path of tasks baed on PERT algorythm. The first tasks must be at the top of the input dataframe, see examples.
+#'
+#' @param inpt_datf is the input dataframe which contains all the tasks, their duration, their finish date at the earliest/latest and their antecedent, so the inpt_datf must contain 5 columns see examples
+#'
+#' @examples
+#'
+#' datf <- data.frame("task" = toupper(letters[1:7]),
+#'                    "duration" = c(2, 8, 5, 2, 6, 5, 3),
+#'                    "antecedent" = c(NA, NA, "A", "B", "B", "E", "A,D"),
+#'                    "earliest" = c(2, 8, 19, 10, 14, 19, 19),
+#'                    "latest" = c(14, 8, 19, 16, 14, 19, 19))
+#' 
+#' print(datf)
+#'
+#'   task duration antecedent earliest latest
+#' 1    A        2       <NA>        2     14
+#' 2    B        8       <NA>        8      8
+#' 3    C        5          A       19     19
+#' 4    D        2          B       10     16
+#' 5    E        6          B       14     14
+#' 6    F        5          E       19     19
+#' 7    G        3        A,D       19     19
+#' 
+#'
+#' print(edm_pert(inpt_datf = datf))
+#' 
+#' [[1]]
+#'   rtn_datf free_margin tot_margin
+#' 1        A           0         12
+#' 2        B           0          0
+#' 3        C          12         12
+#' 4        D           0          6
+#' 5        E           0          0
+#' 6        F           0          0
+#' 7        G           6          6
+#' 
+#' [[2]]
+#' [1] "B" "E" "F"
+#'
+#' @export
+
+edm_pert <- function(inpt_datf){
+  rtn_datf <- inpt_datf[, 1]
+  free_margin <- c()
+  tot_margin <- c()
+  pre_na <- is.na(inpt_datf[, 3])
+  strt <- match(x = FALSE, table = pre_na)
+  for (i in strt:(sum(!(pre_na)) + strt - 1)){
+    pre_ant <- unlist(strsplit(x = inpt_datf[i, 3], split = ","))
+    if (length(pre_ant) > 1){
+      cur_ant <- inpt_datf[match(x = pre_ant[1], table = inpt_datf[, 1]), 4]
+      for (i2 in pre_ant[2:length(pre_ant)]){
+        if (inpt_datf[match(x = i2, table = inpt_datf[, 1]), 4] > cur_ant){
+          cur_ant <- inpt_datf[match(x = i2, table = inpt_datf[, 1]), 4]
+        }
+      }
+    }else{
+      cur_ant <- inpt_datf[match(x = inpt_datf[i, 3], table = inpt_datf[, 1]), 4]
+    }
+    free_margin <- c(free_margin, (inpt_datf[i, 4] - inpt_datf[i, 2] - cur_ant)) 
+    tot_margin <- c(tot_margin, (inpt_datf[i, 5] - inpt_datf[i, 2] - cur_ant))
+  }
+  for (i in sum(pre_na):1){
+    free_margin <- c((inpt_datf[i, 4] - inpt_datf[i, 2]), free_margin)
+    tot_margin <- c((inpt_datf[i, 5] - inpt_datf[i, 2]), tot_margin)
+  }
+  rtn_datf <- as.data.frame(cbind(rtn_datf, "free_margin" = free_margin, "tot_margin" = tot_margin))
+  critical_path <- paste(inpt_datf[grep(pattern = 0, rtn_datf[, 3]), 1], sep = "-") 
+  return(list(rtn_datf, critical_path))
+}
+
 

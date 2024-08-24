@@ -3852,6 +3852,90 @@ print(edm_group_by2(inpt_datf = datf, grp_v = c("col2", "col1")))
 
 </div>
 </body></html>
+<!DOCTYPE html><html><head><title>R: edm_pert</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>edm_pert</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>edm_pert</h2>
+
+<h3>Description</h3>
+
+<p>Calculates margins and critical path of tasks baed on PERT algorythm. The first tasks must be at the top of the input dataframe, see examples.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>edm_pert(inpt_datf)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
+<td>
+<p>is the input dataframe which contains all the tasks, their duration, their finish date at the earliest/latest and their antecedent, so the inpt_datf must contain 5 columns see examples</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+datf &lt;- data.frame("task" = toupper(letters[1:7]),
+                   "duration" = c(2, 8, 5, 2, 6, 5, 3),
+                   "antecedent" = c(NA, NA, "A", "B", "B", "E", "A,D"),
+                   "earliest" = c(2, 8, 19, 10, 14, 19, 19),
+                   "latest" = c(14, 8, 19, 16, 14, 19, 19))
+
+print(datf)
+
+  task duration antecedent earliest latest
+1    A        2       &lt;NA&gt;        2     14
+2    B        8       &lt;NA&gt;        8      8
+3    C        5          A       19     19
+4    D        2          B       10     16
+5    E        6          B       14     14
+6    F        5          E       19     19
+7    G        3        A,D       19     19
+
+
+print(edm_pert(inpt_datf = datf))
+
+[[1]]
+  rtn_datf free_margin tot_margin
+1        A           0         12
+2        B           0          0
+3        C          12         12
+4        D           0          6
+5        E           0          0
+6        F           0          0
+7        G           6          6
+
+[[2]]
+[1] "B" "E" "F"
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
 <!DOCTYPE html><html><head><title>R: edm_pivot_longer1</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
