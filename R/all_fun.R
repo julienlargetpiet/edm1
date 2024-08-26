@@ -18309,8 +18309,7 @@ time_serie_equalizer <- function(inpt_datf,
     cur_grp <- grep(pattern = i, x = inpt_datf[, individual_col])
     cur_v <- unique(inpt_datf[cur_grp, 
                          time_col])
-    cur_v <- see_diff(cur_v, all_unique)
-    all_unique <- c(all_unique, cur_v)
+    cur_v <- all_unique[-match(x = cur_v, table = all_unique)]
     if (length(cur_v) > 0){
       cur_datf <- inpt_datf[cur_grp[1], ] 
       cur_datf[1, var_col] <- null_value 
