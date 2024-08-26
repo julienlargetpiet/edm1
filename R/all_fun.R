@@ -18301,9 +18301,6 @@ time_serie_equalizer <- function(inpt_datf,
                                  null_value = 0, 
                                  individual_col,
                                  var_col = c()){
-  see_diff <- function(vec1 = c(), vec2 = c()){
-    return(setdiff(union(vec1, vec2), intersect(vec1, vec2)))
-  }
   all_unique <- unique(inpt_datf[, time_col])
   for (i in unique(inpt_datf[, individual_col])){
     cur_grp <- grep(pattern = i, x = inpt_datf[, individual_col])
