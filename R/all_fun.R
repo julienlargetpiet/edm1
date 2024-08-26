@@ -9848,17 +9848,37 @@ pairs_findr <- function(inpt, ptrn1="(", ptrn2=")"){
 #' 
 #' [1] 1 2 3
 #'
+#' cur_lst <- list()
+#' cur_lst <- append(x = cur_lst, values = list(c(1:10)))
+#' cur_lst <- append(x = cur_lst, values = list(c(5:17)))
+#' cur_lst <- append(x = cur_lst, values = list(c(-5:7)))
+#' 
+#' print(intersect_all(cur_lst))
+#'
+#' [1] 5 6 7
+#'
 #' @export
 
 intersect_all <- function(...){
-        rtn_v <- unlist(list(...)[1])
-
-        if (length(rtn_v) > 1){
-                for (el in list(...)[2:length(list(...))]){
-                       rtn_v <- intersect(rtn_v, el) 
-                }
+  if (length(list(...)) == 1){
+    if (typeof(...) == "list"){
+      rtn_v <- unlist(...[1])
+      if (length(...) > 1){
+        for (el in ...[2:length(...)]){
+          rtn_v <- intersect(rtn_v, el) 
         }
-
+      }
+      return(rtn_v)
+    }else{
+      return(...)
+    }
+  }
+  rtn_v <- unlist(list(...)[1])
+  if (length(list(...)) > 1){
+    for (el in list(...)[2:length(list(...))]){
+           rtn_v <- intersect(rtn_v, el) 
+    }
+  }
   return(rtn_v)
 }
 
@@ -18038,7 +18058,7 @@ all_concat <- function(..., sep = "_"){
 
 #' edm_pert
 #'
-#' Calculates margins and critical path of tasks baed on PERT algorythm. The first tasks must be at the top of the input dataframe, see examples.
+#' Calculates margins and critical path of tasks based on PERT algorythm. The first tasks must be at the top of the input dataframe, see examples.
 #'
 #' @param inpt_datf is the input dataframe which contains all the tasks, their duration, their finish date at the earliest/latest and their antecedent, so the inpt_datf must contain 5 columns see examples
 #'
@@ -18108,5 +18128,229 @@ edm_pert <- function(inpt_datf){
   critical_path <- paste(inpt_datf[grep(pattern = 0, rtn_datf[, 3]), 1], sep = "-") 
   return(list(rtn_datf, critical_path))
 }
+
+#' edm_pivot_series
+#'
+#' Allow to create a new column for the value of the chosen columns at each new value of the column that represents the time. The occurence of each time stamp has to be equal, see examples (if not consider performing the time_serie_equalizer function fromm the same package)
+#'
+#' @param inpt_datf is the input dataframe
+#' @param time_col is the column name or number of the datafame
+#' @param col_v is a vector containing all the column numbers or names of the variables, if null all the column will be considered as variables apart from the column designated in time_col
+#'
+#' @examples
+#'
+#' print(datf)
+#'
+#'     individual country year                           energy_source twh_cons
+#' 1  France_1995  France 1995                     biofuel_electricity     1.82
+#' 2  France_1995  France 1995                        coal_electricity    24.18
+#' 3  France_1995  France 1995                         gas_electricity     3.84
+#' 4  France_1995  France 1995                       hydro_electricity    71.33
+#' 5  France_1995  France 1995                     nuclear_electricity   377.23
+#' 6  France_1995  France 1995                         oil_electricity    10.50
+#' 7  France_1995  France 1995 other_renewable_exc_biofuel_electricity     0.51
+#' 8  France_1995  France 1995                       solar_electricity     0.00
+#' 9  France_1995  France 1995                        wind_electricity     0.00
+#' 10 France_2023  France 2023                     biofuel_electricity     9.50
+#' 11 France_2023  France 2023                        coal_electricity     2.16
+#' 12 France_2023  France 2023                         gas_electricity    31.43
+#' 13 France_2023  France 2023                       hydro_electricity    53.19
+#' 14 France_2023  France 2023                     nuclear_electricity   335.65
+#' 15 France_2023  France 2023                         oil_electricity     9.71
+#' 16 France_2023  France 2023 other_renewable_exc_biofuel_electricity     0.60
+#' 17 France_2023  France 2023                       solar_electricity    23.26
+#' 18 France_2023  France 2023                        wind_electricity    48.61
+#' 
+#' print(edm_pivot_series(inpt_datf = datf, time_col = 1, col_v = c(5)))
+#'
+#'    individual country year                           energy_source
+#' 1 France_1995  France 1995                     biofuel_electricity
+#' 2 France_1995  France 1995                        coal_electricity
+#' 3 France_1995  France 1995                         gas_electricity
+#' 4 France_1995  France 1995                       hydro_electricity
+#' 5 France_1995  France 1995                     nuclear_electricity
+#' 6 France_1995  France 1995                         oil_electricity
+#' 7 France_1995  France 1995 other_renewable_exc_biofuel_electricity
+#' 8 France_1995  France 1995                       solar_electricity
+#' 9 France_1995  France 1995                        wind_electricity
+#'   twh_cons_France_1995 twh_cons_France_2023
+#' 1                 1.82                 9.50
+#' 2                24.18                 2.16
+#' 3                 3.84                31.43
+#' 4                71.33                53.19
+#' 5               377.23               335.65
+#' 6                10.50                 9.71
+#' 7                 0.51                 0.60
+#' 8                 0.00                23.26
+#' 9                 0.00                48.61
+#'
+#' print(edm_pivot_series(inpt_datf = datf, time_col = 1, col_v = c(5, 3)))
+#'
+#'    individual country year_France_1995                           energy_source
+#' 1 France_1995  France             1995                     biofuel_electricity
+#' 2 France_1995  France             1995                        coal_electricity
+#' 3 France_1995  France             1995                         gas_electricity
+#' 4 France_1995  France             1995                       hydro_electricity
+#' 5 France_1995  France             1995                     nuclear_electricity
+#' 6 France_1995  France             1995                         oil_electricity
+#' 7 France_1995  France             1995 other_renewable_exc_biofuel_electricity
+#' 8 France_1995  France             1995                       solar_electricity
+#' 9 France_1995  France             1995                        wind_electricity
+#'   twh_cons_France_1995 twh_cons_France_2023 year_France_2023
+#' 1                 1.82                 9.50             2023
+#' 2                24.18                 2.16             2023
+#' 3                 3.84                31.43             2023
+#' 4                71.33                53.19             2023
+#' 5               377.23               335.65             2023
+#' 6                10.50                 9.71             2023
+#' 7                 0.51                 0.60             2023
+#' 8                 0.00                23.26             2023
+#' 9                 0.00                48.61             2023
+#'
+#' @export
+
+edm_pivot_series <- function(inpt_datf, time_col, col_v = NULL){
+  if (typeof(time_col) == "character"){
+    time_col <- match(x = time_col, table = colnames(inpt_datf))
+  }
+  if (is.null(col_v)){
+    col_v <- c(1:ncol(inpt_datf))[-time_col]
+  }else if (typeof(col_v) == "character"){
+    for (i in 1:length(col_v)){
+      col_v[i] <- match(x = col_v[i], table = colnames(inpt_datf))
+    }
+    col_v <- as.numeric(col_v)
+  }
+  cur_unique <- unique(inpt_datf[, time_col])
+  rtn_datf <- inpt_datf[grep(pattern = cur_unique[1], x = inpt_datf[, time_col]),]
+  colnames(rtn_datf)[col_v] <- paste(colnames(inpt_datf)[col_v], cur_unique[1], sep = "_")
+  if (length(cur_unique) > 1){
+    for (i in 2:length(cur_unique)){
+      pre_col <- ncol(rtn_datf) + 1
+      rtn_datf <- cbind(rtn_datf, inpt_datf[grep(pattern = cur_unique[i], x = inpt_datf[, time_col]), 
+                        col_v])
+      colnames(rtn_datf)[pre_col:ncol(rtn_datf)] <- paste(colnames(inpt_datf)[col_v], 
+                                                          cur_unique[i], sep = "_")
+    }
+  }
+  return(rtn_datf)
+}
+
+#' time_serie_equalizer
+#'
+#' Allow ewualize the occurence of each elements in all the timestamps, see examples
+#'
+#' @param inpt_datf is the input dataframe
+#' @param time_col is the column number or name of the time values
+#' @param null_value is the default value of the variable of the elements that will be added
+#' @param individual_col is the column name or number of the individuals
+#' @param var_col is a vector containing the column names or numbers if the variables that will equal the null_value for the individual at the new time values
+#'
+#' @examples
+#'
+#' print(datf)
+#'
+#'    individual country year                           energy_source twh_cons
+#' 1           A  France 1995                     biofuel_electricity     1.82
+#' 2           A  France 1996                        coal_electricity    24.18
+#' 3           A  France 1997                         gas_electricity     3.84
+#' 4           A  France 1998                       hydro_electricity    71.33
+#' 5           A  France 1999                     nuclear_electricity   377.23
+#' 6           A  France 2000                         oil_electricity    10.50
+#' 7           A  France 2001 other_renewable_exc_biofuel_electricity     0.51
+#' 10          B  France 1995                     biofuel_electricity     9.50
+#' 11          B  France 1996                        coal_electricity     2.16
+#' 12          B  France 1997                         gas_electricity    31.43
+#' 13          B  France 1998                       hydro_electricity    53.19
+#' 14          B  France 1999                     nuclear_electricity   335.65
+#' 15          B  France 2000                         oil_electricity     9.71
+#' 16          B  France 2001 other_renewable_exc_biofuel_electricity     0.60
+#' 17          B  France 2002                       solar_electricity    23.26
+#' 18          B  France 2003                        wind_electricity    48.61
+#'
+#' print(time_serie_equalizer(inpt_datf = datf,
+#'                            time_col = "year",
+#'                            null_value = 0,
+#'                            individual_col = 1,
+#'                            var_col = "twh_cons"))
+#'
+#'     individual country year                           energy_source twh_cons
+#' 1            A  France 1995                     biofuel_electricity     1.82
+#' 2            A  France 1996                        coal_electricity    24.18
+#' 3            A  France 1997                         gas_electricity     3.84
+#' 4            A  France 1998                       hydro_electricity    71.33
+#' 5            A  France 1999                     nuclear_electricity   377.23
+#' 6            A  France 2000                         oil_electricity    10.50
+#' 7            A  France 2001 other_renewable_exc_biofuel_electricity     0.51
+#' 8            B  France 1995                     biofuel_electricity     9.50
+#' 9            B  France 1996                        coal_electricity     2.16
+#' 10           B  France 1997                         gas_electricity    31.43
+#' 11           B  France 1998                       hydro_electricity    53.19
+#' 12           B  France 1999                     nuclear_electricity   335.65
+#' 13           B  France 2000                         oil_electricity     9.71
+#' 14           B  France 2001 other_renewable_exc_biofuel_electricity     0.60
+#' 15           B  France 2002                       solar_electricity    23.26
+#' 16           B  France 2003                        wind_electricity    48.61
+#' 17           A  France 2002                     biofuel_electricity     0.00
+#' 18           A  France 2003                     biofuel_electricity     0.00
+#'
+#' @export
+
+time_serie_equalizer <- function(inpt_datf, 
+                                 time_col, 
+                                 null_value = 0, 
+                                 individual_col,
+                                 var_col = c()){
+  see_diff <- function(vec1 = c(), vec2 = c()){
+    return(setdiff(union(vec1, vec2), intersect(vec1, vec2)))
+  }
+  all_unique <- unique(inpt_datf[, time_col])
+  for (i in unique(inpt_datf[, individual_col])){
+    cur_grp <- grep(pattern = i, x = inpt_datf[, individual_col])
+    cur_v <- unique(inpt_datf[cur_grp, 
+                         time_col])
+    cur_v <- see_diff(cur_v, all_unique)
+    all_unique <- c(all_unique, cur_v)
+    if (length(cur_v) > 0){
+      cur_datf <- inpt_datf[cur_grp[1], ] 
+      cur_datf[1, var_col] <- null_value 
+      for (i2 in cur_v){
+        cur_datf[, time_col] <- i2
+        inpt_datf <- rbind(inpt_datf, cur_datf)
+      }
+    }
+  }
+  rownames(inpt_datf) <- c(1:nrow(inpt_datf))
+  return(inpt_datf)
+}
+
+#' see_diff_detailled
+#'
+#' Behaves exactly like the see_diff function but is written more explicitely, see examples
+#'
+#' @param vec1 is one of the input vector
+#' @param vec2 is the other input vector
+#'
+#' @examples
+#'
+#' print(see_diff_detailled(c(1:6), c(3:9)))
+#'
+#' [1] 1 2 7 8 9
+#'
+#' @export
+
+see_diff_detailled <- function(vec1 = c(), vec2 = c()){
+  union_v <- unique(c(vec1, vec2))
+  intersct_v <- intersect(vec1, vec2)
+  rtn_v <- c()
+  for (el in union_v){
+    if (is.na(match(x = el, table = intersct_v))){
+      rtn_v <- c(rtn_v, el)
+    }
+  }
+  return(rtn_v)
+}
+
+
 
 

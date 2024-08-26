@@ -2967,6 +2967,105 @@ type_energie twh_cons
 ```
 
 
+# `edm_pivot_series`
+
+edm_pivot_series
+
+
+## Description
+
+Allow to create a new column for the value of the chosen columns at each new value of the column that represents the time. The occurence of each time stamp has to be equal, see examples (if not consider performing the time_serie_equalizer function fromm the same package)
+
+
+## Usage
+
+```r
+edm_pivot_series(inpt_datf, time_col, col_v = NULL)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_datf`     |     is the input dataframe
+`time_col`     |     is the column name or number of the datafame
+`col_v`     |     is a vector containing all the column numbers or names of the variables, if null all the column will be considered as variables apart from the column designated in time_col
+
+
+## Examples
+
+```r
+print(datf)
+
+individual country year                           energy_source twh_cons
+1  France_1995  France 1995                     biofuel_electricity     1.82
+2  France_1995  France 1995                        coal_electricity    24.18
+3  France_1995  France 1995                         gas_electricity     3.84
+4  France_1995  France 1995                       hydro_electricity    71.33
+5  France_1995  France 1995                     nuclear_electricity   377.23
+6  France_1995  France 1995                         oil_electricity    10.50
+7  France_1995  France 1995 other_renewable_exc_biofuel_electricity     0.51
+8  France_1995  France 1995                       solar_electricity     0.00
+9  France_1995  France 1995                        wind_electricity     0.00
+10 France_2023  France 2023                     biofuel_electricity     9.50
+11 France_2023  France 2023                        coal_electricity     2.16
+12 France_2023  France 2023                         gas_electricity    31.43
+13 France_2023  France 2023                       hydro_electricity    53.19
+14 France_2023  France 2023                     nuclear_electricity   335.65
+15 France_2023  France 2023                         oil_electricity     9.71
+16 France_2023  France 2023 other_renewable_exc_biofuel_electricity     0.60
+17 France_2023  France 2023                       solar_electricity    23.26
+18 France_2023  France 2023                        wind_electricity    48.61
+
+print(edm_pivot_series(inpt_datf = datf, time_col = 1, col_v = c(5)))
+
+individual country year                           energy_source
+1 France_1995  France 1995                     biofuel_electricity
+2 France_1995  France 1995                        coal_electricity
+3 France_1995  France 1995                         gas_electricity
+4 France_1995  France 1995                       hydro_electricity
+5 France_1995  France 1995                     nuclear_electricity
+6 France_1995  France 1995                         oil_electricity
+7 France_1995  France 1995 other_renewable_exc_biofuel_electricity
+8 France_1995  France 1995                       solar_electricity
+9 France_1995  France 1995                        wind_electricity
+twh_cons_France_1995 twh_cons_France_2023
+1                 1.82                 9.50
+2                24.18                 2.16
+3                 3.84                31.43
+4                71.33                53.19
+5               377.23               335.65
+6                10.50                 9.71
+7                 0.51                 0.60
+8                 0.00                23.26
+9                 0.00                48.61
+
+print(edm_pivot_series(inpt_datf = datf, time_col = 1, col_v = c(5, 3)))
+
+individual country year_France_1995                           energy_source
+1 France_1995  France             1995                     biofuel_electricity
+2 France_1995  France             1995                        coal_electricity
+3 France_1995  France             1995                         gas_electricity
+4 France_1995  France             1995                       hydro_electricity
+5 France_1995  France             1995                     nuclear_electricity
+6 France_1995  France             1995                         oil_electricity
+7 France_1995  France             1995 other_renewable_exc_biofuel_electricity
+8 France_1995  France             1995                       solar_electricity
+9 France_1995  France             1995                        wind_electricity
+twh_cons_France_1995 twh_cons_France_2023 year_France_2023
+1                 1.82                 9.50             2023
+2                24.18                 2.16             2023
+3                 3.84                31.43             2023
+4                71.33                53.19             2023
+5               377.23               335.65             2023
+6                10.50                 9.71             2023
+7                 0.51                 0.60             2023
+8                 0.00                23.26             2023
+9                 0.00                48.61             2023
+```
+
+
 # `edm_pivot_wider1`
 
 edm_pivot_wider1
@@ -5003,6 +5102,15 @@ Argument      |Description
 print(intersect_all(c(1:5), c(1, 2, 3, 6), c(1:4)))
 
 [1] 1 2 3
+
+cur_lst <- list()
+cur_lst <- append(x = cur_lst, values = list(c(1:10)))
+cur_lst <- append(x = cur_lst, values = list(c(5:17)))
+cur_lst <- append(x = cur_lst, values = list(c(-5:7)))
+
+print(intersect_all(cur_lst))
+
+[1] 5 6 7
 ```
 
 
@@ -7585,6 +7693,40 @@ print(see_diff_all(vec1, vec2, vec3))
 ```
 
 
+# `see_diff_detailled`
+
+see_diff_detailled
+
+
+## Description
+
+Behaves exactly like the see_diff function but is written more explicitely, see examples
+
+
+## Usage
+
+```r
+see_diff_detailled(vec1 = c(), vec2 = c())
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`vec1`     |     is one of the input vector
+`vec2`     |     is the other input vector
+
+
+## Examples
+
+```r
+print(see_diff_detailled(c(1:6), c(3:9)))
+
+[1] 1 2 7 8 9
+```
+
+
 # `see_diff`
 
 see_diff
@@ -9107,6 +9249,91 @@ print(test_order(inpt_v_from = c(1:8), inpt_v_test = c(1, 4)))
 print(test_order(inpt_v_from = c(1:8), inpt_v_test = c(1, 4, 2)))
 
 [1] FALSE
+```
+
+
+# `time_serie_equalizer`
+
+time_serie_equalizer
+
+
+## Description
+
+Allow ewualize the occurence of each elements in all the timestamps, see examples
+
+
+## Usage
+
+```r
+time_serie_equalizer(
+  inpt_datf,
+  time_col,
+  null_value = 0,
+  individual_col,
+  var_col = c()
+)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_datf`     |     is the input dataframe
+`time_col`     |     is the column number or name of the time values
+`null_value`     |     is the default value of the variable of the elements that will be added
+`individual_col`     |     is the column name or number of the individuals
+`var_col`     |     is a vector containing the column names or numbers if the variables that will equal the null_value for the individual at the new time values
+
+
+## Examples
+
+```r
+print(datf)
+
+individual country year                           energy_source twh_cons
+1           A  France 1995                     biofuel_electricity     1.82
+2           A  France 1996                        coal_electricity    24.18
+3           A  France 1997                         gas_electricity     3.84
+4           A  France 1998                       hydro_electricity    71.33
+5           A  France 1999                     nuclear_electricity   377.23
+6           A  France 2000                         oil_electricity    10.50
+7           A  France 2001 other_renewable_exc_biofuel_electricity     0.51
+10          B  France 1995                     biofuel_electricity     9.50
+11          B  France 1996                        coal_electricity     2.16
+12          B  France 1997                         gas_electricity    31.43
+13          B  France 1998                       hydro_electricity    53.19
+14          B  France 1999                     nuclear_electricity   335.65
+15          B  France 2000                         oil_electricity     9.71
+16          B  France 2001 other_renewable_exc_biofuel_electricity     0.60
+17          B  France 2002                       solar_electricity    23.26
+18          B  France 2003                        wind_electricity    48.61
+
+print(time_serie_equalizer(inpt_datf = datf,
+time_col = "year",
+null_value = 0,
+individual_col = 1,
+var_col = "twh_cons"))
+
+individual country year                           energy_source twh_cons
+1            A  France 1995                     biofuel_electricity     1.82
+2            A  France 1996                        coal_electricity    24.18
+3            A  France 1997                         gas_electricity     3.84
+4            A  France 1998                       hydro_electricity    71.33
+5            A  France 1999                     nuclear_electricity   377.23
+6            A  France 2000                         oil_electricity    10.50
+7            A  France 2001 other_renewable_exc_biofuel_electricity     0.51
+8            B  France 1995                     biofuel_electricity     9.50
+9            B  France 1996                        coal_electricity     2.16
+10           B  France 1997                         gas_electricity    31.43
+11           B  France 1998                       hydro_electricity    53.19
+12           B  France 1999                     nuclear_electricity   335.65
+13           B  France 2000                         oil_electricity     9.71
+14           B  France 2001 other_renewable_exc_biofuel_electricity     0.60
+15           B  France 2002                       solar_electricity    23.26
+16           B  France 2003                        wind_electricity    48.61
+17           A  France 2002                     biofuel_electricity     0.00
+18           A  France 2003                     biofuel_electricity     0.00
 ```
 
 

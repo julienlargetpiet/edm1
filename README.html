@@ -3874,7 +3874,7 @@ function processMathHTML() {
 
 <h3>Description</h3>
 
-<p>Calculates margins and critical path of tasks baed on PERT algorythm. The first tasks must be at the top of the input dataframe, see examples.
+<p>Calculates margins and critical path of tasks based on PERT algorythm. The first tasks must be at the top of the input dataframe, see examples.
 </p>
 
 
@@ -4315,6 +4315,133 @@ print(edm_pivot_longer2(inpt_datf = cur_data,
 16 other_renewable_exc_biofuel_electricity      0.6
 17                       solar_electricity    23.26
 18                        wind_electricity    48.61
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: edm_pivot_series</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>edm_pivot_series</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>edm_pivot_series</h2>
+
+<h3>Description</h3>
+
+<p>Allow to create a new column for the value of the chosen columns at each new value of the column that represents the time. The occurence of each time stamp has to be equal, see examples (if not consider performing the time_serie_equalizer function fromm the same package)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>edm_pivot_series(inpt_datf, time_col, col_v = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
+<td>
+<p>is the input dataframe</p>
+</td></tr>
+<tr><td><code id="time_col">time_col</code></td>
+<td>
+<p>is the column name or number of the datafame</p>
+</td></tr>
+<tr><td><code id="col_v">col_v</code></td>
+<td>
+<p>is a vector containing all the column numbers or names of the variables, if null all the column will be considered as variables apart from the column designated in time_col</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(datf)
+
+    individual country year                           energy_source twh_cons
+1  France_1995  France 1995                     biofuel_electricity     1.82
+2  France_1995  France 1995                        coal_electricity    24.18
+3  France_1995  France 1995                         gas_electricity     3.84
+4  France_1995  France 1995                       hydro_electricity    71.33
+5  France_1995  France 1995                     nuclear_electricity   377.23
+6  France_1995  France 1995                         oil_electricity    10.50
+7  France_1995  France 1995 other_renewable_exc_biofuel_electricity     0.51
+8  France_1995  France 1995                       solar_electricity     0.00
+9  France_1995  France 1995                        wind_electricity     0.00
+10 France_2023  France 2023                     biofuel_electricity     9.50
+11 France_2023  France 2023                        coal_electricity     2.16
+12 France_2023  France 2023                         gas_electricity    31.43
+13 France_2023  France 2023                       hydro_electricity    53.19
+14 France_2023  France 2023                     nuclear_electricity   335.65
+15 France_2023  France 2023                         oil_electricity     9.71
+16 France_2023  France 2023 other_renewable_exc_biofuel_electricity     0.60
+17 France_2023  France 2023                       solar_electricity    23.26
+18 France_2023  France 2023                        wind_electricity    48.61
+
+print(edm_pivot_series(inpt_datf = datf, time_col = 1, col_v = c(5)))
+
+   individual country year                           energy_source
+1 France_1995  France 1995                     biofuel_electricity
+2 France_1995  France 1995                        coal_electricity
+3 France_1995  France 1995                         gas_electricity
+4 France_1995  France 1995                       hydro_electricity
+5 France_1995  France 1995                     nuclear_electricity
+6 France_1995  France 1995                         oil_electricity
+7 France_1995  France 1995 other_renewable_exc_biofuel_electricity
+8 France_1995  France 1995                       solar_electricity
+9 France_1995  France 1995                        wind_electricity
+  twh_cons_France_1995 twh_cons_France_2023
+1                 1.82                 9.50
+2                24.18                 2.16
+3                 3.84                31.43
+4                71.33                53.19
+5               377.23               335.65
+6                10.50                 9.71
+7                 0.51                 0.60
+8                 0.00                23.26
+9                 0.00                48.61
+
+print(edm_pivot_series(inpt_datf = datf, time_col = 1, col_v = c(5, 3)))
+
+   individual country year_France_1995                           energy_source
+1 France_1995  France             1995                     biofuel_electricity
+2 France_1995  France             1995                        coal_electricity
+3 France_1995  France             1995                         gas_electricity
+4 France_1995  France             1995                       hydro_electricity
+5 France_1995  France             1995                     nuclear_electricity
+6 France_1995  France             1995                         oil_electricity
+7 France_1995  France             1995 other_renewable_exc_biofuel_electricity
+8 France_1995  France             1995                       solar_electricity
+9 France_1995  France             1995                        wind_electricity
+  twh_cons_France_1995 twh_cons_France_2023 year_France_2023
+1                 1.82                 9.50             2023
+2                24.18                 2.16             2023
+3                 3.84                31.43             2023
+4                71.33                53.19             2023
+5               377.23               335.65             2023
+6                10.50                 9.71             2023
+7                 0.51                 0.60             2023
+8                 0.00                23.26             2023
+9                 0.00                48.61             2023
 
 </code></pre>
 
@@ -7226,6 +7353,15 @@ function processMathHTML() {
 print(intersect_all(c(1:5), c(1, 2, 3, 6), c(1:4)))
 
 [1] 1 2 3
+
+cur_lst &lt;- list()
+cur_lst &lt;- append(x = cur_lst, values = list(c(1:10)))
+cur_lst &lt;- append(x = cur_lst, values = list(c(5:17)))
+cur_lst &lt;- append(x = cur_lst, values = list(c(-5:7)))
+
+print(intersect_all(cur_lst))
+
+[1] 5 6 7
 
 </code></pre>
 
@@ -11388,6 +11524,65 @@ print(see_diff_all(vec1, vec2, vec3))
 
 </div>
 </body></html>
+<!DOCTYPE html><html><head><title>R: see_diff_detailled</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>see_diff_detailled</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>see_diff_detailled</h2>
+
+<h3>Description</h3>
+
+<p>Behaves exactly like the see_diff function but is written more explicitely, see examples
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>see_diff_detailled(vec1 = c(), vec2 = c())
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="vec1">vec1</code></td>
+<td>
+<p>is one of the input vector</p>
+</td></tr>
+<tr><td><code id="vec2">vec2</code></td>
+<td>
+<p>is the other input vector</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(see_diff_detailled(c(1:6), c(3:9)))
+
+[1] 1 2 7 8 9
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
 <!DOCTYPE html><html><head><title>R: see_diff</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
@@ -13505,6 +13700,125 @@ print(test_order(inpt_v_from = c(1:8), inpt_v_test = c(1, 4)))
 print(test_order(inpt_v_from = c(1:8), inpt_v_test = c(1, 4, 2)))
 
 [1] FALSE
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: time_serie_equalizer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>time_serie_equalizer</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>time_serie_equalizer</h2>
+
+<h3>Description</h3>
+
+<p>Allow ewualize the occurence of each elements in all the timestamps, see examples
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>time_serie_equalizer(
+  inpt_datf,
+  time_col,
+  null_value = 0,
+  individual_col,
+  var_col = c()
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
+<td>
+<p>is the input dataframe</p>
+</td></tr>
+<tr><td><code id="time_col">time_col</code></td>
+<td>
+<p>is the column number or name of the time values</p>
+</td></tr>
+<tr><td><code id="null_value">null_value</code></td>
+<td>
+<p>is the default value of the variable of the elements that will be added</p>
+</td></tr>
+<tr><td><code id="individual_col">individual_col</code></td>
+<td>
+<p>is the column name or number of the individuals</p>
+</td></tr>
+<tr><td><code id="var_col">var_col</code></td>
+<td>
+<p>is a vector containing the column names or numbers if the variables that will equal the null_value for the individual at the new time values</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(datf)
+
+   individual country year                           energy_source twh_cons
+1           A  France 1995                     biofuel_electricity     1.82
+2           A  France 1996                        coal_electricity    24.18
+3           A  France 1997                         gas_electricity     3.84
+4           A  France 1998                       hydro_electricity    71.33
+5           A  France 1999                     nuclear_electricity   377.23
+6           A  France 2000                         oil_electricity    10.50
+7           A  France 2001 other_renewable_exc_biofuel_electricity     0.51
+10          B  France 1995                     biofuel_electricity     9.50
+11          B  France 1996                        coal_electricity     2.16
+12          B  France 1997                         gas_electricity    31.43
+13          B  France 1998                       hydro_electricity    53.19
+14          B  France 1999                     nuclear_electricity   335.65
+15          B  France 2000                         oil_electricity     9.71
+16          B  France 2001 other_renewable_exc_biofuel_electricity     0.60
+17          B  France 2002                       solar_electricity    23.26
+18          B  France 2003                        wind_electricity    48.61
+
+print(time_serie_equalizer(inpt_datf = datf,
+                           time_col = "year",
+                           null_value = 0,
+                           individual_col = 1,
+                           var_col = "twh_cons"))
+
+    individual country year                           energy_source twh_cons
+1            A  France 1995                     biofuel_electricity     1.82
+2            A  France 1996                        coal_electricity    24.18
+3            A  France 1997                         gas_electricity     3.84
+4            A  France 1998                       hydro_electricity    71.33
+5            A  France 1999                     nuclear_electricity   377.23
+6            A  France 2000                         oil_electricity    10.50
+7            A  France 2001 other_renewable_exc_biofuel_electricity     0.51
+8            B  France 1995                     biofuel_electricity     9.50
+9            B  France 1996                        coal_electricity     2.16
+10           B  France 1997                         gas_electricity    31.43
+11           B  France 1998                       hydro_electricity    53.19
+12           B  France 1999                     nuclear_electricity   335.65
+13           B  France 2000                         oil_electricity     9.71
+14           B  France 2001 other_renewable_exc_biofuel_electricity     0.60
+15           B  France 2002                       solar_electricity    23.26
+16           B  France 2003                        wind_electricity    48.61
+17           A  France 2002                     biofuel_electricity     0.00
+18           A  France 2003                     biofuel_electricity     0.00
 
 </code></pre>
 
