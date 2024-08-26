@@ -7690,6 +7690,10 @@ print(see_diff_all(vec1, vec2))
 print(see_diff_all(vec1, vec2, vec3))
 
 [1]  3  4  5  6  1  2  7  8 12 13 14 15 16
+
+print(see_diff_all(list(vec1, vec2, vec3)))
+
+[1]  3  4  5  6  1  2  7  8 12 13 14 15 16
 ```
 
 
@@ -9428,6 +9432,10 @@ print(union_all(c(1, 2), c(3, 4), c(1:8)))
 [1] 1 2 3 4 5 6 7 8
 
 print(union_all(c(1, 2), c(3, 4), c(7:8)))
+
+[1] 1 2 3 4 7 8
+
+print(union_all(list(c(1, 2), c(3, 4), c(7:8))))
 
 [1] 1 2 3 4 7 8
 ```

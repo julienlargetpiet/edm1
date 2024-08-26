@@ -11609,20 +11609,35 @@ see_mode <- function(inpt_v = c()){
 #' print(union_all(c(1, 2), c(3, 4), c(7:8)))
 #'
 #' [1] 1 2 3 4 7 8
-#' 
+#'
+#' print(union_all(list(c(1, 2), c(3, 4), c(7:8))))
+#'
+#' [1] 1 2 3 4 7 8
+#'
 #' @export
 
 union_all <- function(...){
   cur_lst <- list(...)
-  rtn_v <- c(unlist(cur_lst[1]))
-  if (length(cur_lst) > 1){
-    cur_lst <- cur_lst[2:length(cur_lst)]
-    for (lst in cur_lst){
-      rtn_v <- union(rtn_v, lst) 
+  if (length(cur_lst) == 1){
+    rtn_v <- c(unlist(...[1]))
+    if (length(...) > 1){
+      for (lst in ...[2:length(...)]){
+        rtn_v <- unique(c(rtn_v, lst))
+      }
+    return(rtn_v)
+    }else{
+      return(NULL)
     }
-  return(rtn_v)
   }else{
-    return(NULL)
+    rtn_v <- c(unlist(cur_lst[1]))
+    if (length(cur_lst) > 1){
+      for (lst in cur_lst[2:length(cur_lst)]){
+        rtn_v <- unique(c(rtn_v, lst))
+      }
+    return(rtn_v)
+    }else{
+      return(NULL)
+    }
   }
 }
 
@@ -11645,23 +11660,44 @@ union_all <- function(...){
 #'
 #' [1]  3  4  5  6  1  2  7  8 12 13 14 15 16
 #' 
+#' print(see_diff_all(list(vec1, vec2, vec3)))
+#'
+#' [1]  3  4  5  6  1  2  7  8 12 13 14 15 16
+#' 
 #' @export
 
 see_diff_all <- function(...){
   cur_lst <- list(...)
-  if (length(cur_lst) > 1){
-    intersect_v <- intersect(unlist(cur_lst[1]), unlist(cur_lst[2]))
-    union_v <- union(unlist(cur_lst[1]), unlist(cur_lst[2]))
-    if (length(cur_lst) > 2){
-      cur_lst <- cur_lst[3:length(cur_lst)]
-      for (lst in cur_lst){
-        intersect_v <- intersect(intersect_v, lst)    
-        union_v <- union(union_v, lst)
+  if (length(cur_lst) == 1){
+    if (length(...) > 1){
+      intersect_v <- intersect(unlist(...[1]), unlist(...[2]))
+      union_v <- union(unlist(...[1]), unlist(...[2]))
+      if (length(...) > 2){
+        cur_lst <- ...[3:length(cur_lst)]
+        for (lst in cur_lst){
+          intersect_v <- intersect(intersect_v, lst)    
+          union_v <- unique(c(union_v, lst))
+        }
       }
+      return(setdiff(union_v, intersect_v))
+    }else{
+      return(NULL)
     }
-    return(setdiff(union_v, intersect_v))
   }else{
-    return(NULL)
+    if (length(cur_lst) > 1){
+      intersect_v <- intersect(unlist(cur_lst[1]), unlist(cur_lst[2]))
+      union_v <- union(unlist(cur_lst[1]), unlist(cur_lst[2]))
+      if (length(cur_lst) > 2){
+        cur_lst <- cur_lst[3:length(cur_lst)]
+        for (lst in cur_lst){
+          intersect_v <- intersect(intersect_v, lst)    
+          union_v <- unique(c(union_v, lst))
+        }
+      }
+      return(setdiff(union_v, intersect_v))
+    }else{
+      return(NULL)
+    }
   }
 }
 

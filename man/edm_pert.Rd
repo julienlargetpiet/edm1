@@ -10,7 +10,7 @@ edm_pert(inpt_datf)
 \item{inpt_datf}{is the input dataframe which contains all the tasks, their duration, their finish date at the earliest/latest and their antecedent, so the inpt_datf must contain 5 columns see examples}
 }
 \description{
-Calculates margins and critical path of tasks baed on PERT algorythm. The first tasks must be at the top of the input dataframe, see examples.
+Calculates margins and critical path of tasks based on PERT algorythm. The first tasks must be at the top of the input dataframe, see examples.
 }
 \examples{
 
