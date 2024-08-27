@@ -4375,73 +4375,85 @@ function processMathHTML() {
 <h3>Examples</h3>
 
 <pre><code class='language-R'>
+print(cur_datf)
+
+   year                           energy_source twh_cons
+1  1995                     biofuel_electricity     1.82
+2  1995                        coal_electricity    24.18
+3  1995                         gas_electricity     3.84
+4  1995                       hydro_electricity    71.33
+5  1995                     nuclear_electricity   377.23
+6  1995                         oil_electricity    10.50
+7  1995 other_renewable_exc_biofuel_electricity     0.51
+8  1995                       solar_electricity     0.00
+9  1995                        wind_electricity     0.00
+10 2023                     biofuel_electricity     9.50
+11 2023                        coal_electricity     2.16
+12 2023                         gas_electricity    31.43
+13 2023                       hydro_electricity    53.19
+14 2023                     nuclear_electricity   335.65
+15 2023                         oil_electricity     9.71
+16 2023 other_renewable_exc_biofuel_electricity     0.60
+17 2023                       solar_electricity    23.26
+18 2023                        wind_electricity    48.61
+
+print(edm_pivot_series(inpt_datf = cur_datf, time_col = 1, col_v = c(3)))
+
+                            energy_source twh_cons_1995 twh_cons_2023
+1                     biofuel_electricity          1.82          9.50
+2                        coal_electricity         24.18          2.16
+3                         gas_electricity          3.84         31.43
+4                       hydro_electricity         71.33         53.19
+5                     nuclear_electricity        377.23        335.65
+6                         oil_electricity         10.50          9.71
+7 other_renewable_exc_biofuel_electricity          0.51          0.60
+8                       solar_electricity          0.00         23.26
+9                        wind_electricity          0.00         48.61
+
 print(datf)
 
-    individual country year                           energy_source twh_cons
-1  France_1995  France 1995                     biofuel_electricity     1.82
-2  France_1995  France 1995                        coal_electricity    24.18
-3  France_1995  France 1995                         gas_electricity     3.84
-4  France_1995  France 1995                       hydro_electricity    71.33
-5  France_1995  France 1995                     nuclear_electricity   377.23
-6  France_1995  France 1995                         oil_electricity    10.50
-7  France_1995  France 1995 other_renewable_exc_biofuel_electricity     0.51
-8  France_1995  France 1995                       solar_electricity     0.00
-9  France_1995  France 1995                        wind_electricity     0.00
-10 France_2023  France 2023                     biofuel_electricity     9.50
-11 France_2023  France 2023                        coal_electricity     2.16
-12 France_2023  France 2023                         gas_electricity    31.43
-13 France_2023  France 2023                       hydro_electricity    53.19
-14 France_2023  France 2023                     nuclear_electricity   335.65
-15 France_2023  France 2023                         oil_electricity     9.71
-16 France_2023  France 2023 other_renewable_exc_biofuel_electricity     0.60
-17 France_2023  France 2023                       solar_electricity    23.26
-18 France_2023  France 2023                        wind_electricity    48.61
+    individual year                           energy_source twh_cons
+1  France_1995 1995                     biofuel_electricity     1.82
+2  France_1995 1995                        coal_electricity    24.18
+3  France_1995 1995                         gas_electricity     3.84
+4  France_1995 1995                       hydro_electricity    71.33
+5  France_1995 1995                     nuclear_electricity   377.23
+6  France_1995 1995                         oil_electricity    10.50
+7  France_1995 1995 other_renewable_exc_biofuel_electricity     0.51
+8  France_1995 1995                       solar_electricity     0.00
+9  France_1995 1995                        wind_electricity     0.00
+10 France_2023 2023                     biofuel_electricity     9.50
+11 France_2023 2023                        coal_electricity     2.16
+12 France_2023 2023                         gas_electricity    31.43
+13 France_2023 2023                       hydro_electricity    53.19
+14 France_2023 2023                     nuclear_electricity   335.65
+15 France_2023 2023                         oil_electricity     9.71
+16 France_2023 2023 other_renewable_exc_biofuel_electricity     0.60
+17 France_2023 2023                       solar_electricity    23.26
+18 France_2023 2023                        wind_electricity    48.61
 
-print(edm_pivot_series(inpt_datf = datf, time_col = 1, col_v = c(5)))
+print(edm_pivot_series(inpt_datf = cur_datf, time_col = 2, col_v = c(1, 4)))
 
-  country year                           energy_source
-1  France 1995                     biofuel_electricity
-2  France 1995                        coal_electricity
-3  France 1995                         gas_electricity
-4  France 1995                       hydro_electricity
-5  France 1995                     nuclear_electricity
-6  France 1995                         oil_electricity
-7  France 1995 other_renewable_exc_biofuel_electricity
-8  France 1995                       solar_electricity
-9  France 1995                        wind_electricity
-  twh_cons_France_1995 twh_cons_France_2023
-1                 1.82                 9.50
-2                24.18                 2.16
-3                 3.84                31.43
-4                71.33                53.19
-5               377.23               335.65
-6                10.50                 9.71
-7                 0.51                 0.60
-8                 0.00                23.26
-9                 0.00                48.61
-
-print(edm_pivot_series(inpt_datf = datf, time_col = 1, col_v = c(5, 3)))
-
-  country year_France_1995                           energy_source
-1  France             1995                     biofuel_electricity
-2  France             1995                        coal_electricity
-3  France             1995                         gas_electricity
-4  France             1995                       hydro_electricity
-5  France             1995                     nuclear_electricity
-6  France             1995                         oil_electricity
-7  France             1995 other_renewable_exc_biofuel_electricity
-8  France             1995                       solar_electricity
-9  France             1995                        wind_electricity
-  twh_cons_France_1995 twh_cons_France_2023 year_France_2023
-1                 1.82                 9.50             2023
-2                24.18                 2.16             2023
-3                 3.84                31.43             2023
-4                71.33                53.19             2023
-5               377.23               335.65             2023
-6                10.50                 9.71             2023
-7                 0.51                 0.60             2023
-8                 0.00                23.26             2023
-9                 0.00                48.61             2023
+  individual_1995                           energy_source twh_cons_1995
+1     France_1995                     biofuel_electricity          1.82
+2     France_1995                        coal_electricity         24.18
+3     France_1995                         gas_electricity          3.84
+4     France_1995                       hydro_electricity         71.33
+5     France_1995                     nuclear_electricity        377.23
+6     France_1995                         oil_electricity         10.50
+7     France_1995 other_renewable_exc_biofuel_electricity          0.51
+8     France_1995                       solar_electricity          0.00
+9     France_1995                        wind_electricity          0.00
+  individual_2023 twh_cons_2023
+1     France_2023          9.50
+2     France_2023          2.16
+3     France_2023         31.43
+4     France_2023         53.19
+5     France_2023        335.65
+6     France_2023          9.71
+7     France_2023          0.60
+8     France_2023         23.26
+9     France_2023         48.61
 
 </code></pre>
 
