@@ -4,7 +4,7 @@
 \alias{edm_pivot_wider1}
 \title{edm_pivot_wider1}
 \usage{
-edm_pivot_wider1(inpt_datf, col_vars = c(), col_vals = c())
+edm_pivot_wider1(inpt_datf, col_vars = c(), col_vals = c(), individual_col)
 }
 \arguments{
 \item{inpt_datf}{is the input dataframe}
@@ -12,6 +12,8 @@ edm_pivot_wider1(inpt_datf, col_vars = c(), col_vals = c())
 \item{col_vars}{is a vector containig the column names or column numbers of the variables to pivot}
 
 \item{col_vals}{is a vector containing the column numbers or column names of the values to pivot}
+
+\item{individual_col}{is the column name or column number of the individuals}
 }
 \description{
 Performs a pivot wider to a dataframe, see examples.
@@ -50,7 +52,8 @@ print(datf2)
 print(edm_pivot_wider1(
                        inpt_datf = datf, 
                        col_vars = c(2, 3), 
-                       col_vals = c(4, 5))
+                       col_vals = c(4, 5), 
+                       individual_col = 1)
     )
 
   individuals val1-A.R val1-A.T val1-B.R val1-B.T val2-A.R val2-A.T val2-B.R
@@ -65,69 +68,13 @@ print(edm_pivot_wider1(
 print(edm_pivot_wider1(
                        inpt_datf = datf2, 
                        col_vars = c(2), 
-                       col_vals = c(3, 4))
+                       col_vals = c(3, 4), 
+                       individual_col = 1)
     )
 
   individuals val1-A val1-B val2-A val2-B
 1           1      7      1      9     11
 2           2      0      0      0     22
 3           3      2      4      8      5
-
-
-datf <- data.frame("i2" = c("P", "P", "P", "M", "L", "L"),
-                   "individual" = c(1, 1, 1, 2, 3, 3),
-                   "var1" = c("A", "A", "B", "B", "B", "A"),
-                   "var2" = c("R", "T", "T", "R", "T", "R"),
-                   "val1" = c(6, 7, 1, 0, 4, 2))
-
-print(datf)
-
-i2 individual var1 var2 val1
- P          1    A    R    6
- P          1    A    T    7
- P          1    B    T    1
- M          2    B    R    0
- L          3    B    T    4
- L          3    A    R    2
-
-print(edm_pivot_wider1(
-                       inpt_datf = datf, 
-                       col_vars = c(2, 3), 
-                       col_vals = c(4))
-    )
-
-i2 individuals val1-A.R val1-A.T val1-B.R val1-B.T
- P           1        6        7        0        1
- M           2        0        0        0        0
- L           3        2        0        0        4
-
-
-datf <- data.frame("i" = c("P", "P", "P", "M", "L", "L"),
-                   "i2" = c("P2", "P2", "P2", "M2", "L2", "L2"),
-                   "individual" = c(1, 1, 1, 2, 3, 3),
-                   "var1" = c("A", "A", "B", "B", "B", "A"),
-                   "var2" = c("R", "T", "T", "R", "T", "R"),
-                   "val1" = c(6, 7, 1, 0, 4, 2))
-
-print(datf)
-
-i i2 individual var1 var2 val1
-P P2          1    A    R    6
-P P2          1    A    T    7
-P P2          1    B    T    1
-M M2          2    B    R    0
-L L2          3    B    T    4
-L L2          3    A    R    2
-
-print(edm_pivot_wider1(
-                       inpt_datf = datf, 
-                       col_vars = c(4, 5), 
-                       col_vals = c(6))
-    )
-
-  i i2 individuals val1-A.R val1-A.T val1-B.R val1-B.T
-  P P2           1        6        7        0        1
-  M M2           2        0        0        0        0
-  L L2           3        2        0        0        4
 
 }

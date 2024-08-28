@@ -18,13 +18,4 @@ print(intersect_all(c(1:5), c(1, 2, 3, 6), c(1:4)))
 
 [1] 1 2 3
 
-cur_lst <- list()
-cur_lst <- append(x = cur_lst, values = list(c(1:10)))
-cur_lst <- append(x = cur_lst, values = list(c(5:17)))
-cur_lst <- append(x = cur_lst, values = list(c(-5:7)))
-
-print(intersect_all(cur_lst))
-
-[1] 5 6 7
-
 }
