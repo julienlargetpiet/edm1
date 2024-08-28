@@ -9848,37 +9848,17 @@ pairs_findr <- function(inpt, ptrn1="(", ptrn2=")"){
 #' 
 #' [1] 1 2 3
 #'
-#' cur_lst <- list()
-#' cur_lst <- append(x = cur_lst, values = list(c(1:10)))
-#' cur_lst <- append(x = cur_lst, values = list(c(5:17)))
-#' cur_lst <- append(x = cur_lst, values = list(c(-5:7)))
-#' 
-#' print(intersect_all(cur_lst))
-#'
-#' [1] 5 6 7
-#'
 #' @export
 
 intersect_all <- function(...){
-  if (length(list(...)) == 1){
-    if (typeof(...) == "list"){
-      rtn_v <- unlist(...[1])
-      if (length(...) > 1){
-        for (el in ...[2:length(...)]){
-          rtn_v <- intersect(rtn_v, el) 
+        rtn_v <- unlist(list(...)[1])
+
+        if (length(rtn_v) > 1){
+                for (el in list(...)[2:length(list(...))]){
+                       rtn_v <- intersect(rtn_v, el) 
+                }
         }
-      }
-      return(rtn_v)
-    }else{
-      return(...)
-    }
-  }
-  rtn_v <- unlist(list(...)[1])
-  if (length(list(...)) > 1){
-    for (el in list(...)[2:length(list(...))]){
-           rtn_v <- intersect(rtn_v, el) 
-    }
-  }
+
   return(rtn_v)
 }
 
@@ -11609,35 +11589,20 @@ see_mode <- function(inpt_v = c()){
 #' print(union_all(c(1, 2), c(3, 4), c(7:8)))
 #'
 #' [1] 1 2 3 4 7 8
-#'
-#' print(union_all(list(c(1, 2), c(3, 4), c(7:8))))
-#'
-#' [1] 1 2 3 4 7 8
-#'
+#' 
 #' @export
 
 union_all <- function(...){
   cur_lst <- list(...)
-  if (length(cur_lst) == 1){
-    rtn_v <- c(unlist(...[1]))
-    if (length(...) > 1){
-      for (lst in ...[2:length(...)]){
-        rtn_v <- unique(c(rtn_v, lst))
-      }
-    return(rtn_v)
-    }else{
-      return(NULL)
+  rtn_v <- c(unlist(cur_lst[1]))
+  if (length(cur_lst) > 1){
+    cur_lst <- cur_lst[2:length(cur_lst)]
+    for (lst in cur_lst){
+      rtn_v <- union(rtn_v, lst) 
     }
+  return(rtn_v)
   }else{
-    rtn_v <- c(unlist(cur_lst[1]))
-    if (length(cur_lst) > 1){
-      for (lst in cur_lst[2:length(cur_lst)]){
-        rtn_v <- unique(c(rtn_v, lst))
-      }
-    return(rtn_v)
-    }else{
-      return(NULL)
-    }
+    return(NULL)
   }
 }
 
@@ -11660,44 +11625,23 @@ union_all <- function(...){
 #'
 #' [1]  3  4  5  6  1  2  7  8 12 13 14 15 16
 #' 
-#' print(see_diff_all(list(vec1, vec2, vec3)))
-#'
-#' [1]  3  4  5  6  1  2  7  8 12 13 14 15 16
-#' 
 #' @export
 
 see_diff_all <- function(...){
   cur_lst <- list(...)
-  if (length(cur_lst) == 1){
-    if (length(...) > 1){
-      intersect_v <- intersect(unlist(...[1]), unlist(...[2]))
-      union_v <- union(unlist(...[1]), unlist(...[2]))
-      if (length(...) > 2){
-        cur_lst <- ...[3:length(cur_lst)]
-        for (lst in cur_lst){
-          intersect_v <- intersect(intersect_v, lst)    
-          union_v <- unique(c(union_v, lst))
-        }
+  if (length(cur_lst) > 1){
+    intersect_v <- intersect(unlist(cur_lst[1]), unlist(cur_lst[2]))
+    union_v <- union(unlist(cur_lst[1]), unlist(cur_lst[2]))
+    if (length(cur_lst) > 2){
+      cur_lst <- cur_lst[3:length(cur_lst)]
+      for (lst in cur_lst){
+        intersect_v <- intersect(intersect_v, lst)    
+        union_v <- union(union_v, lst)
       }
-      return(setdiff(union_v, intersect_v))
-    }else{
-      return(NULL)
     }
+    return(setdiff(union_v, intersect_v))
   }else{
-    if (length(cur_lst) > 1){
-      intersect_v <- intersect(unlist(cur_lst[1]), unlist(cur_lst[2]))
-      union_v <- union(unlist(cur_lst[1]), unlist(cur_lst[2]))
-      if (length(cur_lst) > 2){
-        cur_lst <- cur_lst[3:length(cur_lst)]
-        for (lst in cur_lst){
-          intersect_v <- intersect(intersect_v, lst)    
-          union_v <- unique(c(union_v, lst))
-        }
-      }
-      return(setdiff(union_v, intersect_v))
-    }else{
-      return(NULL)
-    }
+    return(NULL)
   }
 }
 
@@ -16607,6 +16551,7 @@ edm_group_by2 <- function(inpt_datf, grp_v){
 #' @param inpt_datf is the input dataframe
 #' @param col_vars is a vector containig the column names or column numbers of the variables to pivot
 #' @param col_vals is a vector containing the column numbers or column names of the values to pivot
+#' @param individual_col is the column name or column number of the individuals
 #'
 #' @examples
 #'
@@ -16642,7 +16587,8 @@ edm_group_by2 <- function(inpt_datf, grp_v){
 #' print(edm_pivot_wider1(
 #'                        inpt_datf = datf, 
 #'                        col_vars = c(2, 3), 
-#'                        col_vals = c(4, 5))
+#'                        col_vals = c(4, 5), 
+#'                        individual_col = 1)
 #'     )
 #'
 #'   individuals val1-A.R val1-A.T val1-B.R val1-B.T val2-A.R val2-A.T val2-B.R
@@ -16657,7 +16603,8 @@ edm_group_by2 <- function(inpt_datf, grp_v){
 #' print(edm_pivot_wider1(
 #'                        inpt_datf = datf2, 
 #'                        col_vars = c(2), 
-#'                        col_vals = c(3, 4))
+#'                        col_vals = c(3, 4), 
+#'                        individual_col = 1)
 #'     )
 #' 
 #'   individuals val1-A val1-B val2-A val2-B
@@ -16665,78 +16612,12 @@ edm_group_by2 <- function(inpt_datf, grp_v){
 #' 2           2      0      0      0     22
 #' 3           3      2      4      8      5
 #'
-#'
-#' datf <- data.frame("i2" = c("P", "P", "P", "M", "L", "L"),
-#'                    "individual" = c(1, 1, 1, 2, 3, 3),
-#'                    "var1" = c("A", "A", "B", "B", "B", "A"),
-#'                    "var2" = c("R", "T", "T", "R", "T", "R"),
-#'                    "val1" = c(6, 7, 1, 0, 4, 2))
-#' 
-#' print(datf)
-#'
-#' i2 individual var1 var2 val1
-#'  P          1    A    R    6
-#'  P          1    A    T    7
-#'  P          1    B    T    1
-#'  M          2    B    R    0
-#'  L          3    B    T    4
-#'  L          3    A    R    2
-#'
-#' print(edm_pivot_wider1(
-#'                        inpt_datf = datf, 
-#'                        col_vars = c(2, 3), 
-#'                        col_vals = c(4))
-#'     )
-#' 
-#' i2 individuals val1-A.R val1-A.T val1-B.R val1-B.T
-#'  P           1        6        7        0        1
-#'  M           2        0        0        0        0
-#'  L           3        2        0        0        4
-#'
-#'
-#' datf <- data.frame("i" = c("P", "P", "P", "M", "L", "L"),
-#'                    "i2" = c("P2", "P2", "P2", "M2", "L2", "L2"),
-#'                    "individual" = c(1, 1, 1, 2, 3, 3),
-#'                    "var1" = c("A", "A", "B", "B", "B", "A"),
-#'                    "var2" = c("R", "T", "T", "R", "T", "R"),
-#'                    "val1" = c(6, 7, 1, 0, 4, 2))
-#' 
-#' print(datf)
-#' 
-#' i i2 individual var1 var2 val1
-#' P P2          1    A    R    6
-#' P P2          1    A    T    7
-#' P P2          1    B    T    1
-#' M M2          2    B    R    0
-#' L L2          3    B    T    4
-#' L L2          3    A    R    2
-#' 
-#' print(edm_pivot_wider1(
-#'                        inpt_datf = datf, 
-#'                        col_vars = c(4, 5), 
-#'                        col_vals = c(6))
-#'     )
-#' 
-#'   i i2 individuals val1-A.R val1-A.T val1-B.R val1-B.T
-#'   P P2           1        6        7        0        1
-#'   M M2           2        0        0        0        0
-#'   L L2           3        2        0        0        4
-#' 
 #' @export
 
 edm_pivot_wider1 <- function(inpt_datf, 
                             col_vars = c(), 
-                            col_vals = c()){
-  much_status <- FALSE
-  if ((length(col_vars) + length(col_vals) + 1) < ncol(inpt_datf)){
-    much_status <- TRUE
-    inpt_datf2 <- data.frame(inpt_datf[, 1:(ncol(inpt_datf) - (length(col_vars) + length(col_vals) + 1))])
-    pre_colnames <- colnames(inpt_datf)[1:(ncol(inpt_datf) - (length(col_vars) + length(col_vals) + 1))]
-    col_vars <- col_vars - (ncol(inpt_datf) - (length(col_vars) + length(col_vals) + 1))
-    col_vals <- col_vals - (ncol(inpt_datf) - (length(col_vars) + length(col_vals) + 1))
-    pre_hmn_col <- ncol(inpt_datf)
-    inpt_datf <- inpt_datf[, (ncol(inpt_datf) - (length(col_vars) + length(col_vals))):ncol(inpt_datf)]
-  }
+                            col_vals = c(),
+                            individual_col){
   if (typeof(col_vars) == "character"){
     for (i in 1:length(col_vars)){
       col_vars[i] <- match(x = col_vars[i], colnames(inpt_datf))
@@ -16748,6 +16629,9 @@ edm_pivot_wider1 <- function(inpt_datf,
       col_vals[i] <- match(x = col_vals[i], colnames(inpt_datf))
     }
     col_vals <- as.numeric(col_vals)
+  }
+  if (typeof(individual_col) == "character"){
+    individual_character <- match(x = individual_col, table = colnames(inpt_datf))
   }
   mod_l <- list() 
   pos_v <- c()
@@ -16804,7 +16688,7 @@ edm_pivot_wider1 <- function(inpt_datf,
       pos_v <- c(1)
     }
   }
-  prev_indv <- inpt_datf[1, 1]
+  prev_indv <- inpt_datf[1, individual_col]
   cur_row <- rep(x = 0, times = hmn_col) 
   cur_row[1] <- prev_indv
   for (i in 1:nrow(inpt_datf)){
@@ -16812,9 +16696,9 @@ edm_pivot_wider1 <- function(inpt_datf,
     for (cl in col_vars){
       cur_col_names <- c(cur_col_names, inpt_datf[i, cl])
     }
-    if (inpt_datf[i, 1] != prev_indv){
+    if (inpt_datf[i, individual_col] != prev_indv){
       rtn_datf <- rbind(rtn_datf, cur_row)
-      prev_indv <- inpt_datf[i, 1]
+      prev_indv <- inpt_datf[i, individual_col]
       cur_row <- rep(x = 0, times = hmn_col) 
       cur_row[1] <- prev_indv
     }
@@ -16824,14 +16708,7 @@ edm_pivot_wider1 <- function(inpt_datf,
   }
   rtn_datf <- rbind(rtn_datf, cur_row)
   colnames(rtn_datf) <- c("individuals", col_names)
-  if (!(much_status)){
-    return(rtn_datf)
-  }else{
-    inpt_datf2 <- inpt_datf2[match(x = unique(inpt_datf2[, 1]), table = inpt_datf2[, 1]), ]
-    rtn_datf <- as.data.frame(cbind(inpt_datf2, rtn_datf))
-    colnames(rtn_datf)[1:(pre_hmn_col - (length(col_vars) + length(col_vals) + 1))] <- pre_colnames
-    return(rtn_datf)
-  }
+  return(rtn_datf)
 }
 
 #' edm_pivot_wider2
@@ -16841,6 +16718,7 @@ edm_pivot_wider1 <- function(inpt_datf,
 #' @param inpt_datf is the input dataframe
 #' @param col_vars is a vector containig the column names or column numbers of the variables to pivot
 #' @param col_vals is a vector containing the column numbers or column names of the values to pivot
+#' @param individual_col is the column name or column number of the individuals
 #'
 #' @examples
 #'
@@ -16876,7 +16754,8 @@ edm_pivot_wider1 <- function(inpt_datf,
 #' print(edm_pivot_wider2(
 #'                        inpt_datf = datf, 
 #'                        col_vars = c(2, 3), 
-#'                        col_vals = c(4, 5))
+#'                        col_vals = c(4, 5), 
+#'                        individual_col = 1)
 #'     )
 #'
 #'   individuals val1-A.R val1-A.T val1-B.R val1-B.T val2-A.R val2-A.T val2-B.R
@@ -16891,7 +16770,8 @@ edm_pivot_wider1 <- function(inpt_datf,
 #' print(edm_pivot_wider2(
 #'                        inpt_datf = datf2, 
 #'                        col_vars = c(2), 
-#'                        col_vals = c(3, 4))
+#'                        col_vals = c(3, 4), 
+#'                        individual_col = 1)
 #'     )
 #' 
 #'   individuals val1-A val1-B val2-A val2-B
@@ -16899,78 +16779,12 @@ edm_pivot_wider1 <- function(inpt_datf,
 #' 2           2      0      0      0     22
 #' 3           3      2      4      8      5
 #'
-#'
-#' datf <- data.frame("i2" = c("P", "P", "P", "M", "L", "L"),
-#'                    "individual" = c(1, 1, 1, 2, 3, 3),
-#'                    "var1" = c("A", "A", "B", "B", "B", "A"),
-#'                    "var2" = c("R", "T", "T", "R", "T", "R"),
-#'                    "val1" = c(6, 7, 1, 0, 4, 2))
-#' 
-#' print(datf)
-#'
-#' i2 individual var1 var2 val1
-#'  P          1    A    R    6
-#'  P          1    A    T    7
-#'  P          1    B    T    1
-#'  M          2    B    R    0
-#'  L          3    B    T    4
-#'  L          3    A    R    2
-#'
-#' print(edm_pivot_wider1(
-#'                        inpt_datf = datf, 
-#'                        col_vars = c(2, 3), 
-#'                        col_vals = c(4))
-#'     )
-#' 
-#' i2 individuals val1-A.R val1-A.T val1-B.R val1-B.T
-#'  P           1        6        7        0        1
-#'  M           2        0        0        0        0
-#'  L           3        2        0        0        4
-#'
-#'
-#' datf <- data.frame("i" = c("P", "P", "P", "M", "L", "L"),
-#'                    "i2" = c("P2", "P2", "P2", "M2", "L2", "L2"),
-#'                    "individual" = c(1, 1, 1, 2, 3, 3),
-#'                    "var1" = c("A", "A", "B", "B", "B", "A"),
-#'                    "var2" = c("R", "T", "T", "R", "T", "R"),
-#'                    "val1" = c(6, 7, 1, 0, 4, 2))
-#' 
-#' print(datf)
-#' 
-#' i i2 individual var1 var2 val1
-#' P P2          1    A    R    6
-#' P P2          1    A    T    7
-#' P P2          1    B    T    1
-#' M M2          2    B    R    0
-#' L L2          3    B    T    4
-#' L L2          3    A    R    2
-#' 
-#' print(edm_pivot_wider1(
-#'                        inpt_datf = datf, 
-#'                        col_vars = c(4, 5), 
-#'                        col_vals = c(6))
-#'     )
-#' 
-#'   i i2 individuals val1-A.R val1-A.T val1-B.R val1-B.T
-#'   P P2           1        6        7        0        1
-#'   M M2           2        0        0        0        0
-#'   L L2           3        2        0        0        4
-#'
 #' @export
 
 edm_pivot_wider2 <- function(inpt_datf, 
                             col_vars = c(), 
-                            col_vals = c()){
-  much_status <- FALSE
-  if ((length(col_vars) + length(col_vals) + 1) < ncol(inpt_datf)){
-    much_status <- TRUE
-    inpt_datf2 <- data.frame(inpt_datf[, 1:(ncol(inpt_datf) - (length(col_vars) + length(col_vals) + 1))])
-    pre_colnames <- colnames(inpt_datf)[1:(ncol(inpt_datf) - (length(col_vars) + length(col_vals) + 1))]
-    col_vars <- col_vars - (ncol(inpt_datf) - (length(col_vars) + length(col_vals) + 1))
-    col_vals <- col_vals - (ncol(inpt_datf) - (length(col_vars) + length(col_vals) + 1))
-    pre_hmn_col <- ncol(inpt_datf)
-    inpt_datf <- inpt_datf[, (ncol(inpt_datf) - (length(col_vars) + length(col_vals))):ncol(inpt_datf)]
-  }
+                            col_vals = c(),
+                            individual_col){
   if (typeof(col_vars) == "character"){
     for (i in 1:length(col_vars)){
       col_vars[i] <- match(x = col_vars[i], colnames(inpt_datf))
@@ -16982,6 +16796,9 @@ edm_pivot_wider2 <- function(inpt_datf,
       col_vals[i] <- match(x = col_vals[i], colnames(inpt_datf))
     }
     col_vals <- as.numeric(col_vals)
+  }
+  if (typeof(individual_col) == "character"){
+    individual_character <- match(x = individual_col, table = colnames(inpt_datf))
   }
   pos_v <- c()
   hmn_mods = 0
@@ -17036,7 +16853,7 @@ edm_pivot_wider2 <- function(inpt_datf,
       pos_v <- c(1)
     }
   }
-  prev_indv <- inpt_datf[1, 1]
+  prev_indv <- inpt_datf[1, individual_col]
   cur_row <- rep(x = 0, times = hmn_col) 
   cur_row[1] <- prev_indv
   for (i in 1:nrow(inpt_datf)){
@@ -17044,9 +16861,9 @@ edm_pivot_wider2 <- function(inpt_datf,
     for (cl in col_vars){
       cur_col_names <- c(cur_col_names, inpt_datf[i, cl])
     }
-    if (inpt_datf[i, 1] != prev_indv){
+    if (inpt_datf[i, individual_col] != prev_indv){
       rtn_datf <- rbind(rtn_datf, cur_row)
-      prev_indv <- inpt_datf[i, 1]
+      prev_indv <- inpt_datf[i, individual_col]
       cur_row <- rep(x = 0, times = hmn_col) 
       cur_row[1] <- prev_indv
     }
@@ -17056,14 +16873,7 @@ edm_pivot_wider2 <- function(inpt_datf,
   }
   rtn_datf <- rbind(rtn_datf, cur_row)
   colnames(rtn_datf) <- c("individuals", col_names)
-  if (!(much_status)){
-    return(rtn_datf)
-  }else{
-    inpt_datf2 <- inpt_datf2[match(x = unique(inpt_datf2[, 1]), table = inpt_datf2[, 1]), ]
-    rtn_datf <- as.data.frame(cbind(inpt_datf2, rtn_datf))
-    colnames(rtn_datf)[1:(pre_hmn_col - (length(col_vars) + length(col_vals) + 1))] <- pre_colnames
-    return(rtn_datf)
-  }
+  return(rtn_datf)
 }
 
 #' edm_pivot_longer1
@@ -17072,6 +16882,7 @@ edm_pivot_wider2 <- function(inpt_datf,
 #'
 #' @param inpt_datf is the input dataframe
 #' @param col_vars is a vector containing the column names or column numbers of the variables
+#' @param individual_col is the column name or the column number of the individuals
 #' @param col_vars_to is a vector containing the varaiables to which will be assign the modalities, see examples
 #'
 #' @examples
@@ -17121,6 +16932,7 @@ edm_pivot_wider2 <- function(inpt_datf,
 #'
 #' print(edm_pivot_longer1(inpt_datf = datf, 
 #'                           col_vars = c(2:9), 
+#'                           individual_col = 1, 
 #'                           col_vars_to = c("Shape", "Way"),
 #'                           null_value = c(0)))
 #'
@@ -17143,6 +16955,7 @@ edm_pivot_wider2 <- function(inpt_datf,
 #'
 #' print(edm_pivot_longer1(inpt_datf = datf2, 
 #'                         col_vars = c(2:5), 
+#'                         individual_col = 1, 
 #'                         col_vars_to = c("Shape"), 
 #'                         null_value = c(0)))
 #'
@@ -17280,7 +17093,6 @@ edm_pivot_longer1 <- function(inpt_datf,
   if (!(much_status)){
     return(rtn_datf)
   }else{
-    print("ici")
     pre_rtn_datf <- as.data.frame(matrix(nrow = nrow(rtn_datf), ncol = 0))
     i_col_v <- rtn_datf[, 1]
     i_col_v2 <- unique(i_col_v)
@@ -17302,6 +17114,7 @@ edm_pivot_longer1 <- function(inpt_datf,
 #'
 #' @param inpt_datf is the input dataframe
 #' @param col_vars is a vector containing the column names or column numbers of the variables
+#' @param individual_col is the column name or the column number of the individuals
 #' @param col_vars_to is a vector containing the varaiables to which will be assign the modalities, see examples
 #'
 #' @examples
@@ -17351,6 +17164,7 @@ edm_pivot_longer1 <- function(inpt_datf,
 #'
 #' print(edm_pivot_longer2(inpt_datf = datf, 
 #'                           col_vars = c(2:9), 
+#'                           individual_col = 1, 
 #'                           col_vars_to = c("Shape", "Way")))
 #'
 #'    individuals Shape Way val1 val2
@@ -17376,6 +17190,7 @@ edm_pivot_longer1 <- function(inpt_datf,
 #'
 #' print(edm_pivot_longer2(inpt_datf = datf2, 
 #'                         col_vars = c(2:5), 
+#'                         individual_col = 1, 
 #'                         col_vars_to = c("Shape")))
 #'
 #'   individuals Shape val1 val2
@@ -18092,311 +17907,47 @@ all_concat <- function(..., sep = "_"){
   return(rtn_v)
 }
 
-#' edm_pert
+#' col_convertr
 #'
-#' Calculates margins and critical path of tasks based on PERT algorythm. The first tasks must be at the top of the input dataframe, see examples.
-#'
-#' @param inpt_datf is the input dataframe which contains all the tasks, their duration, their finish date at the earliest/latest and their antecedent, so the inpt_datf must contain 5 columns see examples
-#'
-#' @examples
-#'
-#' datf <- data.frame("task" = toupper(letters[1:7]),
-#'                    "duration" = c(2, 8, 5, 2, 6, 5, 3),
-#'                    "antecedent" = c(NA, NA, "A", "B", "B", "E", "A,D"),
-#'                    "earliest" = c(2, 8, 19, 10, 14, 19, 19),
-#'                    "latest" = c(14, 8, 19, 16, 14, 19, 19))
-#' 
-#' print(datf)
-#'
-#'   task duration antecedent earliest latest
-#' 1    A        2       <NA>        2     14
-#' 2    B        8       <NA>        8      8
-#' 3    C        5          A       19     19
-#' 4    D        2          B       10     16
-#' 5    E        6          B       14     14
-#' 6    F        5          E       19     19
-#' 7    G        3        A,D       19     19
-#' 
-#'
-#' print(edm_pert(inpt_datf = datf))
-#' 
-#' [[1]]
-#'   rtn_datf free_margin tot_margin
-#' 1        A           0         12
-#' 2        B           0          0
-#' 3        C          12         12
-#' 4        D           0          6
-#' 5        E           0          0
-#' 6        F           0          0
-#' 7        G           6          6
-#' 
-#' [[2]]
-#' [1] "B" "E" "F"
-#'
-#' @export
-
-edm_pert <- function(inpt_datf){
-  rtn_datf <- inpt_datf[, 1]
-  free_margin <- c()
-  tot_margin <- c()
-  pre_na <- is.na(inpt_datf[, 3])
-  strt <- match(x = FALSE, table = pre_na)
-  for (i in strt:(sum(!(pre_na)) + strt - 1)){
-    pre_ant <- unlist(strsplit(x = inpt_datf[i, 3], split = ","))
-    if (length(pre_ant) > 1){
-      cur_ant <- inpt_datf[match(x = pre_ant[1], table = inpt_datf[, 1]), 4]
-      for (i2 in pre_ant[2:length(pre_ant)]){
-        if (inpt_datf[match(x = i2, table = inpt_datf[, 1]), 4] > cur_ant){
-          cur_ant <- inpt_datf[match(x = i2, table = inpt_datf[, 1]), 4]
-        }
-      }
-    }else{
-      cur_ant <- inpt_datf[match(x = inpt_datf[i, 3], table = inpt_datf[, 1]), 4]
-    }
-    free_margin <- c(free_margin, (inpt_datf[i, 4] - inpt_datf[i, 2] - cur_ant)) 
-    tot_margin <- c(tot_margin, (inpt_datf[i, 5] - inpt_datf[i, 2] - cur_ant))
-  }
-  for (i in sum(pre_na):1){
-    free_margin <- c((inpt_datf[i, 4] - inpt_datf[i, 2]), free_margin)
-    tot_margin <- c((inpt_datf[i, 5] - inpt_datf[i, 2]), tot_margin)
-  }
-  rtn_datf <- as.data.frame(cbind(rtn_datf, "free_margin" = free_margin, "tot_margin" = tot_margin))
-  critical_path <- paste(inpt_datf[grep(pattern = 0, rtn_datf[, 3]), 1], sep = "-") 
-  return(list(rtn_datf, critical_path))
-}
-
-#' edm_pivot_series
-#'
-#' Allow to create a new column for the value of the chosen columns at each new value of the column that represents the time. The occurence of each time stamp has to be equal, see examples (if not consider performing the time_serie_equalizer function fromm the same package)
+#' Allow to convert all column that may be converted to a numeric, to a numeric, see examples
 #'
 #' @param inpt_datf is the input dataframe
-#' @param time_col is the column name or number of the datafame
-#' @param col_v is a vector containing all the column numbers or names of the variables, if null all the column will be considered as variables apart from the column designated in time_col
 #'
 #' @examples
 #'
-#' print(cur_datf)
+#' datf <- mtcars
+#' datf[, 3] <- as.character(datf[, 3])
+#' datf[, 4] <- as.character(datf[, 4])
+#' str(datf)
 #'
-#'    year                           energy_source twh_cons
-#' 1  1995                     biofuel_electricity     1.82
-#' 2  1995                        coal_electricity    24.18
-#' 3  1995                         gas_electricity     3.84
-#' 4  1995                       hydro_electricity    71.33
-#' 5  1995                     nuclear_electricity   377.23
-#' 6  1995                         oil_electricity    10.50
-#' 7  1995 other_renewable_exc_biofuel_electricity     0.51
-#' 8  1995                       solar_electricity     0.00
-#' 9  1995                        wind_electricity     0.00
-#' 10 2023                     biofuel_electricity     9.50
-#' 11 2023                        coal_electricity     2.16
-#' 12 2023                         gas_electricity    31.43
-#' 13 2023                       hydro_electricity    53.19
-#' 14 2023                     nuclear_electricity   335.65
-#' 15 2023                         oil_electricity     9.71
-#' 16 2023 other_renewable_exc_biofuel_electricity     0.60
-#' 17 2023                       solar_electricity    23.26
-#' 18 2023                        wind_electricity    48.61
-#'
-#' print(edm_pivot_series(inpt_datf = cur_datf, time_col = 1, col_v = c(3)))
-#'
-#'                             energy_source twh_cons_1995 twh_cons_2023
-#' 1                     biofuel_electricity          1.82          9.50
-#' 2                        coal_electricity         24.18          2.16
-#' 3                         gas_electricity          3.84         31.43
-#' 4                       hydro_electricity         71.33         53.19
-#' 5                     nuclear_electricity        377.23        335.65
-#' 6                         oil_electricity         10.50          9.71
-#' 7 other_renewable_exc_biofuel_electricity          0.51          0.60
-#' 8                       solar_electricity          0.00         23.26
-#' 9                        wind_electricity          0.00         48.61
-#'
-#' print(datf)
-#'
-#'     individual year                           energy_source twh_cons
-#' 1  France_1995 1995                     biofuel_electricity     1.82
-#' 2  France_1995 1995                        coal_electricity    24.18
-#' 3  France_1995 1995                         gas_electricity     3.84
-#' 4  France_1995 1995                       hydro_electricity    71.33
-#' 5  France_1995 1995                     nuclear_electricity   377.23
-#' 6  France_1995 1995                         oil_electricity    10.50
-#' 7  France_1995 1995 other_renewable_exc_biofuel_electricity     0.51
-#' 8  France_1995 1995                       solar_electricity     0.00
-#' 9  France_1995 1995                        wind_electricity     0.00
-#' 10 France_2023 2023                     biofuel_electricity     9.50
-#' 11 France_2023 2023                        coal_electricity     2.16
-#' 12 France_2023 2023                         gas_electricity    31.43
-#' 13 France_2023 2023                       hydro_electricity    53.19
-#' 14 France_2023 2023                     nuclear_electricity   335.65
-#' 15 France_2023 2023                         oil_electricity     9.71
-#' 16 France_2023 2023 other_renewable_exc_biofuel_electricity     0.60
-#' 17 France_2023 2023                       solar_electricity    23.26
-#' 18 France_2023 2023                        wind_electricity    48.61
-#'
-#' print(edm_pivot_series(inpt_datf = cur_datf, time_col = 2, col_v = c(1, 4)))
-#'
-#'   individual_1995                           energy_source twh_cons_1995
-#' 1     France_1995                     biofuel_electricity          1.82
-#' 2     France_1995                        coal_electricity         24.18
-#' 3     France_1995                         gas_electricity          3.84
-#' 4     France_1995                       hydro_electricity         71.33
-#' 5     France_1995                     nuclear_electricity        377.23
-#' 6     France_1995                         oil_electricity         10.50
-#' 7     France_1995 other_renewable_exc_biofuel_electricity          0.51
-#' 8     France_1995                       solar_electricity          0.00
-#' 9     France_1995                        wind_electricity          0.00
-#'   individual_2023 twh_cons_2023
-#' 1     France_2023          9.50
-#' 2     France_2023          2.16
-#' 3     France_2023         31.43
-#' 4     France_2023         53.19
-#' 5     France_2023        335.65
-#' 6     France_2023          9.71
-#' 7     France_2023          0.60
-#' 8     France_2023         23.26
-#' 9     France_2023         48.61
+#' 'data.frame':	32 obs. of  11 variables:
+#'  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+#'  $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
+#'  $ disp: chr  "160" "160" "108" "258" ...
+#'  $ hp  : chr  "110" "110" "93" "110" ...
+#'  $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+#'  $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
+#'  $ qsec: num  16.5 17 18.6 19.4 17 ...
+#'  $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...
+#'  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
+#'  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
+#'  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...
+#' 
+#' datf <- col_convertr(inpt_datf = datf)
+#' 
+#' all(datf == mtcars)
+#' 
+#' [1] TRUE
 #'
 #' @export
 
-edm_pivot_series <- function(inpt_datf, time_col, col_v = NULL){
-  if (typeof(time_col) == "character"){
-    time_col <- match(x = time_col, table = colnames(inpt_datf))
-  }
-  if (is.null(col_v)){
-    col_v <- c(1:ncol(inpt_datf))[-time_col]
-  }else if (typeof(col_v) == "character"){
-    for (i in 1:length(col_v)){
-      col_v[i] <- match(x = col_v[i], table = colnames(inpt_datf))
-    }
-    col_v <- as.numeric(col_v)
-  }
-  cur_unique <- unique(inpt_datf[, time_col])
-  rtn_datf <- inpt_datf[grep(pattern = cur_unique[1], x = inpt_datf[, time_col]), -time_col]
-  col_v2 <- col_v
-  col_v2[col_v2 > time_col] <- col_v2[col_v2 > time_col] - 1 
-  colnames(rtn_datf)[col_v2] <- paste(colnames(inpt_datf)[col_v], cur_unique[1], sep = "_")
-  if (length(cur_unique) > 1){
-    for (i in 2:length(cur_unique)){
-      pre_col <- ncol(rtn_datf) + 1
-      rtn_datf <- cbind(rtn_datf, inpt_datf[grep(pattern = cur_unique[i], x = inpt_datf[, time_col]), 
-                        col_v])
-      colnames(rtn_datf)[pre_col:ncol(rtn_datf)] <- paste(colnames(inpt_datf)[col_v], 
-                                                          cur_unique[i], sep = "_")
+col_convertr <- function(inpt_datf){
+  for (i in 1:ncol(inpt_datf)){
+    if (all(mapply(function(x) return(can_be_num(x)), inpt_datf[, i]))){
+      inpt_datf[, i] <- as.numeric(inpt_datf[, i]) 
     }
   }
-  return(rtn_datf)
-}
-
-#' time_serie_equalizer
-#'
-#' Allow ewualize the occurence of each elements in all the timestamps, see examples
-#'
-#' @param inpt_datf is the input dataframe
-#' @param time_col is the column number or name of the time values
-#' @param null_value is the default value of the variable of the elements that will be added
-#' @param individual_col is the column name or number of the individuals
-#' @param var_col is a vector containing the column names or numbers if the variables that will equal the null_value for the individual at the new time values
-#'
-#' @examples
-#'
-#' print(datf)
-#'
-#'    individual country year                           energy_source twh_cons
-#' 1           A  France 1995                     biofuel_electricity     1.82
-#' 2           A  France 1996                        coal_electricity    24.18
-#' 3           A  France 1997                         gas_electricity     3.84
-#' 4           A  France 1998                       hydro_electricity    71.33
-#' 5           A  France 1999                     nuclear_electricity   377.23
-#' 6           A  France 2000                         oil_electricity    10.50
-#' 7           A  France 2001 other_renewable_exc_biofuel_electricity     0.51
-#' 10          B  France 1995                     biofuel_electricity     9.50
-#' 11          B  France 1996                        coal_electricity     2.16
-#' 12          B  France 1997                         gas_electricity    31.43
-#' 13          B  France 1998                       hydro_electricity    53.19
-#' 14          B  France 1999                     nuclear_electricity   335.65
-#' 15          B  France 2000                         oil_electricity     9.71
-#' 16          B  France 2001 other_renewable_exc_biofuel_electricity     0.60
-#' 17          B  France 2002                       solar_electricity    23.26
-#' 18          B  France 2003                        wind_electricity    48.61
-#'
-#' print(time_serie_equalizer(inpt_datf = datf,
-#'                            time_col = "year",
-#'                            null_value = 0,
-#'                            individual_col = 1,
-#'                            var_col = "twh_cons"))
-#'
-#'     individual country year                           energy_source twh_cons
-#' 1            A  France 1995                     biofuel_electricity     1.82
-#' 2            A  France 1996                        coal_electricity    24.18
-#' 3            A  France 1997                         gas_electricity     3.84
-#' 4            A  France 1998                       hydro_electricity    71.33
-#' 5            A  France 1999                     nuclear_electricity   377.23
-#' 6            A  France 2000                         oil_electricity    10.50
-#' 7            A  France 2001 other_renewable_exc_biofuel_electricity     0.51
-#' 8            B  France 1995                     biofuel_electricity     9.50
-#' 9            B  France 1996                        coal_electricity     2.16
-#' 10           B  France 1997                         gas_electricity    31.43
-#' 11           B  France 1998                       hydro_electricity    53.19
-#' 12           B  France 1999                     nuclear_electricity   335.65
-#' 13           B  France 2000                         oil_electricity     9.71
-#' 14           B  France 2001 other_renewable_exc_biofuel_electricity     0.60
-#' 15           B  France 2002                       solar_electricity    23.26
-#' 16           B  France 2003                        wind_electricity    48.61
-#' 17           A  France 2002                     biofuel_electricity     0.00
-#' 18           A  France 2003                     biofuel_electricity     0.00
-#'
-#' @export
-
-time_serie_equalizer <- function(inpt_datf, 
-                                 time_col, 
-                                 null_value = 0, 
-                                 individual_col,
-                                 var_col = c()){
-  all_unique <- unique(inpt_datf[, time_col])
-  for (i in unique(inpt_datf[, individual_col])){
-    cur_grp <- grep(pattern = i, x = inpt_datf[, individual_col])
-    cur_v <- unique(inpt_datf[cur_grp, 
-                         time_col])
-    cur_v <- all_unique[-match(x = cur_v, table = all_unique)]
-    if (length(cur_v) > 0){
-      cur_datf <- inpt_datf[cur_grp[1], ] 
-      cur_datf[1, var_col] <- null_value 
-      for (i2 in cur_v){
-        cur_datf[, time_col] <- i2
-        inpt_datf <- rbind(inpt_datf, cur_datf)
-      }
-    }
-  }
-  rownames(inpt_datf) <- c(1:nrow(inpt_datf))
   return(inpt_datf)
 }
-
-#' see_diff_detailled
-#'
-#' Behaves exactly like the see_diff function but is written more explicitely, see examples
-#'
-#' @param vec1 is one of the input vector
-#' @param vec2 is the other input vector
-#'
-#' @examples
-#'
-#' print(see_diff_detailled(c(1:6), c(3:9)))
-#'
-#' [1] 1 2 7 8 9
-#'
-#' @export
-
-see_diff_detailled <- function(vec1 = c(), vec2 = c()){
-  union_v <- unique(c(vec1, vec2))
-  intersct_v <- intersect(vec1, vec2)
-  rtn_v <- c()
-  for (el in union_v){
-    if (is.na(match(x = el, table = intersct_v))){
-      rtn_v <- c(rtn_v, el)
-    }
-  }
-  return(rtn_v)
-}
-
-
 
 
