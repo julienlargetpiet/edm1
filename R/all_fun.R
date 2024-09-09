@@ -18254,3 +18254,164 @@ see_diff_detailled <- function(vec1 = c(), vec2 = c()){
   }
   return(rtn_v)
 }
+
+#' intersect_mod2
+#' 
+#' Returns the mods that have elemnts in common, uses a different algorith than intersect_mod1, see examples
+#'
+#' @param inpt_datf is the input dataframe
+#' @param inter_col is the column number or name of the elements that may be in common to each mod
+#' @param mod_col is the column number or name of the mods
+#' @param n_min is the minimum number of elements in common each mod have to have to be outputed in the returned dataframe
+#'
+#' @examples
+#'
+#' datf <- data.frame("country" = c("Germany", "France", "Italy", "France", "Germany", "Italy"),
+#'                    "year" = c(2000, 2000, 2001, 2002, 2003, 2004),
+#'                    "random_value" = c(1, 3, 2, 1, 2, 2))
+#' print(datf)
+#'
+#'   country year random_value
+#' 1 Germany 2000            1
+#' 2  France 2000            3
+#' 3   Italy 2001            2
+#' 4  France 2002            1
+#' 5 Germany 2003            2
+#' 6   Italy 2004            2
+#' 
+#' print(intersect_mod2(inpt_datf = datf, inter_col = "year", mod_col = "country"))
+#'
+#'   country year random_value
+#' 1 Germany 2000            1
+#' 2  France 2000            3
+#'
+#' @export
+
+intersect_mod2 <- function(inpt_datf, inter_col, mod_col, n_min = 1){
+  grep_all <- function(inpt_v, pattern_v){
+    rtn_v <- c(grep(pattern = pattern_v[1], x = inpt_v))
+    if (length(pattern_v) > 1){
+      pattern_v <- pattern_v[2:length(pattern_v)]
+      for (ptrn in pattern_v){
+        rtn_v <- c(rtn_v, grep(pattern = ptrn, x = inpt_v))
+      }
+    }
+    return(rtn_v)
+  }
+  unique_v <- unique(inpt_datf[, mod_col])
+  cur_intersct <- unique(inpt_datf[inpt_datf[, mod_col] == unique_v[1], inter_col])
+  if (length(unique_v) > 1){
+    for (el in unique_v[2:length(unique_v)]){
+      cur_intersct2 <- intersect(cur_intersct, 
+                        unique(inpt_datf[inpt_datf[, mod_col] == el, inter_col]))
+      if (length(cur_intersct2) >= n_min){
+        cur_intersct <- cur_intersct2
+      }
+    }
+  }
+  return(inpt_datf[grep_all(inpt_v = inpt_datf[, inter_col], 
+                     pattern_v = cur_intersct), ])
+}
+
+#' and_bool1
+#'
+#' Returns a boolean vector according to 'and' condition on boolean vector in a dataframe, each column represents a boolean vector, see examples
+#'
+#' @examples
+#'
+#' print(and_bool1(inpt_datf = data.frame("bool1" = c(TRUE, FALSE, FALSE, TRUE),
+#'                                        "bool2" = c(TRUE, TRUE, FALSE, TRUE))))
+#' 
+#' [1]  TRUE FALSE FALSE  TRUE
+#' 
+#' @export
+
+and_bool1 <- function(inpt_datf){
+  rtn_v <- c()
+  for (I in 1:nrow(inpt_datf)){
+    if (all(inpt_datf[I, ])){
+      rtn_v <- c(rtn_v, TRUE)
+    }else{
+      rtn_v <- c(rtn_v, FALSE)
+    }
+  }
+  return(rtn_v)
+}
+
+#' and_bool2
+#'
+#' Returns a boolean vector according to 'and' condition on boolean vector in a dataframe, each column represents a boolean vector, see examples, uses a different algorithm than and_bool1
+#' 
+#' @examples
+#'
+#' print(and_bool2(inpt_datf = data.frame("bool1" = c(TRUE, FALSE, FALSE, TRUE),
+#'                                        "bool2" = c(TRUE, TRUE, FALSE, TRUE))))
+#' 
+#' [1]  TRUE FALSE FALSE  TRUE
+#' 
+#' 
+#' @export
+
+and_bool2 <- function(inpt_datf){
+  rtn_v <- rep(x = NA, times = nrow(inpt_datf))
+  for (I in 1:nrow(inpt_datf)){
+    if (all(inpt_datf[I, ])){
+      rtn_v[I] <- TRUE
+    }else{
+      rtn_v[I] <- FALSE
+    }
+  }
+  return(rtn_v)
+}
+
+#' or_bool1
+#'
+#' Returns a boolean vector according to 'or' condition on boolean vector in a dataframe, each column represents a boolean vector, see examples, uses a different algorithm than or_bool1
+#'
+#' @examples
+#'
+#' print(or_bool1(inpt_datf = data.frame("bool1" = c(TRUE, FALSE, FALSE, TRUE),
+#'                                        "bool2" = c(TRUE, TRUE, FALSE, TRUE))))
+#' 
+#' [1]  TRUE  TRUE FALSE  TRUE
+#'
+#' @export
+
+or_bool1 <- function(inpt_datf){
+  rtn_v <- c()
+  for (I in 1:nrow(inpt_datf)){
+    if (any(inpt_datf[I, ])){
+      rtn_v <- c(rtn_v, TRUE)
+    }else{
+      rtn_v <- c(rtn_v, FALSE)
+    }
+  }
+  return(rtn_v)
+}
+
+#' or_bool2
+#'
+#' Returns a boolean vector according to 'or' condition on boolean vector in a dataframe, each column represents a boolean vector, see examples, uses a different algorithm than or_bool1
+#'
+#' @examples
+#'
+#' print(or_bool2(inpt_datf = data.frame("bool1" = c(TRUE, FALSE, FALSE, TRUE),
+#'                                        "bool2" = c(TRUE, TRUE, FALSE, TRUE))))
+#' 
+#' [1]  TRUE  TRUE FALSE  TRUE
+#'
+#' @export
+
+or_bool2 <- function(inpt_datf){
+  rtn_v <- rep(x = NA, times = nrow(inpt_datf))
+  for (I in 1:nrow(inpt_datf)){
+    if (any(inpt_datf[I, ])){
+      rtn_v[I] <- TRUE
+    }else{
+      rtn_v[I] <- FALSE
+    }
+  }
+  return(rtn_v)
+}
+
+

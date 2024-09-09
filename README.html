@@ -168,6 +168,99 @@ print(all_stat(inpt_v=c("first", "seco"), var_add = c("var1", "var2", "var3", "v
 
 </div>
 </body></html>
+<!DOCTYPE html><html><head><title>R: and_bool1</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>and_bool1</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>and_bool1</h2>
+
+<h3>Description</h3>
+
+<p>Returns a boolean vector according to 'and' condition on boolean vector in a dataframe, each column represents a boolean vector, see examples
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>and_bool1(inpt_datf)
+</code></pre>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(and_bool1(inpt_datf = data.frame("bool1" = c(TRUE, FALSE, FALSE, TRUE),
+                                       "bool2" = c(TRUE, TRUE, FALSE, TRUE))))
+
+[1]  TRUE FALSE FALSE  TRUE
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: and_bool2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>and_bool2</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>and_bool2</h2>
+
+<h3>Description</h3>
+
+<p>Returns a boolean vector according to 'and' condition on boolean vector in a dataframe, each column represents a boolean vector, see examples, uses a different algorithm than and_bool1
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>and_bool2(inpt_datf)
+</code></pre>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(and_bool2(inpt_datf = data.frame("bool1" = c(TRUE, FALSE, FALSE, TRUE),
+                                       "bool2" = c(TRUE, TRUE, FALSE, TRUE))))
+
+[1]  TRUE FALSE FALSE  TRUE
+
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
 <!DOCTYPE html><html><head><title>R: any_join_datf</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
@@ -7357,6 +7450,88 @@ print(intersect_all(c(1:5), c(1, 2, 3, 6), c(1:4)))
 
 </div>
 </body></html>
+<!DOCTYPE html><html><head><title>R: intersect_mod2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>intersect_mod2</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>intersect_mod2</h2>
+
+<h3>Description</h3>
+
+<p>Returns the mods that have elemnts in common, uses a different algorith than intersect_mod1, see examples
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>intersect_mod2(inpt_datf, inter_col, mod_col, n_min = 1)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
+<td>
+<p>is the input dataframe</p>
+</td></tr>
+<tr><td><code id="inter_col">inter_col</code></td>
+<td>
+<p>is the column number or name of the elements that may be in common to each mod</p>
+</td></tr>
+<tr><td><code id="mod_col">mod_col</code></td>
+<td>
+<p>is the column number or name of the mods</p>
+</td></tr>
+<tr><td><code id="n_min">n_min</code></td>
+<td>
+<p>is the minimum number of elements in common each mod have to have to be outputed in the returned dataframe</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+datf &lt;- data.frame("country" = c("Germany", "France", "Italy", "France", "Germany", "Italy"),
+                   "year" = c(2000, 2000, 2001, 2002, 2003, 2004),
+                   "random_value" = c(1, 3, 2, 1, 2, 2))
+print(datf)
+
+  country year random_value
+1 Germany 2000            1
+2  France 2000            3
+3   Italy 2001            2
+4  France 2002            1
+5 Germany 2003            2
+6   Italy 2004            2
+
+print(intersect_mod2(inpt_datf = datf, inter_col = "year", mod_col = "country"))
+
+  country year random_value
+1 Germany 2000            1
+2  France 2000            3
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
 <!DOCTYPE html><html><head><title>R: intersect_mod</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
@@ -9615,6 +9790,98 @@ function processMathHTML() {
 print(old_to_new_idx(inpt_v = c("oui", "no", "eeee")))
 
 [1] 1 1 1 2 2 3 3 3 3
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: or_bool1</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>or_bool1</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>or_bool1</h2>
+
+<h3>Description</h3>
+
+<p>Returns a boolean vector according to 'or' condition on boolean vector in a dataframe, each column represents a boolean vector, see examples, uses a different algorithm than or_bool1
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>or_bool1(inpt_datf)
+</code></pre>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(or_bool1(inpt_datf = data.frame("bool1" = c(TRUE, FALSE, FALSE, TRUE),
+                                       "bool2" = c(TRUE, TRUE, FALSE, TRUE))))
+
+[1]  TRUE  TRUE FALSE  TRUE
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: or_bool2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>or_bool2</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>or_bool2</h2>
+
+<h3>Description</h3>
+
+<p>Returns a boolean vector according to 'or' condition on boolean vector in a dataframe, each column represents a boolean vector, see examples, uses a different algorithm than or_bool1
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>or_bool2(inpt_datf)
+</code></pre>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(or_bool2(inpt_datf = data.frame("bool1" = c(TRUE, FALSE, FALSE, TRUE),
+                                       "bool2" = c(TRUE, TRUE, FALSE, TRUE))))
+
+[1]  TRUE  TRUE FALSE  TRUE
 
 </code></pre>
 

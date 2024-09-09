@@ -14,8 +14,6 @@ R > build()
 
 R > install()
 
-**This is the main edm1 repo (grouping all edm1. repos), the most up to date. If a bug is found in one of the functions, this repo will be updated first and then the edm1.something repo where the function to update is also present.**
-
 # `all_concat`
 
 all_concat
@@ -126,6 +124,60 @@ inpt_datf=datf))
 #14
 #15
 #16
+```
+
+
+# `and_bool1`
+
+and_bool1
+
+
+## Description
+
+Returns a boolean vector according to 'and' condition on boolean vector in a dataframe, each column represents a boolean vector, see examples
+
+
+## Usage
+
+```r
+and_bool1(inpt_datf)
+```
+
+
+## Examples
+
+```r
+print(and_bool1(inpt_datf = data.frame("bool1" = c(TRUE, FALSE, FALSE, TRUE),
+"bool2" = c(TRUE, TRUE, FALSE, TRUE))))
+
+[1]  TRUE FALSE FALSE  TRUE
+```
+
+
+# `and_bool2`
+
+and_bool2
+
+
+## Description
+
+Returns a boolean vector according to 'and' condition on boolean vector in a dataframe, each column represents a boolean vector, see examples, uses a different algorithm than and_bool1
+
+
+## Usage
+
+```r
+and_bool2(inpt_datf)
+```
+
+
+## Examples
+
+```r
+print(and_bool2(inpt_datf = data.frame("bool1" = c(TRUE, FALSE, FALSE, TRUE),
+"bool2" = c(TRUE, TRUE, FALSE, TRUE))))
+
+[1]  TRUE FALSE FALSE  TRUE
 ```
 
 
@@ -5149,6 +5201,57 @@ col1 col2
 ```
 
 
+# `intersect_mod2`
+
+intersect_mod2
+
+
+## Description
+
+Returns the mods that have elemnts in common, uses a different algorith than intersect_mod1, see examples
+
+
+## Usage
+
+```r
+intersect_mod2(inpt_datf, inter_col, mod_col, n_min = 1)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_datf`     |     is the input dataframe
+`inter_col`     |     is the column number or name of the elements that may be in common to each mod
+`mod_col`     |     is the column number or name of the mods
+`n_min`     |     is the minimum number of elements in common each mod have to have to be outputed in the returned dataframe
+
+
+## Examples
+
+```r
+datf <- data.frame("country" = c("Germany", "France", "Italy", "France", "Germany", "Italy"),
+"year" = c(2000, 2000, 2001, 2002, 2003, 2004),
+"random_value" = c(1, 3, 2, 1, 2, 2))
+print(datf)
+
+country year random_value
+1 Germany 2000            1
+2  France 2000            3
+3   Italy 2001            2
+4  France 2002            1
+5 Germany 2003            2
+6   Italy 2004            2
+
+print(intersect_mod2(inpt_datf = datf, inter_col = "year", mod_col = "country"))
+
+country year random_value
+1 Germany 2000            1
+2  France 2000            3
+```
+
+
 # `is_divisible`
 
 is_divisible
@@ -6454,6 +6557,60 @@ Argument      |Description
 print(old_to_new_idx(inpt_v = c("oui", "no", "eeee")))
 
 [1] 1 1 1 2 2 3 3 3 3
+```
+
+
+# `or_bool1`
+
+or_bool1
+
+
+## Description
+
+Returns a boolean vector according to 'or' condition on boolean vector in a dataframe, each column represents a boolean vector, see examples, uses a different algorithm than or_bool1
+
+
+## Usage
+
+```r
+or_bool1(inpt_datf)
+```
+
+
+## Examples
+
+```r
+print(or_bool1(inpt_datf = data.frame("bool1" = c(TRUE, FALSE, FALSE, TRUE),
+"bool2" = c(TRUE, TRUE, FALSE, TRUE))))
+
+[1]  TRUE  TRUE FALSE  TRUE
+```
+
+
+# `or_bool2`
+
+or_bool2
+
+
+## Description
+
+Returns a boolean vector according to 'or' condition on boolean vector in a dataframe, each column represents a boolean vector, see examples, uses a different algorithm than or_bool1
+
+
+## Usage
+
+```r
+or_bool2(inpt_datf)
+```
+
+
+## Examples
+
+```r
+print(or_bool2(inpt_datf = data.frame("bool1" = c(TRUE, FALSE, FALSE, TRUE),
+"bool2" = c(TRUE, TRUE, FALSE, TRUE))))
+
+[1]  TRUE  TRUE FALSE  TRUE
 ```
 
 
