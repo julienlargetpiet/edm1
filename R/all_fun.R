@@ -18414,4 +18414,28 @@ or_bool2 <- function(inpt_datf){
   return(rtn_v)
 }
 
+#' nb_decimal
+#'
+#' Returns the number of deciaml of the input number.
+#'
+#' @param inpt_x is the input number
+#'
+#' @examples
+#'
+#' print(nb_decimal(inpt_x = "22.4356"))
+#'
+#' [1] 4
+#'
+#' print(nb_decimal(inpt_x = "2.456"))
+#' 
+#' [1] 3
+#'
+#' @export
+
+nb_decimal <- function(inpt_x){
+  return(nchar(sub(x = inpt_x, pattern = "^[0-9]{1,}\\.", replacement = "")))
+}
+
+
+
 
