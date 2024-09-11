@@ -2926,6 +2926,86 @@ print(elements_equalifier(c(letters, letters[-1]), untl = 2))
 [39] "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z" "a"
 ```
 
+# elin_vec
+
+## Description
+
+Finds if a sequence of elements is present in a vector, if yes, the indexes of beginning and ending sequence in the vector is returned, see examples
+
+## Usage
+
+```r
+elin_vec(inpt_v, pattern_v, sep_ = "-")
+```
+
+## Arguments
+
+* `inpt_v`: is the input vector that may contains the sequence of elements contained in pattern_v
+* `pattern_v`: is a vector containing the sequence of elements to search in inpt_v
+* `sep_`: is a separator used in the background, make sure it does not correspond to any character in your input vector (inpt_v)
+
+## Examples
+
+```r
+print(elin_vec(inpt_v = paste0(letters, 12), 
+                  pattern_v = c("e12", "f12", "g12"), 
+                  sep_ = "-"))
+
+[1] 5 8
+
+print(elin_vec(inpt_v = paste0(letters, 1), 
+                  pattern_v = c("e1", "f1", "g1"), 
+                  sep_ = "-"))
+
+[1] 5 8
+
+print(elin_vec(inpt_v = paste0(letters, 12), 
+                  pattern_v = c("e1", "f1", "g1"), 
+                  sep_ = "-"))
+
+[1] NA
+```
+
+# elin_vec2
+
+## Description
+
+Finds if a sequence of elements is present in a vector, if yes, the indexes of beginning and ending sequence in the vector is returned, see examples. This uses an another algorithm than elin_vec1 function and allow for ReGeX expressions in pattern_v
+
+## Usage
+
+```r
+elin_vec2(inpt_v, pattern_v, nvr_here = NA)
+```
+
+## Arguments
+
+* `inpt_v`: is the input vector that may contains the sequence of elements contained in pattern_v
+* `pattern_v`: is a vector containing the sequence of elements to search in inpt_v
+* `sep_`: is a separator used in the background, make sure it does not correspond to any character in your input vector (inpt_v)
+
+## Examples
+
+```r
+print(elin_vec2(inpt_v = paste0(letters, 1), 
+                  pattern_v = c("e1", "f1", "g1"), 
+                  nvr_here = NA))
+
+[1] 5 8
+
+print(elin_vec2(inpt_v = paste0(letters, 12), 
+                  pattern_v = c("e1", "f1", "g1"), 
+                  nvr_here = NA))
+
+[1] 5 8
+
+print(elin_vec2(inpt_v = paste0(letters, 12), 
+                  pattern_v = c("^e1$", "^f1$", "^g1$"),
+                  nvr_here = NA))
+
+[1] NA
+```
+
 # equalizer_v
 
 ## Description
@@ -5431,6 +5511,124 @@ rtn_neg="no", nestr_datf=data.frame(c(TRUE, FALSE, TRUE), c(FALSE, FALSE, TRUE))
 #1        yes         no
 #2         no         no
 #3        yes        yes
+```
+
+# new_group1
+
+## Description
+
+Allow to create new dataframe groups based on existing groups, see example.
+
+## Usage
+
+```r
+new_group1(inpt_datf, lst_grp = list(), grp_col)
+```
+
+## Arguments
+
+* `inpt_datf`: is the input dataframe
+* `lst_grp`: is a list containing vectors containing some of the existing groups to create the new groups, see example
+* `grp_col`: is the column name or number of the existing groups
+
+## Examples
+
+```r
+datf <- data.frame("grp" = c(rep(x = "a", times = 12),
+                             rep(x = "b", times = 4),
+                             rep(x = "c", times = 10)))
+print(new_group1(inpt_datf = datf,
+        grp_col = "grp",
+        lst_grp = list(c("a", "b"), "c")
+         )
+       )
+
+   grp new_group
+1    a         1
+2    a         1
+3    a         1
+4    a         1
+5    a         1
+6    a         1
+7    a         1
+8    a         1
+9    a         1
+10   a         1
+11   a         1
+12   a         1
+13   b         1
+14   b         1
+15   b         1
+16   b         1
+17   c         2
+18   c         2
+19   c         2
+20   c         2
+21   c         2
+22   c         2
+23   c         2
+24   c         2
+25   c         2
+26   c         2
+```
+
+# new_group2
+
+## Description
+
+Allow to create new dataframe groups based on existing groups, see example.
+
+## Usage
+
+```r
+new_group2(inpt_datf, lst_grp = list(), grp_col)
+```
+
+## Arguments
+
+* `inpt_datf`: is the input dataframe
+* `lst_grp`: is a list containing vectors containing some of the existing groups to create the new groups, see example
+* `grp_col`: is the column name or number of the existing groups
+
+## Examples
+
+```r
+datf <- data.frame("grp" = c(rep(x = "a", times = 12),
+                             rep(x = "b", times = 4),
+                             rep(x = "c", times = 10)))
+print(new_group1(inpt_datf = datf,
+        grp_col = "grp",
+        lst_grp = list(c("a", "b"), "c")
+         )
+       )
+
+   grp new_group
+1    a         1
+2    a         1
+3    a         1
+4    a         1
+5    a         1
+6    a         1
+7    a         1
+8    a         1
+9    a         1
+10   a         1
+11   a         1
+12   a         1
+13   b         1
+14   b         1
+15   b         1
+16   b         1
+17   c         2
+18   c         2
+19   c         2
+20   c         2
+21   c         2
+22   c         2
+23   c         2
+24   c         2
+25   c         2
+26   c         2
 ```
 
 # new_ordered

@@ -4948,6 +4948,160 @@ print(elements_equalifier(c(letters, letters[-1]), untl = 2))
 
 </div>
 </body></html>
+<!DOCTYPE html><html><head><title>R: elin_vec2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>elin_vec2</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>elin_vec2</h2>
+
+<h3>Description</h3>
+
+<p>Finds if a sequence of elements is present in a vector, if yes, the indexes of beginning and ending sequence in the vector is returned, see examples. This uses an another algorithm than elin_vec1 function and allow for ReGeX expressions in pattern_v
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>elin_vec2(inpt_v, pattern_v, nvr_here = NA)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_v">inpt_v</code></td>
+<td>
+<p>is the input vector that may contains the sequence of elements contained in pattern_v</p>
+</td></tr>
+<tr><td><code id="pattern_v">pattern_v</code></td>
+<td>
+<p>is a vector containing the sequence of elements to search in inpt_v</p>
+</td></tr>
+<tr><td><code id="sep_">sep_</code></td>
+<td>
+<p>is a separator used in the background, make sure it does not correspond to any character in your input vector (inpt_v)</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(elin_vec2(inpt_v = paste0(letters, 1), 
+                  pattern_v = c("e1", "f1", "g1"), 
+                  nvr_here = NA))
+
+[1] 5 8
+
+print(elin_vec2(inpt_v = paste0(letters, 12), 
+                  pattern_v = c("e1", "f1", "g1"), 
+                  nvr_here = NA))
+
+[1] 5 8
+
+print(elin_vec2(inpt_v = paste0(letters, 12), 
+                  pattern_v = c("^e1$", "^f1$", "^g1$"),
+                  nvr_here = NA))
+
+[1] NA
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: elin_vec</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>elin_vec</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>elin_vec</h2>
+
+<h3>Description</h3>
+
+<p>Finds if a sequence of elements is present in a vector, if yes, the indexes of beginning and ending sequence in the vector is returned, see examples
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>elin_vec(inpt_v, pattern_v, sep_ = "-")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_v">inpt_v</code></td>
+<td>
+<p>is the input vector that may contains the sequence of elements contained in pattern_v</p>
+</td></tr>
+<tr><td><code id="pattern_v">pattern_v</code></td>
+<td>
+<p>is a vector containing the sequence of elements to search in inpt_v</p>
+</td></tr>
+<tr><td><code id="sep_">sep_</code></td>
+<td>
+<p>is a separator used in the background, make sure it does not correspond to any character in your input vector (inpt_v)</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+print(elin_vec(inpt_v = paste0(letters, 12), 
+                  pattern_v = c("e12", "f12", "g12"), 
+                  sep_ = "-"))
+
+[1] 5 8
+
+print(elin_vec(inpt_v = paste0(letters, 1), 
+                  pattern_v = c("e1", "f1", "g1"), 
+                  sep_ = "-"))
+
+[1] 5 8
+
+print(elin_vec(inpt_v = paste0(letters, 12), 
+                  pattern_v = c("e1", "f1", "g1"), 
+                  sep_ = "-"))
+
+[1] NA 
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
 <!DOCTYPE html><html><head><title>R: equalizer_v</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
@@ -9602,6 +9756,198 @@ print(nest_v(f_v=c(1, 2, 3, 4, 5, 6), t_v=c("oui", "oui2", "oui3", "oui4", "oui5
      step=2, after=2))
 
 #[1] "1"    "2"    "oui"  "3"    "4"    "oui2" "5"    "6"    "oui3" "oui4"
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: new_group1</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>new_group1</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>new_group1</h2>
+
+<h3>Description</h3>
+
+<p>Allow to create new dataframe groups based on existing groups, see example.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>new_group1(inpt_datf, lst_grp = list(), grp_col)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
+<td>
+<p>is the input dataframe</p>
+</td></tr>
+<tr><td><code id="lst_grp">lst_grp</code></td>
+<td>
+<p>is a list containing vectors containing some of the existing groups to create the new groups, see example</p>
+</td></tr>
+<tr><td><code id="grp_col">grp_col</code></td>
+<td>
+<p>is the column name or number of the existing groups</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+datf &lt;- data.frame("grp" = c(rep(x = "a", times = 12),
+                             rep(x = "b", times = 4),
+                             rep(x = "c", times = 10)))
+print(new_group1(inpt_datf = datf,
+        grp_col = "grp",
+        lst_grp = list(c("a", "b"), "c")
+         )
+       )
+
+   grp new_group
+1    a         1
+2    a         1
+3    a         1
+4    a         1
+5    a         1
+6    a         1
+7    a         1
+8    a         1
+9    a         1
+10   a         1
+11   a         1
+12   a         1
+13   b         1
+14   b         1
+15   b         1
+16   b         1
+17   c         2
+18   c         2
+19   c         2
+20   c         2
+21   c         2
+22   c         2
+23   c         2
+24   c         2
+25   c         2
+26   c         2
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: new_group2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>new_group2</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>new_group2</h2>
+
+<h3>Description</h3>
+
+<p>Allow to create new dataframe groups based on existing groups, see example.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>new_group2(inpt_datf, lst_grp = list(), grp_col)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="inpt_datf">inpt_datf</code></td>
+<td>
+<p>is the input dataframe</p>
+</td></tr>
+<tr><td><code id="lst_grp">lst_grp</code></td>
+<td>
+<p>is a list containing vectors containing some of the existing groups to create the new groups, see example</p>
+</td></tr>
+<tr><td><code id="grp_col">grp_col</code></td>
+<td>
+<p>is the column name or number of the existing groups</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+datf &lt;- data.frame("grp" = c(rep(x = "a", times = 12),
+                             rep(x = "b", times = 4),
+                             rep(x = "c", times = 10)))
+print(new_group1(inpt_datf = datf,
+        grp_col = "grp",
+        lst_grp = list(c("a", "b"), "c")
+         )
+       )
+
+   grp new_group
+1    a         1
+2    a         1
+3    a         1
+4    a         1
+5    a         1
+6    a         1
+7    a         1
+8    a         1
+9    a         1
+10   a         1
+11   a         1
+12   a         1
+13   b         1
+14   b         1
+15   b         1
+16   b         1
+17   c         2
+18   c         2
+19   c         2
+20   c         2
+21   c         2
+22   c         2
+23   c         2
+24   c         2
+25   c         2
+26   c         2
 
 </code></pre>
 
