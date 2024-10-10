@@ -1,18 +1,3 @@
-![](logo.png)
-
-# Install
-
--> git clone https://github.com/julienlargetpiet/edm1
-
--> cd edm1
-
-edm1 > R
-
-R > library("devtools")
-
-R > build()
-
-R > install()
 
 **This is the main edm1 repo (grouping all edm1. repos), the most up to date. If a bug is found in one of the functions, this repo will be updated first and then the edm1.something repo where the function to update is also present.**
 
@@ -1927,7 +1912,81 @@ print(dcr_val(strt_val=53, cr_val=5, stop_val=450))
 #[1] 448
 ```
 
+<<<<<<< HEAD
 # depth_pairs_findr
+=======
+
+# `delta_normal`
+
+delta_normal
+
+
+## Description
+
+Returns the cumulative difrerence between a dataset of values and the normal distribution density formula, see examples
+
+
+## Usage
+
+```r
+delta_normal(results_v = c(), mean_inpt, sd_inpt)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`results_v`     |     is the input vector
+`mean_inpt`     |     is the mea of the normal distribution
+`sd_inpt`     |     is the standard deviation of the normal distribution
+
+
+## Examples
+
+```r
+x <- rnorm(n = 10000, mean = 15, sd = 1)
+print(delta_normal(results_v = x,
+mean_inpt = 15,
+sd_inpt = 3))
+
+[1] 15904.85
+
+x <- rnorm(n = 10000, mean = 15, sd = 2)
+print(delta_normal(results_v = x,
+mean_inpt = 15,
+sd_inpt = 3))
+
+[1] 8050.662
+
+x <- rnorm(n = 10000, mean = 15, sd = 5)
+print(delta_normal(results_v = x,
+mean_inpt = 15,
+sd_inpt = 3))
+
+[1] 16219.87
+
+x <- rnorm(n = 10000, mean = 15, sd = 4)
+print(delta_normal(results_v = x,
+mean_inpt = 15,
+sd_inpt = 3))
+
+[1] 8081.28
+
+x <- rnorm(n = 10000, mean = 15, sd = 3)
+print(delta_normal(results_v = x,
+mean_inpt = 15,
+sd_inpt = 3))
+
+[1] 474.8151
+```
+
+
+# `depth_pairs_findr`
+
+depth_pairs_findr
+
+>>>>>>> 054a184 (removed bugged function how_normal and how_unif, fixed normal_dens and added delta_normal and normal_untl)
 
 ## Description
 
@@ -3948,6 +4007,7 @@ print(historic_sequence2(inpt_datf = datf, bf_ = 3))
 4     20      peut2    119    112    121    113     19     17     20     17
 ```
 
+<<<<<<< HEAD
 # how_normal
 
 ## Description
@@ -4155,6 +4215,13 @@ print(how_unif(inpt_datf = datf_test, normalised = FALSE))
 ```
 
 # id_keepr
+=======
+
+# `id_keepr`
+
+id_keepr
+
+>>>>>>> 054a184 (removed bugged function how_normal and how_unif, fixed normal_dens and added delta_normal and normal_untl)
 
 ## Description
 
@@ -5666,29 +5733,81 @@ Calculates the normal distribution probality, see examples
 ## Usage
 
 ```r
-normal_dens(target_v = c(), mean, sd)
+normal_dens(target_v = c(), mean, sd, step = 0.01)
 ```
 
 ## Arguments
 
+<<<<<<< HEAD
 * `target_v`: is the target value(s) (one or bounded), see examples
 * `mean`: is the mean of the normal distribution
 * `sd`: is the standard deviation of the normal distribution
+=======
+Argument      |Description
+------------- |----------------
+`target_v`     |     is the input interval, see examples
+`mean`     |     is the mean of the normal distribution
+`sd`     |     is the standard deviation of the normal distribution
+`step`     |     is the step with which the result will be outputed, the smaller the step is, the more accurate the result will be
+
+>>>>>>> 054a184 (removed bugged function how_normal and how_unif, fixed normal_dens and added delta_normal and normal_untl)
 
 ## Examples
 
 ```r
-print(normal_dens(target_v = 13, mean = 12, sd = 2))
+print(normal_dens(target_v = c(5, 19), mean = 12, sd = 1.5, step = 0.1))
 
-[1] 0.1760327
+[1] 0.9999974
 
-print(normal_dens(target_v = c(9, 11), mean = 12, sd = 1.5, step = 0.01))
+print(normal_dens(target_v = c(10.5, 13.5), mean = 12, sd = 1.5, step = 0.1))
 
-[1] 0.2288579
+[1] 0.6986416
 
-print(normal_dens(target_v = c(1, 18), mean = 12, sd = 1.5, step = 0.01))
+print(normal_dens(target_v = c(10.5, 13.5), mean = 12, sd = 1.5, step = 0.01))
 
-[1] 0.9999688
+[1] 0.6843008
+```
+
+
+# `normal_untl`
+
+normal_untl
+
+
+## Description
+
+Returns the probability of the most offset value in the input vector accrding to the normal distribution, see examples.
+
+
+## Usage
+
+```r
+normal_untl(inpt_v = c(), mean_inpt, sd_inpt)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`mean_inpt`     |     is the mean of the normal distribution
+`sd_inpt`     |     is the standard deviations of the normal distribution
+
+
+## Examples
+
+```r
+print(normal_untl(inpt_v = x,
+mean_inpt = 15,
+sd_inpt = 1))
+
+[1] 0.01146424
+
+print(normal_untl(inpt_v = x,
+mean_inpt = 15,
+sd_inpt = 2))
+
+[1] 0.08212756
 ```
 
 # occu

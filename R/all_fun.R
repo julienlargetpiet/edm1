@@ -12050,222 +12050,6 @@ old_to_new_idx <- function(inpt_v = c()){
   return(rtn_v)
 }
 
-#' how_normal
-#'
-#' Allow to get how much a sequence of numbers fit a normal distribution with chosen parameters, see examples
-#'
-#' @param inpt_datf is the input dataframe containing all the values in the first column and their frequency (normalised or no), in the second column
-#' @param normalised is a boolean, takes TRUE if the frequency for each value is divided by n, FALSE if not
-#' @param mean is the mean of the normal distribution that the dataset tries to fit
-#' @param sd is the standard deviation of the normal distribution the dataset tries to fit
-#' @examples
-#'
-#' sample_val <- round(rnorm(n = 12000, mean = 6, sd = 1.25), 1)
-#' sample_freq <- unique_total(sample_val)
-#' datf_test <- data.frame(unique(sample_val), sample_freq)
-#' print(datf_test)
-#'
-#'   unique.sample_val. sample_freq
-#' 1                 6.9         306
-#' 2                 8.3          63
-#' 3                 7.7         148
-#' 4                 5.6         363
-#' 5                 6.5         349
-#' 6                 4.6         202
-#' 7                 6.6         324
-#' 8                 6.7         335
-#' 9                 6.0         406
-#' 10                5.7         365
-#' 11                7.9         109
-#' 12                6.2         420
-#' 13                5.9         386
-#' 14                4.5         185
-#' 15                5.1         326
-#' 16                6.1         360
-#' 17                5.5         346
-#' 18                6.3         375
-#' 19                7.4         207
-#' 20                7.6         162
-#' 21                4.2         129
-#' 22                3.9         102
-#' 23                5.2         325
-#' 24                2.3           7
-#' 25                5.8         387
-#' 26                6.4         319
-#' 27                9.1          21
-#' 28                7.0         280
-#' 29                8.8          27
-#' 30                4.9         218
-#' 31                8.1          98
-#' 32                3.0          25
-#' 33                8.4          66
-#' 34                4.3         160
-#' 35                7.2         267
-#' 36                8.7          40
-#' 37                5.3         313
-#' 38                4.1         127
-#' 39                5.0         275
-#' 40                4.0         119
-#' 41                9.3          13
-#' 42                4.4         196
-#' 43                6.8         313
-#' 44                7.1         247
-#' 45                3.5          57
-#' 46                7.8         139
-#' 47                3.6          57
-#' 48                7.5         189
-#' 49                7.3         215
-#' 50                4.7         230
-#' 51                3.2          36
-#' 52                9.5           8
-#' 53                3.8          79
-#' 54                8.2          62
-#' 55                5.4         343
-#' 56                8.5          55
-#' 57                4.8         207
-#' 58                3.7          79
-#' 59                8.6          33
-#' 60                3.3          38
-#' 61                3.4          43
-#' 62                8.9          21
-#' 63                8.0         105
-#' 64                3.1          23
-#' 65                9.0          27
-#' 66               10.0           5
-#' 67                2.5          10
-#' 68                2.9          16
-#' 69                9.7           7
-#' 70                2.7          11
-#' 71               10.5           1
-#' 72                9.4          13
-#' 73                9.2          16
-#' 74                2.6          16
-#' 75                9.9           3
-#' 76                2.8          10
-#' 77                2.4          10
-#' 78                1.9           2
-#' 79                2.0           6
-#' 80               10.2           2
-#' 81                9.6           3
-#' 82               11.3           1
-#' 83                1.8           1
-#' 84                2.2           3
-#' 85                2.1           2
-#' 86                1.6           1
-#' 87               10.6           1
-#' 88                9.8           1
-#' 89               10.4           1
-#' 90                1.7           1
-#' 
-#' print(how_normal(inpt_datf = datf_test, 
-#'                  normalised = FALSE,
-#'                  mean = 6,
-#'                  sd = 1))
-#' 
-#' [1] 9.003683
-#' 
-#' print(how_normal(inpt_datf = datf_test, 
-#'                  normalised = FALSE,
-#'                  mean = 5,
-#'                  sd = 1))
-#' 
-#' [1] 9.098484
-#'
-#' @export
-
-how_normal <- function(inpt_datf, normalised = TRUE, mean = 0, sd = 1){  
-  diff_add = 0
-  inpt_datf <- inpt_datf[match(x = sort(inpt_datf[, 1], decreasing = FALSE), table = inpt_datf[, 1]), ]
-  if (normalised){
-    for (i in 1:nrow(inpt_datf)){
-      diff_add = diff_add + abs(inpt_datf[i, 2] - (1 / (sd * sqrt(2 * pi)) * exp(-(((inpt_datf[i, 1] - mean) / sd) ** 2) / 2)))
-    }
-  }else{
-    n <- sum(inpt_datf[, 2])
-    for (i in 1:nrow(inpt_datf)){
-      diff_add = diff_add + abs((inpt_datf[i, 2] / n) - (1 / (sd * sqrt(2 * pi)) * exp(-(((inpt_datf[i, 1] - mean) / sd) ** 2) / 2)))
-    }
-  }
-  return(diff_add)
-}
-
-#' how_unif
-#'
-#' Allow to see how much a sequence of numbers fit a uniform distribution, see examples
-#'
-#' @param inpt_datf is the input dataframe containing all the values in the first column and their frequencyu at the second column
-#' @param normalised is a boolean, takes TRUE if the frequency for each value is divided by n, FALSE if not
-#' @examples
-#'
-#' sample_val <- round(runif(n = 12000, min = 24, max = 27), 1)
-#' sample_freq <- unique_total(sample_val)
-#' datf_test <- data.frame(unique(sample_val), sample_freq)
-#' 
-#' print(datf_test)
-#' 
-#'   unique.sample_val. sample_freq
-#' 1                24.4         400
-#' 2                24.8         379
-#' 3                25.5         414
-#' 4                26.0         366
-#' 5                26.6         400
-#' 6                25.7         419
-#' 7                24.3         389
-#' 8                24.1         423
-#' 9                26.1         404
-#' 10               26.5         406
-#' 11               26.2         356
-#' 12               26.8         407
-#' 13               24.6         388
-#' 14               25.3         402
-#' 15               26.3         388
-#' 16               25.4         422
-#' 17               25.0         436
-#' 18               25.9         373
-#' 19               25.2         423
-#' 20               25.6         388
-#' 21               27.0         202
-#' 22               24.2         380
-#' 23               24.9         404
-#' 24               25.1         417
-#' 25               26.4         401
-#' 26               26.7         431
-#' 27               24.5         392
-#' 28               24.0         218
-#' 29               26.9         407
-#' 30               25.8         371
-#' 31               24.7         394
-#'
-#' print(how_unif(inpt_datf = datf_test, normalised = FALSE))
-#' 
-#' [1] 0.0752957
-#'
-#' sample_val <- round(rnorm(n = 12000, mean = 24, sd = 7), 1)
-#' sample_freq <- unique_total(sample_val)
-#' datf_test <- data.frame(unique(sample_val), sample_freq)
-#' 
-#' print(how_unif(inpt_datf = datf_test, normalised = FALSE))
-#'
-#' [1] 0.7797352
-#'
-#' @export
-
-how_unif <- function(inpt_v, normalised = TRUE){
-  diff_add = 0
-  val_base <- 1 / length(inpt_v)
-  if (normalised){
-    for (i in 1:length(inpt_v)){
-      diff_add = diff_add + abs(val_base - inpt_v[i])
-    }
-  }else{
-    n <- sum(inpt_v)
-    for (i in 1:length(inpt_v)){
-      diff_add = diff_add + abs(val_base - (inpt_v[i] / n))
-    }
-  }
-  return(diff_add)
-}
-
 #' successive_diff 
 #'
 #' Allow to see the difference beteen the suxxessive elements of an numeric vector
@@ -12771,30 +12555,34 @@ sort_normal_qual2 <- function(inpt_datf){
 #'
 #' Calculates the normal distribution probality, see examples
 #'
-#' @param target_v is the target value(s) (one or bounded), see examples
+#' @param target_v is the input interval, see examples
 #' @param mean is the mean of the normal distribution
 #' @param sd is the standard deviation of the normal distribution
+#' @param step is the step with which the result will be outputed, the smaller the step is, the more accurate the result will be
 #' @examples
 #'
-#' print(normal_dens(target_v = 13, mean = 12, sd = 2))
+#' print(normal_dens(target_v = c(5, 19), mean = 12, sd = 1.5, step = 0.1))
 #'
-#' [1] 0.1760327
+#' [1] 0.9999974
 #'
-#' print(normal_dens(target_v = c(9, 11), mean = 12, sd = 1.5, step = 0.01))
+#' print(normal_dens(target_v = c(10.5, 13.5), mean = 12, sd = 1.5, step = 0.1))
 #'
-#' [1] 0.2288579
+#' [1] 0.6986416
 #'
-#' print(normal_dens(target_v = c(1, 18), mean = 12, sd = 1.5, step = 0.01))
+#' print(normal_dens(target_v = c(10.5, 13.5), mean = 12, sd = 1.5, step = 0.01))
 #'
-#' [1] 0.9999688
+#' [1] 0.6843008
 #'
 #' @export
 
-normal_dens <- function(target_v = c(), mean, sd){
+normal_dens <- function(target_v = c(), mean, sd, step = 0.01){
   if (length(target_v) == 1){
     return((1 / (sd * sqrt(2 * pi))) * exp(-(((target_v - mean) / sd) ** 2) / 2))
   }else{
-      rtn_val = rtn_val + (1 / (sd * sqrt(2 * pi))) * exp(-(((target_v[1] + cnt - mean) / sd) ** 2) / 2) * 0.01
+      rtn_val = 0
+      for (i in seq(from = target_v[1], to = target_v[2], by = step)){
+        rtn_val = rtn_val + (1 / (sd * sqrt(2 * pi))) * exp(-(((i - mean) / sd) ** 2) / 2) * step
+      }
     return(rtn_val)
   }
 }
@@ -18414,6 +18202,7 @@ or_bool2 <- function(inpt_datf){
   return(rtn_v)
 }
 
+<<<<<<< HEAD
 #' nb_decimal
 #'
 #' Returns the number of deciaml of the input number.
@@ -18729,6 +18518,94 @@ new_group2 <- function(inpt_datf, lst_grp = list(), grp_col){
   }
   return(as.data.frame(cbind(inpt_datf, 
                          "new_group" = n_grp_v)))
+=======
+#' delta_normal
+#'
+#' Returns the cumulative difrerence between a dataset of values and the normal distribution density formula, see examples
+#'
+#' @param results_v is the input vector
+#' @param mean_inpt is the mea of the normal distribution
+#' @param sd_inpt is the standard deviation of the normal distribution
+#'
+#' @examples
+#'
+#' x <- rnorm(n = 10000, mean = 15, sd = 1)
+#' print(delta_normal(results_v = x,
+#'                         mean_inpt = 15,
+#'                         sd_inpt = 3))
+#'
+#' [1] 15904.85
+#' 
+#' x <- rnorm(n = 10000, mean = 15, sd = 2)
+#' print(delta_normal(results_v = x,
+#'                         mean_inpt = 15,
+#'                         sd_inpt = 3))
+#' 
+#' [1] 8050.662
+#'
+#' x <- rnorm(n = 10000, mean = 15, sd = 5)
+#' print(delta_normal(results_v = x,
+#'                         mean_inpt = 15,
+#'                         sd_inpt = 3))
+#'
+#' [1] 16219.87
+#'
+#' x <- rnorm(n = 10000, mean = 15, sd = 4)
+#' print(delta_normal(results_v = x,
+#'                         mean_inpt = 15,
+#'                         sd_inpt = 3))
+#' 
+#' [1] 8081.28
+#' 
+#' x <- rnorm(n = 10000, mean = 15, sd = 3)
+#' print(delta_normal(results_v = x,
+#'                         mean_inpt = 15,
+#'                         sd_inpt = 3))
+#' 
+#' [1] 474.8151
+#'
+#' @export
+
+delta_normal <- function(results_v = c(), 
+                              mean_inpt, 
+                              sd_inpt){
+  return(sum(abs(sort(results_v) - sort(rnorm(n = length(results_v), mean = mean_inpt, sd = sd_inpt)))))
+}
+
+#' normal_untl
+#'
+#' Returns the probability of the most offset value in the input vector accrding to the normal distribution, see examples.
+#'
+#' @export inpt_v is the input vector
+#' @param mean_inpt is the mean of the normal distribution
+#' @param sd_inpt is the standard deviations of the normal distribution 
+#'
+#' @examples
+#'
+#' print(normal_untl(inpt_v = x,
+#'                   mean_inpt = 15,
+#'                   sd_inpt = 1))
+#'
+#' [1] 0.01146424
+#'
+#' print(normal_untl(inpt_v = x,
+#'                   mean_inpt = 15,
+#'                   sd_inpt = 2))
+#'
+#' [1] 0.08212756
+#'
+#' @export
+
+normal_untl <- function(inpt_v = c(),
+                        mean_inpt,
+                        sd_inpt){
+  if (mean_inpt - min(inpt_v) > (max(inpt_v) - mean_inpt)){
+    cur_val <- min(inpt_v)
+  }else{
+    cur_val <- max(inpt_v)
+  }
+  return((1 / (sd_inpt * sqrt(2 * pi))) * exp(-(((cur_val - mean_inpt) / sd_inpt) ** 2) / 2))
+>>>>>>> 054a184 (removed bugged function how_normal and how_unif, fixed normal_dens and added delta_normal and normal_untl)
 }
 
 

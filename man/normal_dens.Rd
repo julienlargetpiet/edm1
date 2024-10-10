@@ -4,30 +4,32 @@
 \alias{normal_dens}
 \title{normal_dens}
 \usage{
-normal_dens(target_v = c(), mean, sd)
+normal_dens(target_v = c(), mean, sd, step = 0.01)
 }
 \arguments{
-\item{target_v}{is the target value(s) (one or bounded), see examples}
+\item{target_v}{is the input interval, see examples}
 
 \item{mean}{is the mean of the normal distribution}
 
 \item{sd}{is the standard deviation of the normal distribution}
+
+\item{step}{is the step with which the result will be outputed, the smaller the step is, the more accurate the result will be}
 }
 \description{
 Calculates the normal distribution probality, see examples
 }
 \examples{
 
-print(normal_dens(target_v = 13, mean = 12, sd = 2))
+print(normal_dens(target_v = c(5, 19), mean = 12, sd = 1.5, step = 0.1))
 
-[1] 0.1760327
+[1] 0.9999974
 
-print(normal_dens(target_v = c(9, 11), mean = 12, sd = 1.5, step = 0.01))
+print(normal_dens(target_v = c(10.5, 13.5), mean = 12, sd = 1.5, step = 0.1))
 
-[1] 0.2288579
+[1] 0.6986416
 
-print(normal_dens(target_v = c(1, 18), mean = 12, sd = 1.5, step = 0.01))
+print(normal_dens(target_v = c(10.5, 13.5), mean = 12, sd = 1.5, step = 0.01))
 
-[1] 0.9999688
+[1] 0.6843008
 
 }
