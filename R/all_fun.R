@@ -18255,7 +18255,7 @@ delta_normal <- function(results_v = c(),
   return(sum(abs(sort(results_v) - sort(rnorm(n = length(results_v), mean = mean_inpt, sd = sd_inpt)))))
 }
 
-#' normal_untl
+#' normal_offset_prob
 #'
 #' Returns the probability of the most offset value in the input vector accrding to the normal distribution, see examples.
 #'
@@ -18265,13 +18265,13 @@ delta_normal <- function(results_v = c(),
 #'
 #' @examples
 #'
-#' print(normal_untl(inpt_v = x,
+#' print(normal_offset_prob(inpt_v = x,
 #'                   mean_inpt = 15,
 #'                   sd_inpt = 1))
 #'
 #' [1] 0.01146424
 #'
-#' print(normal_untl(inpt_v = x,
+#' print(normal_offset_prob(inpt_v = x,
 #'                   mean_inpt = 15,
 #'                   sd_inpt = 2))
 #'
@@ -18279,7 +18279,7 @@ delta_normal <- function(results_v = c(),
 #'
 #' @export
 
-normal_untl <- function(inpt_v = c(),
+normal_offset_prob <- function(inpt_v = c(),
                         mean_inpt,
                         sd_inpt){
   if (mean_inpt - min(inpt_v) > (max(inpt_v) - mean_inpt)){
