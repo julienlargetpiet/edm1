@@ -3721,6 +3721,124 @@ print(dynamic_idx_convertr(from_v_ids = c(1, 6), from_v_val = c("oui", "no", "ou
 
 </div>
 </body></html>
+<!DOCTYPE html><html><head><title>R: edm1_normal_gen</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>edm1_normal_gen</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>edm1_normal_gen</h2>
+
+<h3>Description</h3>
+
+<p>Reimplementation of <code>rnorm</code> function. The only difference is that outputed values are already sorted thanks to the algorithm used. You can also choose the most unlikely value to include in the outputed normal distribution. See examples. Warning, the lower <code>sd_inpt</code> is, the lower <code>cur_step</code> should be.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>edm1_normal_gen(
+  mean_inpt,
+  sd_inpt,
+  n_inpt,
+  offset_proba = 1e-05,
+  cur_step = 0.3,
+  accuracy_factor = 10
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="mean_inpt">mean_inpt</code></td>
+<td>
+<p>is the mean of the normal distribution</p>
+</td></tr>
+<tr><td><code id="sd_inpt">sd_inpt</code></td>
+<td>
+<p>is the standard deviation of the normal distribution</p>
+</td></tr>
+<tr><td><code id="n_inpt">n_inpt</code></td>
+<td>
+<p>is the number of values you want to generate</p>
+</td></tr>
+<tr><td><code id="offset_proba">offset_proba</code></td>
+<td>
+<p>is the value with the least probability to be included in the normal distribution</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+
+x &lt;- edm1_normal_gen(mean_inpt = 100,
+                    sd_inpt = 15,
+                    n_inpt = 15000,
+                    offset_proba = 0.00001,
+                    cur_step = 0.3,
+                    accuracy_factor = 10)
+
+sd(x)
+
+[1] 15.0456
+
+summary(x)
+
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  43.13   89.93  100.43  100.30  110.33  159.53 
+
+x &lt;- edm1_normal_gen(mean_inpt = 100,
+                    sd_inpt = 165,
+                    n_inpt = 15000,
+                    offset_proba = 0.00001,
+                    cur_step = 0.3,
+                    accuracy_factor = 10)
+
+sd(x)
+
+[1] 164.1441
+summary(x)
+
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+-444.55  -11.65   99.65   98.81  209.15  635.75 
+
+x &lt;- edm1_normal_gen(mean_inpt = 100,
+                    sd_inpt = 0.45,
+                    n_inpt = 15000,
+                    offset_proba = 0.00001,
+                    cur_step = 0.05,
+                    accuracy_factor = 10)
+
+sd(x)
+
+0.4504586
+
+summary(x)
+
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  98.25   99.70  100.00   99.99  100.30  101.55 
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
 <!DOCTYPE html><html><head><title>R: edm_arranger2</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
@@ -9563,6 +9681,41 @@ print(normal_offset_prob(inpt_v = x,
 
 [1] 0.08212756
 
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
+<!DOCTYPE html><html><head><title>R: normal_offset_val</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>normal_offset_val</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>normal_offset_val</h2>
+
+<h3>Description</h3>
+
+<p>normal_offset_val
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>normal_offset_val(mean_inpt, sd_inpt, proba = 0.01)
 </code></pre>
 
 </main>

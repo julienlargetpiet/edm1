@@ -18290,5 +18290,92 @@ normal_offset_prob <- function(inpt_v = c(),
   return((1 / (sd_inpt * sqrt(2 * pi))) * exp(-(((cur_val - mean_inpt) / sd_inpt) ** 2) / 2))
 }
 
+#' normal_offset_val
+#'
+#' @export
+
+normal_offset_val <- function(mean_inpt, sd_inpt, proba = 0.01){
+  return(abs(log(proba * sd_inpt * (2 * pi) ** 0.5) * 2) ** 0.5 * sd_inpt + mean_inpt)
+}
+
+#' edm1_normal_gen
+#'
+#' Reimplementation of `rnorm` function. The only difference is that outputed values are already sorted thanks to the algorithm used. You can also choose the most unlikely value to include in the outputed normal distribution. See examples. Warning, the lower `sd_inpt` is, the lower `cur_step` should be.
+#'
+#' @param mean_inpt is the mean of the normal distribution
+#' @param sd_inpt is the standard deviation of the normal distribution
+#' @param n_inpt is the number of values you want to generate
+#' @param offset_proba is the value with the least probability to be included in the normal distribution 
+#'
+#' @examples
+#'
+#'
+#' x <- edm1_normal_gen(mean_inpt = 100,
+#'                     sd_inpt = 15,
+#'                     n_inpt = 15000,
+#'                     offset_proba = 0.00001,
+#'                     cur_step = 0.3,
+#'                     accuracy_factor = 10)
+#' 
+#' sd(x)
+#'
+#' [1] 15.0456
+#'
+#' summary(x)
+#'
+#'    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#'   43.13   89.93  100.43  100.30  110.33  159.53 
+#' 
+#' x <- edm1_normal_gen(mean_inpt = 100,
+#'                     sd_inpt = 165,
+#'                     n_inpt = 15000,
+#'                     offset_proba = 0.00001,
+#'                     cur_step = 0.3,
+#'                     accuracy_factor = 10)
+#' 
+#' sd(x)
+#'
+#' [1] 164.1441
+#' summary(x)
+#' 
+#'    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#' -444.55  -11.65   99.65   98.81  209.15  635.75 
+#' 
+#' x <- edm1_normal_gen(mean_inpt = 100,
+#'                     sd_inpt = 0.45,
+#'                     n_inpt = 15000,
+#'                     offset_proba = 0.00001,
+#'                     cur_step = 0.05,
+#'                     accuracy_factor = 10)
+#' 
+#' sd(x)
+#'
+#' 0.4504586
+#'
+#' summary(x)
+#' 
+#'    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#'   98.25   99.70  100.00   99.99  100.30  101.55 
+#'
+#' @export
+
+edm1_normal_gen <- function(mean_inpt, 
+                            sd_inpt, 
+                            n_inpt,
+                            offset_proba = 0.00001,
+                            cur_step = 0.3,
+                            accuracy_factor = 10){
+  offset_val <- abs(log(offset_proba * sd_inpt * (2 * pi) ** 0.5) * 2) ** 0.5 * sd_inpt 
+  rtn_v <- c()
+  for (i in seq(from = (-offset_val + cur_step), to = offset_val, by = cur_step)){
+    cur_rep <- ((1 / (sd_inpt * ((2 * pi) ** 0.5))) * exp(-0.5 * ((i / sd_inpt) ** 2))) * n_inpt * 10
+    cur_value <- i + mean_inpt
+    rtn_v <- c(rtn_v, 
+               rep(x = cur_value, 
+               times = round(x = cur_rep, digits = 0)))
+  }
+  rtn_v <- rtn_v[round(x = runif(n = n_inpt, min = 1, max = length(rtn_v)), digits = 0)]
+  return(sort(rtn_v))
+}
 
 
