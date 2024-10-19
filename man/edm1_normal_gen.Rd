@@ -9,7 +9,7 @@ edm1_normal_gen(
   sd_inpt,
   n_inpt,
   offset_proba = 1e-05,
-  cur_step = 0.3,
+  cur_step = "auto",
   accuracy_factor = 10
 )
 }

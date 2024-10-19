@@ -4316,35 +4316,10 @@ groupr_datf <- function(inpt_datf, condition_lst, val_lst, conjunction_lst, rtn_
 #' @export
 
 occu <- function(inpt_v){
-
-    presence <- which(inpt_v == "")
-
-    if (length(presence) > 0){ inpt_v <- inpt_v[-presence] }
-
-    occu_v <- c()
-    
-    modal_v <- c()
-
-    for (el in inpt_v){
-      
-      if (length(grep(el, modal_v)) == 1){
-        
-        idx <- which(modal_v == el)
-        
-        occu_v[idx] = occu_v[idx] + 1
-        
-      }else{
-        
-        occu_v <- append(x=occu_v, values=1, after=length(occu_v))
-        
-        modal_v <- append(x=modal_v, values=el, after=length(occu_v))
-       
-      }
-    
-    }
-
-    return(data.frame("var"=modal_v, "occurence"=occu_v))
- 
+  ref_unique <- unique(inpt_v)
+  occu_v = mapply(function(x) return(sum(x == inpt_v)), ref_unique)
+  datf <- data.frame("var" = ref_unique, "occurence" = occu_v)
+  return(datf)
 }
 
 #' all_stat
@@ -18363,10 +18338,13 @@ edm1_normal_gen <- function(mean_inpt,
                             sd_inpt, 
                             n_inpt,
                             offset_proba = 0.00001,
-                            cur_step = 0.3,
+                            cur_step = "auto",
                             accuracy_factor = 10){
   offset_val <- abs(log(offset_proba * sd_inpt * (2 * pi) ** 0.5) * 2) ** 0.5 * sd_inpt 
   rtn_v <- c()
+  if (cur_step == "auto"){
+    cur_step <- (2 * offset_val) / n_inpt
+  }
   for (i in seq(from = (-offset_val + cur_step), to = offset_val, by = cur_step)){
     cur_rep <- ((1 / (sd_inpt * ((2 * pi) ** 0.5))) * exp(-0.5 * ((i / sd_inpt) ** 2))) * n_inpt * 10
     cur_value <- i + mean_inpt
@@ -18374,8 +18352,225 @@ edm1_normal_gen <- function(mean_inpt,
                rep(x = cur_value, 
                times = round(x = cur_rep, digits = 0)))
   }
-  rtn_v <- rtn_v[round(x = runif(n = n_inpt, min = 1, max = length(rtn_v)), digits = 0)]
-  return(sort(rtn_v))
+  if (cur_step != "auto"){
+    rtn_v <- rtn_v[round(x = runif(n = n_inpt, min = 1, max = length(rtn_v)), digits = 0)]
+    return(sort(rtn_v))
+  }else{
+    return(rtn_v)
+  }
+}
+
+#' edm1_random_val_spe
+#'
+#' Allow to generate a random number of a pre determined length, see examples.
+#'
+#' @param len_inpt i the lenght of the random number that will be generated
+#'
+#' @examples
+#'
+#' print(edm1_random_val_spe(len_inpt = 5))
+#' 
+#' [1] 55272
+#'
+#' print(edm1_random_val_spe(len_inpt = 8))
+#'
+#' [1] 79930782
+#'
+#' print(edm1_random_val_spe(len_inpt = 3))
+#'
+#' [1] 480
+#'
+#' print(edm1_random_val_spe(len_inpt = 4))
+#'
+#' [1] 6865
+#'
+#' print(edm1_random_val_spe(len_inpt = 1))
+#' 
+#' [1] 2
+#'
+#' @export
+
+edm1_random_val_spe <- function(len_inpt = 5){
+  if (len_inpt > 12){ return("len_inpt too high") }
+  no_stop <- TRUE
+  while (no_stop){
+    cur_time <- as.character(unclass(Sys.time()) %% 1)
+    if (nchar(cur_time) < 17){
+      cur_time <- paste0(cur_time, rep(x = "0", times = (17 - nchar(cur_time))))
+    }
+    pre_val <- len_inpt %/% 2
+    if (len_inpt %% 2 != 0){
+      cur_time <- unlist(strsplit(x = cur_time, split = ""))[(9 - pre_val):(9 + pre_val)]
+    }else{
+      cur_time <- unlist(strsplit(x = cur_time, split = ""))[(9 - pre_val):(8 + pre_val)]
+    }
+    cur_time <- as.numeric(paste(cur_time, collapse = ""))
+    if (nchar(cur_time) == len_inpt){ no_stop <- FALSE }
+  }
+  return(cur_time)
+}
+
+#' edm1_random_val
+#'
+#' Allow to generate a random number until a maximum length, see examples
+#'
+#' @param len_untl is the maximum length that the random number could have
+#'
+#' @examples
+#'
+#' print(edm1_random_val(len_untl = 5))
+#'
+#' [1] 54656
+#'
+#' print(edm1_random_val(len_untl = 8))
+#'
+#' [1] 64021015
+#'
+#' print(edm1_random_val(len_untl = 3))
+#'
+#' [1] 45
+#'
+#' print(edm1_random_val(len_untl = 4))
+#'
+#' [1] 6146
+#'
+#' print(edm1_random_val(len_untl = 1))
+#' 
+#' [1] 3
+#'
+#' @export
+
+edm1_random_val <- function(len_untl = 5){
+  if (len_untl > 12){ return("len_untl too high") }
+  cur_time <- as.character(unclass(Sys.time()) %% 1)
+  if (nchar(cur_time) < 17){
+    cur_time <- paste0(cur_time, rep(x = "0", times = (17 - nchar(cur_time))))
+  }
+  pre_val <- len_untl %/% 2
+  if (len_untl %% 2 != 0){
+    cur_time <- unlist(strsplit(x = cur_time, split = ""))[(9 - pre_val):(9 + pre_val)]
+  }else{
+    cur_time <- unlist(strsplit(x = cur_time, split = ""))[(9 - pre_val):(8 + pre_val)]
+  }
+  return(as.numeric(paste(cur_time, collapse = "")))
+}
+
+#' edm1_runif_deterministic
+#'
+#' Produces a deterministic uniform distribution, see examples
+#'
+#' @param n_inpt is the number of wanted values
+#'
+#' @examples
+#'
+#' x <- edm1_runif_deterministic(n_inpt = 5000, min_inpt = 10, max_inpt = 15)
+#' 
+#' sd(x)
+#'
+#' [1] 1.44352
+#'
+#' sd(runif(n = 5000, min = 10, max = 15))
+#'
+#' [1] 1.449532
+#'
+#' x <- edm1_runif_deterministic(n_inpt = 5000, min_inpt = 10, max_inpt = 115)
+#' 
+#' sd(x)
+#'
+#' [1] 30.31392
+#'
+#' sd(runif(n = 5000, min = 10, max = 115))
+#'
+#' [1] 30.33717
+#'
+#' @export
+
+edm1_runif_deterministic <- function(n_inpt, min_inpt, max_inpt){
+  rtn_v <- c()
+  cur_step <- (max_inpt - min_inpt) / n_inpt
+  for (i in seq(from = (min_inpt + cur_step), to = max_inpt, by = cur_step)){
+    rtn_v <- c(rtn_v, i)
+  }
+  return(rtn_v)
+}
+
+#' delta_unif
+#'
+#' Returns the cumulative difference between a known uniform distribution and the input vector that may be a uniform distribution of given min and max, see examples.
+#'
+#' @param inpt_v is the input vector that may represent a uniform distribution
+#' @param min_inpt is the minimum of your uniform distribution
+#' @param max_inpt is the maximum of your uniform distribution
+#'
+#' @examples
+#'
+#' print(delta_unif(inpt_v = runif(n = 5000, min = 12, max = 17), min_inpt = 12, max_inpt = 17))
+#'
+#' [1] 170.5542
+#'
+#' print(delta_unif(inpt_v = runif(n = 5000, min = 12, max = 17), min_inpt = 122, max_inpt = 177))
+#' 
+#' [1] 675102.8
+#'
+#' @export
+
+delta_unif <- function(inpt_v, min_inpt, max_inpt){
+  return(sum(abs(sort(inpt_v) - sort(runif(n = length(inpt_v), min = min_inpt, max = max_inpt)))))
+}
+
+#' mutate_vector
+#'
+#' Allow to select elements from a vector according to a uniform distribution. You can choose the seed that the reimplementation of the uniform distribution will work with, defaults to 'random_data2.csv', see examples
+#'
+#' @param inpt_v is the input vector containing the elements to evenly select
+#' @param n_inpt is the number of elements of the output vector
+#' @param nvr_here is a known value that is never in 'inpt_v'
+#' @param base_seed is a csv filename containing the values for the reimplentation of the uniform function to work with
+#'
+#' @examples
+#'
+#' library("edm1")
+#'
+#' x <- mutate_vector(inpt_v = test_v, 
+#'                    n_inpt = 50000, 
+#'                    nvr_here = "NULL", 
+#'                    base_seed = "random_data2.csv")
+#'
+#' length(x)
+#'
+#' [1] 5000
+#'
+#' datf <- occu(x)
+#'
+#' datf %>%
+#'   ggplot(mapping = aes(x = var, y = occurence)) +
+#'   geom_col() +
+#'   theme_minimal()
+#'
+#' @export
+
+mutate_vector <- function(inpt_v, n_inpt, nvr_here = "NULL", base_seed = "random_data2.csv"){
+  data_v <- unlist(read.table(file = base_seed))
+  rtn_v <- rep(x = nvr_here, times = n_inpt)
+  cnt = 1
+  random_seed <- as.integer(unclass(Sys.time()) %% 0.001 * 10000)
+  while (random_seed == 0){
+    random_seed <- as.integer(unclass(Sys.time()) %% 0.001 * 10000)
+  }
+  for (i in 1:n_inpt){
+    cur_idx <- data_v[cnt %% length(data_v)] %% length(inpt_v)
+    if (cur_idx != 0){
+      rtn_v[i] <- inpt_v[cur_idx]
+    }
+    if ((cnt + random_seed) %% length(data_v) != 0){
+      cnt = cnt + random_seed
+    }else{
+      cnt = 1
+    }
+  }
+  cur_val <- inpt_v[length(inpt_v)]
+  rtn_v[rtn_v == nvr_here] <- cur_val 
+  return(rtn_v)
 }
 
 

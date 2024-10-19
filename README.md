@@ -2335,6 +2335,45 @@ sd_inpt = 3))
 ```
 
 
+# `delta_unif`
+
+delta_unif
+
+
+## Description
+
+Returns the cumulative difference between a known uniform distribution and the input vector that may be a uniform distribution of given min and max, see examples.
+
+
+## Usage
+
+```r
+delta_unif(inpt_v, min_inpt, max_inpt)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector that may represent a uniform distribution
+`min_inpt`     |     is the minimum of your uniform distribution
+`max_inpt`     |     is the maximum of your uniform distribution
+
+
+## Examples
+
+```r
+print(delta_unif(inpt_v = runif(n = 5000, min = 12, max = 17), min_inpt = 12, max_inpt = 17))
+
+[1] 170.5542
+
+print(delta_unif(inpt_v = runif(n = 5000, min = 12, max = 17), min_inpt = 122, max_inpt = 177))
+
+[1] 675102.8
+```
+
+
 # `depth_pairs_findr`
 
 depth_pairs_findr
@@ -3436,7 +3475,7 @@ edm1_normal_gen(
   sd_inpt,
   n_inpt,
   offset_proba = 1e-05,
-  cur_step = 0.3,
+  cur_step = "auto",
   accuracy_factor = 10
 )
 ```
@@ -3501,6 +3540,153 @@ summary(x)
 
 Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
 98.25   99.70  100.00   99.99  100.30  101.55
+```
+
+
+# `edm1_random_val_spe`
+
+edm1_random_val_spe
+
+
+## Description
+
+Allow to generate a random number of a pre determined length, see examples.
+
+
+## Usage
+
+```r
+edm1_random_val_spe(len_inpt = 5)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`len_inpt`     |     i the lenght of the random number that will be generated
+
+
+## Examples
+
+```r
+print(edm1_random_val_spe(len_inpt = 5))
+
+[1] 55272
+
+print(edm1_random_val_spe(len_inpt = 8))
+
+[1] 79930782
+
+print(edm1_random_val_spe(len_inpt = 3))
+
+[1] 480
+
+print(edm1_random_val_spe(len_inpt = 4))
+
+[1] 6865
+
+print(edm1_random_val_spe(len_inpt = 1))
+
+[1] 2
+```
+
+
+# `edm1_random_val`
+
+edm1_random_val
+
+
+## Description
+
+Allow to generate a random number until a maximum length, see examples
+
+
+## Usage
+
+```r
+edm1_random_val(len_untl = 5)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`len_untl`     |     is the maximum length that the random number could have
+
+
+## Examples
+
+```r
+print(edm1_random_val(len_untl = 5))
+
+[1] 54656
+
+print(edm1_random_val(len_untl = 8))
+
+[1] 64021015
+
+print(edm1_random_val(len_untl = 3))
+
+[1] 45
+
+print(edm1_random_val(len_untl = 4))
+
+[1] 6146
+
+print(edm1_random_val(len_untl = 1))
+
+[1] 3
+```
+
+
+# `edm1_runif_deterministic`
+
+edm1_runif_deterministic
+
+
+## Description
+
+Produces a deterministic uniform distribution, see examples
+
+
+## Usage
+
+```r
+edm1_runif_deterministic(n_inpt, min_inpt, max_inpt)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`n_inpt`     |     is the number of wanted values
+
+
+## Examples
+
+```r
+x <- edm1_runif_deterministic(n_inpt = 5000, min_inpt = 10, max_inpt = 15)
+
+sd(x)
+
+[1] 1.44352
+
+sd(runif(n = 5000, min = 10, max = 15))
+
+[1] 1.449532
+
+x <- edm1_runif_deterministic(n_inpt = 5000, min_inpt = 10, max_inpt = 115)
+
+sd(x)
+
+[1] 30.31392
+
+sd(runif(n = 5000, min = 10, max = 115))
+
+[1] 30.33717
 ```
 
 
@@ -6015,6 +6201,61 @@ print(multitud(l=list(c("a", "b"), c("1", "2"), c("A", "Z", "E"), c("Q", "F")), 
 #[8] "b/2/Z/Q" "a/1/E/Q" "b/1/E/Q" "a/2/E/Q" "b/2/E/Q" "a/1/A/F" "b/1/A/F"
 #[15] "a/2/A/F" "b/2/A/F" "a/1/Z/F" "b/1/Z/F" "a/2/Z/F" "b/2/Z/F" "a/1/E/F"
 #[22] "b/1/E/F" "a/2/E/F" "b/2/E/F"
+```
+
+
+# `mutate_vector`
+
+mutate_vector
+
+
+## Description
+
+Allow to select elements from a vector according to a uniform distribution. You can choose the seed that the reimplementation of the uniform distribution will work with, defaults to 'random_data2.csv', see examples
+
+
+## Usage
+
+```r
+mutate_vector(
+  inpt_v,
+  n_inpt,
+  nvr_here = "NULL",
+  base_seed = "random_data2.csv"
+)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`inpt_v`     |     is the input vector containing the elements to evenly select
+`n_inpt`     |     is the number of elements of the output vector
+`nvr_here`     |     is a known value that is never in 'inpt_v'
+`base_seed`     |     is a csv filename containing the values for the reimplentation of the uniform function to work with
+
+
+## Examples
+
+```r
+library("edm1")
+
+x <- mutate_vector(inpt_v = test_v,
+n_inpt = 50000,
+nvr_here = "NULL",
+base_seed = "random_data2.csv")
+
+length(x)
+
+[1] 5000
+
+datf <- occu(x)
+
+datf %>%
+ggplot(mapping = aes(x = var, y = occurence)) +
+geom_col() +
+theme_minimal()
 ```
 
 
