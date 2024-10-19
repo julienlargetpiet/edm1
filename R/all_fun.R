@@ -18530,6 +18530,7 @@ delta_unif <- function(inpt_v, min_inpt, max_inpt){
 #' @examples
 #'
 #' library("edm1")
+#' library("ggplot2")
 #'
 #' x <- mutate_vector(inpt_v = test_v, 
 #'                    n_inpt = 50000, 

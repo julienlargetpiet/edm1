@@ -6240,6 +6240,7 @@ Argument      |Description
 
 ```r
 library("edm1")
+library("ggplot2")
 
 x <- mutate_vector(inpt_v = test_v,
 n_inpt = 50000,
