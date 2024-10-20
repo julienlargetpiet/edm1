@@ -21,11 +21,14 @@ mutate_vector(
 \item{base_seed}{is a csv filename containing the values for the reimplentation of the uniform function to work with}
 }
 \description{
-Allow to select elements from a vector according to a uniform distribution. You can choose the seed that the reimplementation of the uniform distribution will work with, defaults to 'random_data2.csv', see examples
+Allow to select elements from a vector according to a uniform distribution (better than runif, especially for small vectors). You can choose the seed that the reimplementation of the uniform distribution will work with, defaults to 'random_data2.csv', see examples
 }
 \examples{
 
 library("edm1")
+library("ggplot2")
+
+test_v <- letters
 
 x <- mutate_vector(inpt_v = test_v, 
                    n_inpt = 50000, 

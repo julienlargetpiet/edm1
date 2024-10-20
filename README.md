@@ -6211,7 +6211,7 @@ mutate_vector
 
 ## Description
 
-Allow to select elements from a vector according to a uniform distribution. You can choose the seed that the reimplementation of the uniform distribution will work with, defaults to 'random_data2.csv', see examples
+Allow to select elements from a vector according to a uniform distribution (better than runif, especially for small vectors). You can choose the seed that the reimplementation of the uniform distribution will work with, defaults to 'random_data2.csv', see examples
 
 
 ## Usage

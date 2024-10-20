@@ -18520,7 +18520,7 @@ delta_unif <- function(inpt_v, min_inpt, max_inpt){
 
 #' mutate_vector
 #'
-#' Allow to select elements from a vector according to a uniform distribution. You can choose the seed that the reimplementation of the uniform distribution will work with, defaults to 'random_data2.csv', see examples
+#' Allow to select elements from a vector according to a uniform distribution (better than runif, especially for small vectors). You can choose the seed that the reimplementation of the uniform distribution will work with, defaults to 'random_data2.csv', see examples
 #'
 #' @param inpt_v is the input vector containing the elements to evenly select
 #' @param n_inpt is the number of elements of the output vector
