@@ -18576,4 +18576,104 @@ mutate_vector <- function(inpt_v, n_inpt, nvr_here = "NULL", base_seed = "random
   return(rtn_v)
 }
 
+#' edm1_unif_time
+#'
+#' Implementation of the runif function, see examples.
+#'
+#' @param n_inpt is the number of valyues you want
+#' @param min_inpt is the minimum in the uniform distribution
+#' @param max_inpt is the maximum in the uniform distribution
+#' @param random_seed is the csv of random values that the algo will use, defaults to R/random_data2.csv
+#' @param divider_inpt is the prevalence of the random values (normally should not be changed, but you can play with it)
+#'
+#' @examples
+#'
+#' x <- edm1_unif_time(n_inpt = 5000,
+#'                     min_inpt = 10,
+#'                     max_inpt = 15,
+#'                     random_seed = "random_data2.csv",
+#'                     divider_inpt = "auto")
+#'
+#' ################################## to compare to runif
+#'
+#' library("ggplot2")
+#' library("edm1")
+#' pdf("out.pdf")
+#' 
+#' x <- edm1_unif_time(n_inpt = 5000,
+#'                     min_inpt = 10,
+#'                     max_inpt = 15,
+#'                     random_seed = "random_data2.csv",
+#'                     divider_inpt = "auto")
+#' x <- sort(as.numeric(x))
+#' 
+#' head(x)
+#' xb <- round(x = x, digits = 1)
+#' 
+#' datf <- occu(xb)
+#' #datf
+#' 
+#' ggplot(data = datf, mapping = aes(x = var, y = occurence)) + 
+#'   geom_col() + 
+#'   theme_minimal()
+#' 
+#' x <- runif(n = 5000, min = 10, max = 15)
+#' x <- round(x = x, digits = 1)
+#' datf <- occu(x)
+#' 
+#' ggplot(data = datf, mapping = aes(x = var, y = occurence)) + 
+#'   geom_col() + 
+#'   theme_minimal()
+#' 
+#'
+#' @export
+
+edm1_unif_time <- function(n_inpt, 
+                           min_inpt, 
+                           max_inpt, 
+                           random_seed = "random_data2.csv",
+                           divider_inpt = "auto"){
+  cur_step <- (max_inpt - min_inpt) / n_inpt
+  if (divider_inpt == "auto"){
+    step_v <- unlist(strsplit(as.character(cur_step), split = ""))
+    cur_idx <- match(x = ".", table = step_v)
+    if (!(is.na(cur_idx))){
+      if (cur_idx == 2){
+        cnt = 1
+        while (step_v[(2 + cnt)] == "0"){ cnt = cnt + 1 }
+        divider_inpt <- 1 / (as.numeric(paste(rep(x = "9", times = (cnt + 1)), collapse = "")) + 1)
+      }else{
+        divider_inpt <- as.numeric(paste(c("1", rep(x = "0", times = (cur_idx - 3))), collapse = ""))  
+      }
+    }else{
+      divider_inpt <- as.numeric(paste(c("1", rep(x = "0", times = (nchar(cur_step) - 1))), collapse = ""))  
+    }
+  }
+  rtn_v <- rep(x = "NULL", times = n_inpt)
+  random_step <- as.integer(unclass(Sys.time()) %% 0.001 * 10000)
+  while (random_step == 0){
+    random_step <- as.integer(unclass(Sys.time()) %% 0.001 * 10000)
+  }
+  random_data <- as.numeric(unlist(read.table(file = random_seed)))
+  cnt = 1
+  cnt2 = 1
+  tot_delta <- max_inpt - min_inpt
+  lst_value = cur_step
+  while (rtn_v[length(rtn_v)] == "NULL"){
+    cur_val <- min_inpt + (lst_value + abs(sin(random_data[cnt2 %% length(random_data)])) / divider_inpt) %% tot_delta
+    rtn_v[cnt] <- cur_val  
+    if ((cnt2 + random_step) %% length(random_data) != 0){
+      cnt2 = cnt2 + random_step
+    }else{
+      cnt2 = 1
+    }
+    lst_value = lst_value + cur_step 
+    cnt = cnt + 1
+  }
+  return(rtn_v)
+}
+
+
+
+
 

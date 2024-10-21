@@ -4119,6 +4119,117 @@ sd(runif(n = 5000, min = 10, max = 115))
 
 </div>
 </body></html>
+<!DOCTYPE html><html><head><title>R: edm1_unif_time</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>edm1_unif_time</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>edm1_unif_time</h2>
+
+<h3>Description</h3>
+
+<p>Implementation of the runif function, see examples.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>edm1_unif_time(
+  n_inpt,
+  min_inpt,
+  max_inpt,
+  random_seed = "random_data2.csv",
+  divider_inpt = "auto"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="n_inpt">n_inpt</code></td>
+<td>
+<p>is the number of valyues you want</p>
+</td></tr>
+<tr><td><code id="min_inpt">min_inpt</code></td>
+<td>
+<p>is the minimum in the uniform distribution</p>
+</td></tr>
+<tr><td><code id="max_inpt">max_inpt</code></td>
+<td>
+<p>is the maximum in the uniform distribution</p>
+</td></tr>
+<tr><td><code id="random_seed">random_seed</code></td>
+<td>
+<p>is the csv of random values that the algo will use, defaults to R/random_data2.csv</p>
+</td></tr>
+<tr><td><code id="divider_inpt">divider_inpt</code></td>
+<td>
+<p>is the prevalence of the random values (normally should not be changed, but you can play with it)</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+x &lt;- edm1_unif_time(n_inpt = 5000,
+                    min_inpt = 10,
+                    max_inpt = 15,
+                    random_seed = "random_data2.csv",
+                    divider_inpt = "auto")
+
+################################## to compare to runif
+
+library("ggplot2")
+library("edm1")
+pdf("out.pdf")
+
+x &lt;- edm1_unif_time(n_inpt = 5000,
+                    min_inpt = 10,
+                    max_inpt = 15,
+                    random_seed = "random_data2.csv",
+                    divider_inpt = "auto")
+x &lt;- sort(as.numeric(x))
+
+head(x)
+xb &lt;- round(x = x, digits = 1)
+
+datf &lt;- occu(xb)
+#datf
+
+ggplot(data = datf, mapping = aes(x = var, y = occurence)) + 
+  geom_col() + 
+  theme_minimal()
+
+x &lt;- runif(n = 5000, min = 10, max = 15)
+x &lt;- round(x = x, digits = 1)
+datf &lt;- occu(x)
+
+ggplot(data = datf, mapping = aes(x = var, y = occurence)) + 
+  geom_col() + 
+  theme_minimal()
+
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
 <!DOCTYPE html><html><head><title>R: edm_arranger2</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />

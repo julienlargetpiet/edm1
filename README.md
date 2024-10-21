@@ -3690,6 +3690,82 @@ sd(runif(n = 5000, min = 10, max = 115))
 ```
 
 
+# `edm1_unif_time`
+
+edm1_unif_time
+
+
+## Description
+
+Implementation of the runif function, see examples.
+
+
+## Usage
+
+```r
+edm1_unif_time(
+  n_inpt,
+  min_inpt,
+  max_inpt,
+  random_seed = "random_data2.csv",
+  divider_inpt = "auto"
+)
+```
+
+
+## Arguments
+
+Argument      |Description
+------------- |----------------
+`n_inpt`     |     is the number of valyues you want
+`min_inpt`     |     is the minimum in the uniform distribution
+`max_inpt`     |     is the maximum in the uniform distribution
+`random_seed`     |     is the csv of random values that the algo will use, defaults to R/random_data2.csv
+`divider_inpt`     |     is the prevalence of the random values (normally should not be changed, but you can play with it)
+
+
+## Examples
+
+```r
+x <- edm1_unif_time(n_inpt = 5000,
+min_inpt = 10,
+max_inpt = 15,
+random_seed = "random_data2.csv",
+divider_inpt = "auto")
+
+################################## to compare to runif
+
+library("ggplot2")
+library("edm1")
+pdf("out.pdf")
+
+x <- edm1_unif_time(n_inpt = 5000,
+min_inpt = 10,
+max_inpt = 15,
+random_seed = "random_data2.csv",
+divider_inpt = "auto")
+x <- sort(as.numeric(x))
+
+head(x)
+xb <- round(x = x, digits = 1)
+
+datf <- occu(xb)
+#datf
+
+ggplot(data = datf, mapping = aes(x = var, y = occurence)) +
+geom_col() +
+theme_minimal()
+
+x <- runif(n = 5000, min = 10, max = 15)
+x <- round(x = x, digits = 1)
+datf <- occu(x)
+
+ggplot(data = datf, mapping = aes(x = var, y = occurence)) +
+geom_col() +
+theme_minimal()
+```
+
+
 # `elements_equalifier`
 
 elements_equalifier
