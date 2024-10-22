@@ -18267,15 +18267,35 @@ normal_offset_prob <- function(inpt_v = c(),
 
 #' normal_offset_val
 #'
+#' Returns the most offset value from an normaldistribution, given tha probabilities, see examples.
+#'
+#' @param mean_inpt is the mean of the normal distribution
+#' @param sd_inpt is the standard deviation of the normal distribution
+#' @param proba is the probabilitie of the most offset value to include in the normal distribution
+#'
+#' @examples
+#'
+#' normal_offset_val(mean_inpt = 12, sd_inpt = 3, proba = 0.01)
+#'
+#' [1] 18.82475
+#'
+#' ## offset values are 12 + (18.82475 - 12) and 12 - (18.82475 - 12)
+#'
+#' normal_offset_val(mean_inpt = 18, sd_inpt = 1.2, proba = 0.01)
+#'
+#' [1] 21.17667
+#'
+#' ## ## offset values are 18 + (21.17667 - 18) and 18 - (21.17667 - 18)
+#'
 #' @export
 
 normal_offset_val <- function(mean_inpt, sd_inpt, proba = 0.01){
   return(abs(log(proba * sd_inpt * (2 * pi) ** 0.5) * 2) ** 0.5 * sd_inpt + mean_inpt)
 }
 
-#' edm1_normal_gen
+#' edm1_rnorm1
 #'
-#' Reimplementation of `rnorm` function. The only difference is that outputed values are already sorted thanks to the algorithm used. You can also choose the most unlikely value to include in the outputed normal distribution. See examples. Warning, the lower `sd_inpt` is, the lower `cur_step` should be.
+#' Reimplementation of `rnorm` function. You can also choose the most unlikely value to include in the outputed normal distribution. See examples. Warning, the lower `sd_inpt` is, the lower `cur_step` should be.
 #'
 #' @param mean_inpt is the mean of the normal distribution
 #' @param sd_inpt is the standard deviation of the normal distribution
@@ -18285,7 +18305,7 @@ normal_offset_val <- function(mean_inpt, sd_inpt, proba = 0.01){
 #' @examples
 #'
 #'
-#' x <- edm1_normal_gen(mean_inpt = 100,
+#' x <- edm1_rnorm1(mean_inpt = 100,
 #'                     sd_inpt = 15,
 #'                     n_inpt = 15000,
 #'                     offset_proba = 0.00001,
@@ -18301,7 +18321,7 @@ normal_offset_val <- function(mean_inpt, sd_inpt, proba = 0.01){
 #'    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 #'   43.13   89.93  100.43  100.30  110.33  159.53 
 #' 
-#' x <- edm1_normal_gen(mean_inpt = 100,
+#' x <- edm1_rnorm1(mean_inpt = 100,
 #'                     sd_inpt = 165,
 #'                     n_inpt = 15000,
 #'                     offset_proba = 0.00001,
@@ -18316,7 +18336,7 @@ normal_offset_val <- function(mean_inpt, sd_inpt, proba = 0.01){
 #'    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 #' -444.55  -11.65   99.65   98.81  209.15  635.75 
 #' 
-#' x <- edm1_normal_gen(mean_inpt = 100,
+#' x <- edm1_rnorm1(mean_inpt = 100,
 #'                     sd_inpt = 0.45,
 #'                     n_inpt = 15000,
 #'                     offset_proba = 0.00001,
@@ -18332,32 +18352,74 @@ normal_offset_val <- function(mean_inpt, sd_inpt, proba = 0.01){
 #'    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 #'   98.25   99.70  100.00   99.99  100.30  101.55 
 #'
+#' x <- edm1_rnorm1(mean_inpt = 100,
+#'                      sd_inpt = 15,
+#'                      n_inpt = 15000,
+#'                      offset_proba = 0.00001,
+#'                      cur_step = 0.05,
+#'                      accuracy_factor = 10)
+#' 
+#' x <- sort(as.numeric(x))
+#' library("ggplot2")
+#' pdf("out.pdf")
+#' 
+#' length(x)
+#'
+#' [1] 15000
+#'
+#' sd(x)
+#'
+#' [1] 15.11353
+#'
+#' mean(x)
+#'
+#' [1] 100.0294
+#' 
+#' datf <- data.frame("x" = c(1:length(x)), 
+#'                    "y" = x)
+#' 
+#' ggplot(data = datf, mapping = aes(x = x, y = y)) +
+#'   geom_line() + 
+#'   theme_minimal()
+#' 
+#' x2 <- edm1_rnorm1(mean_inpt = 100,
+#'                      sd_inpt = 15,
+#'                      n_inpt = 15000,
+#'                      offset_proba = 0.00001,
+#'                      cur_step = 0.05,
+#'                      accuracy_factor = 100)
+#' 
+#' 
+#' x2 <- sort(as.numeric(x2))
+#' 
+#' sum(x == x2)
+#'
+#' [1] 1742
+#'
 #' @export
 
-edm1_normal_gen <- function(mean_inpt, 
+edm1_rnorm1 <- function(mean_inpt, 
                             sd_inpt, 
                             n_inpt,
                             offset_proba = 0.00001,
                             cur_step = "auto",
                             accuracy_factor = 10){
   offset_val <- abs(log(offset_proba * sd_inpt * (2 * pi) ** 0.5) * 2) ** 0.5 * sd_inpt 
-  rtn_v <- c()
+  rtn_v <- rep(x = "NULL", times = n_inpt * accuracy_factor)
   if (cur_step == "auto"){
     cur_step <- (2 * offset_val) / n_inpt
   }
+  cnt1 = 1
   for (i in seq(from = (-offset_val + cur_step), to = offset_val, by = cur_step)){
     cur_rep <- ((1 / (sd_inpt * ((2 * pi) ** 0.5))) * exp(-0.5 * ((i / sd_inpt) ** 2))) * n_inpt * 10
     cur_value <- i + mean_inpt
-    rtn_v <- c(rtn_v, 
-               rep(x = cur_value, 
-               times = round(x = cur_rep, digits = 0)))
+    lst_idx <- round(x = cur_rep, digits = 0)
+    rtn_v[cnt1:(cnt1 + lst_idx)] <- cur_value    
+    cnt1 = cnt1 + lst_idx + 1 
   }
-  if (cur_step != "auto"){
-    rtn_v <- rtn_v[round(x = runif(n = n_inpt, min = 1, max = length(rtn_v)), digits = 0)]
-    return(sort(rtn_v))
-  }else{
-    return(rtn_v)
-  }
+  rtn_v <- rtn_v[1:(cnt1 - lst_idx)]
+  rtn_v <- rtn_v[round(x = runif(n = n_inpt, min = 1, max = length(rtn_v)), digits = 0)]
+  return(sort(rtn_v))
 }
 
 #' edm1_random_val_spe
@@ -18672,8 +18734,4 @@ edm1_unif_time <- function(n_inpt,
   }
   return(rtn_v)
 }
-
-
-
-
 
