@@ -3068,6 +3068,7 @@ edm1_rnorm1(
 * `sd_inpt`: is the standard deviation of the normal distribution
 * `n_inpt`: is the number of values you want to generate
 * `offset_proba`: is the value with the least probability to be included in the normal distribution
+* `accuracy_factor`: is an accuracy factor for the density of the values in the output vector (defaults to 10)
 
 ## Examples
 

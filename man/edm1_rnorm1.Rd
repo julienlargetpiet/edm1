@@ -21,6 +21,8 @@ edm1_rnorm1(
 \item{n_inpt}{is the number of values you want to generate}
 
 \item{offset_proba}{is the value with the least probability to be included in the normal distribution}
+
+\item{accuracy_factor}{is an accuracy factor for the density of the values in the output vector (defaults to 10)}
 }
 \description{
 Reimplementation of \code{rnorm} function. You can also choose the most unlikely value to include in the outputed normal distribution. See examples. Warning, the lower \code{sd_inpt} is, the lower \code{cur_step} should be.

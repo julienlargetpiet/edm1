@@ -18300,7 +18300,8 @@ normal_offset_val <- function(mean_inpt, sd_inpt, proba = 0.01){
 #' @param mean_inpt is the mean of the normal distribution
 #' @param sd_inpt is the standard deviation of the normal distribution
 #' @param n_inpt is the number of values you want to generate
-#' @param offset_proba is the value with the least probability to be included in the normal distribution 
+#' @param offset_proba is the value with the least probability to be included in the normal distribution
+#' @param accuracy_factor is an accuracy factor for the density of the values in the output vector (defaults to 10)
 #'
 #' @examples
 #'
