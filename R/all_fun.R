@@ -18810,7 +18810,7 @@ edm1_rnorm2 <- function(mean_inpt,
   cnt1 = 1
   cur_interval <- sd_inpt / 10
   for (i in seq(from = (-offset_val + cur_step), to = offset_val, by = cur_step)){
-    cur_rep <- ((1 / (sd_inpt * ((2 * pi) ** 0.5))) * exp(-0.5 * ((i / sd_inpt) ** 2))) * n_inpt * 10
+    cur_rep <- ((1 / (sd_inpt * ((2 * pi) ** 0.5))) * exp(-0.5 * ((i / sd_inpt) ** 2))) * n_inpt * accuracy_factor
     cur_value <- i + mean_inpt
     lst_idx <- round(x = cur_rep, digits = 0)
     cur_repl <- seq(from = (cur_value - cur_interval), 
