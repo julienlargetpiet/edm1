@@ -3165,6 +3165,83 @@ sum(x == x2)
 [1] 1742
 ```
 
+# edm1_rnorm2
+
+## Description
+
+edm1_rnorm1 but with an other algorithm that may be more accurate (especially for small sd_inpt) but needs more time to, see examples
+
+## Usage
+
+```r
+edm1_rnorm2(
+  mean_inpt,
+  sd_inpt,
+  n_inpt,
+  offset_proba = 1e-05,
+  cur_step = "auto",
+  accuracy_factor = 10
+)
+```
+
+## Arguments
+
+* `mean_inpt`: is the mean of the normal distribution
+* `sd_inpt`: is the standard deviation of the normal distribution
+* `n_inpt`: is the number of values you want to generate
+* `offset_proba`: is the value with the least probability to be included in the normal distribution
+* `accuracy_factor`: is an accuracy factor for the density of the values in the output vector (defaults to 10)
+
+## Examples
+
+```r
+x <- edm1_rnorm2(mean_inpt = 100,
+                     sd_inpt = 0.55,
+                     n_inpt = 15000,
+                     offset_proba = 0.00001,
+                     cur_step = 0.05,
+                     accuracy_factor = 10)
+
+x <- sort(as.numeric(x))
+library("ggplot2")
+pdf("out.pdf")
+
+length(x)
+
+[1] 15000
+
+sd(x)
+
+[1] 0.5512066
+
+mean(x)
+
+[1] 100.0044
+
+datf <- data.frame("x" = c(1:length(x)), 
+                   "y" = x)
+
+ggplot(data = datf, mapping = aes(x = x, y = y)) +
+  geom_line() + 
+  theme_minimal()
+
+x2 <- edm1_rnorm2(mean_inpt = 100,
+                     sd_inpt = 0.55,
+                     n_inpt = 15000,
+                     offset_proba = 0.00001,
+                     cur_step = 0.05,
+                     accuracy_factor = 100)
+
+x2 <- sort(as.numeric(x2))
+print(length(x2))
+
+[1] 15000
+
+sum(x == x2)
+
+[1] 0
+```
+
 # edm1_runif_deterministic
 
 ## Description
