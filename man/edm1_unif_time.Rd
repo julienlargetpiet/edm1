@@ -32,7 +32,7 @@ x <- edm1_unif_time(n_inpt = 5000,
                     min_inpt = 10,
                     max_inpt = 15,
                     random_seed = "random_data2.csv",
-                    divider_inpt = "auto")
+                    prev_inpt = 1)
 
 ################################## to compare to runif
 
@@ -44,7 +44,7 @@ x <- edm1_unif_time(n_inpt = 5000,
                     min_inpt = 10,
                     max_inpt = 15,
                     random_seed = "random_data2.csv",
-                    divider_inpt = "auto")
+                    prev_inpt = 1)
 x <- sort(as.numeric(x))
 
 head(x)

@@ -18592,7 +18592,7 @@ mutate_vector <- function(inpt_v, n_inpt, nvr_here = "NULL", base_seed = "random
 #'                     min_inpt = 10,
 #'                     max_inpt = 15,
 #'                     random_seed = "random_data2.csv",
-#'                     divider_inpt = "auto")
+#'                     prev_inpt = 1)
 #'
 #' ################################## to compare to runif
 #'
@@ -18604,7 +18604,7 @@ mutate_vector <- function(inpt_v, n_inpt, nvr_here = "NULL", base_seed = "random
 #'                     min_inpt = 10,
 #'                     max_inpt = 15,
 #'                     random_seed = "random_data2.csv",
-#'                     divider_inpt = "auto")
+#'                     prev_inpt = 1)
 #' x <- sort(as.numeric(x))
 #' 
 #' head(x)
