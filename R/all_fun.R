@@ -18584,7 +18584,7 @@ mutate_vector <- function(inpt_v, n_inpt, nvr_here = "NULL", base_seed = "random
 #' @param min_inpt is the minimum in the uniform distribution
 #' @param max_inpt is the maximum in the uniform distribution
 #' @param random_seed is the csv of random values that the algo will use, defaults to R/random_data2.csv
-#' @param divider_inpt is the prevalence of the random values (normally should not be changed, but you can play with it)
+#' @param prev_inpt is the prevalence of the random values (normally should not be changed, but you can play with it)
 #'
 #' @examples
 #'
@@ -18608,18 +18608,15 @@ mutate_vector <- function(inpt_v, n_inpt, nvr_here = "NULL", base_seed = "random
 #' x <- sort(as.numeric(x))
 #' 
 #' head(x)
-#' xb <- round(x = x, digits = 1)
 #' 
-#' datf <- occu(xb)
-#' #datf
+#' datf <- occu(as.integer(x))
 #' 
 #' ggplot(data = datf, mapping = aes(x = var, y = occurence)) + 
 #'   geom_col() + 
 #'   theme_minimal()
 #' 
 #' x <- runif(n = 5000, min = 10, max = 15)
-#' x <- round(x = x, digits = 1)
-#' datf <- occu(x)
+#' datf <- occu(as.integer(x))
 #' 
 #' ggplot(data = datf, mapping = aes(x = var, y = occurence)) + 
 #'   geom_col() + 

@@ -21,7 +21,7 @@ edm1_unif_time(
 
 \item{random_seed}{is the csv of random values that the algo will use, defaults to R/random_data2.csv}
 
-\item{divider_inpt}{is the prevalence of the random values (normally should not be changed, but you can play with it)}
+\item{prev_inpt}{is the prevalence of the random values (normally should not be changed, but you can play with it)}
 }
 \description{
 Implementation of the runif function, see examples.
@@ -48,18 +48,15 @@ x <- edm1_unif_time(n_inpt = 5000,
 x <- sort(as.numeric(x))
 
 head(x)
-xb <- round(x = x, digits = 1)
 
-datf <- occu(xb)
-#datf
+datf <- occu(as.integer(x))
 
 ggplot(data = datf, mapping = aes(x = var, y = occurence)) + 
   geom_col() + 
   theme_minimal()
 
 x <- runif(n = 5000, min = 10, max = 15)
-x <- round(x = x, digits = 1)
-datf <- occu(x)
+datf <- occu(as.integer(x))
 
 ggplot(data = datf, mapping = aes(x = var, y = occurence)) + 
   geom_col() + 

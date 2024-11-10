@@ -4176,7 +4176,7 @@ function processMathHTML() {
 <td>
 <p>is the csv of random values that the algo will use, defaults to R/random_data2.csv</p>
 </td></tr>
-<tr><td><code id="divider_inpt">divider_inpt</code></td>
+<tr><td><code id="prev_inpt">prev_inpt</code></td>
 <td>
 <p>is the prevalence of the random values (normally should not be changed, but you can play with it)</p>
 </td></tr>
@@ -4206,18 +4206,15 @@ x &lt;- edm1_unif_time(n_inpt = 5000,
 x &lt;- sort(as.numeric(x))
 
 head(x)
-xb &lt;- round(x = x, digits = 1)
 
-datf &lt;- occu(xb)
-#datf
+datf &lt;- occu(as.integer(x))
 
 ggplot(data = datf, mapping = aes(x = var, y = occurence)) + 
   geom_col() + 
   theme_minimal()
 
 x &lt;- runif(n = 5000, min = 10, max = 15)
-x &lt;- round(x = x, digits = 1)
-datf &lt;- occu(x)
+datf &lt;- occu(as.integer(x))
 
 ggplot(data = datf, mapping = aes(x = var, y = occurence)) + 
   geom_col() + 
