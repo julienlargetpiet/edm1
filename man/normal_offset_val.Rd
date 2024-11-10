@@ -6,28 +6,6 @@
 \usage{
 normal_offset_val(mean_inpt, sd_inpt, proba = 0.01)
 }
-\arguments{
-\item{mean_inpt}{is the mean of the normal distribution}
-
-\item{sd_inpt}{is the standard deviation of the normal distribution}
-
-\item{proba}{is the probabilitie of the most offset value to include in the normal distribution}
-}
 \description{
-Returns the most offset value from an normaldistribution, given tha probabilities, see examples.
-}
-\examples{
-
-normal_offset_val(mean_inpt = 12, sd_inpt = 3, proba = 0.01)
-
-[1] 18.82475
-
-## offset values are 12 + (18.82475 - 12) and 12 - (18.82475 - 12)
-
-normal_offset_val(mean_inpt = 18, sd_inpt = 1.2, proba = 0.01)
-
-[1] 21.17667
-
-## ## offset values are 18 + (21.17667 - 18) and 18 - (21.17667 - 18)
-
+normal_offset_val
 }

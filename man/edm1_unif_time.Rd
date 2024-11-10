@@ -9,7 +9,7 @@ edm1_unif_time(
   min_inpt,
   max_inpt,
   random_seed = "random_data2.csv",
-  divider_inpt = "auto"
+  prev_inpt = 1
 )
 }
 \arguments{

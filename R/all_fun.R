@@ -18267,46 +18267,25 @@ normal_offset_prob <- function(inpt_v = c(),
 
 #' normal_offset_val
 #'
-#' Returns the most offset value from an normaldistribution, given tha probabilities, see examples.
-#'
-#' @param mean_inpt is the mean of the normal distribution
-#' @param sd_inpt is the standard deviation of the normal distribution
-#' @param proba is the probabilitie of the most offset value to include in the normal distribution
-#'
-#' @examples
-#'
-#' normal_offset_val(mean_inpt = 12, sd_inpt = 3, proba = 0.01)
-#'
-#' [1] 18.82475
-#'
-#' ## offset values are 12 + (18.82475 - 12) and 12 - (18.82475 - 12)
-#'
-#' normal_offset_val(mean_inpt = 18, sd_inpt = 1.2, proba = 0.01)
-#'
-#' [1] 21.17667
-#'
-#' ## ## offset values are 18 + (21.17667 - 18) and 18 - (21.17667 - 18)
-#'
 #' @export
 
 normal_offset_val <- function(mean_inpt, sd_inpt, proba = 0.01){
   return(abs(log(proba * sd_inpt * (2 * pi) ** 0.5) * 2) ** 0.5 * sd_inpt + mean_inpt)
 }
 
-#' edm1_rnorm1
+#' edm1_normal_gen
 #'
-#' Reimplementation of `rnorm` function. You can also choose the most unlikely value to include in the outputed normal distribution. See examples. Warning, the lower `sd_inpt` is, the lower `cur_step` should be.
+#' Reimplementation of `rnorm` function. The only difference is that outputed values are already sorted thanks to the algorithm used. You can also choose the most unlikely value to include in the outputed normal distribution. See examples. Warning, the lower `sd_inpt` is, the lower `cur_step` should be.
 #'
 #' @param mean_inpt is the mean of the normal distribution
 #' @param sd_inpt is the standard deviation of the normal distribution
 #' @param n_inpt is the number of values you want to generate
-#' @param offset_proba is the value with the least probability to be included in the normal distribution
-#' @param accuracy_factor is an accuracy factor for the density of the values in the output vector (defaults to 10)
+#' @param offset_proba is the value with the least probability to be included in the normal distribution 
 #'
 #' @examples
 #'
 #'
-#' x <- edm1_rnorm1(mean_inpt = 100,
+#' x <- edm1_normal_gen(mean_inpt = 100,
 #'                     sd_inpt = 15,
 #'                     n_inpt = 15000,
 #'                     offset_proba = 0.00001,
@@ -18322,7 +18301,7 @@ normal_offset_val <- function(mean_inpt, sd_inpt, proba = 0.01){
 #'    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 #'   43.13   89.93  100.43  100.30  110.33  159.53 
 #' 
-#' x <- edm1_rnorm1(mean_inpt = 100,
+#' x <- edm1_normal_gen(mean_inpt = 100,
 #'                     sd_inpt = 165,
 #'                     n_inpt = 15000,
 #'                     offset_proba = 0.00001,
@@ -18337,7 +18316,7 @@ normal_offset_val <- function(mean_inpt, sd_inpt, proba = 0.01){
 #'    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 #' -444.55  -11.65   99.65   98.81  209.15  635.75 
 #' 
-#' x <- edm1_rnorm1(mean_inpt = 100,
+#' x <- edm1_normal_gen(mean_inpt = 100,
 #'                     sd_inpt = 0.45,
 #'                     n_inpt = 15000,
 #'                     offset_proba = 0.00001,
@@ -18353,74 +18332,32 @@ normal_offset_val <- function(mean_inpt, sd_inpt, proba = 0.01){
 #'    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 #'   98.25   99.70  100.00   99.99  100.30  101.55 
 #'
-#' x <- edm1_rnorm1(mean_inpt = 100,
-#'                      sd_inpt = 15,
-#'                      n_inpt = 15000,
-#'                      offset_proba = 0.00001,
-#'                      cur_step = 0.05,
-#'                      accuracy_factor = 10)
-#' 
-#' x <- sort(as.numeric(x))
-#' library("ggplot2")
-#' pdf("out.pdf")
-#' 
-#' length(x)
-#'
-#' [1] 15000
-#'
-#' sd(x)
-#'
-#' [1] 15.11353
-#'
-#' mean(x)
-#'
-#' [1] 100.0294
-#' 
-#' datf <- data.frame("x" = c(1:length(x)), 
-#'                    "y" = x)
-#' 
-#' ggplot(data = datf, mapping = aes(x = x, y = y)) +
-#'   geom_line() + 
-#'   theme_minimal()
-#' 
-#' x2 <- edm1_rnorm1(mean_inpt = 100,
-#'                      sd_inpt = 15,
-#'                      n_inpt = 15000,
-#'                      offset_proba = 0.00001,
-#'                      cur_step = 0.05,
-#'                      accuracy_factor = 100)
-#' 
-#' 
-#' x2 <- sort(as.numeric(x2))
-#' 
-#' sum(x == x2)
-#'
-#' [1] 1742
-#'
 #' @export
 
-edm1_rnorm1 <- function(mean_inpt, 
+edm1_normal_gen <- function(mean_inpt, 
                             sd_inpt, 
                             n_inpt,
                             offset_proba = 0.00001,
                             cur_step = "auto",
                             accuracy_factor = 10){
   offset_val <- abs(log(offset_proba * sd_inpt * (2 * pi) ** 0.5) * 2) ** 0.5 * sd_inpt 
-  rtn_v <- rep(x = "NULL", times = n_inpt * accuracy_factor)
+  rtn_v <- c()
   if (cur_step == "auto"){
     cur_step <- (2 * offset_val) / n_inpt
   }
-  cnt1 = 1
   for (i in seq(from = (-offset_val + cur_step), to = offset_val, by = cur_step)){
-    cur_rep <- ((1 / (sd_inpt * ((2 * pi) ** 0.5))) * exp(-0.5 * ((i / sd_inpt) ** 2))) * n_inpt * accuracy_factor
+    cur_rep <- ((1 / (sd_inpt * ((2 * pi) ** 0.5))) * exp(-0.5 * ((i / sd_inpt) ** 2))) * n_inpt * 10
     cur_value <- i + mean_inpt
-    lst_idx <- round(x = cur_rep, digits = 0)
-    rtn_v[cnt1:(cnt1 + lst_idx)] <- cur_value    
-    cnt1 = cnt1 + lst_idx + 1 
+    rtn_v <- c(rtn_v, 
+               rep(x = cur_value, 
+               times = round(x = cur_rep, digits = 0)))
   }
-  rtn_v <- rtn_v[1:(cnt1 - lst_idx)]
-  rtn_v <- rtn_v[round(x = runif(n = n_inpt, min = 1, max = length(rtn_v)), digits = 0)]
-  return(sort(rtn_v))
+  if (cur_step != "auto"){
+    rtn_v <- rtn_v[round(x = runif(n = n_inpt, min = 1, max = length(rtn_v)), digits = 0)]
+    return(sort(rtn_v))
+  }else{
+    return(rtn_v)
+  }
 }
 
 #' edm1_random_val_spe
@@ -18695,23 +18632,8 @@ edm1_unif_time <- function(n_inpt,
                            min_inpt, 
                            max_inpt, 
                            random_seed = "random_data2.csv",
-                           divider_inpt = "auto"){
+                           prev_inpt = 1) {
   cur_step <- (max_inpt - min_inpt) / n_inpt
-  if (divider_inpt == "auto"){
-    step_v <- unlist(strsplit(as.character(cur_step), split = ""))
-    cur_idx <- match(x = ".", table = step_v)
-    if (!(is.na(cur_idx))){
-      if (cur_idx == 2){
-        cnt = 1
-        while (step_v[(2 + cnt)] == "0"){ cnt = cnt + 1 }
-        divider_inpt <- 1 / (as.numeric(paste(rep(x = "9", times = (cnt + 1)), collapse = "")) + 1)
-      }else{
-        divider_inpt <- as.numeric(paste(c("1", rep(x = "0", times = (cur_idx - 3))), collapse = ""))  
-      }
-    }else{
-      divider_inpt <- as.numeric(paste(c("1", rep(x = "0", times = (nchar(cur_step) - 1))), collapse = ""))  
-    }
-  }
   rtn_v <- rep(x = "NULL", times = n_inpt)
   random_step <- as.integer(unclass(Sys.time()) %% 0.001 * 10000)
   while (random_step == 0){
@@ -18721,9 +18643,9 @@ edm1_unif_time <- function(n_inpt,
   cnt = 1
   cnt2 = 1
   tot_delta <- max_inpt - min_inpt
-  lst_value = cur_step
+  lst_value = cur_step 
   while (rtn_v[length(rtn_v)] == "NULL"){
-    cur_val <- min_inpt + (lst_value + abs(sin(random_data[cnt2 %% length(random_data)])) / divider_inpt) %% tot_delta
+    cur_val <- min_inpt + (lst_value + abs(sin(random_data[cnt2 %% length(random_data)])) * prev_inpt) %% tot_delta
     rtn_v[cnt] <- cur_val  
     if ((cnt2 + random_step) %% length(random_data) != 0){
       cnt2 = cnt2 + random_step
@@ -18735,94 +18657,4 @@ edm1_unif_time <- function(n_inpt,
   }
   return(rtn_v)
 }
-
-#' edm1_rnorm2
-#'
-#' edm1_rnorm1 but with an other algorithm that may be more accurate (especially for small sd_inpt) but needs more time to, see examples
-#'
-#' @param mean_inpt is the mean of the normal distribution
-#' @param sd_inpt is the standard deviation of the normal distribution
-#' @param n_inpt is the number of values you want to generate
-#' @param offset_proba is the value with the least probability to be included in the normal distribution
-#' @param accuracy_factor is an accuracy factor for the density of the values in the output vector (defaults to 10)
-#'
-#' @examples
-#'
-#' x <- edm1_rnorm2(mean_inpt = 100,
-#'                      sd_inpt = 0.55,
-#'                      n_inpt = 15000,
-#'                      offset_proba = 0.00001,
-#'                      cur_step = 0.05,
-#'                      accuracy_factor = 10)
-#' 
-#' x <- sort(as.numeric(x))
-#' library("ggplot2")
-#' pdf("out.pdf")
-#' 
-#' length(x)
-#'
-#' [1] 15000
-#' 
-#' sd(x)
-#'
-#' [1] 0.5512066
-#' 
-#' mean(x)
-#'
-#' [1] 100.0044
-#' 
-#' datf <- data.frame("x" = c(1:length(x)), 
-#'                    "y" = x)
-#' 
-#' ggplot(data = datf, mapping = aes(x = x, y = y)) +
-#'   geom_line() + 
-#'   theme_minimal()
-#' 
-#' x2 <- edm1_rnorm2(mean_inpt = 100,
-#'                      sd_inpt = 0.55,
-#'                      n_inpt = 15000,
-#'                      offset_proba = 0.00001,
-#'                      cur_step = 0.05,
-#'                      accuracy_factor = 100)
-#' 
-#' x2 <- sort(as.numeric(x2))
-#' print(length(x2))
-#'
-#' [1] 15000
-#' 
-#' sum(x == x2)
-#'
-#' [1] 0
-#'
-#' @export 
-
-edm1_rnorm2 <- function(mean_inpt, 
-                            sd_inpt, 
-                            n_inpt,
-                            offset_proba = 0.00001,
-                            cur_step = "auto",
-                            accuracy_factor = 10){
-  offset_val <- abs(log(offset_proba * sd_inpt * (2 * pi) ** 0.5) * 2) ** 0.5 * sd_inpt 
-  rtn_v <- rep(x = "NULL", times = n_inpt * accuracy_factor)
-  if (cur_step == "auto"){
-    cur_step <- (2 * offset_val) / n_inpt
-  }
-  cnt1 = 1
-  cur_interval <- sd_inpt / 10
-  for (i in seq(from = (-offset_val + cur_step), to = offset_val, by = cur_step)){
-    cur_rep <- ((1 / (sd_inpt * ((2 * pi) ** 0.5))) * exp(-0.5 * ((i / sd_inpt) ** 2))) * n_inpt * accuracy_factor
-    cur_value <- i + mean_inpt
-    lst_idx <- round(x = cur_rep, digits = 0)
-    cur_repl <- seq(from = (cur_value - cur_interval), 
-                                        to = (cur_value + cur_interval),
-                                        by = (2 * cur_interval / (lst_idx + 1)))
-    rtn_v[cnt1:(cnt1 + lst_idx)] <- cur_repl[1:(lst_idx + 1)]
-    cnt1 = cnt1 + lst_idx + 1 
-  }
-  rtn_v <- rtn_v[1:(cnt1 - lst_idx)]
-  rtn_v <- rtn_v[round(x = runif(n = n_inpt, min = 1, max = length(rtn_v)), digits = 0)]
-  return(sort(rtn_v))
-}
-
-
 
